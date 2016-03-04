@@ -29,6 +29,7 @@ export * from './RHex';
 export * from './RInteger';
 export * from './RLogger';
 export * from './RObject';
+export * from './RObjectId';
 export * from './RSet';
 export * from './RString';
 export * from './RTypeArray';
