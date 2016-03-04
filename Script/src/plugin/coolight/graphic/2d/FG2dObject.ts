@@ -1,10 +1,12 @@
+import {FObject} from '../../../../runtime/common/lang/FObject';
+
 //==========================================================
 // <T>渲染对象。</T>
 //
 // @author maocy
 // @history 150212
 //==========================================================
-export class FG2dObject {
+export class FG2dObject extends FObject{
    //o = MO.Class.inherits(this, o, MO.FObject, MO.MGraphicObject);
 
    //==========================================================
@@ -21,8 +23,8 @@ export class FG2dObject {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
       //o.__base.MGraphicObject.dispose.call(o);
       //o.__base.FObject.dispose.call(o);
+      super.dispose();
    }
 }

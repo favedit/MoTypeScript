@@ -1,6 +1,6 @@
 import {RObject} from '../../../../runtime/common/lang/RObject';
 import {SSize2} from '../../../../runtime/common/math/SSize2';
-import {FGraphicContext} from '../context/FGraphicContext';
+import {FGraphicContext} from '../base/FGraphicContext';
 
 //==========================================================
 // <T>渲染环境。</T>
@@ -12,9 +12,9 @@ export class FG2dContext extends FGraphicContext {
    //..........................................................
    // @attribute
    //_globalScale = MO.Class.register(o, new MO.AGetter('_globalScale'));
-   _globalScale: SSize2 = null;
+   protected _globalScale: SSize2 = null;
    //_scale = MO.Class.register(o, new MO.AGetter('_scale'));
-   _scale: SSize2 = null;
+   protected _scale: SSize2 = null;
 
    //==========================================================
    // <T>构造处理。</T>
