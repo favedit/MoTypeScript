@@ -1,0 +1,32 @@
+{
+    "version": "1.7.3",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "removeComments": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitOnError": false,
+        "preserveConstEnums": true,
+        "inlineSources": false,
+        "sourceMap": false,
+        "outFile": "../../.tmp/core/skd.js",
+        "project": "../skd",
+        "moduleResolution": "node",
+        "listFiles": false
+    },
+    "buildOnSave": true,
+    "compileOnSave": true,
+    "filesGlob": [
+        "typings/**/*.ts",
+        "home/**/*.ts"
+    ],
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": true
+    },
+    "files": []
+}

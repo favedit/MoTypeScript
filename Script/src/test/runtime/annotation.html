@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<title>skong</title>
+<script type="text/javascript" src="../../../library/require.js"></script>
+<script type="text/javascript" src="../../../build/runtime.js"></script>
+<script>
+function my_logger(){
+   var caller = my_logger.caller;
+   console.log(caller);
+   return caller;
+}
+
+function test(value){
+   my_logger(1);
+}
+require(['package'], function ($) {
+   //debugger
+   var loggerConsole1 = new sk.runtime.core.console.FLoggerConsole();
+   var loggerConsole2 = new sk.runtime.core.console.FLoggerConsole();
+   console.log(loggerConsole1._environmentConsole.toString());
+   console.log(loggerConsole2._environmentConsole.toString());
+   var rclass = sk.runtime.common.reflect.RClass;
+   var ccc = rclass._classes;
+   loggerConsole1.connect('test');
+   //test(1);
+   //var loggerConsole = sk.runtime.core.RConsole.find(sk.runtime.core.console.FLoggerConsole);
+   //var listeners = new sk.runtime.common.lang.FListeners();
+   //listeners.register(null, test);
+   //listeners.process(1);
+   //console.log(window.webCL);
+//   console.log(sk);
+});
+function onLoad(){
+   //debugger
+   //var instance = sk.runtime.common.reflect.RClass.create(sk.runtime.common.lang.FObject);
+   //console.log(instance);
+}
+</script>
+</head>
+<body onload='onLoad()'>
+</body>
+</html>

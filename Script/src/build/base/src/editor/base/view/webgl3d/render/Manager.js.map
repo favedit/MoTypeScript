@@ -1,0 +1,1 @@
+{"version":3,"file":"Manager.js","sourceRoot":"","sources":["../../../../../../../../editor/base/view/webgl3d/render/Manager.ts"],"names":[],"mappings":";;IAAa,uBAAe,GAAG;QAC3B,GAAG,EAAE,CAAC;QACN,MAAM,EAAE,CAAC;QACT,IAAI,EAAE,CAAC;KACV,CAAC;IAEW,sBAAc,GAAG;QAC1B,MAAM,EAAE,CAAC;QACT,IAAI,EAAE,CAAC;KACV,CAAC;IAEF;QAAA;QAEA,CAAC;QAAD,cAAC;IAAD,CAAC,AAFD,IAEC;IAFY,eAAO,UAEnB,CAAA"}
