@@ -1,1 +1,0 @@
-{"version":3,"file":"CmdDeleteWalls.js","sourceRoot":"","sources":["../../../../../../../editor/base/cmd/wall/CmdDeleteWalls.ts"],"names":[],"mappings":";;;;;;;IAEW,oBAAY,GAAG;QACtB,IAAI,EAAE,MAAM;QACZ,SAAS,EAAE,YAAY;QACvB,MAAM,EAAE,QAAQ;KACnB,CAAC;IAEF;QAAoC,kCAAgB;QAApD;YAAoC,8BAAgB;QAEpD,CAAC;QAAD,qBAAC;IAAD,CAAC,AAFD,CAAoC,mCAAgB,GAEnD;IAFY,sBAAc,iBAE1B,CAAA"}

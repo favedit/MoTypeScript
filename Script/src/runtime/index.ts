@@ -1,4 +1,3 @@
-export * from './package';
 
 import * as common from './common/index';
 export {common as common};

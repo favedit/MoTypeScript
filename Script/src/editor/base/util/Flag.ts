@@ -1,17 +1,37 @@
-export class Flag{
-   public isFlagOn(a, b) {
-       return 0 !== (a & b)
-   }
+export class Flag {
+   /**
+	 * @param {?} dataAndEvents
+	 * @param {?} deepDataAndEvents
+	 * @return {?}
+	 */
+	public static isFlagOn(dataAndEvents, deepDataAndEvents) {
+		return 0 !== (dataAndEvents & deepDataAndEvents);
+	};
 
-   public isFlagOff(a, b) {
-       return 0 === (a & b)
-   }
+	/**
+	 * @param {?} deepDataAndEvents
+	 * @param {?} dataAndEvents
+	 * @return {?}
+	 */
+	public static isFlagOff(deepDataAndEvents, dataAndEvents) {
+		return 0 === (deepDataAndEvents & dataAndEvents);
+	};
 
-   public setFlagOn(a, b) {
-       return a | b
-   }
+	/**
+	 * @param {?} dataAndEvents
+	 * @param {boolean} deepDataAndEvents
+	 * @return {?}
+	 */
+	public static setFlagOn(dataAndEvents, deepDataAndEvents) {
+		return dataAndEvents | deepDataAndEvents;
+	};
 
-   public setFlagOff(a, b) {
-       return a & ~b
-   } 
+	/**
+	 * @param {?} deepDataAndEvents
+	 * @param {boolean} dataAndEvents
+	 * @return {?}
+	 */
+	public static setFlagOff(deepDataAndEvents, dataAndEvents) {
+		return deepDataAndEvents & ~dataAndEvents;
+	};
 }

@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../editor/base/app/index.ts"],"names":[],"mappings":";;IAAa,sBAAc,GAAG;QAC1B,UAAU,EAAE,YAAY;QACxB,SAAS,EAAE,WAAW;QACtB,WAAW,EAAE,aAAa;QAC1B,WAAW,EAAE,aAAa;QAC1B,UAAU,EAAE,YAAY;QACxB,iBAAiB,EAAE,mBAAmB;KACzC,CAAC;IAGW,sBAAc,GAAG;QAC1B,OAAO,EAAE,CAAC;QACV,MAAM,EAAE,CAAC;QACT,QAAQ,EAAE,CAAC;KACd,CAAC"}

@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "target": "es5",
+        "module": "amd",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "outDir": "./build"
+    },
+    "buildOnSave": false,
+    "compileOnSave": true,
+    "filesGlob": [
+        "./typings/**/*.ts",
+        "./src/runtime/**/*.ts",
+        "./src/plugin/**/*.ts",
+        "./src/editor/base/**/*.ts",
+        "./src/editor/product/**/*.ts"
+    ],
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": false
+    },
+    "files": [
+    
+    ]
+}

@@ -1,0 +1,27 @@
+/// <reference path="./extends.js"/>
+///// <reference path='../../../../typings/es6-shim/es6-shim.d.ts'/>
+/// <reference path='../../../../typings/jquery/jquery.d.ts'/>
+/// <reference path='../../../../typings/raphael/raphael.d.ts'/>
+/// <reference path='../../../../typings/requirejs/require.d.ts'/>
+/// <reference path='../../../../typings/res/res.d.ts'/>
+/// <reference path='../../../../typings/threejs/detector.d.ts'/>
+/// <reference path='../../../../typings/threejs/objloader.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-canvasrenderer.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-copyshader.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-css3drenderer.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-editorcontrols.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-effectcomposer.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-FirstPersonControls.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-maskpass.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-orbitcontrols.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-projector.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-renderpass.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-shaderpass.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-trackballcontrols.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-transformcontrols.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-vrcontrols.d.ts'/>
+/// <reference path='../../../../typings/threejs/three-vreffect.d.ts'/>
+/// <reference path='../../../../typings/threejs/three.d.ts'/>
+/// <reference path='../../../../typings/tsd.d.ts'/>
+/// <reference path='../../../../typings/tween.js/tween.js.d.ts'/>
+

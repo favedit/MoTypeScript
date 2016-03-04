@@ -10,20 +10,6 @@ import {FError} from './FError'
 // @version 141229
 //==========================================================
 export class RObject {
-   //..........................................................
-   // @attribute
-   private static _hash: number = 1;
-
-   //==========================================================
-   // <T>获得下一个编号。</T>
-   //
-   // @method
-   // @return Integer 编号
-   //==========================================================
-   public static nextId() {
-      return this._hash++;
-   }
-
    //==========================================================
    // <T>获得第一个非空对象。</T>
    //
@@ -31,9 +17,9 @@ export class RObject {
    // @param v:values:Object[] 对象集合
    // @return Object 非空对象
    //==========================================================
-   public static nvl(...values:Array<any>) {
+   public static nvl(...values: Array<any>) {
       var count = values.length;
-      for (var n:number = 0; n < count; n++) {
+      for (var n: number = 0; n < count; n++) {
          if (values[n] != null) {
             return values[n];
          }

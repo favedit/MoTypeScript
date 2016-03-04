@@ -1,3 +1,4 @@
+import {Constants} from '../Constants';
 import {Entity} from './Entity';
 import {EntityEventEnum} from './EntityEventEnum';
 
@@ -7,88 +8,90 @@ import {EntityEventEnum} from './EntityEventEnum';
  * @return {undefined}
  */
 export class Vertex extends Entity {
-   __x = 0;
-	__y = 0;
+	private __x = 0;
+	private __y = 0;
+	public x: any = 0;
+	public y: any = 0;
+	public Class: string = "hsw.core.brep.Vertex";
 
-	public constructor(v2:any = null, v1 : any = null) {
+	public constructor(x: any = null, y: any = null) {
 		super();
 		this.defineField("x");
 		this.defineField("y");
 		/** @type {number} */
-		this.__x = Number(v2);
+		this.__x = Number(x);
 		/** @type {number} */
-		this.__y = Number(v1);
-	};
-	//goog.inherits(hsw.core.brep.Vertex, hsw.core.brep.Entity);
-	Class = "hsw.core.brep.Vertex";
+		this.__y = Number(y);
+	}
+
 	/** @type {string} *//**
 	 * @param {string} item
 	 * @param {string} graphics
 	 * @param {?} opt_attributes
 	 * @return {undefined}
 	 */
-	// public onFieldChanged(item, graphics, opt_attributes) {
-	// 	this._invalidateSubgraph();
-	// 	this.dispatchEvent(new goog.events.Event(EntityEventEnum.fieldChanged, {
-	// 		fieldName: item,
-	// 		oldValue: graphics,
-	// 		newValue: opt_attributes
-	// 	}));
-	// };
+	public onFieldChanged(item, graphics, opt_attributes) {
+		this._invalidateSubgraph();
+		this.dispatchEvent(new goog.events.Event(EntityEventEnum.fieldChanged, {
+			fieldName: item,
+			oldValue: graphics,
+			newValue: opt_attributes
+		}));
+	}
 
 	/**
 	 * @return {undefined}
 	 */
-	// public onEntityDirty() {
-	// 	super.onEntityDirty();
-	// 	/** @type {boolean} */
-	// 	this._boundDirty = true;
-	// };
-   //
-	// /**
-	//  * @param {?} v
-	//  * @return {?}
-	//  */
-	// public equals(v) {
-	// 	if(hsw.core.brep.Vertex.superClass_.equals.call(this, v)) {
-	// 		return true;
-	// 	}
-	// 	if(!(v instanceof hsw.core.brep.Vertex)) {
-	// 		return false;
-	// 	}
-	// 	var tolerance = hsw.core.Constants.TOLERANCE;
-	// 	return Math.abs(this.x - v.x) < tolerance && Math.abs(this.y - v.y) < tolerance;
-	// };
-   //
-	// /**
-	//  * @return {undefined}
-	//  */
-	// public refreshBoundInternal() {
-	// 	var child = this.boundInternal;
-	// 	child.left = this.x;
-	// 	child.top = this.y;
-	// 	/** @type {number} */
-	// 	child.width = child.height = 0;
-	// };
-   //
-	// /**
-	//  * @return {?}
-	//  */
-	// public dump() {
-	// 	var pat = hsw.core.brep.Vertex.superClass_.dump.call(this);
-	// 	pat.x = this.x;
-	// 	pat.y = this.y;
-	// 	return [pat];
-	// };
-   //
-	// /**
-	//  * @param {string} options
-	//  * @param {Object} head
-	//  * @return {undefined}
-	//  */
-	// public load(options, head) {
-	// 	hsw.core.brep.Vertex.superClass_.load.call(this, options, head);
-	// 	this.x = options.x;
-	// 	this.y = options.y;
-	// };
+	public onEntityDirty() {
+		super.onEntityDirty.call(this);
+		/** @type {boolean} */
+		this._boundDirty = true;
+	}
+
+	/**
+	 * @param {?} v
+	 * @return {?}
+	 */
+	public equals(v) {
+		if(super.equals.call(this, v)) {
+			return true;
+		}
+		if(!(v instanceof hsw.core.brep.Vertex)) {
+			return false;
+		}
+		var tolerance = Constants.TOLERANCE;
+		return Math.abs(this.x - v.x) < tolerance && Math.abs(this.y - v.y) < tolerance;
+	}
+
+	/**
+	 * @return {undefined}
+	 */
+	public refreshBoundInternal() {
+		var child = this.boundInternal;
+		child.left = this.x;
+		child.top = this.y;
+		/** @type {number} */
+		child.width = child.height = 0;
+	}
+
+	/**
+	 * @param {string} options
+	 * @param {Object} head
+	 * @return {undefined}
+	 */
+	public load(options, head) {
+		super.load.call(this, options, head);
+		this.x = options.x;
+		this.y = options.y;
+	}
+
+	/**
+	 * @return {?}
+	 */
+	public dump() {
+		var pat:any = super.dump();
+		pat.x = this.x;
+		pat.y = this.y;
+		return [pat];
+	}
 }

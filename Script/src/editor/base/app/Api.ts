@@ -1,3 +1,2 @@
-export const ViewEventTypeEnum = {
-    active: "view.active"
+export class Api {
 };

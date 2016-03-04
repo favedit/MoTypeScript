@@ -1,4 +1,4 @@
-import {RObject} from './RObject';
+import {RObjectId} from './RObjectId';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -35,7 +35,7 @@ export class FObject {
    public get hashCode(): number {
       var hashCode: number = this.__hashCode;
       if (hashCode == 0) {
-         hashCode = this.__hashCode = RObject.nextId();
+         hashCode = this.__hashCode = RObjectId.nextId();
       }
       return hashCode;
    }
@@ -46,9 +46,9 @@ export class FObject {
    // @method
    // @return String 信息字符串
    //==========================================================
-   public toString(): string {
-      return RClass.dump(this);
-   }
+   //public toString(): string {
+      //return RClass.dump(this);
+   //}
 
    //==========================================================
    // <T>释放当前实例。</T>
