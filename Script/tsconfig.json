@@ -13,20 +13,28 @@
         "sourceMap": true,
         "outDir": "./build"
     },
-    "buildOnSave": false,
+    "formatCodeOptions": {
+        "indentSize": 3,
+        "tabSize": 3,
+        "newLineCharacter": "\r\n",
+        "convertTabsToSpaces": true,
+        "insertSpaceAfterCommaDelimiter": true,
+        "insertSpaceAfterSemicolonInForStatements": true,
+        "insertSpaceBeforeAndAfterBinaryOperators": true,
+        "insertSpaceAfterKeywordsInControlFlowStatements": true,
+        "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+        "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+        "placeOpenBraceOnNewLineForFunctions": false,
+        "placeOpenBraceOnNewLineForControlBlocks": false
+    },
     "compileOnSave": true,
+    "buildOnSave": false,
     "filesGlob": [
-        "./typings/**/*.ts",
-        "./src/runtime/**/*.ts",
-        "./src/plugin/**/*.ts",
-        "./src/editor/base/**/*.ts",
-        "./src/editor/product/**/*.ts"
+        "./src/**/*.ts"
     ],
     "exclude": [],
     "atom": {
-        "rewriteTsconfig": false
-    },
-    "files": [
-    
-    ]
+        "rewriteTsconfig": false,
+        "formatOnSave": true
+    }
 }
