@@ -14,13 +14,13 @@ export class MRenderableLinker {
     //    // @method
     //    o.dispose     = MO.MRenderableLinker_dispose;
 
-    //==========================================================
-    // <T>释放处理。</T>
-    //
-    // @method
-    //==========================================================
-    public dispose() {
-        var o = this;
-        o._renderable = null;
-    }
+    // //==========================================================
+    // // <T>释放处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public dispose() {
+    //     var o = this;
+    //     o._renderable = null;
+    // }
 }

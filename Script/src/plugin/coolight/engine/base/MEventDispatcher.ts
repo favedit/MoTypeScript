@@ -20,48 +20,48 @@ export class MEventDispatcher {
     //    o.onOperationVisibility  = MO.Method.empty;
     //    o.onOperationOrientation = MO.Method.empty;
 
-    //==========================================================
-    // <T>事件处理。</T>
-    //
-    // @method
-    // @param event:SEvent 事件信息
-    // @param flag:Boolean 标志
-    //==========================================================
-    public dispatchEvent(event, flag) {
-        var o = this;
-        switch (event.code) {
-            case MO.EEvent.MouseDown:
-                o.onOperationDown(event);
-                break;
-            case MO.EEvent.MouseMove:
-                o.onOperationMove(event);
-                break;
-            case MO.EEvent.MouseUp:
-                o.onOperationUp(event);
-                break;
-            case MO.EEvent.MouseWheel:
-                o.onOperationWheel(event);
-                break;
-            case MO.EEvent.KeyDown:
-                o.onOperationKeyDown(event);
-                break;
-            case MO.EEvent.KeyPress:
-                o.onOperationKeyPress(event);
-                break;
-            case MO.EEvent.KeyUp:
-                o.onOperationKeyUp(event);
-                break;
-            case MO.EEvent.Resize:
-                o.onOperationResize(event);
-                break;
-            case MO.EEvent.Visibility:
-                o.onOperationVisibility(event);
-                break;
-            case MO.EEvent.Orientation:
-                o.onOperationOrientation(event);
-                break;
-            default:
-                throw new MO.TError('Unknown event type.');
-        }
-    }
+    // //==========================================================
+    // // <T>事件处理。</T>
+    // //
+    // // @method
+    // // @param event:SEvent 事件信息
+    // // @param flag:Boolean 标志
+    // //==========================================================
+    // public dispatchEvent(event, flag) {
+    //     var o = this;
+    //     switch (event.code) {
+    //         case MO.EEvent.MouseDown:
+    //             o.onOperationDown(event);
+    //             break;
+    //         case MO.EEvent.MouseMove:
+    //             o.onOperationMove(event);
+    //             break;
+    //         case MO.EEvent.MouseUp:
+    //             o.onOperationUp(event);
+    //             break;
+    //         case MO.EEvent.MouseWheel:
+    //             o.onOperationWheel(event);
+    //             break;
+    //         case MO.EEvent.KeyDown:
+    //             o.onOperationKeyDown(event);
+    //             break;
+    //         case MO.EEvent.KeyPress:
+    //             o.onOperationKeyPress(event);
+    //             break;
+    //         case MO.EEvent.KeyUp:
+    //             o.onOperationKeyUp(event);
+    //             break;
+    //         case MO.EEvent.Resize:
+    //             o.onOperationResize(event);
+    //             break;
+    //         case MO.EEvent.Visibility:
+    //             o.onOperationVisibility(event);
+    //             break;
+    //         case MO.EEvent.Orientation:
+    //             o.onOperationOrientation(event);
+    //             break;
+    //         default:
+    //             throw new MO.TError('Unknown event type.');
+    //     }
+    // }
 }

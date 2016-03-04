@@ -10,7 +10,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "outDir": "./build"
     },
     "formatCodeOptions": {

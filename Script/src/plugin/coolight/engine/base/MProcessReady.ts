@@ -19,26 +19,26 @@ export class MProcessReady {
     //    // @method
     //    o.dispose        = MO.MFrameProcessor_dispose;
 
-    //==========================================================
-    // <T>构造处理。</T>
-    //
-    // @method
-    //==========================================================
-    public constructor() {
-        var o = this;
-        // 设置变量
-        var loader = o._readyLoader = MO.Class.create(MO.FReadyLoader);
-        loader.addChangeListener(o, o.onProcessReady);
-    }
+    // //==========================================================
+    // // <T>构造处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public constructor() {
+    //     var o = this;
+    //     // 设置变量
+    //     var loader = o._readyLoader = MO.Class.create(MO.FReadyLoader);
+    //     loader.addChangeListener(o, o.onProcessReady);
+    // }
 
-    //==========================================================
-    // <T>释放处理。</T>
-    //
-    // @method
-    //==========================================================
-    public dispose() {
-        var o = this;
-        // 释放变量
-        o._readyLoader = MO.Lang.Object.dispose(o._readyLoader);
-    }
+    // //==========================================================
+    // // <T>释放处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public dispose() {
+    //     var o = this;
+    //     // 释放变量
+    //     o._readyLoader = MO.Lang.Object.dispose(o._readyLoader);
+    // }
 }

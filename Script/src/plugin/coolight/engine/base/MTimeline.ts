@@ -5,6 +5,6 @@
 // @author maocy
 // @history 150710
 //==========================================================
-export class MTimeline{
-   //o = MO.Class.inherits(this, o, MO.MTimelineWorker);
+export class MTimeline {
+    //o = MO.Class.inherits(this, o, MO.MTimelineWorker);
 }

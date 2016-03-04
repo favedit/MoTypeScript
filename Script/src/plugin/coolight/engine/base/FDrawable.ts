@@ -23,6 +23,6 @@ export class FDrawable {
     // @return Boolean 可见性
     //==========================================================
     public testVisible() {
-        return this._visible;
+        // return this._visible;
     }
 }

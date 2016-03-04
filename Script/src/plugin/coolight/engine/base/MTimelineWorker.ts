@@ -43,116 +43,116 @@ export class MTimelineWorker {
     //    // @method
     //    o.dispose      = MO.MTimelineWorker_dispose;
 
-    //==========================================================
-    // <T>开始事件处理。</T>
-    //
-    // @method
-    // @param context:STimelineContext 时间轴环境
-    //==========================================================
-    public onStart(context) {
-        var o = this;
-        o._startTick = context.tick;
-        o._lastTick = context.tick;
-        o.processActionStartListener(context);
-    }
+    // //==========================================================
+    // // <T>开始事件处理。</T>
+    // //
+    // // @method
+    // // @param context:STimelineContext 时间轴环境
+    // //==========================================================
+    // public onStart(context) {
+    //     var o = this;
+    //     o._startTick = context.tick;
+    //     o._lastTick = context.tick;
+    //     o.processActionStartListener(context);
+    // }
 
-    //==========================================================
-    // <T>逻辑事件处理。</T>
-    //
-    // @method
-    // @param context:STimelineContext 时间线环境
-    //==========================================================
-    public onProcess(context) {
-        var o = this;
-    }
+    // //==========================================================
+    // // <T>逻辑事件处理。</T>
+    // //
+    // // @method
+    // // @param context:STimelineContext 时间线环境
+    // //==========================================================
+    // public onProcess(context) {
+    //     var o = this;
+    // }
 
-    //==========================================================
-    // <T>结束事件处理。</T>
-    //
-    // @method
-    // @param context:STimelineContext 时间轴环境
-    //==========================================================
-    public onStop(context) {
-        var o = this;
-        o.processActionStopListener(context);
-    }
+    // //==========================================================
+    // // <T>结束事件处理。</T>
+    // //
+    // // @method
+    // // @param context:STimelineContext 时间轴环境
+    // //==========================================================
+    // public onStop(context) {
+    //     var o = this;
+    //     o.processActionStopListener(context);
+    // }
 
-    //==========================================================
-    // <T>构造处理。</T>
-    //
-    // @method
-    //==========================================================
-    public constructor() {
-        var o = this;
-        o._eventActionStart = new MO.SEvent(o);
-        o._eventActionStop = new MO.SEvent(o);
-    }
+    // //==========================================================
+    // // <T>构造处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public constructor() {
+    //     var o = this;
+    //     o._eventActionStart = new MO.SEvent(o);
+    //     o._eventActionStop = new MO.SEvent(o);
+    // }
 
-    //==========================================================
-    // <T>配置处理。</T>
-    //
-    // @method
-    //==========================================================
-    public setup() {
-        var o = this;
-        o._statusStart = false;
-    }
+    // //==========================================================
+    // // <T>配置处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public setup() {
+    //     var o = this;
+    //     o._statusStart = false;
+    // }
 
-    //==========================================================
-    // <T>开始处理。</T>
-    //
-    // @method
-    //==========================================================
-    public start(context) {
-        var o = this;
-        if (!o._statusStart) {
-            o.onStart(context);
-            o._statusStart = true;
-        }
-        o._statusStop = false;
-    }
+    // //==========================================================
+    // // <T>开始处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public start(context) {
+    //     var o = this;
+    //     if (!o._statusStart) {
+    //         o.onStart(context);
+    //         o._statusStart = true;
+    //     }
+    //     o._statusStop = false;
+    // }
 
-    //==========================================================
-    // <T>逻辑处理。</T>
-    //
-    // @method
-    //==========================================================
-    public process(context) {
-        var o = this;
-        var tick = context.tick;
-        var span = tick - o._lastTick;
-        // 计算环境
-        context.currentTick = o._tick = tick - o._startTick;
-        context.span = span;
-        context.spanSecond = span * 0.001;
-        // 逻辑处理
-        o.onProcess(context);
-        o._lastTick = tick;
-    }
+    // //==========================================================
+    // // <T>逻辑处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public process(context) {
+    //     var o = this;
+    //     var tick = context.tick;
+    //     var span = tick - o._lastTick;
+    //     // 计算环境
+    //     context.currentTick = o._tick = tick - o._startTick;
+    //     context.span = span;
+    //     context.spanSecond = span * 0.001;
+    //     // 逻辑处理
+    //     o.onProcess(context);
+    //     o._lastTick = tick;
+    // }
 
-    //==========================================================
-    // <T>停止处理。</T>
-    //
-    // @method
-    //==========================================================
-    public stop(context) {
-        var o = this;
-        if (!o._statusStop) {
-            o.onStop(context);
-            o._statusStop = true;
-        }
-        o._statusStart = false;
-    }
+    // //==========================================================
+    // // <T>停止处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public stop(context) {
+    //     var o = this;
+    //     if (!o._statusStop) {
+    //         o.onStop(context);
+    //         o._statusStop = true;
+    //     }
+    //     o._statusStart = false;
+    // }
 
-    //==========================================================
-    // <T>释放处理。</T>
-    //
-    // @method
-    //==========================================================
-    public dispose() {
-        var o = this;
-        o._eventActionStart = MO.Lang.Object.dispose(o._eventActionStart);
-        o._eventActionStop = MO.Lang.Object.dispose(o._eventActionStop);
-        o.__base.MListener.dispose.call(o);
-    }
+    // //==========================================================
+    // // <T>释放处理。</T>
+    // //
+    // // @method
+    // //==========================================================
+    // public dispose() {
+    //     var o = this;
+    //     o._eventActionStart = MO.Lang.Object.dispose(o._eventActionStart);
+    //     o._eventActionStop = MO.Lang.Object.dispose(o._eventActionStop);
+    //     o.__base.MListener.dispose.call(o);
+    // }
 }
