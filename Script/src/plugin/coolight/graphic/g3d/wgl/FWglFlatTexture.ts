@@ -1,5 +1,5 @@
 import {FError} from '../../../../../runtime/common/lang/FError';
-import {FG3dFlatTexture} from '../FG3dFlatTexture';
+import {FFlatTexture} from '../FFlatTexture';
 import {RWglUtility} from './RWglUtility';
 
 //==========================================================
@@ -8,21 +8,19 @@ import {RWglUtility} from './RWglUtility';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FWglFlatTexture extends FG3dFlatTexture {
-   // @attribute
-   _handle = null;
-   _statusUpdate = false;
+export class FWglFlatTexture extends FFlatTexture {
+   // 句柄
+   public handle: WebGLTexture = null;
+   // 更新状态 
+   public statusUpdate: boolean = false;
 
    //==========================================================
    // <T>配置处理。</T>
-   //
-   // @method
    //==========================================================
    public setup() {
-      var o = this;
-      var g = o._graphicContext._handle;
-      //o.__base.FG3dFlatTexture.setup.call(o);
-      o._handle = g.createTexture();
+      super.setup();
+      var graphic = this.graphicContext.handle;
+      this.handle = graphic.createTexture();
    }
 
    //==========================================================
@@ -32,9 +30,8 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var o = this;
-      var g = o._graphicContext._handle;
-      return g.isTexture(o._handle);
+      var graphic = this.graphicContext.handle;
+      return graphic.isTexture(this.handle);
    }
 
    //==========================================================
@@ -42,9 +39,9 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    //
    // @method
    //==========================================================
-   public texture() {
-      return this;
-   }
+   // public texture() {
+   //    return this;
+   // }
 
    //==========================================================
    // <T>生成位图的缩放图片。</T>
@@ -52,13 +49,11 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @method
    //==========================================================
    public makeMipmap() {
-      var o = this;
-      var context = o._graphicContext;
-      var handle = context._handle;
+      var graphic = this.graphicContext.handle;
       // 绑定数据
-      handle.bindTexture(handle.TEXTURE_2D, o._handle);
+      graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 生成MIP
-      handle.generateMipmap(handle.TEXTURE_2D);
+      graphic.generateMipmap(graphic.TEXTURE_2D);
    }
 
    //==========================================================
@@ -70,16 +65,16 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @param height:Integer 高度
    //==========================================================
    public uploadData(content, width, height) {
-      var o = this;
-      var context = o._graphicContext;
-      var handle = context._handle;
+      var context = this.graphicContext;
+      var graphic = context.handle;
       // 检查参数
       var data = null;
-      if (content.constructor == ArrayBuffer) {
+      var clazz = content.constructor;
+      if (clazz == ArrayBuffer) {
          data = new Uint8Array(content);
-      } else if (content.constructor == Uint8Array) {
+      } else if (clazz == Uint8Array) {
          data = content;
-      } else if (content.constructor == Float32Array) {
+      } else if (clazz == Float32Array) {
          if (!context.enableFloatTexture()) {
             throw new FError(this, 'Invalid content float format.');
          }
@@ -91,20 +86,20 @@ export class FWglFlatTexture extends FG3dFlatTexture {
       // o.width = width;
       // o.height = height;
       // 绑定数据
-      handle.bindTexture(handle.TEXTURE_2D, o._handle);
+      graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 上传内容
-      var internalformatCd = handle.RGBA;
-      var formatCd = handle.RGBA;
-      var typeCd = handle.UNSIGNED_BYTE;
+      var internalformatCd = graphic.RGBA;
+      var formatCd = graphic.RGBA;
+      var typeCd = graphic.UNSIGNED_BYTE;
       if (content.constructor == Float32Array) {
-         internalformatCd = handle.ALPHA;
-         formatCd = handle.ALPHA;
-         typeCd = handle.FLOAT;
+         internalformatCd = graphic.ALPHA;
+         formatCd = graphic.ALPHA;
+         typeCd = graphic.FLOAT;
       }
-      handle.texImage2D(handle.TEXTURE_2D, 0, internalformatCd, width, height, 0, formatCd, typeCd, data);
-      o._statusLoad = context.checkError("texImage2D", "Upload content failure.");
+      graphic.texImage2D(graphic.TEXTURE_2D, 0, internalformatCd, width, height, 0, formatCd, typeCd, data);
+      this.statusLoad = context.checkError("texImage2D", "Upload content failure.");
       // 更新处理
-      o.update();
+      this.update();
    }
 
    //==========================================================
@@ -118,10 +113,9 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @param height:Number 高度
    //==========================================================
    public upload(content, left, top, width, height) {
-      var o = this;
-      var context = o._graphicContext;
+      var context = this.graphicContext;
       var capability = context.capability();
-      var handle = context._handle;
+      var graphic = context.handle;
       // 检查参数
       var data = null;
       //var format = null;
@@ -145,10 +139,10 @@ export class FWglFlatTexture extends FG3dFlatTexture {
          throw new FError(this, 'Invalid image format.');
       }
       // 绑定数据
-      handle.bindTexture(handle.TEXTURE_2D, o._handle);
+      graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 设置上下反转
-      if (o._optionFlipY) {
-         handle.pixelStorei(handle.UNPACK_FLIP_Y_WEBGL, true);
+      if (this.optionFlipY) {
+         graphic.pixelStorei(graphic.UNPACK_FLIP_Y_WEBGL, true);
       }
       // 上传内容
       //if(f){
@@ -157,13 +151,13 @@ export class FWglFlatTexture extends FG3dFlatTexture {
       //handle.texImage2D(handle.TEXTURE_2D, 0, handle.RGBA, handle.RGBA, handle.UNSIGNED_BYTE, m);
       //}
       if ((left != null) && (top != null) && (width != null) && (height != null)) {
-         handle.texSubImage2D(handle.TEXTURE_2D, 0, left, top, width, height, handle.RGBA, handle.UNSIGNED_BYTE, data);
+         graphic.texSubImage2D(graphic.TEXTURE_2D, 0, left, top, width, height, graphic.RGBA, graphic.UNSIGNED_BYTE, data);
       } else {
-         handle.texImage2D(handle.TEXTURE_2D, 0, handle.RGBA, handle.RGBA, handle.UNSIGNED_BYTE, data);
+         graphic.texImage2D(graphic.TEXTURE_2D, 0, graphic.RGBA, graphic.RGBA, graphic.UNSIGNED_BYTE, data);
       }
       // 更新处理
-      o.update();
-      o._statusLoad = context.checkError("texImage2D", "Upload image failure.");
+      this.update();
+      this.statusLoad = context.checkError("texImage2D", "Upload image failure.");
    }
 
    //==========================================================
@@ -173,16 +167,15 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @param element:Object 内容
    //==========================================================
    public uploadElement(element) {
-      var o = this;
-      var handle = o._graphicContext._handle;
+      var graphic = this.graphicContext.handle;
       // 绑定数据
-      handle.bindTexture(handle.TEXTURE_2D, o._handle);
+      graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 上传内容
-      handle.texImage2D(handle.TEXTURE_2D, 0, handle.RGBA, handle.RGBA, handle.UNSIGNED_BYTE, element);
+      graphic.texImage2D(graphic.TEXTURE_2D, 0, graphic.RGBA, graphic.RGBA, graphic.UNSIGNED_BYTE, element);
       // 更新处理
-      if (!o._statusUpdate) {
-         o.update();
-         o._statusUpdate = true;
+      if (!this.statusUpdate) {
+         this.update();
+         this.statusUpdate = true;
       }
    }
 
@@ -192,27 +185,26 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @method
    //==========================================================
    public update() {
-      var o = this;
-      //o.__base.FG3dFlatTexture.update.call(o);
+      super.setup();
       // 绑定数据
-      var handle = o._graphicContext._handle;
-      handle.bindTexture(handle.TEXTURE_2D, o._handle);
+      var graphic = this.graphicContext.handle;
+      graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 设置过滤器
-      var code = RWglUtility.convertSamplerFilter(handle, o._filterMinCd);
+      var code = RWglUtility.convertSamplerFilter(graphic, this.filterMinCd);
       if (code) {
-         handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MIN_FILTER, code);
+         graphic.texParameteri(graphic.TEXTURE_2D, graphic.TEXTURE_MIN_FILTER, code);
       }
-      var code = RWglUtility.convertSamplerFilter(handle, o._filterMagCd);
+      var code = RWglUtility.convertSamplerFilter(graphic, this.filterMagCd);
       if (code) {
-         handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MAG_FILTER, code);
+         graphic.texParameteri(graphic.TEXTURE_2D, graphic.TEXTURE_MAG_FILTER, code);
       }
-      var code = RWglUtility.convertSamplerFilter(handle, o._wrapS);
+      var code = RWglUtility.convertSamplerFilter(graphic, this.wrapS);
       if (code) {
-         handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_WRAP_S, code);
+         graphic.texParameteri(graphic.TEXTURE_2D, graphic.TEXTURE_WRAP_S, code);
       }
-      var code = RWglUtility.convertSamplerFilter(handle, o._wrapT);
+      var code = RWglUtility.convertSamplerFilter(graphic, this.wrapT);
       if (code) {
-         handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_WRAP_T, code);
+         graphic.texParameteri(graphic.TEXTURE_2D, graphic.TEXTURE_WRAP_T, code);
       }
    }
 
@@ -222,13 +214,12 @@ export class FWglFlatTexture extends FG3dFlatTexture {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
-      var context = o._graphicContext;
+      var graphic = this.graphicContext;
       // 释放对象
-      var handle = o._handle;
+      var handle = this.handle;
       if (handle) {
-         context._handle.deleteTexture(handle);
-         o._handle = null;
+         graphic.handle.deleteTexture(handle);
+         this.handle = null;
       }
       // 父处理
       super.dispose();

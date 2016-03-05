@@ -9,7 +9,7 @@ import {FString} from './FString'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FDictionary extends FMap {
+export class FDictionary<V> extends FMap<string, V> {
    //==========================================================
    // <T>按照名称排序。</T>
    //

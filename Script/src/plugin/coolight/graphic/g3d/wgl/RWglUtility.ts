@@ -1,11 +1,11 @@
 import {FError} from '../../../../../runtime/common/lang/FError';
-import {EG3dFillMode} from '../EG3dFillMode';
-import {EG3dDrawMode} from '../EG3dDrawMode';
-import {EG3dCullMode} from '../EG3dCullMode';
-import {EG3dDepthMode} from '../EG3dDepthMode';
-import {EG3dBlendMode} from '../EG3dBlendMode';
-import {EG3dIndexStride} from '../EG3dIndexStride';
-import {EG3dSamplerFilter} from '../EG3dSamplerFilter';
+import {EFillMode} from '../EFillMode';
+import {EDrawMode} from '../EDrawMode';
+import {ECullMode} from '../ECullMode';
+import {EDepthMode} from '../EDepthMode';
+import {EBlendMode} from '../EBlendMode';
+import {EIndexStride} from '../EIndexStride';
+import {ESamplerFilter} from '../ESamplerFilter';
 
 //==========================================================
 // <T>WebGL工具集。</T>
@@ -24,11 +24,11 @@ export class RWglUtility {
    //==========================================================
    public static convertFillMode(graphic, fillCd) {
       switch (fillCd) {
-            case EG3dFillMode.Point:
+         case EFillMode.Point:
             return graphic.POINT;
-         case EG3dFillMode.Line:
+         case EFillMode.Line:
             return graphic.LINE;
-         case EG3dFillMode.Face:
+         case EFillMode.Face:
             return graphic.FILL;
       }
       throw new FError(this, "Convert fill mode failure. (fill_cd={1})", fillCd);
@@ -44,23 +44,23 @@ export class RWglUtility {
    //==========================================================
    public static convertDrawMode(graphic, drawCd) {
       switch (drawCd) {
-         case EG3dDrawMode.Points:
+         case EDrawMode.Points:
             return graphic.POINTS;
-         case EG3dDrawMode.Lines:
+         case EDrawMode.Lines:
             return graphic.LINES;
-         case EG3dDrawMode.LineStrip:
+         case EDrawMode.LineStrip:
             return graphic.LINE_STRIP;
-         case EG3dDrawMode.LineLoop:
+         case EDrawMode.LineLoop:
             return graphic.LINE_LOOP;
-         case EG3dDrawMode.Triangles:
+         case EDrawMode.Triangles:
             return graphic.TRIANGLES;
-         case EG3dDrawMode.TriangleStrip:
+         case EDrawMode.TriangleStrip:
             return graphic.TRIANGLE_STRIP;
-         case EG3dDrawMode.TriangleFan:
+         case EDrawMode.TriangleFan:
             return graphic.TRIANGLE_FAN;
-         case EG3dDrawMode.Quads:
+         case EDrawMode.Quads:
             return graphic.QUADS;
-         case EG3dDrawMode.QuadStrip:
+         case EDrawMode.QuadStrip:
             return graphic.QUAD_STRIP;
       }
       throw new FError(this, "Convert draw mode failure. (draw_cd={1})", drawCd);
@@ -76,11 +76,11 @@ export class RWglUtility {
    //==========================================================
    public static convertCullMode(graphic, cullCd) {
       switch (cullCd) {
-         case EG3dCullMode.Front:
+         case ECullMode.Front:
             return graphic.FRONT;
-         case EG3dCullMode.Back:
+         case ECullMode.Back:
             return graphic.BACK;
-         case EG3dCullMode.Both:
+         case ECullMode.Both:
             return graphic.FRONT_AND_BACK;
       }
       throw new FError(this, "Convert cull mode failure. (cull_cd={1})", cullCd);
@@ -96,19 +96,19 @@ export class RWglUtility {
    //==========================================================
    public static convertDepthMode(graphic, depthCd) {
       switch (depthCd) {
-         case EG3dDepthMode.Equal:
+         case EDepthMode.Equal:
             return graphic.EQUAL;
-         case EG3dDepthMode.NotEqual:
+         case EDepthMode.NotEqual:
             return graphic.NOTEQUAL;
-         case EG3dDepthMode.Less:
+         case EDepthMode.Less:
             return graphic.LESS;
-         case EG3dDepthMode.LessEqual:
+         case EDepthMode.LessEqual:
             return graphic.LEQUAL;
-         case EG3dDepthMode.Greater:
+         case EDepthMode.Greater:
             return graphic.GREATER;
-         case EG3dDepthMode.GreaterEqual:
+         case EDepthMode.GreaterEqual:
             return graphic.GEQUAL;
-         case EG3dDepthMode.Always:
+         case EDepthMode.Always:
             return graphic.ALWAYS;
       }
       throw new FError(this, "Convert depth mode failure. (depth_cd={1})", depthCd);
@@ -124,27 +124,27 @@ export class RWglUtility {
    //==========================================================
    public static convertBlendFactors(graphic, blendCd) {
       switch (blendCd) {
-         case EG3dBlendMode.Zero:
+         case EBlendMode.Zero:
             return graphic.ZERO;
-         case EG3dBlendMode.One:
+         case EBlendMode.One:
             return graphic.ONE;
-         case EG3dBlendMode.SrcColor:
+         case EBlendMode.SrcColor:
             return graphic.SRC_COLOR;
-         case EG3dBlendMode.OneMinusSrcColor:
+         case EBlendMode.OneMinusSrcColor:
             return graphic.ONE_MINUS_SRC_COLOR;
-         case EG3dBlendMode.DstColor:
+         case EBlendMode.DstColor:
             return graphic.DST_COLOR;
-         case EG3dBlendMode.OneMinusDstColor:
+         case EBlendMode.OneMinusDstColor:
             return graphic.ONE_MINUS_DST_COLOR;
-         case EG3dBlendMode.SrcAlpha:
+         case EBlendMode.SrcAlpha:
             return graphic.SRC_ALPHA;
-         case EG3dBlendMode.OneMinusSrcAlpha:
+         case EBlendMode.OneMinusSrcAlpha:
             return graphic.ONE_MINUS_SRC_ALPHA;
-         case EG3dBlendMode.DstAlpha:
+         case EBlendMode.DstAlpha:
             return graphic.DST_ALPHA;
-         case EG3dBlendMode.OneMinusDstAlpha:
+         case EBlendMode.OneMinusDstAlpha:
             return graphic.ONE_MINUS_DST_ALPHA;
-         case EG3dBlendMode.SrcAlphaSaturate:
+         case EBlendMode.SrcAlphaSaturate:
             return graphic.SRC_ALPHA_SATURATE;
       }
       throw new FError(this, "Convert blend factors failure. (blend_cd={1})", blendCd);
@@ -160,9 +160,9 @@ export class RWglUtility {
    //==========================================================
    public static convertIndexStride(graphic, strideCd) {
       switch (strideCd) {
-         case EG3dIndexStride.Uint16:
+         case EIndexStride.Uint16:
             return graphic.UNSIGNED_SHORT;
-         case EG3dIndexStride.Uint32:
+         case EIndexStride.Uint32:
             return graphic.UNSIGNED_INT;
       }
       throw new FError(this, "Convert index stride failure. (stride_cd={1})", strideCd);
@@ -178,19 +178,17 @@ export class RWglUtility {
    //==========================================================
    public static convertSamplerFilter(graphic, filterCd) {
       switch (filterCd) {
-         case EG3dSamplerFilter.Unknown:
-            return 0;
-         case EG3dSamplerFilter.Nearest:
+         case ESamplerFilter.Nearest:
             return graphic.NEAREST;
-         case EG3dSamplerFilter.Linear:
+         case ESamplerFilter.Linear:
             return graphic.LINEAR;
-         case EG3dSamplerFilter.Repeat:
+         case ESamplerFilter.Repeat:
             return graphic.REPEAT;
-         case EG3dSamplerFilter.MirroredRepeat:
+         case ESamplerFilter.MirroredRepeat:
             return graphic.MIRRORED_REPEAT;
-         case EG3dSamplerFilter.ClampToEdge:
+         case ESamplerFilter.ClampToEdge:
             return graphic.CLAMP_TO_EDGE;
-         case EG3dSamplerFilter.ClampToBorder:
+         case ESamplerFilter.ClampToBorder:
             return graphic.CLAMP_TO_BORDER;
       }
       throw new FError(this, "Convert sampler filter failure. (filter_cd={1})", filterCd);

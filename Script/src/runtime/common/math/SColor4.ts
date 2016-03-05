@@ -25,7 +25,7 @@ export class SColor4 {
    // @param y:Number Y分量
    // @param z:Number Z分量
    //============================================================
-   constructor(red: number = 0, green: number = 0, blue: number = 0, alpha: number = 1) {
+   public constructor(red: number = 0, green: number = 0, blue: number = 0, alpha: number = 1) {
       this.red = red;
       this.green = green;
       this.blue = blue;

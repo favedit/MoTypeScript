@@ -17,7 +17,7 @@ export class FResourceType extends FObject {
    //o._code = MO.Class.register(o, new MO.AGetSet('_code'));
    //o._pipeline = MO.Class.register(o, new MO.AGetSet('_pipeline'));
    //o._resources = MO.Class.register(o, new MO.AGetter('_resources'));
-   protected _resources: FDictionary = null;
+   protected _resources: FDictionary<any> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,7 +27,7 @@ export class FResourceType extends FObject {
    public constructor() {
       super();
       // 设置属性
-      this._resources = new FDictionary();
+      this._resources = new FDictionary<any>();
    }
 
    //==========================================================

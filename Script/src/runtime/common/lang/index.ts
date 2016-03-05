@@ -15,6 +15,8 @@ export * from './FLooper';
 export * from './FMap';
 export * from './FMemoryPool';
 export * from './FObject';
+export * from './FObjectPool';
+export * from './FObjectPools';
 export * from './FObjects';
 export * from './FString';
 export * from './RArray';

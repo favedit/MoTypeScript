@@ -315,6 +315,42 @@ export class RRuntime extends RSingleton {
    // @param item:Object 对象
    // @param flag:Boolean 标志
    //==========================================================
+   public static namespace(item: any, space: string): void {
+      for (var name in item) {
+         // 检查名称
+         if(name.indexOf('_') == 0){
+            continue;
+         }
+         // 获得内容 
+         var value = item[name];
+         if (value != null) {
+            // 检查是否已经设置过
+            if(value.__space != null){
+               continue;
+            }
+            // 设置类型名称
+            var typeName = typeof value;
+            if ((typeName == 'object') || (typeName == 'function')) {
+               var spaceName: string = space + '.' + name;
+               value.__space = spaceName;
+               this.namespace(value, spaceName);
+               // 执行处理
+               if (value.staticConstructor) {
+                  value.staticConstructor();
+               }
+            }
+         }
+      }
+      return null;
+   }
+
+   //==========================================================
+   // <T>释放一个对象。</T>
+   //
+   // @method
+   // @param item:Object 对象
+   // @param flag:Boolean 标志
+   //==========================================================
    public static dispose(item: any, flag: boolean = false): void {
       if (item) {
          if (!item.__dispose) {

@@ -1,6 +1,7 @@
 import {EScope} from '../../common/lang/EScope';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {FConsole} from '../FConsole';
+import {FStatistics} from './FStatistics';
 
 //==========================================================
 // <T>统计控制台。</T>
@@ -10,10 +11,10 @@ import {FConsole} from '../FConsole';
 // @version 150303
 //==========================================================
 export class FStatisticsConsole extends FConsole {
-   // @attribute
+   // 范围 
    protected _scopeCd = EScope.Local;
-   //_statisticses = MO.Class.register(o, new MO.AGetter('_statisticses'));
-   protected _statisticses = new FDictionary();
+   // 统计集合
+   protected _statisticses = new FDictionary<FStatistics>();
 
    //==========================================================
    // <T>注册一个统计器。</T>

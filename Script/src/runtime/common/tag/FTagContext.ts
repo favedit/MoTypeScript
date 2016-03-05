@@ -15,11 +15,10 @@ import {RString} from '../lang/RString';
 export class FTagContext extends FObject {
    //..........................................................
    // @attribute
-   protected _trimLeft = false;
-   protected _trimRight = false;
-   //protected _attributes = MO.Class.register(o, new MO.AGetter('_attributes'));
-   protected _attributes: FAttributes = null;
-   protected _source = null;
+   public trimLeft = false;
+   public trimRight = false;
+   public _attributes: FAttributes = null;
+   public _source = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -49,8 +48,8 @@ export class FTagContext extends FObject {
    // @param value:String 默认值
    // @return String 内容
    //==========================================================
-   public get(name, value) {
-      return this._attributes.get(name, value);
+   public get(name: string, defaultValue: any = null) {
+      return this._attributes.get(name, defaultValue);
    }
 
    //==========================================================
@@ -60,7 +59,7 @@ export class FTagContext extends FObject {
    // @param name:String 名称
    // @param value:String 内容
    //==========================================================
-   public set(name, value) {
+   public set(name: string, value: any) {
       this._attributes.set(name, value);
    }
 
@@ -71,7 +70,7 @@ export class FTagContext extends FObject {
    // @param name:String 名称
    // @param value:String 内容
    //==========================================================
-   public setBoolean(name, value) {
+   public setBoolean(name: string, value: boolean) {
       this._attributes.set(name, RBoolean.toString(value));
    }
 
@@ -91,9 +90,9 @@ export class FTagContext extends FObject {
    // @method
    // @param String 文本
    //==========================================================
-   public write(p) {
-      if (!RString.isEmpty(p)) {
-         this._source.append(p);
+   public write(source) {
+      if (!RString.isEmpty(source)) {
+         this._source.append(source);
       }
    }
 

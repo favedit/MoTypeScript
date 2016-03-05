@@ -1,5 +1,6 @@
 import {EResult} from '../lang/EResult';
 import {RBoolean} from '../lang/RBoolean';
+import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
 //==========================================================
@@ -10,9 +11,8 @@ import {FTag} from './FTag';
 // @version 150114
 //==========================================================
 export class FTagTrue extends FTag {
-   // @attribute
-   _trimLeft = true;
-   _source = null;
+   public trimLeft = true;
+   public source = null;
 
    //==========================================================
    // <T>开始处理。</T>
@@ -21,37 +21,35 @@ export class FTagTrue extends FTag {
    // @param p:context:FTagContext 环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(p) {
-      var o = this;
-      var r = false;
-      var ns = o._source.split('|');
+   public onBegin(context: FTagContext): EResult {
+      var result = false;
+      var ns = this.source.split('|');
       var c = ns.length;
-      for (var i = 0; i < c; i++) {
+      for (var i: number = 0; i < c; i++) {
          var n = ns[i]
-         var v = p.get(n);
+         var v = context.get(n);
          if (RBoolean.parse(v)) {
-            r = true;
+            result = true;
             break;
          }
       }
-      return r ? EResult.Continue : EResult.Skip;
+      return result ? EResult.Continue : EResult.Skip;
    }
 
    //==========================================================
    // <T>设置属性值。</T>
    //
    // @method
-   // @param n:name:String 名称
-   // @param v:level:Integer 内容
+   // @param name  名称
+   // @param level  内容
    //==========================================================
-   public set(n, v) {
-      var o = this;
-      switch (n) {
+   public set(name, value) {
+      switch (name) {
          case 'source':
-            o._source = v;
+            this.source = value;
             return;
       }
-      super.set(n, v);
+      super.set(name, value);
    }
 
 
@@ -62,7 +60,6 @@ export class FTagTrue extends FTag {
    // @return String 字符串
    //==========================================================
    public toString() {
-      var o = this;
-      return 'source=' + o._source;
+      return 'source=' + this.source;
    }
 }

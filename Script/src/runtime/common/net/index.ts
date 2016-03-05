@@ -7,3 +7,4 @@ export * from './FHttpConnection';
 export * from './FJsonConnection';
 export * from './FSocket';
 export * from './FXmlConnection';
+export * from './RNet';

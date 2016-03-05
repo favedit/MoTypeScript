@@ -21,7 +21,7 @@ export class FAudioContext extends FObject {
    protected _handle = null;
    // @attribute
    //o._buffers = MO.Class.register(o, new MO.AGetter('_buffers'));
-   protected _buffers: FDictionary = null;
+   protected _buffers: FDictionary<any> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -31,7 +31,7 @@ export class FAudioContext extends FObject {
    public constructor() {
       super();
       // 设置属性
-      this._buffers = new FDictionary();
+      this._buffers = new FDictionary<any>();
    }
 
    //==========================================================

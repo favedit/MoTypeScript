@@ -1,4 +1,4 @@
-import {FG3dLayout} from '../FG3dLayout';
+import {FLayout} from '../FLayout';
 
 //==========================================================
 // <T>WebGL渲染布局。</T>
@@ -7,9 +7,9 @@ import {FG3dLayout} from '../FG3dLayout';
 // @author maocy
 // @history 150212
 //==========================================================
-export class FWglLayout extends FG3dLayout {
-   // @attribute
-   protected _handle = null;
+export class FWglLayout extends FLayout {
+   // 句柄
+   public handle = null;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -17,11 +17,10 @@ export class FWglLayout extends FG3dLayout {
    // @method
    //==========================================================
    public setup() {
-      var o = this;
-      //o.__base.FG3dLayout.setup.call(o);
+      super.setup();
       // 创建层
-      var c = o._graphicContext;
-      o._handle = c._handleLayout.createVertexArrayOES();
+      var context = this.graphicContext;
+      this.handle = context._handleLayout.createVertexArrayOES();
    }
 
    //==========================================================
@@ -30,9 +29,8 @@ export class FWglLayout extends FG3dLayout {
    // @method
    //==========================================================
    public bind() {
-      var o = this;
-      var c = o._graphicContext;
-      c._handleLayout.bindVertexArrayOES(o._handle);
+      var context = this.graphicContext;
+      context._handleLayout.bindVertexArrayOES(this.handle);
    }
 
    //==========================================================
@@ -41,9 +39,8 @@ export class FWglLayout extends FG3dLayout {
    // @method
    //==========================================================
    public unbind() {
-      var o = this;
-      var c = o._graphicContext;
-      c._handleLayout.bindVertexArrayOES(null);
+      var context = this.graphicContext;
+      context._handleLayout.bindVertexArrayOES(null);
    }
 
    //==========================================================
@@ -52,9 +49,8 @@ export class FWglLayout extends FG3dLayout {
    // @method
    //==========================================================
    public active() {
-      var o = this;
-      var c = o._graphicContext;
-      c._handleLayout.bindVertexArrayOES(o._handle);
+      var context = this.graphicContext;
+      context._handleLayout.bindVertexArrayOES(this.handle);
    }
 
    //==========================================================
@@ -63,9 +59,8 @@ export class FWglLayout extends FG3dLayout {
    // @method
    //==========================================================
    public deactive() {
-      var o = this;
-      var c = o._graphicContext;
-      c._handleLayout.bindVertexArrayOES(null);
+      var context = this.graphicContext;
+      context._handleLayout.bindVertexArrayOES(null);
    }
 
    //==========================================================
@@ -74,13 +69,12 @@ export class FWglLayout extends FG3dLayout {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
-      var c = o._graphicContext;
+      var context = this.graphicContext;
       // 释放对象
-      var layout = o._handle;
+      var layout = this.handle;
       if (layout) {
-         c._handleLayout.deleteVertexArrayOES(layout);
-         o._handle = null;
+         context._handleLayout.deleteVertexArrayOES(layout);
+         this.handle = null;
       }
       // 父处理
       super.dispose();

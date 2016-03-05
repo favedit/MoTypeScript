@@ -1,4 +1,4 @@
-import {FG3dCubeTexture} from '../FG3dCubeTexture';
+import {FCubeTexture} from '../FCubeTexture';
 import {RWglUtility} from './RWglUtility';
 
 //==========================================================
@@ -7,10 +7,9 @@ import {RWglUtility} from './RWglUtility';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FWglCubeTexture extends FG3dCubeTexture {
-   //..........................................................
-   // @attribute
-   _handle = null;
+export class FWglCubeTexture extends FCubeTexture {
+   // 句柄
+   public handle: any = null;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -18,9 +17,9 @@ export class FWglCubeTexture extends FG3dCubeTexture {
    // @method
    //==========================================================
    public setup() {
-      var handle = this._graphicContext._handle;
-      //o.__base.FG3dCubeTexture.setup.call(o);
-      this._handle = handle.createTexture();
+      super.setup();
+      var graphic = this.graphicContext.handle;
+      this.handle = graphic.createTexture();
    }
 
    //==========================================================
@@ -30,8 +29,8 @@ export class FWglCubeTexture extends FG3dCubeTexture {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var handle = this._graphicContext._handle;
-      return handle.isTexture(this._handle);
+      var graphic = this.graphicContext.handle;
+      return graphic.isTexture(this.handle);
    }
 
    //==========================================================
@@ -40,12 +39,11 @@ export class FWglCubeTexture extends FG3dCubeTexture {
    // @method
    //==========================================================
    public makeMipmap() {
-      var o = this;
-      var g = o._graphicContext._handle;
+      var graphic = this.graphicContext.handle;
       // 绑定数据
-      g.bindTexture(g.TEXTURE_CUBE_MAP, o._handle);
+      graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
       // 生成MIP
-      g.generateMipmap(g.TEXTURE_CUBE_MAP);
+      graphic.generateMipmap(graphic.TEXTURE_CUBE_MAP);
    }
 
    //==========================================================
@@ -55,22 +53,21 @@ export class FWglCubeTexture extends FG3dCubeTexture {
    // @param p:image:HtmlImgTag 图片
    //==========================================================
    public upload(x1, x2, y1, y2, z1, z2) {
-      var o = this;
-      var c = o._graphicContext;
-      var g = c._handle;
+      var context = this.graphicContext;
+      var graphic = context.handle;
       // 绑定数据
-      g.bindTexture(g.TEXTURE_CUBE_MAP, o._handle);
+      graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
       // 上传内容
-      g.texImage2D(g.TEXTURE_CUBE_MAP_POSITIVE_X, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, x1.image());
-      g.texImage2D(g.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, x2.image());
-      g.texImage2D(g.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, y1.image());
-      g.texImage2D(g.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, y2.image());
-      g.texImage2D(g.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, z1.image());
-      g.texImage2D(g.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, z2.image());
+      graphic.texImage2D(graphic.TEXTURE_CUBE_MAP_POSITIVE_X, 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, x1.image());
+      graphic.texImage2D(graphic.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, x2.image());
+      graphic.texImage2D(graphic.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, y1.image());
+      graphic.texImage2D(graphic.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, y2.image());
+      graphic.texImage2D(graphic.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, z1.image());
+      graphic.texImage2D(graphic.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, z2.image());
       // 检查结果
-      o._statusLoad = c.checkError("texImage2D", "Upload cube image failure.");
+      this.statusLoad = context.checkError("texImage2D", "Upload cube image failure.");
       // 更新处理
-      o.update();
+      this.update();
    }
 
    //==========================================================
@@ -79,19 +76,18 @@ export class FWglCubeTexture extends FG3dCubeTexture {
    // @method
    //==========================================================
    public update() {
-      var o = this;
       //o.__base.FG3dCubeTexture.update.call(o);
       // 绑定数据
-      var g = o._graphicContext._handle;
-      g.bindTexture(g.TEXTURE_CUBE_MAP, o._handle);
+      var graphic = this.graphicContext.handle;
+      graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
       // 设置过滤器
-      var c = RWglUtility.convertSamplerFilter(g, o._filterMinCd);
+      var c = RWglUtility.convertSamplerFilter(graphic, this.filterMinCd);
       if (c) {
-         g.texParameteri(g.TEXTURE_CUBE_MAP, g.TEXTURE_MIN_FILTER, c);
+         graphic.texParameteri(graphic.TEXTURE_CUBE_MAP, graphic.TEXTURE_MIN_FILTER, c);
       }
-      var c = RWglUtility.convertSamplerFilter(g, o._filterMagCd);
+      var c = RWglUtility.convertSamplerFilter(graphic, this.filterMagCd);
       if (c) {
-         g.texParameteri(g.TEXTURE_CUBE_MAP, g.TEXTURE_MAG_FILTER, c);
+         graphic.texParameteri(graphic.TEXTURE_CUBE_MAP, graphic.TEXTURE_MAG_FILTER, c);
       }
       //var c = MO.RWglUtility.convertSamplerFilter(g, pt.wrapS());
       //if(c){
@@ -109,13 +105,12 @@ export class FWglCubeTexture extends FG3dCubeTexture {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
-      var c = o._graphicContext;
+      var graphic = this.graphicContext.handle;
       // 释放对象
-      var n = o._handle;
-      if (n) {
-         c._handle.deleteTexture(n);
-         o._handle = null;
+      var handle = this.handle;
+      if (handle) {
+         graphic.deleteTexture(handle);
+         this.handle = null;
       }
       // 父处理
       super.dispose();

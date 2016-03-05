@@ -1,5 +1,7 @@
 import {FError} from '../../../../../runtime/common/lang/FError';
-import {FG3dIndexBuffer} from '../FG3dIndexBuffer';
+import {EIndexStride} from '../EIndexStride';
+import {FIndexBuffer} from '../FIndexBuffer';
+
 
 //==========================================================
 // <T>WebGL渲染索引流。</T>
@@ -8,10 +10,10 @@ import {FG3dIndexBuffer} from '../FG3dIndexBuffer';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FWglIndexBuffer extends FG3dIndexBuffer {
+export class FWglIndexBuffer extends FIndexBuffer {
    //..........................................................
    // @attribute
-   protected _handle = null;
+   public handle = null;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -19,9 +21,9 @@ export class FWglIndexBuffer extends FG3dIndexBuffer {
    // @method
    //==========================================================
    public setup() {
-      var o = this;
-      //o.__base.FG3dIndexBuffer.setup.call(o);
-      o._handle = o._graphicContext._handle.createBuffer();
+      super.setup();
+      var graphic = this.graphicContext.handle;
+      this.handle = graphic.createBuffer();
    }
 
    //==========================================================
@@ -31,9 +33,8 @@ export class FWglIndexBuffer extends FG3dIndexBuffer {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var o = this;
-      var handle = o._graphicContext._handle;
-      return handle.isBuffer(o._handle);
+      var graphic = this.graphicContext.handle;
+      return graphic.isBuffer(this.handle);
    }
 
    //==========================================================
@@ -44,43 +45,42 @@ export class FWglIndexBuffer extends FG3dIndexBuffer {
    // @param count:Integer 总数
    // @param remain:Boolean 保留数据
    //==========================================================
-   public upload(data, count, remain) {
-      var EG3dIndexStride = EG3dIndexStride;
-      var o = this;
-      var context = o._graphicContext;
-      var handle = context._handle;
+   public upload(data: any, count?: number, remain: boolean = false): void {
+      var context = this.graphicContext;
+      var graphic = context.handle;
       // 设置数据
       if (remain) {
-         o._data = data;
+         this.data = data;
       }
-      o._count = count;
+      this.count = count;
       // 获得数据
       var memory = null;
-      if ((data.constructor == Array) || (data.constructor == ArrayBuffer)) {
-         if (o._strideCd == EG3dIndexStride.Uint16) {
+      var dataClass = data.constructor;
+      if ((dataClass == Array) || (dataClass == ArrayBuffer)) {
+         if (this.strideCd == EIndexStride.Uint16) {
             memory = new Uint16Array(data);
-         } else if (o._strideCd == EG3dIndexStride.Uint32) {
+         } else if (this.strideCd == EIndexStride.Uint32) {
             memory = new Uint32Array(data);
          } else {
-            throw new FError(o, 'Index stride is invalid.');
+            throw new FError(this, 'Index stride is invalid.');
          }
-      } else if (data.constructor == Uint16Array) {
-         if (o._strideCd != EG3dIndexStride.Uint16) {
-            throw new FError(o, 'Index stride16 is invalid.');
+      } else if (dataClass == Uint16Array) {
+         if (this.strideCd != EIndexStride.Uint16) {
+            throw new FError(this, 'Index stride16 is invalid.');
          }
          memory = data;
-      } else if (data.constructor == Uint32Array) {
-         if (o._strideCd != EG3dIndexStride.Uint32) {
-            throw new FError(o, 'Index stride16 is invalid.');
+      } else if (dataClass == Uint32Array) {
+         if (this.strideCd != EIndexStride.Uint32) {
+            throw new FError(this, 'Index stride16 is invalid.');
          }
          memory = data;
       } else {
-         throw new FError(o, 'Upload index data type is invalid. (value={1})', data);
+         throw new FError(this, 'Upload index data type is invalid. (value={1})', data);
       }
       // 上传数据
-      handle.bindBuffer(handle.ELEMENT_ARRAY_BUFFER, o._handle);
+      graphic.bindBuffer(graphic.ELEMENT_ARRAY_BUFFER, this.handle);
       context.checkError('bindBuffer', 'Bind buffer failure.');
-      handle.bufferData(handle.ELEMENT_ARRAY_BUFFER, memory, handle.STATIC_DRAW);
+      graphic.bufferData(graphic.ELEMENT_ARRAY_BUFFER, memory, graphic.STATIC_DRAW);
       context.checkError('bufferData', 'Upload buffer data. (count={1})', count);
    }
 
@@ -90,15 +90,14 @@ export class FWglIndexBuffer extends FG3dIndexBuffer {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
-      var context = o._graphicContext;
+      var graphic = this.graphicContext.handle;
       // TODO：待优化
       // o._resource = null;
       // 释放对象
-      var handle = o._handle;
+      var handle = this.handle;
       if (handle) {
-         context._handle.deleteBuffer(handle);
-         o._handle = null;
+         graphic.deleteBuffer(handle);
+         this.handle = null;
       }
       // 父处理
       super.dispose();

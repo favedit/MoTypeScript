@@ -11,23 +11,13 @@ import {FObject} from '../common/lang/FObject';
 export class FConsole extends FObject {
    //..........................................................
    // @attribute 范围类型
-   protected _scopeCd = EScope.Global;
+   public scopeCd = EScope.Global;
    // @attribute 设置状态
-   protected _statusSetup: boolean = false;
+   public statusSetup: boolean = false;
    // @attribute 激活状态
-   protected _statusActive: boolean = false;
+   public statusActive: boolean = false;
    // @attribute 加载状态
-   protected _statusLoad: boolean = false;
-
-   //==========================================================
-   // <T>获得范围类型。</T>
-   //
-   // @method
-   // @return 范围类型
-   //==========================================================
-   public get scopeCd(): EScope {
-      return this._scopeCd;
-   }
+   public statusLoad: boolean = false;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -43,32 +33,32 @@ export class FConsole extends FObject {
    // @method
    //==========================================================
    public setup(): void {
-      if (!this._statusSetup) {
+      if (!this.statusSetup) {
          this.onSetup();
-         this._statusSetup = true;
+         this.statusSetup = true;
       }
    }
 
-/*
-   //==========================================================
-   // <T>加载处理。</T>
-   //
-   // @method
-   //==========================================================
-   public onLoad(): void {
-   }
-
-   //==========================================================
-   // <T>加载处理。</T>
-   //
-   // @method
-   //==========================================================
-   public load() :void{
-      if (!this._statusLoad) {
-         this.onLoad();
-         this._statusLoad = true;
+   /*
+      //==========================================================
+      // <T>加载处理。</T>
+      //
+      // @method
+      //==========================================================
+      public onLoad(): void {
       }
-   }*/
+   
+      //==========================================================
+      // <T>加载处理。</T>
+      //
+      // @method
+      //==========================================================
+      public load() :void{
+         if (!this._statusLoad) {
+            this.onLoad();
+            this._statusLoad = true;
+         }
+      }*/
 
    //==========================================================
    // <T>激活处理。</T>
@@ -84,9 +74,9 @@ export class FConsole extends FObject {
    // @method
    //==========================================================
    public active(): void {
-      if (!this._statusActive) {
+      if (!this.statusActive) {
          this.onActive();
-         this._statusActive = true;
+         this.statusActive = true;
       }
    }
 
@@ -104,9 +94,9 @@ export class FConsole extends FObject {
    // @method
    //==========================================================
    public deactive(): void {
-      if (this._statusActive) {
+      if (this.statusActive) {
          this.onDeactive();
-         this._statusActive = false;
+         this.statusActive = false;
       }
    }
 
@@ -124,9 +114,9 @@ export class FConsole extends FObject {
    // @method
    //==========================================================
    public unload(): void {
-      if (this._statusLoad) {
+      if (this.statusLoad) {
          this.onUnload();
-         this._statusLoad = false;
+         this.statusLoad = false;
       }
    }
 }

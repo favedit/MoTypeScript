@@ -9,11 +9,11 @@ export * from './FE3dRotateTimelineAction';
 export * from './FE3dStage';
 export * from './FE3dStageConsole';
 export * from './FE3dStageStatistics';
-export * from './FE3dTechnique';
 export * from './FE3dTransformTimelineAction';
 export * from './FE3dTranslateTimelineAction';
 export * from './ME3dObject';
 export * from './REngine3d';
+export * from './SRenderableInfo';
 
 import * as effect from './effect/index';
 export {effect as effect};

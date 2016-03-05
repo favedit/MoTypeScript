@@ -1,2 +1,4 @@
-import * as runtime from './runtime/index';
-export {runtime as runtime}
+import * as mo from './index';
+export {mo as mo}
+
+(window as any).mo = (window as any).mo || mo;

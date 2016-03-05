@@ -1,5 +1,6 @@
 import {EResult} from '../lang/EResult';
 import {RString} from '../lang/RString';
+import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
 //==========================================================
@@ -10,36 +11,34 @@ import {FTag} from './FTag';
 // @version 150114
 //==========================================================
 export class FTagText extends FTag {
-   // @attribute
-   //_text    = MO.Class.register(o, new MO.AGetSet('_text'));
-   _text: string = null;
+   public text: string = null;
 
    //==========================================================
    // <T>开始处理。</T>
    //
    // @method
-   // @param p:context:FTagContext 环境
+   // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(p) {
-      var t = this._text;
-      if (p._trimLeft) {
-         if (RString.startsWith(t, '\r')) {
-            t = t.substring(1);
+   public onBegin(context: FTagContext): EResult {
+      var text = this.text;
+      if (context.trimLeft) {
+         if (RString.startsWith(text, '\r')) {
+            text = text.substring(1);
          }
-         if (RString.startsWith(t, '\n')) {
-            t = t.substring(1);
-         }
-      }
-      if (p._trimRight) {
-         if (RString.endsWith(t, '\r')) {
-            t = t.substring(0, t.length - 1);
-         }
-         if (RString.endsWith(t, '\n')) {
-            t = t.substring(0, t.length - 1);
+         if (RString.startsWith(text, '\n')) {
+            text = text.substring(1);
          }
       }
-      p.write(t);
+      if (context.trimRight) {
+         if (RString.endsWith(text, '\r')) {
+            text = text.substring(0, text.length - 1);
+         }
+         if (RString.endsWith(text, '\n')) {
+            text = text.substring(0, text.length - 1);
+         }
+      }
+      context.write(text);
       return EResult.Skip;
    }
 
@@ -50,6 +49,6 @@ export class FTagText extends FTag {
    // @return String 字符串
    //==========================================================
    public toString(): string {
-      return '{' + this._text + '}';
+      return '{' + this.text + '}';
    }
 }

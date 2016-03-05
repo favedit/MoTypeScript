@@ -1,5 +1,6 @@
 import {EResult} from '../lang/EResult';
 import {RBoolean} from '../lang/RBoolean';
+import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
 //==========================================================
@@ -10,21 +11,19 @@ import {FTag} from './FTag';
 // @version 150114
 //==========================================================
 export class FTagFalse extends FTag {
-   // @attribute
-   _trimLeft = true;
-   _source = null;
+   public trimLeft = true;
+   public source = null;
 
    //==========================================================
    // <T>开始处理。</T>
    //
    // @method
-   // @param p:context:FTagContext 环境
+   // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(p) {
-      var o = this;
-      var v = p.get(o._source);
-      return RBoolean.parse(v) ? EResult.Skip : EResult.Continue;
+   public onBegin(context: FTagContext): EResult {
+      var value = context.get(this.source);
+      return RBoolean.parse(value) ? EResult.Skip : EResult.Continue;
    }
 
    //==========================================================
@@ -34,14 +33,13 @@ export class FTagFalse extends FTag {
    // @param n:name:String 名称
    // @param v:level:Integer 内容
    //==========================================================
-   public set(n, v) {
-      var o = this;
-      switch (n) {
+   public set(name, value) {
+      switch (name) {
          case 'source':
-            o._source = v;
+            this.source = value;
             return;
       }
-      super.set(n, v);
+      super.set(name, value);
    }
 
    //==========================================================
@@ -51,7 +49,6 @@ export class FTagFalse extends FTag {
    // @return String 字符串
    //==========================================================
    public toString() {
-      var o = this;
-      return 'source=' + o._source;
+      return 'source=' + this.source;
    }
 }

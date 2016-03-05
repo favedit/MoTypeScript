@@ -22,107 +22,100 @@ import {FTagText} from './FTagText';
 //==========================================================
 export class FTagDocument extends FObject {
    // @attribute
-   //_space = MO.Class.register(o, MO.AGetSet('_space'));
-   protected _space: string = null;
+   public space: string = null;
    //_root = MO.Class.register(o, MO.AGetter('_root'));
-   protected _root: FTag = null;
-
-   public root(): FTag {
-      return this._root;
-   }
+   public root: FTag = null;
 
    //==========================================================
    // <T>创建一个标签对象。</T>
    //
    // @method
-   // @param p:name:String 名称
+   // @param name  名称
    // @return FTag 标签
    //==========================================================
    public create(p) {
-      var o = this;
       // 获得名称
-      var sn = o._space + '_';
-      var n = null;
-      if (RString.startsWith(p, sn)) {
-         n = p.substring(sn.length);
+      var spaceName = this.space + '_';
+      var name = null;
+      if (RString.startsWith(p, spaceName)) {
+         name = p.substring(spaceName.length);
       } else {
-         n = p;
+         name = p;
       }
       // 创建节点
-      var t = null;
-      switch (n) {
+      var tag = null;
+      switch (name) {
          case 'source':
-            t = RClass.create(FTag);
+            tag = RClass.create(FTag);
             break;
          case 'write':
-            t = RClass.create(FTagWrite);
+            tag = RClass.create(FTagWrite);
             break;
          case 'true':
-            t = RClass.create(FTagTrue);
+            tag = RClass.create(FTagTrue);
             break;
          case 'false':
-            t = RClass.create(FTagFalse);
+            tag = RClass.create(FTagFalse);
             break;
          case 'equals':
-            t = RClass.create(FTagEquals);
+            tag = RClass.create(FTagEquals);
             break;
          case 'notEquals':
-            t = RClass.create(FTagNotEquals);
+            tag = RClass.create(FTagNotEquals);
             break;
          default:
-            throw new FError(o, 'Unknown tag type. (name={1})', n);
+            throw new FError(this, 'Unknown tag type. (name={1})', name);
       }
-      return t;
+      return tag;
    }
 
    //===========================================================
    // 遍历构建XML节点树
    //
    // @method
-   // @param pn:node:TXmlNode 父节点
-   // @param pe:element:XmlElement 页面元素
+   // @param node 父节点
+   // @param element:XmlElement 页面元素
    // @see RXml.fromText
    // @see TXmlDoc.create
    //===========================================================
-   public loadNode(pn, pe) {
-      var o = this;
+   public loadNode(node, element) {
       // 创建节点
-      var x = o.create(pe.nodeName);
-      if (pn) {
-         pn.push(x);
+      var tag = this.create(element.nodeName);
+      if (node) {
+         node.push(tag);
       } else {
-         o._root = x;
+         this.root = tag;
       }
       // 建立属性集合
-      var eas = pe.attributes;
-      if (eas) {
-         var c = eas.length;
-         for (var i = 0; i < c; i++) {
-            var ea = eas[i];
-            if (ea.nodeName) {
-               x.set(ea.nodeName, RXml.formatText(ea.value));
+      var elementAttributes = element.attributes;
+      if (elementAttributes) {
+         var elementCount = elementAttributes.length;
+         for (var i: number = 0; i < elementCount; i++) {
+            var elementAttribute = elementAttributes[i];
+            if (elementAttribute.nodeName) {
+               tag.set(elementAttribute.nodeName, RXml.formatText(elementAttribute.value));
             }
          }
       }
       // 建立标签集合
-      var ens = pe.childNodes
-      if (ens) {
-         var c = ens.length;
-         for (var i = 0; i < c; i++) {
-            var en = ens[i];
-            switch (en.nodeType) {
+      var elementNodes = element.childNodes
+      if (elementNodes) {
+         var elementCount = elementNodes.length;
+         for (var i: number = 0; i < elementCount; i++) {
+            var elementNode = elementNodes[i];
+            switch (elementNode.nodeType) {
                case ENodeType.Text:
-                  var xt = RClass.create(FTagText);
-                  xt.setText(en.nodeValue);
-                  x.push(xt);
+                  var tagText: FTagText = RClass.create(FTagText);
+                  tagText.text = elementNode.nodeValue;
+                  tag.push(tagText);
                   break;
                case ENodeType.Data:
-                  var xt = RClass.create(FTagText);
-                  xt.setText(en.data);
-                  x.push(xt);
+                  var tagText: FTagText = RClass.create(FTagText);
+                  tagText.text = elementNode.data;
+                  tag.push(tagText);
                   break;
                case ENodeType.Node:
-                  o.loadNode(x, en);
+                  this.loadNode(tag, elementNode);
                   break;
             }
          }
@@ -138,13 +131,13 @@ export class FTagDocument extends FObject {
    public load(source) {
       // 格式化代码
       var value = '<source>' + source + '</source>'
-      value = value.replace(new RegExp('<' + this._space + ':', 'g'), '<' + this._space + '_');
-      value = value.replace(new RegExp('</' + this._space + ':', 'g'), '</' + this._space + '_');
+      value = value.replace(new RegExp('<' + this.space + ':', 'g'), '<' + this.space + '_');
+      value = value.replace(new RegExp('</' + this.space + ':', 'g'), '</' + this.space + '_');
       value = value.replace(new RegExp(' & ', 'g'), ' &amp; ');
       value = value.replace(new RegExp(' < ', 'g'), ' &lt; ');
       value = value.replace(new RegExp(' > ', 'g'), ' &gt; ');
       // 解析内容
-      var xnode = RXml.formatText(value);
+      var xnode = RXml.makeString(value);
       this.loadNode(null, xnode.firstChild);
    }
 
@@ -156,7 +149,7 @@ export class FTagDocument extends FObject {
    //==========================================================
    public parse(context) {
       context.resetSource();
-      this._root.parse(context);
+      this.root.parse(context);
       return context.source();
    }
 

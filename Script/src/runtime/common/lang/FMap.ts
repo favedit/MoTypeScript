@@ -10,15 +10,15 @@ import {FObject} from './FObject';
 // @author maocy
 // @version 141226
 //==========================================================
-export class FMap extends FObject {
+export class FMap<N, V> extends FObject {
    // 总数
    protected _count: number = 0;
    // 对照表
    protected _table: any = new Object();
    // 名称集合
-   protected _names: Array<any> = new Array<any>();
+   protected _names: Array<N> = new Array<N>();
    // 内容集合
-   protected _values: Array<any> = new Array<any>();
+   protected _values: Array<V> = new Array<V>();
 
    //==========================================================
    // <T>判断是否为空。</T>
@@ -47,7 +47,7 @@ export class FMap extends FObject {
    // @param name:String 名称
    // @return Boolean 是否含有
    //==========================================================
-   public contains(name): boolean {
+   public contains(name: N): boolean {
       if (name != null) {
          var index = this._table[name.toString().toLowerCase()]
          if (index != null) {
@@ -64,7 +64,7 @@ export class FMap extends FObject {
    // @param value:Object 内容
    // @return Boolean 是否含有
    //==========================================================
-   public containsValue(value): boolean {
+   public containsValue(value: V): boolean {
       var index: number = this.indexOfValue(value);
       return (index != -1);
    }
@@ -76,7 +76,7 @@ export class FMap extends FObject {
    // @param name:String 名称
    // @return Integer 索引位置
    //==========================================================
-   public indexOf(name): number {
+   public indexOf(name: N): number {
       if (name != null) {
          var index = this._table[name.toString().toLowerCase()];
          if (index != null) {
@@ -93,7 +93,7 @@ export class FMap extends FObject {
    // @param value:Object 内容
    // @return Integer 索引位置
    //==========================================================
-   public indexOfValue(value): number {
+   public indexOfValue(value: V): number {
       var o = this;
       var count = o._count;
       if (count > 0) {
@@ -113,7 +113,7 @@ export class FMap extends FObject {
    // @method
    // @return Object 内容
    //==========================================================
-   public first(): any {
+   public first(): V {
       var o = this;
       if (o._count > 0) {
          return o._values[0];
@@ -127,7 +127,7 @@ export class FMap extends FObject {
    // @method
    // @return Object 内容
    //==========================================================
-   public last(): any {
+   public last(): V {
       var o = this;
       if (o._count > 0) {
          return o._values[o._count - 1];
@@ -142,7 +142,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @return String 名称
    //==========================================================
-   public nameAt(index): any {
+   public nameAt(index): N {
       return this._names[index];
    }
 
@@ -153,7 +153,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @return String 名称
    //==========================================================
-   public name(index): any {
+   public name(index): N {
       return ((index >= 0) && (index < this._count)) ? this._names[index] : null;
    }
 
@@ -164,7 +164,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @return Object 内容
    //==========================================================
-   public at(index): any {
+   public at(index): V {
       return this._values[index];
    }
 
@@ -175,7 +175,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @return Object 内容
    //==========================================================
-   public valueAt(index): any {
+   public valueAt(index): V {
       return this._values[index];
    }
 
@@ -186,7 +186,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @return Object 内容
    //==========================================================
-   public value(index): any {
+   public value(index): V {
       return ((index >= 0) && (index < this._count)) ? this._values[index] : null;
    }
 
@@ -197,7 +197,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @param value:Object 内容
    //==========================================================
-   public setValueAt(index, value): any {
+   public setValueAt(index: number, value: V): any {
       this._values[index] = value;
    }
 
@@ -208,7 +208,7 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @param value:Object 内容
    //==========================================================
-   public setValue(index, value): any {
+   public setValue(index: number, value: V): any {
       if ((index >= 0) && (index < this._count)) {
          this._values[index] = value;
       }
@@ -223,11 +223,11 @@ export class FMap extends FObject {
    // @param defaultValue:Object 默认内容
    // @return Object 内容
    //==========================================================
-   public get(name, defaultValue: any = null): any {
+   public get(name: N, defaultValue: V = null): V {
       if (name != null) {
-         var i = this._table[name.toString().toLowerCase()];
-         if (i != null) {
-            return this._values[i];
+         var index = this._table[name.toString().toLowerCase()];
+         if (index != null) {
+            return this._values[index];
          }
       }
       return defaultValue;
@@ -241,18 +241,17 @@ export class FMap extends FObject {
    // @param value:Object 默认内容
    // @return Object 内容
    //==========================================================
-   public set(name, value): void {
-      var o = this;
+   public set(name: N, value: V): void {
       RAssert.debugNotNull(name);
-      var nameString = name.toString();
-      var code = nameString.toLowerCase();
-      var index = o._table[code];
-      if ((index == null) || (index >= o._count)) {
-         index = o._count++;
-         o._names[index] = nameString;
-         o._table[code] = index;
+      var nameString: any = name.toString();
+      var code: any = nameString.toLowerCase();
+      var index = this._table[code];
+      if ((index == null) || (index >= this._count)) {
+         index = this._count++;
+         this._names[index] = nameString;
+         this._table[code] = index;
       }
-      o._values[index] = value;
+      this._values[index] = value;
    }
 
    //==========================================================
@@ -263,7 +262,7 @@ export class FMap extends FObject {
    // @param value:Object 默认内容
    // @return Object 内容
    //==========================================================
-   public setNvl(name, value): void {
+   public setNvl(name: N, value: V): void {
       if (value) {
          this.set(name, value);
       }
@@ -275,10 +274,9 @@ export class FMap extends FObject {
    // @method
    // @param map:TMap 表
    //==========================================================
-   public assign(map): void {
-      var o = this;
-      o.clear();
-      o.append(map);
+   public assign(map: FMap<N, V>): void {
+      this.clear();
+      this.append(map);
    }
 
    //==========================================================
@@ -287,14 +285,13 @@ export class FMap extends FObject {
    // @method
    // @param map:TMap 表
    //==========================================================
-   public append(map): void {
-      var o = this;
+   public append(map: FMap<N, V>): void {
       if (map) {
          var count = map.count();
          for (var i = 0; i < count; i++) {
             var name = map.nameAt(i);
             var value = map.valueAt(i);
-            o.set(name, value);
+            this.set(name, value);
          }
       }
    }
@@ -307,20 +304,19 @@ export class FMap extends FObject {
    // @param name:String 名称
    // @param value:Object 内容
    //==========================================================
-   public insert(index, name, value): void {
-      var o = this;
-      var count = o._count;
+   public insert(index: number, name: N, value: V): void {
+      var count = this._count;
       if ((index >= 0) && (index <= count)) {
-         var names = o._names;
-         var values = o._values;
+         var names = this._names;
+         var values = this._values;
          for (var i = count; i > index; i--) {
             names[i] = names[i - 1];
             values[i] = values[i - 1];
          }
          names[index] = name;
          values[index] = value;
-         o._count++;
-         o.rebuild();
+         this._count++;
+         this.rebuild();
       }
    }
 
@@ -331,20 +327,19 @@ export class FMap extends FObject {
    // @param index:Integer 索引位置
    // @return Object 删除的内容
    //==========================================================
-   public remove(index): void {
-      var o = this;
+   public remove(index: number): void {
       var value = null;
-      var count = o._count;
+      var count = this._count;
       if ((index >= 0) && (index < count)) {
-         var names = o._names;
-         var values = o._values;
+         var names = this._names;
+         var values = this._values;
          value = values[index];
          for (var i = index; i < count; i++) {
             names[i] = names[i + 1];
             values[i] = values[i + 1];
          }
-         o._count--;
-         o.rebuild();
+         this._count--;
+         this.rebuild();
       }
       return value;
    }
@@ -356,11 +351,10 @@ export class FMap extends FObject {
    // @param name:String 名称
    // @return Object 删除的内容
    //==========================================================
-   public removeName(name): void {
-      var o = this;
-      var index = o.indexOf(name);
+   public removeName(name: N): void {
+      var index = this.indexOf(name);
       if (index != -1) {
-         return o.remove(index);
+         return this.remove(index);
       }
       return null;
    }
@@ -371,12 +365,11 @@ export class FMap extends FObject {
    // @method
    // @param value:Object 内容
    //==========================================================
-   public removeValue(value): void {
-      var o = this;
+   public removeValue(value: V): void {
       var index = 0;
-      var count = o._count;
-      var names = o._names;
-      var values = o._values;
+      var count = this._count;
+      var names = this._names;
+      var values = this._values;
       for (var i = 0; i < count; i++) {
          var find = values[i];
          if (find != value) {
@@ -387,8 +380,8 @@ export class FMap extends FObject {
             index++;
          }
       }
-      o._count = index;
-      o.rebuild();
+      this._count = index;
+      this.rebuild();
    }
 
    //==========================================================
@@ -397,17 +390,16 @@ export class FMap extends FObject {
    // @method
    //==========================================================
    public rebuild(): void {
-      var o = this;
       // 清除对照表数据
-      var table = o._table;
+      var table = this._table;
       for (var name in table) {
          delete table[name];
       }
       // 重建对照表数据
-      var count = o._count;
-      var names = o._names;
+      var count = this._count;
+      var names = this._names;
       for (var i = 0; i < count; i++) {
-         var code = names[i].toLowerCase();
+         var code = (names[i] as any).toLowerCase();
          table[code] = i;
       }
    }
@@ -424,9 +416,8 @@ export class FMap extends FObject {
    // @param parameter5:Object 参数5
    //==========================================================
    public invoke(methodName, parameter1, parameter2, parameter3, parameter4, parameter5): void {
-      var o = this;
-      var count = o._count;
-      var values = o._values;
+      var count = this._count;
+      var values = this._values;
       for (var i = 0; i < count; i++) {
          var value = values[i];
          var method = value[methodName];
@@ -440,10 +431,9 @@ export class FMap extends FObject {
    // @method
    //==========================================================
    public clear(): void {
-      var o = this;
-      o._count = 0;
+      this._count = 0;
       // 清除对照表数据
-      var table = o._table;
+      var table = this._table;
       for (var name in table) {
          delete table[name];
       }
@@ -475,26 +465,25 @@ export class FMap extends FObject {
    // @param flag:Boolean 标志
    //==========================================================
    public dispose(flag: boolean = false): void {
-      var o = this;
-      var count = o._count;
+      var count = this._count;
       // 清除对照表数据
-      var table = o._table;
+      var table = this._table;
       if (table) {
          for (var name in table) {
             table[name] = null;
          }
-         o._table = null;
+         this._table = null;
       }
       // 清空名称集合
-      var names = o._names;
+      var names = this._names;
       if (names) {
          for (var i = 0; i < count; i++) {
             names[i] = null;
          }
-         o._names = null;
+         this._names = null;
       }
       // 清空数据集合
-      var values = o._values;
+      var values = this._values;
       if (values) {
          for (var i = 0; i < count; i++) {
             if (flag) {
@@ -502,9 +491,9 @@ export class FMap extends FObject {
             }
             values[i] = null;
          }
-         o._values = null;
+         this._values = null;
       }
       // 清空属性
-      o._count = 0;
+      this._count = 0;
    }
 }

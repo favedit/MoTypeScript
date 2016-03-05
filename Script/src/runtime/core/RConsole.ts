@@ -7,7 +7,7 @@ import {RLogger} from '../common/lang/RLogger';
 import {RAssert} from '../common/RAssert';
 import {FDictionary} from '../common/lang/FDictionary';
 import {RClass} from '../common/reflect/RClass';
-
+import {FConsole} from './FConsole';
 
 //==========================================================
 // <T>控制台对象的管理类。</T>
@@ -21,7 +21,7 @@ export class RConsole {
    // @attribute 注册类型集合
    protected static _registers = new FObjects();
    // @attribute 控制台集合
-   protected static _consoles = new FDictionary();
+   protected static _consoles = new FDictionary<FConsole>();
 
    //==========================================================
    // <T>初始化控制台管理器。</T>
@@ -32,7 +32,7 @@ export class RConsole {
       var registers = this._registers;
       var count: number = registers.count();
       for (var n: number = 0; n < count; n++) {
-         var register:any = registers.get(n);
+         var register: any = registers.get(n);
          if (register.force) {
             this.find(register.clazz);
          }
@@ -152,7 +152,7 @@ export class RConsole {
       //   return console;
       //}
       // 查找本地控制台
-      var consoles: FDictionary = this._consoles;
+      var consoles: FDictionary<FConsole> = this._consoles;
       var console = consoles.get(name);
       if (console) {
          return console;

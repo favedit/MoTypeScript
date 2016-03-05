@@ -8,8 +8,8 @@ import {FObject} from '../../common/lang/FObject';
 // @version 150303
 //==========================================================
 export class FStatistics extends FObject {
-   // @attribute
-   _code: string = null;
+   // 代码
+   public code: string = null;
 
    //==========================================================
    // <T>重置所有数据。</T>

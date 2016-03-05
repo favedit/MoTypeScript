@@ -4,6 +4,7 @@ import {FObject} from '../lang/FObject';
 import {FError} from '../lang/FError';
 import {RObject} from '../lang/RObject';
 import {RLogger} from '../lang/RLogger';
+import {RNet} from '../net/RNet';
 import {EHttpMethod} from './EHttpMethod';
 import {EHttpContent} from './EHttpContent';
 import {EHttpStatus} from './EHttpStatus';
@@ -51,15 +52,14 @@ export class FHttpConnection extends FObject {
    // @method
    //==========================================================
    public onConnectionSend() {
-      var o = this;
-      var input = o._input;
+      var input = this._input;
       if (input) {
          if (input.constructor == String) {
-            o._inputData = input;
-            o._contentLength = input.length;
+            this._inputData = input;
+            this._contentLength = input.length;
          } else if (input.constructor == ArrayBuffer) {
-            o._inputData = input;
-            o._contentLength = input.byteLength;
+            this._inputData = input;
+            this._contentLength = input.byteLength;
          } else {
             throw new FError(this, 'Unknown send data type.');
          }
@@ -72,15 +72,15 @@ export class FHttpConnection extends FObject {
    // @method
    //==========================================================
    public onConnectionReady() {
-      var o = this._linker;
-      if (o._asynchronous) {
-         var handle = o._handle;
+      var linker = this._linker;
+      if (linker._asynchronous) {
+         var handle = linker._handle;
          if (handle.readyState == EHttpStatus.Loaded) {
             if (handle.status == 200) {
-               o.setOutputData();
-               o.onConnectionComplete();
+               linker.setOutputData();
+               linker.onConnectionComplete();
             } else {
-               RLogger.fatal(o, 'Connection failure. (url={1})', o._url);
+               RLogger.fatal(linker, 'Connection failure. (url={1})', linker._url);
             }
          }
       }
@@ -92,14 +92,13 @@ export class FHttpConnection extends FObject {
    // @method
    //==========================================================
    public onConnectionComplete() {
-      var o = this;
-      o._statusFree = true;
+      this._statusFree = true;
       // 加载处理
-      var event = o._event;
-      event.connection = o;
-      event.content = o._outputData;
+      var event = this._event;
+      event.connection = this;
+      event.content = this._outputData;
       // 设置属性
-      var attributes = o._attributes;
+      var attributes = this._attributes;
       var count = attributes.count();
       for (var i = 0; i < count; i++) {
          var name = attributes.name(i);
@@ -123,9 +122,9 @@ export class FHttpConnection extends FObject {
       this._attributes = new FAttributes();
       this._event = new SEvent(this);
       // 创建链接
-      //var handle = this._handle = MO.Window.Xml.createConnection();
-      //handle._linker = this;
-      //handle.onreadystatechange = this.onConnectionReady;
+      var handle = this._handle = RNet.createConnection();
+      handle._linker = this;
+      handle.onreadystatechange = this.onConnectionReady;
    }
 
    //==========================================================
@@ -156,10 +155,9 @@ export class FHttpConnection extends FObject {
    // @method
    //==========================================================
    public setHeaders() {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       // 传输格式
-      if (o._contentCd == EHttpContent.Binary) {
+      if (this._contentCd == EHttpContent.Binary) {
          // 二进制内容
          //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
          //   handle.setRequestHeader('Accept-Charset', 'x-user-defined');
@@ -175,7 +173,7 @@ export class FHttpConnection extends FObject {
          handle.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
       }
       // 设置自定义头信息
-      var heads = o._heads;
+      var heads = this._heads;
       var count = heads.count();
       if (count > 0) {
          // 设置头信息
@@ -200,13 +198,12 @@ export class FHttpConnection extends FObject {
    // @method
    //==========================================================
    public setOutputData() {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       // 传输格式
-      if (o._contentCd == EHttpContent.Binary) {
-         o._outputData = handle.response;
+      if (this._contentCd == EHttpContent.Binary) {
+         this._outputData = handle.response;
       } else {
-         o._outputData = handle.responseText;
+         this._outputData = handle.responseText;
       }
    }
 
@@ -240,14 +237,13 @@ export class FHttpConnection extends FObject {
    // @method
    //==========================================================
    public sendSync() {
-      var o = this;
-      var handle = o._handle;
-      handle.open(o._methodCd, o._url, false);
-      o.setHeaders();
-      handle.send(o._inputData);
-      o.setOutputData();
-      o.onConnectionComplete();
-      RLogger.info(this, 'Send http sync request. (method={1}, url={2})', o._methodCd, o._url);
+      var handle = this._handle;
+      handle.open(this._methodCd, this._url, false);
+      this.setHeaders();
+      handle.send(this._inputData);
+      this.setOutputData();
+      this.onConnectionComplete();
+      RLogger.info(this, 'Send http sync request. (method={1}, url={2})', this._methodCd, this._url);
    }
 
    //==========================================================
@@ -271,21 +267,20 @@ export class FHttpConnection extends FObject {
    // @param data:Object 发送数据
    //==========================================================
    public send(url, data) {
-      var o = this;
       // 设置参数
-      o._url = url;
-      o._input = data;
+      this._url = url;
+      this._input = data;
       // 设置状态
-      o._methodCd = (data != null) ? EHttpMethod.Post : EHttpMethod.Get;
-      o._statusFree = false;
+      this._methodCd = (data != null) ? EHttpMethod.Post : EHttpMethod.Get;
+      this._statusFree = false;
       // 发送信息
-      o.onConnectionSend();
-      if (o._asynchronous) {
-         o.sendAsync();
+      this.onConnectionSend();
+      if (this._asynchronous) {
+         this.sendAsync();
       } else {
-         o.sendSync();
+         this.sendSync();
       }
-      return o.content();
+      return this.content();
    }
 
    //==========================================================
@@ -296,21 +291,20 @@ export class FHttpConnection extends FObject {
    // @param data:Object 发送数据
    //==========================================================
    public send2(url, data) {
-      var o = this;
       // 设置参数
-      o._url = url;
-      o._input = data;
+      this._url = url;
+      this._input = data;
       // 设置状态
-      o._methodCd = EHttpMethod.Post;
-      o._statusFree = false;
+      this._methodCd = EHttpMethod.Post;
+      this._statusFree = false;
       // 发送信息
-      o.onConnectionSend();
-      if (o._asynchronous) {
-         o.sendAsync();
+      this.onConnectionSend();
+      if (this._asynchronous) {
+         this.sendAsync();
       } else {
-         o.sendSync();
+         this.sendSync();
       }
-      return o.content();
+      return this.content();
    }
 
    //==========================================================
@@ -321,19 +315,18 @@ export class FHttpConnection extends FObject {
    // @param data:Object 发送数据
    //==========================================================
    public dispose() {
-      var o = this;
       // 释放属性
-      o._heads = RObject.dispose(o._heads);
-      o._attributes = RObject.dispose(o._attributes);
-      o._event = RObject.dispose(o._event);
-      o._input = null;
-      o._inputData = null;
-      o._output = null;
-      o._outputData = null;
-      var handle = o._handle;
+      this._heads = RObject.dispose(this._heads);
+      this._attributes = RObject.dispose(this._attributes);
+      this._event = RObject.dispose(this._event);
+      this._input = null;
+      this._inputData = null;
+      this._output = null;
+      this._outputData = null;
+      var handle = this._handle;
       if (handle) {
          handle.onreadystatechange = null;
-         o._handle = null;
+         this._handle = null;
       }
       // 父处理
       super.dispose();

@@ -1,4 +1,5 @@
 import {EResult} from '../lang/EResult';
+import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
 //==========================================================
@@ -11,51 +12,49 @@ import {FTag} from './FTag';
 export class FTagEquals extends FTag {
    //..........................................................
    // @attribute
-   protected _trimLeft = true;
-   protected _source = null;
-   protected _value = null;
+   public trimLeft = true;
+   public source = null;
+   public value = null;
 
    //==========================================================
    // <T>开始处理。</T>
    //
    // @method
-   // @param p:context:FTagContext 环境
+   // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(p) {
-      var o = this;
-      var r = false;
-      var s = p.get(o._source);
-      var vs = o._value.split('|');
+   public onBegin(context: FTagContext): EResult {
+      var resource = false;
+      var s = context.get(this.source);
+      var vs = this.value.split('|');
       var c = vs.length;
       for (var i = 0; i < c; i++) {
          var v = vs[i]
          if (s == v) {
-            r = true;
+            resource = true;
             break;
          }
       }
-      return r ? EResult.Continue : EResult.Skip;
+      return resource ? EResult.Continue : EResult.Skip;
    }
 
    //==========================================================
    // <T>设置属性值。</T>
    //
    // @method
-   // @param n:name:String 名称
-   // @param v:level:Integer 内容
+   // @param name 名称
+   // @param level 内容
    //==========================================================
-   public set(n, v) {
-      var o = this;
-      switch (n) {
+   public set(name, value) {
+      switch (name) {
          case 'source':
-            o._source = v;
+            this.source = value;
             return;
          case 'value':
-            o._value = v;
+            this.value = value;
             return;
       }
-      super.set(n, v);
+      super.set(name, value);
    }
 
    //==========================================================
@@ -65,7 +64,6 @@ export class FTagEquals extends FTag {
    // @return String 字符串
    //==========================================================
    public toString() {
-      var o = this;
-      return 'source=' + o._source + ', value=' + o._value;
+      return 'source=' + this.source + ', value=' + this.value;
    }
 }

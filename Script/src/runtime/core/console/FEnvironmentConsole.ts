@@ -4,6 +4,7 @@ import {RString} from '../../common/lang/RString';
 import {RObject} from '../../common/lang/RObject';
 import {RClass} from '../../common/reflect/RClass';
 import {RAssert} from '../../common/RAssert';
+import {RRuntime} from '../../common/RRuntime';
 import {FEnvironment} from './FEnvironment';
 import {FConsole} from '../FConsole';
 
@@ -15,11 +16,10 @@ import {FConsole} from '../FConsole';
 // @version 150606
 //==========================================================
 export class FEnvironmentConsole extends FConsole {
-   // @attribute
+   // 范围类型
    protected _scopeCd = EScope.Local;
-   // @attribute
-   //_environments = MO.Class.register(o, new MO.AGetSet('_environments'));
-   protected _environments: FDictionary = new FDictionary();
+   // 环境变量
+   protected _environments: FDictionary<FEnvironment> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -28,6 +28,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
+      this._environments = new FDictionary<FEnvironment>();
    }
 
    //==========================================================
@@ -37,10 +38,9 @@ export class FEnvironmentConsole extends FConsole {
    // @param environment:FEnvironment 环境
    //==========================================================
    public register(environment) {
-      var o = this;
       var name = environment.name();
       RAssert.debugNotEmpty(name);
-      o._environments.set(name, environment);
+      this._environments.set(name, environment);
    }
 
    //==========================================================
@@ -78,11 +78,10 @@ export class FEnvironmentConsole extends FConsole {
    // @return String 环境内容
    //==========================================================
    public findValue(name) {
-      var o = this;
       var value = null;
-      var environment = o._environments.get(name);
+      var environment:FEnvironment = this._environments.get(name);
       if (environment) {
-         value = environment.value();
+         value = environment.value;
       }
       return value;
    }
@@ -95,14 +94,13 @@ export class FEnvironmentConsole extends FConsole {
    // @return String 解析内容
    //==========================================================
    public parse(value) {
-      var o = this;
       RAssert.debugNotEmpty(value);
       var result = value;
-      var environments = o._environments;
+      var environments = this._environments;
       var count = environments.count();
       for (var i = 0; i < count; i++) {
          var environment = environments.at(i);
-         result = RString.replace(result, '{' + environment.name() + '}', environment.value());
+         result = RString.replace(result, '\\${' + environment.name + '}', environment.value);
       }
       return result;
    }
@@ -115,14 +113,13 @@ export class FEnvironmentConsole extends FConsole {
    // @return String 解析内容
    //==========================================================
    public parseUrl(value) {
-      var o = this;
       var result = null;
-      //var version = MO.Runtime.version();
-      var url = o.parse(value);
+      var version = RRuntime.version;
+      var url = this.parse(value);
       if (url.indexOf('?') != -1) {
-         //result = url + '&' + version;
+         result = url + '&' + version;
       } else {
-         //result = url + '?' + version;
+         result = url + '?' + version;
       }
       return result;
    }

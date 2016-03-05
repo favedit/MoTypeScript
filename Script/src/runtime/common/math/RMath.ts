@@ -54,7 +54,8 @@ export class RMath {
    //    <L value='true'>相等</L>
    //    <L value='false'>不相等</L>
    //==========================================================
-   public static construct() {
+   // TODO： 未来由描述器来写 @AInitialize
+   public static staticConstructor() {
       // 初始化属性
       this.vectorAxisX = new SVector3(1, 0, 0);
       this.vectorAxisY = new SVector3(0, 1, 0);

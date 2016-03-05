@@ -38,7 +38,7 @@ export class FLoggerConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Global;
+      this.scopeCd = EScope.Global;
       RLogger.outputListeners.register(this, this.onOutput);
    }
 

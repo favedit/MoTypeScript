@@ -1,5 +1,6 @@
 import {FError} from '../../../../../runtime/common/lang/FError';
-import {FG3dVertexBuffer} from '../FG3dVertexBuffer';
+import {EAttributeFormat} from '../EAttributeFormat';
+import {FVertexBuffer} from '../FVertexBuffer';
 
 //==========================================================
 // <T>WebGL渲染顶点流。</T>
@@ -7,9 +8,9 @@ import {FG3dVertexBuffer} from '../FG3dVertexBuffer';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FWglVertexBuffer extends FG3dVertexBuffer {
-   // @attribute
-   _handle = null;
+export class FWglVertexBuffer extends FVertexBuffer {
+   // 句柄
+   public handle = null;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -17,10 +18,9 @@ export class FWglVertexBuffer extends FG3dVertexBuffer {
    // @method
    //==========================================================
    public setup() {
-      var o = this;
-      //o.__base.FG3dVertexBuffer.setup.call(o);
-      var graphic = o._graphicContext._handle;
-      o._handle = graphic.createBuffer();
+      super.setup();
+      var graphic = this.graphicContext.handle;
+      this.handle = graphic.createBuffer();
    }
 
    //==========================================================
@@ -30,9 +30,8 @@ export class FWglVertexBuffer extends FG3dVertexBuffer {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var o = this;
-      var graphic = o._graphicContext._handle;
-      return graphic.isBuffer(o._handle);
+      var graphic = this.graphicContext.handle;
+      return graphic.isBuffer(this.handle);
    }
 
    //==========================================================
@@ -44,43 +43,42 @@ export class FWglVertexBuffer extends FG3dVertexBuffer {
    // @param count:Integer 总数
    // @param remain:Boolean 保留数据
    //==========================================================
-   public upload(data, stride, count, remain) {
-      var EG3dAttributeFormat = EG3dAttributeFormat;
-      var o = this;
-      var context = o._graphicContext;
-      var graphics = context._handle;
+   public upload(data: any, stride: number = 0, count: number = 0, remain: boolean = false) {
+      var context = this.graphicContext;
+      var graphics = context.handle;
       // 设置数据
       if (remain) {
-         o._data = data;
+         this.data = data;
       }
-      //o._stride = stride;
-      //o._count = count;
+      this.stride = stride;
+      this.count = count;
       // 获得数据
       var arrays = null;
-      if ((data.constructor == Array) || (data.constructor == ArrayBuffer)) {
-         switch (o._formatCd) {
-            case EG3dAttributeFormat.Float1:
-            case EG3dAttributeFormat.Float2:
-            case EG3dAttributeFormat.Float3:
-            case EG3dAttributeFormat.Float4:
+      var dataClass = data.constructor;
+      if ((dataClass == Array) || (dataClass == ArrayBuffer)) {
+         switch (this.formatCd) {
+            case EAttributeFormat.Float1:
+            case EAttributeFormat.Float2:
+            case EAttributeFormat.Float3:
+            case EAttributeFormat.Float4:
                arrays = new Float32Array(data);
                break;
-            case EG3dAttributeFormat.Byte4:
-            case EG3dAttributeFormat.Byte4Normal:
+            case EAttributeFormat.Byte4:
+            case EAttributeFormat.Byte4Normal:
                arrays = new Uint8Array(data);
                break;
             default:
-               throw new FError(o, 'Unknown data type.');
+               throw new FError(this, 'Unknown data type.');
          }
-      } else if (data.constructor == Uint8Array) {
+      } else if (dataClass == Uint8Array) {
          arrays = data;
-      } else if (data.constructor == Float32Array) {
+      } else if (dataClass == Float32Array) {
          arrays = data;
       } else {
-         throw new FError(o, 'Upload vertex data type is invalid. (data={1})', data);
+         throw new FError(this, 'Upload vertex data type is invalid. (data={1})', data);
       }
       // 绑定数据
-      graphics.bindBuffer(graphics.ARRAY_BUFFER, o._handle);
+      graphics.bindBuffer(graphics.ARRAY_BUFFER, this.handle);
       context.checkError('bindBuffer', 'Bindbuffer');
       // 上传数据
       graphics.bufferData(graphics.ARRAY_BUFFER, arrays, graphics.STATIC_DRAW);
@@ -93,15 +91,14 @@ export class FWglVertexBuffer extends FG3dVertexBuffer {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
-      var context = o._graphicContext;
+      var graphic = this.graphicContext.handle;
       // TODO：待优化
-      //o._resource = null;
+      //this._resource = null;
       // 释放对象
-      var buffer = o._handle;
+      var buffer = this.handle;
       if (buffer) {
-         context._handle.deleteBuffer(buffer);
-         o._handle = null;
+         graphic.deleteBuffer(buffer);
+         this.handle = null;
       }
       // 父处理
       super.dispose();

@@ -1,4 +1,5 @@
 import {EResult} from '../lang/EResult';
+import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
 //==========================================================
@@ -11,18 +12,18 @@ import {FTag} from './FTag';
 export class FTagWrite extends FTag {
    //..........................................................
    // @attribute
-   _source = null;
+   public source = null;
+   
    //==========================================================
    // <T>开始处理。</T>
    //
    // @method
-   // @param p:context:FTagContext 环境
+   // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(p) {
-      var o = this;
-      var v = p.get(o._source);
-      p.write(v);
+   public onBegin(context: FTagContext): EResult {
+      var value = context.get(this.source);
+      context.write(value);
       return EResult.Skip;
    }
 
@@ -33,14 +34,13 @@ export class FTagWrite extends FTag {
    // @param n:name:String 名称
    // @param v:level:Integer 内容
    //==========================================================
-   public set(n, v) {
-      var o = this;
-      switch (n) {
+   public set(name, value) {
+      switch (name) {
          case 'source':
-            o._source = v;
+            this.source = value;
             return;
       }
-      super.set(n, v);
+      super.set(name, value);
    }
 
 
@@ -51,7 +51,6 @@ export class FTagWrite extends FTag {
    // @return String 字符串
    //==========================================================
    public toString() {
-      var o = this;
-      return 'source=' + o._source;
+      return 'source=' + this.source;
    }
 }

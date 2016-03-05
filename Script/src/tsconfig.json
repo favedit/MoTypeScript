@@ -11,7 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": false,
-        "outDir": "./build"
+        "outFile": "../build/mo.js"
     },
     "formatCodeOptions": {
         "indentSize": 3,

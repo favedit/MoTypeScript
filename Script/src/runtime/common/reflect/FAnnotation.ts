@@ -63,7 +63,7 @@ export class FAnnotation {
    //
    // @return 描述类型
    //============================================================
-   public get annotationCd() {
+   public get annotationCd():EAnnotation {
       return this._annotationCd;
    }
 

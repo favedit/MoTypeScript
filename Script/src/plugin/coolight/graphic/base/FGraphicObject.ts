@@ -1,5 +1,6 @@
 import {FObject} from '../../../../runtime/common/lang/FObject';
 import {RAssert} from '../../../../runtime/common/RAssert';
+import {FGraphicContext} from './FGraphicContext';
 
 //==========================================================
 // <T>图形对象。</T>
@@ -9,16 +10,13 @@ import {RAssert} from '../../../../runtime/common/RAssert';
 // @history 150206
 //==========================================================
 export class FGraphicObject extends FObject {
-   //..........................................................
-   // @attribute
-   //o._graphicContext    = MO.Class.register(o, new MO.AGetter('_graphicContext'));
-   protected _graphicContext = null;
+   // 图形环境
+   public graphicContext: any = null;
 
    //==========================================================
    // <T>关联图形环境。</T>
    //
-   // @method
-   // @param context:FGraphicContext 图形环境
+   // @param context 图形环境
    //==========================================================
    public linkGraphicContext(context) {
       /*if (MO.Class.isClass(context, MO.FGraphicContext)) {
@@ -28,16 +26,15 @@ export class FGraphicObject extends FObject {
       } else {
          throw new MO.TError(o, 'Link graphic context failure. (context={1})', context);
       }*/
-      RAssert.debugNotNull(this._graphicContext);
+      RAssert.debugNotNull(context);
+      this.graphicContext = context;
    }
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
-      this._graphicContext = null;
+      this.graphicContext = null;
       super.dispose();
    }
 }

@@ -8,11 +8,9 @@ import {FObject} from '../../../../runtime/common/lang/FObject';
 // @history 150308
 //==========================================================
 export class FFloatStream extends FObject {
-   //_length = MO.Class.register(o, new MO.AGetter('_length'), 0);
-   protected _length = 0;
-   //_memory = MO.Class.register(o, new MO.AGetter('_memory'), null);
-   protected _memory = null;
-   protected _position = 0;
+   public length = 0;
+   public memory = null;
+   public position = 0;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -31,9 +29,8 @@ export class FFloatStream extends FObject {
    // @param length:Integer 长度
    //==========================================================
    public setLength(length) {
-      var o = this;
-      o._length = length;
-      o._memory = new Float32Array(length);
+      this.length = length;
+      this.memory = new Float32Array(length);
    }
 
    //==========================================================
@@ -46,11 +43,10 @@ export class FFloatStream extends FObject {
    // @param value4:Float 浮点数4
    //==========================================================
    public writeFloat4(value1, value2, value3, value4) {
-      var o = this;
-      o._memory[o._position++] = value1;
-      o._memory[o._position++] = value2;
-      o._memory[o._position++] = value3;
-      o._memory[o._position++] = value4;
+      this.memory[this.position++] = value1;
+      this.memory[this.position++] = value2;
+      this.memory[this.position++] = value3;
+      this.memory[this.position++] = value4;
    }
 
    //==========================================================
@@ -69,7 +65,7 @@ export class FFloatStream extends FObject {
    // @method
    //==========================================================
    public reset() {
-      this._position = 0;
+      this.position = 0;
    }
 
    //==========================================================
@@ -78,7 +74,7 @@ export class FFloatStream extends FObject {
    // @method
    //==========================================================
    public clear() {
-      this._position = 0;
+      this.position = 0;
    }
 
    //==========================================================
@@ -87,7 +83,7 @@ export class FFloatStream extends FObject {
    // @author maocy
    //==========================================================
    public dispose() {
-      this._memory = null;
+      this.memory = null;
       // 父处理
       super.dispose();
    }

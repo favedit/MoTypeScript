@@ -14,10 +14,10 @@ import {FHttpConnection} from './FHttpConnection';
 export class FXmlConnection extends FHttpConnection {
    //..........................................................
    // @attribute
-   _contentCd = EHttpContent.Text;
+   public _contentCd = EHttpContent.Text;
    // @attribute
-   _inputNode = null;
-   _outputNode = null;
+   public _inputNode = null;
+   public _outputNode = null;
    // @attribute
 
    //==========================================================
@@ -26,26 +26,25 @@ export class FXmlConnection extends FHttpConnection {
    // @method
    //==========================================================
    public onConnectionSend() {
-      var o = this;
-      var data = o._input;
+      var data = this._input;
       if (data) {
          var xml = null;
          if (data.constructor == String) {
             xml = data;
-            o._inputNode = null;
+            this._inputNode = null;
          } else if (data.constructor == xml.FXmlNode) {
             var document = new xml.FXmlDocument();
             document.setRoot(data);
             xml = document.xml();
-            o._inputNode = data;
+            this._inputNode = data;
          } else if (data.constructor == xml.FXmlDocument) {
             xml = data.xml();
-            o._inputNode = data.root();
+            this._inputNode = data.root();
          } else {
-            throw new FError(o, 'Unknown send data type.');
+            throw new FError(this, 'Unknown send data type.');
          }
-         o._inputData = xml;
-         o._contentLength = xml.length;
+         this._inputData = xml;
+         this._contentLength = xml.length;
       }
    }
 
@@ -55,8 +54,7 @@ export class FXmlConnection extends FHttpConnection {
    // @method
    //==========================================================
    public onConnectionComplete() {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       // 获得返回的文档对象
       var element = null;
       if (handle.responseXML) {
@@ -64,7 +62,7 @@ export class FXmlConnection extends FHttpConnection {
       } else if (handle.responseXml) {
          element = handle.responseXml.documentElement;
       } else {
-         throw new FError(o, "Fetch xml data failure.");
+         throw new FError(this, "Fetch xml data failure.");
       }
       if (!element) {
          //return sk.common.lang.RLogger.fatal(o, 'Read xml error. (url={1})\n{2}', this._url, this._outputText)
@@ -72,12 +70,12 @@ export class FXmlConnection extends FHttpConnection {
       // 建立文档对象
       var document = new FXmlDocument();
       RXml.buildNode(document, null, element);
-      var root = o._outputNode = document.root();
+      var root = this._outputNode = document.root();
       // 完成处理
-      o._statusFree = true;
+      this._statusFree = true;
       // 完成处理
-      var event = o._event;
-      event.connection = o;
+      var event = this._event;
+      event.connection = this;
       event.document = document;
       event.root = root;
       event.content = root;
@@ -85,11 +83,11 @@ export class FXmlConnection extends FHttpConnection {
       //o.processLoadListener(event);
       event.dispose();
       // 异步处理后清空属性
-      if (o._asynchronous) {
-         o._input = null;
-         o._inputNode = null;
-         o._output = null;
-         o._outputNode = null;
+      if (this._asynchronous) {
+         this._input = null;
+         this._inputNode = null;
+         this._output = null;
+         this._outputNode = null;
          //o._parameters = null;
       }
    }

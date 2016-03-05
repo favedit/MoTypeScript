@@ -95,7 +95,7 @@ export class RLogger {
          name = name.replace('_', '.');
       }
       if (owner && owner.hashCode) {
-         name += '@' + owner.hashCode();
+         name += '@' + owner.hashCode;
       }
       //..........................................................
       var code: string = '|D [' + RString.rpad(name, this._labelLength) + '] ';
@@ -128,7 +128,7 @@ export class RLogger {
          name = name.replace('_', '.');
       }
       if (owner && owner.hashCode) {
-         name += '@' + owner.hashCode();
+         name += '@' + owner.hashCode;
       }
       //..........................................................
       var code: string = '|I [' + RString.rpad(name, this._labelLength) + '] ';
@@ -162,7 +162,7 @@ export class RLogger {
          name = name.replace('_', '.');
       }
       if (owner && owner.hashCode) {
-         name += '@' + owner.hashCode();
+         name += '@' + owner.hashCode;
       }
       //..........................................................
       var code: string = '|W [' + RString.rpad(name, o._labelLength) + '] ';
@@ -196,7 +196,7 @@ export class RLogger {
          name = name.replace('_', '.');
       }
       if (owner && owner.hashCode) {
-         name += '@' + owner.hashCode();
+         name += '@' + owner.hashCode;
       }
       //..........................................................
       var code: string = '|E [' + RString.rpad(name, o._labelLength) + '] ';

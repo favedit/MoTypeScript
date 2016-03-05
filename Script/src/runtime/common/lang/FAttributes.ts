@@ -10,7 +10,7 @@ import {RRuntime} from '../RRuntime'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FAttributes extends FDictionary {
+export class FAttributes extends FDictionary<string> {
    //==========================================================
    // <T>将内部所有内容目关联成一个字符串。</T>
    //
