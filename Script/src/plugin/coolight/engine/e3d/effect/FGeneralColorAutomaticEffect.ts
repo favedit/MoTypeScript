@@ -2,7 +2,7 @@
 import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FFloatStream} from '../../../graphic/base/FFloatStream';
-import {ERegionParameter} from '../../../graphic/base/ERegionParameter';
+import {EE3dRegionParameter} from '../EE3dRegionParameter';
 import {FAutomaticEffect} from './FAutomaticEffect';
 
 //==========================================================
@@ -78,9 +78,9 @@ export class FGeneralColorAutomaticEffect extends FAutomaticEffect {
    public drawRenderable(region, renderable) {
       var program = this.program;
       // 获得参数
-      var cameraPosition = region.calculate(ERegionParameter.CameraPosition);
-      var lightDirection = region.calculate(ERegionParameter.LightDirection);
-      var vpMatrix = region.calculate(ERegionParameter.CameraViewProjectionMatrix)
+      var cameraPosition = region.calculate(EE3dRegionParameter.CameraPosition);
+      var lightDirection = region.calculate(EE3dRegionParameter.LightDirection);
+      var vpMatrix = region.calculate(EE3dRegionParameter.CameraViewProjectionMatrix)
       // 绑定材质
       var material = renderable.material;
       var materialInfo = material.info;

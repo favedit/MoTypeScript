@@ -59,10 +59,8 @@ gulp.task('mo',function(){
   });
   var tscfg = tp.config.compilerOptions.outFile;
   var tsRequest = tp.src()
-      .pipe(sourcemaps.init())
       .pipe(ts(tp));
   return tsRequest.js
-      .pipe(sourcemaps.write({includeContent: false,sourceRoot: '../src'}))
       .pipe(gulp.dest('build'));
 });
 

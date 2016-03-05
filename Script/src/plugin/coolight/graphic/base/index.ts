@@ -1,6 +1,5 @@
 export * from './EGraphicError';
 export * from './EGraphicQuality';
-export * from './ERegionParameter';
 export * from './FDisplay';
 export * from './FDisplayContainer';
 export * from './FDisplayLayer';

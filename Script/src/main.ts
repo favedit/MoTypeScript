@@ -30,6 +30,7 @@ var technique = techniqueConsole.find(context, mo.plugin.coolight.engine.e3d.eff
 var pipelineConsole = mo.runtime.core.RConsole.find(mo.plugin.coolight.graphic.g3d.pipeline.FPipelineConsole);
 var pipeline = pipelineConsole.allocPipeline();
 pipeline.context = context;
+pipeline.region = new mo.plugin.coolight.engine.e3d.FE3dRegion();
 pipeline.technique = technique;
 pipeline.camera = camera;
 pipeline.stage = stage;

@@ -132,7 +132,7 @@ export class FTechnique extends FContent {
       var layers = stage.layers;
       var layerCount = layers.count();
       // 设置区域属性
-      region.technique = this;
+      (region as any).technique = this;
       // 绘制所有过程
       var passes = this.passes;
       var count = passes.count();

@@ -1,72 +1,51 @@
 import {RMethod} from '../reflect/RMethod'
 import {RClass} from '../reflect/RClass'
+import {RMemory} from '../RMemory'
+import {SListenerContext} from './SListenerContext'
 import {FObject} from './FObject'
 import {RObject} from './RObject'
+import {RListener} from './RListener'
 
 //==========================================================
-// <T>监听器的工具类。</T>
+// <T>监听器。</T>
 //
 // @tool
 // @author maocy
-// @version 141229
+// @version 160306
 //==========================================================
 export class FListener extends FObject {
    //..........................................................
    // 拥有者
-   protected _owner: any = null;
+   public owner: any = null;
    // 函数
-   protected _callback: Function = null;
+   public callback: Function = null;
 
    //==========================================================
-   // <T>获得拥有者。</T>
-   //
-   // @return 拥有者
-   //==========================================================
-   public get owner() {
-      return this._owner;
-   }
-
-   //==========================================================
-   // <T>设置拥有者。</T>
-   //
-   // @param owner 拥有者
-   //==========================================================
-   public set owner(owner:any) {
-      this._owner = owner;
-   }
-
-   //==========================================================
-   // <T>获得回调函数。</T>
-   //
-   // @return 回调函数
-   //==========================================================
-   public get callback() {
-      return this._callback;
-   }
-
-   //==========================================================
-   // <T>设置回调函数。</T>
-   //
-   // @param callback 回调函数
-   //==========================================================
-   public set callback(callback:any) {
-      this._callback = callback;
-   }
-
-   //==========================================================
-   // <T>监听器的工具类。</T>
-   // <P>响应处理时最多可以带5个参数。</P>
+   // <T>事件处理。</T>
    //
    // @param sender:发出对象
-   // @param parameter1:Object 参数1
-   // @param parameter2:Object 参数2
-   // @param parameter3:Object 参数3
-   // @param parameter4:Object 参数4
-   // @param parameter5:Object 参数5
+   // @param parameters 参数集合
    //==========================================================
-   public process(sender, parameter1, parameter2, parameter3, parameter4, parameter5) {
-      var owner = this._owner ? this._owner : this;
-      this._callback.call(owner, sender, parameter1, parameter2, parameter3, parameter4, parameter5);
+   public process(sender, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
+      // 获得调用者
+      var owner = this.owner;
+      if (!owner) {
+         owner = sender;
+      }
+      var context: SListenerContext = RMemory.alloc(SListenerContext);
+      context.sender = sender;
+      context.owner = owner;
+      context.callback = this.callback;
+      context.parameter1 = p1;
+      context.parameter2 = p2;
+      context.parameter3 = p3;
+      context.parameter4 = p4;
+      context.parameter5 = p5;
+      context.parameter6 = p6;
+      context.parameter6 = p7;
+      context.parameter7 = p8;
+      context.parameter9 = p9;
+      RListener.process(context);
    }
 
    //==========================================================
@@ -76,7 +55,7 @@ export class FListener extends FObject {
    // @return String 字符串信息
    //==========================================================
    public toString() {
-      return RClass.shortName(this) + '(owner=' + RClass.shortName(this._owner) + ', callback=' + RMethod.shortName(this._callback) + ')';
+      return RClass.shortName(this) + '(owner=' + RClass.shortName(this.owner) + ', callback=' + RMethod.shortName(this.callback) + ')';
    }
 
    //============================================================
@@ -85,8 +64,8 @@ export class FListener extends FObject {
    // @method
    //============================================================
    public dispose() {
-      this._owner = null;
-      this._callback = null;
+      this.owner = null;
+      this.callback = null;
       RObject.free(this);
    }
 }

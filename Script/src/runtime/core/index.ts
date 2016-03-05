@@ -7,6 +7,9 @@ export {console as console};
 import * as device from './device/index';
 export {device as device};
 
+import * as framework from './framework/index';
+export {framework as framework};
+
 import * as plugin from './plugin/index';
 export {plugin as plugin};
 

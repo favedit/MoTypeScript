@@ -32,7 +32,7 @@ export class FPipeline extends FObject {
    //==========================================================
    public constructor() {
       super();
-      this.region = new FRegion();
+      //this.region = new FRegion();
    }
    
    //==========================================================
@@ -54,7 +54,7 @@ export class FPipeline extends FObject {
          return false;
       }
       var region:FRegion = this.region;
-      region.camera = this.camera;
+      (region as any).camera = this.camera;
       region.backgroundColor = stage.backgroundColor;
       // 统计处理
       //var statistics = region._statistics = this._statistics;

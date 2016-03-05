@@ -1,3 +1,4 @@
+import {EResult} from '../../common/lang/EResult';
 import {FObject} from '../../common/lang/FObject';
 import {EThreadStatus} from './EThreadStatus';
 
@@ -8,16 +9,15 @@ import {EThreadStatus} from './EThreadStatus';
 // @author maocy
 // @version 150105
 //==========================================================
-export class FThread extends FObject { 
-   //..........................................................
-   // @attribute
-   //_name = MO.Class.register(o, new MO.AGetter('_name'));
-   protected _name: string = null;
-   //_statusCd = MO.Class.register(o, new MO.AGetter('_statusCd'), MO.EThreadStatus.Sleep);
-   protected _statusCd: EThreadStatus = EThreadStatus.Sleep;
-   //_interval = MO.Class.register(o, new MO.AGetSet('_interval'), 100);
-   protected _interval: number = 100;
-   protected _delay: number = 0;
+export abstract class FThread extends FObject {
+   // 名称
+   public name: string = null;
+   // 延时
+   public delay: number = 0;
+   // 间隔
+   public interval: number = 100;
+   // 状态
+   public statusCd: EThreadStatus = EThreadStatus.Sleep;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,7 +34,7 @@ export class FThread extends FObject {
    // @method
    //==========================================================
    public start() {
-      this._statusCd = EThreadStatus.Active;
+      this.statusCd = EThreadStatus.Active;
    }
 
    //==========================================================
@@ -43,23 +43,26 @@ export class FThread extends FObject {
    // @method
    //==========================================================
    public stop() {
-      this._statusCd = EThreadStatus.Finish;
+      this.statusCd = EThreadStatus.Finish;
    }
 
    //==========================================================
    // <T>调用处理。</T>
    //
-   // @method
-   // @param interval:integer 调用间隔
-   // @return 名称
+   // @return 处理结果
    //==========================================================
-   public process(interval) {
-      var o = this;
-      if (o._delay <= 0) {
-         //o.processProcessListener(o);
-         o._delay = o._interval;
+   public abstract onProcess():EResult;
+
+   //==========================================================
+   // <T>调用处理。</T>
+   //
+   // @param interval:integer 调用间隔
+   //==========================================================
+   public process(interval: number) {
+      if (this.delay <= 0) {
+         this.onProcess();
       } else {
-         o._delay -= interval;
+         this.delay -= interval;
       }
    }
 }

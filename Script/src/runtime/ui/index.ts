@@ -1,1 +1,2 @@
-export * from './FUi';
+export * from './FComponent';
+export * from './FControl';

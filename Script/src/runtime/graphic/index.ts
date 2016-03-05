@@ -1,12 +1,16 @@
+export * from './FDisplay';
+export * from './FDisplayContainer';
+export * from './FDisplayLayer';
+export * from './FDrawable';
+export * from './FRegion';
+export * from './FRenderable';
+export * from './FScene';
 
-import * as context2d from './context2d/index';
-export {context2d as context2d};
+import * as camera from './camera/index';
+export {camera as camera};
 
-import * as context3d from './context3d/index';
-export {context3d as context3d};
+import * as light from './light/index';
+export {light as light};
 
-import * as engine2d from './engine2d/index';
-export {engine2d as engine2d};
-
-import * as engine3d from './engine3d/index';
-export {engine3d as engine3d};
+import * as material from './material/index';
+export {material as material};

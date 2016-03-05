@@ -30,7 +30,7 @@ export class RMethod {
       }
       return result;
    }
-   
+
    // @attribute
    /*static _virtuals: any = new Object();
    static _properties: any = new Object();
@@ -232,4 +232,32 @@ export class RMethod {
       }
       return method;
    }*/
+
+   //==========================================================
+   // <T>结构回收处理。</T>
+   //==========================================================
+   public static structFree() {
+      for (var name in this) {
+         var value: any = this[name];
+         if (value != null) {
+            if (value.constructor != Function) {
+               this[name] = null;
+            }
+         }
+      }
+   }
+
+   //==========================================================
+   // <T>结构释放处理。</T>
+   //==========================================================
+   public static structDispose() {
+      for (var name in this) {
+         var value: any = this[name];
+         if (value != null) {
+            if (!Object.prototype.isPrototypeOf(value)) {
+               this[name] = null;
+            }
+         }
+      }
+   }
 }
