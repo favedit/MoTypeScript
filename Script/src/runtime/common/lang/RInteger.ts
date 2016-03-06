@@ -35,7 +35,7 @@ export class RInteger {
    // @param defaultValue:Integer 默认内容
    // @return Integer 非空内容
    //==========================================================
-   public static nvl(value, defaultValue) {
+   public static nvl(value:any, defaultValue?:any) {
       if (value != null) {
          return parseInt(value);
       }

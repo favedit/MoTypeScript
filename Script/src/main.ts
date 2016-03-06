@@ -3,34 +3,34 @@ import * as mo from './index';
 mo.runtime.common.RRuntime.namespace(mo, 'mo');
 
 var hCanvas = (window as any).hCanvas;
-var context = new mo.plugin.coolight.graphic.g3d.wgl.FWglContext();
+var context = new mo.plugin.cl3d.graphic.wgl.FWglContext();
 context.linkCanvas(hCanvas);
 
-var stage = new mo.plugin.coolight.graphic.base.FStage();
-var layer = new mo.plugin.coolight.graphic.base.FDisplayLayer();
+var stage = new mo.plugin.cl3d.base.FScene();
+var layer = new mo.plugin.cl3d.base.FDisplayLayer();
 stage.registerLayer('scene', layer);
 
-var camera = new mo.plugin.coolight.graphic.g3d.FPerspectiveCamera();
+var camera = new mo.plugin.cl3d.graphic.FPerspectiveCamera();
 camera.position.set(0, 0, -10);
 camera.lookAt(0, 0, 0);
 camera.update();
 camera.projection.size.set(hCanvas.offsetWidth, hCanvas.offsetHeight);
 camera.projection.update();
 
-var cube = new mo.plugin.coolight.engine.e3d.shape.FE3dCube();
+var cube = new mo.plugin.cl3d.engine.shape.FE3dCube();
 cube.setup(context);
 layer.pushRenderable(cube);
 
 var environmentConsole = mo.runtime.core.RConsole.find(mo.runtime.core.console.FEnvironmentConsole);
 environmentConsole.registerValue('resource', '/ts/res');
 
-var techniqueConsole = mo.runtime.core.RConsole.find(mo.plugin.coolight.graphic.g3d.FTechniqueConsole);
-var technique = techniqueConsole.find(context, mo.plugin.coolight.engine.e3d.effect.FGeneralTechnique);
+var techniqueConsole = mo.runtime.core.RConsole.find(mo.plugin.cl3d.graphic.FTechniqueConsole);
+var technique = techniqueConsole.find(context, mo.plugin.cl3d.engine.effect.FGeneralTechnique);
 
-var pipelineConsole = mo.runtime.core.RConsole.find(mo.plugin.coolight.graphic.g3d.pipeline.FPipelineConsole);
+var pipelineConsole = mo.runtime.core.RConsole.find(mo.plugin.cl3d.graphic.pipeline.FPipelineConsole);
 var pipeline = pipelineConsole.allocPipeline();
 pipeline.context = context;
-pipeline.region = new mo.plugin.coolight.engine.e3d.FE3dRegion();
+pipeline.region = new mo.plugin.cl3d.engine.FE3dRegion();
 pipeline.technique = technique;
 pipeline.camera = camera;
 pipeline.stage = stage;

@@ -1,6 +1,9 @@
 
-import * as coolight from './coolight/index';
-export {coolight as coolight};
+import * as cl2d from './cl2d/index';
+export {cl2d as cl2d};
+
+import * as cl3d from './cl3d/index';
+export {cl3d as cl3d};
 
 import * as dui from './dui/index';
 export {dui as dui};

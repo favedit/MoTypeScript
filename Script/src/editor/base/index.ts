@@ -1,4 +1,10 @@
 
+import * as application from './application/index';
+export {application as application};
+
+import * as command from './command/index';
+export {command as command};
+
 import * as model from './model/index';
 export {model as model};
 

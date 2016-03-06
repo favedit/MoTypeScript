@@ -80,7 +80,7 @@ export class RObject {
    // @method
    // @param item:Object 对象
    //==========================================================
-   public static free(item) {
+   public static free(item): any {
       if (item) {
          if (RRuntime.isDebug()) {
             // 调试模式
@@ -106,6 +106,7 @@ export class RObject {
             }
          }
       }
+      return null;
    }
 
    //==========================================================

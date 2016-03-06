@@ -5,6 +5,9 @@ export {common as common};
 import * as core from './core/index';
 export {core as core};
 
+import * as data from './data/index';
+export {data as data};
+
 import * as graphic from './graphic/index';
 export {graphic as graphic};
 
