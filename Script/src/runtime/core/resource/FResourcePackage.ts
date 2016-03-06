@@ -1,4 +1,4 @@
-import {FResource} from './FResource';
+import {FResourceObject} from './FResourceObject';
 
 //==========================================================
 // <T>资源打包。</T>
@@ -7,13 +7,15 @@ import {FResource} from './FResource';
 // @author maocy
 // @version 150727
 //==========================================================
-export class FResourcePackage extends FResource {
+export class FResourcePackage extends FResourceObject {
    //..........................................................
    // @attribute
    //o._uri = MO.Class.register(o, new MO.AGetSet('_uri'));
    //o._url = MO.Class.register(o, new MO.AGetter('_url'));
    // @attribute
    //protected _statusReady: boolean = false;
+   // @attribute
+   public loader: any = null;
 
    //==========================================================
    // <T>初始化处理。</T>
@@ -21,7 +23,7 @@ export class FResourcePackage extends FResource {
    // @method
    //==========================================================
    public onLoad(event) {
-      var o = this;
+      //var o = this;
       // 反序列化数据
       //o.unserializeBuffer(event.content, true);
       // 设置标志
@@ -45,7 +47,7 @@ export class FResourcePackage extends FResource {
    // @method
    //==========================================================
    public load() {
-      var o = this;
+      //var o = this;
       //common.RAssert.debugFalse(o._statusReady);
       // 获得地址
       //var url = o._url = MO.Console.find(MO.FEnvironmentConsole).parseUrl(o._uri);

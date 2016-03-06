@@ -1,5 +1,6 @@
 import {EScope} from '../../common/lang/EScope';
 import {FObjects} from '../../common/lang/FObjects';
+import {RLogger} from '../../common/lang/RLogger';
 import {EThreadStatus} from './EThreadStatus';
 import {FConsole} from '../FConsole';
 import {RConsole} from '../RConsole';
@@ -58,8 +59,8 @@ export class FThreadConsole extends FConsole {
    public ohInterval() {
       // RConsole.find();
       var threadConsole: FThreadConsole = RConsole.find(FThreadConsole);
-      // MO.Logger.debug(threadConsole, 'Frame start ----------------------------');
-      //threadConsole.processAll();
+      RLogger.debug(threadConsole, 'Frame start ----------------------------');
+      threadConsole.processAll();
    }
 
    //==========================================================
@@ -87,20 +88,19 @@ export class FThreadConsole extends FConsole {
    // <T>处理一个线程,。</T>
    //
    // @method
-   // @param thread:FThread 线程
+   // @param thread 线程
    //==========================================================
-   public process(thread) {
-      var o = this;
+   public process(thread:FThread) {
       if (thread) {
-         var statusCd = thread.statusCd();
+         var statusCd = thread.statusCd;
          switch (statusCd) {
             case EThreadStatus.Sleep:
                break;
             case EThreadStatus.Active:
-               thread.process(o._interval);
+               thread.process(this._interval);
                break;
             case EThreadStatus.Finish:
-               o._threads.remove(thread);
+               this._threads.remove(thread);
                thread.dispose();
                break;
          }
@@ -113,15 +113,14 @@ export class FThreadConsole extends FConsole {
    // @method
    //==========================================================
    public processAll() {
-      var o = this;
       // 激活处理
-      if (o._active) {
-         var threads = o._threads;
-         var count = threads.count();
+      if (this._active) {
+         var threads:FObjects<FThread> = this._threads;
+         var count:number = threads.count();
          //try{
-         for (var i = 0; i < count; i++) {
-            var thread = threads.at(i);
-            o.process(thread);
+         for (var n:number = 0; n < count; n++) {
+            var thread:FThread = threads.at(n);
+            this.process(thread);
          }
          //}catch(error){
          //   MO.Logger.fatal(o, error, 'Thread process failure. (thread_count={1})', count);

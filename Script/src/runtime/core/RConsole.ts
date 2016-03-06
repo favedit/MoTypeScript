@@ -157,7 +157,8 @@ export class RConsole {
       if (console) {
          return console;
       }
-      console = new value();
+      //console = new value();
+      console = RClass.getInstance(value);
       consoles.set(name, console);
       // 创建控制台实例
       //var template = RClass.forName(name);

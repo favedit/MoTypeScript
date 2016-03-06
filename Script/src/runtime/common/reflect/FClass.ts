@@ -88,7 +88,12 @@ export class FClass extends FObject {
    //==========================================================
    public get instance(): any {
       if (this._instance == null) {
-         this._instance = new this._class();
+         var clazz:any = this._class;
+         if(clazz.instance){
+            this._instance = clazz.instance();
+         }else{
+            this._instance = new clazz();
+         }
       }
       return this._instance;
    }

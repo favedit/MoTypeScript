@@ -35,11 +35,23 @@ export class FLoggerConsole extends FConsole {
    //
    // @method
    //==========================================================
+   public static instance() {
+      var loggerConsole = new FLoggerConsole();
+      //var loggerConsole:FLoggerConsole = RClass.getInstance(FLoggerConsole);
+      RLogger.outputListeners.register(loggerConsole, loggerConsole.onOutput);
+      return loggerConsole;
+   }
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
    public constructor() {
       super();
       // 设置属性
       this.scopeCd = EScope.Global;
-      RLogger.outputListeners.register(this, this.onOutput);
+      //RLogger.outputListeners.register(this, this.onOutput);
    }
 
    //==========================================================

@@ -1,24 +1,17 @@
-export * from './EE3dRegionParameter';
-export * from './FE3dBoomerangTimelineAction';
-export * from './FE3dCameraTimelineAction';
-export * from './FE3dCanvas';
-export * from './FE3dDisplay';
-export * from './FE3dDisplayContainer';
-export * from './FE3dRegion';
-export * from './FE3dRenderable';
-export * from './FE3dRotateAxisTimelineAction';
-export * from './FE3dRotateTimelineAction';
-export * from './FE3dStage';
-export * from './FE3dStageConsole';
-export * from './FE3dStageStatistics';
-export * from './FE3dTransformTimelineAction';
-export * from './FE3dTranslateTimelineAction';
-export * from './ME3dObject';
-export * from './REngine3d';
+export * from './ERegionParameter';
+export * from './FCanvas';
+export * from './FDisplay';
+export * from './FDisplayContainer';
+export * from './FRegion';
+export * from './FRenderable';
+export * from './FScene';
+export * from './FSceneConsole';
+export * from './FSceneStatistics';
+export * from './REngine';
 export * from './SRenderableInfo';
 
-import * as base from './base/index';
-export {base as base};
+import * as core from './core/index';
+export {core as core};
 
 import * as effect from './effect/index';
 export {effect as effect};
@@ -31,6 +24,9 @@ export {framework as framework};
 
 import * as instance from './instance/index';
 export {instance as instance};
+
+import * as material from './material/index';
+export {material as material};
 
 import * as particle from './particle/index';
 export {particle as particle};

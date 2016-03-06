@@ -1,6 +1,7 @@
 import {FAttributes} from '../lang/FAttributes';
 import {SEvent} from '../lang/SEvent';
 import {FObject} from '../lang/FObject';
+import {FListeners} from '../lang/FListeners';
 import {FError} from '../lang/FError';
 import {RObject} from '../lang/RObject';
 import {RLogger} from '../lang/RLogger';
@@ -41,10 +42,27 @@ export class FHttpConnection extends FObject {
    protected _statusFree = true;
    protected _event = null;
    // @attribute
-   //_listenersLoad = MO.Class.register(o, new MO.AListener('_listenersLoad', MO.EEvent.Load));
-   protected _listenersLoad = null;
-   //_listenersComplete = MO.Class.register(o, new MO.AListener('_listenersComplete', MO.EEvent.Complete));
-   protected _listenersComplete = null;
+   public loadListeners: FListeners = null;
+   public completeListeners: FListeners = null;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._heads = new FAttributes();
+      this._attributes = new FAttributes();
+      this._event = new SEvent(this);
+      this.loadListeners = new FListeners();
+      this.completeListeners = new FListeners();
+      // 创建链接
+      var handle = this._handle = RNet.createConnection();
+      handle._linker = this;
+      handle.onreadystatechange = this.onConnectionReady;
+   }
 
    //==========================================================
    // <T>响应链接发送处理。</T>
@@ -105,26 +123,9 @@ export class FHttpConnection extends FObject {
          var value = attributes.value(i);
          event[name] = value;
       }
-      //o.processLoadListener(event);
+      this.loadListeners.process(event);
       // 完成处理
-      //o.processCompleteListener(event);
-   }
-
-   //==========================================================
-   // <T>构造处理。</T>
-   //
-   // @method
-   //==========================================================
-   public constructor() {
-      super();
-      // 设置属性
-      this._heads = new FAttributes();
-      this._attributes = new FAttributes();
-      this._event = new SEvent(this);
-      // 创建链接
-      var handle = this._handle = RNet.createConnection();
-      handle._linker = this;
-      handle.onreadystatechange = this.onConnectionReady;
+      this.completeListeners.process(event);
    }
 
    //==========================================================
@@ -228,7 +229,8 @@ export class FHttpConnection extends FObject {
       // 清空属性
       this._attributes.clear();
       // 清空监听器
-      //this.clearAllListeners();
+      this.loadListeners.clear();
+      this.completeListeners.clear();
    }
 
    //==========================================================

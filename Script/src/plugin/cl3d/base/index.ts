@@ -20,5 +20,8 @@ export {material as material};
 import * as math from './math/index';
 export {math as math};
 
+import * as timeline from './timeline/index';
+export {timeline as timeline};
+
 import * as util from './util/index';
 export {util as util};

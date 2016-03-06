@@ -1,4 +1,4 @@
-import {FE3dRenderable} from '../FE3dRenderable'
+import {FRenderable} from '../FRenderable'
 import {EAttributeFormat} from '../../graphic/EAttributeFormat'
 import {FVertexBuffer} from '../../graphic/FVertexBuffer'
 import {FIndexBuffer} from '../../graphic/FIndexBuffer'
@@ -17,7 +17,7 @@ import {FContext} from '../../graphic/FContext'
 // @author maocy
 // @history 141231
 //==========================================================
-export class FE3dCube extends FE3dRenderable {
+export class FE3dCube extends FRenderable {
    public vertexPositionBuffer = null;
    public vertexColorBuffer = null;
    public indexBuffer = null;
@@ -42,7 +42,7 @@ export class FE3dCube extends FE3dRenderable {
          1.0, 1.0, 1.0,
          1.0, -1.0, 1.0,
          -1.0, -1.0, 1.0];
-      var vertexPositionBuffer:FVertexBuffer = this.vertexPositionBuffer = context.createVertexBuffer();
+      var vertexPositionBuffer: FVertexBuffer = this.vertexPositionBuffer = context.createVertexBuffer();
       vertexPositionBuffer.code = 'position';
       vertexPositionBuffer.formatCd = EAttributeFormat.Float3;
       vertexPositionBuffer.upload(vertexPositionData, 4 * 3, 8);
@@ -57,7 +57,7 @@ export class FE3dCube extends FE3dRenderable {
          1.0, 0.0, 1.0, 1.0,
          1.0, 0.0, 1.0, 1.0,
          0.0, 0.0, 1.0, 1.0];
-      var vertexColorBuffer:FVertexBuffer = this.vertexColorBuffer = context.createVertexBuffer();
+      var vertexColorBuffer: FVertexBuffer = this.vertexColorBuffer = context.createVertexBuffer();
       vertexColorBuffer.code = 'color';
       vertexColorBuffer.formatCd = EAttributeFormat.Float4;
       vertexColorBuffer.upload(vertexColorData, 4 * 4, 8);
@@ -70,7 +70,7 @@ export class FE3dCube extends FE3dRenderable {
          4, 0, 3, 4, 3, 7,
          0, 4, 5, 0, 5, 1,
          3, 2, 6, 3, 6, 7];
-      var indexBuffer:FIndexBuffer = this.indexBuffer = context.createIndexBuffer();
+      var indexBuffer: FIndexBuffer = this.indexBuffer = context.createIndexBuffer();
       indexBuffer.upload(indexData, 36);
       this.pushIndexBuffer(indexBuffer);
       //..........................................................

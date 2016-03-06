@@ -19,6 +19,6 @@ export class RListener {
    //==========================================================
    public static process(context: SListenerContext) {
       context.process();
-      RMemory.free(event);
+      RMemory.free(context);
    }
 }

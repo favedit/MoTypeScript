@@ -48,9 +48,10 @@ export class FEventConsole extends FConsole {
    // <T>静态构造处理。</T>
    //==========================================================
    public static staticConstructor() {
-      RListener.process = (context: SListenerContext) => {
-         (this as any)._events.push(context);
-      };
+      //var eventConsole = RClass.getInstance(FEventConsole);
+      //RListener.process = (context: SListenerContext) => {
+         // eventConsole._events.push(context);
+      //};
    }
 
    //==========================================================

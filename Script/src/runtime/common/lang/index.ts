@@ -18,6 +18,7 @@ export * from './FObject';
 export * from './FObjectPool';
 export * from './FObjectPools';
 export * from './FObjects';
+export * from './FSpeed';
 export * from './FString';
 export * from './RArray';
 export * from './RBlob';

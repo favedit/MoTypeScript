@@ -5,13 +5,13 @@
 // @author maocy
 // @version 141230
 //===========================================================
-export class EResourceStatus {
+export enum EResourceStatus {
    // @attribute 未知
-   Unknown = 'unknown';
+   Unknown,
    // @attribute 加载
-   Load = 'load';
+   Load,
    // @attribute 加载完成
-   Loaded = 'loaded';
+   Loaded,
    // @attribute 完成
-   Complete = 'complete';
+   Complete
 }

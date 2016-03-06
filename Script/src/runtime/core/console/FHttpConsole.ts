@@ -65,9 +65,9 @@ export class FHttpConsole extends FConsole {
          this._pool.push(this.create());
       }
       // 收集对象
-      var connection = pool.alloc();
+      var connection:FHttpConnection = pool.alloc();
       connection.reset();
-      connection.addCompleteListener(this, this.onComplete);
+      connection.completeListeners.register(this, this.onComplete);
       return connection;
    }
 
@@ -89,7 +89,7 @@ export class FHttpConsole extends FConsole {
    // @param data:Object 发送数据
    // @return FHttpConnection 链接对象
    //==========================================================
-   public sendSync(url, data) {
+   public sendSync(url: string, data?: any) {
       var connection = this.alloc();
       connection._asynchronous = false;
       connection.send(url, data);
@@ -104,7 +104,7 @@ export class FHttpConsole extends FConsole {
    // @param data:Object 发送数据
    // @return FHttpConnection 链接对象
    //==========================================================
-   public sendAsync(url, data) {
+   public sendAsync(url: string, data?: any) {
       var connection = this.alloc();
       connection._asynchronous = true;
       connection.send(url, data);

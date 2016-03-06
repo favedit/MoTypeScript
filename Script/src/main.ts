@@ -2,6 +2,8 @@ import * as mo from './index';
 
 mo.runtime.common.RRuntime.namespace(mo, 'mo');
 
+var loggerConsole = mo.runtime.core.RConsole.find(mo.runtime.core.console.FLoggerConsole);
+
 var hCanvas = (window as any).hCanvas;
 var context = new mo.plugin.cl3d.graphic.wgl.FWglContext();
 context.linkCanvas(hCanvas);
@@ -30,9 +32,12 @@ var technique = techniqueConsole.find(context, mo.plugin.cl3d.engine.effect.FGen
 var pipelineConsole = mo.runtime.core.RConsole.find(mo.plugin.cl3d.graphic.pipeline.FPipelineConsole);
 var pipeline = pipelineConsole.allocPipeline();
 pipeline.context = context;
-pipeline.region = new mo.plugin.cl3d.engine.FE3dRegion();
+pipeline.region = new mo.plugin.cl3d.engine.FRegion();
 pipeline.technique = technique;
 pipeline.camera = camera;
 pipeline.stage = stage;
 pipeline.process();
 
+
+var resourceConsole:mo.runtime.core.resource.FResourceConsole = mo.runtime.core.RConsole.find(mo.runtime.core.resource.FResourceConsole);
+resourceConsole.loadPackageByUrl('http://localhost/ts/res/world.dat');

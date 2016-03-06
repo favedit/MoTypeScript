@@ -4,9 +4,6 @@ export * from './RConsole';
 import * as console from './console/index';
 export {console as console};
 
-import * as device from './device/index';
-export {device as device};
-
 import * as framework from './framework/index';
 export {framework as framework};
 

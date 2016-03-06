@@ -272,11 +272,15 @@ export class RClass {
    // @return 类对象
    //==========================================================
    public static get(typeClass: Function): FClass {
-      var className: string = this.shortName(typeClass);
+      var findClass = typeClass;
+      if (typeClass.constructor != Function) {
+         findClass = typeClass.constructor;
+      }
+      var className: string = this.shortName(findClass);
       var clazz: FClass = this._classes[className];
       if (clazz == null) {
          clazz = this._classes[className] = new FClass();
-         clazz.build(typeClass);
+         clazz.build(findClass);
       }
       return clazz;
    }
