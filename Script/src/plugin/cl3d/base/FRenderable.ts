@@ -1,3 +1,4 @@
+import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
 import {FMaterial} from './material/FMaterial';
 import {FDrawable} from './FDrawable';
@@ -122,3 +123,5 @@ export class FRenderable extends FDrawable implements IRenderable{
     //     }
     // }
 }
+
+export type FRenderables = FObjects<FRenderable>;

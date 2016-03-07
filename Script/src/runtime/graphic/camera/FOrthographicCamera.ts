@@ -1,4 +1,4 @@
-import {FCamera} from './FCamera';
+import {FCamera} from "./FCamera";
 
 export class FOrthographicCamera extends FCamera {
 }

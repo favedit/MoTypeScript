@@ -18,40 +18,36 @@ export class FArray extends FObject {
    //==========================================================
    // <T>判断数组是否为空。</T>
    //
-   // @method
-   // @return Boolean 是否为空
+   // @return 是否为空
    //==========================================================
-   public isEmpty() {
+   public isEmpty():boolean {
       return this._length == 0;
    }
 
    //==========================================================
    // <T>获得数据长度。</T>
    //
-   // @method
-   // @return Integer 数据长度
+   // @return 数据长度
    //==========================================================
-   public length() {
+   public length():number {
       return this._length;
    }
 
    //==========================================================
    // <T>设置数据长度。</T>
    //
-   // @method
-   // @param Integer 数据长度
+   // @param 数据长度
    //==========================================================
-   public setLength(length) {
+   public setLength(length:number):void {
       this._length = length;
    }
 
    //==========================================================
    // <T>获得数据。</T>
    //
-   // @method
    // @return Array 数据
    //==========================================================
-   public memory() {
+   public memory():Array<any> {
       return this._memory;
    }
 
@@ -73,11 +69,11 @@ export class FArray extends FObject {
    // @param value:Object 对象
    // @return Integer 索引位置
    //==========================================================
-   public indexOf(value) {
+   public indexOf(value: any): number {
       var count: number = this._length;
-      for (var i: number = 0; i < count; i++) {
-         if (this._memory[i] == value) {
-            return i;
+      for (var n: number = 0; n < count; n++) {
+         if (this._memory[n] == value) {
+            return n;
          }
       }
       return -1;
@@ -97,9 +93,8 @@ export class FArray extends FObject {
    //==========================================================
    // <T>把对象存储在指定的索引处。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
-   // @param value:Object 对象
+   // @param index 索引位置
+   // @param value 对象
    //==========================================================
    public set(index, value) {
       if ((index >= 0) && (index < this._length)) {
@@ -110,13 +105,12 @@ export class FArray extends FObject {
    //==========================================================
    // <T>把对象追加到数组的最后位置。</T>
    //
-   // @method
-   // @param values:Object 对象
+   // @param values 对象
    //==========================================================
-   public push() {
-      var count = arguments.length;
-      for (var i = 0; i < count; i++) {
-         this._memory[this._length++] = arguments[i];
+   public push(...params: Array<any>): void {
+      var count: number = params.length;
+      for (var n: number = 0; n < count; n++) {
+         this._memory[this._length++] = params[n];
       }
    }
 
@@ -186,12 +180,10 @@ export class FArray extends FObject {
 
    //==========================================================
    // <T>将数组内项目为空的位置全部删除。</T>
-   //
-   // @method
    //==========================================================
-   public compress() {
-      var index = 0;
-      var count = this._length;
+   public compress(): void {
+      var index: number = 0;
+      var count: number = this._length;
       var memory = this._memory;
       for (var i = 0; i < count; i++) {
          var value = memory[i];
@@ -204,8 +196,6 @@ export class FArray extends FObject {
 
    //==========================================================
    // <T>清除数组的所有内容。</T>
-   //
-   // @method
    //==========================================================
    public clear() {
       this._length = 0;
@@ -213,8 +203,6 @@ export class FArray extends FObject {
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
       this._length = 0;
@@ -224,17 +212,16 @@ export class FArray extends FObject {
    //==========================================================
    // <T>获得数组的内部信息。</T>
    //
-   // @method
-   // @return String 信息字符串
+   // @return 信息字符串
    //==========================================================
-   public dump() {
+   public dump(): string {
       var result: FString = new FString();
-      var count = this._length;
+      var count: number = this._length;
       result.append(RRuntime.className(this), ':', count);
       if (count > 0) {
          var memory = this._memory;
-         for (var i = 0; i < count; i++) {
-            result.append(' [', memory[i], ']');
+         for (var n: number = 0; n < count; n++) {
+            result.append(' [', memory[n], ']');
          }
       }
       return result.flush();

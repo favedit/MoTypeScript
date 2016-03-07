@@ -17,7 +17,7 @@ import {FContext} from '../../graphic/FContext'
 // @author maocy
 // @history 141231
 //==========================================================
-export class FE3dCube extends FRenderable {
+export class FCube extends FRenderable {
    public vertexPositionBuffer = null;
    public vertexColorBuffer = null;
    public indexBuffer = null;
