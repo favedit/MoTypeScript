@@ -19,7 +19,7 @@ export class FModelResource extends FResource {
    //    o._dataCompress  = true;
    //    o._dataBlock     = true;
    //    // @attribute
-   protected _meshes: FDictionary<FMeshResource> = null;
+   public meshes: FDictionary<FMeshResource> = null;
    //    o._skeletons     = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations    = MO.Class.register(o, new MO.AGetter('_animations'));
    //    o._display       = MO.Class.register(o, new MO.AGetter('_display'));
@@ -41,7 +41,7 @@ export class FModelResource extends FResource {
    public constructor() {
       super();
       // 设置属性
-      this._meshes = new FDictionary<FMeshResource>();
+      this.meshes = new FDictionary<FMeshResource>();
       //var display = this._display = MO.Class.create(MO.FE3sModelDisplay);
       //display._model = this;
    }
@@ -80,14 +80,14 @@ export class FModelResource extends FResource {
       // 读取几何体集合
       var meshCount: number = input.readInt32();
       if (meshCount > 0) {
-         var meshes = this._meshes = new FDictionary<FMeshResource>();
+         var meshes = this.meshes = new FDictionary<FMeshResource>();
          for (var n: number = 0; n < meshCount; n++) {
             //var mesh = modelConsole.unserialMesh(input)
             //var meshGuid = mesh.guid();
             //meshes.set(meshGuid, mesh);
             var mesh = new FMeshResource();
             mesh.unserialize(input);
-            this._meshes.set(mesh.code, mesh);
+            this.meshes.set(mesh.code, mesh);
          }
       }
       // //..........................................................

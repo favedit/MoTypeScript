@@ -1,3 +1,5 @@
+import {FWglVertexBuffer} from '../../graphic/wgl/FWglVertexBuffer';
+
 //==========================================================
 // <T>渲染顶点缓冲。</T>
 //
@@ -5,22 +7,15 @@
 // @author maocy
 // @history 150512
 //==========================================================
-export class FE3rVertexBuffer{
-//    o = MO.Class.inherits(this, o, MO.FWglVertexBuffer, MO.MLinkerResource);
-//    //..........................................................
-//    // @method
-//    o.dispose = MO.FE3rVertexBuffer_dispose;
-//    return o;
-// }
+export class FE3rVertexBuffer extends FWglVertexBuffer {
+   // 资源对象
+   public resource: any = null;
 
-// //==========================================================
-// // <T>释放处理。</T>
-// //
-// // @method
-// //==========================================================
-// MO.FE3rVertexBuffer_dispose = function FE3rVertexBuffer_dispose(){
-//    var o = this;
-//    o.__base.MLinkerResource.dispose.call(o);
-//    o.__base.FWglVertexBuffer.dispose.call(o);
-// }
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      this.resource = null;
+      super.dispose();
+   }
 }
