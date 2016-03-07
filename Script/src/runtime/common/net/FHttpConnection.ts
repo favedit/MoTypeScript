@@ -19,22 +19,17 @@ import {EHttpStatus} from './EHttpStatus';
 //==========================================================
 export class FHttpConnection extends FObject {
    // @attribute
-   //_asynchronous = MO.Class.register(o, new MO.AGetSet('_asynchronous'), false);
    protected _asynchronous: boolean = false;
    protected _methodCd = EHttpMethod.Get;
    protected _contentCd = EHttpContent.Binary;
    protected _url = null;
    // @attribute
-   //_heads = MO.Class.register(o, new MO.AGetter('_heads'));
    protected _linker = null;
    protected _heads = null;
-   //_attributes = MO.Class.register(o, new MO.AGetter('_attributes'));
    protected _attributes = null;
    protected _input = null;
-   //_inputData = MO.Class.register(o, new MO.AGetSet('_inputData'));
    protected _inputData = null;
    protected _output = null;
-   //_outputData = MO.Class.register(o, new MO.AGetter('_outputData'));
    protected _outputData = null;
    // @attribute
    protected _handle = null;
@@ -164,10 +159,10 @@ export class FHttpConnection extends FObject {
          //   handle.setRequestHeader('Accept-Charset', 'x-user-defined');
          //   handle.responseType = 'arraybuffer';
          //} else {
-         //   handle.overrideMimeType('text/plain; charset=x-user-defined');
-         //   if (o._asynchronous) {
-         //      handle.responseType = 'arraybuffer';
-         //   }
+         handle.overrideMimeType('text/plain; charset=x-user-defined');
+         if (this._asynchronous) {
+            handle.responseType = 'arraybuffer';
+         }
          //}
       } else {
          // 文本内容

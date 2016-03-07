@@ -34,8 +34,5 @@ export {particle as particle};
 import * as render from './render/index';
 export {render as render};
 
-import * as resource from './resource/index';
-export {resource as resource};
-
 import * as shape from './shape/index';
 export {shape as shape};

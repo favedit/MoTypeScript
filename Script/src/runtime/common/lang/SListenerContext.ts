@@ -1,4 +1,4 @@
-import {RMethod} from '../reflect/RMethod';
+import {SObject} from '../lang/SObject';
 
 //==========================================================
 // <T>监听环境。</T>
@@ -7,21 +7,15 @@ import {RMethod} from '../reflect/RMethod';
 // @author maocy
 // @version 160306
 //==========================================================
-export class SListenerContext {
+export class SListenerContext extends SObject {
    // 发送者
    public sender: any = null;
    // 拥有者
    public owner: any = null;
-   // 参数
-   public parameter1: any = null;
-   public parameter2: any = null;
-   public parameter3: any = null;
-   public parameter4: any = null;
-   public parameter5: any = null;
-   public parameter6: any = null;
-   public parameter7: any = null;
-   public parameter8: any = null;
-   public parameter9: any = null;
+   // 属性集合
+   public attributes: Array<any> = null;
+   // 参数集合
+   public parameters: Array<any> = null;
    // 回调函数
    public callback: Function = null;
 
@@ -29,18 +23,14 @@ export class SListenerContext {
    // <T>释放处理。</T>
    //==========================================================
    public process() {
-      this.callback.call(this.owner, this.sender,
-         this.parameter1, this.parameter2, this.parameter3, this.parameter4, this.parameter5,
-         this.parameter6, this.parameter7, this.parameter8, this.parameter9);
+      var data = [this];
+      var parameters = this.parameters;
+      if (parameters) {
+         var count: number = parameters.length;
+         for (var n: number = 0; n < count; n++) {
+            data.push(parameters[n]);
+         }
+      }
+      this.callback.apply(this.owner, data);
    }
-
-   //==========================================================
-   // <T>回收处理。</T>
-   //==========================================================
-   free: Function = RMethod.structFree;
-
-   //==========================================================
-   // <T>释放处理。</T>
-   //==========================================================
-   dispose: Function = RMethod.structDispose;
 }

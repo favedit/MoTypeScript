@@ -4,12 +4,12 @@ import {RMath} from '../../../../runtime/common/math/RMath';
 import {EDrawMode} from '../../graphic/EDrawMode';
 import {EAttributeFormat} from '../../graphic/EAttributeFormat'
 import {EIndexStride} from '../../graphic/EIndexStride'
+import {FVertexBuffer} from '../../graphic/FVertexBuffer'
+import {FIndexBuffer} from '../../graphic/FIndexBuffer'
+import {FMaterial} from '../../graphic/FMaterial'
 import {FContext} from '../../graphic/FContext'
 import {FRenderable} from '../FRenderable';
 // import {EAttributeFormat} from '../../graphic/EAttributeFormat'
-// import {FVertexBuffer} from '../../graphic/FVertexBuffer'
-// import {FIndexBuffer} from '../../graphic/FIndexBuffer'
-// import {FMaterial} from '../../graphic/FMaterial'
 // import {FContext} from '../../graphic/FContext'
 
 //==========================================================
@@ -20,11 +20,11 @@ import {FRenderable} from '../FRenderable';
 // @history 150207
 //==========================================================
 export class FSphere extends FRenderable {
-   public vertexPositionBuffer = null;
-   public vertexNormalBuffer = null;
-   public vertexColorBuffer = null;
-   public vertexCoordBuffer = null;
-   public indexBuffer = null;
+   public vertexPositionBuffer: FVertexBuffer = null;
+   public vertexNormalBuffer: FVertexBuffer = null;
+   public vertexColorBuffer: FVertexBuffer = null;
+   public vertexCoordBuffer: FVertexBuffer = null;
+   public indexBuffer: FIndexBuffer = null;
    //    //..........................................................
    //    // @attribute
    public outline = null;
@@ -64,7 +64,7 @@ export class FSphere extends FRenderable {
       for (var rz = 0; rz <= countZ; rz++) {
          for (var r = 0; r <= countAngle; r++) {
             var radius = stepAngle * r - Math.PI;
-            var radiusZ = stepZ * rz - MO.Const.PI_2;
+            var radiusZ = stepZ * rz - RMath.PI_2;
             var x = Math.sin(radius) * Math.cos(radiusZ);
             var y = Math.sin(radiusZ);
             var z = -Math.cos(radius) * Math.cos(radiusZ);
@@ -79,27 +79,27 @@ export class FSphere extends FRenderable {
          }
       }
       // 创建顶点位置缓冲
-      var buffer = this.vertexPositionBuffer = context.createVertexBuffer();
-      buffer.setCode('position');
-      buffer.setFormatCd(EAttributeFormat.Float3);
-      buffer.upload(positionData, 4 * 3, vertexCount);
-      this.pushVertexBuffer(buffer);
+      var vertexPositionBuffer: FVertexBuffer = this.vertexPositionBuffer = context.createVertexBuffer();
+      vertexPositionBuffer.code = 'position';
+      vertexPositionBuffer.formatCd = EAttributeFormat.Float3;
+      vertexPositionBuffer.upload(positionData, 4 * 3, vertexCount);
+      this.pushVertexBuffer(vertexPositionBuffer);
       // 创建顶点颜色缓冲
-      var buffer = this.vertexNormalBuffer = context.createVertexBuffer();
-      buffer.setCode('normal');
-      buffer.setFormatCd(EAttributeFormat.Float3);
-      buffer.upload(normalData, 4 * 3, vertexCount);
-      this.pushVertexBuffer(buffer);
+      var vertexNormalBuffer: FVertexBuffer = this.vertexNormalBuffer = context.createVertexBuffer();
+      vertexNormalBuffer.code = 'normal';
+      vertexNormalBuffer.formatCd = EAttributeFormat.Float3;
+      vertexNormalBuffer.upload(normalData, 4 * 3, vertexCount);
+      this.pushVertexBuffer(vertexNormalBuffer);
       // 创建顶点纹理缓冲
-      var buffer = this.vertexCoordBuffer = context.createVertexBuffer();
-      buffer.setCode('coord');
-      buffer.setFormatCd(EAttributeFormat.Float2);
-      buffer.upload(coordData, 4 * 2, vertexCount);
-      this.pushVertexBuffer(buffer);
+      var vertexCoordBuffer: FVertexBuffer = this.vertexCoordBuffer = context.createVertexBuffer();
+      vertexCoordBuffer.code = 'coord';
+      vertexCoordBuffer.formatCd = EAttributeFormat.Float2;
+      vertexCoordBuffer.upload(coordData, 4 * 2, vertexCount);
+      this.pushVertexBuffer(vertexCoordBuffer);
       //..........................................................
       // 计算索引
       var drawModeCd = this.drawModeCd;
-      var indexes:FArray = new FArray();
+      var indexes: FArray = new FArray();
       for (var rz = 0; rz < countZ; rz++) {
          for (var r = 0; r < countAngle; r++) {
             var i = (countAngle + 1) * rz;
@@ -115,12 +115,12 @@ export class FSphere extends FRenderable {
          }
       }
       // 创建索引缓冲
-      var buffer = this.indexBuffer = context.createIndexBuffer();
-      buffer.setDrawModeCd(drawModeCd);
+      var buffer: FIndexBuffer = this.indexBuffer = context.createIndexBuffer();
+      buffer.drawModeCd = drawModeCd;
       var indexLength = indexes.length();
       var indexMemory = indexes.memory();
       if (indexLength > 65535) {
-         buffer.setStrideCd(EIndexStride.Uint32);
+         buffer.strideCd = EIndexStride.Uint32;
          buffer.upload(new Uint32Array(indexMemory), indexLength);
       } else {
          buffer.upload(new Uint16Array(indexMemory), indexLength);
@@ -131,7 +131,8 @@ export class FSphere extends FRenderable {
       //this.update();
       //..........................................................
       // 设置材质
-      var info = this.material().info();
+      var material: FMaterial = this.material = new FMaterial();
+      var info = material.info;
       //info.effectCode = 'control';
       //info.optionDouble = true;
       info.ambientColor.set(0.2, 0.2, 0.2, 1);

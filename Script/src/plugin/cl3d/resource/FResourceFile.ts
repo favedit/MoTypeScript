@@ -4,7 +4,7 @@
 // @author maocy
 // @history 150105
 //==========================================================
-export class FResource{
+export class FResourceFile{
 //    o = MO.Class.inherits(this, o, MO.FResource, MO.MListener);
 //    //..........................................................
 //    // @attribute

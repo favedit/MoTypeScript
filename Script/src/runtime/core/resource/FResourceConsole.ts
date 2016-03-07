@@ -256,6 +256,20 @@ export class FResourceConsole extends FConsole {
    // @method
    // @param uri:String 资源对象
    //==========================================================
+   public loadContent(content: any, url: string): void {
+      // 创建加载器
+      var loader: FResourceLoader = RClass.create(FResourceLoader);
+      loader.url = url;
+      loader.content = content;
+      this._loaderConsole.push(loader);
+   }
+
+   //==========================================================
+   // <T>根据URL地址加载资源包。</T>
+   //
+   // @method
+   // @param uri:String 资源对象
+   //==========================================================
    public loadPackageByUrl(uri): FResourcePackage {
       // 查找资源包
       var resourcePackages: FDictionary<FResourcePackage> = this._packages;

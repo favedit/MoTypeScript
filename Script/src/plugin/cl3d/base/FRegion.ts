@@ -9,7 +9,6 @@ import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
 import {FLight} from './light/FLight';
 import {FRenderable} from './FRenderable';
-import {FRenderables} from './FRenderable';
 import {FDisplay} from './FDisplay';
 
 
@@ -30,9 +29,9 @@ export class FRegion extends FObject implements IProcessContext {
    // 光源集合
    public lights: FObjects<FLight> = null;
    // 渲染集合
-   public renderables: FRenderables = null;
+   public renderables: FObjects<FRenderable> = null;
    // 所有渲染集合
-   public allRenderables: FRenderables = null;
+   public allRenderables: FObjects<FRenderable> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -43,8 +42,8 @@ export class FRegion extends FObject implements IProcessContext {
       super();
       // 初始化参数
       this.lights = new FObjects<FLight>();
-      this.renderables = new FRenderables();
-      this.allRenderables = new FRenderables();
+      this.renderables = new FObjects<FRenderable>();
+      this.allRenderables = new FObjects<FRenderable>();
    }
 
    //==========================================================

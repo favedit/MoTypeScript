@@ -17,6 +17,8 @@ export class FListener extends FObject {
    //..........................................................
    // 拥有者
    public owner: any = null;
+   // 参数集合
+   public attributes: any = null;
    // 函数
    public callback: Function = null;
 
@@ -26,25 +28,20 @@ export class FListener extends FObject {
    // @param sender:发出对象
    // @param parameters 参数集合
    //==========================================================
-   public process(sender, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
+   public process(sender: any, parameters: Array<any>): void {
       // 获得调用者
       var owner = this.owner;
       if (!owner) {
          owner = sender;
       }
+      // 创建监听环境
       var context: SListenerContext = RMemory.alloc(SListenerContext);
       context.sender = sender;
       context.owner = owner;
       context.callback = this.callback;
-      context.parameter1 = p1;
-      context.parameter2 = p2;
-      context.parameter3 = p3;
-      context.parameter4 = p4;
-      context.parameter5 = p5;
-      context.parameter6 = p6;
-      context.parameter6 = p7;
-      context.parameter7 = p8;
-      context.parameter9 = p9;
+      context.attributes = this.attributes;
+      context.parameters = parameters;
+      // 消息处理
       RListener.process(context);
    }
 

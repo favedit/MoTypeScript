@@ -60,7 +60,7 @@ export class FLoggerConsole extends FConsole {
    // @method
    //==========================================================
    //@ALinker(FEnvironmentConsole)
-   public onOutput(event) {
+   public onOutput(context, event) {
       var message = event.message;
       console.log(message);
       //this.output(message);

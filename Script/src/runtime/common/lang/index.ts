@@ -41,3 +41,4 @@ export * from './SEvent';
 export * from './SListenerContext';
 export * from './SLogger';
 export * from './SLooperEntry';
+export * from './SObject';

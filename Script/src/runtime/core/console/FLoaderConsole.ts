@@ -4,6 +4,8 @@ import {ALinker} from '../../common/reflect/ALinker';
 import {EScope} from '../../common/lang/EScope';
 import {FObjects} from '../../common/lang/FObjects';
 import {RObject} from '../../common/lang/RObject';
+import {SListenerContext} from '../../common/lang/SListenerContext';
+import {SEvent} from '../../common/lang/SEvent';
 // import {RLogger} from '../../common/lang/RLogger';
 import {RClass} from '../../common/reflect/RClass';
 import {FHttpConnection} from '../../common/net/FHttpConnection';
@@ -34,7 +36,7 @@ export class FLoaderConsole extends FConsole {
    // protected _value: string = 'my';
    // // 网络
    // protected _socket = null;
-   
+
    // 加载集合
    protected _loaders: FObjects<FLoader> = null;
    // 加载中集合
@@ -84,7 +86,7 @@ export class FLoaderConsole extends FConsole {
             var url: string = loader.url;
             // 加载处理
             var connection: FHttpConnection = httpConsole.sendAsync(url);
-            connection.loadListeners.register(this, this.onLoad);
+            connection.loadListeners.register(this, this.onLoad, loader);
             // 增加加载中集合
             processLoaders.push(loader);
             // 跳出循环
@@ -101,10 +103,11 @@ export class FLoaderConsole extends FConsole {
    // @method
    // @param connection:FHttpConnection 链接
    //==========================================================
-   public onLoad(sender, event) {
-      debugger;
+   public onLoad(sender:SListenerContext, event:any):void {
       // 设置资源
-      var data = event.content;
+      var loader: FLoader = sender.attributes[0];
+      loader.data = event.content;
+      loader.process();
       // var resource = event.connection._resource;
       // // 加载数据
       // var storage = RClass.create(FResourceSingleStorage);

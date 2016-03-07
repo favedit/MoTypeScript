@@ -123,5 +123,3 @@ export class FRenderable extends FDrawable implements IRenderable{
     //     }
     // }
 }
-
-export type FRenderables = FObjects<FRenderable>;

@@ -19,7 +19,8 @@ camera.update();
 camera.projection.size.set(hCanvas.offsetWidth, hCanvas.offsetHeight);
 camera.projection.update();
 
-var cube = new mo.plugin.cl3d.engine.shape.FE3dCube();
+//var cube = new mo.plugin.cl3d.engine.shape.FCube();
+var cube = new mo.plugin.cl3d.engine.shape.FSphere();
 cube.setup(context);
 layer.pushRenderable(cube);
 
@@ -38,6 +39,8 @@ pipeline.camera = camera;
 pipeline.stage = stage;
 pipeline.process();
 
+//var resourceConsole:mo.runtime.core.resource.FResourceConsole = mo.runtime.core.RConsole.find(mo.runtime.core.resource.FResourceConsole);
+//resourceConsole.loadPackageByUrl('http://localhost/ts/res/world.dat');
 
-var resourceConsole:mo.runtime.core.resource.FResourceConsole = mo.runtime.core.RConsole.find(mo.runtime.core.resource.FResourceConsole);
-resourceConsole.loadPackageByUrl('http://localhost/ts/res/world.dat');
+var modelResourceConsole: mo.plugin.cl3d.resource.FModelResourceConsole = mo.runtime.core.RConsole.find(mo.plugin.cl3d.resource.FModelResourceConsole);
+var modelResource = modelResourceConsole.loadByUrl('http://localhost/ts/res/model/xiong.model');

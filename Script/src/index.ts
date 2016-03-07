@@ -14,6 +14,3 @@ export {plugin as plugin};
 
 import * as runtime from './runtime/index';
 export {runtime as runtime};
-
-import * as test from './test/index';
-export {test as test};

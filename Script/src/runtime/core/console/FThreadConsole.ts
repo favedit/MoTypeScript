@@ -59,7 +59,7 @@ export class FThreadConsole extends FConsole {
    public ohInterval() {
       // RConsole.find();
       var threadConsole: FThreadConsole = RConsole.find(FThreadConsole);
-      RLogger.debug(threadConsole, 'Frame start ----------------------------');
+      // RLogger.debug(threadConsole, 'Frame start ----------------------------');
       threadConsole.processAll();
    }
 

@@ -73,7 +73,7 @@ export class FListeners extends FObject {
    // @param callback:Function 处理函数
    // @return TListener 监听器
    //==========================================================
-   public register(owner: any, callback: Function): FListener {
+   public register(owner: any, callback: Function, ...attributes: Array<any>): FListener {
       // 检查是否已经注册
       var listener: FListener = this.find(owner, callback);
       if (listener) {
@@ -82,6 +82,7 @@ export class FListeners extends FObject {
       // 注册监听器
       listener = new FListener();
       listener.owner = owner;
+      listener.attributes = attributes;
       listener.callback = callback;
       this.push(listener);
       // 返回监听器
@@ -151,13 +152,13 @@ export class FListeners extends FObject {
    // @param sender:Object 发出对象
    // @param parameters 参数集合
    //==========================================================
-   public process(p1?, p2?, p3?, p4?, p5?, p6?, p7?, p8?, p9?) {
+   public process(...parameters: Array<any>) {
       var listeners: FObjects<FListener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
             var listener: FListener = listeners.at(n);
-            listener.process(this.sender, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+            listener.process(this.sender, parameters);
          }
       }
    }
