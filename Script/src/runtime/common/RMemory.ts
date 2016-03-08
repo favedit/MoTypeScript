@@ -1,6 +1,6 @@
 import {SMemoryPoolEntry} from './SMemoryPoolEntry';
 import {TMemoryPool} from './TMemoryPool';
-import {RSingleton} from './RSingleton';
+import {RSingleton} from './lang/RSingleton';
 import {RAssert} from './RAssert';
 import {RRuntime} from './RRuntime';
 
@@ -12,8 +12,9 @@ import {RRuntime} from './RRuntime';
 // @version 141229
 //==========================================================
 export class RMemory extends RSingleton {
-   // @attribute
+   // 未使用节点
    protected static _entryUnused: SMemoryPoolEntry = null;
+   // 缓冲池
    protected static _pools: any = new Object();
 
    //============================================================
@@ -21,8 +22,8 @@ export class RMemory extends RSingleton {
    //
    // @return 节点
    //============================================================
-   public static entryAlloc() {
-      var entry = null;
+   public static entryAlloc(): SMemoryPoolEntry {
+      var entry: SMemoryPoolEntry = null;
       var unused: SMemoryPoolEntry = this._entryUnused;
       if (unused) {
          entry = unused;
@@ -38,11 +39,10 @@ export class RMemory extends RSingleton {
    //
    // @param entry 节点
    //============================================================
-   public static entryFree(entry) {
-      var o = this;
+   public static entryFree(entry: SMemoryPoolEntry): void {
       RAssert.debugNotNull(entry);
-      entry.next = o._entryUnused;
-      o._entryUnused = entry;
+      entry.next = this._entryUnused;
+      this._entryUnused = entry;
    }
 
    //==========================================================
@@ -52,13 +52,13 @@ export class RMemory extends RSingleton {
    // @param clazz:Function 类函数
    // @return Object 实例
    //==========================================================
-   public static alloc(clazz) {
+   public static alloc(clazz: Function): any {
       // 获得类名
       RAssert.debugNotNull(clazz);
-      var className = RRuntime.className(clazz);
+      var className: string = RRuntime.className(clazz);
       // 获得缓冲池
-      var pools = this._pools;
-      var pool = pools[className];
+      var pools: any = this._pools;
+      var pool: TMemoryPool = pools[className];
       if (!pool) {
          pool = new TMemoryPool();
          pool._constructor = clazz;

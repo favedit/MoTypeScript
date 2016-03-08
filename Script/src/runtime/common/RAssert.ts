@@ -1,4 +1,4 @@
-import {RSingleton} from 'RSingleton';
+import {RSingleton} from './lang/RSingleton';
 
 //==========================================================
 // <T>检查结果。</T>
@@ -16,7 +16,7 @@ export class RAssert extends RSingleton {
    //
    // @method
    //==========================================================
-   static debugBegin(): void {
+   public static debugBegin(): void {
    }
 
    //==========================================================
@@ -24,7 +24,7 @@ export class RAssert extends RSingleton {
    //
    // @method
    //==========================================================
-   static debugEnd(): void {
+   public static debugEnd(): void {
    }
 
    //==========================================================
@@ -34,7 +34,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static isTrue(value): void {
+   public static isTrue(value): void {
       if (!value) {
          throw new Error('Assert ture failure.');
       }
@@ -47,7 +47,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static isFalse(value): void {
+   public static isFalse(value): void {
       if (value) {
          throw new Error('Assert false failure.');
       }
@@ -60,7 +60,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debug(value): void {
+   public static debug(value): void {
       return value;
    }
 
@@ -71,7 +71,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debugTrue(value): void {
+   public static debugTrue(value): void {
       if (!value) {
          throw new Error('Assert true failure.');
       }
@@ -84,7 +84,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debugFalse(value): void {
+   public static debugFalse(value): void {
       if (value) {
          throw new Error('Assert false failure.');
       }
@@ -97,7 +97,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debugNull(value): void {
+   public static debugNull(value): void {
       if (value != null) {
          throw new Error('Assert null failure.');
       }
@@ -110,7 +110,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debugNotNull(value): void {
+   public static debugNotNull(value): void {
       if (value == null) {
          throw new Error('Assert not null failure.');
       }
@@ -123,7 +123,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debugEmpty(value: string): void {
+   public static debugEmpty(value: string): void {
       if ((value != null) && (value.length != 0)) {
          throw new Error('Assert empty failure.');
       }
@@ -136,7 +136,7 @@ export class RAssert extends RSingleton {
    // @method
    // @param value:Object 内容
    //==========================================================
-   static debugNotEmpty(value: string): void {
+   public static debugNotEmpty(value: string): void {
       if (value == null) {
          throw new Error('Assert not empty failure, value is null.');
       }

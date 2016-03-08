@@ -1,4 +1,5 @@
-﻿import {RAssert} from './RAssert';
+﻿import {SMemoryPoolEntry} from './SMemoryPoolEntry';
+import {RAssert} from './RAssert';
 import {RMemory} from './RMemory';
 
 //==========================================================
@@ -9,35 +10,37 @@ import {RMemory} from './RMemory';
 // @version 150523
 //==========================================================
 export class TMemoryPool {
-   // @attribute
-   _constructor = null;
-   _unused = null;
-   // @attribute
-   _createCount = 0;
-   _allocCount = 0;
-   _freeCount = 0;
+   // 未使用节点
+   protected _unused: SMemoryPoolEntry = null;
+   // 构造器
+   public itemClass: Function = null;
+   // 创建个数
+   public createCount: number = 0;
+   // 收集个数
+   public allocCount: number = 0;
+   // 自由个数
+   public freeCount: number = 0;
 
    //==========================================================
    // <T>收集一个自由对象。</T>
    //
    // @method
-   // @return FObject 对象
+   // @return 对象
    //==========================================================
-   public alloc() {
-      var o = this;
-      var value = null;
-      var unused = o._unused;
+   public alloc(): any {
+      var value: any = null;
+      var unused: SMemoryPoolEntry = this._unused;
       if (unused) {
          value = unused.value;
-         o._unused = unused.next;
+         this._unused = unused.next;
          // 释放节点
          RMemory.entryFree(unused);
       } else {
-         value = new o._constructor();
-         value.__pool = o;
-         o._createCount++;
+         value = new (this.itemClass as any)();
+         value.__pool = this;
+         this.createCount++;
       }
-      o._allocCount++;
+      this.allocCount++;
       return value;
    }
 
@@ -45,21 +48,20 @@ export class TMemoryPool {
    // <T>释放 一个自由对象。</T>
    //
    // @method
-   // @param FObject 对象
+   // @param 对象
    //==========================================================
-   public free(value) {
-      var o = this;
+   public free(value: any): void {
       RAssert.debugNotNull(value);
       // 释放资源
       if (value.free) {
          value.free();
       }
       // 放回缓冲池
-      var entry = RMemory.entryAlloc();
+      var entry: SMemoryPoolEntry = RMemory.entryAlloc();
       entry.value = value;
-      entry.next = o._unused;
-      o._unused = entry;
-      o._freeCount++;
+      entry.next = this._unused;
+      this._unused = entry;
+      this.freeCount++;
    }
 
    //==========================================================
@@ -68,9 +70,9 @@ export class TMemoryPool {
    // @method
    //==========================================================
    public dispose() {
-      var entry = this._unused;
+      var entry: SMemoryPoolEntry = this._unused;
       while (entry) {
-         var current = entry;
+         var current: SMemoryPoolEntry = entry;
          entry = current.next;
          current.dispose();
          // 释放节点
