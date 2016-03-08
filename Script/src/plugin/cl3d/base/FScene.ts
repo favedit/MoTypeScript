@@ -6,6 +6,7 @@ import {SColor4} from '../../../runtime/common/math/SColor4';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {IScene} from '../../../runtime/graphic/IScene';
 import {FDisplayLayer} from './FDisplayLayer';
+import {FRegion} from './FRegion';
 
 //==========================================================
 // <T>舞台对象。</T>
@@ -26,15 +27,10 @@ export class FScene extends FObject implements IScene {
    // 离开帧监听器集合
    public leaveFrameListeners: FListeners = null;
 
-   //    o = MO.Class.inherits(this, o, MO.FComponent, MO.MListener);
-   //    //..........................................................
    //    // @attribute
    //    o._code                = 'stage';
    //    o._size                = MO.Class.register(o, new MO.AGetter('_size'));
    //    o._timer               = MO.Class.register(o, new MO.AGetter('_timer'));
-   //    // @attribute
-   //    o._enterFrameListeners = MO.Class.register(o, new MO.AListener('_enterFrameListeners', MO.EEvent.EnterFrame));
-   //    o._leaveFrameListeners = MO.Class.register(o, new MO.AListener('_leaveFrameListeners', MO.EEvent.LeaveFrame));
 
    //==========================================================
    // <T>构造处理。</T>
@@ -107,28 +103,12 @@ export class FScene extends FObject implements IScene {
       this.statusActive = false;
    }
 
-   // //==========================================================
-   // // <T>逻辑处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // public onProcess() {
-   //     var o = this;
-   //     // 舞台处理
-   //     var layers = o._layers;
-   //     var count = layers.count();
-   //     for (var i = 0; i < count; i++) {
-   //         var layer = layers.at(i);
-   //         layer.process();
-   //     }
-   // }
-
    //==========================================================
    // <T>逻辑处理。</T>
    //
    // @method
    //==========================================================
-   public process() {
+   public process(region: FRegion): boolean {
       // 设置计时器
       // var timer = this._timer;
       // if (!timer) {
@@ -139,14 +119,20 @@ export class FScene extends FObject implements IScene {
       // 前处理
       //this.processEnterFrameListener(o);
       // 逻辑处理
-      //o.onProcess();
+      var layers = this.layers;
+      var count = layers.count();
+      for (var i = 0; i < count; i++) {
+         var layer = layers.at(i);
+         layer.process(region);
+      }
       // 后处理
       //this.processLeaveFrameListener(o);
       //..........................................................
       // 计时器更新
       //timer.update();
+      return true;
    }
-   
+
    //==========================================================
    // <T>释放处理。</T>
    //==========================================================

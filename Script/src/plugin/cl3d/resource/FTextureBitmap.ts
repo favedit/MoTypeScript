@@ -5,7 +5,7 @@
 // @author maocy
 // @history 150302
 //==========================================================
-export class FE3sTextureBitmap{
+export class FTextureBitmap{
 //    o = MO.Class.inherits(this, o, MO.FE3sObject);
 //    //..........................................................
 //    // @attribute

@@ -2,6 +2,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {RObjectId} from '../../../runtime/common/lang/RObjectId';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {FNode} from '../../../runtime/core/framework/FNode';
 //import {EntityFlagEnum} from './EntityFlagEnum';
 //import {EntityEventEnum} from "./EntityEventEnum";
 //import {Signal} from "../../util/Signal";
@@ -11,13 +12,13 @@ import {FListeners} from '../../../runtime/common/lang/FListeners';
 //==========================================================
 // <T>实体。</T>
 //==========================================================
-export class FEntity extends FObject {
+export class FEntity extends FNode {
    // 实体编号
    public entityId: number = 0;
    // 实体编号
-   public children: FObjects<FEntity> = null;
+   // public children: FObjects<FEntity> = null;
    // 脏监听
-   public listenersDirty: FListeners = null; 
+   // public listenersDirty: FListeners = null;
    // _tempFlag: number;
    // _flag: number;
    // parents: {};
@@ -39,8 +40,8 @@ export class FEntity extends FObject {
    public constructor() {
       super();
       this.entityId = RObjectId.nextId('entity');
-      this.listenersDirty = new FListeners(this);
-      this.children = new FObjects<FEntity>(); 
+      //this.listenersDirty = new FListeners(this);
+      //this.children = new FObjects<FEntity>();
       //core.Id(this);
       // this._tempFlag = this._flag = 0;
       // this.parents = {};
@@ -58,18 +59,18 @@ export class FEntity extends FObject {
    //==========================================================
    // <T>增加一个子节点。</T>
    //==========================================================
-   public addChild(entity, recurring) {
-      var children = this.children;
-      if (children.contains(entity)) {
-         // this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})
-      }
-      // if (!this.children[obj.ID]) {
-      //    return 
-      //       this.children[obj.ID] = obj, obj.parents[this.ID] = this, 
-      //       false !== recurring && (this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})), obj._dispatchInvalidateSubgraph(true)), 
-      //       obj;
-      // }
-   };
+   // public addChild(entity, recurring) {
+   //    var children = this.children;
+   //    if (children.contains(entity)) {
+   //       // this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})
+   //    }
+   //    // if (!this.children[obj.ID]) {
+   //    //    return 
+   //    //       this.children[obj.ID] = obj, obj.parents[this.ID] = this, 
+   //    //       false !== recurring && (this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})), obj._dispatchInvalidateSubgraph(true)), 
+   //    //       obj;
+   //    // }
+   // };
 
 
    // public clone(target?, deepDataAndEvents?, obj?, method?) {

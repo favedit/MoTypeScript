@@ -5,7 +5,6 @@ export * from './EScope';
 export * from './RAssert';
 export * from './RMemory';
 export * from './RRuntime';
-export * from './RSingleton';
 export * from './SMemoryPoolEntry';
 export * from './TMemoryPool';
 

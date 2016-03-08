@@ -39,24 +39,24 @@ export class FTechniquePass extends FContent {
    // @param target:FG3dRenderable 目标
    //==========================================================
    public sortRenderables(source, target) {
-      var sourceMaterial = source.material().info();
-      var targetMaterial = target.material().info();
+      var sourceMaterial = source.material.info;
+      var targetMaterial = target.material.info;
       // 按照效果排序
       if (sourceMaterial.optionAlpha && targetMaterial.optionAlpha) {
          if (sourceMaterial.sortLevel != targetMaterial.sortLevel) {
             return sourceMaterial.sortLevel - targetMaterial.sortLevel;
          }
-         var sourceEffect = source.activeEffect();
-         var targetEffect = target.activeEffect();
+         var sourceEffect = source.activeEffect;
+         var targetEffect = target.activeEffect;
          if (sourceEffect == targetEffect) {
             // 按照材质排序
-            var sourceReference = source.materialReference();
-            var targetReference = target.materialReference();
+            var sourceReference = source.materialReference;
+            var targetReference = target.materialReference;
             if (sourceReference && targetReference) {
                return sourceReference.hashCode() - targetReference.hashCode();
             }
          }
-         return sourceEffect.hashCode() - targetEffect.hashCode();
+         return sourceEffect.hashCode - targetEffect.hashCode;
       } else if (sourceMaterial.optionAlpha && !targetMaterial.optionAlpha) {
          return 1;
       } else if (!sourceMaterial.optionAlpha && targetMaterial.optionAlpha) {
@@ -69,13 +69,13 @@ export class FTechniquePass extends FContent {
          var targetEffect = target.activeEffect();
          if (sourceEffect == targetEffect) {
             // 按照材质排序
-            var sourceReference = source.materialReference();
-            var targetReference = target.materialReference();
+            var sourceReference = source.materialReference;
+            var targetReference = target.materialReference;
             if (sourceReference && targetReference) {
-               return sourceReference.hashCode() - targetReference.hashCode();
+               return sourceReference.hashCode - targetReference.hashCode;
             }
          }
-         return sourceEffect.hashCode() - targetEffect.hashCode();
+         return sourceEffect.hashCode - targetEffect.hashCode;
       }
    }
 

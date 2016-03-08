@@ -11,39 +11,39 @@ export enum EDataType {
    // @member 8位有符号整数
    Boolean = 1,
    // @member 8位有符号整数
-   Int8 = 1,
+   Int8 = 2,
    // @member 16位有符号整数
-   Int16 = 2,
+   Int16 = 3,
    // @member 32位有符号整数
-   Int32 = 3,
+   Int32 = 4,
    // @member 64位有符号整数
-   Int64 = 4,
+   Int64 = 5,
    // @member 8位无符号整数
-   Uint8 = 5,
+   Uint8 = 6,
    // @member 16位无符号整数
-   Uint16 = 6,
+   Uint16 = 7,
    // @member 32位无符号整数
-   Uint32 = 7,
+   Uint32 = 8,
    // @member 64位无符号整数
-   Uint64 = 8,
+   Uint64 = 9,
    // @member 16位浮点数
-   Float16 = 9,
+   Float16 = 10,
    // @member 32位浮点数
-   Float32 = 10,
+   Float32 = 11,
    // @member 64位浮点数
-   Float64 = 11,
+   Float64 = 12,
    // @member 字符串
-   String = 12,
+   String = 13,
    // @member 数组集合
-   Array = 13,
+   Array = 14,
    // @member 结构
-   Struct = 14,
+   Struct = 15,
    // @member 结构
-   Structs = 15,
+   Structs = 16,
    // @member 对象
-   Object = 16,
+   Object = 17,
    // @member 对象集合
-   Objects = 17,
+   Objects = 18,
    // @member 字典集合
-   Dictionary = 18,
+   Dictionary = 19,
 }

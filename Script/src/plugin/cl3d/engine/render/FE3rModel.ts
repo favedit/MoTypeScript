@@ -123,7 +123,7 @@ export class FE3rModel extends FE3rComponent {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      this._ready = false;
+      //this._ready = false;
       this.resource = null;
       this.meshes = RObject.dispose(this.meshes);
       //this._skeletons = RObject.dispose(this._skeletons);

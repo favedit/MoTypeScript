@@ -1,5 +1,6 @@
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
+import {RAssert} from '../../../runtime/common/RAssert';
 import {FDisplay as FBaseDisplay} from '../base/FDisplay';
 
 //==========================================================
@@ -8,26 +9,28 @@ import {FDisplay as FBaseDisplay} from '../base/FDisplay';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FE3dDisplay extends FBaseDisplay {
+export class FDisplay extends FBaseDisplay {
+   // 图形环境
+   public graphicContext: any = null;
    // 轮廓
-   protected _outline: SOutline3d = null;
-   //    o._materials       = MO.Class.register(o, new MO.AGetter('_materials'));
+   public outline: SOutline3d = null;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
-      this._outline = new SOutline3d();
+      this.outline = new SOutline3d();
    }
 
    //==========================================================
-   // <T>获得轮廓。</T>
+   // <T>关联图形环境。</T>
    //
-   // @return 轮廓
+   // @param context 图形环境
    //==========================================================
-   public get outline(): SOutline3d {
-      return this._outline;
+   public linkGraphicContext(context) {
+      RAssert.debugNotNull(context);
+      this.graphicContext = context;
    }
 
    //==========================================================
@@ -35,16 +38,16 @@ export class FE3dDisplay extends FBaseDisplay {
    //
    // @return 轮廓
    //==========================================================
-   public calculateOutline() {
-      return this._outline;
+   public calculateOutline(): SOutline3d {
+      return this.outline;
    }
 
    //==========================================================
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      this._outline = RObject.free(this._outline);
-      //o._materials = MO.Lang.Object.free(o._materials);
+      this.graphicContext = null;
+      this.outline = RObject.free(this.outline);
       // 父处理
       super.dispose();
    }

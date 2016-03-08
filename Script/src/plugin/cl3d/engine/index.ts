@@ -1,4 +1,5 @@
 export * from './ERegionParameter';
+export * from './FActor';
 export * from './FCanvas';
 export * from './FDisplay';
 export * from './FDisplayContainer';

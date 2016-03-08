@@ -5,10 +5,12 @@ import {RString} from '../../../runtime/common/lang/RString';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
+import {RAssert} from '../../../runtime/common/RAssert';
 import {FRenderable as FBaseRenderable} from '../base/FRenderable';
 import {FIndexBuffer} from '../graphic/FIndexBuffer';
 import {FVertexBuffer} from '../graphic/FVertexBuffer';
 import {SRenderableInfo} from './SRenderableInfo';
+import {FRegion} from './FRegion';
 
 //==========================================================
 // <T>渲染体。</T>
@@ -17,10 +19,14 @@ import {SRenderableInfo} from './SRenderableInfo';
 // @history 150207
 //==========================================================
 export class FRenderable extends FBaseRenderable {
+   // 图形环境
+   public graphicContext: any = null;
+   // 资源
+   public resource = null;
    // 外轮廓
    public outline = null;
    // 轮廓可见性
-   public outlineVisible = true;
+   // public outlineVisible = true;
    // 计算矩阵
    public calculateMatrix = null;
    // 顶点数量
@@ -29,21 +35,19 @@ export class FRenderable extends FBaseRenderable {
    public vertexBuffers: FDictionary<FVertexBuffer> = null;
    // 索引缓冲集合
    public indexBuffers: FObjects<FIndexBuffer> = null;
+   // 纹理集合
+   public textures: FDictionary<any> = null;
+   // 激活信息
+   public activeInfo: SRenderableInfo = null;
+   // 信息集合
+   public infos: FDictionary<SRenderableInfo> = null;
    //..........................................................
    //    o._display           = MO.Class.register(o, new MO.AGetSet('_display'));
-   public optionMerge = false;
-   public optionFull = false;
-   public optionSelect = true;
-   // @attribute
-   public material = null;
-   // @attribute
-   public activeInfo = null;
-   public infos = null;
-   //    // @attribute
-   public materialReference = null;
+   //public optionMerge = false;
+   //public optionFull = false;
+   //public optionSelect = true;
    //    o._materials         = MO.Class.register(o, new MO.AGetter('_materials'));
    //    o._bones             = MO.Class.register(o, new MO.AGetter('_bones'));
-   //    o._textures          = MO.Class.register(o, new MO.AGetter('_textures'));
    //    //..........................................................
    //    // @method
    //    o.setup              = MO.Method.empty;
@@ -64,6 +68,16 @@ export class FRenderable extends FBaseRenderable {
    }
 
    //==========================================================
+   // <T>关联图形环境。</T>
+   //
+   // @param context 图形环境
+   //==========================================================
+   public linkGraphicContext(context) {
+      RAssert.debugNotNull(context);
+      this.graphicContext = context;
+   }
+
+   //==========================================================
    // <T>获得激活效果器。</T>
    //
    // @method
@@ -78,10 +92,11 @@ export class FRenderable extends FBaseRenderable {
    // <T>根据名称查找效果器。</T>
    //
    // @method
-   // @param code:String 代码
+   // @param code 代码
    // @return FG3dEffect 效果器
    //==========================================================
-   public effectFind(code) {
+   public effectFind(code: string) {
+      RAssert.debugNotEmpty(code);
       var infos = this.infos;
       if (infos) {
          var info = infos.get(code);
@@ -96,11 +111,16 @@ export class FRenderable extends FBaseRenderable {
    // <T>设置一个效果器。</T>
    //
    // @method
-   // @param code:String 代码
+   // @param code 代码
    // @param effect:FG3dEffect 效果器
    //==========================================================
-   public effectSet(code, effect) {
-      var infos = this.infos();
+   public effectSet(code: string, effect) {
+      RAssert.debugNotEmpty(code);
+      RAssert.debugNotNull(effect);
+      var infos = this.infos;
+      if (!infos) {
+         infos = this.infos = new FDictionary<SRenderableInfo>();
+      }
       var info = infos.get(code);
       if (!info) {
          info = new SRenderableInfo();
@@ -113,13 +133,14 @@ export class FRenderable extends FBaseRenderable {
    // <T>选中一个信息。</T>
    //
    // @method
-   // @param code:String 名称
+   // @param code 名称
    // @return SG3dRenderableInfo 信息
    //==========================================================
-   public selectInfo(code) {
+   public selectInfo(code: string) {
+      RAssert.debugNotEmpty(code);
       var infos = this.infos;
       if (!infos) {
-         infos = this.infos = new FDictionary();
+         infos = this.infos = new FDictionary<SRenderableInfo>();
       }
       var info = infos.get(code);
       if (!info) {
@@ -195,11 +216,10 @@ export class FRenderable extends FBaseRenderable {
    // @return buffer 顶点缓冲
    //==========================================================
    public pushVertexBuffer(buffer: FVertexBuffer): void {
+      RAssert.debugNotNull(buffer);
       // 检查参数
       var code = buffer.code;
-      if (RString.isEmpty(code)) {
-         throw new FError(this, 'Buffer code is empty.');
-      }
+      RAssert.debugNotEmpty(code);
       // 获得集合
       var buffers = this.vertexBuffers;
       if (!buffers) {
@@ -240,55 +260,45 @@ export class FRenderable extends FBaseRenderable {
    //     materials.push(material);
    // }
 
-   // //==========================================================
-   // // <T>根据名称查找纹理。</T>
-   // //
-   // // @method
-   // // @param name:String 名称
-   // // @return FRenderIndexBuffer 纹理
-   // //==========================================================
-   // public findTexture(name) {
-   //     return this._textures.get(name);
-   // }
+   //==========================================================
+   // <T>根据名称查找纹理。</T>
+   //
+   // @method
+   // @param name:String 名称
+   // @return FRenderIndexBuffer 纹理
+   //==========================================================
+   public findTexture(name) {
+      return this.textures.get(name);
+   }
 
-   // //==========================================================
-   // // <T>增加一个纹理。</T>
-   // //
-   // // @method
-   // // @param texture:FG3dTexture 纹理
-   // // @param code:String 代码
-   // //==========================================================
-   // public pushTexture(texture, code) {
-   //     var o = this;
-   //     var textures = o._textures;
-   //     if (!textures) {
-   //         textures = o._textures = new MO.TDictionary();
-   //     }
-   //     // 增加纹理
-   //     if (code) {
-   //         textures.set(code, texture);
-   //     } else if (texture._name) {
-   //         textures.set(texture._name, texture);
-   //     } else {
-   //         textures.set(texture.code(), texture);
-   //     }
-   // }
+   //==========================================================
+   // <T>增加一个纹理。</T>
+   //
+   // @param code 代码
+   // @param texture 纹理
+   //==========================================================
+   public pushTexture(code, texture) {
+      RAssert.debugNotEmpty(code);
+      RAssert.debugNotNull(texture);
+      var textures = this.textures;
+      if (!textures) {
+         textures = this.textures = new FDictionary();
+      }
+      // 增加纹理
+      textures.set(code, texture);
+   }
 
    //==========================================================
    // <T>更新处理。</T>
    //
-   // @method
-   // @param region:FG3dRegion 区域
+   // @param region 区域
+   // @return 处理结果
    //==========================================================
-   public update(region) {
+   public update(region: FRegion): boolean {
+      var result = super.update(region);
       // 计算矩阵
       var calculateMatrix = this.calculateMatrix;
       calculateMatrix.assign(this.matrix);
-      // 计算显示矩阵
-      // var drawable = this.drawable;
-      // if (drawable) {
-      //    calculateMatrix.append(drawable.currentMatrix());
-      // }
       // 计算显示矩阵
       var display = this.parent;
       if (display) {
@@ -299,6 +309,7 @@ export class FRenderable extends FBaseRenderable {
       if (changed && region) {
          region.change();
       }
+      return result;
    }
 
    // //==========================================================
@@ -315,7 +326,6 @@ export class FRenderable extends FBaseRenderable {
    //     }
    // }
 
-
    //==========================================================
    // <T>释放处理。</T>
    //
@@ -323,11 +333,12 @@ export class FRenderable extends FBaseRenderable {
    //==========================================================
    public dispose() {
       // 释放属性
-      //this._currentMatrix = MO.Lang.Object.dispose(this._currentMatrix);
-      //this._matrix = MO.Lang.Object.dispose(this._matrix);
-      //this._material = MO.Lang.Object.dispose(this._material);
+      this.graphicContext = null;
       this.activeInfo = null;
-      this.infos = RObject.dispose(this.infos);
+      this.infos = RObject.dispose(this.infos, true);
+      this.vertexBuffers = RObject.dispose(this.vertexBuffers);
+      this.indexBuffers = RObject.dispose(this.indexBuffers);
+      // 父处理
       super.dispose();
    }
 }

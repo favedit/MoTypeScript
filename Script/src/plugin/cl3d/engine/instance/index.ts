@@ -1,4 +1,4 @@
-export * from './FE3dMesh';
+export * from './FE3dMeshRenderable';
 export * from './FE3dModel';
 export * from './FE3dModelConsole';
 

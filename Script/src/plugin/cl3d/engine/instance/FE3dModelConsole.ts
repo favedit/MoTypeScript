@@ -1,6 +1,7 @@
 import {EScope} from '../../runtime/common/lang/EScope'
 import {FObjectPools} from '../../runtime/common/lang/FObjectPools'
 import {RString} from '../../runtime/common/lang/RString'
+import {RObject} from '../../runtime/common/lang/RObject'
 import {RAssert} from '../../runtime/common/RAssert'
 import {RMemory} from '../../runtime/common/RMemory'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
@@ -50,22 +51,22 @@ export class FE3dModelConsole extends FConsole {
       var context = args.context;
       RAssert.debugNotNull(context);
       // 获得标识
-      var identity = null;
-      var guid = args.guid;
+      var identity: string = null;
+      var guid: string = args.guid;
       if (!RString.isEmpty(guid)) {
          identity = guid;
       }
-      var code = args.code;
+      var code: string = args.code;
       if (!RString.isEmpty(code)) {
          identity = code;
       }
-      var url = args.url;
+      var url: string = args.url;
       if (!RString.isEmpty(url)) {
          identity = url;
       }
       RAssert.debugNotEmpty(identity);
       // 尝试从缓冲池中取出
-      var model = this._pools.alloc(identity);
+      var model: FE3dModel = this._pools.alloc(identity);
       if (!model) {
          // 加载渲染对象
          var renderable = RConsole.find(FE3rModelConsole).load(args);
@@ -73,8 +74,8 @@ export class FE3dModelConsole extends FConsole {
          // 加载模型
          model = RClass.create(FE3dModel);
          model.linkGraphicContext(context);
-         model.setPoolCode(identity);
-         model.setRenderable(renderable);
+         //model.setPoolCode(identity);
+         model.renderable = renderable;
          // 追加到加载队列
          this._processLoadConsole.push(model);
       }
@@ -90,13 +91,11 @@ export class FE3dModelConsole extends FConsole {
    // @return FE3dModel 渲染模型
    //==========================================================
    public allocByGuid(context, guid) {
-      //var args = RMemory.alloc(SLoadArgs);
-      var args = SLoadArgs.innerAlloc();
+      var args = RMemory.alloc(SLoadArgs);
       args.context = context;
       args.guid = guid;
       var model = this.alloc(args);
-      SLoadArgs.innerFree(args);
-      //RMemory.free(args);
+      RMemory.free(args);
       return model;
    }
 
@@ -109,13 +108,11 @@ export class FE3dModelConsole extends FConsole {
    // @return FE3dModel 渲染模型
    //==========================================================
    public allocByCode(context, code) {
-      //var args = RMemory.alloc(SLoadArgs);
-      var args = SLoadArgs.innerAlloc();
+      var args = RMemory.alloc(SLoadArgs);
       args.context = context;
       args.code = code;
       var model = this.alloc(args);
-      SLoadArgs.innerFree(args);
-      //RMemory.free(args);
+      RMemory.free(args);
       return model;
    }
 
@@ -128,28 +125,24 @@ export class FE3dModelConsole extends FConsole {
    // @return FE3dModel 渲染模型
    //==========================================================
    public allocByUrl(context, url) {
-      //var args = RMemory.alloc(SLoadArgs);
-      var args = SLoadArgs.innerAlloc();
+      var args = RMemory.alloc(SLoadArgs);
       args.context = context;
       args.url = url;
       var model = this.alloc(args);
-      SLoadArgs.innerFree(args);
-      //RMemory.free(args);
+      RMemory.free(args);
       return model;
    }
 
-   // //==========================================================
-   // // <T>释放一个模型。</T>
-   // //
-   // // @method
-   // // @param model:FE3dModel 渲染模型
-   // //==========================================================
-   // MO.FE3dModelConsole_free = function FE3dModelConsole_free(model){
-   //    var o = this;
-   //    // 放到缓冲池
-   //    var code = model.poolCode();
-   //    o._pools.free(code, model);
-   // }
+   //==========================================================
+   // <T>释放一个模型。</T>
+   //
+   // @param model 渲染模型
+   //==========================================================
+   public free(model) {
+      // 放到缓冲池
+      var code = model.poolCode();
+      this._pools.free(code, model);
+   }
 
    //==========================================================
    // <T>释放处理。</T>
@@ -158,7 +151,7 @@ export class FE3dModelConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      // this._pools = MO.Lang.Object.dispose(this._pools);
+      this._pools = RObject.dispose(this._pools);
       // 父处理
       super.dispose();
    }

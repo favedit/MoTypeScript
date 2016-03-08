@@ -5,6 +5,7 @@ import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../FConsole';
 import {FListenerThread} from './FListenerThread';
 import {FThreadConsole} from './FThreadConsole';
+import {IProcessLoadable} from './IProcessLoadable';
 
 //==========================================================
 // <T>处理加载控制台。</T>
@@ -40,7 +41,7 @@ export class FProcessLoadConsole extends FConsole {
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);
    }
-   
+
    //==========================================================
    // <T>逻辑处理。</T>
    //
@@ -50,9 +51,9 @@ export class FProcessLoadConsole extends FConsole {
       var looper = this._looper;
       looper.record();
       while (looper.next()) {
-         var item = looper.current();
+         var item: IProcessLoadable = looper.current();
          // 开始处理
-         if (!item.statusLoading()) {
+         if (!item.statusLoading) {
             item.processLoadBegin();
          }
          // 逻辑处理
@@ -70,7 +71,7 @@ export class FProcessLoadConsole extends FConsole {
    // @method
    // @param load:MProcessLoad 进度处理器
    //==========================================================
-   public push(load) {
+   public push(load: IProcessLoadable) {
       this._looper.push(load);
    }
 

@@ -18,21 +18,13 @@ export class FResourceLoader extends FLoader {
    // @attribute
    //o._loadListeners = MO.Class.register(o, new MO.AListener('_loadListeners', MO.EEvent.Load));
 
-
    //==========================================================
    // <T>数据处理。</T>
    //==========================================================
    public process(): void {
-      // 创建读取流
-      var stream: FDataStream = RClass.create(FDataStream);
-      stream.endianCd = true;
-      stream.link(this.data);
-      // 反序列化数据
-      this.content.unserialize(stream);
-      // 释放资源
-      stream.dispose();
+      // 加载内容
+      this.content.loadContent(this.data);
    }
-
 
    // //==========================================================
    // // <T>加载处理。</T>

@@ -1,12 +1,13 @@
 import {EDataType} from '../../../runtime/common/lang/EDataType';
 import {FError} from '../../../runtime/common/lang/FError';
-// import {RClass} from '../../../runtime/common/reflect/RClass';
-// import {FModelResource} from '../../resource/FModelResource';
-import {FE3rObject} from './FE3rObject';
+import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {RObject} from '../../../runtime/common/lang/RObject';
 import {EIndexStride} from '../../graphic/EIndexStride';
 import {EAttributeFormat} from '../../graphic/EAttributeFormat';
 import {FStreamResource} from '../resource/FStreamResource';
 import {FMeshResource} from '../resource/FMeshResource';
+import {FRenderable} from '../FRenderable';
 import {FE3rVertexBuffer} from './FE3rVertexBuffer';
 import {FE3rIndexBuffer} from './FE3rIndexBuffer';
 
@@ -16,11 +17,11 @@ import {FE3rIndexBuffer} from './FE3rIndexBuffer';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FE3rModelMesh extends FE3rObject {
+export class FE3rModelMesh extends FRenderable {
    public ready = false;
    public vertexCount = 0;
-   public vertexBuffers = null;
-   public indexBuffers = null;
+   //public vertexBuffers: FDictionary<FE3rVertexBuffer> = null;
+   //public indexBuffers: FObjects<FE3rIndexBuffer> = null;
    //    o._resourceMaterial = null;
    //    o._skins            = MO.Class.register(o, new MO.AGetter('_skins'));
    //    o._boneIds          = MO.Class.register(o, new MO.AGetter('_boneIds'));
@@ -32,6 +33,9 @@ export class FE3rModelMesh extends FE3rObject {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      //this.vertexBuffers = new FDictionary<FE3rVertexBuffer>();
+      //this.indexBuffers = new FObjects<FE3rIndexBuffer>();
    }
 
    //==========================================================
@@ -40,9 +44,9 @@ export class FE3rModelMesh extends FE3rObject {
    // @method
    // @param code:String 代码
    //==========================================================
-   public findVertexBuffer(code) {
-      return this.vertexBuffers.get(code);
-   }
+   // public findVertexBuffer(code) {
+   //    return this.vertexBuffers.get(code);
+   // }
 
    //==========================================================
    // <T>加载资源。</T>
@@ -53,8 +57,8 @@ export class FE3rModelMesh extends FE3rObject {
       var context = this.graphicContext;
       // 设置属性
       this.resource = resource;
-      this.guid = resource.guid;
-      this.code = resource.code;
+      //this.guid = resource.guid;
+      //this.code = resource.code;
       // 创建顶点缓冲集合
       var streamResources = resource.vertexStreams;
       var streamCount = streamResources.count();
@@ -64,36 +68,36 @@ export class FE3rModelMesh extends FE3rObject {
          var dataCount = streamResource.dataCount;
          var data = streamResource.data;
          // 创建顶点缓冲
-         var buffer = context.createVertexBuffer(FE3rVertexBuffer);
-         buffer.setCode(code);
-         buffer.resource = streamResource;
-         buffer.vertexCount = dataCount;
+         var vertexBuffer: FE3rVertexBuffer = context.createVertexBuffer(FE3rVertexBuffer);
+         vertexBuffer.code = code;
+         vertexBuffer.resource = streamResource;
+         // vertexBuffer.vertexCount = dataCount;
          var pixels = null;
          switch (code) {
             case "position":
                pixels = new Float32Array(data);
-               buffer.setFormatCd(EAttributeFormat.Float3);
+               vertexBuffer.formatCd = EAttributeFormat.Float3;
                this.vertexCount = dataCount;
                break;
             case "coord":
                pixels = new Float32Array(data);
-               buffer.setFormatCd(EAttributeFormat.Float2);
+               vertexBuffer.formatCd = EAttributeFormat.Float2;
                break;
             case "color":
                pixels = new Uint8Array(data);
-               buffer.setFormatCd(EAttributeFormat.Byte4Normal);
+               vertexBuffer.formatCd = EAttributeFormat.Byte4Normal;
                break;
             case "normal":
             case "binormal":
             case "tangent":
                pixels = new Uint8Array(data);
-               buffer.setFormatCd(EAttributeFormat.Byte4Normal);
+               vertexBuffer.formatCd = EAttributeFormat.Byte4Normal;
                break;
             default:
                throw new FError(this, "Unknown code");
          }
-         buffer.upload(pixels, streamResource.dataStride, dataCount);
-         this.vertexBuffers.set(code, buffer);
+         vertexBuffer.upload(pixels, streamResource.dataStride, dataCount);
+         this.pushVertexBuffer(vertexBuffer);
       }
       // 创建顶点缓冲集合
       var streamResources = resource.indexStreams;
@@ -104,18 +108,18 @@ export class FE3rModelMesh extends FE3rObject {
          var dataCount = streamResource.dataCount;
          var data = streamResource.data;
          // 创建索引缓冲
-         var buffer = context.createIndexBuffer(FE3rIndexBuffer);
-         buffer.resource = streamResource;
+         var indexBuffer: FE3rIndexBuffer = context.createIndexBuffer(FE3rIndexBuffer);
+         indexBuffer.resource = streamResource;
          var dataCd = streamResource.elementDataCd;
          if (dataCd == EDataType.Uint16) {
-            buffer.setStrideCd(EIndexStride.Uint16);
+            indexBuffer.strideCd = EIndexStride.Uint16;
          } else if (dataCd == EDataType.Uint32) {
-            buffer.setStrideCd(EIndexStride.Uint32);
+            indexBuffer.strideCd = EIndexStride.Uint32;
          } else {
             throw new FError(this, "Unknown data type.");
          }
-         buffer.upload(data, 3 * dataCount);
-         this.indexBuffers.push(buffer);
+         indexBuffer.upload(data, 3 * dataCount);
+         this.pushIndexBuffer(indexBuffer);
       }
       this.ready = true;
    }
@@ -170,4 +174,12 @@ export class FE3rModelMesh extends FE3rObject {
    //    }
    //    skins.push(skin);
    // }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 父处理
+      super.dispose();
+   }
 }

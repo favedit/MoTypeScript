@@ -5,7 +5,7 @@
 // @author maocy
 // @history 150302
 //==========================================================
-export class FE3sTexture{
+export class FTextureResource{
 //    o = MO.Class.inherits(this, o, MO.FE3sResource);
 //    //..........................................................
 //    // @attribute

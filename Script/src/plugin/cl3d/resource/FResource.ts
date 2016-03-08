@@ -1,5 +1,6 @@
+import {RClass} from '../../../runtime/common/reflect/RClass';
+import {FDataStream} from '../../../runtime/common/io/FDataStream';
 import {FResource as FBaseResource} from '../../runtime/core/resource/FResource'
-import {FDataStream} from '../../runtime/common/io/FDataStream';
 
 //==========================================================
 // <T>资源对象。</T>
@@ -8,16 +9,21 @@ import {FDataStream} from '../../runtime/common/io/FDataStream';
 // @history 150105
 //==========================================================
 export class FResource extends FBaseResource {
+   // 类型名称
+   public typeName = null;
+   // 版本信息
+   public version = null;
+   // 唯一编号
+   public guid = null;
+   // 代码
+   public code = null;
+   // 标签
+   public label = null;
+   // 数据准备
+   public dataReady = false;
 
-   public _typeName = null;
-   public _version = null;
-   public _guid = null;
-   public _code = null;
-   public _label = null;
-      
    //    // @attribute
    //    o._dataLoad      = false;
-   //    o._dataReady     = false;
    //    o._dataSize      = 0;
    //    // @attribute
    //    o._blockSize     = 0;
@@ -79,15 +85,15 @@ export class FResource extends FBaseResource {
    //    return result;
    // }
 
-   // //==========================================================
-   // // <T>测试是否准备好。</T>
-   // //
-   // // @method
-   // // @return 是否准备好
-   // //==========================================================
-   // MO.FE3sResource_testReady = function FE3sResource_testReady(){
-   //    return this._dataReady;
-   // }
+   //==========================================================
+   // <T>测试是否准备好。</T>
+   //
+   // @method
+   // @return 是否准备好
+   //==========================================================
+   public testReady() {
+      return this.dataReady;
+   }
 
    //==========================================================
    // <T>从输入流里反序列化信息内容</T>
@@ -95,11 +101,28 @@ export class FResource extends FBaseResource {
    // @param input:FByteStream 数据流
    //==========================================================
    public unserialize(input: FDataStream): void {
-      this._typeName = input.readString();
-      this._version = input.readInt32();
-      this._guid = input.readString();
-      this._code = input.readString();
-      this._label = input.readString();
+      this.typeName = input.readString();
+      this.version = input.readInt32();
+      this.guid = input.readString();
+      this.code = input.readString();
+      this.label = input.readString();
+   }
+
+   //==========================================================
+   // <T>加载内容。</T>
+   //
+   // @param content 内容
+   //==========================================================
+   public loadContent(content: any): void {
+      // 创建读取流
+      var stream: FDataStream = RClass.create(FDataStream);
+      stream.endianCd = true;
+      stream.link(content);
+      // 反序列化数据
+      this.unserialize(stream);
+      this.dataReady = true;
+      // 释放资源
+      stream.dispose();
    }
 
    // //==========================================================

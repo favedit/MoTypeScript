@@ -34,61 +34,6 @@ export class FScene extends FBaseScene {
    }
 
    // //==========================================================
-   // // <T>逻辑处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // public onProcess() {
-   //     var o = this;
-   //     var region = o._region;
-   //     if (!region) {
-   //         return;
-   //     }
-   //     var technique = o._technique;
-   //     if (!technique) {
-   //         return;
-   //     }
-   //     var context = technique._graphicContext;
-   //     // 统计处理
-   //     var statistics = region._statistics = o._statistics;
-   //     statistics.resetFrame();
-   //     statistics._frame.begin();
-   //     //..........................................................
-   //     statistics._frameProcess.begin();
-   //     // 更新区域（更新光源相机等特殊处理）
-   //     context.prepare();
-   //     technique.updateRegion(region);
-   //     // 清空区域
-   //     region.prepare();
-   //     region.change();
-   //     // 处理所有层
-   //     var layers = o._layers;
-   //     var layerCount = layers.count();
-   //     for (var i = 0; i < layerCount; i++) {
-   //         var layer = layers.at(i);
-   //         // 过滤单个层渲染信息
-   //         region.reset();
-   //         layer.process(region);
-   //         layer.filterRenderables(region);
-   //         region.update();
-   //     }
-   //     // 处理所有渲染集合
-   //     MO.Console.find(MO.FE3dStageConsole).process(region);
-   //     statistics._frameProcess.end();
-   //     //..........................................................
-   //     // 绘制舞台
-   //     statistics._frameDraw.begin();
-   //     if (region.isChanged()) {
-   //         technique.drawStage(o, region);
-   //     }
-   //     statistics._frameDraw.end();
-   //     //..........................................................
-   //     // 处理完成
-   //     statistics._frame.end();
-   // }
-
-
-   // //==========================================================
    // // <T>创建区域。</T>
    // //
    // // @method
@@ -217,10 +162,9 @@ export class FScene extends FBaseScene {
    // @return TObjects 显示集合
    //==========================================================
    public allDisplays() {
-      var o = this;
-      var displays = o._allDisplays;
+      var displays = this._allDisplays;
       displays.clear();
-      o.filterDisplays(displays);
+      this.filterDisplays(displays);
       return displays;
    }
 }

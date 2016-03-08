@@ -125,64 +125,66 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    // <T>过滤显示集合。</T>
    //
    // @param region 渲染区域
+   // @return 处理结果
    //==========================================================
    public filterDisplays(region: FRegion): boolean {
       var result: boolean = super.filterDisplays(region);
-      // 检查结果
-      if (!result) {
-         return false;
-      }
-      // 过滤显示集合
-      var displays: FObjects<FDisplay> = this.displays;
-      if (displays) {
-         var count: number = displays.count();
-         for (var n: number = 0; n < count; n++) {
-            var display: FDisplay = displays.at(n);
-            display.filterDisplays(region);
+      if (result) {
+         // 过滤显示集合
+         var displays: FObjects<FDisplay> = this.displays;
+         if (displays) {
+            var count: number = displays.count();
+            for (var n: number = 0; n < count; n++) {
+               var display: FDisplay = displays.at(n);
+               display.filterDisplays(region);
+            }
          }
       }
-      return true;
+      return result;
    }
 
    //==========================================================
    // <T>过滤渲染集合。</T>
    //
    // @param region 渲染区域
+   // @return 处理结果
    //==========================================================
    public filterRenderables(region: FRegion): boolean {
       var result: boolean = super.filterRenderables(region);
-      // 检查结果
-      if (!result) {
-         return false;
-      }
-      // 过滤显示集合
-      var displays: FObjects<FDisplay> = this.displays;
-      if (displays) {
-         var count: number = displays.count();
-         for (var n: number = 0; n < count; n++) {
-            var display: FDisplay = displays.at(n);
-            display.filterRenderables(region);
+      if (result) {
+         // 过滤显示集合
+         var displays: FObjects<FDisplay> = this.displays;
+         if (displays) {
+            var count: number = displays.count();
+            for (var n: number = 0; n < count; n++) {
+               var display: FDisplay = displays.at(n);
+               display.filterRenderables(region);
+            }
          }
       }
-      return true;
+      return result;
    }
 
    //==========================================================
    // <T>逻辑处理。</T>
    //
    // @param region 区域
+   // @return 处理结果
    //==========================================================
-   public process(region: FRegion) {
-      super.process(region);
-      // 处理显示集合
-      var displays = this.displays;
-      if (displays) {
-         var count: number = displays.count();
-         for (var n: number = 0; n < count; n++) {
-            var display: FDisplay = displays.at(n);
-            display.process(region);
+   public process(region: FRegion): boolean {
+      var result = super.process(region);
+      if (result) {
+         // 处理显示集合
+         var displays = this.displays;
+         if (displays) {
+            var count: number = displays.count();
+            for (var n: number = 0; n < count; n++) {
+               var display: FDisplay = displays.at(n);
+               display.process(region);
+            }
          }
       }
+      return result;
    }
 
    //==========================================================
@@ -193,6 +195,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    public dispose(): void {
       // 释放所有子节点
       this.displays = RObject.dispose(this.displays);
+      // 父处理
       super.dispose();
    }
 }

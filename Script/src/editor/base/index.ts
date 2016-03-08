@@ -14,5 +14,8 @@ export {model as model};
 import * as selection from './selection/index';
 export {selection as selection};
 
+import * as transaction from './transaction/index';
+export {transaction as transaction};
+
 import * as view from './view/index';
 export {view as view};

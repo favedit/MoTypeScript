@@ -38,12 +38,12 @@ export class FDisplayLayer extends FDisplayContainer implements IDisplayLayer {
    // @param context:FG3dContext 渲染环境
    // @param name:String 名称
    //==========================================================
-   public selectTechnique(context, name) {
-      var o = this;
-      //o._technique = RConsole.find(FG3dTechniqueConsole).find(context, name);
-      //var technique = MO.Console.find(MO.FG3dTechniqueConsole).find(context, name);
-      //this.selectTechnique(technique);
-   }
+   //public selectTechnique(context, name) {
+   //var o = this;
+   //o._technique = RConsole.find(FG3dTechniqueConsole).find(context, name);
+   //var technique = MO.Console.find(MO.FG3dTechniqueConsole).find(context, name);
+   //this.selectTechnique(technique);
+   //}
 
    //==========================================================
    // <T>过滤渲染集合。</T>
@@ -82,6 +82,7 @@ export class FDisplayLayer extends FDisplayContainer implements IDisplayLayer {
    public dispose(): void {
       // 释放所有子节点
       this.visibleRenderables = RObject.dispose(this.visibleRenderables);
+      // 父处理
       super.dispose();
    }
 }

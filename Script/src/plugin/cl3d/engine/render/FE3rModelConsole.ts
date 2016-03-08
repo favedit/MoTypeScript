@@ -20,15 +20,14 @@ import {FE3rModel} from './FE3rModel'
 // @version 150106
 //==========================================================
 export class FE3rModelConsole extends FConsole {
-   //    // @attribute
-   //    o._scopeCd       = MO.EScope.Local;
-   //    // @attribute
-   protected _models = null;
+   // 模型集合
+   protected _models: FDictionary<FE3rModel> = null;
    //    o._meshs         = MO.Class.register(o, new MO.AGetter('_meshs'));
    //    o._dynamicMeshs  = null;
+   // 模型资源控制台
    @ALinker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole = null;
-
+   // 处理加载控制台
    @ALinker(FProcessLoadConsole)
    protected _processLoadConsole: FProcessLoadConsole = null;
 
@@ -41,7 +40,7 @@ export class FE3rModelConsole extends FConsole {
       super();
       // 设置属性
       this.scopeCd = EScope.Local;
-      this._models = new FDictionary();
+      this._models = new FDictionary<FE3rModel>();
       //this._meshs = new FDictionary();
       //this._dynamicMeshs = new FDictionary();
    }
@@ -122,15 +121,15 @@ export class FE3rModelConsole extends FConsole {
       RAssert.debugNotEmpty(identity);
       // 查找模型
       var models = this._models;
-      var model = models.get(identity);
+      var model: FE3rModel = models.get(identity);
       if (!model) {
          // 获得路径
          var resource = this._modelResourceConsole.load(args);
          // 加载模型
          model = RClass.create(FE3rModel);
          model.linkGraphicContext(context);
-         model.setCode(identity);
-         model.setResource(resource);
+         model.code = identity;
+         model.resource = resource;
          models.set(identity, model);
          // 追加到加载队列
          this._processLoadConsole.push(model);

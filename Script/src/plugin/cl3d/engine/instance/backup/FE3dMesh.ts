@@ -1,12 +1,13 @@
+//import {FRenderable} from '../FRenderable';
+
  //==========================================================
 // <T>渲染模型。</T>
 //
 // @author maocy
 // @history 150106
 //==========================================================
-export class FE3dMesh{
-//    o = MO.Class.inherits(this, o, MO.FE3dSpace, MO.MLinkerResource, MO.MListenerLoad);
-//    //..........................................................
+export class FE3dMesh {
+//export class FE3dMesh extends FRenderable{
 //    // @attribute
 //    o._ready         = false;
 //    o._display       = null;

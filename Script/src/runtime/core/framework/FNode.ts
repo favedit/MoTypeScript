@@ -1,8 +1,13 @@
-import {FObject} from '../../common/lang/FObject';
+import {FDispatcher} from '../../common/lang/FDispatcher';
 import {FObjects} from '../../common/lang/FObjects';
 import {FClassFactory} from './FClassFactory';
+import {SFieldChangeEvent} from './SFieldChangeEvent';
+import {ENodeAction} from './ENodeAction';
 
-export class FNode extends FObject {
+//==========================================================
+// <T>节点</T>
+//==========================================================
+export class FNode extends FDispatcher {
 
    // 类工厂
    //public classFactory: FClassFactory = null;
@@ -26,10 +31,10 @@ export class FNode extends FObject {
    //public parent: FNode = null;
 
    // 子节点
-   // public nodes: FObjects<FNode> = null;
+   public children: FObjects<FNode> = null;
 
    //==========================================================
-   // <T>构建当前对象的实例。</T>
+   // <T>构建处理。</T>
    //
    // @method
    //==========================================================
@@ -38,20 +43,12 @@ export class FNode extends FObject {
    }
 
    //==========================================================
-   // <T>属性更改。</T>
+   // <T>字段变更处理。</T>
    //
-   // @method
+   // @param event 事件
    //==========================================================
-   public onPropertyChange() {
-   }
-
-   //==========================================================
-   // <T>属性更改。</T>
-   //
-   // @method
-   //==========================================================
-   public dispatchEvent(code:string, event:any):void {
-      //RConsole.find(FEventConsole).dispatchEvent(code, event);
+   public onFieldChange(event: SFieldChangeEvent) {
+      this.processListener(ENodeAction.FieldChange, event);
    }
 
    //==========================================================
@@ -59,27 +56,31 @@ export class FNode extends FObject {
    //
    // @param node 子节点
    //==========================================================
-   // public push(node: FNode) {
-   //    var nodes = this.nodes;
-   //    if (!nodes) {
-   //       nodes = new FObjects<FNode>();
-   //    }
-   //    node.parent = this;
-   //    nodes.push(node);
-   // }
+   public addChild(node: FNode) {
+      var children: FObjects<FNode> = this.children;
+      if (!children) {
+         children = new FObjects<FNode>();
+      }
+      if (!children.contains(node)) {
+         children.push(node);
+         this.processListener(ENodeAction.AddChild, node);
+      }
+   }
 
-   // //==========================================================
-   // // <T>删除一个子节点。</T>
-   // //
-   // // @param node 子节点
-   // //==========================================================
-   // public remove(node: FNode) {
-   //    node.parent = null;
-   //    var nodes = this.nodes;
-   //    if (nodes) {
-   //       nodes.remove(node);
-   //    }
-   // }
+   //==========================================================
+   // <T>删除一个子节点。</T>
+   //
+   // @param node 子节点
+   //==========================================================
+   public remove(node: FNode) {
+      var children = this.children;
+      if (children) {
+         if (children.contains(node)) {
+            children.remove(node);
+            this.processListener(ENodeAction.AddChild, node);
+         }
+      }
+   }
 
    // //==========================================================
    // // <T>删除一个子节点。</T>

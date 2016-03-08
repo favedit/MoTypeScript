@@ -14,7 +14,6 @@ export * from './FE3rMaterialConsole';
 export * from './FE3rMesh';
 export * from './FE3rMeshAnimation';
 export * from './FE3rMeshConsole';
-export * from './FE3rObject';
 export * from './FE3rPipeline';
 export * from './FE3rSkeleton';
 export * from './FE3rSkeletonAnimation';

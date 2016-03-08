@@ -1,14 +1,13 @@
 import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
-import {FE3rObject} from './FE3rObject';
+import {FDisplay} from './FDisplay';
 
 //==========================================================
-// <T>渲染3D对象。</T>
+// <T>显示对象。</T>
 //
-// @class
 // @author maocy
-// @history 150206
+// @history 150107
 //==========================================================
-export class FE3rComponent extends FE3rObject implements IProcessLoadable {
+export class FActor extends FDisplay implements IProcessLoadable {
    // 加载状态
    public statusLoading: boolean = false;
 

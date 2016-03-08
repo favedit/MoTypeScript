@@ -13,4 +13,12 @@ export class FResource extends FResourceObject {
    // @attribute
    //_typeCode = MO.Class.register(o, new MO.AGetter('_typeCode'));
    //protected _typeCode: string = null;
+
+   //==========================================================
+   // <T>加载内容。</T>
+   //
+   // @param content 内容
+   //==========================================================
+   public loadContent(content: any): void {
+   }
 }

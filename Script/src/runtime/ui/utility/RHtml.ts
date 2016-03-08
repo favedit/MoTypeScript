@@ -26,7 +26,7 @@ export class RHtml {
    public static uid(value) {
       var uuid = value.__puuid;
       if (uuid == null) {
-         uuid = value.__puuid = RObjectId.nextId();
+         uuid = value.__puuid = RObjectId.nextId('html');
       }
       return uuid;
    }

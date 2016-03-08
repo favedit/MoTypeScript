@@ -1,5 +1,6 @@
+import {FObject} from '../../../runtime/common/lang/FObject';
+import {RObject} from '../../../runtime/common/lang/RObject';
 import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
-import {FNode} from '../../../runtime/core/framework/FNode';
 import {IDrawable} from '../../../runtime/graphic/IDrawable';
 import {FRegion} from './FRegion';
 
@@ -9,7 +10,7 @@ import {FRegion} from './FRegion';
 // @author maocy
 // @history 160305
 //==========================================================
-export class FDrawable extends FNode implements IDrawable {
+export class FDrawable extends FObject implements IDrawable {
    // 父对象
    public parent: any = null;
 
@@ -24,7 +25,7 @@ export class FDrawable extends FNode implements IDrawable {
 
    // 当前矩阵（空间计算后）
    public currentMatrix = null;
-   
+
    //==========================================================
    // <T>构造处理。</T>
    //
@@ -33,10 +34,10 @@ export class FDrawable extends FNode implements IDrawable {
    public constructor() {
       super();
       // 设置属性
-      this.currentMatrix = new SMatrix3d();
       this.matrix = new SMatrix3d();
+      this.currentMatrix = new SMatrix3d();
    }
-   
+
    //==========================================================
    // <T>测试可见性。</T>
    //
@@ -75,7 +76,8 @@ export class FDrawable extends FNode implements IDrawable {
    //
    // @param region 区域
    //==========================================================
-   public process(region: FRegion) {
+   public process(region: FRegion): boolean {
+      return true;
    }
 
    //==========================================================
@@ -83,6 +85,17 @@ export class FDrawable extends FNode implements IDrawable {
    //
    // @param region 区域
    //==========================================================
-   public update(region: FRegion) {
+   public update(region: FRegion): boolean {
+      return true;
+   }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      this.matrix = RObject.dispose(this.matrix);
+      this.currentMatrix = RObject.dispose(this.currentMatrix);
+      // 父处理
+      super.dispose();
    }
 }

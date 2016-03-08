@@ -5,6 +5,8 @@ import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FGraphicContext} from '../../runtime/graphic/context/FGraphicContext';
 import {EFillMode} from './EFillMode';
 import {FContextStatistics} from './FContextStatistics';
+import {FVertexBuffer} from './FVertexBuffer';
+import {FIndexBuffer} from './FIndexBuffer';
 
 //==========================================================
 // <T>渲染环境。</T>
@@ -133,7 +135,7 @@ export abstract class FContext extends FGraphicContext {
    // @param clazz:Function 类对象
    // @return FG3dVertexBuffer 顶点缓冲
    //==========================================================
-   public abstract createVertexBuffer(clazz?: Function);
+   public abstract createVertexBuffer(clazz?: Function):FVertexBuffer;
 
    //==========================================================
    // <T>创建索引缓冲。</T>
@@ -142,7 +144,7 @@ export abstract class FContext extends FGraphicContext {
    // @param clazz:Function 类对象
    // @return FG3dIndexBuffer 索引缓冲
    //==========================================================
-   public abstract createIndexBuffer(clazz?: Function);
+   public abstract createIndexBuffer(clazz?: Function):FIndexBuffer;
 
    //==========================================================
    // <T>创建平面渲染纹理。</T>

@@ -57,6 +57,16 @@ export class FRegion extends FObject implements IProcessContext {
    }
 
    //==========================================================
+   // <T>判断是否变更过。</T>
+   //
+   // @method
+   // @return Boolean 变更过
+   //==========================================================
+   public change() {
+      this.changed = true;
+   }
+
+   //==========================================================
    // <T>设置技术过程。</T>
    //
    // @method

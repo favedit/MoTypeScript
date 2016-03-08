@@ -20,7 +20,7 @@ export class FDisplay extends FDrawable implements IDisplay {
    public rotation: SVector3 = null;
    // 缩放
    public scale: SVector3 = null;
-   // @attribute
+   // 渲染集合
    public renderables: FObjects<FRenderable> = null;
 
    //==========================================================
@@ -144,45 +144,15 @@ export class FDisplay extends FDrawable implements IDisplay {
       // 放入渲染对象
       var renderables = this.renderables;
       if (renderables) {
-         var count = renderables.count();
-         for (var i = 0; i < count; i++) {
-            var renderable = renderables.at(i);
+         var count: number = renderables.count();
+         for (var n: number = 0; n < count; n++) {
+            var renderable = renderables.at(n);
             if (renderable.visible) {
                region.pushRenderable(renderable);
             }
          }
       }
       return true;
-   }
-
-   //==========================================================
-   // <T>显示处理。</T>
-   //
-   // @method
-   //==========================================================
-   public show() {
-      this.visible = true;
-   }
-
-   //==========================================================
-   // <T>隐藏处理。</T>
-   //
-   // @method
-   //==========================================================
-   public hide() {
-      this.visible = false;
-   }
-
-   //==========================================================
-   // <T>更新处理。</T>
-   //
-   // @method
-   //==========================================================
-   public update() {
-      // 更新矩阵
-      var matrix = this.matrix;
-      matrix.set(this.position, this.rotation, this.scale);
-      matrix.update();
    }
 
    //==========================================================
@@ -201,26 +171,46 @@ export class FDisplay extends FDrawable implements IDisplay {
       }
    }
 
-   // //==========================================================
-   // // <T>逻辑处理。</T>
-   // //
-   // // @method
-   // // @param region:FG3dReigon 区域
-   // //==========================================================
-   // public process(region) {
-   //     var o = this;
-   //     // 更新矩阵
-   //     o.updateMatrix(region);
-   //     // 处理渲染集合
-   //     var renderables = o._renderables;
-   //     if (renderables) {
-   //         var count = renderables.count();
-   //         for (var i = 0; i < count; i++) {
-   //             var renderable = renderables.at(i);
-   //             renderable.process(region);
-   //         }
-   //     }
-   // }
+   //==========================================================
+   // <T>更新处理。</T>
+   //
+   // @param region 区域
+   // @return 处理结果
+   //==========================================================
+   public update(region: FRegion): boolean {
+      var result = super.update(region);
+      if (result) {
+         // 更新矩阵
+         var matrix = this.matrix;
+         matrix.set(this.position, this.rotation, this.scale);
+         matrix.update();
+      }
+      return result;
+   }
+
+   //==========================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param region 区域
+   // @return 处理结果
+   //==========================================================
+   public process(region: FRegion): boolean {
+      var result = super.process(region);
+      if (result) {
+         // 更新矩阵
+         this.updateMatrix(region);
+         // 处理渲染集合
+         var renderables = this.renderables;
+         if (renderables) {
+            var count = renderables.count();
+            for (var i = 0; i < count; i++) {
+               var renderable = renderables.at(i);
+               renderable.process(region);
+            }
+         }
+      }
+      return result;
+   }
 
    //==========================================================
    // <T>释放处理。</T>
@@ -229,8 +219,6 @@ export class FDisplay extends FDrawable implements IDisplay {
    //==========================================================
    public dispose() {
       // 释放属性
-      //  this._currentMatrix = RObject.dispose(this._currentMatrix);
-      //  this._matrix = RObject.dispose(this._matrix);
       this.position = RObject.dispose(this.position);
       this.rotation = RObject.dispose(this.rotation);
       this.scale = RObject.dispose(this.scale);

@@ -15,8 +15,8 @@ export class FPipeline extends FObject {
    // 环境
    public context: FContext = null;
 
-   // 舞台
-   public stage: FScene = null;
+   // 场景
+   public scene: FScene = null;
 
    // 技术
    public technique: FTechnique = null;
@@ -27,6 +27,9 @@ export class FPipeline extends FObject {
    // 舞台
    public camera: FCamera = null;
 
+   // 激活状态
+   public statusActive: boolean = false;
+
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
@@ -34,18 +37,18 @@ export class FPipeline extends FObject {
       super();
       //this.region = new FRegion();
    }
-   
+
    //==========================================================
    // <T>逻辑处理。</T>
    //
    // @method
    //==========================================================
-   public onProcess():boolean {
+   public onProcess(): boolean {
       var context = this.context;
       if (!context) {
          return false;
       }
-      var stage = this.stage;
+      var stage = this.scene;
       if (!stage) {
          return false;
       }
@@ -53,7 +56,7 @@ export class FPipeline extends FObject {
       if (!technique) {
          return false;
       }
-      var region:FRegion = this.region;
+      var region: FRegion = this.region;
       (region as any).camera = this.camera;
       region.backgroundColor = stage.backgroundColor;
       // 统计处理
@@ -99,6 +102,21 @@ export class FPipeline extends FObject {
    // <T>构造处理。</T>
    //==========================================================
    public process() {
+      this.scene.process(this.region);
       this.onProcess();
+   }
+
+   //==========================================================
+   // <T>启动处理。</T>
+   //==========================================================
+   public start() {
+      this.statusActive = true;
+   }
+
+   //==========================================================
+   // <T>停止处理。</T>
+   //==========================================================
+   public stop() {
+      this.statusActive = false;
    }
 }

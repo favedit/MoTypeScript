@@ -1,6 +1,6 @@
 export * from './ECommandState';
 export * from './FCommand';
-export * from './FCommandManager';
+export * from './FCommandConsole';
 export * from './FCompositeCommand';
 
 import * as camera from './camera/index';
