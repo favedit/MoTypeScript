@@ -51,6 +51,6 @@ export class FRequest extends FObject {
    //==========================================================
    public commit(): void {
       this.onCommit();
-         this.isCommitted = true;
+      this.isCommitted = true;
    }
 }

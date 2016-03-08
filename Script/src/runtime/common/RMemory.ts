@@ -61,7 +61,7 @@ export class RMemory extends RSingleton {
       var pool: TMemoryPool = pools[className];
       if (!pool) {
          pool = new TMemoryPool();
-         pool._constructor = clazz;
+         pool.itemClass = clazz;
          pools[className] = pool;
       }
       // 创建对象

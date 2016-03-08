@@ -35,7 +35,7 @@ export class FObject {
    public get hashCode(): number {
       var hashCode: number = this.__hashCode;
       if (hashCode == 0) {
-         hashCode = this.__hashCode = RObjectId.nextId();
+         hashCode = this.__hashCode = RObjectId.nextHash();
       }
       return hashCode;
    }
