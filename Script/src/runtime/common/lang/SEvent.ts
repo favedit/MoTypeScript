@@ -1,3 +1,5 @@
+import {SObject} from './SObject';
+
 //==========================================================
 // <T>事件信息类。</T>
 //
@@ -5,7 +7,7 @@
 // @author maocy
 // @version 150113
 //==========================================================
-export class SEvent {
+export class SEvent extends SObject {
    //..........................................................
    // @attribute
    public code = null;
@@ -19,6 +21,8 @@ export class SEvent {
    public hEvent = null;
    public hSender = null;
    public hSource = null;
+   // @attribute
+   public result: boolean = false;
    //..........................................................
    // @method
    public ohProcess = null;
@@ -28,14 +32,7 @@ export class SEvent {
 
    // @method
    public constructor(sender: any = null) {
+      super();
       this.sender = sender;
-   }
-
-   //free = sk.common.lang.RObject.fre . RMethod.freeStruct;
-   public free() {
-   }
-
-   //dispose = sk.common.reflect.RMethod.disposeStruct;
-   public dispose() {
    }
 }

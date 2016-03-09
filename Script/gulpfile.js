@@ -64,6 +64,18 @@ gulp.task('mo',function(){
       .pipe(gulp.dest('build'));
 });
 
+// Runtime监听模块
+gulp.task('wmo', ['mo'], function() {
+  var runtimeTSConfig = jsonfile.readFileSync(compileByModules.mo)
+  var filesGlob = runtimeTSConfig.filesGlob;
+  var tsConfigFile = compileByModules.editorProduct;
+  var prjPath = path.dirname(tsConfigFile);
+  for(var i = 0; i < filesGlob.length; i++){
+    var fileGlob = path.join(prjPath,filesGlob[i]);
+    gulp.watch(fileGlob, ['mo']);
+  }
+});
+
 // Runtime编译模块
 gulp.task('runtime',function(){
   var tp = ts.createProject(compileByModules.runtime,{

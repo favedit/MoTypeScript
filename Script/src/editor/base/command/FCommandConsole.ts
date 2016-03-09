@@ -1,5 +1,6 @@
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {FListeners} from '../../../runtime/common/lang/FListeners';
 import {RLogger} from '../../../runtime/common/lang/RLogger';
 import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FConsole} from '../../../runtime/core/FConsole';
@@ -13,7 +14,7 @@ import {FTransactionConsole} from '../transaction/FTransactionConsole';
 // @history 160308
 //==========================================================
 export class FCommandConsole extends FConsole {
-   // 类型 
+   // 类型
    protected types: FDictionary<FCommand> = null;
    // 当前
    protected current: FCommand = null;
@@ -21,24 +22,30 @@ export class FCommandConsole extends FConsole {
    protected pendings: FObjects<FCommand> = null;
    // 事务控制台
    @ALinker(FTransactionConsole)
-   protected _transactionConsole:FTransactionConsole = null;
-
-   //    signalCommandStarting = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandStarted = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandSuspending = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandSuspended = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandResuming = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandResumed = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandTerminating = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    signalCommandTerminated = sk_create("hsw.util.Signal", hsw.util.Signal, this);
-   //    /** @type {null} */
-   //    this._transMgr = null;
+   protected _transactionConsole: FTransactionConsole = null;
+   // 监听器
+   public commandStartingListeners: FListeners = null;
+   public commandStarted: FListeners = null;
+   public commandSuspending: FListeners = null;
+   public commandSuspended: FListeners = null;
+   public commandResuming: FListeners = null;
+   public commandResumed: FListeners = null;
+   public commandTerminating: FListeners = null;
+   public commandTerminated: FListeners = null;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
+      this.commandStartingListeners = new FListeners(this);
+      this.commandStarted = new FListeners(this);
+      this.commandSuspending = new FListeners(this);
+      this.commandSuspended = new FListeners(this);
+      this.commandResuming = new FListeners(this);
+      this.commandResumed = new FListeners(this);
+      this.commandTerminating = new FListeners(this);
+      this.commandTerminated = new FListeners(this);
       // this.clear();
       // this._transMgr = body.transManager;
       // goog.events.listen(body, hsw.app.ViewEventTypeEnum.active, function(entry) {

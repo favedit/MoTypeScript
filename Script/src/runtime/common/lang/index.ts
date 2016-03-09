@@ -1,3 +1,4 @@
+export * from './EAccess';
 export * from './EBoolean';
 export * from './ECharCase';
 export * from './EDataType';
@@ -39,6 +40,7 @@ export * from './RSet';
 export * from './RSingleton';
 export * from './RString';
 export * from './RTypeArray';
+export * from './SAccessEvent';
 export * from './SEvent';
 export * from './SListenerContext';
 export * from './SLogger';

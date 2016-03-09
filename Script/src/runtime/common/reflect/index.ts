@@ -1,6 +1,7 @@
 export * from './ALinker';
 export * from './ALogger';
 export * from './AProperty';
+export * from './AReadonly';
 export * from './EAnnotation';
 export * from './FAnnotation';
 export * from './FClass';

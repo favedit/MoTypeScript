@@ -15,10 +15,8 @@ import {FAnnotation} from './FAnnotation'
 export class FLoggerAnnotation extends FAnnotation {
    // 数据名称
    protected _count: number = 0;
-   
    // 数据名称
    protected _successCount: number = 0;
-
    // 回调处理
    protected _callback: Function = null;
 

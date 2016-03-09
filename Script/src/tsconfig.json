@@ -31,7 +31,8 @@
     "buildOnSave": false,
     "filesGlob": [
         "./runtime/**/*.ts",
-        "./plugin/**/*.ts"
+        "./plugin/**/*.ts",
+        "./test/**/*.ts"
     ],
     "exclude": [
         "./data",

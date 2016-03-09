@@ -118,7 +118,7 @@ export class FCommand extends FObject {
       }
    }
 
-   public onReceive = function(keepData, opt_attributes, userid, chunk, serviceName) {
+   public onReceive(keepData, opt_attributes, userid, chunk, serviceName) {
       // if (keepData === hsw.app.ViewEventTypeEnum.active) {
       //    return this.mgr.cancel(this), false;
       // }
