@@ -9,11 +9,16 @@ import {FHttpConnection} from './FHttpConnection';
 // @version 150104
 //==========================================================
 export class FJsonConnection extends FHttpConnection {
-   //..........................................................
-   // @attribute
-   protected _contentCd = EHttpContent.Text;
-   // @attribute
-   protected _content = null;
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._contentCd = EHttpContent.Text;
+   }
 
    //==========================================================
    // <T>事件响应处理。</T>
@@ -21,30 +26,20 @@ export class FJsonConnection extends FHttpConnection {
    // @method
    //==========================================================
    public onConnectionComplete() {
-      var o = this;
-      o._statusFree = true;
+      this._statusFree = true;
       // 解析内容
       var content = null;
-      var data = o._outputData;
+      var data = this._outputData;
       if (data) {
-         //content = o._content = JSON.parse(data);
+         content = this.content = JSON.parse(data);
       }
       // 加载处理
-      var event = o._event;
-      event.connection = o;
+      var event = this._event;
+      event.connection = this;
       event.data = data;
       event.content = content;
-      //o.processLoadListener(event);
+      this.loadListeners.process(event);
       // 完成处理
-      //o.processCompleteListener(event);
-   }
-
-   //==========================================================
-   // <T>获得内容。</T>
-   //
-   // @return Object 内容
-   //==========================================================
-   public content() {
-      return this._content;
+      this.completeListeners.process(event);
    }
 }

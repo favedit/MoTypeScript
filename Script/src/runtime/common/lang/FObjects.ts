@@ -10,9 +10,9 @@ import {RRuntime} from '../RRuntime';
 // @version 141230
 // =========================================================
 export class FObjects<T> extends FObject {
-   //..........................................................
-   // @attribute
+   // 项目个数
    protected _count: number = 0;
+   // 项目集合
    protected _items: Array<T> = new Array<T>();
 
    //===========================================================
@@ -64,9 +64,8 @@ export class FObjects<T> extends FObject {
    // @return Integer 索引位置
    //===========================================================
    public indexOf(value: T): number {
-      var o = this;
-      var count = o._count;
-      var items = o._items;
+      var count = this._count;
+      var items = this._items;
       for (var i = 0; i < count; i++) {
          if (items[i] == value) {
             return i;
@@ -82,8 +81,7 @@ export class FObjects<T> extends FObject {
    // @return 第一个对象
    //===========================================================
    public first(): T {
-      var o = this;
-      return o._count ? o._items[0] : null;
+      return this._count ? this._items[0] : null;
    }
 
    //===========================================================
@@ -93,8 +91,7 @@ export class FObjects<T> extends FObject {
    // @return 最后一个对象
    //===========================================================
    public last(): T {
-      var o = this;
-      return o._count ? o._items[o._count - 1] : null;
+      return this._count ? this._items[this._count - 1] : null;
    }
 
    //===========================================================
@@ -127,8 +124,7 @@ export class FObjects<T> extends FObject {
    // @return 当前位置上的对象
    //===========================================================
    public get(index: number): T {
-      var o = this;
-      return ((index >= 0) && (index < o._count)) ? o._items[index] : null;
+      return ((index >= 0) && (index < this._count)) ? this._items[index] : null;
    }
 
    //===========================================================
@@ -150,9 +146,8 @@ export class FObjects<T> extends FObject {
    // @param value:Object 对象
    //===========================================================
    public set(index: number, value: T): void {
-      var o = this;
-      var items = o._items;
-      if ((index >= 0) && (index < o._count)) {
+      var items = this._items;
+      if ((index >= 0) && (index < this._count)) {
          items[index] = value;
       }
    }
@@ -166,9 +161,8 @@ export class FObjects<T> extends FObject {
    // @return 对象
    //===========================================================
    public search(name: string, value: T): T {
-      var o = this;
-      var items = o._items;
-      var count = o._count;
+      var items = this._items;
+      var count = this._count;
       for (var i = 0; i < count; i++) {
          var item = items[i];
          var find = item[name];
@@ -186,9 +180,8 @@ export class FObjects<T> extends FObject {
    // @param values:TObjects 集合
    //===========================================================
    public assign(values: FObjects<T>): void {
-      var o = this;
-      var items = o._items;
-      var count = o._count = values.count();
+      var items = this._items;
+      var count = this._count = values.count();
       var valueItems = values.items();
       for (var i = 0; i < count; i++) {
          items[i] = valueItems[i];
@@ -202,10 +195,9 @@ export class FObjects<T> extends FObject {
    // @param values:TObjects 集合
    //===========================================================
    public append(values: FObjects<T>): void {
-      var o = this;
       var count = values.count();
       for (var i = 0; i < count; i++) {
-         o.push(values.at(i));
+         this.push(values.at(i));
       }
    }
 
@@ -217,15 +209,14 @@ export class FObjects<T> extends FObject {
    //@param value:Object 对象
    //===========================================================
    public insert(index: number, value: T): void {
-      var o = this;
-      var count = o._count;
-      var items = o._items;
+      var count = this._count;
+      var items = this._items;
       if ((index >= 0) && (index <= count)) {
          for (var i = count; i > index; i--) {
             items[i] = items[i - 1];
          }
          items[index] = value;
-         o._count++;
+         this._count++;
       }
    }
 
@@ -256,10 +247,9 @@ export class FObjects<T> extends FObject {
    // @return Object 对象
    //===========================================================
    public pop(): T {
-      var o = this;
       var value = null;
-      if (o._count) {
-         value = o._items[--o._count];
+      if (this._count) {
+         value = this._items[--this._count];
       }
       return value;
    }
@@ -272,9 +262,8 @@ export class FObjects<T> extends FObject {
    // @return Integer 索引值
    //===========================================================
    public push(value: T): number {
-      var o = this;
-      var index = o._count++;
-      o._items[index] = value;
+      var index = this._count++;
+      this._items[index] = value;
       return index;
    }
 
@@ -286,10 +275,9 @@ export class FObjects<T> extends FObject {
    // @return Integer 索引值
    //===========================================================
    public pushUnique(value: T): void {
-      var o = this;
-      var index = o.indexOf(value);
+      var index = this.indexOf(value);
       if (index == -1) {
-         o.push(value);
+         this.push(value);
       }
    }
 
@@ -301,10 +289,9 @@ export class FObjects<T> extends FObject {
    // @param right:Integer 第二个对象的索引值
    //===========================================================
    public swap(left: number, right: number): void {
-      var o = this;
-      var count = o._count;
+      var count = this._count;
       if ((left >= 0) && (left < count) && (right >= 0) && (right < count) && (left != right)) {
-         var items = o._items;
+         var items = this._items;
          var value = items[left];
          items[left] = items[right];
          items[right] = value;
@@ -318,10 +305,9 @@ export class FObjects<T> extends FObject {
    // @param callback:Function 排序函数
    //===========================================================
    public sort(callback: any): void {
-      var o = this;
-      var items = o._items;
-      if (items.length != o._count) {
-         items.length = o._count;
+      var items = this._items;
+      if (items.length != this._count) {
+         items.length = this._count;
       }
       // 排序处理
       items.sort(callback);
@@ -335,12 +321,11 @@ export class FObjects<T> extends FObject {
    // @return Object 被删除的对象
    //===========================================================
    public erase(index: number): T {
-      var o = this;
       var value = null;
-      if ((index >= 0) && (index < o._count)) {
-         var items = o._items;
+      if ((index >= 0) && (index < this._count)) {
+         var items = this._items;
          value = items[index];
-         var count = --o._count;
+         var count = --this._count;
          for (var i = index; i < count; i++) {
             items[i] = items[i + 1];
          }
@@ -356,11 +341,10 @@ export class FObjects<T> extends FObject {
    // @param value:Object 指定对象
    //===========================================================
    public remove(value: T): void {
-      var o = this;
-      var count = o._count;
+      var count = this._count;
       if (count) {
          var index = 0;
-         var items = o._items;
+         var items = this._items;
          // 移除对象
          for (var i = index; i < count; i++) {
             if (items[i] != value) {
@@ -372,7 +356,7 @@ export class FObjects<T> extends FObject {
             items[i] = null;
          }
          // 设置大小
-         o._count = index;
+         this._count = index;
       }
    }
 
@@ -388,9 +372,8 @@ export class FObjects<T> extends FObject {
    // @param parameter5:Object 参数5
    //==========================================================
    public invoke(methodName: string, parameter1: any, parameter2: any, parameter3: any, parameter4: any, parameter5: any): void {
-      var o = this;
-      var count = o._count;
-      var items = o._items;
+      var count = this._count;
+      var items = this._items;
       for (var i = 0; i < count; i++) {
          var item = items[i];
          var method = item[methodName];
@@ -413,13 +396,12 @@ export class FObjects<T> extends FObject {
    // @method
    //===========================================================
    public dispose(): void {
-      var o = this;
-      var items = o._items;
+      var items = this._items;
       for (var name in items) {
          items[name] = null;
       }
-      o._count = 0;
-      o._items = null;
+      this._count = 0;
+      this._items = null;
    }
 
    //===========================================================

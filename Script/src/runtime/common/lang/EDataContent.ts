@@ -1,18 +1,17 @@
 //==========================================================
-// <T>材质枚举。</T>
+// <T>数据内容。</T>
 //
 // @enum
 // @author maocy
 // @version 150415
 //==========================================================
-export enum EResource {
+export enum EDataContent {
+   // 未知
    Unknown,
-   Bitmap,
-   Material,
-   Mesh,
-   Model,
-   Template,
-   Scene,
-   Project,
-   All
+   // JSON
+   Json,
+   // XML
+   Xml,
+   // 二进制
+   Binary
 }

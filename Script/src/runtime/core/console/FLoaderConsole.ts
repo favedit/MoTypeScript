@@ -1,19 +1,22 @@
-import {ALinker} from '../../common/reflect/ALinker';
 // import {AProperty} from '../../common/reflect/AProperty';
 // import {ALogger} from '../../common/reflect/ALogger';
 import {EScope} from '../../common/lang/EScope';
+import {EDataContent} from '../../common/lang/EDataContent';
 import {FObjects} from '../../common/lang/FObjects';
 import {RObject} from '../../common/lang/RObject';
 import {SListenerContext} from '../../common/lang/SListenerContext';
 import {SEvent} from '../../common/lang/SEvent';
 // import {RLogger} from '../../common/lang/RLogger';
+import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {FHttpConnection} from '../../common/net/FHttpConnection';
+import {FJsonConnection} from '../../common/net/FJsonConnection';
 // import {FBufferedSocket} from '../../common/net/FBufferedSocket';
 // import {FEnvironmentConsole} from './FEnvironmentConsole';
 import {FListenerThread} from '../console/FListenerThread';
 import {FThreadConsole} from '../console/FThreadConsole';
 import {FHttpConsole} from '../console/FHttpConsole';
+import {FJsonConsole} from '../console/FJsonConsole';
 import {FConsole} from '../FConsole';
 import {FLoader} from './FLoader';
 
@@ -53,6 +56,9 @@ export class FLoaderConsole extends FConsole {
    // 请求控制台
    @ALinker(FHttpConsole)
    protected _httpConsole: FHttpConsole = null;
+   // JSON控制台
+   @ALinker(FJsonConsole)
+   protected _jsonConsole: FJsonConsole = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -77,6 +83,7 @@ export class FLoaderConsole extends FConsole {
       var loaders: FObjects<FLoader> = this._loaders;
       var processLoaders: FObjects<FLoader> = this._processLoaders;
       var httpConsole: FHttpConsole = this._httpConsole;
+      var jsonConsole: FJsonConsole = this._jsonConsole;
       //..........................................................
       // 获取数据
       var processCount: number = processLoaders.count();
@@ -85,7 +92,12 @@ export class FLoaderConsole extends FConsole {
             var loader: FLoader = loaders.shift();
             var url: string = loader.url;
             // 加载处理
-            var connection: FHttpConnection = httpConsole.sendAsync(url);
+            var connection: FHttpConnection = null;
+            if (loader.contentCd == EDataContent.Json) {
+               connection = jsonConsole.sendAsync(url);
+            } else {
+               connection = httpConsole.sendAsync(url);
+            }
             connection.loadListeners.register(this, this.onLoad, loader);
             // 增加加载中集合
             processLoaders.push(loader);
@@ -103,7 +115,7 @@ export class FLoaderConsole extends FConsole {
    // @method
    // @param connection:FHttpConnection 链接
    //==========================================================
-   public onLoad(sender:SListenerContext, event:any):void {
+   public onLoad(sender: SListenerContext, event: any): void {
       // 设置资源
       var loader: FLoader = sender.attributes[0];
       loader.data = event.content;

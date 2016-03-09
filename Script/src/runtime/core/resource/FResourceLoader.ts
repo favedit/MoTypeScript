@@ -23,7 +23,7 @@ export class FResourceLoader extends FLoader {
    //==========================================================
    public process(): void {
       // 加载内容
-      this.content.loadContent(this.data);
+      this.content.load(this);
    }
 
    // //==========================================================

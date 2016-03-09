@@ -23,23 +23,30 @@ export class FResourceObject extends FObject {
       this.version = input.readInt32();
    }
 
-   // //==========================================================
-   // // <T>数据内容存储到配置节点中。</T>
-   // //
-   // // @method
-   // // @param xconfig:TXmlNode 配置节点
-   // //==========================================================
-   // MO.FE3sResource_saveConfig = function FE3sResource_saveConfig(xconfig){
-   //    var o = this;
-   //    // 设置类型
-   //    if(!MO.Lang.String.isEmpty(o._typeName)){
-   //       xconfig.setName(o._typeName);
-   //    }
-   //    // 存储属性
-   //    xconfig.set('guid', o._guid);
-   //    xconfig.set('code', o._code);
-   //    xconfig.set('label', o._label);
-   // }
+   //==========================================================
+   // <T>从配置里加载信息内容</T>
+   //
+   // @param config 配置
+   //==========================================================
+   public loadConfig(config) {
+   }
+
+   //==========================================================
+   // <T>数据内容存储到配置节点中。</T>
+   //
+   // @method
+   // @param xconfig:TXmlNode 配置节点
+   //==========================================================
+   public saveConfig(config) {
+      // // 设置类型
+      // if(!MO.Lang.String.isEmpty(this._typeName)){
+      //    xconfig.setName(this._typeName);
+      // }
+      // // 存储属性
+      // xconfig.set('guid', this._guid);
+      // xconfig.set('code', this._code);
+      // xconfig.set('label', this._label);
+   }
 
    //==========================================================
    // <T>释放处理。</T>

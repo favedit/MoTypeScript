@@ -1,3 +1,4 @@
+import {EDataContent} from '../../runtime/common/lang/EDataContent';
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
 import {RObject} from '../../runtime/common/lang/RObject';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
@@ -18,32 +19,12 @@ import {FModelResource} from './FModelResource';
 export class FModelResourceConsole extends FConsole {
    // 模型集合
    protected models: FDictionary<FModelResource> = null;
+   // 资源控制台
+   @ALinker(FResourceConsole)
+   protected _resourceConsole: FResourceConsole = null;
    //    o._meshs            = MO.Class.register(o, new MO.AGetter('_meshs'));
    //    o._skeletons        = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations       = MO.Class.register(o, new MO.AGetter('_animations'));
-   //    //..........................................................
-   //    // @method
-   //    o.construct         = MO.FE3sModelConsole_construct;
-   //    // @method
-   //    o.findModel         = MO.FE3sModelConsole_findModel;
-   //    o.findMesh          = MO.FE3sModelConsole_findMesh;
-   //    o.findSkeleton      = MO.FE3sModelConsole_findSkeleton;
-   //    o.findAnimation     = MO.FE3sModelConsole_findAnimation;
-   //    // @method
-   //    o.unserialMesh      = MO.FE3sModelConsole_unserialMesh;
-   //    o.unserialSkeleton  = MO.FE3sModelConsole_unserialSkeleton;
-   //    o.unserialAnimation = MO.FE3sModelConsole_unserialAnimation;
-   //    // @method
-   //    o.load              = MO.FE3sModelConsole_load;
-   //    o.loadByGuid        = MO.FE3sModelConsole_loadByGuid;
-   //    o.loadByCode        = MO.FE3sModelConsole_loadByCode;
-   //    // @method
-   //    o.dispose           = MO.FE3sModelConsole_dispose;
-   //    return o;
-   // }
-   
-   @ALinker(FResourceConsole)
-   protected _resourceConsole: FResourceConsole = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -187,7 +168,7 @@ export class FModelResourceConsole extends FConsole {
       var identity = url;
       // 查找模型
       var models = this.models;
-      var model:FModelResource = models.get(identity);
+      var model: FModelResource = models.get(identity);
       if (model) {
          return model;
       }
@@ -197,7 +178,7 @@ export class FModelResourceConsole extends FConsole {
       //model.setVendor(vendor);
       //model.setSourceUrl(url);
       // 创建加载器
-      this._resourceConsole.loadContent(model, url);
+      this._resourceConsole.loadContent(EDataContent.Binary, model, url);
       // 存储模型
       models.set(identity, model);
       return model;
@@ -232,7 +213,7 @@ export class FModelResourceConsole extends FConsole {
    }
 
    //==========================================================
-   // <T>加载指定代码的模型资源。</T>
+   // <T>加载指定地址的模型资源。</T>
    //
    // @param url 网络地址
    // @return 模型资源

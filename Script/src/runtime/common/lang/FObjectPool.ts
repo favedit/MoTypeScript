@@ -1,6 +1,7 @@
 import {FObject} from './FObject'
 import {FObjects} from './FObjects'
 import {RObject} from './RObject'
+import {RAssert} from '../RAssert'
 
 //==========================================================
 // <T>对象池。</T>
@@ -11,8 +12,8 @@ import {RObject} from './RObject'
 //==========================================================
 export class FObjectPool extends FObject {
    // @attribute
-   public _items = null;
-   public _frees = null;
+   public items:FObjects<any> = null;
+   public frees:FObjects<any> = null;
    // @attribute
    public _allocCount = 0;
    public _freeCount = 0;
@@ -24,8 +25,8 @@ export class FObjectPool extends FObject {
    //==========================================================
    public constructor() {
       super();
-      this._items = new FObjects();
-      this._frees = new FObjects();
+      this.items = new FObjects<any>();
+      this.frees = new FObjects<any>();
    }
 
    //==========================================================
@@ -35,7 +36,7 @@ export class FObjectPool extends FObject {
    // @return Boolean 是否存在
    //==========================================================
    public hasFree(): boolean {
-      return !this._frees.isEmpty();
+      return !this.frees.isEmpty();
    }
 
    //==========================================================
@@ -46,8 +47,8 @@ export class FObjectPool extends FObject {
    //==========================================================
    public alloc(): any {
       var item = null;
-      if (!this._frees.isEmpty()) {
-         item = this._frees.pop();
+      if (!this.frees.isEmpty()) {
+         item = this.frees.pop();
       }
       this._allocCount++;
       return item;
@@ -60,7 +61,8 @@ export class FObjectPool extends FObject {
    // @param item:FObject 对象
    //==========================================================
    public free(item: any): void {
-      this._frees.push(item);
+      RAssert.debugNotNull(item);
+      this.frees.push(item);
       this._freeCount++;
    }
 
@@ -71,8 +73,9 @@ export class FObjectPool extends FObject {
    // @param FObject 对象
    //==========================================================
    public push(item: any): void {
-      this._items.push(item);
-      this._frees.push(item);
+      RAssert.debugNotNull(item);
+      this.items.push(item);
+      this.frees.push(item);
    }
 
    //==========================================================
@@ -81,8 +84,8 @@ export class FObjectPool extends FObject {
    // @method
    //==========================================================
    public dispose() {
-      this._items = RObject.dispose(this._items);
-      this._frees = RObject.dispose(this._frees);
+      this.items = RObject.dispose(this.items);
+      this.frees = RObject.dispose(this.frees);
       super.dispose();
    }
 
@@ -95,8 +98,8 @@ export class FObjectPool extends FObject {
    //==========================================================
    public innerDump(result, level) {
       result.append('Pool:');
-      result.append('total=', this._items.count());
-      result.append(', free=', this._frees.count());
+      result.append('total=', this.items.count());
+      result.append(', free=', this.frees.count());
       result.append(', alloc_count=', this._allocCount);
       result.append(', free_count=', this._freeCount);
    }

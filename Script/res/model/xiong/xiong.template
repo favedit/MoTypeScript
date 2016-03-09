@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "version": 1,
+    "guid": "XXXX",
+    "code": "xiong",
+    "label": "灰熊"
+  },
+  "content": [
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/xiong/xiong.model",
+      "material_url": "${resource}/model/xiong/xiong.material"
+    }
+  ]
+}

@@ -10,12 +10,22 @@ import {IPlugin} from './IPlugin';
 //==========================================================
 export class FPlugin extends FObject implements IPlugin {
 
+   // 类型
    public type = null;
-   public enable = null;
+   // 名称
    public name = null;
+   // 有效
+   public enable = null;
+   // 描述
    public description = null;
+   // 依赖
    public dependencies = null;
+   // 加载器
+   public loader = null;
 
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
    public constructor(plugin) {
       super();
       plugin = plugin || {};

@@ -1,9 +1,11 @@
 import {EScope} from '../../common/lang/EScope';
 import {FObjectPool} from '../../common/lang/FObjectPool';
+import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {EHttpContent} from '../../common/net/EHttpContent';
 import {FHttpConnection} from '../../common/net/FHttpConnection';
 import {FConsole} from '../FConsole';
+import {FEnvironmentConsole} from './FEnvironmentConsole';
 
 //==========================================================
 // <T>页面数据通讯的控制台。</T>
@@ -13,11 +15,11 @@ import {FConsole} from '../FConsole';
 // @version 150104
 //==========================================================
 export class FHttpConsole extends FConsole {
-   //..........................................................
-   // @attribute
-   public _scopeCd = EScope.Local;
-   // @attribute
+   // 缓冲池
    public _pool: FObjectPool = null;
+   // 环境控制台
+   @ALinker(FEnvironmentConsole)
+   protected _environmentConsole: FEnvironmentConsole = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,6 +29,7 @@ export class FHttpConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
+      this.scopeCd = EScope.Local;
       this._pool = RClass.create(FObjectPool);
    }
 
@@ -36,7 +39,7 @@ export class FHttpConsole extends FConsole {
    // @method
    // @param connection:FHttpConnection 网络链接
    //==========================================================
-   public onComplete(event) {
+   public onComplete(sender, event) {
       var connection = event.connection;
       this._pool.free(connection);
    }
@@ -65,7 +68,7 @@ export class FHttpConsole extends FConsole {
          this._pool.push(this.create());
       }
       // 收集对象
-      var connection:FHttpConnection = pool.alloc();
+      var connection: FHttpConnection = pool.alloc();
       connection.reset();
       connection.completeListeners.register(this, this.onComplete);
       return connection;
@@ -90,9 +93,10 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public sendSync(url: string, data?: any) {
+      var sendUrl: string = this._environmentConsole.parse(url);
       var connection = this.alloc();
       connection._asynchronous = false;
-      connection.send(url, data);
+      connection.send(sendUrl, data);
       return connection.content();
    }
 
@@ -105,9 +109,10 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public sendAsync(url: string, data?: any) {
+      var sendUrl: string = this._environmentConsole.parse(url);
       var connection = this.alloc();
       connection._asynchronous = true;
-      connection.send(url, data);
+      connection.send(sendUrl, data);
       return connection;
    }
 
@@ -120,10 +125,11 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public fetchSync(url, data) {
+      var sendUrl: string = this._environmentConsole.parse(url);
       var connection = this.alloc();
       connection._asynchronous = false;
       connection._contentCd = EHttpContent.Text;
-      connection.send(url, data);
+      connection.send(sendUrl, data);
       return connection.content();
    }
 
@@ -136,10 +142,11 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public fetchAsync(url, data) {
+      var sendUrl: string = this._environmentConsole.parse(url);
       var connection = this.alloc();
       connection._asynchronous = true;
       connection._contentCd = EHttpContent.Text;
-      connection.send(url, data);
+      connection.send(sendUrl, data);
       return connection;
    }
 

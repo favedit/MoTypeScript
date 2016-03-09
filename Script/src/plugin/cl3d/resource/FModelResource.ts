@@ -15,7 +15,6 @@ export class FModelResource extends FResource {
    //    o = MO.Class.inherits(this, o, MO.FE3sSpace);
    //    //..........................................................
    //    // @attribute
-   //    o._typeName      = 'Model';
    //    o._dataCompress  = true;
    //    o._dataBlock     = true;
    //    // @attribute
@@ -41,6 +40,7 @@ export class FModelResource extends FResource {
    public constructor() {
       super();
       // 设置属性
+      this.typeCode = 'Model';
       this.meshes = new FDictionary<FMeshResource>();
       //var display = this._display = MO.Class.create(MO.FE3sModelDisplay);
       //display._model = this;

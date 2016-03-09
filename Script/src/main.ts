@@ -1,3 +1,5 @@
+import {FEnvironmentConsole} from './runtime/core/console/FEnvironmentConsole';
+import {FTemplateResourceConsole} from './plugin/cl3d/resource/FTemplateResourceConsole';
 import {FE3dModelConsole} from './plugin/cl3d/engine/instance/FE3dModelConsole';
 import * as mo from './index';
 
@@ -25,18 +27,28 @@ camera.projection.update();
 //cube.setup(context);
 //layer.pushRenderable(cube);
 
-var modelConsole: FE3dModelConsole = mo.runtime.core.RConsole.find(FE3dModelConsole);
-var model = modelConsole.allocByUrl(context, 'http://localhost/ts/res/model/xiong.model');
-model.matrix.rx = -Math.PI / 2;
-model.matrix.ry = Math.PI / 2;
-model.matrix.sx = 0.1;
-model.matrix.sy = 0.1;
-model.matrix.sz = 0.1;
-model.matrix.updateForce();
-layer.pushDisplay(model);
-
 var environmentConsole = mo.runtime.core.RConsole.find(mo.runtime.core.console.FEnvironmentConsole);
 environmentConsole.registerValue('resource', '/ts/res');
+
+var templateResourceConsole: FTemplateResourceConsole = mo.runtime.core.RConsole.find(FTemplateResourceConsole);
+var templateResource = templateResourceConsole.loadByUrl('http://localhost/ts/res/model/xiong/xiong.template');
+// model.matrix.rx = -Math.PI / 2;
+// model.matrix.ry = Math.PI / 2;
+// model.matrix.sx = 0.1;
+// model.matrix.sy = 0.1;
+// model.matrix.sz = 0.1;
+// model.matrix.updateForce();
+// layer.pushDisplay(model);
+
+// var modelConsole: FE3dModelConsole = mo.runtime.core.RConsole.find(FE3dModelConsole);
+// var model = modelConsole.allocByUrl(context, 'http://localhost/ts/res/model/xiong/xiong.model');
+// model.matrix.rx = -Math.PI / 2;
+// model.matrix.ry = Math.PI / 2;
+// model.matrix.sx = 0.1;
+// model.matrix.sy = 0.1;
+// model.matrix.sz = 0.1;
+// model.matrix.updateForce();
+// layer.pushDisplay(model);
 
 var techniqueConsole = mo.runtime.core.RConsole.find(mo.plugin.cl3d.graphic.FTechniqueConsole);
 var technique = techniqueConsole.find(context, mo.plugin.cl3d.engine.effect.FGeneralTechnique);

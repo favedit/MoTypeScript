@@ -1,6 +1,7 @@
 export * from './EAccess';
 export * from './EBoolean';
 export * from './ECharCase';
+export * from './EDataContent';
 export * from './EDataType';
 export * from './EEnum';
 export * from './EResult';

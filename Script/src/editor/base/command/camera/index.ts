@@ -1,1 +1,1 @@
-export * from './FCameraMoveCommand';
+export * from './FMoveCommand';

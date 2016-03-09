@@ -1,4 +1,5 @@
 import {EScope} from '../../common/lang/EScope';
+import {EDataContent} from '../../common/lang/EDataContent';
 import {FDictionary} from '../../common/lang/FDictionary';
 // import {FError} from '../../common/lang/FError';
 import {RObject} from '../../common/lang/RObject';
@@ -16,6 +17,7 @@ import {FConsole} from '../FConsole';
 // import {FResourceBlockStorage} from './FResourceBlockStorage';
 // import {FResourcePackage} from './FResourcePackage';
 // import {FResourceDataConsole} from './FResourceDataConsole';
+import {FResource} from './FResource';
 import {FResourcePackage} from './FResourcePackage';
 import {FResourceLoader} from './FResourceLoader';
 
@@ -251,14 +253,17 @@ export class FResourceConsole extends FConsole {
    // }
 
    //==========================================================
-   // <T>根据URL地址加载资源包。</T>
+   // <T>根据URL地址加载资源。</T>
    //
    // @method
-   // @param uri:String 资源对象
+   // @param contentCd 内容类型
+   // @param content 内容
+   // @param uri 网络地址
    //==========================================================
-   public loadContent(content: any, url: string): void {
+   public loadContent(contentCd: EDataContent, content: FResource, url: string): void {
       // 创建加载器
       var loader: FResourceLoader = RClass.create(FResourceLoader);
+      loader.contentCd = contentCd;
       loader.url = url;
       loader.content = content;
       this._loaderConsole.push(loader);

@@ -14,7 +14,7 @@ import {FHttpConnection} from './FHttpConnection';
 export class FXmlConnection extends FHttpConnection {
    //..........................................................
    // @attribute
-   public _contentCd = EHttpContent.Text;
+   public contentCd = EHttpContent.Text;
    // @attribute
    public _inputNode = null;
    public _outputNode = null;

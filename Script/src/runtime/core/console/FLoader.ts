@@ -1,3 +1,4 @@
+import {EDataContent} from '../../common/lang/EDataContent';
 import {FObject} from '../../common/lang/FObject';
 
 //==========================================================
@@ -8,12 +9,14 @@ import {FObject} from '../../common/lang/FObject';
 // @version 160306
 //==========================================================
 export abstract class FLoader extends FObject {
-   // @attribute
-   public url: any = null;
-   // @attribute
+   // 内容类型
+   public contentCd: EDataContent = EDataContent.Unknown;
+   // 内容
    public content: any = null;
-   // @attribute
+   // 数据
    public data: any = null;
+   // 网络地址
+   public url: string = null;
 
    //==========================================================
    // <T>数据处理。</T>

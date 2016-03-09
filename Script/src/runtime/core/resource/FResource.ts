@@ -8,11 +8,10 @@ import {FResourceObject} from './FResourceObject';
 // @version 150721
 //==========================================================
 export class FResource extends FResourceObject {
-   //o = MO.Class.inherits(this, o, MO.FResource);
-   //..........................................................
-   // @attribute
-   //_typeCode = MO.Class.register(o, new MO.AGetter('_typeCode'));
-   //protected _typeCode: string = null;
+   // 类型代码
+   public typeCode: string = null;
+   // 版本号
+   public version: number = null;
 
    //==========================================================
    // <T>加载内容。</T>

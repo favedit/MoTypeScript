@@ -277,7 +277,7 @@ export class FHttpConnection extends FObject {
       } else {
          this.sendSync();
       }
-      return this.content();
+      return this.content;
    }
 
    //==========================================================

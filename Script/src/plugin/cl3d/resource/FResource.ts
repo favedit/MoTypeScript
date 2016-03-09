@@ -1,6 +1,10 @@
+import {EDataContent} from '../../../runtime/common/lang/EDataContent';
+import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {FError} from '../../../runtime/common/lang/FError';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../../runtime/common/io/FDataStream';
-import {FResource as FBaseResource} from '../../runtime/core/resource/FResource'
+import {FResource as FBaseResource} from '../../runtime/core/resource/FResource';
+import {FResourceLoader} from '../../runtime/core/resource/FResourceLoader';
 
 //==========================================================
 // <T>资源对象。</T>
@@ -9,8 +13,6 @@ import {FResource as FBaseResource} from '../../runtime/core/resource/FResource'
 // @history 150105
 //==========================================================
 export class FResource extends FBaseResource {
-   // 类型名称
-   public typeName = null;
    // 版本信息
    public version = null;
    // 唯一编号
@@ -21,6 +23,8 @@ export class FResource extends FBaseResource {
    public label = null;
    // 数据准备
    public dataReady = false;
+   // @attribute
+   public loadListeners: FListeners = null;
 
    //    // @attribute
    //    o._dataLoad      = false;
@@ -30,8 +34,15 @@ export class FResource extends FBaseResource {
    //    o._blockCount    = 0;
    //    // @attribute
    //    o._vendor        = MO.Class.register(o, new MO.AGetSet('_vendor'));
-   //    // @attribute
-   //    o._loadListeners = MO.Class.register(o, new MO.AListener('_loadListeners', MO.EEvent.Load));
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this.loadListeners = new FListeners(this);
+   }
 
    // //==========================================================
    // // <T>从输入流里反序列化信息内容</T>
@@ -101,7 +112,7 @@ export class FResource extends FBaseResource {
    // @param input:FByteStream 数据流
    //==========================================================
    public unserialize(input: FDataStream): void {
-      this.typeName = input.readString();
+      this.typeCode = input.readString();
       this.version = input.readInt32();
       this.guid = input.readString();
       this.code = input.readString();
@@ -109,20 +120,53 @@ export class FResource extends FBaseResource {
    }
 
    //==========================================================
+   // <T>从配置里加载描述内容</T>
+   //
+   // @param config 配置
+   //==========================================================
+   public loadMeta(config: any): void {
+      this.version = config.version;
+      this.guid = config.guid;
+      this.code = config.code;
+      this.label = config.label;
+   }
+
+   //==========================================================
+   // <T>从配置里加载信息内容</T>
+   //
+   // @param config 配置
+   //==========================================================
+   public loadConfig(config: any): void {
+      this.loadMeta(config.meta);
+   }
+
+   //==========================================================
    // <T>加载内容。</T>
    //
    // @param content 内容
    //==========================================================
-   public loadContent(content: any): void {
-      // 创建读取流
-      var stream: FDataStream = RClass.create(FDataStream);
-      stream.endianCd = true;
-      stream.link(content);
-      // 反序列化数据
-      this.unserialize(stream);
-      this.dataReady = true;
-      // 释放资源
-      stream.dispose();
+   public load(loader: FResourceLoader): void {
+      var data: any = loader.data;
+      switch (loader.contentCd) {
+         case EDataContent.Json: {
+            this.loadConfig(data);
+            break;
+         }
+         case EDataContent.Binary: {
+            // 创建读取流
+            var stream: FDataStream = RClass.create(FDataStream);
+            stream.endianCd = true;
+            stream.link(data);
+            // 反序列化数据
+            this.unserialize(stream);
+            this.dataReady = true;
+            // 释放资源
+            stream.dispose();
+            break;
+         }
+         default:
+            throw new FError(this, "Content type is invalid.");
+      }
    }
 
    // //==========================================================
@@ -143,16 +187,13 @@ export class FResource extends FBaseResource {
    //    xconfig.set('label', o._label);
    // }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FE3sResource_dispose = function FE3sResource_dispose(){
-   //    var o = this;
-   //    o._vendor = null;
-   //    // 父处理
-   //    o.__base.MListener.dispose.call(o);
-   //    o.__base.FConsole.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //
+   // @method
+   //==========================================================
+   public dispose() {
+      // 父处理
+      super.dispose();
+   }
 }
