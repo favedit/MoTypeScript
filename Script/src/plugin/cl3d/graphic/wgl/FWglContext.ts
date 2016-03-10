@@ -110,18 +110,18 @@ export class FWglContext extends FContext {
          parameters.stencil = false;
          parameters.premultipliedAlpha = false;
          // 初始化对象
-         let handle = null;
-         var codes = ['experimental-webgl2', 'experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl']
-         var count = codes.length;
-         for (var i = 0; i < count; i++) {
-            var code = codes[i];
-            handle = hCanvas.getContext(code, parameters);
-            if (handle) {
-               RLogger.debug(this, 'Create context3d. (code={1}, handle={2})', code, handle);
+         var hHandle = null;
+         var codes = ['experimental-webgl2', 'webgl2', 'experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl']
+         var count:number = codes.length;
+         for (var n:number = 0; n < count; n++) {
+            var code:string = codes[n];
+            hHandle = hCanvas.getContext(code, parameters);
+            if (hHandle) {
+               RLogger.debug(this, 'Create context3d. (code={1}, handle={2})', code, hHandle);
                break;
             }
          }
-         if (!handle) {
+         if (!hHandle) {
             RLogger.error(this, 'Create context3d failure.');
             var event = new SEvent(this);
             //event.code = MO.EGraphicError.UnsupportWebGL;
@@ -130,7 +130,7 @@ export class FWglContext extends FContext {
             event.dispose();
             return false;
          }
-         this.handle = handle;
+         this.handle = hHandle;
          //o._contextAttributes = handle.getContextAttributes();
       } else {
          var event = new SEvent(this);
