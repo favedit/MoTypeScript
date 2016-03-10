@@ -1,5 +1,5 @@
 import {FObjects} from '../common/lang/FObjects';
-import {FNode} from '../core/framework/FNode';
+import {FNode} from '../framework/FNode';
 
 export class FEntity extends FNode {
 

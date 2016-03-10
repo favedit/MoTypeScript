@@ -1,5 +1,5 @@
-import {FDispatcher} from '../../common/lang/FDispatcher';
-import {FObjects} from '../../common/lang/FObjects';
+import {FDispatcher} from '../common/lang/FDispatcher';
+import {FObjects} from '../common/lang/FObjects';
 import {FClassFactory} from './FClassFactory';
 import {SFieldChangeEvent} from './SFieldChangeEvent';
 import {ENodeAction} from './ENodeAction';

@@ -1,4 +1,5 @@
 import {FError} from '../lang/FError';
+import {RLogger} from '../lang/RLogger';
 import {FXmlDocument} from '../xml/FXmlDocument';
 import {RXml} from '../xml/RXml';
 import {EHttpContent} from './EHttpContent';
@@ -12,13 +13,21 @@ import {FHttpConnection} from './FHttpConnection';
 // @version 150104
 //==========================================================
 export class FXmlConnection extends FHttpConnection {
-   //..........................................................
-   // @attribute
-   public contentCd = EHttpContent.Text;
-   // @attribute
+   // 输入节点
    public _inputNode = null;
+   // 输出节点
    public _outputNode = null;
-   // @attribute
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._contentCd = EHttpContent.Text;
+   }
 
    //==========================================================
    // <T>响应链接发送处理。</T>
@@ -65,7 +74,8 @@ export class FXmlConnection extends FHttpConnection {
          throw new FError(this, "Fetch xml data failure.");
       }
       if (!element) {
-         //return sk.common.lang.RLogger.fatal(o, 'Read xml error. (url={1})\n{2}', this._url, this._outputText)
+         //return RLogger.fatal(this, 'Read xml error. (url={1})\n{2}', this._url, this._outputText)
+         return RLogger.fatal(this, 'Read xml error. (url={1})', this._url)
       }
       // 建立文档对象
       var document = new FXmlDocument();
@@ -79,8 +89,7 @@ export class FXmlConnection extends FHttpConnection {
       event.document = document;
       event.root = root;
       event.content = root;
-      //event.parameters = o._parameters;
-      //o.processLoadListener(event);
+      this.loadListeners.process(event);
       event.dispose();
       // 异步处理后清空属性
       if (this._asynchronous) {
@@ -88,7 +97,6 @@ export class FXmlConnection extends FHttpConnection {
          this._inputNode = null;
          this._output = null;
          this._outputNode = null;
-         //o._parameters = null;
       }
    }
 

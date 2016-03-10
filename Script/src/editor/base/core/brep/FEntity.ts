@@ -2,7 +2,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {RObjectId} from '../../../runtime/common/lang/RObjectId';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
-import {FNode} from '../../../runtime/core/framework/FNode';
+import {FNode} from '../../../runtime/framework/FNode';
 //import {EntityFlagEnum} from './EntityFlagEnum';
 //import {EntityEventEnum} from "./EntityEventEnum";
 //import {Signal} from "../../util/Signal";

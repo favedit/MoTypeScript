@@ -277,30 +277,6 @@ export class FHttpConnection extends FObject {
       } else {
          this.sendSync();
       }
-      return this.content;
-   }
-
-   //==========================================================
-   // <T>发送页面请求。</T>
-   //
-   // @method
-   // @param url:String 发送地址
-   // @param data:Object 发送数据
-   //==========================================================
-   public send2(url, data) {
-      // 设置参数
-      this._url = url;
-      this._input = data;
-      // 设置状态
-      this._methodCd = EHttpMethod.Post;
-      this._statusFree = false;
-      // 发送信息
-      this.onConnectionSend();
-      if (this._asynchronous) {
-         this.sendAsync();
-      } else {
-         this.sendSync();
-      }
       return this.content();
    }
 

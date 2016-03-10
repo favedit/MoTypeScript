@@ -9,6 +9,9 @@ import {FHttpConnection} from './FHttpConnection';
 // @version 150104
 //==========================================================
 export class FJsonConnection extends FHttpConnection {
+
+   protected _content: any = null;
+
    //==========================================================
    // <T>构造处理。</T>
    //
@@ -31,7 +34,7 @@ export class FJsonConnection extends FHttpConnection {
       var content = null;
       var data = this._outputData;
       if (data) {
-         content = this.content = JSON.parse(data);
+         content = this._content = JSON.parse(data);
       }
       // 加载处理
       var event = this._event;
@@ -41,5 +44,14 @@ export class FJsonConnection extends FHttpConnection {
       this.loadListeners.process(event);
       // 完成处理
       this.completeListeners.process(event);
+   }
+
+   //==========================================================
+   // <T>获得内容。</T>
+   //
+   // @return 内容
+   //==========================================================
+   public content() {
+      return this._content;
    }
 }

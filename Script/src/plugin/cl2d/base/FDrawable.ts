@@ -1,4 +1,4 @@
-import {FNode} from '../../../runtime/core/framework/FNode';
+import {FNode} from '../../../runtime/framework/FNode';
 
 //==========================================================
 // <T>可绘制2D对象。</T>

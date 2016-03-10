@@ -11,9 +11,19 @@ export class FCanvas extends FObject {
 
    public hCanvas: HTMLCanvasElement = null;
 
+   public content = null;
+
    //==========================================================
    // <T>创建环境。</T>
    //==========================================================
-   public createContext() {
+   public setup(parameters) {
+      this.content = this.createContext(parameters);
+   }
+
+   //==========================================================
+   // <T>创建环境。</T>
+   //==========================================================
+   public createContext(parameters): any {
+      return null;
    }
 }

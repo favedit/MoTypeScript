@@ -1,4 +1,4 @@
-﻿import {EKeyCode} from '../../../../runtime/ui/device/EKeyCode'
+﻿import {EKeyCode} from '../../../../runtime/ui/EKeyCode'
 
 //===========================================================
 // <T>按键代码枚举。</T>

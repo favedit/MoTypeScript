@@ -8,6 +8,9 @@ export {core as core};
 import * as data from './data/index';
 export {data as data};
 
+import * as framework from './framework/index';
+export {framework as framework};
+
 import * as graphic from './graphic/index';
 export {graphic as graphic};
 

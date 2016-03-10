@@ -11,21 +11,21 @@ import {EMouseButton} from './EMouseButton';
 export class SMouseEvent extends SEvent {
    //..........................................................
    // @attribute
-   button = null;
-   mouseLeft = false;
-   mouseMiddle = false;
-   mouseRight = false;
-   altKey = false;
-   ctrlKey = false;
-   x = 0;
-   y = 0;
-   offsetX = 0;
-   offsetY = 0;
-   clientX = 0;
-   clientY = 0;
-   deltaX = 0;
-   deltaY = 0;
-   deltaZ = 0;
+   public button = null;
+   public mouseLeft = false;
+   public mouseMiddle = false;
+   public mouseRight = false;
+   public altKey = false;
+   public ctrlKey = false;
+   public x = 0;
+   public y = 0;
+   public offsetX = 0;
+   public offsetY = 0;
+   public clientX = 0;
+   public clientY = 0;
+   public deltaX = 0;
+   public deltaY = 0;
+   public deltaZ = 0;
 
    //==========================================================
    // <T>接收事件信息。</T>
@@ -34,33 +34,32 @@ export class SMouseEvent extends SEvent {
    // @param event:HtmlEvent 页面事件
    //==========================================================
    public attachEvent(event) {
-      var o = this;
       //var hs = o.hSource = MO.RHtml.eventSource(event);
       var hs = null;
       if (hs) {
-         o.source = hs.__linker;
+         this.source = hs.__linker;
       }
-      o.button = event.button;
-      o.mouseLeft = (event.button == EMouseButton.Left);
-      o.mouseMiddle = (event.button == EMouseButton.Middle);
-      o.mouseRight = (event.button == EMouseButton.Right);
-      o.altKey = event.altKey;
-      o.ctrlKey = event.ctrlKey;
+      this.button = event.button;
+      this.mouseLeft = (event.button == EMouseButton.Left);
+      this.mouseMiddle = (event.button == EMouseButton.Middle);
+      this.mouseRight = (event.button == EMouseButton.Right);
+      this.altKey = event.altKey;
+      this.ctrlKey = event.ctrlKey;
       //if (MO.RBrowser.isBrowser(MO.EBrowser.FireFox)) {
-      o.x = event.pageX;
-      o.y = event.pageY;
-      o.offsetX = event.layerX;
-      o.offsetY = event.layerY;
+      this.x = event.pageX;
+      this.y = event.pageY;
+      this.offsetX = event.layerX;
+      this.offsetY = event.layerY;
       //} else {
-      o.x = event.x;
-      o.y = event.y;
-      o.offsetX = event.offsetX;
-      o.offsetY = event.offsetY;
+      this.x = event.x;
+      this.y = event.y;
+      this.offsetX = event.offsetX;
+      this.offsetY = event.offsetY;
       //}
-      o.clientX = event.clientX;
-      o.clientY = event.clientY;
-      o.deltaX = event.deltaX;
-      o.deltaY = event.deltaY;
-      o.deltaZ = event.deltaZ;
+      this.clientX = event.clientX;
+      this.clientY = event.clientY;
+      this.deltaX = event.deltaX;
+      this.deltaY = event.deltaY;
+      this.deltaZ = event.deltaZ;
    }
 }

@@ -1,4 +1,4 @@
-import {SEvent} from '../../../runtime/common/lang/SEvent';
+import {SEvent} from '../common/lang/SEvent';
 
 export class SFieldChangeEvent extends SEvent {
    public valueFrom: any;

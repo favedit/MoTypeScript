@@ -10,10 +10,10 @@ import {SEvent} from '../../common/lang/SEvent';
 export class SKeyboardEvent extends SEvent {
    //..........................................................
    // @attribute
-   altKey = false;
-   shiftKey = false;
-   ctrlKey = false;
-   keyCode = 0;
+   public altKey = false;
+   public shiftKey = false;
+   public ctrlKey = false;
+   public keyCode = 0;
 
    //==========================================================
    // <T>接收事件信息。</T>
@@ -22,11 +22,10 @@ export class SKeyboardEvent extends SEvent {
    // @param p:event:HtmlEvent 页面事件
    //==========================================================
    public attachEvent(p) {
-      var o = this;
-      o.altKey = p.altKey;
-      o.shiftKey = p.shiftKey;
-      o.ctrlKey = p.ctrlKey;
-      o.keyCode = p.keyCode;
+      this.altKey = p.altKey;
+      this.shiftKey = p.shiftKey;
+      this.ctrlKey = p.ctrlKey;
+      this.keyCode = p.keyCode;
    }
 
    //==========================================================
@@ -35,7 +34,6 @@ export class SKeyboardEvent extends SEvent {
    // @method
    //==========================================================
    public cancel() {
-      var o = this;
-      o.hEvent.returnValue = false;
+      this.hEvent.returnValue = false;
    }
 }
