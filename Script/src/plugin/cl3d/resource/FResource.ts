@@ -16,6 +16,8 @@ export class FResource extends FBaseResource {
    // 版本信息
    public version = null;
    // 唯一编号
+   public identity = null;
+   // 鉴定码
    public guid = null;
    // 代码
    public code = null;

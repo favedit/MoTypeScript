@@ -5,7 +5,9 @@ import {SSettings} from '../../../runtime/framework/SSettings';
 import {FCanvasView} from '../view/FCanvasView';
 
 export class FApplication extends FBaseApplication {
+   // 画板视图
    public canvasView: FCanvasView;
+   
    //==========================================================
    // <T>配置处理。</T>
    //==========================================================

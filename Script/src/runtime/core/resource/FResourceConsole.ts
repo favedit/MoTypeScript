@@ -41,7 +41,7 @@ export class FResourceConsole extends FConsole {
    // protected _processStorages = null;
    // 线程
    protected _thread: FListenerThread = null;
-   protected _interval = 150;
+   protected _interval:number = 150;
    // protected _loadLimit = 8;
    // 线程控制台
    @ALinker(FThreadConsole)

@@ -18,13 +18,10 @@ import {FMaterialResource} from './FMaterialResource';
 //==========================================================
 export class FMaterialResourceConsole extends FConsole {
    // 模板集合
-   public materials: FDictionary<FMaterialResource> = null;
+   public _materials: FDictionary<FMaterialResource> = null;
    // 资源控制台
    @ALinker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
-
-   //    // @attribute
-   //    o._resources  = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,30 +31,27 @@ export class FMaterialResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.materials = new FDictionary<FMaterialResource>();
+      this._materials = new FDictionary<FMaterialResource>();
    }
 
-   // //==========================================================
-   // // <T>构造处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FE3sMaterialConsole_construct = function FE3sMaterialConsole_construct(){
-   //    var o = this;
-   //    o.__base.FConsole.construct.call(o);
-   //    o._resources = new MO.TDictionary();
-   //    o._materials = new MO.TDictionary();
-   // }
+   //==========================================================
+   // <T>获得材质集合。</T>
+   //
+   // @return 材质集合
+   //==========================================================
+   public get materials(): FDictionary<FMaterialResource> {
+      return this._materials;
+   }
 
-   // //==========================================================
-   // // <T>根据名称查找材质。</T>
-   // //
-   // // @param p:name:String 名称
-   // // @return FE3sMaterial 材质
-   // //==========================================================
-   // MO.FE3sMaterialConsole_find = function FE3sMaterialConsole_find(p){
-   //    return this._materials.get(p);
-   // }
+   //==========================================================
+   // <T>根据名称查找材质。</T>
+   //
+   // @param code 代码
+   // @return 材质
+   //==========================================================
+   public find(code) {
+      return this._materials.get(code);
+   }
 
    // //==========================================================
    // // <T>反序列化一个材质。</T>
@@ -79,7 +73,6 @@ export class FMaterialResourceConsole extends FConsole {
    //    o._materials.set(materialGuid, material);
    //    return material;
    // }
-
 
    // //==========================================================
    // // <T>加载指定代码的模型资源。</T>
@@ -132,19 +125,18 @@ export class FMaterialResourceConsole extends FConsole {
       // }
       // MO.Assert.debugNotEmpty(identity);
       // var url = vendor.makeUrl();
-      var url = args.url;
-      var identity = url;
+      var url:string = args.url;
+      var identity:string = url;
       // 查找模板
-      var materials = this.materials;
+      var materials = this._materials;
       var material: FMaterialResource = materials.get(identity);
       if (material) {
          return material;
       }
       // 创建模板
       material = RClass.create(FMaterialResource);
-      //template.setGuid(identity);
+      material.guid = identity;
       //template.setVendor(vendor);
-      //template.setSourceUrl(url);
       // 创建加载器
       this._resourceConsole.loadContent(EDataContent.Json, material, url);
       materials.set(identity, material);
@@ -160,9 +152,9 @@ export class FMaterialResourceConsole extends FConsole {
    public loadByGuid(guid): FMaterialResource {
       var args = RMemory.alloc(SLoadArgs);
       args.guid = guid;
-      var template = this.load(args);
+      var material = this.load(args);
       RMemory.free(args);
-      return template;
+      return material;
    }
 
    //==========================================================
@@ -174,9 +166,9 @@ export class FMaterialResourceConsole extends FConsole {
    public loadByCode(code): FMaterialResource {
       var args = RMemory.alloc(SLoadArgs);
       args.code = code;
-      var template = this.load(args);
+      var material = this.load(args);
       RMemory.free(args);
-      return template;
+      return material;
    }
 
    //==========================================================
@@ -188,17 +180,16 @@ export class FMaterialResourceConsole extends FConsole {
    public loadByUrl(url: string): FMaterialResource {
       var args = RMemory.alloc(SLoadArgs);
       args.url = url;
-      var template = this.load(args);
+      var material = this.load(args);
       RMemory.free(args);
-      return template;
+      return material;
    }
 
    //==========================================================
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      //this._resources = MO.Lang.Object.free(this._resources);
-      this.materials = RObject.dispose(this.materials);
+      this._materials = RObject.dispose(this._materials);
       // 父处理
       super.dispose();
    }

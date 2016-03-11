@@ -18,9 +18,12 @@ import {FContext} from '../../graphic/FContext'
 // @history 141231
 //==========================================================
 export class FCube extends FRenderable {
-   public vertexPositionBuffer = null;
-   public vertexColorBuffer = null;
-   public indexBuffer = null;
+   // 顶点位置缓冲
+   public vertexPositionBuffer:FVertexBuffer = null;
+   // 顶点颜色缓冲
+   public vertexColorBuffer:FVertexBuffer = null;
+   // 索引缓冲
+   public indexBuffer:FIndexBuffer = null;
 
    //==========================================================
    // <T>设置信息。</T>

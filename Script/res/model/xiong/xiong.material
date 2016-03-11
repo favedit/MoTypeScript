@@ -8,6 +8,7 @@
   },
   "effect": {
     "code": "automatic",
+    "render": "automatic",
     "option": {
       "depth_write": true,
       "depth_compare": "less",

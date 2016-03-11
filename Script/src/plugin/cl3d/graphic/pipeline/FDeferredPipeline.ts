@@ -5,5 +5,5 @@
 // @author maocy
 // @version 141230
 //==========================================================
-export class FDeferPipeline {
+export class FDeferredPipeline {
 }
