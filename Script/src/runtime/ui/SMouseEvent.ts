@@ -1,4 +1,4 @@
-import {SEvent} from '../../common/lang/SEvent';
+import {SEvent} from '../common/lang/SEvent';
 import {EMouseButton} from './EMouseButton';
 
 //==========================================================

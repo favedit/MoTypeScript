@@ -1,8 +1,13 @@
 import {FListeners} from '../../common/lang/FListeners';
+import {FAttributes} from '../../common/lang/FAttributes';
+import {SEvent} from '../../common/lang/SEvent';
 import {RString} from '../../common/lang/RString';
 import {RLogger} from '../../common/lang/RLogger';
 import {FConsole} from '../../core/FConsole';
 import {EEvent} from '../EEvent';
+import {SMouseEvent} from '../SMouseEvent';
+import {SKeyboardEvent} from '../SKeyboardEvent';
+import {SResizeEvent} from '../SResizeEvent';
 
 //==========================================================
 // <T>设备控制台。</T>
@@ -43,6 +48,9 @@ export class FDeviceConsole extends FConsole {
    public lsnsOrientation = new FListeners();
    public lsnsDeviceError = new FListeners();
 
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
    public constructor() {
       super();
    }
@@ -247,7 +255,7 @@ export class FDeviceConsole extends FConsole {
    // @method
    // @param hEvent:htmlEvent 事件
    //==========================================================
-   public static ohKeyUp(hEvent) {
+   public ohKeyUp(hEvent) {
       var linker = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
@@ -264,7 +272,7 @@ export class FDeviceConsole extends FConsole {
    // @method
    // @param hEvent:htmlEvent 事件
    //==========================================================
-   public static ohKeyPress(hEvent) {
+   public ohKeyPress(hEvent) {
       var linker = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
@@ -281,7 +289,7 @@ export class FDeviceConsole extends FConsole {
    // @method
    // @param event:htmlEvent 事件
    //==========================================================
-   public static ohResize(hEvent) {
+   public ohResize(hEvent) {
       var linker = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
