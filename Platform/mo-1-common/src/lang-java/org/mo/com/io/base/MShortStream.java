@@ -1,0 +1,161 @@
+package org.mo.com.io.base;
+
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.generic.MShorts;
+
+//============================================================
+// <T>短整数数据流基类。</T>
+//============================================================
+public abstract class MShortStream
+      extends MShorts
+{
+   // 数据位置
+   protected int _position = 0;
+
+   //============================================================
+   // <T>构造短整数数据流基类。</T>
+   //============================================================
+   public MShortStream(){
+   }
+
+   //============================================================
+   // <T>构造短整数数据流基类。</T>
+   //
+   // @param capacity 容量
+   //============================================================
+   public MShortStream(int capacity){
+      super(capacity);
+   }
+
+   //============================================================
+   // <T>构造短整数数据流基类。</T>
+   //
+   // @param data 数据
+   // @param length 长度
+   //============================================================
+   public MShortStream(short[] data,
+                       int length){
+      super(data, length);
+   }
+
+   //============================================================
+   // <T>判断是否存在下个数据。</T>
+   //
+   // @return 是否存在
+   //============================================================
+   public boolean hasNext(){
+      return _position < _length - 1;
+   }
+
+   //============================================================
+   // <T>获得位置。</T>
+   //
+   // @return 位置
+   //============================================================
+   public int position(){
+      return _position;
+   }
+
+   //============================================================
+   // <T>获得位置。</T>
+   //
+   // @return 位置
+   //============================================================
+   public void setPosition(int position){
+      if(position < 0){
+         position = 0;
+      }
+      if(position > _length - 1){
+         position = _length - 1;
+      }
+      _position = position;
+   }
+
+   //============================================================
+   // <T>忽略指定长度。</T>
+   //
+   // @param length 长度
+   //============================================================
+   public void skip(int length){
+      _position += length;
+   }
+
+   //============================================================
+   // <T>获得位置。</T>
+   //
+   // @return 位置
+   //============================================================
+   public short read(){
+      if(_position >= _length - 1){
+         throw new FFatalError("Read failure. (length={1}, _osition={2})", _length, _position);
+      }
+      return _memory[_position++];
+   }
+
+   //============================================================
+   // <T>获得位置。</T>
+   //
+   // @return 位置
+   //============================================================
+   public int read(short[] data){
+      return read(data, 0, data.length);
+   }
+
+   //============================================================
+   // <T>获得位置。</T>
+   //
+   // @return 位置
+   //============================================================
+   public int read(short[] data,
+                   int offset,
+                   int length){
+      int copy = Math.min(length, _length - _position);
+      System.arraycopy(_memory, _position, data, offset, copy);
+      _position += copy;
+      return copy;
+   }
+
+   //============================================================
+   // <T>写入一个字节。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public int write(short data){
+      if(_position < _length - 1){
+         _memory[_position] = data;
+      }else{
+         append(data);
+      }
+      _position++;
+      return 1;
+   }
+
+   //============================================================
+   // <T>写入一个字节。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public int write(short[] data){
+      return write(data, 0, data.length);
+   }
+
+   //============================================================
+   // <T>写入字节集合。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public int write(short[] data,
+                    int offset,
+                    int length){
+      if(length > _length - _position){
+         ensureSize(_position + length);
+         System.arraycopy(data, offset, _memory, _position, length);
+         _position += length;
+         _length = _position;
+      }else{
+         System.arraycopy(data, offset, _memory, _position, length);
+         _position += length;
+      }
+      return length;
+   }
+}

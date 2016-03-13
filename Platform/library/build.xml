@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MoHadoop" default="run" basedir=".">
+   <property name="solution.dir" value="D:/Microbject/MoCloud3d/Platform"/>
+   <property name="target.dir" value="${solution.dir}/library"/>
+
+   <target name="init">
+      <mkdir dir="${target.dir}"/>
+   </target>
+
+   <target name="jar" depends="init" description="jar">
+      <jar destfile="mo-common.jar"      basedir="${solution.dir}/mo-1-common/bin"/>
+      <jar destfile="mo-core.jar"        basedir="${solution.dir}/mo-2-core/bin"/>
+      <jar destfile="mo-logic.jar"       basedir="${solution.dir}/mo-3-logic/bin"/>
+      <jar destfile="mo-web.jar"         basedir="${solution.dir}/mo-4-web/bin"/>
+      <jar destfile="mo-cloud.jar"       basedir="${solution.dir}/mo-5-cloud/bin"/>
+      <jar destfile="mo-content.jar"     basedir="${solution.dir}/mo-6-content/bin"/>
+      <jar destfile="mo-resource.jar"    basedir="${solution.dir}/mo-7-resource/bin"/>
+      <jar destfile="mo-utility.jar"     basedir="${solution.dir}/mo-8-utility/bin"/>
+      <jar destfile="mo-lib-lzma.jar"    basedir="${solution.dir}/mo-lib-lzma/bin"/>
+   </target> 
+</project>
