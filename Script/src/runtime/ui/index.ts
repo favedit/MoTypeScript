@@ -1,7 +1,10 @@
+export * from './EBrowser';
+export * from './EDevice';
 export * from './EKeyCode';
 export * from './EKeyStatus';
 export * from './EMouseButton';
 export * from './EOrientation';
+export * from './ESoftware';
 export * from './EUiAlign';
 export * from './EUiAnchor';
 export * from './EUiBorder';
@@ -30,8 +33,14 @@ export * from './FControl';
 import * as console from './console/index';
 export {console as console};
 
+import * as control from './control/index';
+export {control as control};
+
 import * as device from './device/index';
 export {device as device};
+
+import * as event from './event/index';
+export {event as event};
 
 import * as resource from './resource/index';
 export {resource as resource};

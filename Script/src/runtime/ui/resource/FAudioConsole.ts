@@ -1,6 +1,11 @@
 import {FDictionary} from '../../common/lang/FDictionary';
+import {EScope} from '../../common/lang/EScope';
 import {RObject} from '../../common/lang/RObject';
+import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
+import {RConsole} from '../../core/RConsole';
+import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {FAudio} from './FAudio';
 
 //==========================================================
 // <T>音乐资源控制台。</T>
@@ -10,12 +15,8 @@ import {FConsole} from '../../core/FConsole';
 // @version 150707
 //==========================================================
 export class FAudioConsole extends FConsole {
-   //o = MO.Class.inherits(this, o, MO.FConsole);
-   //..........................................................
-   // @attribute
-   //protected _scopeCd = common.lang.EScope.Global;
-   // @attribute
-   protected _audios = null;
+   // 声音集合
+   protected _audios: FDictionary<FAudio> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -25,37 +26,34 @@ export class FAudioConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._audios = new FDictionary();
+      this.scopeCd = EScope.Global;
+      this._audios = new FDictionary<FAudio>();
    }
 
    //==========================================================
    // <T>创建声音资源。</T>
    //
-   // @method
-   // @param uri:String 网络地址
-   // @return FAudio 资源对象
+   // @param uri 网络地址
+   // @return 资源对象
    //==========================================================
    public create(uri) {
-      //var o = this;
-      //var url = MO.Console.find(MO.FEnvironmentConsole).parse(uri);
-      //var audio = MO.Class.create(MO.FAudioResource);
-      //audio.loadUrl(url);
-      //return audio;
+      var url = RConsole.find(FEnvironmentConsole).parse(uri);
+      var audio: FAudio = RClass.create(FAudio);
+      audio.loadUrl(url);
+      return audio;
    }
 
    //==========================================================
    // <T>加载声音资源。</T>
    //
-   // @method
-   // @param uri:String 网络地址
-   // @return FAudio 资源对象
+   // @param uri  网络地址
+   // @return 资源对象
    //==========================================================
    public load(uri) {
-      var o = this;
-      var audios = o._audios;
+      var audios = this._audios;
       var audio = audios.get(uri);
       if (!audio) {
-         audio = o.create(uri);
+         audio = this.create(uri);
          audios.set(uri, audio);
       }
       return audio;
@@ -63,14 +61,11 @@ export class FAudioConsole extends FConsole {
 
    //==========================================================
    // <T>选择处理。</T>
-   //
-   // @method
    //==========================================================
    public select() {
-      var o = this;
-      var audios = o._audios;
-      var count = audios.count();
-      for (var i = 0; i < count; i++) {
+      var audios = this._audios;
+      var count: number = audios.count();
+      for (var i: number = 0; i < count; i++) {
          var audio = audios.at(i);
          audio.select();
       }
@@ -78,13 +73,10 @@ export class FAudioConsole extends FConsole {
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
-      var o = this;
       // 清空变量
-      this._audios = RObject.dispose(o._audios);
+      this._audios = RObject.dispose(this._audios);
       // 父处理
       super.dispose();
    }

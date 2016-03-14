@@ -2,6 +2,8 @@ export * from './FCamera';
 export * from './FCameraController';
 export * from './FCanvas';
 export * from './FObject';
+export * from './FScene';
+export * from './FSceneTypeEnum';
 
 import * as controls from './controls/index';
 export {controls as controls};

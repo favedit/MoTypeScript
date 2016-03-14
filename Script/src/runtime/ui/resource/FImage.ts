@@ -1,10 +1,12 @@
-import {FObject} from '../../common/lang/FObject';
-import {RObject} from '../../common/lang/RObject';
 import {SEvent} from '../../common/lang/SEvent';
+import {FObject} from '../../common/lang/FObject';
+import {FListeners} from '../../common/lang/FListeners';
+import {RObject} from '../../common/lang/RObject';
 import {RLogger} from '../../common/lang/RLogger';
 import {SSize2} from '../../common/math/SSize2';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
+import {RHtml} from '../utility/RHtml';
 
 //==========================================================
 // <T>图片。</T>
@@ -14,71 +16,57 @@ import {RConsole} from '../../core/RConsole';
 // @history 150105
 //==========================================================
 export class FImage extends FObject {
-   //o = MO.Class.inherits(this, o, MO.FObject, MO.MListenerLoad);
-   //..........................................................
-   // @attribute
-   protected __linker = null;
-   //_optionAlpha = MO.Class.register(o, new MO.AGetSet('_optionAlpha'), true);
+   // 准备好
    protected _ready = false;
-   //_size = MO.Class.register(o, new MO.AGetter('_size'));
-   protected _size = null;
-   //_url = MO.Class.register(o, new MO.AGetter('_url'));
+   // 尺寸
+   protected _size: SSize2 = null;
+   // 地址 
    protected _url = null;
-   //..........................................................
-   // @html
-   protected _hImage = null;
+   // 句柄
+   protected _handle = null;
+   // 句柄
+   protected _loadListeners: FListeners = null;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this._size = new SSize2();
+      this._loadListeners = new FListeners(this);
    }
 
    //==========================================================
-   // <T>加载完成处理。</T>
+   // <T>获得大小。</T>
    //
-   // @method
+   // @return 大小
    //==========================================================
-   public ohLoad() {
-      var image: FImage = this.__linker;
-      var hImage = image._hImage;
-      image._size.set(hImage.naturalWidth, hImage.naturalHeight);
-      image._ready = true;
-      // 处理加载事件
-      var event = new SEvent(image);
-      //image.processLoadListener(event);
-      event.dispose();
+   public size(): SSize2 {
+      return this._size;
    }
 
    //==========================================================
-   // <T>加载完成处理。</T>
+   // <T>获得句柄。</T>
    //
-   // @method
+   // @return 句柄
    //==========================================================
-   public ohError(p) {
-      var image = this.__linker;
-      var url = image._url;
-      RLogger.error(image, 'Load image failure. (url={1})', url);
+   public handle() {
+      return this._handle;
    }
 
    //==========================================================
-   // <T>获得位图。</T>
+   // <T>获得加载监听器。</T>
    //
-   // @method
-   // @return 位图
+   // @return 加载监听器
    //==========================================================
-   public image() {
-      return this._hImage;
+   public loadListeners(): FListeners {
+      return this._loadListeners;
    }
 
    //==========================================================
    // <T>测试是否准备好。</T>
    //
-   // @method
    // @return 是否准备好
    //==========================================================
    public testReady() {
@@ -86,37 +74,56 @@ export class FImage extends FObject {
    }
 
    //==========================================================
+   // <T>加载完成处理。</T>
+   //==========================================================
+   public ohLoad() {
+      var image: FImage = (this as any).__linker;
+      var hImage = image._handle;
+      image._size.set(hImage.naturalWidth, hImage.naturalHeight);
+      image._ready = true;
+      // 处理加载事件
+      var event = new SEvent(image);
+      image._loadListeners.process(event);
+      event.dispose();
+   }
+
+   //==========================================================
+   // <T>加载完成处理。</T>
+   //==========================================================
+   public ohError(p) {
+      var image = (this as any).__linker;
+      var url = image._url;
+      RLogger.error(image, 'Load image failure. (url={1})', url);
+   }
+
+   //==========================================================
    // <T>加载网络地址资源。</T>
    //
-   // @method
-   // @param uri:String 网络地址
+   // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
-      var o = this;
       var url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
       // 创建图片
-      var hImage = o._hImage;
+      var hImage = this._handle;
       if (!hImage) {
-         hImage = o._hImage = new Image();
-         hImage.__linker = o;
-         hImage.onload = o.ohLoad;
-         hImage.onerror = o.ohError;
+         hImage = this._handle = new Image();
+         hImage.__linker = this;
+         hImage.onload = this.ohLoad;
+         hImage.onerror = this.ohError;
       }
       // 加载图片
-      o._url = url;
+      this._url = url;
       hImage.src = url;
    }
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
-      var o = this;
       // 清空属性
-      o._size = RObject.dispose(o._size);
-      //o._hImage = MO.Window.Html.free(o._hImage);
+      this._size = RObject.dispose(this._size);
+      this._loadListeners = RObject.dispose(this._loadListeners);
+      this._handle = RHtml.free(this._handle);
       // 父处理
       super.dispose();
    }

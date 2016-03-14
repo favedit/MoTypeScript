@@ -5,7 +5,7 @@ import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
-import {FImageResource} from './FImageResource';
+import {FImage} from './FImage';
 
 //==========================================================
 // <T>图片资源控制台。</T>
@@ -15,11 +15,8 @@ import {FImageResource} from './FImageResource';
 // @version 150707
 //==========================================================
 export class FImageConsole extends FConsole {
-   //..........................................................
-   // @attribute
-   protected _scopeCd = EScope.Global;
-   // @attribute
-   protected _images = null;
+   // 图像集合 
+   protected _images: FDictionary<FImage> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -29,7 +26,8 @@ export class FImageConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._images = new FDictionary();
+      this.scopeCd = EScope.Global;
+      this._images = new FDictionary<FImage>();
    }
 
    //==========================================================
@@ -40,11 +38,10 @@ export class FImageConsole extends FConsole {
    // @return FAudio 资源对象
    //==========================================================
    public create(uri) {
-      var o = this;
       // 获得地址
       var url = RConsole.find(FEnvironmentConsole).parse(uri);
       // 加载地址
-      var image = RClass.create(FImageResource);
+      var image = RClass.create(FImage);
       image.loadUrl(url);
       return image;
    }
@@ -57,11 +54,10 @@ export class FImageConsole extends FConsole {
    // @return FAudio 资源对象
    //==========================================================
    public load(uri) {
-      var o = this;
-      var images = o._images;
+      var images = this._images;
       var image = images.get(uri);
       if (!image) {
-         image = o.create(uri);
+         image = this.create(uri);
          images.set(uri, image);
       }
       return image;

@@ -21,6 +21,10 @@ export * from './FTextureBitmapPack';
 export * from './FTextureResource';
 export * from './FTextureResourceConsole';
 export * from './FTrackResource';
+export * from './FVendor';
+export * from './FVendorConsole';
+export * from './FVendorLocal';
+export * from './FVendorNet';
 export * from './SLoadArgs';
 
 import * as backup from './backup/index';

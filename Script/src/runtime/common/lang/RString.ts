@@ -199,21 +199,20 @@ export class RString {
    //==========================================================
    // <T>判断是否包含指定字符串。</T>
    //
-   // @method
-   // @param source:String 字符串
-   // @param values:String 内容集合
-   // @return Boolean 是否包含
+   // @param source 字符串
+   // @param values 内容集合
+   // @return 是否包含
    //==========================================================
-   public static contains(source, values) {
+   public static contains(source, ...values: Array<any>) {
       if (source != null) {
          // 转换成字符串
          if (source.constructor != String) {
             source = source.toString();
          }
          // 判断内容包含
-         var count = arguments.length;
-         for (var i = 1; i < count; i++) {
-            var value = arguments[i];
+         var count: number = values.length;
+         for (var i: number = 0; i < count; i++) {
+            var value = values[i];
             if (source.indexOf(value) != -1) {
                return true;
             }

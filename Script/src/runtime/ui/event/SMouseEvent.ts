@@ -1,4 +1,5 @@
 import {SEvent} from '../common/lang/SEvent';
+import {RHtml} from '../utility/RHtml';
 import {EMouseButton} from './EMouseButton';
 
 //==========================================================
@@ -34,10 +35,9 @@ export class SMouseEvent extends SEvent {
    // @param event:HtmlEvent 页面事件
    //==========================================================
    public attachEvent(event) {
-      //var hs = o.hSource = MO.RHtml.eventSource(event);
-      var hs = null;
-      if (hs) {
-         this.source = hs.__linker;
+      var hEvent = this.hSource = RHtml.eventSource(event);
+      if (hEvent) {
+         this.source = hEvent.__linker;
       }
       this.button = event.button;
       this.mouseLeft = (event.button == EMouseButton.Left);

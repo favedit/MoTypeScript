@@ -2,6 +2,8 @@ import {FObject} from '../../common/lang/FObject';
 import {RLogger} from '../../common/lang/RLogger';
 import {RConsole} from '../../core/RConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {FDeviceConsole} from '../console/FDeviceConsole';
+import {RHtml} from '../utility/RHtml';
 
 //==========================================================
 // <T>声音。</T>
@@ -11,89 +13,71 @@ import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 // @history 150526
 //==========================================================
 export class FAudio extends FObject {
-   // o = MO.Class.inherits(this, o, MO.FObject, MO.MAudio);
-   //..........................................................
-   // @attribute
-   private __linker: any = null;
-   //..........................................................
-   // @attribute
-   //_url      = MO.Class.register(o, new MO.AGetter('_url'));
+   // 地址 
    protected _url: string = null;
-   //..........................................................
-   // @html
+   // 句柄
    protected _hAudio = null;
-
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
    }
 
    //==========================================================
-   // <T>加载完成处理。</T>
-   //
-   // @method
+   // <T>加载处理。</T>
    //==========================================================
    public ohLoad() {
-      var o = this.__linker;
-      o._ready = true;
-      o._hAudio.oncanplay = null;
-      RLogger.info(o, 'Audio load success. (url={1})', o._url);
+      var linker = (this as any).__linker;
+      linker._ready = true;
+      linker._hAudio.oncanplay = null;
+      RLogger.info(linker, 'Audio load success. (url={1})', linker._url);
    }
 
    //==========================================================
    // <T>加载完成处理。</T>
-   //
-   // @method
    //==========================================================
    public ohLoaded(event) {
-      var o = this.__linker;
-      o._ready = true;
-      o._loaded = true;
-      o._finish = true;
-      o._hAudio.oncanplaythrough = null;
-      RLogger.info(o, 'Audio loaded success. (url={1})', o._url);
+      var linker = (this as any).__linker;
+      linker._ready = true;
+      linker._loaded = true;
+      linker._finish = true;
+      linker._hAudio.oncanplaythrough = null;
+      RLogger.info(linker, 'Audio loaded success. (url={1})', linker._url);
    }
 
    //==========================================================
-   // <T>加载完成处理。</T>
-   //
-   // @method
+   // <T>错误处理。</T>
    //==========================================================
    public ohError(event) {
-      var o = this.__linker;
-      o._finish = true;
-      RLogger.error(o, 'Audio load failure. (url={1})', o._url);
+      var linker = (this as any).__linker;
+      linker._finish = true;
+      RLogger.error(linker, 'Audio load failure. (url={1})', linker._url);
    }
+
    //==========================================================
    // <T>获得音量。</T>
    //
-   // @method
    // @return 音量
    //==========================================================
-   public volume() {
+   public get volume() {
       return this._hAudio.volume;
    }
 
    //==========================================================
    // <T>设置音量。</T>
    //
-   // @method
-   // @param value:Number 设置音量
+   // @param value 设置音量
    //==========================================================
-   public setVolume(value) {
+   public set volume(value) {
       this._hAudio.volume = value;
    }
 
    //==========================================================
    // <T>获得循环。</T>
    //
-   // @method
-   // @return Boolean 循环
+   // @return 循环
    //==========================================================
    public loop() {
       return this._hAudio.loop;
@@ -102,8 +86,7 @@ export class FAudio extends FObject {
    //==========================================================
    // <T>设置循环。</T>
    //
-   // @method
-   // @param value:Boolean 设置循环
+   // @param value 设置循环
    //==========================================================
    public setLoop(value) {
       this._hAudio.loop = value;
@@ -112,59 +95,55 @@ export class FAudio extends FObject {
    //==========================================================
    // <T>播放处理。</T>
    //
-   // @method
+   // @param position 位置
    //==========================================================
    public play(position) {
-      var o = this;
-      var hAudio = o._hAudio;
+      var hAudio = this._hAudio;
       if (position != null) {
          if (hAudio.currentTime != position) {
             hAudio.currentTime = position;
          }
       }
       hAudio.play();
-      RLogger.debug(o, 'Audio play. (url={1}, position={2})', o._url, position);
+      RLogger.debug(this, 'Audio play. (url={1}, position={2})', this._url, position);
    }
 
    //==========================================================
    // <T>测试是否准备好。</T>
    //
-   // @method
    // @return 是否准备好
    //==========================================================
    public pause() {
-      var o = this;
-      o._hAudio.pause();
-      RLogger.debug(o, 'Audio pause. (url={1})', o._url);
+      this._hAudio.pause();
+      RLogger.debug(this, 'Audio pause. (url={1})', this._url);
    }
 
    //==========================================================
    // <T>加载网络地址资源。</T>
    //
-   // @method
-   // @param uri:String 网络地址
+   // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
-      var o = this;
       var url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
       // 创建图片
-      var hAudio = o._hAudio;
+      var hAudio = this._hAudio;
       if (!hAudio) {
-         hAudio = o._hAudio = new Audio();
-         hAudio.__linker = o;
-         hAudio.oncanplay = o.ohLoad;
-         hAudio.oncanplaythrough = o.ohLoaded;
-         hAudio.onerror = o.ohError;
+         hAudio = this._hAudio = new Audio();
+         hAudio.__linker = this;
+         hAudio.oncanplay = this.ohLoad;
+         hAudio.oncanplaythrough = this.ohLoaded;
+         hAudio.onerror = this.ohError;
          hAudio.loop = false;
       }
       // 不支持声音完成检测
-      //if (!MO.Window.Browser.capability.soundFinish) {
-      //   o._ready = true;
-      //   o._loaded = true;
-      //   o._finish = true;
-      //}
+      var deviceConsole: FDeviceConsole = RConsole.find(FDeviceConsole);
+      if (!deviceConsole.capability.soundFinish) {
+         //this._ready = true;
+         //this._loaded = true;
+         //this._finish = true;
+      }
       // 加载图片
-      o._url = url;
+      this._url = url;
       hAudio.src = url;
    }
 
@@ -174,9 +153,8 @@ export class FAudio extends FObject {
    // @method
    //==========================================================
    public select() {
-      var o = this;
-      o._hAudio.play();
-      o._hAudio.pause();
+      this._hAudio.play();
+      this._hAudio.pause();
    }
 
    //==========================================================
@@ -185,9 +163,8 @@ export class FAudio extends FObject {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
       // 清空属性
-      //o._hAudio = MO.Window.Html.free(o._hAudio);
+      this._hAudio = RHtml.free(this._hAudio);
       super.dispose();
    }
 }

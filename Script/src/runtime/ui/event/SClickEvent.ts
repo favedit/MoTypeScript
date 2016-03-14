@@ -8,7 +8,7 @@ import {SEvent} from '../../common/lang/SEvent';
 // @version 150327
 //==========================================================
 export class SClickEvent extends SEvent {
-   constructor(sender) {
+   public constructor(sender) {
       super(sender);
    }
 }

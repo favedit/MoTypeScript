@@ -1,4 +1,5 @@
 import {SEvent} from '../../common/lang/SEvent';
+import {RHtml} from '../utility/RHtml';
 
 //==========================================================
 // <T>改变大小事件信息类。</T>
@@ -9,8 +10,8 @@ import {SEvent} from '../../common/lang/SEvent';
 //==========================================================
 export class SResizeEvent extends SEvent {
    // @attribute
-   width = null;
-   height = null;
+   public width = null;
+   public height = null;
 
    //==========================================================
    // <T>接收事件信息。</T>
@@ -19,10 +20,9 @@ export class SResizeEvent extends SEvent {
    // @param p:event:HtmlEvent 页面事件
    //==========================================================
    public attachEvent(p) {
-      var o = this;
-      //var hs = o.hSource = MO.RHtml.eventSource(p);
-      //if(hs){
-      //   o.source = hs.__linker;
-      //}
+      var hs = this.hSource = RHtml.eventSource(p);
+      if(hs){
+        this.source = hs.__linker;
+      }
    }
 }

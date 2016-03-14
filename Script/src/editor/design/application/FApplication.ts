@@ -15,7 +15,7 @@ export class FApplication extends FBaseApplication {
       super.setup(settings);
       // 设置环境
       var environmentConsole = RConsole.find(FEnvironmentConsole);
-      environmentConsole.registerValue('resource', '/ts/res');
+      environmentConsole.registerValue('resource', '/res');
       // 选择视图
       var canvasView = this.canvasView = new FCanvasView()
       this.registerView(canvasView);

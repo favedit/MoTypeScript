@@ -24,7 +24,7 @@ export class FConsole extends FObject {
    //
    // @method
    //==========================================================
-   public onSetup(): void {
+   public onSetup(args?: any): void {
    }
 
    //==========================================================
@@ -32,9 +32,9 @@ export class FConsole extends FObject {
    //
    // @method
    //==========================================================
-   public setup(): void {
+   public setup(args?: any): void {
       if (!this.statusSetup) {
-         this.onSetup();
+         this.onSetup(args);
          this.statusSetup = true;
       }
    }
