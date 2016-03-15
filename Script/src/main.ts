@@ -1,6 +1,7 @@
 import * as mo from './index';
 // 初始化控件
 mo.runtime.common.RRuntime.namespace(mo, 'mo');
+
 // 设置参数
 var settings = new mo.runtime.framework.SSettings();
 settings.hDocument = document;

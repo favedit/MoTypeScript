@@ -1,6 +1,7 @@
 import {EScope} from '../../runtime/common/lang/EScope'
 import {FDictionary} from '../../runtime/common/lang/FDictionary'
 import {RString} from '../../runtime/common/lang/RString'
+import {RObject} from '../../runtime/common/lang/RObject'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
 import {RAssert} from '../../runtime/common/RAssert'
 import {RMemory} from '../../runtime/common/RMemory'
@@ -33,8 +34,6 @@ export class FE3rModelConsole extends FConsole {
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
@@ -305,4 +304,14 @@ export class FE3rModelConsole extends FConsole {
    //    model.update();
    //    return model;
    // }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 释放处理
+      this._models = RObject.dispose(this._models);
+      // 父处理
+      super.dispose();
+   }
 }

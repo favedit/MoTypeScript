@@ -13,15 +13,15 @@ import {FTechnique} from './FTechnique';
 //==========================================================
 export class FTechniqueConsole extends FConsole {
    // 技术集合
-   public techniques: FDictionary<FTechnique> = null;
+   protected _techniques: FDictionary<FTechnique> = null;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
-      this.scopeCd = EScope.Local;
-      this.techniques = new FDictionary<FTechnique>();
+      this._scopeCd = EScope.Local;
+      this._techniques = new FDictionary<FTechnique>();
    }
 
    //==========================================================
@@ -34,7 +34,7 @@ export class FTechniqueConsole extends FConsole {
    //==========================================================
    public find(context, clazz) {
       // 获得环境
-      if(context.graphicContext){
+      if (context.graphicContext) {
          context = context.graphicContext;
       }
       //if (!RClass.isClass(context, context.FGraphicContext)) {
@@ -45,8 +45,8 @@ export class FTechniqueConsole extends FConsole {
       //}
       // 查找技术
       var code = context.hashCode + '|' + RClass.shortName(clazz);
-      var techniques = this.techniques;
-      var technique:FTechnique = techniques.get(code);
+      var techniques = this._techniques;
+      var technique: FTechnique = techniques.get(code);
       if (!technique) {
          // 创建技术
          technique = RClass.create(clazz);
@@ -56,7 +56,7 @@ export class FTechniqueConsole extends FConsole {
          // 设置过程集合
          var passes = technique.passes;
          var passCount = passes.count();
-         for (var i:number = 0; i < passCount; i++) {
+         for (var i: number = 0; i < passCount; i++) {
             var pass = passes.at(i);
             var passCode = pass.code;
             pass.fullCode = techniqueCode + '.' + passCode;

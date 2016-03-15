@@ -60,7 +60,7 @@ export class FImage extends FObject {
    //
    // @return 加载监听器
    //==========================================================
-   public loadListeners(): FListeners {
+   public get loadListeners(): FListeners {
       return this._loadListeners;
    }
 

@@ -1,4 +1,5 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
+import {FError} from '../../../runtime/common/lang/FError';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {FGraphicContext} from './FGraphicContext';
 
@@ -11,7 +12,16 @@ import {FGraphicContext} from './FGraphicContext';
 //==========================================================
 export class FGraphicObject extends FObject {
    // 图形环境
-   public graphicContext: any = null;
+   public _graphicContext: any = null;
+
+   //==========================================================
+   // <T>关联图形环境。</T>
+   //
+   // @param context 图形环境
+   //==========================================================
+   public get graphicContext() {
+      return this._graphicContext;
+   }
 
    //==========================================================
    // <T>关联图形环境。</T>
@@ -19,15 +29,14 @@ export class FGraphicObject extends FObject {
    // @param context 图形环境
    //==========================================================
    public linkGraphicContext(context) {
-      /*if (MO.Class.isClass(context, MO.FGraphicContext)) {
-         o._graphicContext = context;
-      } else if (MO.Class.isClass(context, MO.MGraphicObject)) {
-         o._graphicContext = context.graphicContext();
-      } else {
-         throw new MO.TError(o, 'Link graphic context failure. (context={1})', context);
-      }*/
       RAssert.debugNotNull(context);
-      this.graphicContext = context;
+      if (context instanceof FGraphicContext) {
+         this._graphicContext = context;
+      } else if (context instanceof FGraphicObject) {
+         this._graphicContext = (context as FGraphicObject).graphicContext;
+      } else {
+         throw new FError(this, 'Link graphic context failure. (context={1})', context);
+      }
    }
 
    //==========================================================
@@ -35,7 +44,7 @@ export class FGraphicObject extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.graphicContext = null;
+      this._graphicContext = null;
       // 父处理
       super.dispose();
    }

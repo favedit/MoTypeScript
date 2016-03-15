@@ -14,7 +14,7 @@ import {FPipeline} from './FPipeline';
 // @history 141231
 //==========================================================
 export class FPipelineConsole extends FConsole {
-   public pipelines: FObjects<FPipeline> = null;
+   protected _pipelines: FObjects<FPipeline> = null;
    // 线程
    protected _thread: FListenerThread = null;
    protected _interval = 150;
@@ -28,8 +28,8 @@ export class FPipelineConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this.scopeCd = EScope.Global;
-      this.pipelines = new FObjects<FPipeline>();
+      this._scopeCd = EScope.Global;
+      this._pipelines = new FObjects<FPipeline>();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
       thread.interval = this._interval;
@@ -42,7 +42,7 @@ export class FPipelineConsole extends FConsole {
    //==========================================================
    public alloc(): FPipeline {
       var pipeline: FPipeline = RClass.create(FPipeline);
-      this.pipelines.push(pipeline);
+      this._pipelines.push(pipeline);
       return pipeline;
    }
 
@@ -50,7 +50,7 @@ export class FPipelineConsole extends FConsole {
    // <T>逻辑处理。</T>
    //==========================================================
    public onProcess() {
-      var pipelines = this.pipelines;
+      var pipelines = this._pipelines;
       var count: number = pipelines.count();
       for (var n: number = 0; n < count; n++) {
          var pipeline: FPipeline = pipelines.at(n);

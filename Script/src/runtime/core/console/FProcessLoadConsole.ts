@@ -33,7 +33,7 @@ export class FProcessLoadConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.scopeCd = EScope.Local;
+      this._scopeCd = EScope.Local;
       this._looper = new FLooper();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
