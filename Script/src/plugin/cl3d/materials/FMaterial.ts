@@ -8,6 +8,8 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 // @history 150107
 //==========================================================
 export class FMaterial extends FObject {
+   // 代码
+   public code: string;
    // 名称
    public name: string;
    // 效果器代码

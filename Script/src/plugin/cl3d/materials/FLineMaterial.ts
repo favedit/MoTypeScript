@@ -23,7 +23,8 @@ export class FLineMaterial extends FMaterial {
    public constructor() {
       super();
       // 设置属性
-      this._lineColor = new SColor4();
+      this.code = "line";
+      this._lineColor = new SColor4(1, 1, 1, 1);
       this.lineWidth = 1;
    }
 
@@ -32,7 +33,7 @@ export class FLineMaterial extends FMaterial {
    //
    // @return 颜色
    //==========================================================
-   public get lineColor() {
+   public get lineColor(): SColor4 {
       return this._lineColor;
    }
 

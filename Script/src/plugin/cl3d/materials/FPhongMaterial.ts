@@ -25,9 +25,10 @@ export class FPhongMaterial extends FMaterial {
    public constructor() {
       super();
       // 设置属性
-      this._ambientColor = new SColor4();
-      this._diffuseColor = new SColor4();
-      this.specularPower = 16;
+      this.code = "phong";
+      this._ambientColor = new SColor4(1, 1, 1, 0.7);
+      this._diffuseColor = new SColor4(1, 1, 1, 0.6);
+      this.specularPower = 32;
    }
 
    //==========================================================
@@ -35,7 +36,7 @@ export class FPhongMaterial extends FMaterial {
    //
    // @return 颜色
    //==========================================================
-   public get ambientColor() {
+   public get ambientColor(): SColor4 {
       return this._ambientColor;
    }
 
@@ -44,7 +45,7 @@ export class FPhongMaterial extends FMaterial {
    //
    // @return 颜色
    //==========================================================
-   public get diffuseColor() {
+   public get diffuseColor(): SColor4 {
       return this._diffuseColor;
    }
 
