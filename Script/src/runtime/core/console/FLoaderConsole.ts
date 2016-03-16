@@ -29,17 +29,6 @@ import {FLoader} from './FLoader';
 //==========================================================
 //@ALinker('ASD')
 export class FLoaderConsole extends FConsole {
-
-   // @ALinker(FEnvironmentConsole)
-   // protected _environmentConsole: FEnvironmentConsole;
-
-   //@AProperty(EDataType.String)
-   // protected _code: string = null;
-
-   // protected _value: string = 'my';
-   // // 网络
-   // protected _socket = null;
-
    // 加载集合
    protected _loaders: FObjects<FLoader> = null;
    // 加载中集合
@@ -66,7 +55,7 @@ export class FLoaderConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.scopeCd = EScope.Global;
+      this._scopeCd = EScope.Global;
       this._loaders = new FObjects<FLoader>();
       this._processLoaders = new FObjects<FLoader>();
       // 创建线程

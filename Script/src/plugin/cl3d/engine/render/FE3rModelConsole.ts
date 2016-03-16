@@ -38,7 +38,7 @@ export class FE3rModelConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.scopeCd = EScope.Local;
+      this._scopeCd = EScope.Local;
       this._models = new FDictionary<FE3rModel>();
       //this._meshs = new FDictionary();
       //this._dynamicMeshs = new FDictionary();

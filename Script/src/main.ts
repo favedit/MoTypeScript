@@ -1,10 +1,10 @@
+// 初始化空间
 import * as mo from './index';
-// 初始化控件
 mo.runtime.common.RRuntime.namespace(mo, 'mo');
 
 // 设置参数
-var settings = new mo.runtime.framework.SSettings();
-settings.hDocument = document;
+var settings = new mo.editor.design.application.SSettings();
+settings.hWindow = window;
 settings.hPanel = document.body;
 settings.size.set(800, 400);
 // 启动应用

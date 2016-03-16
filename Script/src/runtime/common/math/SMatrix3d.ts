@@ -10,17 +10,17 @@ import {RFloat} from '../lang/RFloat';
 //==========================================================
 export class SMatrix3d extends SMatrix4x4 {
    // @attribute
-   _dirty = false;
+   protected _dirty = false;
    // @attribute
-   tx = 0;
-   ty = 0;
-   tz = 0;
-   rx = 0;
-   ry = 0;
-   rz = 0;
-   sx = 1;
-   sy = 1;
-   sz = 1;
+   public tx = 0;
+   public ty = 0;
+   public tz = 0;
+   public rx = 0;
+   public ry = 0;
+   public rz = 0;
+   public sx = 1;
+   public sy = 1;
+   public sz = 1;
 
    //============================================================
    // <T>构造处理。</T>

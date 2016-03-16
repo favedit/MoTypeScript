@@ -41,7 +41,7 @@ export class FResourceConsole extends FConsole {
    // protected _processStorages = null;
    // 线程
    protected _thread: FListenerThread = null;
-   protected _interval:number = 150;
+   protected _interval: number = 150;
    // protected _loadLimit = 8;
    // 线程控制台
    @ALinker(FThreadConsole)
@@ -61,7 +61,7 @@ export class FResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this.scopeCd = EScope.Global;
+      this._scopeCd = EScope.Global;
       //_factory = RClass.create(MO.FClassFactory);
       //_types = new common.lang.FDictionary();
       this._packages = new FDictionary<FResourcePackage>();

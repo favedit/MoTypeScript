@@ -54,6 +54,10 @@ export class FApplication extends FObject {
    // <T>配置处理。</T>
    //==========================================================
    public setup(settings: SSettings) {
+      if (!settings.hDocument) {
+         settings.hDocument = settings.hWindow.document;
+      }
+      // 设置属性
       this._settings = settings;
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);

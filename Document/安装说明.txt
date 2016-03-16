@@ -1,0 +1,22 @@
+修改Apache设置：
+------------------------------------------------------------
+\Apache\conf\httpd.conf
+文件尾部加入
+
+<IfModule alias_module>
+    Alias /sk {安装路径}/MoTypeScript/Script
+</IfModule>
+
+<Directory "{安装路径}/MoTypeScript/Script">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+测试访问：
+------------------------------------------------------------
+文件列表
+http://localhost/sk/test
+设计测试
+http://localhost/sk/test/editor/design.html

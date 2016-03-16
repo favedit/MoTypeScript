@@ -11,10 +11,8 @@ import {RMath} from './RMath';
 // @version 141231
 //==========================================================
 export class SMatrix4x4 {
-   //..........................................................
-   // @attribute
+   // 数据
    protected _data: Array<number> = new Array<number>(16);
-
 
    //============================================================
    // <T>获得数据。</T>
@@ -33,10 +31,10 @@ export class SMatrix4x4 {
    // @return 是否单位化
    //============================================================
    public isIdentityData() {
-      var d = this._data;
+      var data = this._data;
       var v = RMath.identity4x4;
       for (var i = 0; i < 16; i++) {
-         if (d[i] != v[i]) {
+         if (data[i] != v[i]) {
             return false;
          }
       }
@@ -49,13 +47,12 @@ export class SMatrix4x4 {
    // @method
    //============================================================
    public identityData() {
-      var o = this;
-      var d = o._data;
+      var d = this._data;
       var v = RMath.identity4x4;
       for (var i = 0; i < 16; i++) {
          d[i] = v[i];
       }
-      return o;
+      return this;
    }
 
    //============================================================
@@ -66,9 +63,9 @@ export class SMatrix4x4 {
    // @return Boolean 是否相等
    //============================================================
    public equalsData(p) {
-      var d = this._data;
+      var data = this._data;
       for (var i = 0; i < 16; i++) {
-         if (d[i] != p[i]) {
+         if (data[i] != p[i]) {
             return false;
          }
       }
@@ -82,12 +79,11 @@ export class SMatrix4x4 {
    // @param values:Array 数据
    //============================================================
    public assignData(values) {
-      var o = this;
-      var data = o._data;
+      var data = this._data;
       for (var n = 0; n < 16; n++) {
          data[n] = values[n];
       }
-      return o;
+      return this;
    }
 
    //============================================================
@@ -98,15 +94,15 @@ export class SMatrix4x4 {
    //============================================================
    public attachData(p) {
       var r = false;
-      var d = this._data;
+      var data = this._data;
       for (var i = 0; i < 16; i++) {
          var v = p[i];
          if (!r) {
-            if (d[i] != v) {
+            if (data[i] != v) {
                r = true;
             }
          }
-         d[i] = v;
+         data[i] = v;
       }
       return r;
    }
@@ -118,41 +114,41 @@ export class SMatrix4x4 {
    // @param p:data:Array 数据
    //============================================================
    public appendData(p) {
-      var d = this._data;
+      var data = this._data;
       // 矩阵计算
-      var v00 = (d[0] * p[0]) + (d[1] * p[4]) + (d[2] * p[8]) + (d[3] * p[12]);
-      var v01 = (d[0] * p[1]) + (d[1] * p[5]) + (d[2] * p[9]) + (d[3] * p[13]);
-      var v02 = (d[0] * p[2]) + (d[1] * p[6]) + (d[2] * p[10]) + (d[3] * p[14]);
-      var v03 = (d[0] * p[3]) + (d[1] * p[7]) + (d[2] * p[11]) + (d[3] * p[15]);
-      var v04 = (d[4] * p[0]) + (d[5] * p[4]) + (d[6] * p[8]) + (d[7] * p[12]);
-      var v05 = (d[4] * p[1]) + (d[5] * p[5]) + (d[6] * p[9]) + (d[7] * p[13]);
-      var v06 = (d[4] * p[2]) + (d[5] * p[6]) + (d[6] * p[10]) + (d[7] * p[14]);
-      var v07 = (d[4] * p[3]) + (d[5] * p[7]) + (d[6] * p[11]) + (d[7] * p[15]);
-      var v08 = (d[8] * p[0]) + (d[9] * p[4]) + (d[10] * p[8]) + (d[11] * p[12]);
-      var v09 = (d[8] * p[1]) + (d[9] * p[5]) + (d[10] * p[9]) + (d[11] * p[13]);
-      var v10 = (d[8] * p[2]) + (d[9] * p[6]) + (d[10] * p[10]) + (d[11] * p[14]);
-      var v11 = (d[8] * p[3]) + (d[9] * p[7]) + (d[10] * p[11]) + (d[11] * p[15]);
-      var v12 = (d[12] * p[0]) + (d[13] * p[4]) + (d[14] * p[8]) + (d[15] * p[12]);
-      var v13 = (d[12] * p[1]) + (d[13] * p[5]) + (d[14] * p[9]) + (d[15] * p[13]);
-      var v14 = (d[12] * p[2]) + (d[13] * p[6]) + (d[14] * p[10]) + (d[15] * p[14]);
-      var v15 = (d[12] * p[3]) + (d[13] * p[7]) + (d[14] * p[11]) + (d[15] * p[15]);
+      var v00 = (data[0] * p[0]) + (data[1] * p[4]) + (data[2] * p[8]) + (data[3] * p[12]);
+      var v01 = (data[0] * p[1]) + (data[1] * p[5]) + (data[2] * p[9]) + (data[3] * p[13]);
+      var v02 = (data[0] * p[2]) + (data[1] * p[6]) + (data[2] * p[10]) + (data[3] * p[14]);
+      var v03 = (data[0] * p[3]) + (data[1] * p[7]) + (data[2] * p[11]) + (data[3] * p[15]);
+      var v04 = (data[4] * p[0]) + (data[5] * p[4]) + (data[6] * p[8]) + (data[7] * p[12]);
+      var v05 = (data[4] * p[1]) + (data[5] * p[5]) + (data[6] * p[9]) + (data[7] * p[13]);
+      var v06 = (data[4] * p[2]) + (data[5] * p[6]) + (data[6] * p[10]) + (data[7] * p[14]);
+      var v07 = (data[4] * p[3]) + (data[5] * p[7]) + (data[6] * p[11]) + (data[7] * p[15]);
+      var v08 = (data[8] * p[0]) + (data[9] * p[4]) + (data[10] * p[8]) + (data[11] * p[12]);
+      var v09 = (data[8] * p[1]) + (data[9] * p[5]) + (data[10] * p[9]) + (data[11] * p[13]);
+      var v10 = (data[8] * p[2]) + (data[9] * p[6]) + (data[10] * p[10]) + (data[11] * p[14]);
+      var v11 = (data[8] * p[3]) + (data[9] * p[7]) + (data[10] * p[11]) + (data[11] * p[15]);
+      var v12 = (data[12] * p[0]) + (data[13] * p[4]) + (data[14] * p[8]) + (data[15] * p[12]);
+      var v13 = (data[12] * p[1]) + (data[13] * p[5]) + (data[14] * p[9]) + (data[15] * p[13]);
+      var v14 = (data[12] * p[2]) + (data[13] * p[6]) + (data[14] * p[10]) + (data[15] * p[14]);
+      var v15 = (data[12] * p[3]) + (data[13] * p[7]) + (data[14] * p[11]) + (data[15] * p[15]);
       // 复制内容
-      d[0] = v00;
-      d[1] = v01;
-      d[2] = v02;
-      d[3] = v03;
-      d[4] = v04;
-      d[5] = v05;
-      d[6] = v06;
-      d[7] = v07;
-      d[8] = v08;
-      d[9] = v09;
-      d[10] = v10;
-      d[11] = v11;
-      d[12] = v12;
-      d[13] = v13;
-      d[14] = v14;
-      d[15] = v15;
+      data[0] = v00;
+      data[1] = v01;
+      data[2] = v02;
+      data[3] = v03;
+      data[4] = v04;
+      data[5] = v05;
+      data[6] = v06;
+      data[7] = v07;
+      data[8] = v08;
+      data[9] = v09;
+      data[10] = v10;
+      data[11] = v11;
+      data[12] = v12;
+      data[13] = v13;
+      data[14] = v14;
+      data[15] = v15;
    }
 
    //============================================================
@@ -164,24 +160,24 @@ export class SMatrix4x4 {
    // @param z:Float Z坐标
    //============================================================
    public addTranslate(x, y, z) {
-      var v = RMath.value16;
-      v[0] = 1;
-      v[1] = 0;
-      v[2] = 0;
-      v[3] = 0;
-      v[4] = 0;
-      v[5] = 1;
-      v[6] = 0;
-      v[7] = 0;
-      v[8] = 0;
-      v[9] = 0;
-      v[10] = 1;
-      v[11] = 0;
-      v[12] = x;
-      v[13] = y;
-      v[14] = z;
-      v[15] = 1;
-      this.appendData(v);
+      var value = RMath.value16;
+      value[0] = 1;
+      value[1] = 0;
+      value[2] = 0;
+      value[3] = 0;
+      value[4] = 0;
+      value[5] = 1;
+      value[6] = 0;
+      value[7] = 0;
+      value[8] = 0;
+      value[9] = 0;
+      value[10] = 1;
+      value[11] = 0;
+      value[12] = x;
+      value[13] = y;
+      value[14] = z;
+      value[15] = 1;
+      this.appendData(value);
    }
 
    //============================================================

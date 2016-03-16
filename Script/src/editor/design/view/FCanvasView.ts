@@ -1,15 +1,20 @@
-import {FView} from '../../runtime/framework/view/FView';
-import {SSettings} from '../../../runtime/framework/SSettings';
+import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RConsole} from '../../../runtime/core/RConsole';
+import {FView} from '../../runtime/framework/view/FView';
+import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
+import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
 import {FScene} from '../../plugin/cl3d/base/FScene';
 import {FDisplayLayer} from '../../plugin/cl3d/base/FDisplayLayer';
 import {FPerspectiveCamera} from '../../plugin/cl3d/graphic/FPerspectiveCamera';
+import {FPipeline} from '../../plugin/cl3d/graphic/pipeline/FPipeline';
 import {FPipelineConsole} from '../../plugin/cl3d/graphic/pipeline/FPipelineConsole';
 import {FTechniqueConsole} from '../../plugin/cl3d/graphic/FTechniqueConsole';
 import {FCube} from '../../plugin/cl3d/engine/shape/FCube';
 import {FRegion} from '../../plugin/cl3d/engine/FRegion';
 import {FGeneralTechnique} from '../../plugin/cl3d/engine/effect/FGeneralTechnique';
+import {FE3dModelConsole} from '../../plugin/cl3d/engine/instance/FE3dModelConsole';
+import {SSettings} from '../application/SSettings';
 
 //==========================================================
 // <T>画板视图。</T>
@@ -25,6 +30,11 @@ export class FCanvasView extends FView {
    public contentLayer: FDisplayLayer = null;
    // 内容层
    public camera: FPerspectiveCamera = null;
+   // 内容层
+   public pipeline: FPipeline = null;
+   // 按键管理器
+   @ALinker(FKeyboardConsole)
+   public _keyboardConsole: FKeyboardConsole = null;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -33,7 +43,7 @@ export class FCanvasView extends FView {
       super.onSetup();
       // 创建画板
       var parameters = new Object();
-      var settings = this.application.settings;
+      var settings: SSettings = this.application.settings;
       var canvas = this.canvas = new FCanvas();
       canvas.setup(settings);
       var hCanvas = canvas.hCanvas;
@@ -56,25 +66,65 @@ export class FCanvasView extends FView {
       var cube = new FCube();
       cube.setup(context);
       this.contentLayer.pushRenderable(cube);
+
+      // var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
+      // var model = modelConsole.allocByUrl(context, 'http://localhost/sk/res/model/xiong/xiong.model');
+      // model.matrix.tx = 0.2;
+      // model.matrix.sx = 0.1;
+      // model.matrix.sy = 0.1;
+      // model.matrix.sz = 0.1;
+      // model.matrix.updateForce();
+      // model.matrix.addRotationX(-Math.PI/2);
+      // model.matrix.addRotationY(Math.PI);
+      // this.contentLayer.pushDisplay(model);
+
       // 设置渲染技术
       var techniqueConsole = RConsole.find(FTechniqueConsole);
       var technique = techniqueConsole.find(context, FGeneralTechnique);
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
-      var pipeline = pipelineConsole.alloc();
+      var pipeline = this.pipeline = pipelineConsole.alloc();
       pipeline.context = context;
       pipeline.region = new FRegion();
       pipeline.technique = technique;
       pipeline.camera = camera;
       pipeline.scene = scene;
-      pipeline.start();
+      //pipeline.start();
    }
+
+   _cameraMoveRate = 0.4;
+   _cameraKeyRotation = 0.03;
+   _cameraMouseRotation = 0.005;
 
    //==========================================================
    // <T>逻辑处理。</T>
    //==========================================================
    public onProcess() {
       super.onProcess();
+      // 按键处理
+      var camera = this.camera;
+      var keyboardConsole = this._keyboardConsole;
+      // 上下处理
+      var distance = this._cameraMoveRate;
+      var keyUp = keyboardConsole.isPress(EKeyCode.W)
+      var keyDown = keyboardConsole.isPress(EKeyCode.S)
+      if (keyUp && !keyDown) {
+         camera.doWalk(distance);
+      } else if (!keyUp && keyDown) {
+         camera.doWalk(-distance);
+      }
+      // 左右处理
+      var rotation = this._cameraKeyRotation;
+      var keyLeft = keyboardConsole.isPress(EKeyCode.A)
+      var keyRight = keyboardConsole.isPress(EKeyCode.D)
+      if (keyLeft && !keyRight) {
+         camera.doYaw(rotation);
+      } else if (!keyLeft && keyRight) {
+         camera.doYaw(-rotation);
+      }
+      camera.update();
+      // 画板处理
       this.canvas.process();
+      this.pipeline.process();
    }
 }

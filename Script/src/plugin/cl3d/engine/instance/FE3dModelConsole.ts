@@ -35,7 +35,7 @@ export class FE3dModelConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.scopeCd = EScope.Local;
+      this._scopeCd = EScope.Local;
       this._pools = RClass.create(FObjectPools);
    }
 

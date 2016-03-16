@@ -1,5 +1,6 @@
 import {EScope} from '../../common/lang/EScope';
 import {FListeners} from '../../common/lang/FListeners';
+import {RObject} from '../../common/lang/RObject';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {EKeyStatus} from '../EKeyStatus';
@@ -11,14 +12,14 @@ import {FDeviceConsole} from './FDeviceConsole';
 //===========================================================
 export class FKeyboardConsole extends FConsole {
    // 状态集合
-   protected _status = new Array();
+   protected _status: Array<EKeyStatus>;
+   // 监听器集合
+   protected _keyDownListeners: FListeners;
+   protected _keyUpListeners: FListeners;
+   protected _keyPressListeners: FListeners;
    // 设备控制台
    @ALinker(FDeviceConsole)
-   protected _deviceConsole: FDeviceConsole = null;
-   // 监听器集合
-   public keyDownListeners = new FListeners();
-   public keyUpListeners = new FListeners();
-   public keyPressListeners = new FListeners();
+   protected _deviceConsole: FDeviceConsole;
 
    //===========================================================
    // <T>构造处理。</T>
@@ -29,6 +30,11 @@ export class FKeyboardConsole extends FConsole {
    //===========================================================
    public constructor() {
       super();
+      // 设置属性
+      this._status = new Array<EKeyStatus>();
+      this._keyDownListeners = new FListeners();
+      this._keyUpListeners = new FListeners();
+      this._keyPressListeners = new FListeners();
       // 设置状态
       var status = this._status = new Array();
       for (var i: number = 0; i < 256; i++) {
@@ -41,6 +47,33 @@ export class FKeyboardConsole extends FConsole {
    }
 
    //===========================================================
+   // <T>获得按键落下监听器。</T>
+   //
+   // @return 监听器
+   //===========================================================
+   public get keyDownListeners(): FListeners {
+      return this._keyDownListeners;
+   }
+
+   //===========================================================
+   // <T>获得按键抬起监听器。</T>
+   //
+   // @return 监听器
+   //===========================================================
+   public get keyUpListeners(): FListeners {
+      return this._keyUpListeners;
+   }
+
+   //===========================================================
+   // <T>获得按键监听器。</T>
+   //
+   // @return 监听器
+   //===========================================================
+   public get keyPressListeners(): FListeners {
+      return this._keyPressListeners;
+   }
+
+   //===========================================================
    // <T>按键落下处理。</T>
    //
    // @param event 事件
@@ -50,7 +83,7 @@ export class FKeyboardConsole extends FConsole {
       var keyCode = event.keyCode;
       this._status[keyCode] = EKeyStatus.Press;
       // 处理事件
-      this.keyDownListeners.process(event);
+      this._keyDownListeners.process(event);
    }
 
    //===========================================================
@@ -63,7 +96,7 @@ export class FKeyboardConsole extends FConsole {
       var keyCode = event.keyCode;
       this._status[keyCode] = EKeyStatus.Normal;
       // 处理事件
-      this.keyUpListeners.process(event);
+      this._keyUpListeners.process(event);
    }
 
    //===========================================================
@@ -73,7 +106,7 @@ export class FKeyboardConsole extends FConsole {
    //===========================================================
    public onKeyPress(sender, event) {
       // 处理事件
-      this.keyPressListeners.process(event);
+      this._keyPressListeners.process(event);
    }
 
    // //===========================================================
@@ -206,4 +239,16 @@ export class FKeyboardConsole extends FConsole {
    //    }
    //    return true;
    // }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 释放属性
+      this._keyDownListeners = RObject.dispose(this._keyDownListeners);
+      this._keyUpListeners = RObject.dispose(this._keyUpListeners);
+      this._keyPressListeners = RObject.dispose(this._keyPressListeners);
+      // 父处理
+      super.dispose();
+   }
 }

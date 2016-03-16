@@ -29,7 +29,7 @@ export class FHttpConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this.scopeCd = EScope.Local;
+      this._scopeCd = EScope.Local;
       this._pool = RClass.create(FObjectPool);
    }
 
