@@ -24,62 +24,66 @@ import {SBrowserCapability} from './SBrowserCapability';
 //==========================================================
 export class FDeviceConsole extends FConsole {
    // @attribute
-   public _optionSelect = true;
+   protected _optionSelect = true;
    // @attribute
-   public _eventMouse = new SMouseEvent();
-   public _eventKey = new SKeyboardEvent();
-   public _eventResize = new SResizeEvent();
-   public _eventVisibility = new SEvent();
-   public _eventOrientation = new SEvent();
-   public _eventUnload = new SEvent();
-   //..........................................................
+   protected _eventMouse = new SMouseEvent();
+   protected _eventKey = new SKeyboardEvent();
+   protected _eventResize = new SResizeEvent();
+   protected _eventVisibility = new SEvent();
+   protected _eventOrientation = new SEvent();
+   protected _eventUnload = new SEvent();
    // @attribute
-   public _agent = null;
-   public _capability: SBrowserCapability = null;
-   public _defineProperties = null;
-   public _defineEvents = null;
-   public _defineMethods = null;
+   protected _agent = null;
+   protected _capability: SBrowserCapability = null;
+   protected _defineProperties = null;
+   protected _defineEvents = null;
+   protected _defineMethods = null;
    // @attribute
-   public _platformCd = EPlatform.Unknown;
-   public _deviceCd = EDevice.Unknown;
-   public _softwareCd = ESoftware.Unknown;
-   public _typeCd = EBrowser.Unknown;
-   public _orientationCd = EOrientation.Horizontal;
-   public _supportHtml5 = false;
-   //..........................................................
+   protected _platformCd = EPlatform.Unknown;
+   protected _deviceCd = EDevice.Unknown;
+   protected _softwareCd = ESoftware.Unknown;
+   protected _typeCd = EBrowser.Unknown;
+   protected _orientationCd = EOrientation.Horizontal;
+   protected _supportHtml5 = false;
    // @html
-   public _hWindow = null;
-   public _hDocument = null;
-   public _hContainer = null;
+   protected _hWindow = null;
+   protected _hDocument = null;
+   protected _hContainer = null;
    // @attribute
-   public _cookies = new FAttributes();
-   public _localStorage = null;
-   public _sessionStorage = null;
-   // @listeners
-   public lsnsLoad = new FListeners();
-   public lsnsLoaded = new FListeners();
-   public lsnsUnload = new FListeners();
-   public lsnsMouseDown = new FListeners();
-   public lsnsMouseUp = new FListeners();
-   public lsnsMouseOver = new FListeners();
-   public lsnsMouseMove = new FListeners();
-   public lsnsMouseWheel = new FListeners();
-   public lsnsKeyDown = new FListeners();
-   public lsnsKeyUp = new FListeners();
-   public lsnsKeyPress = new FListeners();
-   public lsnsResize = new FListeners();
-   public lsnsVisibility = new FListeners();
-   public lsnsOrientation = new FListeners();
-   public lsnsDeviceError = new FListeners();
-   //..........................................................
+   protected _requestAnimationFrame = null;
+   protected _cancelAnimationFrame = null;
+   // @attribute
+   protected _cookies = new FAttributes();
+   protected _localStorage = null;
+   protected _sessionStorage = null;
+   // 环境控制台
    @ALinker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole = null;
+   // 监听器集合
+   public loadListeners = new FListeners();
+   public loadedListeners = new FListeners();
+   public unloadListeners = new FListeners();
+   public mouseDownListeners = new FListeners();
+   public mouseUpListeners = new FListeners();
+   public mouseOverListeners = new FListeners();
+   public mouseMoveListeners = new FListeners();
+   public mouseWheelListeners = new FListeners();
+   public keyDownListeners = new FListeners();
+   public keyUpListeners = new FListeners();
+   public keyPressListeners = new FListeners();
+   public resizeListeners = new FListeners();
+   public visibilityListeners = new FListeners();
+   public orientationListeners = new FListeners();
+   public deviceErrorListeners = new FListeners();
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this._eventVisibility.code = EEvent.Visibility;
+      this._eventOrientation.code = EEvent.Orientation;
    }
 
    //==========================================================
@@ -269,9 +273,6 @@ export class FDeviceConsole extends FConsole {
    // @param hWindow 窗口对象
    //==========================================================
    public setup(hWindow: any) {
-      // 设置事件
-      //this._eventVisibility.code = MO.EEvent.Visibility;
-      //this._eventOrientation.code = MO.EEvent.Orientation;
       // 设置属性
       var hWindow = this._hWindow = hWindow;
       hWindow.__linker = this;
@@ -388,26 +389,26 @@ export class FDeviceConsole extends FConsole {
       RLogger.debug(this, 'Browser connect. (agent={1})', this._agent);
       //..........................................................
       // 关联鼠标事件
-      //var visibilitychange = MO.Window.Browser.defineEventGet('visibilitychange');
-      //if (MO.Window.Browser.supportHtml5()) {
-      hContainer.addEventListener('mousedown', this.ohMouseDown, true);
-      hContainer.addEventListener('mousemove', this.ohMouseMove, true);
-      hContainer.addEventListener('mouseup', this.ohMouseUp, true);
-      hContainer.addEventListener('mousewheel', this.ohMouseWheel, true);
-      hContainer.addEventListener('keydown', this.ohKeyDown, true);
-      hContainer.addEventListener('keyup', this.ohKeyUp, true);
-      hContainer.addEventListener('keypress', this.ohKeyPress, true);
-      //hDocument.addEventListener(visibilitychange, this.ohVisibility, true);
-      //} else {
-      hContainer.onmousedown = this.ohMouseDown;
-      hContainer.onmousemove = this.ohMouseMove;
-      hContainer.onmouseup = this.ohMouseUp;
-      hContainer.onmousewheel = this.ohMouseWheel;
-      hContainer.onkeydown = this.ohKeyDown;
-      hContainer.onkeyup = this.ohKeyUp;
-      hContainer.onkeypress = this.ohKeyPress;
-      //hDocument['on' + visibilitychange] = this.ohVisibility;
-      //}
+      var visibilitychange = this.defineEventGet('visibilitychange');
+      if (this.supportHtml5()) {
+         hContainer.addEventListener('mousedown', this.ohMouseDown, true);
+         hContainer.addEventListener('mousemove', this.ohMouseMove, true);
+         hContainer.addEventListener('mouseup', this.ohMouseUp, true);
+         hContainer.addEventListener('mousewheel', this.ohMouseWheel, true);
+         hContainer.addEventListener('keydown', this.ohKeyDown, true);
+         hContainer.addEventListener('keyup', this.ohKeyUp, true);
+         hContainer.addEventListener('keypress', this.ohKeyPress, true);
+         hDocument.addEventListener(visibilitychange, this.ohVisibility, true);
+      } else {
+         hContainer.onmousedown = this.ohMouseDown;
+         hContainer.onmousemove = this.ohMouseMove;
+         hContainer.onmouseup = this.ohMouseUp;
+         hContainer.onmousewheel = this.ohMouseWheel;
+         hContainer.onkeydown = this.ohKeyDown;
+         hContainer.onkeyup = this.ohKeyUp;
+         hContainer.onkeypress = this.ohKeyPress;
+         hDocument['on' + visibilitychange] = this.ohVisibility;
+      }
       hWindow.onorientationchange = this.ohOrientation;
       hContainer.onresize = this.ohResize;
       hContainer.onselectstart = this.ohSelect;
@@ -415,8 +416,11 @@ export class FDeviceConsole extends FConsole {
       // 读取COOKIES
       this._cookies.split(hDocument.cookie, '=', ';');
       // 检测事件
-      //this._requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;
-      //this._cancelAnimationFrame = window.cancelRequestAnimationFrame || window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame || window.msCancelAnimationFrame || window.msCancelRequestAnimationFrame;
+      this._requestAnimationFrame = hWindow.requestAnimationFrame || hWindow.webkitRequestAnimationFrame
+         || hWindow.mozRequestAnimationFrame || hWindow.oRequestAnimationFrame || hWindow.msRequestAnimationFrame;
+      this._cancelAnimationFrame = hWindow.cancelRequestAnimationFrame || hWindow.webkitCancelAnimationFrame
+         || hWindow.webkitCancelRequestAnimationFrame || hWindow.mozCancelAnimationFrame
+         || hWindow.mozCancelRequestAnimationFrame || hWindow.msCancelAnimationFrame || hWindow.msCancelRequestAnimationFrame;
    }
 
    //==========================================================
@@ -426,14 +430,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohMouseDown(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventMouse;
       event.code = EEvent.MouseDown;
       event.attachEvent(hEvent);
-      linker.lsnsMouseDown.process(event);
+      linker.mouseDownListeners.process(event);
    }
 
    //==========================================================
@@ -443,14 +447,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohMouseMove(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventMouse;
       event.code = EEvent.MouseMove;
       event.attachEvent(hEvent);
-      linker.lsnsMouseMove.process(event);
+      linker.mouseMoveListeners.process(event);
    }
 
    //==========================================================
@@ -460,14 +464,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohMouseUp(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventMouse;
       event.code = EEvent.MouseUp;
       event.attachEvent(hEvent);
-      linker.lsnsMouseUp.process(event);
+      linker.mouseUpListeners.process(event);
    }
 
    //==========================================================
@@ -477,14 +481,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohMouseWheel(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventMouse;
       event.code = EEvent.MouseWheel;
       event.attachEvent(hEvent);
-      linker.lsnsMouseWheel.process(event);
+      linker.mouseWheelListeners.process(event);
    }
 
    //==========================================================
@@ -494,14 +498,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohKeyDown(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventKey;
       event.code = EEvent.KeyDown;
       event.attachEvent(hEvent);
-      linker.lsnsKeyDown.process(event);
+      linker.keyDownListeners.process(event);
       // RLogger.debug(linker, 'Window key down. (key_code={1})', e.keyCode);
       // var s = e.srcElement ? e.srcElement : e.target;
       // var t = s.tagName;
@@ -539,14 +543,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohKeyUp(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventKey;
       event.code = EEvent.KeyUp;
       event.attachEvent(hEvent);
-      linker.lsnsKeyUp.process(event);
+      linker.keyUpListeners.process(event);
    }
 
    //==========================================================
@@ -556,14 +560,14 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohKeyPress(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
       var event = linker._eventKey;
       event.code = EEvent.KeyPress;
       event.attachEvent(hEvent);
-      linker.lsnsKeyPress.process(event);
+      linker.keyPressListeners.process(event);
    }
 
    //==========================================================
@@ -573,7 +577,7 @@ export class FDeviceConsole extends FConsole {
    // @param event:htmlEvent 事件
    //==========================================================
    public ohResize(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       if (!hEvent) {
          hEvent = linker._hWindow.event;
       }
@@ -581,7 +585,7 @@ export class FDeviceConsole extends FConsole {
       var event = linker._eventResize;
       event.code = EEvent.Resize;
       event.attachEvent(hEvent);
-      linker.lsnsResize.process(event);
+      linker.resizeListeners.process(event);
       // var h = linker._hDisablePanel;
       // if (h) {
       //    if ('block' == h.style.display) {
@@ -610,7 +614,7 @@ export class FDeviceConsole extends FConsole {
    // @param event:htmlEvent 事件
    //==========================================================
    public ohSelect(event) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       return linker._optionSelect;
    }
 
@@ -621,7 +625,7 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohVisibility(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       // 刷新方向
       // var visibility = MO.Window.Browser.isVisibility();
       // // 分发消息
@@ -638,13 +642,13 @@ export class FDeviceConsole extends FConsole {
    // @param hEvent:htmlEvent 事件
    //==========================================================
    public ohOrientation(hEvent) {
-      var linker = (this as any).__linker;
+      var linker: FDeviceConsole = (this as any).__linker;
       // 刷新方向
-      var orientationCd = linker.Browser.refreshOrientation();
+      var orientationCd = linker.refreshOrientation();
       // 分发消息
       var event = linker._eventOrientation;
-      event.orientationCd = orientationCd;
-      linker.lsnsOrientation.process(event);
+      // event.orientationCd = orientationCd;
+      linker.orientationListeners.process(event);
       RLogger.debug(linker, 'Window orientation changed. (orientation_cd={1})', orientationCd);
    }
 
@@ -654,11 +658,11 @@ export class FDeviceConsole extends FConsole {
    // @method
    // @param event:htmlEvent 事件
    //==========================================================
-   public ohUnload(event) {
-      var linker = (this as any).__linker;
+   public ohUnload(hEvent) {
+      var linker: FDeviceConsole = (this as any).__linker;
       // 释放处理
       var event = linker._eventUnload;
-      linker.lsnsUnload.process(event);
+      linker.unloadListeners.process(event);
       // 释放窗口
       linker.dispose();
    }
