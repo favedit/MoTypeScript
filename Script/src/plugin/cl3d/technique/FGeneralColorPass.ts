@@ -1,4 +1,4 @@
-﻿import {FTechniquePass} from '../../graphic/FTechniquePass';
+﻿import {FTechniquePass} from '../graphic/FTechniquePass';
 
 //==========================================================
 // <T>通用颜色渲染过程。</T>

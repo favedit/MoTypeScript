@@ -1,5 +1,5 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
 import {SMaterialInfo} from './SMaterialInfo';
+import {FMaterial} from '../materials/FMaterial';
 
 //==========================================================
 // <T>基础渲染材质。</T>
@@ -7,7 +7,7 @@ import {SMaterialInfo} from './SMaterialInfo';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FBaseMaterial extends FObject {
+export class FBaseMaterial extends FMaterial {
    // @attribute 名称
    public name: string = null;
    // @attribute 材质信息

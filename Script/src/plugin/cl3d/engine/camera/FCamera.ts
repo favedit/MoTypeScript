@@ -4,5 +4,5 @@
 // @author maocy
 // @history 141231
 //==========================================================
-export class FCombinationMaterial {
+export class FCamera{
 }

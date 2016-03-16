@@ -11,23 +11,17 @@ export * from './FSceneStatistics';
 export * from './REngine';
 export * from './SRenderableInfo';
 
+import * as camera from './camera/index';
+export {camera as camera};
+
 import * as core from './core/index';
 export {core as core};
-
-import * as effect from './effect/index';
-export {effect as effect};
-
-import * as entity from './entity/index';
-export {entity as entity};
 
 import * as framework from './framework/index';
 export {framework as framework};
 
 import * as instance from './instance/index';
 export {instance as instance};
-
-import * as material from './material/index';
-export {material as material};
 
 import * as particle from './particle/index';
 export {particle as particle};

@@ -1,4 +1,4 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
+import {FObject} from '../../../runtime/common/lang/FObject';
 import {ILight} from '../../../runtime/graphic/light/ILight';
 
 //==========================================================

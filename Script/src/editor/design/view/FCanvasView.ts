@@ -12,7 +12,7 @@ import {FPipelineConsole} from '../../plugin/cl3d/graphic/pipeline/FPipelineCons
 import {FTechniqueConsole} from '../../plugin/cl3d/graphic/FTechniqueConsole';
 import {FCube} from '../../plugin/cl3d/engine/shape/FCube';
 import {FRegion} from '../../plugin/cl3d/engine/FRegion';
-import {FGeneralTechnique} from '../../plugin/cl3d/engine/effect/FGeneralTechnique';
+import {FGeneralTechnique} from '../../plugin/cl3d/technique/FGeneralTechnique';
 import {FE3dModelConsole} from '../../plugin/cl3d/engine/instance/FE3dModelConsole';
 import {SSettings} from '../application/SSettings';
 

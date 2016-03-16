@@ -7,7 +7,7 @@ import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SVector4} from '../../../runtime/common/math/SVector4';
 import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
-import {FLight} from './light/FLight';
+import {FLight} from '../lights/FLight';
 import {FRenderable} from './FRenderable';
 import {FDisplay} from './FDisplay';
 

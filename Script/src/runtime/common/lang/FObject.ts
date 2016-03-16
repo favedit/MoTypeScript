@@ -56,8 +56,7 @@ export class FObject {
    // @method
    //==========================================================
    public dispose(flag: boolean = false): void {
-      var o = this;
       //sk.common.lang.RObject.free(o);
-      o.__dispose = true;
+      this.__dispose = true;
    }
 }

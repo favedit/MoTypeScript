@@ -1,4 +1,4 @@
-﻿import {RClass} from '../../../../runtime/common/reflect/RClass';
+﻿import {RClass} from '../../../runtime/common/reflect/RClass';
 // import {FG3dTechnique} from '../FG3dTechnique';
 // import {FG3dSelectPass} from './FG3dSelectPass';
 

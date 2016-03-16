@@ -1,5 +1,5 @@
 ﻿import {RClass} from '../../../runtime/common/reflect/RClass'
-import {FTechnique} from '../../graphic/FTechnique';
+import {FTechnique} from '../graphic/FTechnique';
 import {ETechniqueMode} from './ETechniqueMode'
 import {FGeneralColorPass} from './FGeneralColorPass'
 

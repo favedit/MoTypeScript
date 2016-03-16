@@ -1,5 +1,5 @@
-﻿import {SPoint2} from '../../../../runtime/common/math/SPoint2';
-import {RConsole} from '../../../../runtime/core/RConsole';
+﻿import {SPoint2} from '../../../runtime/common/math/SPoint2';
+import {RConsole} from '../../../runtime/core/RConsole';
 // import {FEffectConsole} from '../FEffectConsole';
 // import {ESamplerFilter} from '../ESamplerFilter';
 // import {FTechniquePass} from '../FTechniquePass';

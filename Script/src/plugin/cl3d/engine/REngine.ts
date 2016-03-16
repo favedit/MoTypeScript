@@ -1,5 +1,5 @@
 import {RConsole} from '../../../runtime/core/RConsole';
-import {FGeneralColorAutomaticEffect} from './effect/FGeneralColorAutomaticEffect';
+import {FGeneralColorAutomaticEffect} from '../technique/effect/FGeneralColorAutomaticEffect';
 import {FEffectConsole} from '../graphic/FEffectConsole';
 
 //==========================================================

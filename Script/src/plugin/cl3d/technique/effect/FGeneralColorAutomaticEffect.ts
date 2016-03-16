@@ -2,7 +2,7 @@
 import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FFloatStream} from '../../base/util/FFloatStream';
-import {ERegionParameter} from '../ERegionParameter';
+import {ERegionParameter} from '../../engine/ERegionParameter';
 import {FAutomaticEffect} from './FAutomaticEffect';
 
 //==========================================================

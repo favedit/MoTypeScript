@@ -1,2 +1,2 @@
-export * from './SSettings';
 export * from './FApplication';
+export * from './SSettings';

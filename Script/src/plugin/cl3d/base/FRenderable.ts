@@ -1,5 +1,5 @@
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
-import {FMaterial} from './material/FMaterial';
+import {FMaterial} from '../materials/FMaterial';
 import {FDrawable} from './FDrawable';
 
 //==========================================================
@@ -13,5 +13,5 @@ export class FRenderable extends FDrawable implements IRenderable {
    // 材质
    public material: FMaterial = null;
    // 参考材质
-   public materialReference: FMaterial = null;
+   public materialReference: any = null;
 }

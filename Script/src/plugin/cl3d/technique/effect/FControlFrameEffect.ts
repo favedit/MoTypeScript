@@ -1,4 +1,4 @@
-﻿import {ERegionParameter} from '../ERegionParameter';
+﻿import {ERegionParameter} from '../../engine/ERegionParameter';
 import {FAutomaticEffect} from './FAutomaticEffect';
 
 //==========================================================
