@@ -11,11 +11,11 @@ import {RClass} from '../reflect/RClass';
 //==========================================================
 export class FObject {
    // 类对象
-   protected __class: any = null;
+   protected __class: any;
    // 哈希值
-   protected __hashCode: number = 0;
+   protected __hashCode: number;
    // 释放标志
-   protected __dispose: boolean = false;
+   protected __dispose: boolean;
 
    //==========================================================
    // <T>构建当前对象的实例。</T>
@@ -23,6 +23,7 @@ export class FObject {
    // @method
    //==========================================================
    public constructor() {
+      this.__hashCode = 0;
       this.__dispose = false;
    }
 
@@ -47,7 +48,7 @@ export class FObject {
    // @return String 信息字符串
    //==========================================================
    //public toString(): string {
-      //return RClass.dump(this);
+   //return RClass.dump(this);
    //}
 
    //==========================================================

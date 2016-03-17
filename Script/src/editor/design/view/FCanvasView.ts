@@ -10,7 +10,7 @@ import {FPerspectiveCamera} from '../../plugin/cl3d/graphic/FPerspectiveCamera';
 import {FPipeline} from '../../plugin/cl3d/graphic/pipeline/FPipeline';
 import {FPipelineConsole} from '../../plugin/cl3d/graphic/pipeline/FPipelineConsole';
 import {FTechniqueConsole} from '../../plugin/cl3d/graphic/FTechniqueConsole';
-import {FCube} from '../../plugin/cl3d/engine/shape/FCube';
+import {FCube} from '../../plugin/cl3d/shape/FCube';
 import {FRegion} from '../../plugin/cl3d/engine/FRegion';
 import {FGeneralTechnique} from '../../plugin/cl3d/technique/FGeneralTechnique';
 import {FE3dModelConsole} from '../../plugin/cl3d/engine/instance/FE3dModelConsole';
@@ -50,6 +50,7 @@ export class FCanvasView extends FView {
       var context = canvas.context;
       // 创建场景
       var scene: FScene = this.scene = new FScene();
+      scene.backgroundColor.set(0.9, 0.9, 0.9, 1);
       var layer = this.backgroundLayer = new FDisplayLayer();
       scene.registerLayer('background', layer);
       var layer = this.contentLayer = new FDisplayLayer();
@@ -62,7 +63,7 @@ export class FCanvasView extends FView {
       camera.projection.size.set(hCanvas.offsetWidth, hCanvas.offsetHeight);
       camera.projection.update();
       // 创建物件
-      //var cube = new mo.plugin.cl3d.engine.shape.FSphere();
+      //var cube = new mo.plugin.cl3d.shape.FSphere();
       var cube = new FCube();
       cube.setup(context);
       this.contentLayer.pushRenderable(cube);
@@ -74,7 +75,7 @@ export class FCanvasView extends FView {
       // model.matrix.sy = 0.1;
       // model.matrix.sz = 0.1;
       // model.matrix.updateForce();
-      // model.matrix.addRotationX(-Math.PI/2);
+      // model.matrix.addRotationX(-Math.PI / 2);
       // model.matrix.addRotationY(Math.PI);
       // this.contentLayer.pushDisplay(model);
 

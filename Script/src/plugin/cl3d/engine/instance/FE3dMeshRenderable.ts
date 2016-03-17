@@ -1,4 +1,4 @@
-import {FMaterial} from '../../graphic/FMaterial'
+import {FPhongMaterial} from '../../materials/FPhongMaterial'
 import {FRenderable} from '../FRenderable';
 
 //==========================================================
@@ -105,10 +105,10 @@ export class FE3dMeshRenderable extends FRenderable {
       this.indexBuffers = renderable.indexBuffers;
       //..........................................................
       // 设置材质
-      var material = this.material = new FMaterial();
-      var info = material.info;
-      info.effectCode = 'automatic';
-      info.ambientColor.set(1, 1, 1, 1);
+      var material = this.material = new FPhongMaterial();
+      //var info = material.info;
+      //info.effectCode = 'automatic';
+      //info.ambientColor.set(1, 1, 1, 1);
    }
 
    // //==========================================================

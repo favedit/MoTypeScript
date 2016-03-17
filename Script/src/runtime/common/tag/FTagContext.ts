@@ -13,12 +13,11 @@ import {RString} from '../lang/RString';
 // @version 150114
 //==========================================================
 export class FTagContext extends FObject {
-   //..........................................................
-   // @attribute
-   public trimLeft = false;
-   public trimRight = false;
-   public _attributes: FAttributes = null;
-   public _source = null;
+   public code: string;
+   public trimLeft: boolean;
+   public trimRight: boolean;
+   public _attributes: FAttributes;
+   public _source: FString;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,6 +26,8 @@ export class FTagContext extends FObject {
    //==========================================================
    public constructor() {
       super();
+      this.trimLeft = false;
+      this.trimRight = false;
       this._attributes = new FAttributes();
       this._source = new FString();
    }

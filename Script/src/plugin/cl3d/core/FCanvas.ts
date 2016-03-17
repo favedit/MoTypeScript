@@ -1,4 +1,4 @@
-import {FObject} from '../../../../runtime/common/lang/FObject'
+import {FObject} from '../../../runtime/common/lang/FObject'
 
 //==========================================================
 // <T>画板对象。</T>

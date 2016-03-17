@@ -7,10 +7,11 @@ import {RLogger} from '../../../runtime/common/lang/RLogger';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FTagContext} from '../../../runtime/common/tag/FTagContext';
 import {FXmlConnection} from '../../../runtime/common/net/FXmlConnection';
+import {RAssert} from '../../../runtime/common/RAssert';
 import {FEnvironmentConsole} from '../../../runtime/core/console/FEnvironmentConsole';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {RConsole} from '../../../runtime/core/RConsole';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {FGraphicContext} from '../../../runtime/graphic/context/FGraphicContext';
 import {SEffectInfo} from './SEffectInfo';
 
 //==========================================================
@@ -21,18 +22,35 @@ import {SEffectInfo} from './SEffectInfo';
 //==========================================================
 export class FEffectConsole extends FConsole {
    // @attribute
-   public _scopeCd = EScope.Local;
+   public _configs: FDictionary<any>;
+   public _loadEffects: FLooper;
+   public _registerEffects: FDictionary<any>;
+   public _templateEffects: FDictionary<any>;
+   public _effects: FDictionary<any>;
+   public _effectInfo: SEffectInfo;
+   public _tagContext: FTagContext;
    // @attribute
-   public _configs = null;
-   public _loadEffects = null;
-   public _registerEffects = null;
-   public _templateEffects = null;
-   public _effects = null;
-   public _effectInfo = null;
-   public _tagContext = null;
-   // @attribute
-   public _thread = null;
-   public _interval = 300;
+   public _thread;
+   public _interval;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._scopeCd = EScope.Local;
+      this._configs = new FDictionary();
+      this._loadEffects = new FLooper();
+      this._registerEffects = new FDictionary();
+      this._templateEffects = new FDictionary();
+      this._effects = new FDictionary();
+      this._effectInfo = new SEffectInfo();
+      this._tagContext = RClass.create(FTagContext);
+      this._interval = 300;
+   }
 
    //==========================================================
    // <T>逻辑处理。</T>
@@ -48,22 +66,6 @@ export class FEffectConsole extends FConsole {
             effects.removeCurrent();
          }
       }
-   }
-
-   //==========================================================
-   // <T>构造处理。</T>
-   //
-   // @method
-   //==========================================================
-   public constructor() {
-      super();
-      this._configs = new FDictionary();
-      this._loadEffects = new FLooper();
-      this._registerEffects = new FDictionary();
-      this._templateEffects = new FDictionary();
-      this._effects = new FDictionary();
-      this._effectInfo = new SEffectInfo();
-      this._tagContext = RClass.create(FTagContext);
    }
 
    //==========================================================
@@ -129,14 +131,14 @@ export class FEffectConsole extends FConsole {
          effectInfo.mergeStride = renderable.mergeStride();
       }
       // 设置材质
-      var mi = renderable.material.info;
-      effectInfo.optionNormalInvert = mi.optionNormalInvert;
-      effectInfo.optionColor = mi.optionColor;
-      effectInfo.optionAmbient = mi.optionAmbient;
-      effectInfo.optionDiffuse = mi.optionDiffuse;
-      effectInfo.optionSpecular = mi.optionSpecular;
-      effectInfo.optionReflect = mi.optionReflect;
-      effectInfo.optionRefract = mi.optionRefract;
+      // var materialInfo = renderable.material.info;
+      // effectInfo.optionNormalInvert = materialInfo.optionNormalInvert;
+      // effectInfo.optionColor = materialInfo.optionColor;
+      // effectInfo.optionAmbient = materialInfo.optionAmbient;
+      // effectInfo.optionDiffuse = materialInfo.optionDiffuse;
+      // effectInfo.optionSpecular = materialInfo.optionSpecular;
+      // effectInfo.optionReflect = materialInfo.optionReflect;
+      // effectInfo.optionRefract = materialInfo.optionRefract;
       // 设置定点属性
       effectInfo.vertexCount = renderable.vertexCount;
       // 设置顶点信息
@@ -221,22 +223,11 @@ export class FEffectConsole extends FConsole {
       if (context.graphicContext) {
          context = context.graphicContext;
       }
-      //if (!MO.Class.isClass(context, MO.FGraphicContext)) {
-      //   context = context.graphicContext();
-      //}
-      //if (!MO.Class.isClass(context, MO.FGraphicContext)) {
-      //   throw new sk.common.lang.FError(o, 'Unknown context.');
-      //}
+      if (!(context instanceof FGraphicContext)) {
+         throw new FError(this, 'Unknown context.');
+      }
       // 获得效果名称
-      var effectCode = renderable.material.info.effectCode;
-      if (RString.isEmpty(effectCode)) {
-         effectCode = 'automatic'
-      }
-      if (effectCode == 'skeleton' || effectCode == 'skeleton.4') {
-         if (renderable.bones() == null) {
-            effectCode = 'automatic'
-         }
-      }
+      var effectCode = renderable.material.effectCode;
       var effectFlag = region.spaceName + '.' + effectCode;
       // 查找模板
       var effectTemplate = this.findTemplate(context, effectFlag);
@@ -267,13 +258,12 @@ export class FEffectConsole extends FConsole {
    //==========================================================
    // <T>加载配置文件。</T>
    //
-   // @method
-   // @param name:String 路径
-   // @return TXmlNode 节点
+   // @param name 路径
+   // @return 节点
    //==========================================================
    public loadConfig(name) {
       // 查找配置
-      var xconfig = this._configs.get(uri);
+      var xconfig = this._configs.get(name);
       if (!xconfig) {
          // 生成地址
          var uri = "${resource}/shader/" + name + ".xml";

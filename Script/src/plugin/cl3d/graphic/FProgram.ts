@@ -10,6 +10,7 @@ import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SVector4} from '../../../runtime/common/math/SVector4';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {RClass} from '../../../runtime/common/reflect/RClass';
+import {RAssert} from '../../../runtime/common/RAssert';
 import {EParameterFormat} from './EParameterFormat';
 import {EShader} from './EShader';
 import {FProgramAttribute} from './FProgramAttribute';
@@ -196,11 +197,9 @@ export abstract class FProgram extends FContent {
    public setAttribute(name, buffer, format) {
       // 获得定义
       var attribute = this.findAttribute(name);
-      if (attribute == null) {
-         throw new FError(this, 'Bind invalid attribute. (name={1})', name);
-      }
+      RAssert.debugNotNull(attribute);
       // 设置内容
-      this.graphicContext.bindVertexBuffer(attribute.slot, buffer, 0, format);
+      this._graphicContext.bindVertexBuffer(attribute.slot, buffer, 0, format);
    }
 
    //==========================================================
@@ -213,10 +212,8 @@ export abstract class FProgram extends FContent {
    //==========================================================
    public setParameter(name, value, count) {
       // 获得定义
-      var parameter:FProgramParameter = this.findParameter(name);
-      if (parameter == null) {
-         throw new FError(this, 'Bind invalid parameter. (name={1})', name);
-      }
+      var parameter: FProgramParameter = this.findParameter(name);
+      RAssert.debugNotNull(parameter);
       // 转换数据
       var data = null;
       var clazz = value.constructor;
@@ -245,7 +242,7 @@ export abstract class FProgram extends FContent {
       // 检查数据变更
       if (parameter.attachData(data)) {
          // 设置内容
-         this.graphicContext.bindConst(null, parameter.slot, parameter.formatCd, data, count);
+         this._graphicContext.bindConst(null, parameter.slot, parameter.formatCd, data, count);
       }
    }
 
@@ -282,7 +279,7 @@ export abstract class FProgram extends FContent {
          throw new FError(this, 'Bind invalid sampler. (name={1})', name);
       }
       // 设置内容
-      this.graphicContext.bindTexture(sampler.slot, sampler.index, texture);
+      this._graphicContext.bindTexture(sampler.slot, sampler.index, texture);
    }
 
    //==========================================================
@@ -309,7 +306,7 @@ export abstract class FProgram extends FContent {
    // @param source 渲染代码
    //==========================================================
    public abstract upload(shaderCd: EShader, source: string): void;
-   
+
    //==========================================================
    // <T>释放处理。</T>
    //

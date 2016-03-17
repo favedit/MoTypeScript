@@ -12,24 +12,35 @@ import {EParameterFormat} from './EParameterFormat';
 // @history 141230
 //==========================================================
 export class FProgramParameter extends FObject {
-   // @attribute 名称
-   public name = null;
-   // @attribute 关联名称
-   public linker = null;
-   // @attribute 格式
-   public formatCd = EParameterFormat.Unknown;
-   // @attribute 关联名称
-   public define = null;
-   // @attribute 使用标志
-   public statusUsed = false;
-   // @attribute 插槽
-   public slot = null;
-   // @attribute 大小
-   public size = 0;
-   // @attribute 缓冲
-   public buffer = null;
-   // @attribute 内存
-   public memory = null;
+   // 名称
+   public name: string;
+   // 关联名称
+   public linker: string;
+   // 格式
+   public formatCd: EParameterFormat;
+   // 关联名称
+   public define: string;
+   // 使用标志
+   public statusUsed: boolean;
+   // 插槽
+   public slot;
+   // 大小
+   public size;
+   // 缓冲
+   public buffer;
+   // 内存
+   public memory;
+
+   //==========================================================
+   // <T>构造处理</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this.formatCd = EParameterFormat.Unknown;
+      this.statusUsed = false;
+      this.size = 0;
+   }
 
    //==========================================================
    // <T>接收数据，返回是否发生变更。</T>
@@ -39,28 +50,29 @@ export class FProgramParameter extends FObject {
    // @return Boolean 是否变更
    //==========================================================
    public attachData(value) {
-      var result = false;
-      // 检查参数类型
-      var clazz = value.constructor;
-      if (clazz == SMatrix3d) {
-         // 矩阵数据
-         var memory = this.memory;
-         if (!memory) {
-            memory = this.memory = new Float32Array(16);
-         }
-         result = RFloat.attach(memory, value._data, 16);
-      } else if (clazz == Float32Array) {
-         // 浮点数据
-         var length = value.length;
-         var memory = this.memory;
-         if (!memory) {
-            memory = this.memory = new Float32Array(length);
-         }
-         result = RFloat.attach(memory, value, length);
-      } else {
-         throw new FError(this, 'Unknown data type.');
-      }
-      return result;
+      // var result = false;
+      // // 检查参数类型
+      // var clazz = value.constructor;
+      // if (clazz == SMatrix3d) {
+      //    // 矩阵数据
+      //    var memory = this.memory;
+      //    if (!memory) {
+      //       memory = this.memory = new Float32Array(16);
+      //    }
+      //    result = RFloat.attach(memory, value._data, 16);
+      // } else if (clazz == Float32Array) {
+      //    // 浮点数据
+      //    var length = value.length;
+      //    var memory = this.memory;
+      //    if (!memory) {
+      //       memory = this.memory = new Float32Array(length);
+      //    }
+      //    result = RFloat.attach(memory, value, length);
+      // } else {
+      //    throw new FError(this, 'Unknown data type.');
+      // }
+      // return result;
+      return true;
    }
 
    //==========================================================

@@ -1,11 +1,13 @@
 ﻿import {FError} from '../../../../runtime/common/lang/FError';
 import {FString} from '../../../../runtime/common/lang/FString';
+import {RAssert} from '../../../../runtime/common/RAssert';
 import {FEffect} from '../../graphic/FEffect';
 import {FRegion} from '../../base/FRegion';
 import {FRenderable} from '../../base/FRenderable';
 import {FProgramAttribute} from '../../graphic/FProgramAttribute';
 import {FProgramSampler} from '../../graphic/FProgramSampler';
 import {FVertexBuffer} from '../../graphic/FVertexBuffer';
+import {FMaterial} from '../../materials/FMaterial';
 import {EAttribute} from './EAttribute';
 import {ESampler} from './ESampler';
 
@@ -56,13 +58,6 @@ export class FAutomaticEffect extends FEffect {
    protected _dynamicEmissive = true;
    protected _dynamicHeight = true;
    protected _dynamicEnvironment = true;
-   // @attribute
-   protected _stateDepth = true;
-   protected _stateDepthCd = true;
-   protected _stateBlend = true;
-   protected _stateBlendSourceCd = true;
-   protected _stateBlendTargetCd = true;
-   protected _stateCullCd = true;
    // @attribute
    protected _supportAlpha = true;
    protected _supportAmbient = true;
@@ -447,9 +442,9 @@ export class FAutomaticEffect extends FEffect {
          var attributes = program.attributes();
          var count = attributes.count();
          for (var n = 0; n < count; n++) {
-            var attribute:FProgramAttribute = attributes.at(n);
+            var attribute: FProgramAttribute = attributes.at(n);
             if (attribute.statusUsed) {
-               var buffer:FVertexBuffer = renderable.findVertexBuffer(attribute.linker);
+               var buffer: FVertexBuffer = renderable.findVertexBuffer(attribute.linker);
                program.setAttribute(attribute.name, buffer, buffer.formatCd);
             }
          }
@@ -474,7 +469,7 @@ export class FAutomaticEffect extends FEffect {
          var samplers = program.samplers();
          var count = samplers.count();
          for (var n = 0; n < count; n++) {
-            var sampler:FProgramSampler = samplers.at(n);
+            var sampler: FProgramSampler = samplers.at(n);
             if (sampler.bind && sampler.statusUsed) {
                var name = sampler.name();
                var linker = sampler.linker();
@@ -499,7 +494,7 @@ export class FAutomaticEffect extends FEffect {
          var samplers = program.samplers();
          var count = samplers.count();
          for (var n = 0; n < count; n++) {
-            var sampler:FProgramSampler = samplers.at(n);
+            var sampler: FProgramSampler = samplers.at(n);
             if (sampler.bind && sampler.statusUsed) {
                var linker = sampler.linker();
                var texture = material.findBitmap(linker);
@@ -512,31 +507,30 @@ export class FAutomaticEffect extends FEffect {
    //==========================================================
    // <T>绑定材质。</T>
    //
-   // @method
-   // @param material:FG3dMaterial 材质
+   // @param material 材质
    //==========================================================
-   public bindMaterial(material) {
+   public bindMaterial(material: FMaterial) {
+      RAssert.debugNotNull(material);
       var context = this.graphicContext;
-      var info = material.info;
       // 设置深度
-      if (info.optionDepth) {
-         context.setDepthMode(this._stateDepth, this._stateDepthCd);
+      if (material.optionDepth) {
+         context.setDepthMode(this.stateDepth, this.stateDepthCd);
       } else {
          context.setDepthMode(false);
       }
       // 设置深度输出
-      context.setDepthMask(info.optionDepthWrite);
+      context.setDepthMask(material.optionDepthWrite);
       // 设置透明
-      if (info.optionAlpha) {
-         context.setBlendFactors(this._stateBlend, this._stateBlendSourceCd, this._stateBlendTargetCd);
+      if (material.optionAlpha) {
+         context.setBlendFactors(this.stateBlend, this.stateBlendSourceCd, this.stateBlendTargetCd);
       } else {
          context.setBlendFactors(false);
       }
       // 设置双面
-      if (info.optionDouble) {
+      if (material.optionDouble) {
          context.setCullingMode(false);
       } else {
-         context.setCullingMode(this._stateDepth, this._stateCullCd);
+         context.setCullingMode(this.stateDepth, this.stateCullCd);
       }
    }
 
@@ -547,7 +541,7 @@ export class FAutomaticEffect extends FEffect {
    // @param region 渲染区域
    // @param renderable  渲染对象
    //==========================================================
-   public drawRenderable(region:FRegion, renderable:FRenderable, index: number = 0) {
+   public drawRenderable(region: FRegion, renderable: FRenderable, index: number = 0) {
       var context = this.graphicContext;
       var program = this.program;
       // 绘制准备
@@ -616,16 +610,16 @@ export class FAutomaticEffect extends FEffect {
       }
    }
 
-    //==========================================================
-    // <T>绘制渲染集合。</T>
-    //
-    // @method
-    // @param region:MG3dRegion 渲染区域
-    // @param renderables:TObjects 渲染集合
-    // @param offset:Integer 开始位置
-    // @param count:Integer 总数
-    //==========================================================
-    public drawGroup(region, renderables, offset, count){
+   //==========================================================
+   // <T>绘制渲染集合。</T>
+   //
+   // @method
+   // @param region:MG3dRegion 渲染区域
+   // @param renderables:TObjects 渲染集合
+   // @param offset:Integer 开始位置
+   // @param count:Integer 总数
+   //==========================================================
+   public drawGroup(region, renderables, offset, count) {
       //  if(count > 1){
       //     var modelConsole = RConsole.find(FE3rModelConsole);
       //     var model = modelConsole.merge(this, region, offset, count);
@@ -651,6 +645,6 @@ export class FAutomaticEffect extends FEffect {
       //        return effect.drawRenderables(region, meshes, 0, meshCount);
       //     }
       //  }
-       this.drawRenderables(region, renderables, offset, count);
-    }
+      this.drawRenderables(region, renderables, offset, count);
    }
+}

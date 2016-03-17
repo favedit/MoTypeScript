@@ -1,0 +1,28 @@
+Scene
+   Layers - Layer
+      DisplayContainer
+         Display
+            Renderable
+
+
+var shape = new FShape();
+shape.vertexPositionBuffer().upload([1, 1, 1], 1);
+shape.indexBuffer().upload([0, 0]);
+
+"#ifdef GL_ES
+ precision highp float;
+ #endif
+ uniform vec3 fc_camera_position;
+ uniform vec3 fc_light_direction;
+ uniform vec4 fc_materials[10];
+ varying vec4 v_model_position;
+ varying vec4 v_position;
+ varying vec4 v_color;
+ void main(void){
+ vec4 result = vec4(0.0, 0.0, 0.0, 1.0);
+ vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+ result.rgb *= fc_materials[2].rgb;
+ result.a = color.a * fc_materials[0].y;
+ gl_FragColor = result;
+ }
+ "

@@ -39,8 +39,8 @@ export class FTechniquePass extends FContent {
    // @param target:FG3dRenderable 目标
    //==========================================================
    public sortRenderables(source, target) {
-      var sourceMaterial = source.material.info;
-      var targetMaterial = target.material.info;
+      var sourceMaterial = source.material;
+      var targetMaterial = target.material;
       // 按照效果排序
       if (sourceMaterial.optionAlpha && targetMaterial.optionAlpha) {
          if (sourceMaterial.sortLevel != targetMaterial.sortLevel) {

@@ -221,7 +221,6 @@
          vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
          //............................................................
          // 计算环境颜色
-         <shader:true source='option.ambient'>
             <shader:true source='support.ambient'>
                <shader:true source='support.ambient.sampler'>
                   color = texture2D(fs_diffuse, v_coord);
@@ -246,7 +245,6 @@
             <shader:equals source='technique.mode' value='ambient'>
                result.rgb = resultAmbient;
             </shader:equals>
-         </shader:true>
          //............................................................
          // 计算散射颜色
          <shader:true source='option.diffuse'>
@@ -345,7 +343,7 @@
          </shader:true>
          //............................................................
          //result = texture2D(fs_diffuse, v_coord);
-         //gl_FragColor = vec4(result.rgb, 1.0);
+         //gl_FragColor = vec4(fc_ambient_color.xyz, 1.0);
          gl_FragColor = result;
       }
    ]]></Source>

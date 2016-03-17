@@ -1,9 +1,9 @@
-import {FRenderable} from '../FRenderable'
-import {EAttributeFormat} from '../../graphic/EAttributeFormat'
-import {FVertexBuffer} from '../../graphic/FVertexBuffer'
-import {FIndexBuffer} from '../../graphic/FIndexBuffer'
-import {FMaterial} from '../../graphic/FMaterial'
-import {FContext} from '../../graphic/FContext'
+import {FRenderable} from '../engine/FRenderable'
+import {EAttributeFormat} from '../graphic/EAttributeFormat'
+import {FContext} from '../graphic/FContext'
+import {FVertexBuffer} from '../graphic/FVertexBuffer'
+import {FIndexBuffer} from '../graphic/FIndexBuffer'
+import {FPhongMaterial} from '../materials/FPhongMaterial'
 
 //==========================================================
 // <T>渲染立方体。</T>
@@ -19,11 +19,11 @@ import {FContext} from '../../graphic/FContext'
 //==========================================================
 export class FCube extends FRenderable {
    // 顶点位置缓冲
-   public vertexPositionBuffer:FVertexBuffer = null;
+   public vertexPositionBuffer: FVertexBuffer = null;
    // 顶点颜色缓冲
-   public vertexColorBuffer:FVertexBuffer = null;
+   public vertexColorBuffer: FVertexBuffer = null;
    // 索引缓冲
-   public indexBuffer:FIndexBuffer = null;
+   public indexBuffer: FIndexBuffer = null;
 
    //==========================================================
    // <T>设置信息。</T>
@@ -78,10 +78,9 @@ export class FCube extends FRenderable {
       this.pushIndexBuffer(indexBuffer);
       //..........................................................
       // 设置材质
-      var material = this.material = new FMaterial();
-      var info = material.info;
-      //info.effectCode = 'control';
-      info.effectCode = 'automatic';
-      info.ambientColor.set(1, 1, 1, 1);
+      var material = this.material = new FPhongMaterial();
+      // info.effectCode = 'control';
+      // info.effectCode = 'automatic';
+      // material.ambientColor.set(1, 1, 1, 1);
    }
 }

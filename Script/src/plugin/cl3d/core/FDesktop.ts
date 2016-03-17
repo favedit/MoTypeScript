@@ -1,8 +1,8 @@
-import {FObject} from '../../../../runtime/common/lang/FObject'
-import {FObjects} from '../../../../runtime/common/lang/FObjects'
-import {RObject} from '../../../../runtime/common/lang/RObject'
-import {SSize2} from '../../../../runtime/common/math/SSize2'
-import {RAssert} from '../../../../runtime/common/RAssert'
+import {FObject} from '../../../runtime/common/lang/FObject'
+import {FObjects} from '../../../runtime/common/lang/FObjects'
+import {RObject} from '../../../runtime/common/lang/RObject'
+import {SSize2} from '../../../runtime/common/math/SSize2'
+import {RAssert} from '../../../runtime/common/RAssert'
 
 //==========================================================
 // <T>桌面对象。</T>

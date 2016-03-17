@@ -3,6 +3,8 @@ import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FFloatStream} from '../../base/util/FFloatStream';
 import {ERegionParameter} from '../../engine/ERegionParameter';
+import {FMaterial} from '../../materials/FMaterial';
+import {FPhongMaterial} from '../../materials/FPhongMaterial';
 import {FAutomaticEffect} from './FAutomaticEffect';
 
 //==========================================================
@@ -28,52 +30,58 @@ export class FGeneralColorAutomaticEffect extends FAutomaticEffect {
    // @param renderable:FG3dRenderable 渲染对象
    //==========================================================
    public buildMaterial(effectInfo, renderable) {
-      var material = renderable.material;
+      var material: FMaterial = renderable.material;
       // 建立容器
       var data = effectInfo.material;
       if (!data) {
          data = effectInfo.material = RClass.create(FFloatStream);
          data.setLength(40);
-         material._dirty = true;
+         material.dirty = true;
       }
       // 建立数据
-      if (material._dirty) {
-         var info = material.info;
+      if (material.dirty) {
          data.reset();
+         var phongMaterial = <FPhongMaterial>material;
          // 颜色透明（索引0）
-         if (info.optionAlpha) {
-            data.writeFloat4(info.alphaBase, info.alphaRate, 0, 0);
+         if (material.optionAlpha) {
+            data.writeFloat4(phongMaterial.alphaBase, phongMaterial.alphaRate, 0, 0);
          } else {
-            data.writeFloat4(info.alphaBase, 1, 0, 0);
+            data.writeFloat4(phongMaterial.alphaBase, 1, 0, 0);
          }
          // 颜色设置（索引1）
-         data.writeFloat4(info.colorMin, info.colorMax, info.colorBalance, info.colorRate);
+         //data.writeFloat4(phongMaterial.colorMin, phongMaterial.colorMax, phongMaterial.colorBalance, phongMaterial.colorRate);
+         data.writeFloat4(0, 1, 0.5, 2);
          // 顶点颜色（索引2）
-         data.writeColor4(info.vertexColor);
+         //data.writeColor4(phongMaterial.vertexColor);
+         data.writeFloat4(1, 1, 1, 1);
          // 环境颜色（索引3）
-         data.writeColor4(info.ambientColor);
+         data.writeColor4(phongMaterial.ambientColor);
          // 散射颜色（索引4）
-         data.writeColor4(info.diffuseColor);
+         data.writeColor4(phongMaterial.diffuseColor);
          // 高光颜色（索引5）
-         data.writeColor4(info.specularColor);
+         //data.writeColor4(phongMaterial.specularColor);
+         data.writeFloat4(1, 1, 1, 1);
          // 高光参数（索引6）
-         data.writeFloat4(info.specularBase, info.specularLevel, info.specularAverage, info.specularShadow);
+         // data.writeFloat4(phongMaterial.specularBase, phongMaterial.specularLevel, phongMaterial.specularAverage, phongMaterial.specularShadow);
+         data.writeFloat4(0, phongMaterial.specularPower, 0, 0);
          // 反射颜色（索引7）
-         data.writeColor4(info.reflectColor);
+         //data.writeColor4(phongMaterial.reflectColor);
+         data.writeFloat4(1, 1, 1, 1);
          // 反射参数（索引8）
-         data.writeFloat4(0, 0, 1 - info.reflectMerge, info.reflectMerge);
+         //data.writeFloat4(0, 0, 1 - phongMaterial.reflectMerge, phongMaterial.reflectMerge);
+         data.writeFloat4(1, 1, 1, 1);
          // 发光颜色（索引9）
-         data.writeColor4(info.emissiveColor);
-         material._dirty = false;
+         //data.writeColor4(phongMaterial.emissiveColor);
+         data.writeFloat4(1, 1, 1, 1);
+         material.dirty = false;
       }
    }
 
    //==========================================================
    // <T>绘制渲染对象。</T>
    //
-   // @method
-   // @param region:FG3dRegion 渲染区域
-   // @param renderable:FG3dRenderable 渲染对象
+   // @param region 渲染区域
+   // @param renderable 渲染对象
    //==========================================================
    public drawRenderable(region, renderable) {
       var program = this.program;
@@ -83,7 +91,7 @@ export class FGeneralColorAutomaticEffect extends FAutomaticEffect {
       var vpMatrix = region.calculate(ERegionParameter.CameraViewProjectionMatrix)
       // 绑定材质
       var material = renderable.material;
-      var materialInfo = material.info;
+      // var materialInfo = material.info;
       this.bindMaterial(material);
       // 设置骨头集合
       if (renderable._optionMerge) {

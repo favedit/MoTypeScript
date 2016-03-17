@@ -12,10 +12,22 @@ export class FMaterial extends FObject {
    public code: string;
    // 名称
    public name: string;
+   // 脏标志
+   public dirty: boolean;
    // 效果器代码
    public effectCode: string;
    // 效果器
    public effect: any;
+   // 渲染器代码
+   public renderCode: string;
+   // 配置深度检查
+   public optionDepth: boolean;
+   // 配置深度写入
+   public optionDepthWrite: boolean;
+   // 配置双面
+   public optionDouble: boolean;
+   // 配置信息
+   public optionAlpha: boolean;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -24,6 +36,30 @@ export class FMaterial extends FObject {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this.effectCode = 'automatic';
+      this.optionDepth = true;
+      this.optionDepthWrite = true;
+      this.optionDouble = false;
+      this.optionAlpha = false;
+      this.dirty = true;
+   }
+
+   //==========================================================
+   // <T>重置内容。</T>
+   //==========================================================
+   public reset() {
+      this.optionDepth = true;
+      this.optionDepthWrite = true;
+      this.optionDouble = false;
+      this.optionAlpha = false;
+   }
+
+   //==========================================================
+   // <T>更新处理。</T>
+   //==========================================================
+   public update() {
+      this.dirty = true;
    }
 
    //==========================================================

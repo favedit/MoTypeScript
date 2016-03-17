@@ -1,14 +1,14 @@
-import {FArray} from '../../../../runtime/common/lang/FArray';
-import {SOutline3} from '../../../../runtime/common/math/SOutline3';
-import {RMath} from '../../../../runtime/common/math/RMath';
-import {EDrawMode} from '../../graphic/EDrawMode';
-import {EAttributeFormat} from '../../graphic/EAttributeFormat'
-import {EIndexStride} from '../../graphic/EIndexStride'
-import {FVertexBuffer} from '../../graphic/FVertexBuffer'
-import {FIndexBuffer} from '../../graphic/FIndexBuffer'
-import {FMaterial} from '../../graphic/FMaterial'
-import {FContext} from '../../graphic/FContext'
-import {FRenderable} from '../FRenderable';
+import {FArray} from '../../../runtime/common/lang/FArray';
+import {SOutline3} from '../../../runtime/common/math/SOutline3';
+import {RMath} from '../../../runtime/common/math/RMath';
+import {EDrawMode} from '../graphic/EDrawMode';
+import {EAttributeFormat} from '../graphic/EAttributeFormat'
+import {EIndexStride} from '../graphic/EIndexStride'
+import {FVertexBuffer} from '../graphic/FVertexBuffer'
+import {FIndexBuffer} from '../graphic/FIndexBuffer'
+import {FMaterial} from '../materials/FMaterial'
+import {FContext} from '../graphic/FContext'
+import {FRenderable} from '../engine/FRenderable';
 // import {EAttributeFormat} from '../../graphic/EAttributeFormat'
 // import {FContext} from '../../graphic/FContext'
 
@@ -132,12 +132,12 @@ export class FSphere extends FRenderable {
       //..........................................................
       // 设置材质
       var material: FMaterial = this.material = new FMaterial();
-      var info = material.info;
+      //var info = material.info;
       //info.effectCode = 'control';
       //info.optionDouble = true;
-      info.ambientColor.set(0.2, 0.2, 0.2, 1);
-      info.diffuseColor.set(0.8, 0.8, 0.8, 1);
-      info.specularColor.set(0.8, 0.8, 0.8, 1);
-      info.specularLevel = 64;
+      //info.ambientColor.set(0.2, 0.2, 0.2, 1);
+      //info.diffuseColor.set(0.8, 0.8, 0.8, 1);
+      //info.specularColor.set(0.8, 0.8, 0.8, 1);
+      //info.specularLevel = 64;
    }
 }

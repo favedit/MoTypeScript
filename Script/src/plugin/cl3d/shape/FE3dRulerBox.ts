@@ -9,7 +9,7 @@
 //
 // @class
 // @author maocy
-// @history 150509 
+// @history 150509
 //==========================================================
 export class FE3dRulerBox{
 //    o = MO.Class.inherits(this, o, MO.FE3dSprite);

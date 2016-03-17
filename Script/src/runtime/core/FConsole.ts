@@ -10,13 +10,27 @@ import {FObject} from '../common/lang/FObject';
 //==========================================================
 export class FConsole extends FObject {
    // 范围类型
-   protected _scopeCd = EScope.Global;
+   protected _scopeCd: EScope;
    // 设置状态
-   protected _statusSetup: boolean = false;
+   protected _statusSetup: boolean;
    // 激活状态
-   protected _statusActive: boolean = false;
+   protected _statusActive: boolean;
    // 加载状态
-   protected _statusLoad: boolean = false;
+   protected _statusLoad: boolean;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._scopeCd = EScope.Global;
+      this._statusSetup = false;
+      this._statusActive = false;
+      this._statusLoad = false;
+   }
 
    //==========================================================
    // <T>获得范围。</T>
