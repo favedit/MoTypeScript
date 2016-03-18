@@ -3,8 +3,8 @@ import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FFloatStream} from '../../base/util/FFloatStream';
 import {ERegionParameter} from '../../engine/ERegionParameter';
-import {FMaterial} from '../../materials/FMaterial';
-import {FPhongMaterial} from '../../materials/FPhongMaterial';
+import {FMaterial} from '../../../../runtime/graphic/materials/FMaterial';
+import {FPhongMaterial} from '../../../../runtime/graphic/materials/FPhongMaterial';
 import {FAutomaticEffect} from './FAutomaticEffect';
 
 //==========================================================

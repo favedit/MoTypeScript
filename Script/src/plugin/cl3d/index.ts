@@ -17,9 +17,6 @@ export {graphic as graphic};
 import * as lights from './lights/index';
 export {lights as lights};
 
-import * as materials from './materials/index';
-export {materials as materials};
-
 import * as particle from './particle/index';
 export {particle as particle};
 

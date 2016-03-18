@@ -1,4 +1,4 @@
-import {FPhongMaterial} from '../../materials/FPhongMaterial'
+import {FPhongMaterial} from '../../../runtime/graphic/materials/FPhongMaterial'
 import {FRenderable} from '../FRenderable';
 
 //==========================================================

@@ -3,7 +3,7 @@ import {EAttributeFormat} from '../graphic/EAttributeFormat'
 import {FContext} from '../graphic/FContext'
 import {FVertexBuffer} from '../graphic/FVertexBuffer'
 import {FIndexBuffer} from '../graphic/FIndexBuffer'
-import {FPhongMaterial} from '../materials/FPhongMaterial'
+import {FPhongMaterial} from '../../../runtime/graphic/materials/FPhongMaterial'
 
 //==========================================================
 // <T>渲染立方体。</T>

@@ -7,7 +7,7 @@ import {FRenderable} from '../../base/FRenderable';
 import {FProgramAttribute} from '../../graphic/FProgramAttribute';
 import {FProgramSampler} from '../../graphic/FProgramSampler';
 import {FVertexBuffer} from '../../graphic/FVertexBuffer';
-import {FMaterial} from '../../materials/FMaterial';
+import {FMaterial} from '../../../../runtime/graphic/materials/FMaterial';
 import {EAttribute} from './EAttribute';
 import {ESampler} from './ESampler';
 

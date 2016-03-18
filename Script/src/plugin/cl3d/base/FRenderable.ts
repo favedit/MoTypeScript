@@ -1,5 +1,5 @@
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
-import {FMaterial} from '../materials/FMaterial';
+import {FMaterial} from '../../../runtime/graphic/materials/FMaterial';
 import {FDrawable} from './FDrawable';
 
 //==========================================================

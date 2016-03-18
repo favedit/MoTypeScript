@@ -6,7 +6,7 @@ import {EAttributeFormat} from '../graphic/EAttributeFormat'
 import {EIndexStride} from '../graphic/EIndexStride'
 import {FVertexBuffer} from '../graphic/FVertexBuffer'
 import {FIndexBuffer} from '../graphic/FIndexBuffer'
-import {FMaterial} from '../materials/FMaterial'
+import {FMaterial} from '../../../runtime/graphic/materials/FMaterial'
 import {FContext} from '../graphic/FContext'
 import {FRenderable} from '../engine/FRenderable';
 // import {EAttributeFormat} from '../../graphic/EAttributeFormat'
