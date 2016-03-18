@@ -10,7 +10,9 @@ import {SRectangle} from './SRectangle';
 // @version 141231
 //==========================================================
 export class RMath {
-   //..........................................................
+   // 唯一编号
+   private static _guidChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+   private static _guidBuffer = new Array(36);
    // @const
    public static PI_2 = Math.PI / 2;
    public static PI = Math.PI;
@@ -20,6 +22,7 @@ export class RMath {
    // @const
    public static RADIAN_RATE = 180 / Math.PI;
    public static DEGREE_RATE = Math.PI / 180;
+   public static EPSILON = Math.pow(2, - 52);
    // @attribute
    public static value1: Array<number> = new Array<number>(1);
    public static value2: Array<number> = new Array<number>(2);
@@ -127,5 +130,29 @@ export class RMath {
          return -1;
       }
       return 0;
+   }
+
+   //==========================================================
+   // <T>产生一个唯一编号。</T>
+   //
+   // @return 唯一编号
+   //==========================================================
+   public static makeGuid() {
+      var value: number = 0;
+      var buffer = this._guidBuffer
+      var chars = this._guidChars;
+      for (var i: number = 0; i < 36; i++) {
+         if (i === 8 || i === 13 || i === 18 || i === 23) {
+            buffer[i] = '-';
+         } else if (i === 14) {
+            buffer[i] = '4';
+         } else {
+            if (value <= 0x02) value = 0x2000000 + (Math.random() * 0x1000000) | 0;
+            var index = value & 0xf;
+            value = value >> 4;
+            buffer[i] = chars[(i === 19) ? (index & 0x3) | 0x8 : index];
+         }
+      }
+      return buffer.join('');
    }
 }

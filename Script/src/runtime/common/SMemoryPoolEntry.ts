@@ -7,9 +7,9 @@
 //==========================================================
 export class SMemoryPoolEntry {
    // 下一个节点
-   next: SMemoryPoolEntry = null;
+   public next: SMemoryPoolEntry ;
    // 内容
-   value: any = null;
+   public value: any;
 
    //==========================================================
    // <T>释放处理。</T>

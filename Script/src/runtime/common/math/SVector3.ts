@@ -12,18 +12,16 @@ import {SValue3} from './SValue3';
 //==========================================================
 export class SVector3 extends SValue3 {
    //==========================================================
-   // <T>计算2个点的方向</T>
+   // <T>计算开始到结束的方向</T>
    //
-   // @method
-   // @param startPoint:SPoint3 开始点
-   // @param endPoint:SPoint3 结束点
+   // @param start 开始
+   // @param end 结束
    //==========================================================
-   public direction(startPoint, endPoint) {
-      var o = this;
-      o.x = endPoint.x - startPoint.x;
-      o.y = endPoint.y - startPoint.y;
-      o.z = endPoint.z - startPoint.z;
-      return o;
+   public direction(start: SValue3, end: SValue3) {
+      this.x = end.x - start.x;
+      this.y = end.y - start.y;
+      this.z = end.z - start.z;
+      return this;
    }
 
    //============================================================

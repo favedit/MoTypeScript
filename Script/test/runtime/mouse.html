@@ -22,8 +22,30 @@ function _mouse_leave(event){
    console.log(this.name + ' leave');
    last = 'leave';
 }
+var a = new Array();
+var b = [];
+var c = [];
+console.log(b == c);
+console.log(a instanceof Array);
+console.log(b instanceof Array);
+console.log(typeof a);
+console.log(typeof b);
+console.log(a.prototype === b.prototype);
+console.log(a.constructor === b.constructor);
+
+function A(){
+   return this;
+}
+A
+var a = new A();
+
 </script>
 
 <div name='outer' style='left:100px;top:100px;width:400px;height:100px;background-color:red' onmousemove='_mouse_move()' onmouseover='_mouse_over()' onmouseout='_mouse_out()' onmouseenter='_mouse_enter()' onmouseleave='_mouse_leave()'>
    <div name='inner' style='left:120px;top:120px;width:200px;height:50px;background-color:blue' onmousemove='_mouse_move()' onmouseover='_mouse_over()' onmouseout='_mouse_out()' onmouseenter='_mouse_enter()' onmouseleave='_mouse_leave()'>
 </div>
+
+
+getXmlSource
+
+

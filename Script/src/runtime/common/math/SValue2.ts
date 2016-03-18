@@ -6,23 +6,20 @@ import {RFloat} from '../lang/RFloat';
 // <T>二维数据。</T>
 //
 // @struct
-// @param x:Number X分量
-// @param y:Number Y分量
 // @author maocy
 // @version 150912
 //==========================================================
 export class SValue2 {
    // X参数
-   x: number = 0;
+   public x: number;
    // Y参数
-   y: number = 0;
+   public y: number;
 
    //============================================================
    // <T>构造处理。</T>
    //
-   // @method
-   // @param x:Number X分量
-   // @param y:Number Y分量
+   // @param x X分量
+   // @param y Y分量
    //============================================================
    public constructor(x: number = 0, y: number = 0) {
       this.x = x;
@@ -32,8 +29,7 @@ export class SValue2 {
    //============================================================
    // <T>判断是否为空。</T>
    //
-   // @method
-   // @return Boolean 是否为空
+   // @return 是否为空
    //============================================================
    public isEmpty() {
       return (this.x == 0) && (this.y == 0);
@@ -42,8 +38,7 @@ export class SValue2 {
    //============================================================
    // <T>判断是否相等。</T>
    //
-   // @method
-   // @return Boolean 是否相等
+   // @return 是否相等
    //============================================================
    public equals(value) {
       return (this.x == value.x) && (this.y == value.y);
@@ -52,8 +47,7 @@ export class SValue2 {
    //============================================================
    // <T>判断是否相等。</T>
    //
-   // @method
-   // @return Boolean 是否相等
+   // @return 是否相等
    //============================================================
    public equalsData(x, y) {
       return (this.x == x) && (this.y == y);
@@ -62,8 +56,7 @@ export class SValue2 {
    //==========================================================
    // <T>接收数据内容。</T>
    //
-   // @method
-   // @param value:SValue2 二维数据
+   // @param value 二维数据
    //==========================================================
    public assign(value) {
       this.x = value.x;
@@ -72,8 +65,6 @@ export class SValue2 {
 
    //==========================================================
    // <T>设置最小数据。</T>
-   //
-   // @method
    //==========================================================
    public setMin() {
       this.x = Number.MIN_VALUE;
@@ -82,8 +73,6 @@ export class SValue2 {
 
    //==========================================================
    // <T>设置最大数据。</T>
-   //
-   // @method
    //==========================================================
    public setMax() {
       this.x = Number.MAX_VALUE;
@@ -93,9 +82,8 @@ export class SValue2 {
    //==========================================================
    // <T>设置数据内容。</T>
    //
-   // @method
-   // @param x:Number X分量
-   // @param y:Number Y分量
+   // @param x X分量
+   // @param y Y分量
    //==========================================================
    public set(x, y) {
       this.x = x;
@@ -105,8 +93,7 @@ export class SValue2 {
    //==========================================================
    // <T>设置数据内容。</T>
    //
-   // @method
-   // @param value:Number 内容
+   // @param value 内容
    //==========================================================
    public setAll(value) {
       this.x = value;
@@ -116,9 +103,8 @@ export class SValue2 {
    //==========================================================
    // <T>增加数据内容。</T>
    //
-   // @method
-   // @param x:Number X分量
-   // @param y:Number Y分量
+   // @param x X分量
+   // @param y Y分量
    //==========================================================
    public add(x, y) {
       this.x += x;
@@ -128,9 +114,8 @@ export class SValue2 {
    //==========================================================
    // <T>乘以数据内容。</T>
    //
-   // @method
-   // @param x:Number X分量
-   // @param y:Number Y分量
+   // @param x X分量
+   // @param y Y分量
    //==========================================================
    public mul(x, y) {
       this.x *= x;
@@ -139,8 +124,6 @@ export class SValue2 {
 
    //==========================================================
    // <T>单位化处理。</T>
-   //
-   // @method
    //==========================================================
    public normalize() {
       var value = this.absolute();
@@ -155,26 +138,22 @@ export class SValue2 {
    //============================================================
    // <T>合并最小值。</T>
    //
-   // @method
-   // @param value:SValue2 二维数据
+   // @param value 二维数据
    //============================================================
    public mergeMin(value) {
-      var o = this;
-      o.x = Math.min(o.x, value.x);
-      o.y = Math.min(o.y, value.y);
+      this.x = Math.min(this.x, value.x);
+      this.y = Math.min(this.y, value.y);
    }
 
    //============================================================
    // <T>合并最小值。</T>
    //
-   // @method
-   // @param x:Number X坐标
-   // @param y:Number Y坐标
+   // @param x X坐标
+   // @param y Y坐标
    //============================================================
    public mergeMin2(x, y) {
-      var o = this;
-      o.x = Math.min(o.x, x);
-      o.y = Math.min(o.y, y);
+      this.x = Math.min(this.x, x);
+      this.y = Math.min(this.y, y);
    }
 
    //============================================================
@@ -184,9 +163,8 @@ export class SValue2 {
    // @param value:SValue2 二维数据
    //============================================================
    public mergeMax(value) {
-      var o = this;
-      o.x = Math.max(o.x, value.x);
-      o.y = Math.max(o.y, value.y);
+      this.x = Math.max(this.x, value.x);
+      this.y = Math.max(this.y, value.y);
    }
 
    //============================================================
@@ -197,9 +175,8 @@ export class SValue2 {
    // @param y:Number Y坐标
    //============================================================
    public mergeMax2(x, y) {
-      var o = this;
-      o.x = Math.max(o.x, x);
-      o.y = Math.max(o.y, y);
+      this.x = Math.max(this.x, x);
+      this.y = Math.max(this.y, y);
    }
 
    //==========================================================
@@ -299,9 +276,8 @@ export class SValue2 {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
-      o.x = null;
-      o.y = null;
+      this.x = null;
+      this.y = null;
    }
 
    //==========================================================
