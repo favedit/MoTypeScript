@@ -4,9 +4,10 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
-import {SFrustum} from '../../../runtime/common/math/SFrustum';
-import {SFrustumPlanes} from '../../../runtime/common/math/SFrustumPlanes';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SFrustum} from '../../../runtime/graphic/math/SFrustum';
+import {RConst} from '../../../runtime/graphic/math/RConst';
+import {SFrustumPlanes} from '../../../runtime/graphic/math/SFrustumPlanes';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {RMath} from '../../../runtime/common/math/RMath';
 import {FViewport} from './FViewport';
 
@@ -215,7 +216,7 @@ export class FCamera extends FObject {
    // @method
    //==========================================================
    public updateFrustum() {
-      var matrix = RMath.matrix;
+      var matrix = RConst.matrix;
       matrix.assign(this.matrix);
       //m.append(this._projection.matrix());
       this.planes.updateVision(matrix.data());

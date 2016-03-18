@@ -5,7 +5,7 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SVector4} from '../../../runtime/common/math/SVector4';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 //import {ERegionParameter} from './ERegionParameter';
 //import {FRenderable} from './FRenderable';
 //import {FDisplay} from './FDisplay';

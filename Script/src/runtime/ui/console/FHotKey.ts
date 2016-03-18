@@ -9,7 +9,7 @@ export class FHotKey extends FObject {
    public cmdHotkeyMap = {};
    public _hotkeysEnabled = true;
    protected _valid;
-   
+
    public constructor(){
       super();
       this._valid = false;
@@ -17,7 +17,7 @@ export class FHotKey extends FObject {
 
    public enable() {
    }
-   
+
    public disable() {
    }
 }

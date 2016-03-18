@@ -1,9 +1,9 @@
 import {FObject} from '../../../../runtime/common/lang/FObject';
 import {RObject} from '../../../../runtime/common/lang/RObject';
-import {SMatrix3d} from '../../../../runtime/common/math/SMatrix3d';
 import {SQuaternion} from '../../../../runtime/common/math/SQuaternion';
 import {SVector3} from '../../../../runtime/common/math/SVector3';
 import {SPoint3} from '../../../../runtime/common/math/SPoint3';
+import {SMatrix3d} from '../../../../runtime/graphic/math/SMatrix3d';
 
 //==========================================================
 // <T>渲染跟踪球。</T>

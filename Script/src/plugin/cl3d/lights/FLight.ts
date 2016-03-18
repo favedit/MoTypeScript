@@ -1,5 +1,5 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
-import {ILight} from '../../../runtime/graphic/light/ILight';
+//import {Light} from '../../../runtime/graphic/light/Light';
 
 //==========================================================
 // <T>光源。</T>
@@ -7,6 +7,7 @@ import {ILight} from '../../../runtime/graphic/light/ILight';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FLight extends FObject implements ILight{
+//export class FLight extends FObject implements Light{
+export class FLight extends FObject{
    code: string;
 }

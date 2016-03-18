@@ -3,7 +3,7 @@ import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {RString} from '../../../runtime/common/lang/RString';
 import {RObject} from '../../../runtime/common/lang/RObject';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {FRenderable as FBaseRenderable} from '../base/FRenderable';

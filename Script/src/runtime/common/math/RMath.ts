@@ -1,5 +1,4 @@
 import {SVector3} from './SVector3'
-import {SMatrix3d} from './SMatrix3d';
 import {SRectangle} from './SRectangle';
 
 //==========================================================
@@ -41,7 +40,6 @@ export class RMath {
    // @attribute
    public static vector3 = null;
    public static rectangle = null;
-   public static matrix = null;
    // @attribute
    public static identity3x3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
    public static identity4x4 = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
@@ -69,7 +67,6 @@ export class RMath {
       // 初始化属性
       this.vector3 = new SVector3();
       this.rectangle = new SRectangle();
-      this.matrix = new SMatrix3d();
    }
 
    //==========================================================

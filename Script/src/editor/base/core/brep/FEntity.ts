@@ -65,9 +65,9 @@ export class FEntity extends FNode {
    //       // this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})
    //    }
    //    // if (!this.children[obj.ID]) {
-   //    //    return 
-   //    //       this.children[obj.ID] = obj, obj.parents[this.ID] = this, 
-   //    //       false !== recurring && (this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})), obj._dispatchInvalidateSubgraph(true)), 
+   //    //    return
+   //    //       this.children[obj.ID] = obj, obj.parents[this.ID] = this,
+   //    //       false !== recurring && (this.dispatchEvent(new goog.events.Event(EntityEventEnum.childAdded, {entity: obj})), obj._dispatchInvalidateSubgraph(true)),
    //    //       obj;
    //    // }
    // };

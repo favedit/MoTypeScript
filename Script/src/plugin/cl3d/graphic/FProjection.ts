@@ -1,5 +1,5 @@
 import {RObject} from '../../../runtime/common/lang/RObject';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {FObject} from '../../../runtime/common/lang/FObject';
 
@@ -45,8 +45,8 @@ export class FProjection extends FObject {
    public distance() {
       return this.zfar - this.znear;
    }
-   
-   
+
+
    //============================================================
    // <T>更新矩阵。</T>
    //

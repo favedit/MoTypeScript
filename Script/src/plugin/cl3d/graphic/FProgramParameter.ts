@@ -2,7 +2,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 import {FError} from '../../../runtime/common/lang/FError';
 import {RFloat} from '../../../runtime/common/lang/RFloat';
 import {REnum} from '../../../runtime/common/lang/REnum';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {EParameterFormat} from './EParameterFormat';
 
 //==========================================================

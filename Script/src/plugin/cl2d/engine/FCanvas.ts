@@ -31,7 +31,7 @@ export class FCanvas extends FContent {
       // 设置属性
       this._size = new SSize2(1280, 720);
    }
-   
+
    //==========================================================
    // <T>获得页面元素。</T>
    //

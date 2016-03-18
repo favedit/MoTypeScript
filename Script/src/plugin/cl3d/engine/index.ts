@@ -19,3 +19,6 @@ export {instance as instance};
 
 import * as render from './render/index';
 export {render as render};
+
+import * as shape from './shape/index';
+export {shape as shape};

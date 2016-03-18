@@ -1,7 +1,7 @@
 import {FObject} from '../common/lang/FObject';
 import {FObjects} from '../runtime/common/lang/FObjects';
 import {RObject} from '../runtime/common/lang/RObject';
-import {ILight} from './light/ILight';
+//import {Light} from './light/Light';
 
 //==========================================================
 // <T>处理环境。</T>
@@ -16,7 +16,7 @@ export interface IProcessContext {
    // // 主方向光源
    // public directionalLight = null;
    // 光源集合
-   lights: FObjects<ILight>;
+   //lights: FObjects<ILight>;
    // // 渲染集合
    // public renderables = null;
    // // 所有渲染集合

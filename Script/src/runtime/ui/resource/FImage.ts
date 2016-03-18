@@ -20,7 +20,7 @@ export class FImage extends FObject {
    protected _ready = false;
    // 尺寸
    protected _size: SSize2 = null;
-   // 地址 
+   // 地址
    protected _url = null;
    // 句柄
    protected _handle = null;

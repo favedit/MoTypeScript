@@ -13,7 +13,7 @@ import {RHtml} from '../utility/RHtml';
 // @history 150526
 //==========================================================
 export class FAudio extends FObject {
-   // 地址 
+   // 地址
    protected _url: string = null;
    // 句柄
    protected _hAudio = null;

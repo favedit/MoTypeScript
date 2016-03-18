@@ -5,7 +5,7 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SVector4} from '../../../runtime/common/math/SVector4';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
 import {FLight} from '../lights/FLight';
 import {FRenderable} from './FRenderable';
@@ -106,7 +106,7 @@ export class FRegion extends FObject implements IProcessContext {
       // 清空全部渲染对象
       this.allRenderables.clear();
    }
-   
+
    //==========================================================
    // <T>重置处理。</T>
    //

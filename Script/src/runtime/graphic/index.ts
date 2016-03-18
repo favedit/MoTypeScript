@@ -12,8 +12,17 @@ export {camera as camera};
 import * as context from './context/index';
 export {context as context};
 
-import * as light from './light/index';
-export {light as light};
+import * as core from './core/index';
+export {core as core};
+
+import * as lights from './lights/index';
+export {lights as lights};
 
 import * as material from './material/index';
 export {material as material};
+
+import * as math from './math/index';
+export {math as math};
+
+import * as shape from './shape/index';
+export {shape as shape};

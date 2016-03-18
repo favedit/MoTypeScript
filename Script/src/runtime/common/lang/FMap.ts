@@ -14,7 +14,7 @@ export class FMap<N, V> extends FObject {
    // 总数
    protected _count: number = 0;
    // 对照表
-   protected _table: any = new Object();
+   protected _table: any = new FObject();
    // 名称集合
    protected _names: Array<N> = new Array<N>();
    // 内容集合

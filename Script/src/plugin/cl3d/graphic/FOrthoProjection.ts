@@ -1,4 +1,4 @@
-import {RMatrix} from '../../../runtime/common/math/RMatrix';
+import {RMatrix} from '../../../runtime/graphic/math/RMatrix';
 import {FProjection} from './FProjection';
 
 //==========================================================

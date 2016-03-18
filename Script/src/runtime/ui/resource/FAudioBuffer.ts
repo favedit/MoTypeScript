@@ -26,7 +26,7 @@ export class FAudioBuffer extends FObject {
       //o.__base.FObject.construct.call(o);
       //o.__base.MAudio.construct.call(o);
    }
-      
+
    //==========================================================
    // <T>数据解码成功。</T>
    //

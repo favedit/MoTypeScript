@@ -1,6 +1,6 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
 import {RObject} from '../../../runtime/common/lang/RObject';
-import {SMatrix3d} from '../../../runtime/common/math/SMatrix3d';
+import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IDrawable} from '../../../runtime/graphic/IDrawable';
 import {FRegion} from './FRegion';
 
