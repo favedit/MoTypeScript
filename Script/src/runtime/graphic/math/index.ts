@@ -1,4 +1,5 @@
 export * from './EFrustumPlane';
+export * from './RConst';
 export * from './RMatrix';
 export * from './SCorners';
 export * from './SFace3';
