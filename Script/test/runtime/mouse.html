@@ -34,12 +34,19 @@ console.log(a.prototype === b.prototype);
 console.log(a.constructor === b.constructor);
 
 function A(){
+   A.prototype.test = function(){
+      debugger
+      console.log('test' + this);
+   };
    return this;
 }
-A.prototype.test = 'asd';
 var a = new A();
-console.log(a.test);
-console.log(A.test);
+A.prototype.test.call(a);
+
+//A.prototype.test = 'asd';
+//var a = new A();
+//console.log(a.test);
+//console.log(A.test);
 
 </script>
 
