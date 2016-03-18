@@ -6,6 +6,8 @@ import {FConsole} from '../../core/FConsole';
 import {EKeyStatus} from '../EKeyStatus';
 import {EKeyCode} from '../EKeyCode';
 import {FDeviceConsole} from './FDeviceConsole';
+import {EEvent} from '../event/EEvent';
+import {SKeyboardEvent} from '../event/SKeyboardEvent';
 
 //===========================================================
 // <T>键盘管理器。</T>
@@ -14,6 +16,7 @@ export class FKeyboardConsole extends FConsole {
    // 状态集合
    protected _status: Array<EKeyStatus>;
    // 监听器集合
+   protected _eventKey: SKeyboardEvent;
    protected _keyDownListeners: FListeners;
    protected _keyUpListeners: FListeners;
    protected _keyPressListeners: FListeners;
@@ -32,6 +35,7 @@ export class FKeyboardConsole extends FConsole {
       super();
       // 设置属性
       this._status = new Array<EKeyStatus>();
+      this._eventKey = new SKeyboardEvent();
       this._keyDownListeners = new FListeners();
       this._keyUpListeners = new FListeners();
       this._keyPressListeners = new FListeners();
@@ -40,10 +44,6 @@ export class FKeyboardConsole extends FConsole {
       for (var i: number = 0; i < 256; i++) {
          status[i] = EKeyStatus.Normal;
       }
-      // 增加监听
-      this._deviceConsole.keyDownListeners.register(this, this.onKeyDown);
-      this._deviceConsole.keyUpListeners.register(this, this.onKeyUp);
-      this._deviceConsole.keyPressListeners.register(this, this.onKeyPress);
    }
 
    //===========================================================
@@ -71,6 +71,89 @@ export class FKeyboardConsole extends FConsole {
    //===========================================================
    public get keyPressListeners(): FListeners {
       return this._keyPressListeners;
+   }
+
+   //==========================================================
+   // <T>初始化处理。</T>
+   //==========================================================
+   public initialize() {
+      var deviceConsole = this._deviceConsole;
+      var hContainer = deviceConsole.htmlContainer();
+      hContainer._keyboardConsole = this;
+      // 关联键盘事件
+      var supportHtml5 = deviceConsole.supportHtml5();
+      if (supportHtml5) {
+         hContainer.addEventListener('keydown', this.ohKeyDown, true);
+         hContainer.addEventListener('keyup', this.ohKeyUp, true);
+         hContainer.addEventListener('keypress', this.ohKeyPress, true);
+      } else {
+         hContainer.onkeydown = this.ohKeyDown;
+         hContainer.onkeyup = this.ohKeyUp;
+         hContainer.onkeypress = this.ohKeyPress;
+      }
+   }
+
+   //==========================================================
+   // <T>键盘按下处理。</T>
+   //
+   // @param hEvent 事件
+   //==========================================================
+   public ohKeyDown(hEvent) {
+      var linker: FKeyboardConsole = (this as any)._keyboardConsole;
+      // 获得事件
+      var hFindEvent = null;
+      if (!hEvent) {
+         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+      } else {
+         hFindEvent = hEvent;
+      }
+      // 事件处理
+      var event = linker._eventKey;
+      event.code = EEvent.KeyDown;
+      event.attachEvent(hEvent);
+      linker.onKeyDown(linker, event);
+   }
+
+   //==========================================================
+   // <T>键盘抬起处理。</T>
+   //
+   // @param hEvent 事件
+   //==========================================================
+   public ohKeyUp(hEvent) {
+      var linker: FKeyboardConsole = (this as any)._keyboardConsole;
+      // 获得事件
+      var hFindEvent = null;
+      if (!hEvent) {
+         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+      } else {
+         hFindEvent = hEvent;
+      }
+      // 事件处理
+      var event = linker._eventKey;
+      event.code = EEvent.KeyUp;
+      event.attachEvent(hEvent);
+      linker.onKeyUp(linker, event);
+   }
+
+   //==========================================================
+   // <T>键盘点击处理。</T>
+   //
+   // @param hEvent 事件
+   //==========================================================
+   public ohKeyPress(hEvent) {
+      var linker: FKeyboardConsole = (this as any)._keyboardConsole;
+      // 获得事件
+      var hFindEvent = null;
+      if (!hEvent) {
+         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+      } else {
+         hFindEvent = hEvent;
+      }
+      // 事件处理
+      var event = linker._eventKey;
+      event.code = EEvent.KeyPress;
+      event.attachEvent(hEvent);
+      linker.onKeyPress(linker, event);
    }
 
    //===========================================================
@@ -107,6 +190,18 @@ export class FKeyboardConsole extends FConsole {
    public onKeyPress(sender, event) {
       // 处理事件
       this._keyPressListeners.process(event);
+   }
+
+   //===========================================================
+   // <T>判断按键是否按下。</T>
+   //
+   // @method
+   // @param keyCode:Integer 按键代码
+   // @return Boolean 是否按下
+   //===========================================================
+   public isKeyPress(keyCode:number): boolean {
+      var status = this._status[keyCode];
+      return status == EKeyStatus.Press;
    }
 
    // //===========================================================
@@ -161,18 +256,6 @@ export class FKeyboardConsole extends FConsole {
    //    }
    //    return false;
    // }
-
-   //===========================================================
-   // <T>判断按键是否按下。</T>
-   //
-   // @method
-   // @param keyCode:Integer 按键代码
-   // @return Boolean 是否按下
-   //===========================================================
-   public isPress(keyCode): boolean {
-      var status = this._status[keyCode];
-      return status == EKeyStatus.Press;
-   }
 
    // //===========================================================
    // // <T>修正按键字符大小写。</T>

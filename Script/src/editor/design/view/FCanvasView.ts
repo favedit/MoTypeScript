@@ -107,8 +107,8 @@ export class FCanvasView extends FView {
       var keyboardConsole = this._keyboardConsole;
       // 上下处理
       var distance = this._cameraMoveRate;
-      var keyUp = keyboardConsole.isPress(EKeyCode.W)
-      var keyDown = keyboardConsole.isPress(EKeyCode.S)
+      var keyUp = keyboardConsole.isKeyPress(EKeyCode.W)
+      var keyDown = keyboardConsole.isKeyPress(EKeyCode.S)
       if (keyUp && !keyDown) {
          camera.doWalk(distance);
       } else if (!keyUp && keyDown) {
@@ -116,8 +116,8 @@ export class FCanvasView extends FView {
       }
       // 左右处理
       var rotation = this._cameraKeyRotation;
-      var keyLeft = keyboardConsole.isPress(EKeyCode.A)
-      var keyRight = keyboardConsole.isPress(EKeyCode.D)
+      var keyLeft = keyboardConsole.isKeyPress(EKeyCode.A)
+      var keyRight = keyboardConsole.isKeyPress(EKeyCode.D)
       if (keyLeft && !keyRight) {
          camera.doYaw(rotation);
       } else if (!keyLeft && keyRight) {

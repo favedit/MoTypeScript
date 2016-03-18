@@ -38,6 +38,10 @@ export class EEvent {
    public static MouseMove = 'MouseMove';
    // @attribute 鼠标抬起
    public static MouseUp = 'MouseUp';
+   // @attribute 鼠标进入
+   public static MouseEnter = 'MouseEnter';
+   // @attribute 鼠标离开
+   public static MouseLeave = 'MouseLeave';
    // @attribute 鼠标卷动
    public static MouseWheel = 'MouseWheel';
    // @attribute 按键落下

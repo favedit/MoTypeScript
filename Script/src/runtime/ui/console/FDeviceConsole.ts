@@ -10,8 +10,8 @@ import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {EEvent} from '../event/EEvent';
-import {SMouseEvent} from '../event/SMouseEvent';
-import {SKeyboardEvent} from '../event/SKeyboardEvent';
+//import {SMouseEvent} from '../event/SMouseEvent';
+//import {SKeyboardEvent} from '../event/SKeyboardEvent';
 import {SResizeEvent} from '../event/SResizeEvent';
 import {EDevice} from '../EDevice';
 import {ESoftware} from '../ESoftware';
@@ -26,8 +26,6 @@ export class FDeviceConsole extends FConsole {
    // @attribute
    protected _optionSelect = true;
    // @attribute
-   protected _eventMouse = new SMouseEvent();
-   protected _eventKey = new SKeyboardEvent();
    protected _eventResize = new SResizeEvent();
    protected _eventVisibility = new SEvent();
    protected _eventOrientation = new SEvent();
@@ -63,14 +61,6 @@ export class FDeviceConsole extends FConsole {
    public loadListeners = new FListeners();
    public loadedListeners = new FListeners();
    public unloadListeners = new FListeners();
-   public mouseDownListeners = new FListeners();
-   public mouseUpListeners = new FListeners();
-   public mouseOverListeners = new FListeners();
-   public mouseMoveListeners = new FListeners();
-   public mouseWheelListeners = new FListeners();
-   public keyDownListeners = new FListeners();
-   public keyUpListeners = new FListeners();
-   public keyPressListeners = new FListeners();
    public resizeListeners = new FListeners();
    public visibilityListeners = new FListeners();
    public orientationListeners = new FListeners();
@@ -93,6 +83,37 @@ export class FDeviceConsole extends FConsole {
    //==========================================================
    public htmlWindow() {
       return this._hWindow;
+   }
+
+   //==========================================================
+   // <T>获得文档对象。</T>
+   //
+   // @return 文档对象
+   //==========================================================
+   public htmlDocument() {
+      return this._hDocument;
+   }
+
+   //==========================================================
+   // <T>获得容器对象。</T>
+   //
+   // @return 容器对象
+   //==========================================================
+   public htmlContainer() {
+      return this._hContainer;
+   }
+
+   //==========================================================
+   // <T>获得事件对象。</T>
+   //
+   // @param hEvent 事件
+   // @return 事件
+   //==========================================================
+   public htmlEvent(hEvent) {
+      if (!hEvent) {
+         hEvent = this._hWindow.event;
+      }
+      return hEvent;
    }
 
    //==========================================================
@@ -391,22 +412,8 @@ export class FDeviceConsole extends FConsole {
       // 关联鼠标事件
       var visibilitychange = this.defineEventGet('visibilitychange');
       if (this.supportHtml5()) {
-         hContainer.addEventListener('mousedown', this.ohMouseDown, true);
-         hContainer.addEventListener('mousemove', this.ohMouseMove, true);
-         hContainer.addEventListener('mouseup', this.ohMouseUp, true);
-         hContainer.addEventListener('mousewheel', this.ohMouseWheel, true);
-         hContainer.addEventListener('keydown', this.ohKeyDown, true);
-         hContainer.addEventListener('keyup', this.ohKeyUp, true);
-         hContainer.addEventListener('keypress', this.ohKeyPress, true);
          hDocument.addEventListener(visibilitychange, this.ohVisibility, true);
       } else {
-         hContainer.onmousedown = this.ohMouseDown;
-         hContainer.onmousemove = this.ohMouseMove;
-         hContainer.onmouseup = this.ohMouseUp;
-         hContainer.onmousewheel = this.ohMouseWheel;
-         hContainer.onkeydown = this.ohKeyDown;
-         hContainer.onkeyup = this.ohKeyUp;
-         hContainer.onkeypress = this.ohKeyPress;
          hDocument['on' + visibilitychange] = this.ohVisibility;
       }
       hWindow.onorientationchange = this.ohOrientation;
@@ -421,153 +428,6 @@ export class FDeviceConsole extends FConsole {
       this._cancelAnimationFrame = hWindow.cancelRequestAnimationFrame || hWindow.webkitCancelAnimationFrame
          || hWindow.webkitCancelRequestAnimationFrame || hWindow.mozCancelAnimationFrame
          || hWindow.mozCancelRequestAnimationFrame || hWindow.msCancelAnimationFrame || hWindow.msCancelRequestAnimationFrame;
-   }
-
-   //==========================================================
-   // <T>鼠标按下处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohMouseDown(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventMouse;
-      event.code = EEvent.MouseDown;
-      event.attachEvent(hEvent);
-      linker.mouseDownListeners.process(event);
-   }
-
-   //==========================================================
-   // <T>鼠标移动处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohMouseMove(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventMouse;
-      event.code = EEvent.MouseMove;
-      event.attachEvent(hEvent);
-      linker.mouseMoveListeners.process(event);
-   }
-
-   //==========================================================
-   // <T>鼠标抬起处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohMouseUp(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventMouse;
-      event.code = EEvent.MouseUp;
-      event.attachEvent(hEvent);
-      linker.mouseUpListeners.process(event);
-   }
-
-   //==========================================================
-   // <T>鼠标滚动处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohMouseWheel(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventMouse;
-      event.code = EEvent.MouseWheel;
-      event.attachEvent(hEvent);
-      linker.mouseWheelListeners.process(event);
-   }
-
-   //==========================================================
-   // <T>键盘按下处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohKeyDown(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventKey;
-      event.code = EEvent.KeyDown;
-      event.attachEvent(hEvent);
-      linker.keyDownListeners.process(event);
-      // RLogger.debug(linker, 'Window key down. (key_code={1})', e.keyCode);
-      // var s = e.srcElement ? e.srcElement : e.target;
-      // var t = s.tagName;
-      // if (EKeyCode.BackSpace == e.keyCode) {
-      //    // 禁止在非输入框内输入退格键
-      //    if ('INPUT' == t) {
-      //       if (s.readOnly || 'checkbox' == s.type) {
-      //          return RKey.eventClear(e);
-      //       }
-      //    } else if ('TEXTAREA' == t) {
-      //       if (s.readOnly) {
-      //          return RKey.eventClear(e);
-      //       }
-      //    } else {
-      //       return RKey.eventClear(e);
-      //    }
-      // }
-      // // 纷发按键消息
-      // linker.__keyDownEvent.attach(e);
-      // linker.lsnsKeyDown.process(linker.__keyDownEvent);
-      // // 处理回车键
-      // if (EKeyCode.Enter == e.keyCode) {
-      //    if ('INPUT' == t) {
-      //       if (REvent.process(s, e)) {
-      //          RKey.eventClear(e);
-      //       }
-      //    }
-      // }
-   }
-
-   //==========================================================
-   // <T>键盘抬起处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohKeyUp(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventKey;
-      event.code = EEvent.KeyUp;
-      event.attachEvent(hEvent);
-      linker.keyUpListeners.process(event);
-   }
-
-   //==========================================================
-   // <T>键盘点击处理。</T>
-   //
-   // @method
-   // @param hEvent:htmlEvent 事件
-   //==========================================================
-   public ohKeyPress(hEvent) {
-      var linker: FDeviceConsole = (this as any).__linker;
-      if (!hEvent) {
-         hEvent = linker._hWindow.event;
-      }
-      var event = linker._eventKey;
-      event.code = EEvent.KeyPress;
-      event.attachEvent(hEvent);
-      linker.keyPressListeners.process(event);
    }
 
    //==========================================================

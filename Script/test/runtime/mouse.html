@@ -1,0 +1,29 @@
+<script>
+var last = null;
+function _mouse_move(event){
+   if(last != 'move'){
+      console.log(this.name + ' move');
+      last = 'move';
+   }
+}
+function _mouse_over(event){
+   console.log(this.name + ' over');
+   last = 'over';
+}
+function _mouse_out(event){
+   console.log(this.name + ' out');
+   last = 'out';
+}
+function _mouse_enter(event){
+   console.log(this.name + ' enter');
+   last = 'enter';
+}
+function _mouse_leave(event){
+   console.log(this.name + ' leave');
+   last = 'leave';
+}
+</script>
+
+<div name='outer' style='left:100px;top:100px;width:400px;height:100px;background-color:red' onmousemove='_mouse_move()' onmouseover='_mouse_over()' onmouseout='_mouse_out()' onmouseenter='_mouse_enter()' onmouseleave='_mouse_leave()'>
+   <div name='inner' style='left:120px;top:120px;width:200px;height:50px;background-color:blue' onmousemove='_mouse_move()' onmouseover='_mouse_over()' onmouseout='_mouse_out()' onmouseenter='_mouse_enter()' onmouseleave='_mouse_leave()'>
+</div>

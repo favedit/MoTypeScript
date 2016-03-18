@@ -34,7 +34,7 @@ export class FClass extends FObject {
    protected _annotations: FDictionary<FAnnotationDictionary> = null;
    // 属性集合
    protected _attributes: FDictionary<FAnnotation> = null;
-   
+
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
@@ -87,15 +87,19 @@ export class FClass extends FObject {
    // @return 实例
    //==========================================================
    public get instance(): any {
-      if (this._instance == null) {
+      var instance = this._instance;
+      if (!instance) {
          var clazz:any = this._class;
          if(clazz.instance){
-            this._instance = clazz.instance();
+            instance = this._instance = clazz.instance();
          }else{
-            this._instance = new clazz();
+            instance = this._instance = new clazz();
+         }
+         if (instance.initialize){
+            instance.initialize();
          }
       }
-      return this._instance;
+      return instance;
    }
 
    //==========================================================
@@ -106,7 +110,7 @@ export class FClass extends FObject {
    public set instance(instance: any) {
       this._instance = instance;
    }
-   
+
    //==========================================================
    // <T>向当前类对象注册一个描述对象。</T>
    //
@@ -138,10 +142,10 @@ export class FClass extends FObject {
       }
       // 设置内容
       annotations.set(code, annotation);
-      // 设置属性 
+      // 设置属性
       this._attributes.set(name, annotation);
    }
-   
+
    //==========================================================
    // <T>查找一个描述类型的描述对象集合。</T>
    //
@@ -153,7 +157,7 @@ export class FClass extends FObject {
       var annotations: FAnnotationDictionary = this._annotations.get(annotationCd as any);
       return annotations;
    }
-   
+
    //==========================================================
    // <T>获得一个描述类型的描述对象集合。</T>
    //
@@ -168,13 +172,13 @@ export class FClass extends FObject {
       }
       return annotations;
    }
-   
+
    //==========================================================
    // <T>查找一个描述类型下的一个描述对象。</T>
    //
    // @method
    // @param annotationCd 描述类型
-   // @param code 代码 
+   // @param code 代码
    // @return 描述对象
    //==========================================================
    public findAnnotation(annotationCd: EAnnotation, code: string): FAnnotation {
@@ -185,13 +189,13 @@ export class FClass extends FObject {
       }
       return annotation;
    }
-   
+
    //==========================================================
    // <T>获得一个描述类型下的一个描述对象。</T>
    //
    // @method
    // @param annotationCd 描述类型
-   // @param code 代码 
+   // @param code 代码
    // @return 描述对象
    //==========================================================
    public getAnnotation(annotationCd: EAnnotation, code: string): FAnnotation {
@@ -201,7 +205,7 @@ export class FClass extends FObject {
       }
       return annotation;
    }
-   
+
    //==========================================================
    // <T>根据属性查找描述器。</T>
    //
@@ -213,7 +217,7 @@ export class FClass extends FObject {
       var attribute = this._attributes.get(code);
       return attribute;
    }
-   
+
    //==========================================================
    // <T>根据属性获得描述器。</T>
    //
@@ -274,7 +278,7 @@ export class FClass extends FObject {
       protected _clazz = null;
       protected _parent = null;
       protected _pool = new FMemoryPool();
-   
+
       //==========================================================
       // <T>当前类接收其他类所有的描述信息。</T>
       //
@@ -320,7 +324,7 @@ export class FClass extends FObject {
             }
          }
       }
-   
+
       //==========================================================
       // <T>获得一个类关联的样式描述。</T>
       //
@@ -357,7 +361,7 @@ export class FClass extends FObject {
          styles[name] = styleName;
          return styleName;
       }
-   
+
       //==========================================================
       // <T>类对象构建处理。</T>
       //
@@ -396,7 +400,7 @@ export class FClass extends FObject {
             }
          }
       }
-   
+
       //==========================================================
       // <T>创建当前类对象的一个实例。</T>
       //

@@ -1,11 +1,23 @@
-export class FHotKey {
+import {FObject} from '../../common/lang/FObject';
+
+//===========================================================
+// <T>热键。</T>
+//===========================================================
+export class FHotKey extends FObject {
    public hotkeyHandler = null;
    public hotkeyMap = {};
    public cmdHotkeyMap = {};
    public _hotkeysEnabled = true;
-   // goog.events.listen(this.hotkeyHandler, goog.ui.KeyboardShortcutHandler.EventType.SHORTCUT_TRIGGERED, this.customHotkeyHandler.bind(this));
+   protected _valid;
+   
+   public constructor(){
+      super();
+      this._valid = false;
+   }
+
    public enable() {
    }
+   
    public disable() {
    }
 }
