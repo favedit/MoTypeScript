@@ -12,7 +12,7 @@ import {FGraphicContext} from './FGraphicContext';
 //==========================================================
 export class FGraphicObject extends FObject {
    // 图形环境
-   public _graphicContext: any = null;
+   public _graphicContext: any;
 
    //==========================================================
    // <T>关联图形环境。</T>

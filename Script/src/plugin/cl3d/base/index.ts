@@ -1,5 +1,7 @@
 export * from './EGraphicError';
 export * from './EGraphicQuality';
+export * from './ERegionParameter';
+export * from './FActor';
 export * from './FDisplay';
 export * from './FDisplayContainer';
 export * from './FDisplayLayer';
@@ -7,6 +9,11 @@ export * from './FDrawable';
 export * from './FRegion';
 export * from './FRenderable';
 export * from './FScene';
+export * from './FSceneStatistics';
+export * from './SRenderableInfo';
+
+import * as framework from './framework/index';
+export {framework as framework};
 
 import * as geom from './geom/index';
 export {geom as geom};

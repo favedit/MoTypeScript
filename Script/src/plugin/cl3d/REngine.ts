@@ -1,6 +1,6 @@
-import {RConsole} from '../../../runtime/core/RConsole';
-import {FGeneralColorAutomaticEffect} from '../technique/effect/FGeneralColorAutomaticEffect';
-import {FEffectConsole} from '../graphic/FEffectConsole';
+import {RConsole} from '../../runtime/core/RConsole';
+import {FGeneralColorAutomaticEffect} from './technique/effect/FGeneralColorAutomaticEffect';
+import {FEffectConsole} from './graphic/FEffectConsole';
 
 //==========================================================
 // <T>三维渲染引擎。</T>
@@ -23,6 +23,8 @@ export class REngine {
    //public onSetup() {
    public static staticConstructor() {
       var effectConsole = RConsole.find(FEffectConsole);
+      // 通用效果器
+      effectConsole.register('general.color.phong.automatic', FGeneralColorAutomaticEffect);
       // 选取效果器
       // effectConsole.register('select.select.flat', MO.FG3dSelectAutomaticEffect);
       // effectConsole.register('select.select.control', MO.FG3dSelectAutomaticEffect);
@@ -36,7 +38,7 @@ export class REngine {
       // effectConsole.register('general.color.control', MO.FE3dControlAutomaticEffect);
       // effectConsole.register('general.color.flat', MO.FE3dGeneralColorFlatEffect);
       // effectConsole.register('general.color.fill', MO.FE3dGeneralColorFillEffect);
-      effectConsole.register('general.color.automatic', FGeneralColorAutomaticEffect);
+      // effectConsole.register('general.color.automatic', FGeneralColorAutomaticEffect);
       // effectConsole.register('general.color.skin', MO.FE3dGeneralColorAutomaticEffect);
       // effectConsole.register('general.color.parallax', MO.FE3dGeneralColorAutomaticEffect);
       // effectConsole.register('general.color.video', MO.FE3dGeneralColorVideoEffect);

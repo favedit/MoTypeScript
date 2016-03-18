@@ -1,5 +1,5 @@
-import {FPhongMaterial} from '../../../runtime/graphic/materials/FPhongMaterial'
-import {FRenderable} from '../FRenderable';
+import {FPhongMaterial} from '../../../runtime/graphic/material/FPhongMaterial'
+import {FRenderable} from '../../base/FRenderable';
 
 //==========================================================
 // <T>网格渲染对象。</T>

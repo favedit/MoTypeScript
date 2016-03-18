@@ -19,8 +19,7 @@ export class SRenderableInfo {
    // @method
    //==========================================================
    public reset() {
-      var o = this;
-      o.effect = null;
-      o.layout = RObject.dispose(o.layout);
+      this.effect = null;
+      this.layout = RObject.dispose(this.layout);
    }
 }

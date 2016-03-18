@@ -9,16 +9,14 @@ import {FStatistics} from '../../../runtime/core/console/FStatistics';
 // @version 150303
 //==========================================================
 export class FSceneStatistics extends FStatistics {
-   public frame = null;
-   public frameProcess = null;
-   public frameDraw = null;
-   public frameDrawSort = null;
-   public frameDrawRenderable = null;
+   public frame;
+   public frameProcess;
+   public frameDraw;
+   public frameDrawSort;
+   public frameDrawRenderable;
 
    //==========================================================
-   // <T>重置所有数据。</T>
-   //
-   // @method
+   // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
@@ -31,23 +29,18 @@ export class FSceneStatistics extends FStatistics {
 
    //==========================================================
    // <T>重置所有数据。</T>
-   //
-   // @method
    //==========================================================
    public reset() {
    }
 
    //==========================================================
    // <T>重置所有帧数据。</T>
-   //
-   // @method
    //==========================================================
    public resetFrame() {
-      var o = this;
-      o.frame.reset();
-      o.frameProcess.reset();
-      o.frameDraw.reset();
-      o.frameDrawSort.reset();
-      o.frameDrawRenderable.reset();
+      this.frame.reset();
+      this.frameProcess.reset();
+      this.frameDraw.reset();
+      this.frameDrawSort.reset();
+      this.frameDrawRenderable.reset();
    }
 }

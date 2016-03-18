@@ -1,9 +1,9 @@
 import {FObject} from '../../../../runtime/common/lang/FObject';
-import {FContext} from '../FContext';
+import {FCamera} from '../../../runtime/graphic/camera/FCamera';
+import {FContext} from '../../graphic/FContext';
+import {FTechnique} from '../../graphic/FTechnique';
 import {FScene} from '../../base/FScene';
 import {FRegion} from '../../base/FRegion';
-import {FTechnique} from '../FTechnique';
-import {FCamera} from '../FCamera';
 
 //==========================================================
 // <T>立方渲染纹理。</T>

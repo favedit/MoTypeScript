@@ -30,6 +30,7 @@ export class FPhongMaterial extends FMaterial {
       super();
       // 设置属性
       this.code = "phong";
+      this.effectCode = 'phong.automatic';
       this.alphaBase = 0.1;
       this.alphaRate = 1;
       this._ambientColor = new SColor4(0.7, 0.7, 0.7, 0.7);

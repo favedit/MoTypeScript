@@ -10,7 +10,7 @@ export class RObjectId {
    private static _hash: number = 1;
 
    // 编号集合
-   private static _ids:any = new Object();
+   private static _ids: any = new Object();
 
    //==========================================================
    // <T>获得下一个编号。</T>
@@ -28,11 +28,11 @@ export class RObjectId {
    // @param code 代码
    // @return Integer 编号
    //==========================================================
-   public static nextId(code:string) {
-      var id:number = this._ids[code];
-      if(id == null){
-         id = this._ids[code] = 1;
-      }else{
+   public static nextId(code: string) {
+      var id: number = this._ids[code];
+      if (id == null) {
+         id = this._ids[code] = 0;
+      } else {
          this._ids[code] = ++id;
       }
       return id;

@@ -32,3 +32,9 @@ export * from './ME3dBoundaryPolygon';
 export * from './ME3dDynamicRenderable';
 export * from './SE3dRulerPrecision';
 export * from './SE3dRulerStyle';
+
+import * as instance from './instance/index';
+export {instance as instance};
+
+import * as render from './render/index';
+export {render as render};

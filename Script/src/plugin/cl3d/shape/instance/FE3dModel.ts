@@ -1,7 +1,7 @@
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {FE3rModelMesh} from '../render/FE3rModelMesh';
 import {FE3rModel} from '../render/FE3rModel';
-import {FActor} from '../FActor';
+import {FActor} from '../../base/FActor';
 import {FE3dMeshRenderable} from './FE3dMeshRenderable';
 
 //==========================================================
@@ -55,7 +55,7 @@ export class FE3dModel extends FActor {
       var count: number = meshes.count();
       for (var n: number = 0; n < count; n++) {
          var meshRenderable: FE3rModelMesh = meshes.at(n);
-         meshRenderable.vertexBuffers
+         //meshRenderable.vertexBuffers
          var renderable:FE3dMeshRenderable = new FE3dMeshRenderable();
          renderable.loadRenderable(meshRenderable);
          this.pushRenderable(renderable);

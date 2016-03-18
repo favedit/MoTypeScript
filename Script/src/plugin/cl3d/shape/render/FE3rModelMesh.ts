@@ -7,7 +7,7 @@ import {EIndexStride} from '../../graphic/EIndexStride';
 import {EAttributeFormat} from '../../graphic/EAttributeFormat';
 import {FStreamResource} from '../resource/FStreamResource';
 import {FMeshResource} from '../resource/FMeshResource';
-import {FRenderable} from '../FRenderable';
+import {FRenderable} from '../../base/FRenderable';
 import {FE3rVertexBuffer} from './FE3rVertexBuffer';
 import {FE3rIndexBuffer} from './FE3rIndexBuffer';
 

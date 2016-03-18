@@ -11,19 +11,19 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 //==========================================================
 export class FProjection extends FObject {
    // 矩阵
-   public matrix: SMatrix3d = null;
+   public matrix: SMatrix3d;
    // 尺寸
-   public size: SSize2 = null;
+   public size: SSize2;
    // 角度
-   public angle: number = 60;
+   public angle: number;
    // 夹角
-   public fieldOfView = 0;
+   public fieldOfView;
    // 近平面
-   public znear: number = 0.1;
+   public znear: number;
    // 远平面
-   public zfar: number = 200;
+   public zfar: number;
    // 缩放
-   public zoom: number = 1;
+   public zoom: number;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,6 +34,11 @@ export class FProjection extends FObject {
       super();
       this.matrix = new SMatrix3d();
       this.size = new SSize2();
+      this.angle = 60;
+      this.fieldOfView = 0;
+      this.znear = 0.1;
+      this.zfar = 200;
+      this.zoom = 1;
    }
 
    //==========================================================

@@ -6,14 +6,14 @@ import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
 import {FScene} from '../../plugin/cl3d/base/FScene';
 import {FDisplayLayer} from '../../plugin/cl3d/base/FDisplayLayer';
-import {FPerspectiveCamera} from '../../plugin/cl3d/graphic/FPerspectiveCamera';
-import {FPipeline} from '../../plugin/cl3d/graphic/pipeline/FPipeline';
-import {FPipelineConsole} from '../../plugin/cl3d/graphic/pipeline/FPipelineConsole';
+import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamera';
+import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
+import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
 import {FTechniqueConsole} from '../../plugin/cl3d/graphic/FTechniqueConsole';
 import {FCube} from '../../plugin/cl3d/shape/FCube';
-import {FRegion} from '../../plugin/cl3d/engine/FRegion';
+import {FRegion} from '../../plugin/cl3d/base/FRegion';
 import {FGeneralTechnique} from '../../plugin/cl3d/technique/FGeneralTechnique';
-import {FE3dModelConsole} from '../../plugin/cl3d/engine/instance/FE3dModelConsole';
+import {FE3dModelConsole} from '../../plugin/cl3d/shape/instance/FE3dModelConsole';
 import {SSettings} from '../application/SSettings';
 
 //==========================================================

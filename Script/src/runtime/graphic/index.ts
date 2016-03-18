@@ -15,11 +15,11 @@ export {context as context};
 import * as core from './core/index';
 export {core as core};
 
-import * as lights from './lights/index';
-export {lights as lights};
+import * as light from './light/index';
+export {light as light};
 
-import * as materials from './materials/index';
-export {materials as materials};
+import * as material from './material/index';
+export {material as material};
 
 import * as math from './math/index';
 export {math as math};

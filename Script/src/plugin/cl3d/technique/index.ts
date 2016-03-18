@@ -14,3 +14,6 @@ export * from './FSphereViewPass';
 
 import * as effect from './effect/index';
 export {effect as effect};
+
+import * as pipeline from './pipeline/index';
+export {pipeline as pipeline};
