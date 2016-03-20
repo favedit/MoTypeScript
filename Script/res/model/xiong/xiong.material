@@ -1,5 +1,6 @@
 {
   "meta": {
+    "type": "phong",
     "guid": "XXXX",
     "id": "1",
     "version": 1,
@@ -35,14 +36,14 @@
   "textures": [
       {
          "code": "diffuse",
-         "type": "repeat",
+         "wrap": "repeat",
          "src": "${resource}/model/xiong/diffuse.png",
          "coord": "0,0",
          "rate": "1,1"
        },
        {
          "code":"specular",
-         "type": "repeat",
+         "wrap": "repeat",
          "src": "${resource}/model/xiong/specular.png",
          "coord": "0,0",
          "rate": "1,1"

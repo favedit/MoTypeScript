@@ -16,7 +16,7 @@ import {SSettings} from '../application/SSettings';
 import {EEvent} from '../../runtime/ui/EEvent';
 import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
 
-import {FMaterialResourceConsole} from '../../plugin/cl3d/resource/FMaterialResourceConsole';
+import {FE3rMaterialConsole} from '../../plugin/cl3d/shape/render/FE3rMaterialConsole';
 
 declare var id_info;
 
@@ -84,8 +84,8 @@ export class FCanvasView extends FView {
       model.matrix.addRotationY(Math.PI);
       this.contentLayer.pushDisplay(model);
 
-      var mrConsole: FMaterialResourceConsole = RConsole.find(FMaterialResourceConsole);
-      var material = mrConsole.loadByUrl('/sk/res/model/xiong/xiong.material');
+      var mrConsole: FE3rMaterialConsole = RConsole.find(FE3rMaterialConsole);
+      var material = mrConsole.loadByUrl(context, '/sk/res/model/xiong/xiong.material');
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);

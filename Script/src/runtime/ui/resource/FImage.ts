@@ -17,15 +17,15 @@ import {RHtml} from '../utility/RHtml';
 //==========================================================
 export class FImage extends FObject {
    // 准备好
-   protected _ready = false;
+   protected _ready;
    // 尺寸
-   protected _size: SSize2 = null;
+   protected _size: SSize2;
    // 地址
-   protected _url = null;
+   protected _url: string;
    // 句柄
-   protected _handle = null;
+   protected _handle;
    // 句柄
-   protected _loadListeners: FListeners = null;
+   protected _loadListeners: FListeners;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -33,6 +33,7 @@ export class FImage extends FObject {
    public constructor() {
       super();
       // 设置属性
+      this._ready = false;
       this._size = new SSize2();
       this._loadListeners = new FListeners(this);
    }
@@ -42,7 +43,7 @@ export class FImage extends FObject {
    //
    // @return 大小
    //==========================================================
-   public size(): SSize2 {
+   public get size(): SSize2 {
       return this._size;
    }
 
@@ -51,7 +52,7 @@ export class FImage extends FObject {
    //
    // @return 句柄
    //==========================================================
-   public handle() {
+   public get handle() {
       return this._handle;
    }
 
@@ -85,8 +86,8 @@ export class FImage extends FObject {
       var event = new SEvent(image);
       image._loadListeners.process(event);
       event.dispose();
-      console.log('Load image success. (url={1})', image._url);
-      //RLogger.info(image, 'Load image success. (url={1})', image._url);
+      //console.log('Load image success. (url={1})', image._url);
+      RLogger.info(image, 'Load image success. (url={1})', image._url);
    }
 
    //==========================================================
@@ -95,8 +96,8 @@ export class FImage extends FObject {
    public ohError(p) {
       var image = (this as any).__linker;
       var url = image._url;
-      console.log('Load image failure. (url={1})', image._url);
-      //RLogger.error(image, 'Load image failure. (url={1})', url);
+      //console.log('Load image failure. (url={1})', image._url);
+      RLogger.error(image, 'Load image failure. (url={1})', url);
    }
 
    //==========================================================

@@ -1,4 +1,5 @@
 import {FError} from '../../../../runtime/common/lang/FError';
+import {FImage} from '../../../../runtime/ui/resource/FImage';
 import {FFlatTexture} from '../FFlatTexture';
 import {RWglUtility} from './RWglUtility';
 
@@ -113,8 +114,8 @@ export class FWglFlatTexture extends FFlatTexture {
    // @param height:Number 高度
    //==========================================================
    public upload(content, left, top, width, height) {
-      var context = this.graphicContext;
-      var capability = context.capability();
+      var context = this._graphicContext;
+      var capability = context.capability;
       var graphic = context.handle;
       // 检查参数
       var data = null;
@@ -126,8 +127,8 @@ export class FWglFlatTexture extends FFlatTexture {
          data = content;
       } else if (content.constructor == Uint8ClampedArray) {
          data = new Uint8Array(content);
-         //} else if (MO.Class.isClass(content, MO.FImage)) {
-         //data = content.image();
+      } else if (content instanceof FImage) {
+         data = content.handle;
          //if(image.optionAlpha()){
          //   format = capability.samplerCompressRgba;
          //}else{

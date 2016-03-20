@@ -1,3 +1,4 @@
+import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
 import {FE3rComponent} from './FE3rComponent';
 
 //==========================================================
@@ -9,9 +10,9 @@ import {FE3rComponent} from './FE3rComponent';
 //==========================================================
 export class FE3rMaterial extends FE3rComponent {
    public dataReady = false;
+   public ready = false;
    // @method
    public material;
-   //_ready         = false;
    //_visible       = MO.Class.register(o, new MO.AGetSet('_visible'), true);
    //_guid          = MO.Class.register(o, new MO.AGetSet('_guid'));
    // @method
@@ -50,7 +51,8 @@ export class FE3rMaterial extends FE3rComponent {
       //    }
       //    this._ready = true;
       // }
-      // return this._ready;
+      // 
+      return this.ready;
    }
 
    //==========================================================
@@ -91,11 +93,22 @@ export class FE3rMaterial extends FE3rComponent {
    // @param resource 材质资源
    //==========================================================
    public loadResource(resource) {
-      debugger;
+      var context = this._graphicContext;
+      var textures = resource.textures;
+      var count = textures.count();
+      for (var i = 0; i < count; i++) {
+         var texture = textures.at(i);
+         var textureResource = texture.textureResource;
+         var rtexture = context.createFlatTexture();
+         rtexture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
+         rtexture.setWrapCd(ESamplerFilter.Repeat, ESamplerFilter.Repeat);
+         rtexture.upload(textureResource.image);
+      }
       //this._guid = resource.guid();
       //this._resource = resource;
       //this._info.calculate(resource.info());
       //this._dirty = true;
+      this.ready = true;
    }
 
    // //==========================================================
