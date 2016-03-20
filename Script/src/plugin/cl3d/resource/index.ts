@@ -6,6 +6,7 @@ export * from './FMaterialBitmap';
 export * from './FMaterialBitmapPack';
 export * from './FMaterialResource';
 export * from './FMaterialResourceConsole';
+export * from './FMaterialTextureResource';
 export * from './FMeshResource';
 export * from './FModelResource';
 export * from './FModelResourceConsole';

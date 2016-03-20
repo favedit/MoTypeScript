@@ -16,6 +16,8 @@ import {SSettings} from '../application/SSettings';
 import {EEvent} from '../../runtime/ui/EEvent';
 import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
 
+import {FMaterialResourceConsole} from '../../plugin/cl3d/resource/FMaterialResourceConsole';
+
 declare var id_info;
 
 //==========================================================
@@ -72,7 +74,7 @@ export class FCanvasView extends FView {
       // this.contentLayer.pushRenderable(cube);
 
       var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
-      var model = modelConsole.allocByUrl(context, 'http://localhost/sk/res/model/xiong/xiong.model');
+      var model = modelConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.model');
       model.matrix.tx = 0.2;
       model.matrix.sx = 0.1;
       model.matrix.sy = 0.1;
@@ -81,6 +83,9 @@ export class FCanvasView extends FView {
       model.matrix.addRotationX(-Math.PI / 2);
       model.matrix.addRotationY(Math.PI);
       this.contentLayer.pushDisplay(model);
+
+      var mrConsole: FMaterialResourceConsole = RConsole.find(FMaterialResourceConsole);
+      var material = mrConsole.loadByUrl('/sk/res/model/xiong/xiong.material');
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);

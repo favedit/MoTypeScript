@@ -36,11 +36,11 @@ export class FAutomaticEffect extends FEffect {
    protected _supportSkeleton = false;
    // @attribute
    protected _supportNormalInvert = true;
-   protected optionAmbient = true;
-   protected optionDiffuse = true;
-   protected optionSpecular = true;
-   protected optionReflect = true;
-   protected optionRefract = true;
+   protected _optionAmbient = true;
+   protected _optionDiffuse = true;
+   protected _optionSpecular = true;
+   protected _optionReflect = true;
+   protected _optionRefract = true;
    protected _dynamicVertexColor = true;
    protected _dynamicVertexCoord = true;
    protected _dynamicVertexNormal = true;
@@ -130,37 +130,37 @@ export class FAutomaticEffect extends FEffect {
       if (info.optionColor) {
          flag.append("|OC");
          tagContext.setBoolean("option.color", true);
-         this.optionAmbient = true;
+         this._optionAmbient = true;
       }
       // 支持纹理环境
       if (info.optionAmbient) {
          flag.append("|OA");
          tagContext.setBoolean("option.ambient", true);
-         this.optionAmbient = true;
+         this._optionAmbient = true;
       }
       // 支持纹理散射
       if (info.optionDiffuse) {
          flag.append("|OD");
          tagContext.setBoolean("option.diffuse", true);
-         this.optionDiffuse = true;
+         this._optionDiffuse = true;
       }
       // 支持纹理高光
       if (info.optionSpecular) {
          flag.append("|OS");
          tagContext.setBoolean("option.specular", true);
-         this.optionSpecular = true;
+         this._optionSpecular = true;
       }
       // 支持纹理反射
       if (info.optionReflect) {
          flag.append("|ORL");
          tagContext.setBoolean("option.reflect", true);
-         this.optionReflect = true;
+         this._optionReflect = true;
       }
       // 支持纹理折射
       if (info.optionRefract) {
          flag.append("|ORF");
          tagContext.setBoolean("option.refract", true);
-         this.optionRefract = true;
+         this._optionRefract = true;
       }
       //............................................................
       // 支持顶点颜色

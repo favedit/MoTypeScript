@@ -1,5 +1,6 @@
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
 import {RObject} from '../../runtime/common/lang/RObject';
+import {RClass} from '../../runtime/common/reflect/RClass';
 import {FConsole} from '../../runtime/core/FConsole';
 import {FTextureResource} from './FTextureResource';
 
@@ -9,7 +10,7 @@ import {FTextureResource} from './FTextureResource';
 // @author maocy
 // @history 150108
 //==========================================================
-export class FE3sTextureConsole extends FConsole {
+export class FTextureResourceConsole extends FConsole {
    // 纹理集合
    public textures: FDictionary<FTextureResource> = null;
 
@@ -63,6 +64,35 @@ export class FE3sTextureConsole extends FConsole {
       //texture.setSourceUrl(u);
       // RConsole.find(FResourceConsole).load(texture);
       textures.set(p, texture);
+      return texture;
+   }
+
+   //==========================================================
+   // <T>加载指定代码的纹理资源。</T>
+   //
+   // @param code:String 代码
+   // @return 处理结果
+   //==========================================================
+   public loadByUrl(url:string) {
+      // 获取纹理
+      var textures = this.textures;
+      var texture: FTextureResource = textures.get(url);
+      if (texture) {
+         return texture;
+      }
+      //..........................................................
+      // 生成地址
+      // var v = MO.Console.find(MO.FE3sVendorConsole).find('texture');
+      // var u = v.makeUrl(p);
+      // 创建纹理资源
+      texture = RClass.create(FTextureResource);
+      texture.guid = url;
+      texture.url = url;
+      texture.load();
+      //texture.setVendor(v);
+      //texture.setSourceUrl(u);
+      //RConsole.find(FResourceConsole).load(texture);
+      textures.set(url, texture);
       return texture;
    }
 

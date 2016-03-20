@@ -13,20 +13,18 @@ import {FResourceLoader} from '../../runtime/core/resource/FResourceLoader';
 // @history 150105
 //==========================================================
 export class FResource extends FBaseResource {
-   // 版本信息
-   public version = null;
    // 唯一编号
-   public identity = null;
+   public identity: string;
    // 鉴定码
-   public guid = null;
+   public guid: string;
    // 代码
-   public code = null;
+   public code: string;
    // 标签
-   public label = null;
+   public label: string;
    // 数据准备
-   public dataReady = false;
+   public dataReady: boolean;
    // @attribute
-   public loadListeners: FListeners = null;
+   public loadListeners: FListeners;
 
    //    // @attribute
    //    o._dataLoad      = false;
@@ -43,6 +41,7 @@ export class FResource extends FBaseResource {
    public constructor() {
       super();
       // 设置属性
+      this.dataReady = false;
       this.loadListeners = new FListeners(this);
    }
 

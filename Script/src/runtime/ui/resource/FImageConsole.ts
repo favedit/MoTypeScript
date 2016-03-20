@@ -1,6 +1,7 @@
 import {EScope} from '../../common/lang/EScope';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {RObject} from '../../common/lang/RObject';
+import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
@@ -15,8 +16,11 @@ import {FImage} from './FImage';
 // @version 150707
 //==========================================================
 export class FImageConsole extends FConsole {
-   // 图像集合 
-   protected _images: FDictionary<FImage> = null;
+   // 图像集合
+   protected _images: FDictionary<FImage>;
+   // 环境控制台
+   @ALinker(FEnvironmentConsole)
+   protected _environmentConsole: FEnvironmentConsole;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -26,20 +30,17 @@ export class FImageConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this.scopeCd = EScope.Global;
+      this._scopeCd = EScope.Global;
       this._images = new FDictionary<FImage>();
    }
 
    //==========================================================
    // <T>创建图片资源。</T>
    //
-   // @method
-   // @param uri:String 网络地址
-   // @return FAudio 资源对象
+   // @param uri 网络地址
+   // @return 图片对象
    //==========================================================
-   public create(uri) {
-      // 获得地址
-      var url = RConsole.find(FEnvironmentConsole).parse(uri);
+   public create(url: string) {
       // 加载地址
       var image = RClass.create(FImage);
       image.loadUrl(url);
@@ -49,16 +50,18 @@ export class FImageConsole extends FConsole {
    //==========================================================
    // <T>加载声音资源。</T>
    //
-   // @method
-   // @param uri:String 网络地址
-   // @return FAudio 资源对象
+   // @param uri 网络地址
+   // @return 图片对象
    //==========================================================
    public load(uri) {
+      // 获得地址
+      var url = this._environmentConsole.parse(uri);
+      // 加载位图
       var images = this._images;
-      var image = images.get(uri);
+      var image = images.get(url);
       if (!image) {
          image = this.create(uri);
-         images.set(uri, image);
+         images.set(url, image);
       }
       return image;
    }

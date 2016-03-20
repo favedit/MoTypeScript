@@ -32,18 +32,20 @@
       "power": 4
     }
   },
-  "textures": {
-    "diffuse": {
-      "type": "repeat",
-      "src": "/model/xiong/diffuse.png",
-      "coord": "0,0",
-      "rate": "1,1"
-    },
-    "specular": {
-      "type": "repeat",
-      "src": "/model/xiong/specular.png",
-      "coord": "0,0",
-      "rate": "1,1"
-    }
-  }
+  "textures": [
+      {
+         "code": "diffuse",
+         "type": "repeat",
+         "src": "${resource}/model/xiong/diffuse.png",
+         "coord": "0,0",
+         "rate": "1,1"
+       },
+       {
+         "code":"specular",
+         "type": "repeat",
+         "src": "${resource}/model/xiong/specular.png",
+         "coord": "0,0",
+         "rate": "1,1"
+       }
+   ]
 }

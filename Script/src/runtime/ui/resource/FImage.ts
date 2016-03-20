@@ -85,6 +85,8 @@ export class FImage extends FObject {
       var event = new SEvent(image);
       image._loadListeners.process(event);
       event.dispose();
+      console.log('Load image success. (url={1})', image._url);
+      //RLogger.info(image, 'Load image success. (url={1})', image._url);
    }
 
    //==========================================================
@@ -93,7 +95,8 @@ export class FImage extends FObject {
    public ohError(p) {
       var image = (this as any).__linker;
       var url = image._url;
-      RLogger.error(image, 'Load image failure. (url={1})', url);
+      console.log('Load image failure. (url={1})', image._url);
+      //RLogger.error(image, 'Load image failure. (url={1})', url);
    }
 
    //==========================================================
@@ -102,7 +105,7 @@ export class FImage extends FObject {
    // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
-      var url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
+      var url = this._url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
       // 创建图片
       var hImage = this._handle;
       if (!hImage) {
@@ -112,7 +115,6 @@ export class FImage extends FObject {
          hImage.onerror = this.ohError;
       }
       // 加载图片
-      this._url = url;
       hImage.src = url;
    }
 

@@ -6,6 +6,9 @@ export * from './IProcessContext';
 export * from './IRenderable';
 export * from './IScene';
 
+import * as base from './base/index';
+export {base as base};
+
 import * as camera from './camera/index';
 export {camera as camera};
 
