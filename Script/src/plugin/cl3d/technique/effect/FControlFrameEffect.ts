@@ -25,7 +25,7 @@ export class FControlFrameEffect
    // @param renderable 渲染对象
    //==========================================================
    public drawRenderable(region, renderable) {
-      var c = this.graphicContext;
+      var context = this.graphicContext;
       var program = this.program;
       // 获得参数
       var vcp = region.calculate(ERegionParameter.CameraPosition);
@@ -59,6 +59,6 @@ export class FControlFrameEffect
       // 绑定所有取样器
       this.bindSamplers(renderable);
       // 绘制处理
-      c.drawTriangles(renderable.indexBuffer());
+      context.drawTriangles(renderable.indexBuffer());
    }
 }

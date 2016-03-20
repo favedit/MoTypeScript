@@ -9,9 +9,6 @@ export * from './IScene';
 import * as camera from './camera/index';
 export {camera as camera};
 
-import * as context from './context/index';
-export {context as context};
-
 import * as core from './core/index';
 export {core as core};
 

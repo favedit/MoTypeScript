@@ -1,5 +1,5 @@
 ﻿import {RClass} from '../../../runtime/common/reflect/RClass'
-import {FTechnique} from '../graphic/FTechnique';
+import {FTechnique} from './FTechnique';
 import {ETechniqueMode} from './ETechniqueMode'
 import {FGeneralColorPass} from './FGeneralColorPass'
 
@@ -11,13 +11,14 @@ import {FGeneralColorPass} from './FGeneralColorPass'
 //==========================================================
 export class FGeneralTechnique extends FTechnique {
    // 颜色过程
-   public _passColor = null;
-   
+   public _passColor: FGeneralColorPass;
+
    //==========================================================
    // <T>构造处理</T>
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this.code = "general";
    }
 

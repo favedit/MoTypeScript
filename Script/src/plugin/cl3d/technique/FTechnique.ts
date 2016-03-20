@@ -3,7 +3,7 @@ import {RClass} from '../../../runtime/common/reflect/RClass';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {FScene} from '../base/FScene';
 import {FRegion} from '../base/FRegion';
-import {FContent} from './FContent';
+import {FContent} from '../graphic/FContent';
 import {FTechniqueMode} from './FTechniqueMode';
 import {FTechniquePass} from './FTechniquePass';
 
@@ -76,7 +76,7 @@ export class FTechnique extends FContent {
    // @param color:SColor4 颜色
    //==========================================================
    public clear(color): void {
-      var context = this.graphicContext;
+      var context = this._graphicContext;
       // 设置渲染目标
       context.setRenderTarget(null);
       // 清除颜色
@@ -90,7 +90,7 @@ export class FTechnique extends FContent {
    // @param depth 深度
    //==========================================================
    public clearDepth(depth: number = 1): void {
-      var context = this.graphicContext;
+      var context = this._graphicContext;
       context.clearDepth(depth);
    }
 
@@ -107,11 +107,11 @@ export class FTechnique extends FContent {
    // <T>绘制区域处理。</T>
    //
    // @method
-   // @param region:FG3dRetion 区域
+   // @param region 区域
    //==========================================================
-   public drawRegion(region) {
+   public drawRegion(region: FRegion) {
       // 设置区域属性
-      region.setTechnique(this);
+      region.technique = this;
       // 绘制所有过程
       var passes = this.passes;
       var count = passes.count();
@@ -132,7 +132,7 @@ export class FTechnique extends FContent {
       var layers = stage.layers;
       var layerCount = layers.count();
       // 设置区域属性
-      (region as any).technique = this;
+      region.technique = this;
       // 绘制所有过程
       var passes = this.passes;
       var count = passes.count();

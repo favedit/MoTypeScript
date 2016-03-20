@@ -1,5 +1,6 @@
 export * from './EBrowser';
 export * from './EDevice';
+export * from './EEvent';
 export * from './EKeyCode';
 export * from './EKeyStatus';
 export * from './EMouseButton';

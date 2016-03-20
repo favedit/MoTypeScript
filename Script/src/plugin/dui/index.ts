@@ -1,1 +1,1 @@
-export * from './FDuiComponent';
+export * from './FEdit';

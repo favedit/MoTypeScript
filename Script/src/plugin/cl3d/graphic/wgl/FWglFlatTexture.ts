@@ -11,14 +11,14 @@ import {RWglUtility} from './RWglUtility';
 export class FWglFlatTexture extends FFlatTexture {
    // 句柄
    public handle: WebGLTexture = null;
-   // 更新状态 
+   // 更新状态
    public statusUpdate: boolean = false;
 
    //==========================================================
    // <T>配置处理。</T>
    //==========================================================
    public setup() {
-      super.setup();
+      //super.setup();
       var graphic = this.graphicContext.handle;
       this.handle = graphic.createTexture();
    }
@@ -185,7 +185,7 @@ export class FWglFlatTexture extends FFlatTexture {
    // @method
    //==========================================================
    public update() {
-      super.setup();
+      //super.setup();
       // 绑定数据
       var graphic = this.graphicContext.handle;
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);

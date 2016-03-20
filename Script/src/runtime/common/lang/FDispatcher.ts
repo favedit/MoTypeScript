@@ -12,37 +12,33 @@ export class FDispatcher extends FObject {
    public _listenerss: FDictionary<FListeners> = null;
 
    //==========================================================
-   // <T>监听器接口。</T>
-   //
-   // @console
-   // @author maocy
-   // @version 150130
+   // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this._listenerss = new FDictionary<FListeners>();
    }
 
    //==========================================================
    // <T>注册一个监听器。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param owner:String 拥有者
-   // @param method:Function 函数
-   // @return TListener 监听器
+   // @param code 代码
+   // @param owner 拥有者
+   // @param method 函数
+   // @return 监听器
    //==========================================================
-   public addListener(name, owner, method): FListener {
+   public addListener(code, owner, method): FListener {
       // 获得监听器集合对象
       var listenerss = this._listenerss;
       if (!listenerss) {
          listenerss = this._listenerss = new FDictionary<FListeners>();
       }
       // 获得监听器集合
-      var listeners = listenerss.get(name);
+      var listeners = listenerss.get(code);
       if (!listeners) {
          listeners = new FListeners(this);
-         listenerss.set(name, listeners);
+         listenerss.set(code, listeners);
       }
       // 检查重复
       var listener = listeners.find(owner, method);
@@ -55,47 +51,44 @@ export class FDispatcher extends FObject {
    //==========================================================
    // <T>设置一个监听器。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param owner:String 拥有者
-   // @param method:Function 函数
-   // @return TListener 监听器
+   // @param code 代码
+   // @param owner 拥有者
+   // @param method 函数
+   // @return 监听器
    //==========================================================
-   public setListener(name, owner, method): FListener {
+   public setListener(code, owner, method): FListener {
       var listenerss = this._listenerss;
       if (listenerss) {
-         var listeners = listenerss.get(name);
+         var listeners = listenerss.get(code);
          if (listeners) {
             listeners.clear();
          }
       }
-      return this.addListener(name, owner, method)
+      return this.addListener(code, owner, method)
    }
 
    //==========================================================
    // <T>注销一个监听器。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param owner:String 拥有者
-   // @param method:Function 函数
+   // @param code 代码
+   // @param owner 拥有者
+   // @param method 函数
    //==========================================================
-   public removeListener(name, owner, method) {
+   public removeListener(code, owner, method) {
       var listenerss = this._listenerss;
-      var listeners = listenerss.get(name);
+      var listeners = listenerss.get(code);
       return listeners.unregister(owner, method);
    }
 
    //==========================================================
    // <T>清空一类监听器。</T>
    //
-   // @method
-   // @param n:name:String 名称
+   // @param code 代码
    //==========================================================
-   public clearListeners(name) {
+   public clearListeners(code) {
       var listenerss = this._listenerss;
       if (listenerss) {
-         var listeners = listenerss.get(name);
+         var listeners = listenerss.get(code);
          if (listeners) {
             listeners.clear();
          }
@@ -104,8 +97,6 @@ export class FDispatcher extends FObject {
 
    //==========================================================
    // <T>清空全部监听器。</T>
-   //
-   // @method
    //==========================================================
    public clearAllListeners() {
       var listenerss = this._listenerss;
@@ -123,18 +114,17 @@ export class FDispatcher extends FObject {
    //==========================================================
    // <T>监听处理。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param p1:parameter1:Object 参数1
-   // @param p2:parameter2:Object 参数1
-   // @param p3:parameter3:Object 参数1
-   // @param p4:parameter4:Object 参数1
-   // @param p5:parameter5:Object 参数1
+   // @param code 代码
+   // @param p1:parameter1 参数1
+   // @param p2:parameter2 参数2
+   // @param p3:parameter3 参数3
+   // @param p4:parameter4 参数4
+   // @param p5:parameter5 参数5
    //==========================================================
-   public processListener(name, p1?, p2?, p3?, p4?, p5?) {
+   public processListener(code, p1?, p2?, p3?, p4?, p5?) {
       var listenerss = this._listenerss;
       if (listenerss) {
-         var listeners = listenerss.get(name);
+         var listeners = listenerss.get(code);
          if (listeners) {
             listeners.process(p1, p2, p3, p4, p5);
          }
@@ -143,8 +133,6 @@ export class FDispatcher extends FObject {
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
       var listenerss = this._listenerss;

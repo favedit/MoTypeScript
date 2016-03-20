@@ -8,13 +8,15 @@ import {FScene} from '../../plugin/cl3d/base/FScene';
 import {FDisplayLayer} from '../../plugin/cl3d/base/FDisplayLayer';
 import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamera';
 import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
+import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
 import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
-import {FTechniqueConsole} from '../../plugin/cl3d/graphic/FTechniqueConsole';
-import {FCube} from '../../plugin/cl3d/shape/FCube';
-import {FRegion} from '../../plugin/cl3d/base/FRegion';
-import {FGeneralTechnique} from '../../plugin/cl3d/technique/FGeneralTechnique';
 import {FE3dModelConsole} from '../../plugin/cl3d/shape/instance/FE3dModelConsole';
+import {FCube} from '../../plugin/cl3d/shape/FCube';
 import {SSettings} from '../application/SSettings';
+import {EEvent} from '../../runtime/ui/EEvent';
+import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
+
+declare var id_info;
 
 //==========================================================
 // <T>画板视图。</T>
@@ -46,6 +48,7 @@ export class FCanvasView extends FView {
       var settings: SSettings = this.application.settings;
       var canvas = this.canvas = new FCanvas();
       canvas.setup(settings);
+      canvas.addListener(EEvent.MouseMove, this, this.onMouseMove);
       var hCanvas = canvas.hCanvas;
       var context = canvas.context;
       // 创建场景
@@ -64,32 +67,25 @@ export class FCanvasView extends FView {
       camera.projection.update();
       // 创建物件
       //var cube = new mo.plugin.cl3d.shape.FSphere();
-      var cube = new FCube();
-      cube.setup(context);
-      this.contentLayer.pushRenderable(cube);
+      // var cube = new FCube();
+      // cube.setup(context);
+      // this.contentLayer.pushRenderable(cube);
 
-      // var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
-      // var model = modelConsole.allocByUrl(context, 'http://localhost/sk/res/model/xiong/xiong.model');
-      // model.matrix.tx = 0.2;
-      // model.matrix.sx = 0.1;
-      // model.matrix.sy = 0.1;
-      // model.matrix.sz = 0.1;
-      // model.matrix.updateForce();
-      // model.matrix.addRotationX(-Math.PI / 2);
-      // model.matrix.addRotationY(Math.PI);
-      // this.contentLayer.pushDisplay(model);
-
-      // 设置渲染技术
-      var techniqueConsole = RConsole.find(FTechniqueConsole);
-      var technique = techniqueConsole.find(context, FGeneralTechnique);
+      var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
+      var model = modelConsole.allocByUrl(context, 'http://localhost/sk/res/model/xiong/xiong.model');
+      model.matrix.tx = 0.2;
+      model.matrix.sx = 0.1;
+      model.matrix.sy = 0.1;
+      model.matrix.sz = 0.1;
+      model.matrix.updateForce();
+      model.matrix.addRotationX(-Math.PI / 2);
+      model.matrix.addRotationY(Math.PI);
+      this.contentLayer.pushDisplay(model);
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
-      var pipeline = this.pipeline = pipelineConsole.alloc();
-      pipeline.context = context;
-      pipeline.region = new FRegion();
-      pipeline.technique = technique;
-      pipeline.camera = camera;
+      var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);
       pipeline.scene = scene;
+      pipeline.camera = camera;
       //pipeline.start();
    }
 
@@ -127,5 +123,14 @@ export class FCanvasView extends FView {
       // 画板处理
       this.canvas.process();
       this.pipeline.process();
+   }
+
+   //==========================================================
+   // <T>逻辑处理。</T>
+   //==========================================================
+   public onMouseMove(sender, event: SMouseEvent) {
+      var renderable = this.pipeline.selectTest(event.offsetX, event.offsetY);
+      id_info.innerHTML = renderable + ' ' + event.offsetX + '-' + event.offsetY
+      //console.log(renderable, event.x, event.y);
    }
 }

@@ -1,12 +1,25 @@
 import {FWglContext} from '../../../../plugin/cl3d/graphic/wgl/FWglContext';
+import {EEvent} from '../../../../runtime/ui/EEvent';
 import {FCanvas as FBaseCanvas} from '../base/FCanvas';
+
 
 //==========================================================
 // <T>画板。</T>
 //==========================================================
 export class FCanvas extends FBaseCanvas {
 
-   public context: FWglContext = null;
+   public context: FWglContext;
+
+   public constructor() {
+      super();
+   }
+
+   //==========================================================
+   // <T>创建环境。</T>
+   //==========================================================
+   public setup(parameters) {
+      super.setup(parameters);
+   }
 
    //==========================================================
    // <T>创建环境。</T>
@@ -23,6 +36,14 @@ export class FCanvas extends FBaseCanvas {
       // 创建环境
       var context = this.context = new FWglContext();
       context.linkCanvas(hCanvas);
+      // 设置事件
+      this.attachEvent(hCanvas, EEvent.MouseMove, this.onMouseMove);
+   }
+
+   //==========================================================
+   // <T>创建环境。</T>
+   //==========================================================
+   public onMouseMove(sender, event) {
    }
 
    //==========================================================

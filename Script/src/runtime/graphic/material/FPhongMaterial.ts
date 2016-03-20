@@ -33,7 +33,7 @@ export class FPhongMaterial extends FMaterial {
       this.effectCode = 'phong.automatic';
       this.alphaBase = 0.1;
       this.alphaRate = 1;
-      this._ambientColor = new SColor4(0.7, 0.7, 0.7, 0.7);
+      this._ambientColor = new SColor4(0.4, 0.4, 0.4, 0.7);
       this._diffuseColor = new SColor4(0.6, 0.6, 0.6, 0.6);
       this.specularPower = 32;
    }

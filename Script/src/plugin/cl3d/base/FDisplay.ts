@@ -6,7 +6,7 @@ import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {IDisplay} from '../../../runtime/graphic/IDisplay';
-import {FGraphicContext} from '../../../runtime/graphic/context/FGraphicContext';
+import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 import {FDrawable} from './FDrawable';
 import {FRenderable} from './FRenderable';
 import {FDisplayContainer} from './FDisplayContainer';

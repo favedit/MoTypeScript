@@ -1,15 +1,16 @@
 import {FObject} from '../../../../runtime/common/lang/FObject';
+import {FControl} from '../../../../runtime/ui/FControl';
 
 //==========================================================
 // <T>画板基类。</T>
 //==========================================================
-export class FCanvas extends FObject {
+export class FCanvas extends FControl {
 
-   public hDocument: HTMLDocument = null;
+   public hDocument: HTMLDocument;
 
-   public hPanel: HTMLElement = null;
+   public hPanel: HTMLElement;
 
-   public hCanvas: HTMLCanvasElement = null;
+   public hCanvas: HTMLCanvasElement;
 
    public content = null;
 

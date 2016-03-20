@@ -1,4 +1,4 @@
-export class SpotLight {
+export class FSpotLight {
 
    // THREE.SpotLight = function(color, intensity, distance, angle, penumbra, decay) {
 

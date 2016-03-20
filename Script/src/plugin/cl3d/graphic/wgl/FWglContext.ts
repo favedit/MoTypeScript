@@ -25,6 +25,7 @@ import {FWglVertexBuffer} from './FWglVertexBuffer';
 import {FWglIndexBuffer} from './FWglIndexBuffer';
 import {FWglFlatTexture} from './FWglFlatTexture';
 import {FWglCubeTexture} from './FWglCubeTexture';
+import {FWglRenderTarget} from './FWglRenderTarget';
 import {FWglProgram} from './FWglProgram';
 import {FWglLayout} from './FWglLayout';
 import {RWglUtility} from './RWglUtility';
@@ -38,54 +39,51 @@ import {RWglUtility} from './RWglUtility';
 //==========================================================
 export class FWglContext extends FContext {
    // @attribute
-   //_handle = MO.Class.register(o, new MO.AGetter('_handle'));
-   public handle: WebGLRenderingContext = null;
-   public _handleInstance = null;
-   public _handleLayout = null;
-   //_handleDrawBuffers = MO.Class.register(o, new MO.AGetter('_handleDrawBuffers'));
-   protected _handleDrawBuffers = null;
-   //_handleSamplerS3tc = MO.Class.register(o, new MO.AGetter('_handleSamplerS3tc'));
-   protected _handleSamplerS3tc = null;
-   protected _handleDebugShader = null;
+   public handle: WebGLRenderingContext;
+   public _handleInstance;
+   public _handleLayout;
+   protected _handleDrawBuffers;
+   protected _handleSamplerS3tc;
+   protected _handleDebugShader;
    // @attribute
-   protected _activeRenderTarget = null;
-   protected _activeTextureSlot = null;
+   protected _activeRenderTarget;
+   protected _activeTextureSlot;
    // @attribute
-   protected _parameters = null;
-   protected _extensions = null;
+   protected _parameters;
+   protected _extensions;
    // @attribute
-   protected _statusRecord = false;
-   //_recordBuffers = MO.Class.register(o, new MO.AGetter('_recordBuffers'));
-   public recordBuffers: FObjects<any> = new FObjects<any>();
-   //_recordSamplers = MO.Class.register(o, new MO.AGetter('_recordSamplers'));
-   public recordSamplers: FObjects<any> = new FObjects<any>();
+   protected _statusRecord;
+   public recordBuffers: FObjects<any>;
+   public recordSamplers: FObjects<any>;
    // @attribute
-   //_statusDepthMask = MO.Class.register(o, new MO.AGetter('_statusDepthMask'), false);
-   protected _statusDepthMask = false;
-   //_statusFloatTexture = MO.Class.register(o, new MO.AGetter('_statusFloatTexture'), false);
-   protected _statusFloatTexture = false;
-   //_statusDrawBuffers = MO.Class.register(o, new MO.AGetter('_statusDrawBuffers'), false);
-   protected _statusDrawBuffers = false;
-   //_statusScissor = MO.Class.register(o, new MO.AGetter('_statusScissor'), false);
-   protected _statusScissor = false;
-   protected _data9 = new Float32Array(9);
-   protected _data16 = new Float32Array(16);
+   public statusDepthMask;
+   public statusFloatTexture;
+   public statusDrawBuffers;
+   public statusScissor;
+   protected _data9: Float32Array;
+   protected _data16: Float32Array;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       this.capability = new SContextCapability();
+      this._statusRecord = false;
+      this.recordBuffers = new FObjects<any>();
+      this.recordSamplers = new FObjects<any>();
+      this.statusDepthMask = false;
+      this.statusFloatTexture = false;
+      this.statusDrawBuffers = false;
+      this.statusScissor = false;
+      this._data9 = new Float32Array(9);
+      this._data16 = new Float32Array(16);
    }
 
    //==========================================================
    // <T>获得是否有效。</T>
    //
-   // @method
-   // @return Boolean 是否有效
+   // @return 是否有效
    //==========================================================
    public isValid() {
       return this.handle;
@@ -94,8 +92,7 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>关联页面画布标签。</T>
    //
-   // @method
-   // @param hCanvas:HtmlCanvasTag 页面画布标签
+   // @param hCanvas 页面画布标签
    //==========================================================
    public linkCanvas(hCanvas) {
       super.linkCanvas(hCanvas)
@@ -112,9 +109,9 @@ export class FWglContext extends FContext {
          // 初始化对象
          var hHandle = null;
          var codes = ['experimental-webgl2', 'webgl2', 'experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl']
-         var count:number = codes.length;
-         for (var n:number = 0; n < count; n++) {
-            var code:string = codes[n];
+         var count: number = codes.length;
+         for (var n: number = 0; n < count; n++) {
+            var code: string = codes[n];
             hHandle = hCanvas.getContext(code, parameters);
             if (hHandle) {
                RLogger.debug(this, 'Create context3d. (code={1}, handle={2})', code, hHandle);
@@ -213,9 +210,8 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>获得参数。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @return Object 参数
+   // @param name 名称
+   // @return 参数
    //==========================================================
    public parameter(name) {
       var parameters = this.parameters();
@@ -225,8 +221,7 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>获得参数集合。</T>
    //
-   // @method
-   // @return Object 参数集合
+   // @return 参数集合
    //==========================================================
    public parameters() {
       // 获得属性
@@ -277,9 +272,8 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>获得扩展。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @return Object 扩展
+   // @param name 名称
+   // @return 扩展
    //==========================================================
    public extension(name) {
       var extensions = this.extensions();
@@ -289,8 +283,7 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>获得扩展集合。</T>
    //
-   // @method
-   // @return Object 扩展集合
+   // @return 扩展集合
    //==========================================================
    public extensions() {
       // 获得属性
@@ -312,11 +305,10 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>允许浮点纹理。</T>
    //
-   // @method
-   // @return Boolean 是否允许
+   // @return 是否允许
    //==========================================================
    public enableFloatTexture() {
-      if (!this._statusFloatTexture) {
+      if (!this.statusFloatTexture) {
          var handle = this.handle;
          // 检查浮点纹理
          var extension = handle.getExtension('OES_texture_float');
@@ -329,19 +321,18 @@ export class FWglContext extends FContext {
             return false;
          }
          // 设置状态
-         this._statusFloatTexture = true;
+         this.statusFloatTexture = true;
       }
-      return this._statusFloatTexture;
+      return this.statusFloatTexture;
    }
 
    //==========================================================
    // <T>允许多纹理。</T>
    //
-   // @method
-   // @return Boolean 是否允许
+   // @return 是否允许
    //==========================================================
    public enableDrawBuffers() {
-      if (!this._statusDrawBuffers) {
+      if (!this.statusDrawBuffers) {
          var handle = this.handle;
          // 检查句柄
          var extension = this._handleDrawBuffers;
@@ -353,14 +344,12 @@ export class FWglContext extends FContext {
             extension.COLOR_ATTACHMENT0_WEBGL
          ]);
          // 设置状态
-         this._statusDrawBuffers = true;
+         this.statusDrawBuffers = true;
       }
    }
 
    //==========================================================
    // <T>开始记录操作。</T>
-   //
-   // @method
    //==========================================================
    public recordBegin() {
       this.recordBuffers.clear();
@@ -370,8 +359,6 @@ export class FWglContext extends FContext {
 
    //==========================================================
    // <T>解除记录操作。</T>
-   //
-   // @method
    //==========================================================
    public recordEnd() {
       this._statusRecord = false;
@@ -380,8 +367,7 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建渲染程序。</T>
    //
-   // @method
-   // @return FProgram3d 顶点缓冲
+   // @return 顶点缓冲
    //==========================================================
    public createProgram(clazz: Function = FWglProgram) {
       var program = this.createObject(FWglProgram);
@@ -393,8 +379,7 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建布局。</T>
    //
-   // @method
-   // @return FProgram3d 顶点缓冲
+   // @return 顶点缓冲
    //==========================================================
    public createLayout(clazz: Function = FWglLayout) {
       var layout = RClass.create(FWglLayout);
@@ -410,9 +395,8 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建顶点缓冲。</T>
    //
-   // @method
-   // @param clazz:Function 类对象
-   // @return FG3dVertexBuffer 顶点缓冲
+   // @param clazz 类对象
+   // @return 顶点缓冲
    //==========================================================
    public createVertexBuffer(clazz: Function = FWglVertexBuffer) {
       var buffer = this.createObject(clazz);
@@ -426,9 +410,8 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建索引缓冲。</T>
    //
-   // @method
-   // @param clazz:Function 类对象
-   // @return FG3dIndexBuffer 索引缓冲
+   // @param clazz 类对象
+   // @return 索引缓冲
    //==========================================================
    public createIndexBuffer(clazz: Function = FWglIndexBuffer) {
       var buffer = this.createObject(clazz);
@@ -440,9 +423,8 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建平面渲染纹理。</T>
    //
-   // @method
-   // @param clazz:Function 类对象
-   // @return FG3dFlatTexture 平面渲染纹理
+   // @param clazz 类对象
+   // @return 平面渲染纹理
    //==========================================================
    public createFlatTexture(clazz: Function = FWglFlatTexture) {
       var texture = this.createObject(clazz);
@@ -454,9 +436,8 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建立方渲染纹理。</T>
    //
-   // @method
-   // @param clazz:Function 类对象
-   // @return FG3dCubeTexture 立方渲染纹理
+   // @param clazz 类对象
+   // @return 立方渲染纹理
    //==========================================================
    public createCubeTexture(clazz: Function = FWglCubeTexture) {
       var texture = this.createObject(clazz);
@@ -468,15 +449,14 @@ export class FWglContext extends FContext {
    //==========================================================
    // <T>创建渲染目标。</T>
    //
-   // @method
-   // @param clazz:Function 类对象
-   // @return FG3dRenderTarget 渲染目标
+   // @param clazz 类对象
+   // @return 渲染目标
    //==========================================================
-   public createRenderTarget(clazz) {
-      //var texture = o.createObject(MO.Runtime.nvl(clazz, MO.FWglRenderTarget));
-      //o._storeTargets.push(texture);
-      //o._statistics.targetTotal++;
-      //return texture;
+   public createRenderTarget(clazz: Function = FWglRenderTarget) {
+      var texture = this.createObject(clazz);
+      this._storeTargets.push(texture);
+      this._statistics.targetTotal++;
+      return texture;
    }
 
    //==========================================================
@@ -565,10 +545,10 @@ export class FWglContext extends FContext {
    // @return 处理结果
    //==========================================================
    public setDepthMask(depthMask) {
-      if (this._statusDepthMask != depthMask) {
+      if (this.statusDepthMask != depthMask) {
          this._statistics.frameDepthMaskCount++;
          this.handle.depthMask(depthMask);
-         this._statusDepthMask = depthMask;
+         this.statusDepthMask = depthMask;
          return true;
       }
       return false;
@@ -658,13 +638,13 @@ export class FWglContext extends FContext {
       var handle = this.handle;
       // 设置标志
       var scissorFlag = (width > 0) && (height > 0);
-      if (this._statusScissor != scissorFlag) {
+      if (this.statusScissor != scissorFlag) {
          if (scissorFlag) {
             handle.enable(handle.SCISSOR_TEST);
          } else {
             handle.disable(handle.SCISSOR_TEST);
          }
-         this._statusScissor = scissorFlag;
+         this.statusScissor = scissorFlag;
       }
       // 设置范围
       if (scissorFlag) {
@@ -696,9 +676,9 @@ export class FWglContext extends FContext {
             return result;
          }
          // 修改视角
-         // var size = o._size;
-         // graphic.viewport(0, 0, size.width, size.height);
-         //var rectangle = o._viewportRectangle;
+         var size:any = this._size;
+         graphic.viewport(0, 0, size.width, size.height);
+         //var rectangle = this._viewportRectangle;
          //graphic.viewport(0, 0, rectangle.width, rectangle.height);
       } else {
          // 绑定渲染目标
@@ -708,7 +688,7 @@ export class FWglContext extends FContext {
             return result;
          }
          // 修改视角
-         var size = renderTarget.size();
+         var size = renderTarget.size;
          graphic.viewport(0, 0, size.width, size.height);
       }
       this._activeRenderTarget = renderTarget;
@@ -840,7 +820,7 @@ export class FWglContext extends FContext {
    // @param offset:Integer 偏移位置
    // @param formatCd:String 格式
    //==========================================================
-   public bindVertexBuffer(slot, vertexBuffer:FVertexBuffer, offset:number, formatCd:any) {
+   public bindVertexBuffer(slot, vertexBuffer: FVertexBuffer, offset: number, formatCd: any) {
       var graphic = this.handle;
       var result = true;
       this._statistics.frameBufferCount++;

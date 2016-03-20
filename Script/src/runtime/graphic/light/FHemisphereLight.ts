@@ -1,4 +1,4 @@
-export class HemisphereLight{
+export class FHemisphereLight{
 // THREE.HemisphereLight = function ( skyColor, groundColor, intensity ) {
 
 // 	THREE.Light.call( this, skyColor, intensity );

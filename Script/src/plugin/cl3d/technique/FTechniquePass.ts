@@ -1,6 +1,6 @@
 ﻿import {RConsole} from '../../../runtime/core/RConsole';
-import {FContent} from './FContent';
-import {FEffectConsole} from './FEffectConsole';
+import {FContent} from '../graphic/FContent';
+import {FEffectConsole} from '../graphic/FEffectConsole';
 
 //==========================================================
 // <T>渲染过程。</T>

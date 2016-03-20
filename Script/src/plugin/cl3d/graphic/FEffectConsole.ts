@@ -11,8 +11,12 @@ import {RAssert} from '../../../runtime/common/RAssert';
 import {FEnvironmentConsole} from '../../../runtime/core/console/FEnvironmentConsole';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {RConsole} from '../../../runtime/core/RConsole';
-import {FGraphicContext} from '../../../runtime/graphic/context/FGraphicContext';
+import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
+import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
+import {FRenderable} from '../base/FRenderable';
+import {FRegion} from '../base/FRegion';
 import {SEffectInfo} from './SEffectInfo';
+import {FEffect} from './FEffect';
 
 //==========================================================
 // <T>效果器管理器。</T>
@@ -24,9 +28,9 @@ export class FEffectConsole extends FConsole {
    // @attribute
    public _configs: FDictionary<any>;
    public _loadEffects: FLooper;
-   public _registerEffects: FDictionary<any>;
-   public _templateEffects: FDictionary<any>;
-   public _effects: FDictionary<any>;
+   public _registerEffects: FDictionary<Function>;
+   public _templateEffects: FDictionary<FEffect>;
+   public _effects: FDictionary<FEffect>;
    public _effectInfo: SEffectInfo;
    public _tagContext: FTagContext;
    // @attribute
@@ -44,9 +48,9 @@ export class FEffectConsole extends FConsole {
       this._scopeCd = EScope.Local;
       this._configs = new FDictionary();
       this._loadEffects = new FLooper();
-      this._registerEffects = new FDictionary();
-      this._templateEffects = new FDictionary();
-      this._effects = new FDictionary();
+      this._registerEffects = new FDictionary<Function>();
+      this._templateEffects = new FDictionary<FEffect>();
+      this._effects = new FDictionary<FEffect>();
       this._effectInfo = new SEffectInfo();
       this._tagContext = RClass.create(FTagContext);
       this._interval = 300;
@@ -113,23 +117,21 @@ export class FEffectConsole extends FConsole {
    //==========================================================
    // <T>建立效果器信息。</T>
    //
-   // @method
-   // @param context:FG3dContext 渲染环境
-   // @param effectInfo:SG3dEffectInfo 效果环境
-   // @param region:FG3dRegion 渲染区域
-   // @param renderable:FG3dRenderable 渲染对象
-   // @return FG3dEffect 效果器
+   // @param context 渲染环境
+   // @param effectInfo 效果环境
+   // @param region 渲染区域
+   // @param renderable 渲染对象
    //==========================================================
-   public buildEffectInfo(context, effectInfo, region, renderable) {
+   public buildEffectInfo(context, effectInfo: SEffectInfo, region: FRegion, renderable: FRenderable) {
       var capability = context.capability;
       // 设置技术
       var technique = region.technique;
       effectInfo.techniqueModeCode = technique.activeMode.code;
-      effectInfo.optionMerge = renderable._optionMerge;
-      if (effectInfo.optionMerge) {
-         effectInfo.mergeCount = renderable.mergeMaxCount();
-         effectInfo.mergeStride = renderable.mergeStride();
-      }
+      //effectInfo.optionMerge = renderable._optionMerge;
+      //if (effectInfo.optionMerge) {
+      //   effectInfo.mergeCount = renderable.mergeMaxCount();
+      //   effectInfo.mergeStride = renderable.mergeStride();
+      //}
       // 设置材质
       // var materialInfo = renderable.material.info;
       // effectInfo.optionNormalInvert = materialInfo.optionNormalInvert;
@@ -147,6 +149,7 @@ export class FEffectConsole extends FConsole {
       for (var i = 0; i < count; i++) {
          var vertexBuffer = vertexBuffers.at(i);
          var vertexCode = vertexBuffer.code;
+         RAssert.debugNotEmpty(vertexCode);
          // 法线压缩判定（临时处理）
          if (vertexCode == 'normal') {
             var stride = vertexBuffer.stride;
@@ -156,51 +159,47 @@ export class FEffectConsole extends FConsole {
                effectInfo.optionNormalCompress = false;
             }
          }
-         if (RString.isEmpty(vertexCode)) {
-            throw new FError(this, 'Vertex buffer code is empty.');
-         }
          effectInfo.attributes.push(vertexCode);
       }
       // 设置纹理信息
-      var textures = renderable.textures;
+      var material: FMaterial = renderable.material;
+      RAssert.debugNotNull(material);
+      var textures = material.textures;
       if (textures) {
-         var count = textures.count();
-         for (var i = 0; i < count; i++) {
-            var textureCode = textures.name(i);
-            if (RString.isEmpty(textureCode)) {
-               throw new FError(this, 'Texture code is empty.');
-            }
+         var count: number = textures.count();
+         for (var i: number = 0; i < count; i++) {
+            var textureCode: string = textures.name(i);
+            RAssert.debugNotEmpty(textureCode);
             effectInfo.samplers.push(textureCode);
          }
       }
       // 设置骨头信息
-      var bones = renderable.bones;
-      if (bones) {
-         var boneCount = bones.count();
-         effectInfo.vertexBoneCount = boneCount;
-         var boneLimit = capability.calculateBoneCount(effectInfo.vertexBoneCount, effectInfo.vertexCount);
-         if (boneCount > boneLimit) {
-            boneCount = boneLimit;
-         }
-         renderable._boneLimit = boneCount;
-         effectInfo.vertexBoneLimit = boneCount;
-      }
+      // var bones = renderable.bones;
+      // if (bones) {
+      //    var boneCount = bones.count();
+      //    effectInfo.vertexBoneCount = boneCount;
+      //    var boneLimit = capability.calculateBoneCount(effectInfo.vertexBoneCount, effectInfo.vertexCount);
+      //    if (boneCount > boneLimit) {
+      //       boneCount = boneLimit;
+      //    }
+      //    renderable._boneLimit = boneCount;
+      //    //effectInfo.vertexBoneLimit = boneCount;
+      // }
    }
 
    //==========================================================
    // <T>获得渲染器模板。</T>
    //
-   // @method
-   // @param context:FG3dContext 环境对象
-   // @param code:String 代码
-   // @return FG3dEffect 渲染器模板
+   // @param context 环境对象
+   // @param code 代码
+   // @return 渲染器模板
    //==========================================================
    public findTemplate(context, code) {
       var effects = this._templateEffects;
-      var effect = effects.get(code);
-      if (effect == null) {
+      var effect: FEffect = effects.get(code);
+      if (!effect) {
          // 创建效果器
-         var effect = this.create(context, code);
+         effect = this.create(context, code);
          effect.load();
          RLogger.info(this, 'Create effect template. (code={1}, instance={2})', code, effect);
          // 存储效果器
@@ -212,20 +211,17 @@ export class FEffectConsole extends FConsole {
    //==========================================================
    // <T>根据渲染对象获得效果器。</T>
    //
-   // @method
-   // @param context:FG3dContext 环境对象
-   // @param region:FG3dRegion 渲染区域
-   // @param renderable:FG3dRenderable 渲染对象
-   // @return FG3dEffect 效果器
+   // @param context 环境对象
+   // @param region 渲染区域
+   // @param renderable 渲染对象
+   // @return 效果器
    //==========================================================
    public find(context, region, renderable) {
       // 获得环境
       if (context.graphicContext) {
          context = context.graphicContext;
       }
-      if (!(context instanceof FGraphicContext)) {
-         throw new FError(this, 'Unknown context.');
-      }
+      RAssert.debugTrue(context instanceof FGraphicContext);
       // 获得效果名称
       var effectCode = renderable.material.effectCode;
       var effectFlag = region.spaceName + '.' + effectCode;
@@ -244,7 +240,7 @@ export class FEffectConsole extends FConsole {
          if (!effect) {
             // 创建效果器
             effect = this.create(context, effectFlag);
-            effect._flag = flag;
+            effect.flag = flag;
             effect.load();
             effect.build(this._effectInfo);
             RLogger.info(this, 'Create effect. (name={1}, instance={2})', effectCode, effect);

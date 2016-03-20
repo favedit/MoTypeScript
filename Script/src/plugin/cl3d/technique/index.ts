@@ -11,6 +11,10 @@ export * from './FShadowTechnique';
 export * from './FSphereColorPass';
 export * from './FSphereTechnique';
 export * from './FSphereViewPass';
+export * from './FTechnique';
+export * from './FTechniqueConsole';
+export * from './FTechniqueMode';
+export * from './FTechniquePass';
 
 import * as effect from './effect/index';
 export {effect as effect};

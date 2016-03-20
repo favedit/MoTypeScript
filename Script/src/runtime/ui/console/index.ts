@@ -1,4 +1,5 @@
 export * from './FDeviceConsole';
+export * from './FEventConsole';
 export * from './FFrameConsole';
 export * from './FHotKey';
 export * from './FHotKeyConsole';

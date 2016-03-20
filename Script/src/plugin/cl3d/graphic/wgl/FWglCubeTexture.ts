@@ -17,7 +17,7 @@ export class FWglCubeTexture extends FCubeTexture {
    // @method
    //==========================================================
    public setup() {
-      super.setup();
+      //super.setup();
       var graphic = this.graphicContext.handle;
       this.handle = graphic.createTexture();
    }

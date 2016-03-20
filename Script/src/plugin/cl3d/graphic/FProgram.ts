@@ -210,7 +210,7 @@ export abstract class FProgram extends FContent {
    // @param value 数据
    // @param count 个数
    //==========================================================
-   public setParameter(name, value, count) {
+   public setParameter(name, value, count?:any) {
       // 获得定义
       var parameter: FProgramParameter = this.findParameter(name);
       RAssert.debugNotNull(parameter);

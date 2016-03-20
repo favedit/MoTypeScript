@@ -6,7 +6,7 @@ import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
-import {FGraphicContext} from '../../../runtime/graphic/context/FGraphicContext';
+import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
 import {FIndexBuffer} from '../graphic/FIndexBuffer';
 import {FVertexBuffer} from '../graphic/FVertexBuffer';

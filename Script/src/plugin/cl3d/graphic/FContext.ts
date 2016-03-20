@@ -2,7 +2,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
-import {FGraphicContext} from '../../runtime/graphic/context/FGraphicContext';
+import {FGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
 import {EFillMode} from './EFillMode';
 import {FContextStatistics} from './FContextStatistics';
 import {FVertexBuffer} from './FVertexBuffer';

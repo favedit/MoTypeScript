@@ -1,4 +1,4 @@
-export class LightShadow {
+export class FLightShadow {
 
    // THREE.LightShadow = function ( camera ) {
 

@@ -1,5 +1,7 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
 import {RObject} from '../../../runtime/common/lang/RObject';
+import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {FGraphicObject} from '../core/FGraphicObject';
+import {FTexture} from './FTexture';
 
 //==========================================================
 // <T>基础渲染材质。</T>
@@ -7,7 +9,7 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FMaterial extends FObject {
+export class FMaterial extends FGraphicObject {
    // 代码
    public code: string;
    // 名称
@@ -28,6 +30,8 @@ export class FMaterial extends FObject {
    public optionDouble: boolean;
    // 配置信息
    public optionAlpha: boolean;
+   // 纹理集合
+   public textures: FDictionary<FTexture>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -43,6 +47,20 @@ export class FMaterial extends FObject {
       this.optionDouble = false;
       this.optionAlpha = false;
       this.dirty = true;
+   }
+
+   //==========================================================
+   // <T>获得纹理集合。</T>
+   //
+   // @method
+   // @return 纹理集合
+   //==========================================================
+   public setTexture(code, texture) {
+      var textures = this.textures;
+      if (!textures) {
+         textures = this.textures = new FDictionary<FTexture>();
+      }
+      textures.set(code, texture);
    }
 
    //==========================================================
@@ -68,6 +86,7 @@ export class FMaterial extends FObject {
    public dispose(): void {
       // 释放属性
       this.effect = RObject.dispose(this.effect);
+      this.textures = RObject.dispose(this.textures);
       // 父处理
       super.dispose();
    }

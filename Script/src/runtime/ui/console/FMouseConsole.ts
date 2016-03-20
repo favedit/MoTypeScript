@@ -5,7 +5,7 @@ import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {RHtml} from '../utility/RHtml';
 import {FDeviceConsole} from './FDeviceConsole';
-import {EEvent} from '../event/EEvent';
+import {EEvent} from '../EEvent';
 import {SMouseEvent} from '../event/SMouseEvent';
 
 //==========================================================

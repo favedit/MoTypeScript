@@ -133,8 +133,6 @@ export class RConsole {
    // @param value 类函数
    // @return Object 控制台实例
    //==========================================================
-   //@ALinker(RAssert)
-   //@ALogger()
    public static find(value: any): any {
       RAssert.debugNotNull(value);
       // 获得名称

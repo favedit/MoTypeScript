@@ -1,6 +1,6 @@
-import {FContent} from './FContent';
+import {ESamplerFilter} from '../base/ESamplerFilter';
+import {FGraphicObject} from '../core/FGraphicObject';
 import {ETexture} from './ETexture';
-import {ESamplerFilter} from './ESamplerFilter';
 
 //==========================================================
 // <T>渲染纹理。</T>
@@ -8,7 +8,7 @@ import {ESamplerFilter} from './ESamplerFilter';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FTexture extends FContent {
+export class FTexture extends FGraphicObject {
    // 代码
    public code = null;
    // 纹理类型
@@ -32,7 +32,7 @@ export class FTexture extends FContent {
    public isValid(): boolean {
       return true;
    }
-   
+
    //==========================================================
    // <T>设置取样。</T>
    //

@@ -1,6 +1,9 @@
 ﻿import {RClass} from '../../../runtime/common/reflect/RClass';
-// import {FG3dTechnique} from '../FG3dTechnique';
-// import {FG3dSelectPass} from './FG3dSelectPass';
+import {FTechnique} from './FTechnique';
+import {FRenderable} from '../base/FRenderable';
+import {FRegion} from '../base/FRegion';
+import {ETechniqueMode} from './ETechniqueMode'
+import {FSelectPass} from './FSelectPass';
 
 //==========================================================
 // <T>阴影渲染技术。</T>
@@ -8,13 +11,17 @@
 // @author maocy
 // @history 150119
 //==========================================================
-//export class FG3dSelectTechnique extends FG3dTechnique {
-   export class FG3dSelectTechnique {
-   // @attribute
-   protected _code: string = 'select';
-   // @attribute
-   //_passSelect = MO.Class.register(o, new MO.AGetter('_passSelect'));
-   protected _passSelect = null;
+export class FSelectTechnique extends FTechnique {
+   // 选择过程
+   protected _passSelect: FSelectPass;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.code = 'select';
+   }
 
    //==========================================================
    // <T>配置处理。</T>
@@ -22,33 +29,29 @@
    // @method
    //==========================================================
    public setup() {
-      var o = this;
-      //o.__base.FG3dTechnique.setup.call(o);
+      super.setup();
       //..........................................................
       // 创建支持模式
-      //o.registerMode(sk.graphic.context3d.EG3dTechniqueMode.Result);
+      this.registerMode(ETechniqueMode.Result);
       //..........................................................
       // 创建选取处理过程
-      // var pass = o._passSelect = RClass.create(FG3dSelectPass);
-      // pass.linkGraphicContext(o);
-      // pass.setup();
-      // o.pushPass(pass);
+      var pass = this._passSelect = RClass.create(FSelectPass);
+      pass.linkGraphicContext(this._graphicContext);
+      pass.setup();
+      this.pushPass(pass);
    }
 
    //==========================================================
    // <T>测试信息。</T>
    //
-   // @method
-   // @param region:FG3dRegion 渲染区域
+   // @param region 渲染区域
    //==========================================================
-   public test(region, x, y) {
-      var o = this;
+   public test(region: FRegion, x: number, y: number) {
       // 设置区域属性
-      region._selectX = x;
-      region._selectY = y;
+      region.selectPosition.set(x, y);
       // 绘制所有过程
-      //o.drawRegion(region);
+      this.drawRegion(region);
       // 返回选中内容
-      return o._passSelect._selectRenderable;
+      return this._passSelect.selectRenderable;
    }
 }

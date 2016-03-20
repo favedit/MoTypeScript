@@ -1,4 +1,4 @@
-export class PointLight {
+export class FPointLight {
    // THREE.PointLight = function ( color, intensity, distance, decay ) {
 
    // 	THREE.Light.call( this, color, intensity );

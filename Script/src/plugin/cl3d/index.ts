@@ -9,9 +9,6 @@ export {core as core};
 import * as graphic from './graphic/index';
 export {graphic as graphic};
 
-import * as lights from './lights/index';
-export {lights as lights};
-
 import * as particle from './particle/index';
 export {particle as particle};
 

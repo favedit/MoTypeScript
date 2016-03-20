@@ -9,7 +9,7 @@ import {REnum} from '../../common/lang/REnum';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
-import {EEvent} from '../event/EEvent';
+import {EEvent} from '../EEvent';
 //import {SMouseEvent} from '../event/SMouseEvent';
 //import {SKeyboardEvent} from '../event/SKeyboardEvent';
 import {SResizeEvent} from '../event/SResizeEvent';

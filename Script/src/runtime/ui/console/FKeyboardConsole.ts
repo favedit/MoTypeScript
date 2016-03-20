@@ -6,7 +6,7 @@ import {FConsole} from '../../core/FConsole';
 import {EKeyStatus} from '../EKeyStatus';
 import {EKeyCode} from '../EKeyCode';
 import {FDeviceConsole} from './FDeviceConsole';
-import {EEvent} from '../event/EEvent';
+import {EEvent} from '../EEvent';
 import {SKeyboardEvent} from '../event/SKeyboardEvent';
 
 //===========================================================

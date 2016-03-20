@@ -1,11 +1,14 @@
 import {EScope} from '../../../../runtime/common/lang/EScope';
 import {FObjects} from '../../../../runtime/common/lang/FObjects';
+import {RAssert} from '../../../../runtime/common/RAssert';
 import {ALinker} from '../../../../runtime/common/reflect/ALinker';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FConsole} from '../../../../runtime/core/FConsole';
 import {FListenerThread} from '../../../../runtime/core/console/FListenerThread';
 import {FThreadConsole} from '../../../../runtime/core/console/FThreadConsole';
+import {FGraphicContext} from '../../../../runtime/graphic/core/FGraphicContext';
 import {FPipeline} from './FPipeline';
+import {FForwardPipeline} from './FForwardPipeline';
 
 //==========================================================
 // <T>立方渲染纹理。</T>
@@ -38,10 +41,13 @@ export class FPipelineConsole extends FConsole {
    }
 
    //==========================================================
-   // <T>构造处理。</T>
+   // <T>收集一个渲染管道。</T>
    //==========================================================
-   public alloc(): FPipeline {
-      var pipeline: FPipeline = RClass.create(FPipeline);
+   public alloc(context: FGraphicContext, clazz: Function = FForwardPipeline): FPipeline {
+      RAssert.debugNotNull(context);
+      var pipeline: FPipeline = RClass.create(clazz);
+      pipeline.linkGraphicContext(context);
+      pipeline.setup();
       this._pipelines.push(pipeline);
       return pipeline;
    }

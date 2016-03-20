@@ -8,8 +8,10 @@ import {FProgramAttribute} from '../../graphic/FProgramAttribute';
 import {FProgramSampler} from '../../graphic/FProgramSampler';
 import {FVertexBuffer} from '../../graphic/FVertexBuffer';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
+import {SEffectInfo} from '../graphic/SEffectInfo';
 import {EAttribute} from './EAttribute';
 import {ESampler} from './ESampler';
+
 
 //==========================================================
 // <T>自动渲染器。</T>
@@ -93,7 +95,7 @@ export class FAutomaticEffect extends FEffect {
    // @param tagContext:FTagContext 模板环境
    // @param info:SG3dEffectInfo 渲染信息
    //==========================================================
-   public buildInfo(tagContext, info) {
+   public buildInfo(tagContext, info: SEffectInfo) {
       var context = this.graphicContext;
       var capability = context.capability;
       // 获得参数
@@ -461,9 +463,9 @@ export class FAutomaticEffect extends FEffect {
    public bindSamplers(renderable) {
       var program = this.program;
       // 绑定特定取样器
-      if (this._supportMaterialMap) {
+      //if (this._supportMaterialMap) {
          //program.setSampler('fs_material', region.materialMap().texture());
-      }
+      //}
       // 绑定取样器集合
       if (program.hasSampler()) {
          var samplers = program.samplers();

@@ -11,17 +11,17 @@ import {EAttributeFormat} from './EAttributeFormat';
 export class FProgramAttribute extends FObject {
    //..........................................................
    // @attribute 名称
-   public name = null;
+   public name: string;
    // @attribute 关联名称
-   public linker = null;
+   public linker: string;
    // @attribute 使用标志
-   public statusUsed = false;
+   public statusUsed: boolean = false;
    // @attribute 插槽
-   public slot = null;
+   public slot: any = null;
    // @attribute 索引
-   public index = -1;
+   public index: number = -1;
    // @attribute 格式
-   public formatCd = EAttributeFormat.Unknown;
+   public formatCd: EAttributeFormat = EAttributeFormat.Unknown;
 
    //==========================================================
    // <T>从配置节点钟加载信息。</T>

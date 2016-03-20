@@ -6,7 +6,7 @@ import {RClass} from '../../../runtime/common/reflect/RClass';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {IScene} from '../../../runtime/graphic/IScene';
-import {FGraphicObject} from '../../../runtime/graphic/context/FGraphicObject';
+import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
 import {FDisplay} from './FDisplay';
 import {FDisplayLayer} from './FDisplayLayer';
 import {FRegion} from './FRegion';

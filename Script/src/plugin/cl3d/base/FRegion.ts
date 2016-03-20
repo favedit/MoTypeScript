@@ -2,13 +2,14 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 import {FError} from '../../../runtime/common/lang/FError';
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {RObject} from '../../../runtime/common/lang/RObject';
+import {SPoint2} from '../../../runtime/common/math/SPoint2';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
-import {FTechniquePass} from '../graphic/FTechniquePass';
-import {FTechnique} from '../graphic/FTechnique';
+import {FTechniquePass} from '../technique/FTechniquePass';
+import {FTechnique} from '../technique/FTechnique';
 import {ERegionParameter} from './ERegionParameter';
 import {FRenderable} from './FRenderable';
 import {FDisplay} from './FDisplay';
@@ -61,8 +62,10 @@ export class FRegion extends FObject implements IProcessContext {
    public lightProjectionMatrix: SMatrix3d;
    // 光源视角投影位置
    public lightViewProjectionMatrix: SMatrix3d;
+   // 选择位置
+   public selectPosition: SPoint2;
    // 最后帧
-   public finish = false;
+   public finish: boolean;
    //public lightInfo = null;
    // 主方向光源
    // public directionalLight;
@@ -93,6 +96,8 @@ export class FRegion extends FObject implements IProcessContext {
       this.lightViewMatrix = new SMatrix3d();
       this.lightProjectionMatrix = new SMatrix3d();
       this.lightViewProjectionMatrix = new SMatrix3d();
+      this.selectPosition = new SPoint2();
+      this.finish = false;
       //this.ratioMatrix = new SMatrix3d();
       // this.lightInfo = new SVector4();
       //this.lights = new FObjects<FLight>();
@@ -173,6 +178,8 @@ export class FRegion extends FObject implements IProcessContext {
       this.cameraViewProjectionMatrix.assign(camera.matrix);
       this.cameraViewProjectionMatrix.append(projection.matrix);
       // 设置光源信息
+      this.lightDirection.set(1, 1, 1);
+      this.lightDirection.normalize();
       // var light = this.directionalLight;
       // if (light) {
       //    var lightCamera = light.camera;

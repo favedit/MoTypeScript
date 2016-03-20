@@ -15,8 +15,9 @@ export class SEffectInfo {
    public techniqueCode = null;
    public techniqueModeCode = null;
    // @attribute 状态
-   public optionMerge = null;
-   public mergeCount = null;
+   public optionMerge: boolean;
+   public mergeCount: number;
+   public mergeStride: number;
    // @attribute 状态
    public fillModeCd = null;
    public optionCullMode = null;
@@ -30,6 +31,13 @@ export class SEffectInfo {
    public optionAlphaTest = null;
    public optionNormalInvert = null;
    public optionNormalCompress = null;
+   // @attribute 配置
+   public optionColor = null;
+   public optionAmbient = null;
+   public optionDiffuse = null;
+   public optionSpecular = null;
+   public optionReflect = null;
+   public optionRefract = null;
    // @attribute 配置
    public supportInstance = null;
    // @attribute 顶点模式

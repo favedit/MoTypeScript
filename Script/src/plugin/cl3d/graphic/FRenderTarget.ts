@@ -64,7 +64,7 @@ export class FRenderTarget extends FContent {
    // @method
    // @return TObjects 纹理集合
    //==========================================================
-   public textures() {
+   public get textures() {
       var textures = this._textures;
       if (!textures) {
          textures = this._textures = new FObjects();

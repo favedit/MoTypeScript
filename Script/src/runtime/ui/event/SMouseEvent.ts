@@ -34,32 +34,35 @@ export class SMouseEvent extends SEvent {
    // @method
    // @param event:HtmlEvent 页面事件
    //==========================================================
-   public attachEvent(event) {
-      var hEvent = this.hSource = RHtml.eventSource(event);
-      if (hEvent) {
-         this.source = hEvent.__linker;
+   public attachEvent(hEvent) {
+      if (!hEvent) {
+         hEvent = window.event;
       }
-      this.button = event.button;
-      this.mouseLeft = (event.button == EMouseButton.Left);
-      this.mouseMiddle = (event.button == EMouseButton.Middle);
-      this.mouseRight = (event.button == EMouseButton.Right);
-      this.altKey = event.altKey;
-      this.ctrlKey = event.ctrlKey;
-      //if (MO.RBrowser.isBrowser(MO.EBrowser.FireFox)) {
-      this.x = event.pageX;
-      this.y = event.pageY;
-      this.offsetX = event.layerX;
-      this.offsetY = event.layerY;
-      //} else {
-      this.x = event.x;
-      this.y = event.y;
-      this.offsetX = event.offsetX;
-      this.offsetY = event.offsetY;
+      //var hEvent = this.hSource = RHtml.eventSource(hEvent);
+      //if (hEvent) {
+         //this.source = hEvent.__linker;
       //}
-      this.clientX = event.clientX;
-      this.clientY = event.clientY;
-      this.deltaX = event.deltaX;
-      this.deltaY = event.deltaY;
-      this.deltaZ = event.deltaZ;
+      this.button = hEvent.button;
+      this.mouseLeft = (hEvent.button == EMouseButton.Left);
+      this.mouseMiddle = (hEvent.button == EMouseButton.Middle);
+      this.mouseRight = (hEvent.button == EMouseButton.Right);
+      this.altKey = hEvent.altKey;
+      this.ctrlKey = hEvent.ctrlKey;
+      //if (MO.RBrowser.isBrowser(MO.EBrowser.FireFox)) {
+      // this.x = hEvent.pageX;
+      // this.y = hEvent.pageY;
+      // this.offsetX = hEvent.layerX;
+      // this.offsetY = hEvent.layerY;
+      //} else {
+      this.x = hEvent.x;
+      this.y = hEvent.y;
+      this.offsetX = hEvent.offsetX;
+      this.offsetY = hEvent.offsetY;
+      //}
+      this.clientX = hEvent.clientX;
+      this.clientY = hEvent.clientY;
+      this.deltaX = hEvent.deltaX;
+      this.deltaY = hEvent.deltaY;
+      this.deltaZ = hEvent.deltaZ;
    }
 }

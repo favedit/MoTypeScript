@@ -1,7 +1,7 @@
 import {FError} from '../../../runtime/common/lang/FError';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {RObject} from '../../../runtime/common/lang/RObject';
-import {FGraphicContext} from '../../../runtime/graphic/context/FGraphicContext';
+import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 
 //==========================================================
 // <T>WebGL渲染环境。</T>

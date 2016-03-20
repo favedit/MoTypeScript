@@ -1,14 +1,7 @@
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {FLight} from './FLight';
-//import {FG3dCamera} from './FG3dCamera';
 
-//==========================================================
-// <T>方向光源。</T>
-//
-// @author maocy
-// @history 141230
-//==========================================================
 export class FDirectionalLight extends FLight {
    // @attribute
    //_camera      = MO.Class.register(o, new MO.AGetter('_camera'));
@@ -43,4 +36,33 @@ export class FDirectionalLight extends FLight {
       // 父处理
       super.dispose();
    }
+   // THREE.DirectionalLight = function ( color, intensity ) {
+
+   // 	THREE.Light.call( this, color, intensity );
+
+   // 	this.type = 'DirectionalLight';
+
+   // 	this.position.set( 0, 1, 0 );
+   // 	this.updateMatrix();
+
+   // 	this.target = new THREE.Object3D();
+
+   // 	this.shadow = new THREE.LightShadow( new THREE.OrthographicCamera( - 5, 5, 5, - 5, 0.5, 500 ) );
+
+   // };
+
+   // THREE.DirectionalLight.prototype = Object.create( THREE.Light.prototype );
+   // THREE.DirectionalLight.prototype.constructor = THREE.DirectionalLight;
+
+   // THREE.DirectionalLight.prototype.copy = function ( source ) {
+
+   // 	THREE.Light.prototype.copy.call( this, source );
+
+   // 	this.target = source.target.clone();
+
+   // 	this.shadow = source.shadow.clone();
+
+   // 	return this;
+
+   // };
 }

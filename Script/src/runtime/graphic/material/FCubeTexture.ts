@@ -1,17 +1,24 @@
-﻿import {FTechniquePass} from './FTechniquePass';
+import {ETexture} from './ETexture';
+import {FTexture} from './FTexture';
 
 //==========================================================
-// <T>控件渲染过程。</T>
+// <T>立方渲染纹理。</T>
 //
 // @author maocy
-// @history 150211
+// @history 141231
 //==========================================================
-export class FControlPass extends FTechniquePass {
+export class FCubeTexture extends FTexture {
+   // 大小
+   public size: number = 0;
+
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
-      this.code = 'control';
+      this.textureCd = ETexture.Cube;
    }
+
+   //o.upload    = MO.Method.virtual(o, 'upload');
+   //o.update    = MO.Method.empty;
 }

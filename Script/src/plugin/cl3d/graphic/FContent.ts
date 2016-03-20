@@ -1,4 +1,4 @@
-import {FGraphicObject} from '../../runtime/graphic/context/FGraphicObject';
+import {FGraphicObject} from '../../runtime/graphic/core/FGraphicObject';
 
 //==========================================================
 // <T>渲染对象。</T>

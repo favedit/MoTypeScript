@@ -1,4 +1,5 @@
-﻿import {FError} from '../../../runtime/common/lang/FError';
+﻿import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {FError} from '../../../runtime/common/lang/FError';
 import {RBoolean} from '../../../runtime/common/lang/RBoolean';
 import {RString} from '../../../runtime/common/lang/RString';
 import {REnum} from '../../../runtime/common/lang/REnum';
@@ -13,11 +14,13 @@ import {EBlendMode} from './EBlendMode';
 import {EShader} from './EShader';
 import {SEffectInfo} from './SEffectInfo';
 import {FContent} from './FContent';
+import {FShaderTemplate} from './FShaderTemplate';
 import {FProgramParameter} from './FProgramParameter';
 import {FProgramAttribute} from './FProgramAttribute';
 import {FProgramSampler} from './FProgramSampler';
-import {FShaderTemplate} from './FShaderTemplate';
+import {FProgram} from './FProgram';
 import {FEffectConsole} from './FEffectConsole';
+import {FRenderable} from '../base/FRenderable';
 
 //==========================================================
 // <T>渲染程序。</T>
@@ -27,8 +30,9 @@ import {FEffectConsole} from './FEffectConsole';
 //==========================================================
 export class FEffect extends FContent {
    // @attribute
-   public ready = null;
-   public code: string = null;
+   public ready: boolean;
+   public code: string;
+   public flag: string;
    // @attribute
    public stateFillCd = EFillMode.Face;
    public stateCullCd = ECullMode.Front;
@@ -44,12 +48,12 @@ export class FEffect extends FContent {
    public optionLightMap = false;
    public optionFog = false;
    // @attribute
-   public program = null;
+   public program: FProgram;
    public vertexTemplate = null;
    public fragmentTemplate = null;
    public _vertexSource: string;
    public _fragmentSource: string;
-   
+
    // @method
    //o.setup = MO.Method.empty;
 
@@ -103,7 +107,7 @@ export class FEffect extends FContent {
    // @param region:MG3dRegion 渲染区域
    // @param renderable:MG3dRenderable 渲染对象
    //==========================================================
-   public drawRenderable(region, renderable) {
+   public drawRenderable(region: FRegion, renderable: FRenderable) {
       var context = this.graphicContext;
       var program = this.program;
       // 绑定所有属性流
@@ -112,31 +116,34 @@ export class FEffect extends FContent {
          var attributeCount = attributes.count();
          for (var i = 0; i < attributeCount; i++) {
             var attribute = attributes.value(i);
-            if (attribute._statusUsed) {
-               var linker = attribute._linker;
+            if (attribute.statusUsed) {
+               var linker = attribute.linker;
                var vertexBuffer = renderable.findVertexBuffer(linker);
                if (!vertexBuffer) {
                   throw new FError(this, "Can't find renderable vertex buffer. (linker={1})", linker);
                }
-               program.setAttribute(attribute._name, vertexBuffer, vertexBuffer._formatCd);
+               program.setAttribute(attribute.name, vertexBuffer, vertexBuffer.formatCd);
             }
          }
       }
       // 绘制处理
-      var indexBuffer = renderable.indexBuffer();
-      context.drawTriangles(indexBuffer, 0, indexBuffer.count());
+      var indexBuffers = renderable.indexBuffers;
+      var count = indexBuffers.count();
+      for (var i = 0; i < count; i++) {
+         var indexBuffer = indexBuffers.at(i);
+         context.drawTriangles(indexBuffer, 0, indexBuffer.count);
+      }
    }
 
    //==========================================================
    // <T>绘制渲染集合。</T>
    //
-   // @method
-   // @param region:MG3dRegion 渲染区域
-   // @param renderables:TObjects 渲染集合
-   // @param offset:Integer 开始位置
-   // @param count:Integer 总数
+   // @param region 渲染区域
+   // @param renderables 渲染集合
+   // @param offset 开始位置
+   // @param count 总数
    //==========================================================
-   public drawRenderables(region, renderables, offset, count) {
+   public drawRenderables(region: FRegion, renderables: FObjects<FRenderable>, offset, count) {
       // 选择技术
       this.graphicContext.setProgram(this.program);
       // 绘制所有对象
@@ -167,10 +174,10 @@ export class FEffect extends FContent {
    // @param offset:Integer 开始位置
    // @param count:Integer 总数
    //==========================================================
-   public drawRegion(region:FRegion, offset:number, count:number) {
+   public drawRegion(region: FRegion, offset: number, count: number) {
       // 根据效果类型进行分组
       var renderabels = region.renderables;
-      for (var n:number = 0; n < count;) {
+      for (var n: number = 0; n < count;) {
          // 获得分组
          var groupBegin = n;
          var groupEnd = count;
@@ -239,17 +246,17 @@ export class FEffect extends FContent {
             }
          } else if (xnode.isName('Parameter')) {
             // 设置参数
-            var parameter:FProgramParameter = RClass.create(FProgramParameter);
+            var parameter: FProgramParameter = RClass.create(FProgramParameter);
             parameter.loadConfig(xnode);
             program.parameters().set(parameter.name, parameter);
          } else if (xnode.isName('Attribute')) {
             // 设置属性
-            var attribute:FProgramAttribute = RClass.create(FProgramAttribute);
+            var attribute: FProgramAttribute = RClass.create(FProgramAttribute);
             attribute.loadConfig(xnode);
             program.attributes().set(attribute.name, attribute);
          } else if (xnode.isName('Sampler')) {
             // 设置取样
-            var sampler:FProgramSampler = RClass.create(FProgramSampler);
+            var sampler: FProgramSampler = RClass.create(FProgramSampler);
             sampler.loadConfig(xnode);
             program.samplers().set(sampler.name, sampler);
          } else if (xnode.isName('Source')) {
@@ -278,8 +285,8 @@ export class FEffect extends FContent {
    //
    // @param effectInfo 效果信息
    //==========================================================
-   public build(effectInfo:SEffectInfo) {
-      var program = this.program;
+   public build(effectInfo: SEffectInfo) {
+      var program: any = this.program;
       var parameters = program.parameters();
       var parameterCount = parameters.count();
       // 设置环境
