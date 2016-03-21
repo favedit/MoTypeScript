@@ -104,6 +104,7 @@ export class FE3rMaterial extends FE3rComponent {
          rtexture.setWrapCd(ESamplerFilter.Repeat, ESamplerFilter.Repeat);
          rtexture.upload(textureResource.image);
       }
+      debugger
       //this._guid = resource.guid();
       //this._resource = resource;
       //this._info.calculate(resource.info());

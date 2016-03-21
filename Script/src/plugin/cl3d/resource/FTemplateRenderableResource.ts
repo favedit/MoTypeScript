@@ -13,6 +13,7 @@ import {FMaterialResourceConsole} from './FMaterialResourceConsole';
 // @history 150108
 //==========================================================
 export class FTemplateRenderableResource extends FResourceObject {
+   public ready: boolean;
    public model: FModelResource = null;
    public modelUrl: string = null;
    public material: FMaterialResource = null;
@@ -24,8 +25,6 @@ export class FTemplateRenderableResource extends FResourceObject {
    @ALinker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole = null;
 
-
-
    //==========================================================
    // <T>构造处理。</T>
    //
@@ -34,7 +33,28 @@ export class FTemplateRenderableResource extends FResourceObject {
    public constructor() {
       super();
       // 设置属性
+      this.ready = false;
       this.typeName = 'TemplateRenderable';
+   }
+
+   //==========================================================
+   // <T>测试是否准备好。</T>
+   //
+   // @return 是否准备好
+   //==========================================================
+   public testReady(): boolean {
+      // var ready = this.ready;
+      // if (!ready) {
+      //    if (!this.model.testReady()) {
+      //       return false;
+      //    }
+      //    if (!this.material.testReady()) {
+      //       return false;
+      //    }
+      //    ready = this.ready = true;
+      // }
+      // return ready;
+      return true;
    }
 
    //==========================================================
@@ -45,9 +65,9 @@ export class FTemplateRenderableResource extends FResourceObject {
    public loadConfig(config) {
       super.loadConfig(config);
       this.modelUrl = config.model_url;
-      this.model = this._modelResourceConsole.loadByUrl(this.modelUrl);
+      //this.model = this._modelResourceConsole.loadByUrl(this.modelUrl);
       this.materialUrl = config.material_url;
-      this.material = this._materialResourceConsole.loadByUrl(this.materialUrl);
+      //this.material = this._materialResourceConsole.loadByUrl(this.materialUrl);
    }
 
    //==========================================================

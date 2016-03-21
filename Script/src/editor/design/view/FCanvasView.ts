@@ -11,12 +11,15 @@ import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
 import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
 import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
 import {FE3dModelConsole} from '../../plugin/cl3d/shape/instance/FE3dModelConsole';
+//import {FE3dTemplatelConsole} from '../../plugin/cl3d/shape/instance/FE3dTemplatelConsole';
 import {FCube} from '../../plugin/cl3d/shape/FCube';
 import {SSettings} from '../application/SSettings';
 import {EEvent} from '../../runtime/ui/EEvent';
 import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
 
+import {FTemplateResourceConsole} from '../../plugin/cl3d/resource/FTemplateResourceConsole';
 import {FE3rMaterialConsole} from '../../plugin/cl3d/shape/render/FE3rMaterialConsole';
+import {FE3dTemplateConsole} from '../../plugin/cl3d/shape/instance/FE3dTemplateConsole';
 
 declare var id_info;
 
@@ -84,8 +87,16 @@ export class FCanvasView extends FView {
       model.matrix.addRotationY(Math.PI);
       this.contentLayer.pushDisplay(model);
 
-      var mrConsole: FE3rMaterialConsole = RConsole.find(FE3rMaterialConsole);
-      var material = mrConsole.loadByUrl(context, '/sk/res/model/xiong/xiong.material');
+      //var mrConsole: FE3rMaterialConsole = RConsole.find(FE3rMaterialConsole);
+      //var material = mrConsole.loadByUrl(context, '/sk/res/model/xiong/xiong.material');
+      
+      // var trConsole:FTemplateResourceConsole = RConsole.find(FTemplateResourceConsole);
+      // var templateResource = trConsole.loadByUrl('/sk/res/model/xiong/xiong.template');
+      
+      var trConsole:FE3dTemplateConsole = RConsole.find(FE3dTemplateConsole);
+      var templateResource = trConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
+      
+      
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);
@@ -134,8 +145,8 @@ export class FCanvasView extends FView {
    // <T>逻辑处理。</T>
    //==========================================================
    public onMouseMove(sender, event: SMouseEvent) {
-      var renderable = this.pipeline.selectTest(event.offsetX, event.offsetY);
-      id_info.innerHTML = renderable + ' ' + event.offsetX + '-' + event.offsetY
+      //var renderable = this.pipeline.selectTest(event.offsetX, event.offsetY);
+      //id_info.innerHTML = renderable + ' ' + event.offsetX + '-' + event.offsetY
       //console.log(renderable, event.x, event.y);
    }
 }

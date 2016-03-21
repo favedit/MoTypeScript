@@ -74,9 +74,9 @@ export class FE3dModel extends FActor {
    //==========================================================
    // <T>加载处理。</T>
    //
-   // @method
+   // @return 处理结果
    //==========================================================
-   public processLoad() {
+   public processLoad() :boolean{
       // 检测数据状态
       if (this._dataReady) {
          return true;

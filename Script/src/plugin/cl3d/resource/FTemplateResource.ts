@@ -31,6 +31,31 @@ export class FTemplateResource extends FResource {
    // }
 
    //==========================================================
+   // <T>测试是否准备好。</T>
+   //
+   // @return 是否准备好
+   //==========================================================
+   public testReady(): boolean {
+      var ready = this.ready;
+      if (!ready) {
+         if (this.dataReady) {
+            var renderables = this.renderables;
+            if (renderables) {
+               var count: number = renderables.count();
+               for (var n: number = 0; n < count; n++) {
+                  var renderable = renderables.at(n);
+                  if (!renderable.testReady()) {
+                     return false;
+                  }
+               }
+            }
+            ready = this.ready = true;
+         }
+      }
+      return ready;
+   }
+
+   //==========================================================
    // <T>从配置里加载信息内容</T>
    //
    // @param config 配置
@@ -56,6 +81,7 @@ export class FTemplateResource extends FResource {
       // }
       // var tick = new Date().getTime() - start;
       // console.log(count, tick, count / tick * 1000, this._number);
+      this.dataReady = true;
    }
 
    //==========================================================

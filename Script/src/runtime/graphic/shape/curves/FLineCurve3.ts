@@ -24,11 +24,11 @@ export class FLineCurve3 extends FCurve {
    //==========================================================
    // <T>输出所有点集合。</T>
    //==========================================================
-   public writePoints(buffer:FObjects<SVertex>):void {
+   public writePoints(buffer: FObjects<SVertex>): void {
       buffer.push(this.start);
       buffer.push(this.end);
    }
-   
+
    public a(t) {
       var vector = new SPoint3();
       //vector.subVectors(this.v2, this.v1);

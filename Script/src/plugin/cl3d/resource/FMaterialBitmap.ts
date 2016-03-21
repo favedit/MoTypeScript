@@ -16,7 +16,7 @@ export class FE3sMaterialBitmap{
 //    // @method
 //    o.unserialize     = MO.FE3sMaterialBitmap_unserialize;
 //    return o;
-// }
+// } 
 
 // //==========================================================
 // // <T>从输入流里反序列化信息内容</T>

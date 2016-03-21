@@ -1,3 +1,5 @@
+/// <reference path="./FPath.ts" />
+
 import {FPath} from './FPath';
 
 export class FShape extends FPath {
@@ -7,6 +9,10 @@ export class FShape extends FPath {
    public constructor() {
       super();
       this.holes = [];
+   }
+
+   public createShap() {
+      return new FShape();
    }
 
    // Convenience method to return ExtrudeGeometry
