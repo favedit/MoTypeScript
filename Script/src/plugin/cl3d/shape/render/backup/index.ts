@@ -4,7 +4,6 @@ export * from './FE3rDynamicMesh';
 export * from './FE3rDynamicModel';
 export * from './FE3rGeometry';
 export * from './FE3rInstanceMesh';
-export * from './FE3rMaterial';
 export * from './FE3rMesh';
 export * from './FE3rMeshAnimation';
 export * from './FE3rMeshConsole';

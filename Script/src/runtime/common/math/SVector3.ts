@@ -27,92 +27,80 @@ export class SVector3 extends SValue3 {
    //============================================================
    // <T>获得反方向。</T>
    //
-   // @method
-   // @param p:value:SQuaternion 四元数
-   // @return SQuaternion 四元数
+   // @param value 内容
+   // @return 反方向
    //============================================================
-   public conjugate(p) {
-      var o = this;
-      var r = null;
-      if (p) {
-         r = p;
+   public conjugate(value) {
+      var instance: SVector3 = null;
+      if (value) {
+         instance = value;
       } else {
-         r = new SVector3();
+         instance = new SVector3();
       }
-      r.x = -o.x;
-      r.y = -o.y;
-      r.z = -o.z;
-      return r;
+      instance.x = -this.x;
+      instance.y = -this.y;
+      instance.z = -this.z;
+      return instance;
    }
 
    //==========================================================
    // <T>向量点乘</T>
    //
-   // @method
    // @param value:SVector3 三维向量
    //==========================================================
    public dotPoint3(value) {
-      var o = this;
-      return (o.x * value.x) + (o.y * value.y) + (o.z * value.z);
+      return (this.x * value.x) + (this.y * value.y) + (this.z * value.z);
    }
 
    //==========================================================
    // <T>点乘(内积)。</T>
    //
-   // @method
-   // @param value:SVector3 三维向量
+   // @param value 三维向量
    //==========================================================
    public cross(value) {
-      var o = this;
-      var vx = (o.y * value.z) - (o.z * value.y);
-      var vy = (o.z * value.x) - (o.x * value.z);
-      var vz = (o.x * value.y) - (o.y * value.x);
-      o.x = vx;
-      o.y = vy;
-      o.z = vz;
+      var vx = (this.y * value.z) - (this.z * value.y);
+      var vy = (this.z * value.x) - (this.x * value.z);
+      var vz = (this.x * value.y) - (this.y * value.x);
+      this.x = vx;
+      this.y = vy;
+      this.z = vz;
    }
 
    //==========================================================
    // <T>点乘(内积)。</T>
    //
-   // @method
-   // @param po:output:SVector3 输出三维向量
-   // @param pi:input:SVector3 输入三维向量
+   // @param output 输出三维向量
+   // @param input 输入三维向量
    //==========================================================
    public cross2(po, pi) {
-      var o = this;
-      po.x = (o.y * pi.z) - (o.z * pi.y);
-      po.y = (o.z * pi.x) - (o.x * pi.z);
-      po.z = (o.x * pi.y) - (o.y * pi.x);
+      po.x = (this.y * pi.z) - (this.z * pi.y);
+      po.y = (this.z * pi.x) - (this.x * pi.z);
+      po.z = (this.x * pi.y) - (this.y * pi.x);
    }
 
    //==========================================================
    // <T>计算插值。</T>
    //
-   // @method
-   // @param v1:value1:SQuaternion 开始四元数
-   // @param v2:value2:SQuaternion 结束四元数
-   // @param r:rate:Float 比率
+   // @param value1 开始内容
+   // @param value2 结束内容
+   // @param rate 比率
    //==========================================================
    public slerp(v1, v2, r) {
-      var o = this;
-      o.x = (v2.x - v1.x) * r + v1.x;
-      o.y = (v2.y - v1.y) * r + v1.y;
-      o.z = (v2.z - v1.z) * r + v1.z;
+      this.x = (v2.x - v1.x) * r + v1.x;
+      this.y = (v2.y - v1.y) * r + v1.y;
+      this.z = (v2.z - v1.z) * r + v1.z;
    }
 
    //==========================================================
    // <T>获得克隆对象。</T>
    //
-   // @method
-   // @return SVector3 克隆对象
+   // @return 克隆对象
    //==========================================================
    public clone() {
-      var o = this;
-      var r = new SVector3();
-      r.x = o.x;
-      r.y = o.y;
-      r.z = o.z;
-      return r;
+      var instance = new SVector3();
+      instance.x = this.x;
+      instance.y = this.y;
+      instance.z = this.z;
+      return instance;
    }
 }

@@ -1,5 +1,5 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
-import {SVector3} from '../../../runtime/common/math/SVector3';
+import {RObject} from '../../common/lang/RObject';
+import {SVector3} from '../../common/math/SVector3';
 import {FLight} from './FLight';
 
 export class FDirectionalLight extends FLight {
@@ -36,6 +36,7 @@ export class FDirectionalLight extends FLight {
       // 父处理
       super.dispose();
    }
+
    // THREE.DirectionalLight = function ( color, intensity ) {
 
    // 	THREE.Light.call( this, color, intensity );

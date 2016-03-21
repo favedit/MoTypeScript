@@ -2,6 +2,7 @@ export * from './EFrustumPlane';
 export * from './RConst';
 export * from './RMatrix';
 export * from './SCorners';
+export * from './SEuler';
 export * from './SFace3';
 export * from './SFrustum';
 export * from './SFrustumPlanes';

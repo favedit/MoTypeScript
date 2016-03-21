@@ -1,7 +1,10 @@
+//import {FObjects} from '../../common/lang/FObjects';
+//import {SVertex} from '../core/SVertex';
+
 //==========================================================
-// <T>曲线。</T>
+// <T>线段。</T>
 //==========================================================
-export abstract class Curve {
+export abstract class FCurve {
 
    private __arcLengthDivisions;
    public needsUpdate;
@@ -14,25 +17,27 @@ export abstract class Curve {
    }
 
    //==========================================================
-   // <T>获得点。</T>
+   // <T>获得点信息。</T>
+   // <P>percent：0~1之间，比率</P>
    //==========================================================
-   public getPoint(index): any {
+   public getPoint(percent): any {
+      return null;
    }
 
    //==========================================================
-   // <T>根据索引获得点。</T>
+   // <T>获得点信息。</T>
+   // <P>percent：0~1之间，比率</P>
    //==========================================================
-   public getPointAt(index) {
-      var t = this.getUtoTmapping(index);
+   public getPointAt(u) {
+      var t = this.getUtoTmapping(u);
       return this.getPoint(t);
    }
 
    //==========================================================
-   // Get sequence of points using getPoint( t )
-   public getPoints(divisions?: any): any {
-      if (!divisions) {
-         divisions = 5;
-      }
+   // <T>获得点集合。</T>
+   //==========================================================
+   public getPoints(divisions) {
+      if (!divisions) divisions = 5;
       var d, pts = [];
       for (d = 0; d <= divisions; d++) {
          pts.push(this.getPoint(d / divisions));
@@ -41,11 +46,10 @@ export abstract class Curve {
    }
 
    //==========================================================
-   // Get sequence of points using getPointAt( u )
+   // <T>获得空间点集合。</T>
+   //==========================================================
    public getSpacedPoints(divisions) {
-      if (!divisions) {
-         divisions = 5;
-      }
+      if (!divisions) divisions = 5;
       var d, pts = [];
       for (d = 0; d <= divisions; d++) {
          pts.push(this.getPointAt(d / divisions));
@@ -54,16 +58,20 @@ export abstract class Curve {
    }
 
    //==========================================================
-   // Get total curve arc length
+   // <T>获得长度。</T>
+   //==========================================================
    public getLength() {
       var lengths = this.getLengths();
       return lengths[lengths.length - 1];
    }
 
    //==========================================================
-   // Get list of cumulative segment lengths
+   // <T>获得长度集合。</T>
+   //==========================================================
    public getLengths(divisions?: any) {
-      if (!divisions) divisions = (this.__arcLengthDivisions) ? (this.__arcLengthDivisions) : 200;
+      if (!divisions) {
+         divisions = (this.__arcLengthDivisions) ? (this.__arcLengthDivisions) : 200;
+      }
       if (this.cacheArcLengths && (this.cacheArcLengths.length === divisions + 1) && !this.needsUpdate) {
          return this.cacheArcLengths;
       }
@@ -79,9 +87,11 @@ export abstract class Curve {
          last = current;
       }
       this.cacheArcLengths = cache;
-      return cache; // { sums: cache, sum:sum }; Sum is in the last element.
+      return cache;
    }
 
+   //==========================================================
+   // <T>更新长度集合。</T>
    //==========================================================
    public updateArcLengths() {
       this.needsUpdate = true;
@@ -89,7 +99,8 @@ export abstract class Curve {
    }
 
    //==========================================================
-   // Given u ( 0 .. 1 ), get a t to find p. This gives you points which are equidistant
+   // <T>获得点映射。</T>
+   //==========================================================
    public getUtoTmapping(u, distance?: any) {
       var arcLengths = this.getLengths();
       var i = 0, il = arcLengths.length;
@@ -126,10 +137,8 @@ export abstract class Curve {
    }
 
    //==========================================================
-   // Returns a unit vector tangent at t
-   // In case any sub curve does not implement its tangent derivation,
-   // 2 points a small delta apart will be used to find its gradient
-   // which seems to give a reasonable approximation
+   // <T>获得方向。</T>
+   //==========================================================
    public getTangent(t) {
       var delta = 0.0001;
       var t1 = t - delta;
@@ -143,6 +152,8 @@ export abstract class Curve {
       return vec.normalize();
    }
 
+   //==========================================================
+   // <T>获得方向位置。</T>
    //==========================================================
    public getTangentAt(u) {
       var t = this.getUtoTmapping(u);

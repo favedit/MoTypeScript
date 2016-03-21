@@ -1,10 +1,11 @@
-import {Curve} from '../brep/Curve';
+import {SPoint2} from '../../../runtime/common/math/SPoint2';
+import {FCurve} from '../brep/FCurve';
 
-export class LineCurve extends Curve {
-   public v1;
-   public v2;
+export class FLineCurve extends FCurve {
+   public v1: any;
+   public v2: any;
 
-   public constructor(v1, v2) {
+   public constructor(v1: any, v2: any) {
       super();
       this.v1 = v1;
       this.v2 = v2;

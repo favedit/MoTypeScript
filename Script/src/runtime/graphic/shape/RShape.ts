@@ -1,6 +1,6 @@
 import {RMath} from '../../common/math/RMath';
 
-export class ShapeUtils {
+export class RShape {
 
    // calculate area of the contour polygon
    public static area(contour) {
@@ -53,7 +53,7 @@ export class ShapeUtils {
       var result = [], verts = [], vertIndices = [];
       /* we want a counter-clockwise polygon in verts */
       var u, v, w;
-      if (ShapeUtils.area(contour) > 0.0) {
+      if (this.area(contour) > 0.0) {
          for (v = 0; v < n; v++) verts[v] = v;
       } else {
          for (v = 0; v < n; v++) verts[v] = (n - 1) - v;
@@ -98,7 +98,7 @@ export class ShapeUtils {
       return result;
    };
 
-   public triangulateShape = function ( contour, holes ) {
+   public static triangulateShape = function ( contour, holes ) {
    	function point_in_segment_2D_colin( inSegPt1, inSegPt2, inOtherPt ) {
    		// inOtherPt needs to be collinear to the inSegment
    		if ( inSegPt1.x !== inSegPt2.x ) {
@@ -384,7 +384,7 @@ export class ShapeUtils {
    	}
    	// remove holes by cutting paths to holes and adding them to the shape
    	var shapeWithoutHoles = removeHoles( contour, holes );
-   	var triangles = ShapeUtils.triangulate( shapeWithoutHoles, false ); // True returns indices for points of spooled shape
+   	var triangles = this.triangulate( shapeWithoutHoles, false ); // True returns indices for points of spooled shape
    	//console.log( "triangles",triangles, triangles.length );
    	// check all face vertices against all points map
    	for ( i = 0, il = triangles.length; i < il; i ++ ) {
@@ -400,13 +400,13 @@ export class ShapeUtils {
    	return triangles.concat();
    }
 
-   public isClockWise(pts) {
-      return ShapeUtils.area(pts) < 0;
+   public static isClockWise(pts) {
+      return this.area(pts) < 0;
    }
 
    // Bezier Curves formulas obtained from
    // Quad Bezier Functions
-   public b2 = function() {
+   public static b2 = function() {
       function b2p0(t, p) {
          var k = 1 - t;
          return k * k * p;
@@ -423,7 +423,7 @@ export class ShapeUtils {
    } ();
 
    // Cubic Bezier Functions
-   public b3 = function() {
+   public static b3 = function() {
       function b3p0(t, p) {
          var k = 1 - t;
          return k * k * k * p;

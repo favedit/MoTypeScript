@@ -1,6 +1,6 @@
-export * from './CurveUtils';
+export * from './RCurve';
+export * from './RShape';
 export * from './SceneUtils';
-export * from './ShapeUtils';
 
 import * as brep from './brep/index';
 export {brep as brep};

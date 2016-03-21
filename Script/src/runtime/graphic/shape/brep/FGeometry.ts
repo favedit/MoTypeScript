@@ -1,8 +1,9 @@
 import {FObjects} from '../../common/lang/FObjects';
 import {SPoint3} from '../../common/math/SPoint3';
 import {SVector3} from '../../common/math/SVector3';
+import {SColor4} from '../../common/math/SColor4';
 import {RMath} from '../../common/math/RMath';
-import {SFace3} from '../core/SFace3';
+import {SFace3} from '../math/SFace3';
 
 //==========================================================
 // <T>几何体。</T>
@@ -10,18 +11,17 @@ import {SFace3} from '../core/SFace3';
 // @author maocy
 // @history 160318
 //==========================================================
-export class Geometry {
-
+export class FGeometry {
    // 编号
    protected static _nextId: number = 0;
 
    public uuid: string;
    public name: string;
    public type: string;
-   public _vertices: FObjects<SPoint3>;
-   public _faces: FObjects<SFace3>;
+   public _vertices: Array<SPoint3>;
+   public _faces: Array<SFace3>;
+   public _colors: Array<SColor4>;
 
-   public colors: Array<any>;
    public faceVertexUvs: Array<any>;
    public morphTargets: Array<any>;
    public morphNormals: Array<any>;
@@ -45,10 +45,10 @@ export class Geometry {
       this.uuid = RMath.makeGuid();
       this.name = '';
       this.type = 'Geometry';
-      this._vertices = new FObjects<SPoint3>();
-      this._faces = new FObjects<SFace3>();
+      this._vertices = new Array<SPoint3>();
+      this._colors = new Array<SColor4>();
+      this._faces = new Array<SFace3>();
 
-      this.colors = [];
       this.faceVertexUvs = [[]];
       this.morphTargets = [];
       this.morphNormals = [];
@@ -70,24 +70,27 @@ export class Geometry {
    // <T>获得编号。</T>
    //==========================================================
    public get id() {
-      var id = Geometry._nextId;
-      if (id == 0) {
-         id = Geometry._nextId++;
-      }
-      return id;
+      return FGeometry._nextId++;
    }
 
    //==========================================================
    // <T>获得顶点集合。</T>
    //==========================================================
-   public get vertices(): FObjects<SPoint3> {
+   public get vertices(): Array<SPoint3> {
       return this._vertices;
+   }
+
+   //==========================================================
+   // <T>获得颜色集合。</T>
+   //==========================================================
+   public get colors(): Array<SColor4> {
+      return this._colors;
    }
 
    //==========================================================
    // <T>获得面集合。</T>
    //==========================================================
-   public get faces(): FObjects<SFace3> {
+   public get faces(): Array<SFace3> {
       return this._faces;
    }
 
@@ -292,8 +295,8 @@ export class Geometry {
    // <T>计算顶点法线。</T>
    //==========================================================
    public computeVertexNormals(areaWeighted: boolean = true) {
-      var vertexCount = this._vertices.count();
-      var faceCount = this._faces.count();
+      var vertexCount = this._vertices.length;
+      var faceCount = this._faces.length;
       // 创建集合
       var vertices = new FObjects<SVector3>();
       for (let i: number = 0; i < vertexCount; i++) {
@@ -304,23 +307,23 @@ export class Geometry {
          var cb = new SVector3();
          var ab = new SVector3();
          for (let i: number = 0; i < faceCount; i++) {
-            var face = this._faces.at(i);
+            var face = this._faces[i];
             var vA = this._vertices[face.a];
             var vB = this._vertices[face.b];
             var vC = this._vertices[face.c];
             cb.direction(vC, vB);
             ab.direction(vA, vB);
             cb.cross(ab);
-            vertices.get(face.a).addValue3(cb);
-            vertices.get(face.b).addValue3(cb);
-            vertices.get(face.c).addValue3(cb);
+            vertices[face.a].addValue3(cb);
+            vertices[face.b].addValue3(cb);
+            vertices[face.c].addValue3(cb);
          }
       } else {
          for (let i: number = 0; i < faceCount; i++) {
-            var face = this._faces.at(i);
-            vertices.get(face.a).addValue3(face.normal);
-            vertices.get(face.b).addValue3(face.normal);
-            vertices.get(face.c).addValue3(face.normal);
+            var face = this._faces[i];
+            vertices[face.a].addValue3(face.normal);
+            vertices[face.b].addValue3(face.normal);
+            vertices[face.c].addValue3(face.normal);
          }
       }
       // 单位化
@@ -332,13 +335,13 @@ export class Geometry {
          face = this._faces[i];
          var vertexNormals = face.vertexNormals;
          if (vertexNormals.length === 3) {
-            vertexNormals[0].assign(vertices.get(face.a));
-            vertexNormals[1].assign(vertices.get(face.b));
-            vertexNormals[2].assign(vertices.get(face.c));
+            vertexNormals[0].assign(vertices[face.a]);
+            vertexNormals[1].assign(vertices[face.b]);
+            vertexNormals[2].assign(vertices[face.c]);
          } else {
-            vertexNormals[0] = vertices.get(face.a).clone();
-            vertexNormals[1] = vertices.get(face.b).clone();
-            vertexNormals[2] = vertices.get(face.c).clone();
+            vertexNormals[0] = vertices[face.a].clone();
+            vertexNormals[1] = vertices[face.b].clone();
+            vertexNormals[2] = vertices[face.c].clone();
          }
       }
       if (faceCount > 0) {
@@ -512,72 +515,68 @@ export class Geometry {
       // this.merge(mesh.geometry, mesh.matrix);
    }
 
-   /*
-    * Checks for duplicate vertices with hashmap.
-    * Duplicated vertices are removed
-    * and faces' vertices are updated.
-    */
-
+   //============================================================
+   // <T>合并顶点。</T>
+   // <P>去掉重复的顶点信息，修正面顶点索引。</P>
+   //============================================================
    public mergeVertices() {
-      var verticesMap = {}; // Hashmap for looking up vertices by position coordinates (and making sure they are unique)
-      var unique = [], changes = [];
-      var v, key;
-      var precisionPoints = 4; // number of decimal points, e.g. 4 for epsilon of 0.0001
+      var verticesMap = {};
+      var unique = [];
+      var changes = [];
+      // 设定保留4为小数
+      var precisionPoints = 4;
       var precision = Math.pow(10, precisionPoints);
-      var i, il, face;
-      var indices, j, jl;
-      for (i = 0, il = this._vertices.count(); i < il; i++) {
-         v = this._vertices[i];
-         key = Math.round(v.x * precision) + '_' + Math.round(v.y * precision) + '_' + Math.round(v.z * precision);
-         if (verticesMap[key] === undefined) {
-            verticesMap[key] = i;
-            unique.push(this._vertices[i]);
-            changes[i] = unique.length - 1;
+      // 生成顶点表（vertex key = index）
+      var vertexCount: number = this._vertices.length;
+      for (var n: number = 0; n < vertexCount; n++) {
+         var vertex = this._vertices[n];
+         var key: string = Math.round(vertex.x * precision) + '_' + Math.round(vertex.y * precision) + '_' + Math.round(vertex.z * precision);
+         var keyValue = verticesMap[key];
+         if (keyValue === undefined) {
+            verticesMap[key] = n;
+            changes[n] = unique.length;
+            unique.push(vertex);
          } else {
-            //console.log('Duplicate vertex found. ', i, ' could be using ', verticesMap[key]);
-            changes[i] = changes[verticesMap[key]];
+            changes[n] = changes[keyValue];
          }
       }
-
-      // if faces are completely degenerate after merging vertices, we
-      // have to remove them from the geometry.
+      // 检查需要删除的面集合
       var faceIndicesToRemove = [];
-      for (i = 0, il = this._faces.count(); i < il; i++) {
-         face = this._faces[i];
+      var faceCount: number = this._faces.length;
+      for (var n: number = 0; n < faceCount; n++) {
+         var face = this._faces[n];
          face.a = changes[face.a];
          face.b = changes[face.b];
          face.c = changes[face.c];
-         indices = [face.a, face.b, face.c];
-         var dupIndex = - 1;
-         // if any duplicate vertices are found in a Face3
-         // we have to remove the face as nothing can be saved
-         for (var n = 0; n < 3; n++) {
-            if (indices[n] === indices[(n + 1) % 3]) {
-               dupIndex = n;
-               faceIndicesToRemove.push(i);
+         var indices = [face.a, face.b, face.c];
+         for (var i: number = 0; i < 3; i++) {
+            if (indices[i] === indices[(i + 1) % 3]) {
+               faceIndicesToRemove.push(n);
                break;
             }
          }
       }
-      for (i = faceIndicesToRemove.length - 1; i >= 0; i--) {
-         var idx = faceIndicesToRemove[i];
-         //this._faces.splice(idx, 1);
-         for (j = 0, jl = this.faceVertexUvs.length; j < jl; j++) {
-            this.faceVertexUvs[j].splice(idx, 1);
+      // 移除面集合
+      for (var n: number = faceIndicesToRemove.length - 1; n >= 0; n--) {
+         var index: number = faceIndicesToRemove[n];
+         this._faces.splice(index, 1);
+         var uvCount: number = this.faceVertexUvs.length;
+         for (var i: number = 0; i < uvCount; i++) {
+            this.faceVertexUvs[i].splice(index, 1);
          }
       }
-      // Use unique set of vertices
-      // var diff = this._vertices.length - unique.length;
-      // this._vertices = unique;
-      // return diff;
+      // 使用唯一顶点集合
+      var removeCount = this._vertices.length - unique.length;
+      this._vertices = unique;
+      return removeCount;
    }
 
    public sortFacesByMaterialIndex() {
       var faces = this._faces;
-      var length = faces.count();
+      var length = faces.length;
       // tag faces
       for (var i = 0; i < length; i++) {
-         faces[i]._id = i;
+         // faces[i]._id = i;
       }
       // sort faces
       function materialIndexSort(a, b) {
@@ -591,9 +590,9 @@ export class Geometry {
       if (uvs1 && uvs1.length === length) newUvs1 = [];
       if (uvs2 && uvs2.length === length) newUvs2 = [];
       for (var i = 0; i < length; i++) {
-         var id = faces[i]._id;
-         if (newUvs1) newUvs1.push(uvs1[id]);
-         if (newUvs2) newUvs2.push(uvs2[id]);
+         //var id = faces[i]._id;
+         //if (newUvs1) newUvs1.push(uvs1[id]);
+         //if (newUvs2) newUvs2.push(uvs2[id]);
       }
       if (newUvs1) this.faceVertexUvs[0] = newUvs1;
       if (newUvs2) this.faceVertexUvs[1] = newUvs2;
@@ -607,36 +606,22 @@ export class Geometry {
       //       generator: 'Geometry.toJSON'
       //    }
       // };
-
       // // standard Geometry serialization
-
       // data.uuid = this.uuid;
       // data.type = this.type;
       // if (this.name !== '') data.name = this.name;
-
       // if (this.parameters !== undefined) {
-
       //    var parameters = this.parameters;
-
       //    for (var key in parameters) {
-
       //       if (parameters[key] !== undefined) data[key] = parameters[key];
-
       //    }
-
       //    return data;
-
       // }
-
       // var vertices = [];
-
       // for (var i = 0; i < this.vertices.length; i++) {
-
       //    var vertex = this.vertices[i];
       //    vertices.push(vertex.x, vertex.y, vertex.z);
-
       // }
-
       // var faces = [];
       // var normals = [];
       // var normalsHash = {};
@@ -644,11 +629,8 @@ export class Geometry {
       // var colorsHash = {};
       // var uvs = [];
       // var uvsHash = {};
-
       // for (var i = 0; i < this.faces.length; i++) {
-
       //    var face = this.faces[i];
-
       //    var hasMaterial = true;
       //    var hasFaceUv = false; // deprecated
       //    var hasFaceVertexUv = this.faceVertexUvs[0][i] !== undefined;
@@ -656,9 +638,7 @@ export class Geometry {
       //    var hasFaceVertexNormal = face.vertexNormals.length > 0;
       //    var hasFaceColor = face.color.r !== 1 || face.color.g !== 1 || face.color.b !== 1;
       //    var hasFaceVertexColor = face.vertexColors.length > 0;
-
       //    var faceType = 0;
-
       //    faceType = setBit(faceType, 0, 0); // isQuad
       //    faceType = setBit(faceType, 1, hasMaterial);
       //    faceType = setBit(faceType, 2, hasFaceUv);
@@ -667,211 +647,124 @@ export class Geometry {
       //    faceType = setBit(faceType, 5, hasFaceVertexNormal);
       //    faceType = setBit(faceType, 6, hasFaceColor);
       //    faceType = setBit(faceType, 7, hasFaceVertexColor);
-
       //    faces.push(faceType);
       //    faces.push(face.a, face.b, face.c);
       //    faces.push(face.materialIndex);
-
       //    if (hasFaceVertexUv) {
-
       //       var faceVertexUvs = this.faceVertexUvs[0][i];
-
       //       faces.push(
       //          getUvIndex(faceVertexUvs[0]),
       //          getUvIndex(faceVertexUvs[1]),
       //          getUvIndex(faceVertexUvs[2])
       //       );
-
       //    }
-
       //    if (hasFaceNormal) {
-
       //       faces.push(getNormalIndex(face.normal));
-
       //    }
-
       //    if (hasFaceVertexNormal) {
-
       //       var vertexNormals = face.vertexNormals;
-
       //       faces.push(
       //          getNormalIndex(vertexNormals[0]),
       //          getNormalIndex(vertexNormals[1]),
       //          getNormalIndex(vertexNormals[2])
       //       );
-
       //    }
-
       //    if (hasFaceColor) {
-
       //       faces.push(getColorIndex(face.color));
-
       //    }
-
       //    if (hasFaceVertexColor) {
-
       //       var vertexColors = face.vertexColors;
-
       //       faces.push(
       //          getColorIndex(vertexColors[0]),
       //          getColorIndex(vertexColors[1]),
       //          getColorIndex(vertexColors[2])
       //       );
-
       //    }
-
       // }
-
       // function setBit(value, position, enabled) {
-
       //    return enabled ? value | (1 << position) : value & (~(1 << position));
-
       // }
-
       // function getNormalIndex(normal) {
-
       //    var hash = normal.x.toString() + normal.y.toString() + normal.z.toString();
-
       //    if (normalsHash[hash] !== undefined) {
-
       //       return normalsHash[hash];
-
       //    }
-
       //    normalsHash[hash] = normals.length / 3;
       //    normals.push(normal.x, normal.y, normal.z);
-
       //    return normalsHash[hash];
-
       // }
-
       // function getColorIndex(color) {
-
       //    var hash = color.r.toString() + color.g.toString() + color.b.toString();
-
       //    if (colorsHash[hash] !== undefined) {
-
       //       return colorsHash[hash];
-
       //    }
-
       //    colorsHash[hash] = colors.length;
       //    colors.push(color.getHex());
-
       //    return colorsHash[hash];
-
       // }
-
       // function getUvIndex(uv) {
-
       //    var hash = uv.x.toString() + uv.y.toString();
-
       //    if (uvsHash[hash] !== undefined) {
-
       //       return uvsHash[hash];
-
       //    }
-
       //    uvsHash[hash] = uvs.length / 2;
       //    uvs.push(uv.x, uv.y);
-
       //    return uvsHash[hash];
-
       // }
-
       // data.data = {};
-
       // data.data.vertices = vertices;
       // data.data.normals = normals;
       // if (colors.length > 0) data.data.colors = colors;
       // if (uvs.length > 0) data.data.uvs = [uvs]; // temporal backward compatibility
       // data.data.faces = faces;
-
       // return data;
    }
 
    public clone() {
-
       /*
       // Handle primitives
-
       var parameters = this.parameters;
-
       if ( parameters !== undefined ) {
-
          var values = [];
-
          for ( var key in parameters ) {
-
             values.push( parameters[ key ] );
-
          }
-
          var geometry = Object.create( this.constructor.prototype );
          this.constructor.apply( geometry, values );
          return geometry;
-
       }
-
       return new this.constructor().copy( this );
       */
-
       //return new THREE.Geometry().copy(this);
-
    }
 
    public copy(source) {
-
       // this.vertices = [];
       // this.faces = [];
       // this.faceVertexUvs = [[]];
-
       // var vertices = source.vertices;
-
       // for (var i = 0, il = vertices.length; i < il; i++) {
-
       //    this.vertices.push(vertices[i].clone());
-
       // }
-
       // var faces = source.faces;
-
       // for (var i = 0, il = faces.length; i < il; i++) {
-
       //    this.faces.push(faces[i].clone());
-
       // }
-
       // for (var i = 0, il = source.faceVertexUvs.length; i < il; i++) {
-
       //    var faceVertexUvs = source.faceVertexUvs[i];
-
       //    if (this.faceVertexUvs[i] === undefined) {
-
       //       this.faceVertexUvs[i] = [];
-
       //    }
-
       //    for (var j = 0, jl = faceVertexUvs.length; j < jl; j++) {
-
       //       var uvs = faceVertexUvs[j], uvsCopy = [];
-
       //       for (var k = 0, kl = uvs.length; k < kl; k++) {
-
       //          var uv = uvs[k];
-
       //          uvsCopy.push(uv.clone());
-
       //       }
-
       //       this.faceVertexUvs[i].push(uvsCopy);
-
       //    }
-
       // }
-
       // return this;
-
    }
 
    public dispose() {

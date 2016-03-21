@@ -5,6 +5,7 @@ export * from './FE3rBitmapFlatPack';
 export * from './FE3rBitmapPack';
 export * from './FE3rComponent';
 export * from './FE3rIndexBuffer';
+export * from './FE3rMaterial';
 export * from './FE3rMaterialConsole';
 export * from './FE3rModel';
 export * from './FE3rModelConsole';

@@ -22,7 +22,7 @@ export class SFace3 {
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
-   public constructor(a, b, c, normal, color, materialIndex: number = 0) {
+   public constructor(a, b, c, normal?: any, color?: any, materialIndex: number = 0) {
       this.a = a;
       this.b = b;
       this.c = c;

@@ -1,4 +1,4 @@
-export class Font {
+export class FFont {
 
    public data;
 

@@ -1,4 +1,4 @@
-export class CurveUtils {
+export class RCurve {
 
    public static tangentQuadraticBezier(t, p0, p1, p2) {
       return 2 * (1 - t) * (p1 - p0) + 2 * t * (p2 - p1);

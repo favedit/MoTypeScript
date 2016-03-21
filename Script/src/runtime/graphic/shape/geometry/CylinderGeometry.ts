@@ -1,4 +1,6 @@
 export class CylinderGeometry {
+   public constructor(radiusTop?:any, radiusBottom?:any, height?:any, radialSegments?:any, heightSegments?:any, openEnded?:any, thetaStart?:any, thetaLength?:any){
+   }
 
    // THREE.CylinderGeometry = function(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength) {
 

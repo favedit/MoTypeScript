@@ -4,7 +4,7 @@ export class FLight extends FObject {
 
    public code: string;
 
-   public constructor(color?:any, intensity?:any) {
+   public constructor(color?: any, intensity?: any) {
       super();
       // THREE.Object3D.call(this);
       // this.type = 'Light';
