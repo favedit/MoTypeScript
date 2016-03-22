@@ -34,10 +34,7 @@
     ],
     "exclude": [],
     "atom": {
-        "rewriteTsconfig": true,
-        "formatOnSave": true
-    },
-    "files": [
-        "../test/ITest.ts"
-    ]
+        "rewriteTsconfig": false,
+        "formatOnSave": false
+    }
 }

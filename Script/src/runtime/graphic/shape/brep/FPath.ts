@@ -7,7 +7,6 @@ import {FSplineCurve} from '../curves/FSplineCurve';
 import {FEllipseCurve} from '../curves/FEllipseCurve';
 import {RShape} from '../RShape';
 import {FCurvePath} from './FCurvePath';
-import {FShape} from './FShape';
 
 //==========================================================
 // <T>路径。</T>
@@ -23,6 +22,9 @@ export class FPath extends FCurvePath {
       if (points) {
          this.fromPoints(points);
       }
+   }
+
+   public createShap() {
    }
 
    public fromPoints(vectors) {
@@ -307,7 +309,7 @@ export class FPath extends FCurvePath {
          var shapes = [];
          for (var i = 0, l = inSubpaths.length; i < l; i++) {
             var tmpPath = inSubpaths[i];
-            var tmpShape = new FShape();
+            var tmpShape = this.createShap();
             tmpShape.actions = tmpPath.actions;
             tmpShape.curves = tmpPath.curves;
             shapes.push(tmpShape);
@@ -366,7 +368,7 @@ export class FPath extends FCurvePath {
       var solid, tmpPath, tmpShape, shapes = [];
       if (subPaths.length === 1) {
          tmpPath = subPaths[0];
-         tmpShape = new FShape();
+         tmpShape = this.createShap();
          tmpShape.actions = tmpPath.actions;
          tmpShape.curves = tmpPath.curves;
          shapes.push(tmpShape);
@@ -389,7 +391,7 @@ export class FPath extends FCurvePath {
          solid = isCCW ? !solid : solid;
          if (solid) {
             if ((!holesFirst) && (newShapes[mainIdx])) mainIdx++;
-            newShapes[mainIdx] = { s: new FShape(), p: tmpPoints };
+            newShapes[mainIdx] = { s: this.createShap(), p: tmpPoints };
             newShapes[mainIdx].s.actions = tmpPath.actions;
             newShapes[mainIdx].s.curves = tmpPath.curves;
             if (holesFirst) mainIdx++;
