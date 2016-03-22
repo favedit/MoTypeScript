@@ -1,8 +1,11 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
+import {FError} from '../../../runtime/common/lang/FError';
 import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
-import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
 import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
+import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
 import {FE3rComponent} from './FE3rComponent';
+import {FPhongMaterial} from '../../material/FPhongMaterial';
+
 
 //==========================================================
 // <T>材质。</T>
@@ -58,7 +61,7 @@ export class FE3rMaterialLoader extends FGraphicObject implements IProcessLoadab
       return this.ready;
    }
    // 状态
-   statusLoading: boolean;
+   public statusLoading: boolean;
 
    //==========================================================
    // <T>处理加载开始。</T>
@@ -66,6 +69,7 @@ export class FE3rMaterialLoader extends FGraphicObject implements IProcessLoadab
    // @param 处理结果
    //==========================================================
    public processLoadBegin(): boolean {
+      this.statusLoading = true;
       return true;
    }
 
@@ -79,12 +83,17 @@ export class FE3rMaterialLoader extends FGraphicObject implements IProcessLoadab
       if (!this.dataReady) {
          var resource = this.resource;
          if (resource.testReady()) {
-            if (resource.className == 'phone') {
-               var material = new
-
+            var material = null;
+            if (resource.className == 'phong') {
+               material = new FPhongMaterial();
+            } else {
+               throw new FError(this, 'Unknown material.');
             }
-            debugger;
+            material.linkGraphicContext(this._graphicContext);
+            material.loadResource(resource);
+            this.material = material;
             this.dataReady = true;
+            this.ready = true;
          }
       }
       return ready;
@@ -96,6 +105,7 @@ export class FE3rMaterialLoader extends FGraphicObject implements IProcessLoadab
    // @param 处理结果
    //==========================================================
    public processLoadEnd(): boolean {
+      this.statusLoading = false;
       return true;
    }
 }

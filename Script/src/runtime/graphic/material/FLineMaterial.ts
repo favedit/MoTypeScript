@@ -11,7 +11,7 @@ import {FMaterial} from './FMaterial';
 //==========================================================
 export class FLineMaterial extends FMaterial {
    // 线颜色
-   protected _lineColor: SColor4;
+   public lineColor: SColor4;
    // 线宽度
    public lineWidth: number;
 
@@ -24,17 +24,9 @@ export class FLineMaterial extends FMaterial {
       super();
       // 设置属性
       this.code = "line";
-      this._lineColor = new SColor4(1, 1, 1, 1);
+      this.effectCode = 'line.automatic';
+      this.lineColor = new SColor4(1, 1, 1, 1);
       this.lineWidth = 1;
-   }
-
-   //==========================================================
-   // <T>获得线颜色。</T>
-   //
-   // @return 颜色
-   //==========================================================
-   public get lineColor(): SColor4 {
-      return this._lineColor;
    }
 
    //==========================================================
@@ -42,7 +34,7 @@ export class FLineMaterial extends FMaterial {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this._lineColor = RObject.dispose(this._lineColor);
+      this.lineColor = RObject.dispose(this.lineColor);
       // 父处理
       super.dispose();
    }

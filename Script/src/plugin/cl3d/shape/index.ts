@@ -1,4 +1,5 @@
 export * from './FCube';
+export * from './FCurve3Renderable';
 export * from './FDimensional';
 export * from './FE3dBitmap';
 export * from './FE3dBitmapConsole';

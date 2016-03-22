@@ -1,7 +1,8 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {FMaterial} from './FMaterial';
+import {FTexture} from './FTexture';
 
 //==========================================================
 // <T>复合渲染材质。</T>
@@ -15,9 +16,9 @@ export class FPhongMaterial extends FMaterial {
    // 透明比率
    public alphaRate: number;
    // 环境光颜色
-   protected _ambientColor: SColor4;
+   public ambientColor: SColor4;
    // 散射光颜色
-   protected _diffuseColor: SColor4;
+   public diffuseColor: SColor4;
    // 高光级别
    public specularPower: number;
 
@@ -33,27 +34,9 @@ export class FPhongMaterial extends FMaterial {
       this.effectCode = 'phong.automatic';
       this.alphaBase = 0.1;
       this.alphaRate = 1;
-      this._ambientColor = new SColor4(0.4, 0.4, 0.4, 0.7);
-      this._diffuseColor = new SColor4(0.6, 0.6, 0.6, 0.6);
+      this.ambientColor = new SColor4(0.4, 0.4, 0.4, 0.7);
+      this.diffuseColor = new SColor4(0.6, 0.6, 0.6, 0.6);
       this.specularPower = 32;
-   }
-
-   //==========================================================
-   // <T>获得环境光颜色。</T>
-   //
-   // @return 颜色
-   //==========================================================
-   public get ambientColor(): SColor4 {
-      return this._ambientColor;
-   }
-
-   //==========================================================
-   // <T>获得散射光颜色。</T>
-   //
-   // @return 颜色
-   //==========================================================
-   public get diffuseColor(): SColor4 {
-      return this._diffuseColor;
    }
 
    //==========================================================
@@ -63,8 +46,8 @@ export class FPhongMaterial extends FMaterial {
       super.reset();
       this.alphaBase = 0.1;
       this.alphaRate = 1;
-      this._ambientColor.set(1, 1, 1, 0.7);
-      this._diffuseColor.set(1, 1, 1, 0.6);
+      this.ambientColor.set(1, 1, 1, 0.7);
+      this.diffuseColor.set(1, 1, 1, 0.6);
       this.specularPower = 32;
    }
 
@@ -73,8 +56,8 @@ export class FPhongMaterial extends FMaterial {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this._ambientColor = RObject.dispose(this._ambientColor);
-      this._diffuseColor = RObject.dispose(this._diffuseColor);
+      this.ambientColor = RObject.dispose(this.ambientColor);
+      this.diffuseColor = RObject.dispose(this.diffuseColor);
       // 父处理
       super.dispose();
    }

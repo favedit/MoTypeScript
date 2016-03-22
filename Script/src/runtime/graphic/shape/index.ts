@@ -13,3 +13,6 @@ export {geometry as geometry};
 
 import * as helpers from './helpers/index';
 export {helpers as helpers};
+
+import * as math from './math/index';
+export {math as math};

@@ -2,12 +2,12 @@ import {SPoint3} from '../../../common/math/SPoint3';
 import {SPoint2} from '../../../common/math/SPoint2';
 import {SVector3} from '../../../common/math/SVector3';
 import {SFace3} from '../../math/SFace3';
-import {FGeometry} from '../brep/FGeometry';
+import {Geometry} from '../brep/Geometry';
 
 //==========================================================
 // <T>盒子几何体。</T>
 //==========================================================
-export class BoxGeometry extends FGeometry {
+export class BoxGeometry extends Geometry {
    // 参数集合
    public parameters: any;
    public widthSegments: number;

@@ -1,15 +1,15 @@
 import {FObjects} from '../../common/lang/FObjects';
 import {SPoint3} from '../../common/math/SPoint3';
-import {FCurve} from './FCurve';
-import {FLineCurve} from '../curves/FLineCurve';
-import {FGeometry} from './FGeometry';
+import {Curve} from './Curve';
+import {LineCurve} from '../curves/LineCurve';
+import {Geometry} from './Geometry';
 
 //==========================================================
 // <T>线段路径。</T>
 //==========================================================
-export class FCurvePath extends FCurve {
+export class CurvePath extends Curve {
    // 线段集合
-   public curves:Array<FCurve>;
+   public curves:Array<Curve>;
    // 自动关闭
    public autoClose;
    // 缓冲长度
@@ -20,8 +20,8 @@ export class FCurvePath extends FCurve {
    //==========================================================
    public constructor() {
       super();
-      // 设置属性 
-      this.curves = new Array<FCurve>();
+      // 设置属性
+      this.curves = new Array<Curve>();
       this.autoClose = false;
    }
 
@@ -40,7 +40,7 @@ export class FCurvePath extends FCurve {
       var startPoint = this.curves[0].getPoint(0);
       var endPoint = this.curves[this.curves.length - 1].getPoint(1);
       if (!startPoint.equals(endPoint)) {
-         this.curves.push(new FLineCurve(endPoint, startPoint));
+         this.curves.push(new LineCurve(endPoint, startPoint));
       }
    }
 

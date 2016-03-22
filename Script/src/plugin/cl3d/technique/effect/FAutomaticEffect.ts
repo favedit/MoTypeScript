@@ -12,7 +12,6 @@ import {SEffectInfo} from '../graphic/SEffectInfo';
 import {EAttribute} from './EAttribute';
 import {ESampler} from './ESampler';
 
-
 //==========================================================
 // <T>自动渲染器。</T>
 //
@@ -436,9 +435,9 @@ export class FAutomaticEffect extends FEffect {
    // <T>绑定所有属性流。</T>
    //
    // @method
-   // @param renderable:FG3dRenderable 渲染对象
+   // @param renderable 渲染对象
    //==========================================================
-   public bindAttributes(renderable) {
+   public bindAttributes(renderable: FRenderable) {
       var program = this.program;
       if (program.hasAttribute()) {
          var attributes = program.attributes();
@@ -457,26 +456,28 @@ export class FAutomaticEffect extends FEffect {
    // <T>绑定所有取样器。</T>
    //
    // @method
-   // @param region:FG3dRegion 渲染区域
-   // @param renderable:FG3dRenderable 渲染对象
+   // @param region 渲染区域
+   // @param renderable 渲染对象
    //==========================================================
-   public bindSamplers(renderable) {
+   public bindSamplers(renderable: FRenderable) {
+      RAssert.debugNotNull(renderable);
       var program = this.program;
       // 绑定特定取样器
       //if (this._supportMaterialMap) {
-         //program.setSampler('fs_material', region.materialMap().texture());
+      //   program.setSampler('fs_material', region.materialMap().texture());
       //}
       // 绑定取样器集合
-      if (program.hasSampler()) {
+      var material = renderable.material;
+      if (program.hasSampler() && material) {
          var samplers = program.samplers();
          var count = samplers.count();
          for (var n = 0; n < count; n++) {
             var sampler: FProgramSampler = samplers.at(n);
             if (sampler.bind && sampler.statusUsed) {
-               var name = sampler.name();
-               var linker = sampler.linker();
-               var texture = renderable.findTexture(linker);
-               program.setSampler(name, texture.texture());
+               var name = sampler.name;
+               var linker = sampler.linker;
+               var texture = material.findTexture(linker);
+               program.setSampler(name, texture);
             }
          }
       }
@@ -486,10 +487,12 @@ export class FAutomaticEffect extends FEffect {
    // <T>绑定所有取样器。</T>
    //
    // @method
-   // @param renderable:FG3dRenderable 渲染对象
-   // @param material:FE3dMaterial 渲染材质
+   // @param renderable 渲染对象
+   // @param material 渲染材质
    //==========================================================
-   public bindMaterialSamplers(renderable, material) {
+   public bindMaterialSamplers(renderable: FRenderable, material: FMaterial) {
+      RAssert.debugNotNull(renderable);
+      RAssert.debugNotNull(material);
       var program = this.program;
       // 绑定取样器集合
       if (program.hasSampler()) {
@@ -498,9 +501,9 @@ export class FAutomaticEffect extends FEffect {
          for (var n = 0; n < count; n++) {
             var sampler: FProgramSampler = samplers.at(n);
             if (sampler.bind && sampler.statusUsed) {
-               var linker = sampler.linker();
-               var texture = material.findBitmap(linker);
-               program.setSampler(sampler.name(), texture.texture());
+               var linker = sampler.linker;
+               var texture = material.findTexture(linker);
+               program.setSampler(sampler.name, texture);
             }
          }
       }

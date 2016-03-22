@@ -6,6 +6,7 @@ export * from './FControlFrameEffect';
 export * from './FGeneralColorAutomaticEffect';
 export * from './FGeneralColorFillEffect';
 export * from './FGeneralColorFlatEffect';
+export * from './FGeneralColorLineEffect';
 export * from './FGeneralColorSkeletonEffect';
 export * from './FGeneralColorVideoEffect';
 export * from './FGeneralColorVideoMaskEffect';

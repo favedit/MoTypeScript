@@ -1,15 +1,15 @@
 import {SPoint3} from '../../../common/math/SPoint3';
-import {FCurve} from '../brep/FCurve';
+import {Curve} from '../brep/Curve';
 import {RShape} from '../RShape';
 
-export class CubicBezierCurve3 extends FCurve {
+export class CubicBezierCurve3 extends Curve {
 
    public v0;
    public v1;
    public v2;
    public v3;
 
-   public constructor(v0, v1, v2, v3) {
+   public constructor(v0?:any, v1?:any, v2?:any, v3?:any) {
       super();
       this.v0 = v0;
       this.v1 = v1;

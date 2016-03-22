@@ -930,8 +930,8 @@ export class FWglContext extends FContext {
       }
       //............................................................
       // 绑定纹理
-      var handle = texture._handle;
-      var textureCd = texture.textureCd();
+      var handle = texture.handle;
+      var textureCd = texture.textureCd;
       switch (textureCd) {
          case ETexture.Flat2d: {
             graphic.bindTexture(graphic.TEXTURE_2D, handle);

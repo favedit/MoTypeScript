@@ -1,8 +1,6 @@
-/// <reference path="./FPath.ts" />
+import {Path} from './Path';
 
-import {FPath} from './FPath';
-
-export class FShape extends FPath {
+export class Shape extends Path {
 
    public holes;
 
@@ -12,7 +10,7 @@ export class FShape extends FPath {
    }
 
    public createShap() {
-      return new FShape();
+      return new Shape();
    }
 
    // Convenience method to return ExtrudeGeometry

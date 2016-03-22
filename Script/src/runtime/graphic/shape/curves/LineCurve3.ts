@@ -1,12 +1,12 @@
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
-import {FCurve} from '../brep/FCurve';
 import {SVertex} from '../../core/SVertex';
+import {Curve} from '../brep/Curve';
 
 //==========================================================
 // <T>直线线段。</T>
 //==========================================================
-export class FLineCurve3 extends FCurve {
+export class LineCurve3 extends Curve {
    // 开始点
    public start: SPoint3;
    // 结束点

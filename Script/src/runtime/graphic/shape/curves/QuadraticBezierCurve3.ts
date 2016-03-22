@@ -1,8 +1,8 @@
 import {SPoint3} from '../../common/math/SPoint3';
-import {FCurve} from '../brep/FCurve';
+import {Curve} from '../brep/Curve';
 import {RShape} from '../RShape';
 
-export class FQuadraticBezierCurve3 extends FCurve {
+export class QuadraticBezierCurve3 extends Curve {
 
    public v0;
    public v1;

@@ -7,6 +7,7 @@ export * from './FE3rComponent';
 export * from './FE3rIndexBuffer';
 export * from './FE3rMaterial';
 export * from './FE3rMaterialConsole';
+export * from './FE3rMaterialLoader';
 export * from './FE3rModel';
 export * from './FE3rModelConsole';
 export * from './FE3rModelMesh';

@@ -21,6 +21,10 @@ import {FTemplateResourceConsole} from '../../plugin/cl3d/resource/FTemplateReso
 import {FE3rMaterialConsole} from '../../plugin/cl3d/shape/render/FE3rMaterialConsole';
 import {FE3dTemplateConsole} from '../../plugin/cl3d/shape/instance/FE3dTemplateConsole';
 
+import {Vertex} from '../../runtime/graphic/shape/brep/Vertex';
+import {Path3} from '../../runtime/graphic/shape/brep/Path3';
+import {FCurve3Renderable} from '../../plugin/cl3d/shape/FCurve3Renderable';
+
 declare var id_info;
 
 //==========================================================
@@ -58,7 +62,7 @@ export class FCanvasView extends FView {
       var context = canvas.context;
       // 创建场景
       var scene: FScene = this.scene = new FScene();
-      scene.backgroundColor.set(0.9, 0.9, 0.9, 1);
+      scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
       var layer = this.backgroundLayer = new FDisplayLayer();
       scene.registerLayer('background', layer);
       var layer = this.contentLayer = new FDisplayLayer();
@@ -89,15 +93,29 @@ export class FCanvasView extends FView {
 
       //var mrConsole: FE3rMaterialConsole = RConsole.find(FE3rMaterialConsole);
       //var material = mrConsole.loadByUrl(context, '/sk/res/model/xiong/xiong.material');
-      
+
       // var trConsole:FTemplateResourceConsole = RConsole.find(FTemplateResourceConsole);
       // var templateResource = trConsole.loadByUrl('/sk/res/model/xiong/xiong.template');
-      
+
       var trConsole:FE3dTemplateConsole = RConsole.find(FE3dTemplateConsole);
       var template = trConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
-      this.contentLayer.pushDisplay(template);
-      
-      
+      template.matrix.sx = 0.05;
+      template.matrix.sy = 0.05;
+      template.matrix.sz = 0.05;
+      template.matrix.updateForce();
+      template.matrix.addRotationX(-Math.PI / 2);
+      template.matrix.addRotationY(Math.PI);
+      //this.contentLayer.push(template);
+
+      var path3 = new Path3();
+      path3.moveTo(0, 0, 0);
+      path3.lineTo(1, 1, 0);
+      path3.lineTo(2, 2, 1);
+      path3.lineTo(2, 2, 2);
+      var renderable = new FCurve3Renderable(path3);
+      renderable.setup(context);
+      this.contentLayer.push(renderable);
+
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);

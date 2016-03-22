@@ -11,22 +11,34 @@ import {ETexture} from './ETexture';
 //==========================================================
 export class FProgramSampler extends FObject {
    //..........................................................
-   // @attribute 名称
-   public name = null;
-   // @attribute 关联名称
-   public linker = null;
-   // @attribute 使用标志
-   public statusUsed = false;
-   // @attribute 插槽
-   public formatCd = ETexture.Flat2d;
-   // @attribute 插槽
-   public bind = true;
-   // @attribute 插槽
-   public slot = -1;
-   // @attribute 索引
-   public index = 0;
-   // @attribute 来源
-   public source = null;
+   // 名称
+   public name: string;
+   // 关联名称
+   public linker: string;
+   // 使用标志
+   public statusUsed: boolean;
+   // 插槽
+   public formatCd: ETexture;
+   // 插槽
+   public bind: boolean;
+   // 插槽
+   public slot: number;
+   // 索引
+   public index: number;
+   // 来源
+   public source: string;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.statusUsed = false;
+      this.formatCd = ETexture.Flat2d;
+      this.bind = true;
+      this.slot = -1;
+      this.index = 0;
+   }
 
    //==========================================================
    // <T>从配置节点钟加载信息。</T>

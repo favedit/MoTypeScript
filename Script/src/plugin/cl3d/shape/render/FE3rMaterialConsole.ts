@@ -44,22 +44,22 @@ export class FE3rMaterialConsole extends FConsole {
    // @param guid:String 唯一编号
    // @return FRenderModel 渲染模型
    //==========================================================
-   public loadMaterial(context, material) {
-      // 检查参数
-      if (!context) {
-         throw new FError(this, 'Graphics context is empty');
-      }
-      // 获得路径
-      var resource = this._materialResourceConsole.loadByUrl(url);
-      // 创建材质
-      material = RClass.create(FE3rMaterial);
-      material.linkGraphicContext(context);
-      material.resource = resource;
-      this._materials.set(url, material);
-      // 追加到加载队列
-      this._processLoadConsole.push(material);
-      return material;
-   }
+   // public loadMaterial(context, material) {
+   //    // 检查参数
+   //    if (!context) {
+   //       throw new FError(this, 'Graphics context is empty');
+   //    }
+   //    // 获得路径
+   //    var resource = this._materialResourceConsole.loadByUrl(url);
+   //    // 创建材质
+   //    material = RClass.create(FE3rMaterial);
+   //    material.linkGraphicContext(context);
+   //    material.resource = resource;
+   //    this._materials.set(url, material);
+   //    // 追加到加载队列
+   //    this._processLoadConsole.push(material);
+   //    return material;
+   // }
 
    //==========================================================
    // <T>加载一个渲染模型。</T>

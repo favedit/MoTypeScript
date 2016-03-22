@@ -11,7 +11,7 @@ import {SFace3} from '../math/SFace3';
 // @author maocy
 // @history 160318
 //==========================================================
-export class FGeometry {
+export class Geometry {
    // 编号
    protected static _nextId: number = 0;
 
@@ -70,7 +70,7 @@ export class FGeometry {
    // <T>获得编号。</T>
    //==========================================================
    public get id() {
-      return FGeometry._nextId++;
+      return Geometry._nextId++;
    }
 
    //==========================================================

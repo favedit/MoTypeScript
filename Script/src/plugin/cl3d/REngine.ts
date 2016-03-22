@@ -1,5 +1,6 @@
 import {RConsole} from '../../runtime/core/RConsole';
 import {FGeneralColorAutomaticEffect} from './technique/effect/FGeneralColorAutomaticEffect';
+import {FGeneralColorLineEffect} from './technique/effect/FGeneralColorLineEffect';
 import {FSelectAutomaticEffect} from './technique/effect/FSelectAutomaticEffect';
 import {FEffectConsole} from './graphic/FEffectConsole';
 
@@ -24,10 +25,13 @@ export class REngine {
    //public onSetup() {
    public static staticConstructor() {
       var effectConsole = RConsole.find(FEffectConsole);
-      // 通用效果器
+      // 选择效果器
+      effectConsole.register('select.select.line.automatic', FSelectAutomaticEffect);
       effectConsole.register('select.select.phong.automatic', FSelectAutomaticEffect);
+      // 通用效果器
+      effectConsole.register('general.color.line.automatic', FGeneralColorLineEffect);
       effectConsole.register('general.color.phong.automatic', FGeneralColorAutomaticEffect);
-      
+
       // 选取效果器
       // effectConsole.register('select.select.flat', MO.FG3dSelectAutomaticEffect);
       // effectConsole.register('select.select.control', MO.FG3dSelectAutomaticEffect);

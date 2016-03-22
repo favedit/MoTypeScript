@@ -1,5 +1,6 @@
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {RAssert} from '../../../runtime/common/RAssert';
 import {FGraphicObject} from '../core/FGraphicObject';
 import {FTexture} from './FTexture';
 
@@ -47,19 +48,38 @@ export class FMaterial extends FGraphicObject {
       this.optionDouble = false;
       this.optionAlpha = false;
       this.dirty = true;
+      this.textures = new FDictionary<FTexture>();
    }
 
    //==========================================================
-   // <T>获得纹理集合。</T>
+   // <T>根据代码查找纹理。</T>
    //
-   // @method
-   // @return 纹理集合
+   // @param code 名称
+   // @return 纹理
    //==========================================================
-   public setTexture(code, texture) {
+   public findTexture(code: string): FTexture {
+      var texture: FTexture = null;
+      var textures = this.textures;
+      if (textures) {
+         texture = textures.get(code);
+      }
+      return texture;
+   }
+
+   //==========================================================
+   // <T>设置一个纹理。</T>
+   //
+   // @param code 代码
+   // @param texture 纹理
+   //==========================================================
+   public setTexture(code: string, texture: FTexture) {
+      RAssert.debugNotEmpty(code);
+      RAssert.debugNotNull(texture);
       var textures = this.textures;
       if (!textures) {
          textures = this.textures = new FDictionary<FTexture>();
       }
+      // 增加纹理
       textures.set(code, texture);
    }
 

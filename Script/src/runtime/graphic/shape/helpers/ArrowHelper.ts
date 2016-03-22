@@ -1,10 +1,10 @@
 // import {FObject3d} from '../../core/FObject3d';
-import {FGeometry} from '../brep/FGeometry';
+import {Geometry} from '../brep/Geometry';
 import {CylinderGeometry} from '../geometry/CylinderGeometry';
 
 //export class ArrowHelper extends FObject3d {
    export class ArrowHelper{
-   lineGeometry = new FGeometry();
+   lineGeometry = new Geometry();
    coneGeometry = new CylinderGeometry(0, 0.5, 1, 5, 1);
 
    public constructor(dir, origin, length, color, headLength, headWidth) {

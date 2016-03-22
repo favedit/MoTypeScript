@@ -26,6 +26,8 @@ export class FRenderable extends FDrawable implements IRenderable {
    public optionSelect: boolean;
    // 外轮廓
    public outline: SOutline3d;
+   // 未定材质
+   public peddingMaterial: FMaterial;
    // 材质
    public material: FMaterial;
    // 参考材质
@@ -253,33 +255,6 @@ export class FRenderable extends FDrawable implements IRenderable {
       // 设置缓冲
       buffers.push(buffer);
    }
-
-   // //==========================================================
-   // // <T>根据名称查找纹理。</T>
-   // //
-   // // @param name 名称
-   // // @return 纹理
-   // //==========================================================
-   // public findTexture(name) {
-   //    return this.textures.get(name);
-   // }
-
-   // //==========================================================
-   // // <T>增加一个纹理。</T>
-   // //
-   // // @param code 代码
-   // // @param texture 纹理
-   // //==========================================================
-   // public pushTexture(code, texture) {
-   //    RAssert.debugNotEmpty(code);
-   //    RAssert.debugNotNull(texture);
-   //    var textures = this.textures;
-   //    if (!textures) {
-   //       textures = this.textures = new FDictionary();
-   //    }
-   //    // 增加纹理
-   //    textures.set(code, texture);
-   // }
 
    //==========================================================
    // <T>更新处理。</T>

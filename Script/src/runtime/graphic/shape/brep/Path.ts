@@ -1,18 +1,18 @@
 import {SPoint2} from '../../common/math/SPoint2';
 import {RMath} from '../../common/math/RMath';
-import {FLineCurve} from '../curves/FLineCurve';
-import {FQuadraticBezierCurve} from '../curves/FQuadraticBezierCurve';
-import {FCubicBezierCurve} from '../curves/FCubicBezierCurve';
-import {FSplineCurve} from '../curves/FSplineCurve';
-import {FEllipseCurve} from '../curves/FEllipseCurve';
+import {LineCurve} from '../curves/LineCurve';
+import {QuadraticBezierCurve} from '../curves/QuadraticBezierCurve';
+import {CubicBezierCurve} from '../curves/CubicBezierCurve';
+import {SplineCurve} from '../curves/SplineCurve';
+import {EllipseCurve} from '../curves/EllipseCurve';
+import {CurvePath} from './CurvePath';
 import {RShape} from '../RShape';
-import {FCurvePath} from './FCurvePath';
 
 //==========================================================
 // <T>路径。</T>
 // <P>支持命令描述。</P>
 //==========================================================
-export class FPath extends FCurvePath {
+export class Path extends CurvePath {
 
    public actions;
 
@@ -43,7 +43,7 @@ export class FPath extends FCurvePath {
       var lastargs = this.actions[this.actions.length - 1].args;
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
-      var curve = new FLineCurve(new SPoint2(x0, y0), new SPoint2(x, y));
+      var curve = new LineCurve(new SPoint2(x0, y0), new SPoint2(x, y));
       this.curves.push(curve);
       this.actions.push({ action: 'lineTo', args: [x, y] });
    }
@@ -52,7 +52,7 @@ export class FPath extends FCurvePath {
       var lastargs = this.actions[this.actions.length - 1].args;
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
-      var curve = new FQuadraticBezierCurve(
+      var curve = new QuadraticBezierCurve(
          new SPoint2(x0, y0),
          new SPoint2(aCPx, aCPy),
          new SPoint2(aX, aY)
@@ -65,7 +65,7 @@ export class FPath extends FCurvePath {
       var lastargs = this.actions[this.actions.length - 1].args;
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
-      var curve = new FCubicBezierCurve(
+      var curve = new CubicBezierCurve(
          new SPoint2(x0, y0),
          new SPoint2(aCP1x, aCP1y),
          new SPoint2(aCP2x, aCP2y),
@@ -82,7 +82,7 @@ export class FPath extends FCurvePath {
       var y0 = lastargs[lastargs.length - 1];
       var npts = [new SPoint2(x0, y0)];
       Array.prototype.push.apply(npts, pts);
-      var curve = new FSplineCurve(npts);
+      var curve = new SplineCurve(npts);
       this.curves.push(curve);
       this.actions.push({ action: 'splineThru', args: args });
    }
@@ -115,7 +115,7 @@ export class FPath extends FCurvePath {
          aClockwise,
          aRotation
       ];
-      var curve = new FEllipseCurve(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation);
+      var curve = new EllipseCurve(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation);
       this.curves.push(curve);
       var lastPoint = curve.getPoint(1);
       args.push(lastPoint.x);
@@ -136,10 +136,7 @@ export class FPath extends FCurvePath {
    }
 
    /* Return an array of vectors based on contour of the path */
-   public getPoints(divisions?: any): any {
-      divisions = divisions || 12;
-      //var b2 = THREE.ShapeUtils.b2;
-      //var b3 = THREE.ShapeUtils.b3;
+   public getPoints(divisions: number = 12): any {
       var points = [];
       var cpx, cpy, cpx2, cpy2, cpx1, cpy1, cpx0, cpy0, laste, tx, ty;
       for (var i = 0, l = this.actions.length; i < l; i++) {
@@ -203,7 +200,7 @@ export class FPath extends FCurvePath {
                var spts = [last];
                var n = divisions * args[0].length;
                spts = spts.concat(args[0]);
-               var spline = new FSplineCurve(spts);
+               var spline = new SplineCurve(spts);
                for (var j = 1; j <= n; j++) {
                   points.push(spline.getPointAt(j / n));
                }
@@ -285,7 +282,7 @@ export class FPath extends FCurvePath {
    //
    public toShapes = function(isCCW, noHoles) {
       function extractSubpaths(inActions) {
-         var subPaths = [], lastPath = new FPath();
+         var subPaths = [], lastPath = new Path();
          for (var i = 0, l = inActions.length; i < l; i++) {
             var item = inActions[i];
             var args = item.args;
@@ -293,7 +290,7 @@ export class FPath extends FCurvePath {
             if (action === 'moveTo') {
                if (lastPath.actions.length !== 0) {
                   subPaths.push(lastPath);
-                  lastPath = new FPath();
+                  lastPath = new Path();
                }
             }
             lastPath[action].apply(lastPath, args);
