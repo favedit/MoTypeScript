@@ -76,16 +76,16 @@ export class FCanvasView extends FView {
       // cube.setup(context);
       // this.contentLayer.pushRenderable(cube);
 
-      var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
-      var model = modelConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.model');
-      model.matrix.tx = 0.2;
-      model.matrix.sx = 0.1;
-      model.matrix.sy = 0.1;
-      model.matrix.sz = 0.1;
-      model.matrix.updateForce();
-      model.matrix.addRotationX(-Math.PI / 2);
-      model.matrix.addRotationY(Math.PI);
-      this.contentLayer.pushDisplay(model);
+      // var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
+      // var model = modelConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.model');
+      // model.matrix.tx = 0.2;
+      // model.matrix.sx = 0.1;
+      // model.matrix.sy = 0.1;
+      // model.matrix.sz = 0.1;
+      // model.matrix.updateForce();
+      // model.matrix.addRotationX(-Math.PI / 2);
+      // model.matrix.addRotationY(Math.PI);
+      // this.contentLayer.pushDisplay(model);
 
       //var mrConsole: FE3rMaterialConsole = RConsole.find(FE3rMaterialConsole);
       //var material = mrConsole.loadByUrl(context, '/sk/res/model/xiong/xiong.material');
@@ -94,7 +94,8 @@ export class FCanvasView extends FView {
       // var templateResource = trConsole.loadByUrl('/sk/res/model/xiong/xiong.template');
       
       var trConsole:FE3dTemplateConsole = RConsole.find(FE3dTemplateConsole);
-      var templateResource = trConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
+      var template = trConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
+      this.contentLayer.pushDisplay(template);
       
       
       // 设置渲染管道

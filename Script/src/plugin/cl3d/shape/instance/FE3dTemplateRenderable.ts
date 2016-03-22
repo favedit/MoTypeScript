@@ -4,6 +4,7 @@ import {RConsole} from '../../../../runtime/core/RConsole';
 import {FRenderable} from '../../base/FRenderable';
 import {FE3rModelConsole} from '../../shape/render/FE3rModelConsole';
 import {FE3rMaterialConsole} from '../../shape/render/FE3rMaterialConsole';
+import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
 
 //==========================================================
 // <T>渲染几何体。</T>
@@ -21,6 +22,7 @@ export class FE3dTemplateRenderable extends FRenderable {
    //    o._materialResource = null;
    public _resource;
    public _model;
+   public materialLoader;
    // public _material;
 
    //==========================================================
@@ -46,9 +48,9 @@ export class FE3dTemplateRenderable extends FRenderable {
                return false;
             }
             // 测试材质加载状态
-            var material: any = this.material;
-            if (material) {
-               if (!material.testReady()) {
+            var materialLoader: any = this.materialLoader;
+            if (materialLoader) {
+               if (!materialLoader.testReady()) {
                   return false;
                }
             }
@@ -115,7 +117,9 @@ export class FE3dTemplateRenderable extends FRenderable {
       var materialUrl = resource.materialUrl;
       if (!RString.isEmpty(materialUrl)) {
          //var material = this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
-         this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
+         //this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
+         this.materialLoader = RConsole.find(FE3rMaterialConsole).loadLoaderByUrl(this, materialUrl);
+         //RConsole.find(FProcessLoadConsole).push();
          //this._materialResource = material.resource();
          //this.pushMaterial(material);
       }
@@ -193,6 +197,9 @@ export class FE3dTemplateRenderable extends FRenderable {
       //var mesh = model.findMeshByCode(meshCode);
       var mesh = model.meshes.first();
       RAssert.debugNotNull(mesh);
+      this.vertexBuffers = mesh.vertexBuffers;
+      this.indexBuffers = mesh.indexBuffers;
+      this.material = this.materialLoader.material;
       //var renderable = this._renderable = MO.Console.find(MO.FE3rModelConsole).findMesh(meshGuid);
       //RAssert.debugNotNull(renderable);
       // var vertexBuffers = renderable.vertexBuffers();

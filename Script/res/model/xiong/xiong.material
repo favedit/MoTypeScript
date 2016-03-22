@@ -1,6 +1,6 @@
 {
   "meta": {
-    "type": "phong",
+    "class_name": "phong",
     "guid": "XXXX",
     "id": "1",
     "version": 1,

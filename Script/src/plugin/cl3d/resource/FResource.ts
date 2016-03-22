@@ -15,6 +15,8 @@ import {FResourceLoader} from '../../runtime/core/resource/FResourceLoader';
 export class FResource extends FBaseResource {
    // 唯一编号
    public identity: string;
+   // 类对象
+   public className: string;
    // 鉴定码
    public guid: string;
    // 代码
@@ -125,11 +127,12 @@ export class FResource extends FBaseResource {
    //
    // @param config 配置
    //==========================================================
-   public loadMeta(config: any): void {
-      this.version = config.version;
-      this.guid = config.guid;
-      this.code = config.code;
-      this.label = config.label;
+   public loadMeta(jconfig: any): void {
+      this.className = jconfig.class_name;
+      this.version = jconfig.version;
+      this.guid = jconfig.guid;
+      this.code = jconfig.code;
+      this.label = jconfig.label;
    }
 
    //==========================================================
@@ -137,8 +140,8 @@ export class FResource extends FBaseResource {
    //
    // @param config 配置
    //==========================================================
-   public loadConfig(config: any): void {
-      this.loadMeta(config.meta);
+   public loadConfig(jconfig: any): void {
+      this.loadMeta(jconfig.meta);
    }
 
    //==========================================================
