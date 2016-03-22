@@ -22,10 +22,10 @@ import {FE3dModel} from './FE3dModel'
 //==========================================================
 export class FE3dModelConsole extends FConsole {
    // 缓冲集合
-   protected _pools: FObjectPools = null;
+   protected _pools: FObjectPools;
    // 加载处理器
    @ALinker(FProcessLoadConsole)
-   protected _processLoadConsole: FProcessLoadConsole = null;
+   protected _processLoadConsole: FProcessLoadConsole;
 
    //==========================================================
    // <T>构造处理。</T>

@@ -1,3 +1,4 @@
+import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
 import {FE3rComponent} from './FE3rComponent';
 
@@ -12,7 +13,7 @@ export class FE3rMaterial extends FE3rComponent {
    public dataReady = false;
    public ready = false;
    // @method
-   public material;
+   public textures = new FObjects<any>();
    //_visible       = MO.Class.register(o, new MO.AGetSet('_visible'), true);
    //_guid          = MO.Class.register(o, new MO.AGetSet('_guid'));
    // @method
@@ -51,7 +52,7 @@ export class FE3rMaterial extends FE3rComponent {
       //    }
       //    this._ready = true;
       // }
-      // 
+      //
       return this.ready;
    }
 
@@ -103,6 +104,7 @@ export class FE3rMaterial extends FE3rComponent {
          rtexture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
          rtexture.setWrapCd(ESamplerFilter.Repeat, ESamplerFilter.Repeat);
          rtexture.upload(textureResource.image);
+         this.textures.push(rtexture);
       }
       //this._guid = resource.guid();
       //this._resource = resource;

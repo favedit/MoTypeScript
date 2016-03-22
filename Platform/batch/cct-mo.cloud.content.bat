@@ -2,6 +2,7 @@
 
 @SET APP_ROOT=%cd%\..
 
+@SET JAVA_HOME=C:\Program Files\Java\jdk1.8.0_74
 @SET CATALINA_OPTS=-Xms512m -Xmx2048m
 @SET CATALINA_HOME=%APP_ROOT%\mt-server\cloud.content
 @SET MOBJ_MODE=Logic

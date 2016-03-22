@@ -13,18 +13,18 @@ import {FMaterialResourceConsole} from './FMaterialResourceConsole';
 // @history 150108
 //==========================================================
 export class FTemplateRenderableResource extends FResourceObject {
-   public model: FModelResource = null;
-   public modelUrl: string = null;
-   public material: FMaterialResource = null;
-   public materialUrl: string = null;
+   public ready: boolean;
+   public model: FModelResource;
+   public modelUrl: string;
+   public meshCode: string;
+   public material: FMaterialResource;
+   public materialUrl: string;
    // 材质管理器
    @ALinker(FMaterialResourceConsole)
-   protected _materialResourceConsole: FMaterialResourceConsole = null;
+   protected _materialResourceConsole: FMaterialResourceConsole;
    // 模型管理器
    @ALinker(FModelResourceConsole)
-   protected _modelResourceConsole: FModelResourceConsole = null;
-
-
+   protected _modelResourceConsole: FModelResourceConsole;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,7 +34,28 @@ export class FTemplateRenderableResource extends FResourceObject {
    public constructor() {
       super();
       // 设置属性
+      this.ready = false;
       this.typeName = 'TemplateRenderable';
+   }
+
+   //==========================================================
+   // <T>测试是否准备好。</T>
+   //
+   // @return 是否准备好
+   //==========================================================
+   public testReady(): boolean {
+      // var ready = this.ready;
+      // if (!ready) {
+      //    if (!this.model.testReady()) {
+      //       return false;
+      //    }
+      //    if (!this.material.testReady()) {
+      //       return false;
+      //    }
+      //    ready = this.ready = true;
+      // }
+      // return ready;
+      return true;
    }
 
    //==========================================================
@@ -45,9 +66,10 @@ export class FTemplateRenderableResource extends FResourceObject {
    public loadConfig(config) {
       super.loadConfig(config);
       this.modelUrl = config.model_url;
-      this.model = this._modelResourceConsole.loadByUrl(this.modelUrl);
+      this.meshCode = config.mesh_code;
+      //this.model = this._modelResourceConsole.loadByUrl(this.modelUrl);
       this.materialUrl = config.material_url;
-      this.material = this._materialResourceConsole.loadByUrl(this.materialUrl);
+      //this.material = this._materialResourceConsole.loadByUrl(this.materialUrl);
    }
 
    //==========================================================
