@@ -39,6 +39,15 @@ export class FE3rModel extends FE3rComponent {
    //    return null;
    // }
 
+   //==========================================================
+   // <T>根据唯一编号查找网格。</T>
+   //
+   // @param p:name:String 名称
+   //==========================================================
+   public findMeshByCode(code) {
+      return this.meshes.search('code', code);
+   }
+
    // //==========================================================
    // // <T>加载骨骼资源。</T>
    // //

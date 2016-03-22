@@ -51,11 +51,12 @@ export class FE3rModelMesh extends FRenderable {
    //==========================================================
    // <T>加载资源。</T>
    //
-   // @param resource:FE3sGeometry 资源
+   // @param resource 资源
    //==========================================================
    public loadResource(resource: FMeshResource) {
       var context = this.graphicContext;
       // 设置属性
+      this.code = resource.code;
       this.resource = resource;
       //this.guid = resource.guid;
       //this.code = resource.code;

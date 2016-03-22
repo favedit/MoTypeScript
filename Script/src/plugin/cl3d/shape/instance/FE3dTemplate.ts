@@ -1,5 +1,13 @@
+import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FActor} from '../../base/FActor';
 import {FTemplateResource} from '../resource/FTemplateResource';
+import {FE3dTemplateRenderable} from './FE3dTemplateRenderable';
+import {FModelResource} from '../resource/FModelResource';
+import {FModelResourceConsole} from '../resource/FModelResourceConsole';
+import {FMaterialResource} from '../resource/FMaterialResource';
+import {FMaterialResourceConsole} from '../resource/FMaterialResourceConsole';
 
 //==========================================================
 // <T>渲染模板。</T>
@@ -12,10 +20,18 @@ export class FE3dTemplate extends FActor {
    public _dataReady: boolean;
    public _ready: boolean;
    public resource: any;
+   public _meshs: any = new FObjects<any>();
+   // public renderables: any;
    //    // @attribute
    //    o._sprites         = MO.Class.register(o, new MO.AGetter('_sprites'));
    //    o._skeletons       = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations      = MO.Class.register(o, new MO.AGetter('_animations'));
+   // 材质管理器
+   @ALinker(FMaterialResourceConsole)
+   protected _materialResourceConsole: FMaterialResourceConsole = null;
+   // 模型管理器
+   @ALinker(FModelResourceConsole)
+   protected _modelResourceConsole: FModelResourceConsole = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -226,7 +242,15 @@ export class FE3dTemplate extends FActor {
    // @param resource:FE3sTemplate 资源模板
    //==========================================================
    public loadResource(resource) {
-      debugger
+      var renderableResources = resource.renderables;
+      var count = renderableResources.count();
+      for (var i = 0; i < count; i++) {
+         var renderableResource = renderableResources.at(i);
+         var renderable = new FE3dTemplateRenderable();
+         renderable.linkGraphicContext(this._graphicContext);
+         renderable.loadResource(renderableResource);
+         this._meshs.push(renderable);
+      }
       // 加载技术
       //var technique = o.selectTechnique(o, MO.FE3dGeneralTechnique);
       //technique.setResource(resource.technique());
@@ -274,33 +298,33 @@ export class FE3dTemplate extends FActor {
    public processLoad(): boolean {
       var ready = this._ready;
       if (!ready) {
+         var resource = this.resource;
          // 加载资源
          if (!this._dataReady) {
-            var resource = this.resource;
             if (!resource.testReady()) {
                return false;
             }
             this.loadResource(resource);
             this._dataReady = true;
          }
-         // 加载渲染对象
-         // var sprites = this._sprites;
-         // if (sprites) {
-         //    var spriteCount = sprites.count();
-         //    // 测试全部加载完成
-         //    for (var i = 0; i < spriteCount; i++) {
-         //       var sprite = sprites.at(i);
-         //       if (!sprite.testReady()) {
-         //          return false;
-         //       }
-         //    }
-         //    // 加载全部渲染对象
-         //    for (var i = 0; i < spriteCount; i++) {
-         //       var sprite = sprites.at(i);
-         //       sprite.load();
-         //       this._layer.pushDisplay(sprite);
-         //    }
-         // }
+         // 加载渲染集合
+         var meshs = this._meshs;
+         if (meshs) {
+            var meshCount = meshs.count();
+            // 测试全部加载完成
+            for (var i = 0; i < meshCount; i++) {
+               var mesh = meshs.at(i);
+               if (!mesh.testReady()) {
+                  return false;
+               }
+            }
+            // 加载全部渲染对象
+            for (var i = 0; i < meshCount; i++) {
+               var mesh = meshs.at(i);
+               mesh.load();
+               this.pushRenderable(mesh);
+            }
+         }
          // 关联动画
          // var animations = this._animations;
          // if (animations) {

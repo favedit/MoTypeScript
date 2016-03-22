@@ -36,23 +36,24 @@ export class FTemplateResource extends FResource {
    // @return 是否准备好
    //==========================================================
    public testReady(): boolean {
-      var ready = this.ready;
-      if (!ready) {
-         if (this.dataReady) {
-            var renderables = this.renderables;
-            if (renderables) {
-               var count: number = renderables.count();
-               for (var n: number = 0; n < count; n++) {
-                  var renderable = renderables.at(n);
-                  if (!renderable.testReady()) {
-                     return false;
-                  }
-               }
-            }
-            ready = this.ready = true;
-         }
-      }
-      return ready;
+      // var ready = this.ready;
+      // if (!ready) {
+      //    if (this.dataReady) {
+      //       var renderables = this.renderables;
+      //       if (renderables) {
+      //          var count: number = renderables.count();
+      //          for (var n: number = 0; n < count; n++) {
+      //             var renderable = renderables.at(n);
+      //             if (!renderable.testReady()) {
+      //                return false;
+      //             }
+      //          }
+      //       }
+      //       ready = this.ready = true;
+      //    }
+      // }
+      // return ready;
+      return this.ready;
    }
 
    //==========================================================
@@ -81,7 +82,8 @@ export class FTemplateResource extends FResource {
       // }
       // var tick = new Date().getTime() - start;
       // console.log(count, tick, count / tick * 1000, this._number);
-      this.dataReady = true;
+      //this.dataReady = true;
+      this.ready = true;
    }
 
    //==========================================================

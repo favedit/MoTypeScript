@@ -14,16 +14,17 @@ import {FMaterialResourceConsole} from './FMaterialResourceConsole';
 //==========================================================
 export class FTemplateRenderableResource extends FResourceObject {
    public ready: boolean;
-   public model: FModelResource = null;
-   public modelUrl: string = null;
-   public material: FMaterialResource = null;
-   public materialUrl: string = null;
+   public model: FModelResource;
+   public modelUrl: string;
+   public meshCode: string;
+   public material: FMaterialResource;
+   public materialUrl: string;
    // 材质管理器
    @ALinker(FMaterialResourceConsole)
-   protected _materialResourceConsole: FMaterialResourceConsole = null;
+   protected _materialResourceConsole: FMaterialResourceConsole;
    // 模型管理器
    @ALinker(FModelResourceConsole)
-   protected _modelResourceConsole: FModelResourceConsole = null;
+   protected _modelResourceConsole: FModelResourceConsole;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -65,6 +66,7 @@ export class FTemplateRenderableResource extends FResourceObject {
    public loadConfig(config) {
       super.loadConfig(config);
       this.modelUrl = config.model_url;
+      this.meshCode = config.mesh_code;
       //this.model = this._modelResourceConsole.loadByUrl(this.modelUrl);
       this.materialUrl = config.material_url;
       //this.material = this._materialResourceConsole.loadByUrl(this.materialUrl);

@@ -1,4 +1,5 @@
 import {RString} from '../../../../runtime/common/lang/RString';
+import {RAssert} from '../../../../runtime/common/RAssert';
 import {RConsole} from '../../../../runtime/core/RConsole';
 import {FRenderable} from '../../base/FRenderable';
 import {FE3rModelConsole} from '../../shape/render/FE3rModelConsole';
@@ -12,13 +13,15 @@ import {FE3rMaterialConsole} from '../../shape/render/FE3rMaterialConsole';
 //==========================================================
 export class FE3dTemplateRenderable extends FRenderable {
    //    // @attribute
-   //    o._ready            = false;
+   protected _ready = false;
+   protected _dataReady = false;
    //    // @attribute
    //    o._model            = null;
    //    o._materialCode     = null;
    //    o._materialResource = null;
    public _resource;
    public _model;
+   // public _material;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -29,37 +32,32 @@ export class FE3dTemplateRenderable extends FRenderable {
       super();
    }
 
-   // //==========================================================
-   // // <T>测试是否准备好。</T>
-   // //
-   // // @method
-   // // @return Boolean 准备好
-   // //==========================================================
-   // MO.FE3dTemplateRenderable_testReady = function FE3dTemplateRenderable_testReady(){
-   //    var o = this;
-   //    if(!o._ready){
-   //       // 测试模型加载状态
-   //       if(!o._model.testReady()){
-   //          return false;
-   //       }
-   //       // 测试材质加载状态
-   //       var materials = o._materials;
-   //       if(materials){
-   //          var count = materials.count();
-   //          for(var i = 0; i < count; i++){
-   //             var material = materials.at(i);
-   //             if(material){
-   //                if(!material.testReady()){
-   //                   return false;
-   //                }
-   //             }
-   //          }
-   //       }
-   //       // 加载完成
-   //       o._ready = true;
-   //    }
-   //    return o._ready;
-   // }
+   //==========================================================
+   // <T>测试是否准备好。</T>
+   //
+   // @method
+   // @return Boolean 准备好
+   //==========================================================
+   public testReady() {
+      if (!this._ready) {
+         if (this._dataReady) {
+            // 测试模型加载状态
+            if (!this._model.testReady()) {
+               return false;
+            }
+            // 测试材质加载状态
+            var material: any = this.material;
+            if (material) {
+               if (!material.testReady()) {
+                  return false;
+               }
+            }
+            // 加载完成
+            this._ready = true;
+         }
+      }
+      return this._ready;
+   }
 
    // //==========================================================
    // // <T>测试是否可见。</T>
@@ -116,7 +114,8 @@ export class FE3dTemplateRenderable extends FRenderable {
       //var materialGuid = resource.materialGuid();
       var materialUrl = resource.materialUrl;
       if (!RString.isEmpty(materialUrl)) {
-         var material = this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
+         //var material = this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
+         this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
          //this._materialResource = material.resource();
          //this.pushMaterial(material);
       }
@@ -139,6 +138,7 @@ export class FE3dTemplateRenderable extends FRenderable {
       // if (!this._material) {
       //    this._material = this._materialReference = RClass.create(FE3dMaterial);
       // }
+      this._dataReady = true;
    }
 
    // //==========================================================
@@ -153,83 +153,87 @@ export class FE3dTemplateRenderable extends FRenderable {
    //    material.update();
    // }
 
-   // //==========================================================
-   // // <T>加载资源。</T>
-   // //
-   // // @method
-   // // @param p:resource:FE3sTemplateRenderable 资源
-   // //==========================================================
-   // MO.FE3dTemplateRenderable_load = function FE3dTemplateRenderable_load(){
-   //    var o = this;
-   //    var display = o._display;
-   //    var resource = o._resource;
-   //    var modelResource = resource.model();
-   //    //..........................................................
-   //    // 加载材质
-   //    var bitmaps = o._material.bitmaps();
-   //    if(bitmaps){
-   //       var count = bitmaps.count();
-   //       for(var i = 0; i < count; i++){
-   //          var bitmap = bitmaps.at(i);
-   //          o.pushTexture(bitmap);
-   //       }
-   //    }
-   //    //..........................................................
-   //    // 加载骨骼
-   //    var skeletonResources = modelResource.skeletons();
-   //    if(skeletonResources){
-   //       display.loadSkeletons(skeletonResources);
-   //    }
-   //    // 加载动画
-   //    var animationResources = modelResource.animations();
-   //    if(animationResources){
-   //       display.loadAnimations(animationResources);
-   //    }
-   //    //..........................................................
-   //    // 设置网格
-   //    var meshResource = resource.mesh();
-   //    var meshGuid = resource.meshGuid();
-   //    var renderable = o._renderable = MO.Console.find(MO.FE3rModelConsole).findMesh(meshGuid);
-   //    MO.Assert.debugNotNull(renderable);
-   //    var vertexBuffers = renderable.vertexBuffers();
-   //    var vertexBufferCount = vertexBuffers.count();
-   //    for(var i = 0; i < vertexBufferCount; i++){
-   //       var vertexBuffer = vertexBuffers.at(i);
-   //       o._vertexBuffers.set(vertexBuffer.code(), vertexBuffer);
-   //    }
-   //    // 设置蒙皮
-   //    var skins = renderable.skins();
-   //    if(skins){
-   //       var displaySkeleton = display._activeSkeleton;
-   //       // 获得激活皮肤
-   //       var skin = o._activeSkin = skins.first();
-   //       var streams = skin.streams();
-   //       var streamCount = streams.count();
-   //       for(var i = 0; i < streamCount; i++){
-   //          var stream = streams.at(i);
-   //          var buffer = stream.buffer();
-   //          o._vertexBuffers.set(buffer.code(), buffer);
-   //       }
-   //       // 获得骨头集合
-   //       var skinResource = skin.resource();
-   //       var boneReferResources = skinResource.boneRefers();
-   //       var c = boneReferResources.count();
-   //       if(c > 0){
-   //          var bones = o._bones = new MO.TObjects();
-   //          for(var i = 0; i < c; i++){
-   //             var boneReferResource = boneReferResources.at(i);
-   //             var boneReferIndex = boneReferResource.index();
-   //             var bone = displaySkeleton.bones().get(boneReferIndex);
-   //             if(!bone){
-   //                throw new MO.TError(o, 'Bone is not exist.');
-   //             }
-   //             bones.push(bone);
-   //          }
-   //       }
-   //    }
-   //    // 加载完成
-   //    o._ready = true;
-   // }
+   //==========================================================
+   // <T>加载资源。</T>
+   //
+   // @method
+   // @param p:resource:FE3sTemplateRenderable 资源
+   //==========================================================
+   public load() {
+      //var display = this._display;
+      var resource = this._resource;
+      //var modelResource = resource.model();
+      //..........................................................
+      // 加载材质
+      // var textures = this.material.textures;
+      // if (textures) {
+      //    var count = textures.count();
+      //    for (var i = 0; i < count; i++) {
+      //       var bitmap = textures.at(i);
+      //       //this.pushTexture(bitmap);
+      //    }
+      // }
+      //..........................................................
+      // 加载骨骼
+      // var skeletonResources = modelResource.skeletons();
+      // if(skeletonResources){
+      //    display.loadSkeletons(skeletonResources);
+      // }
+      // 加载动画
+      // var animationResources = modelResource.animations();
+      // if(animationResources){
+      //    display.loadAnimations(animationResources);
+      // }
+      //..........................................................
+      // 设置网格
+      //var meshResource = resource.meshCode;
+      //var meshGuid = resource.meshGuid();
+      var model = this._model;
+      var meshCode = resource.meshCode;
+      //var mesh = model.findMeshByCode(meshCode);
+      var mesh = model.meshes.first();
+      RAssert.debugNotNull(mesh);
+      //var renderable = this._renderable = MO.Console.find(MO.FE3rModelConsole).findMesh(meshGuid);
+      //RAssert.debugNotNull(renderable);
+      // var vertexBuffers = renderable.vertexBuffers();
+      // var vertexBufferCount = vertexBuffers.count();
+      // for (var i = 0; i < vertexBufferCount; i++) {
+      //    var vertexBuffer = vertexBuffers.at(i);
+      //    this._vertexBuffers.set(vertexBuffer.code(), vertexBuffer);
+      // }
+      // 设置蒙皮
+      // var skins = renderable.skins();
+      // if (skins) {
+      //    var displaySkeleton = display._activeSkeleton;
+      //    // 获得激活皮肤
+      //    var skin = this._activeSkin = skins.first();
+      //    var streams = skin.streams();
+      //    var streamCount = streams.count();
+      //    for (var i = 0; i < streamCount; i++) {
+      //       var stream = streams.at(i);
+      //       var buffer = stream.buffer();
+      //       this._vertexBuffers.set(buffer.code(), buffer);
+      //    }
+      //    // 获得骨头集合
+      //    var skinResource = skin.resource();
+      //    var boneReferResources = skinResource.boneRefers();
+      //    var c = boneReferResources.count();
+      //    if (c > 0) {
+      //       var bones = this._bones = new MO.TObjects();
+      //       for (var i = 0; i < c; i++) {
+      //          var boneReferResource = boneReferResources.at(i);
+      //          var boneReferIndex = boneReferResource.index();
+      //          var bone = displaySkeleton.bones().get(boneReferIndex);
+      //          if (!bone) {
+      //             throw new MO.TError(this, 'Bone is not exist.');
+      //          }
+      //          bones.push(bone);
+      //       }
+      //    }
+      // }
+      // 加载完成
+      this._ready = true;
+   }
 
    //==========================================================
    // <T>释放处理。</T>
