@@ -6,7 +6,7 @@ import {FVertexBuffer} from '../graphic/FVertexBuffer';
 import {FIndexBuffer} from '../graphic/FIndexBuffer';
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
 import {FLineMaterial} from '../../../runtime/graphic/material/FLineMaterial';
-import {Curve3} from '../../../runtime/graphic/shape/brep/Curve3';
+import {FCurve3} from '../../../runtime/graphic/shape/brep/FCurve3';
 
 //==========================================================
 // <T>渲染线。</T>
@@ -22,7 +22,7 @@ export class FCurve3Renderable extends FRenderable {
    // 索引缓冲
    public indexBuffer: FIndexBuffer;
    // 线段
-   public curve: Curve3;
+   public curve: FCurve3;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -30,7 +30,7 @@ export class FCurve3Renderable extends FRenderable {
    // @param curve 线段
    // @param material 材质
    //==========================================================
-   public constructor(curve?: Curve3, material?: FMaterial) {
+   public constructor(curve?: FCurve3, material?: FMaterial) {
       super();
       this.curve = curve;
       this.material = material;

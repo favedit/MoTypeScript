@@ -1,7 +1,7 @@
 import {SVector2} from '../../../common/math/SVector2';
-import {Curve} from '../brep/Curve';
+import {FCurve} from '../brep/FCurve';
 
-export class EllipseCurve extends Curve {
+export class EllipseCurve extends FCurve {
    public aX;
    public aY;
    public xRadius;

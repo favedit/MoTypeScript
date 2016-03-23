@@ -1,7 +1,7 @@
 import {SPoint2} from '../../../runtime/common/math/SPoint2';
-import {Curve} from '../brep/Curve';
+import {FCurve} from '../brep/FCurve';
 
-export class LineCurve extends Curve {
+export class LineCurve extends FCurve {
    public v1: any;
    public v2: any;
 

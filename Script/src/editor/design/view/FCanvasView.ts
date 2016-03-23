@@ -21,8 +21,8 @@ import {FTemplateResourceConsole} from '../../plugin/cl3d/resource/FTemplateReso
 import {FE3rMaterialConsole} from '../../plugin/cl3d/shape/render/FE3rMaterialConsole';
 import {FE3dTemplateConsole} from '../../plugin/cl3d/shape/instance/FE3dTemplateConsole';
 
-import {Vertex} from '../../runtime/graphic/shape/brep/Vertex';
-import {Path3} from '../../runtime/graphic/shape/brep/Path3';
+import {SVertex} from '../../runtime/graphic/shape/brep/SVertex';
+import {FPath3} from '../../runtime/graphic/shape/brep/FPath3';
 import {FCurve3Renderable} from '../../plugin/cl3d/shape/FCurve3Renderable';
 
 declare var id_info;
@@ -107,7 +107,7 @@ export class FCanvasView extends FView {
       template.matrix.addRotationY(Math.PI);
       //this.contentLayer.push(template);
 
-      var path3 = new Path3();
+      var path3 = new FPath3();
       path3.moveTo(0, 0, 0);
       path3.lineTo(1, 1, 0);
       path3.lineTo(2, 2, 1);

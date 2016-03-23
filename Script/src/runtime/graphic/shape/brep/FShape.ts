@@ -1,6 +1,6 @@
-import {Path} from './Path';
+import {FPath} from './FPath';
 
-export class Shape extends Path {
+export class FShape extends FPath {
 
    public holes;
 
@@ -10,7 +10,7 @@ export class Shape extends Path {
    }
 
    public createShap() {
-      return new Shape();
+      return new FShape();
    }
 
    // Convenience method to return ExtrudeGeometry

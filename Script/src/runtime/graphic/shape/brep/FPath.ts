@@ -5,14 +5,14 @@ import {QuadraticBezierCurve} from '../curves/QuadraticBezierCurve';
 import {CubicBezierCurve} from '../curves/CubicBezierCurve';
 import {SplineCurve} from '../curves/SplineCurve';
 import {EllipseCurve} from '../curves/EllipseCurve';
-import {CurvePath} from './CurvePath';
+import {FCurvePath} from './FCurvePath';
 import {RShape} from '../RShape';
 
 //==========================================================
 // <T>路径。</T>
 // <P>支持命令描述。</P>
 //==========================================================
-export class Path extends CurvePath {
+export class FPath extends FCurvePath {
 
    public actions;
 
@@ -282,7 +282,7 @@ export class Path extends CurvePath {
    //
    public toShapes = function(isCCW, noHoles) {
       function extractSubpaths(inActions) {
-         var subPaths = [], lastPath = new Path();
+         var subPaths = [], lastPath = new FPath();
          for (var i = 0, l = inActions.length; i < l; i++) {
             var item = inActions[i];
             var args = item.args;
@@ -290,7 +290,7 @@ export class Path extends CurvePath {
             if (action === 'moveTo') {
                if (lastPath.actions.length !== 0) {
                   subPaths.push(lastPath);
-                  lastPath = new Path();
+                  lastPath = new FPath();
                }
             }
             lastPath[action].apply(lastPath, args);

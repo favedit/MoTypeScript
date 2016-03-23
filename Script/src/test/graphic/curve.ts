@@ -1,5 +1,5 @@
-import {CurvePath} from '../src/runtime/graphic/shape/brep/CurvePath';
-import {Path3} from '../src/runtime/graphic/shape/brep/Path3';
+import {FCurvePath} from '../src/runtime/graphic/shape/brep/FCurvePath';
+import {FPath3} from '../src/runtime/graphic/shape/brep/FPath3';
 
 // var path = new Path();
 // path.moveTo(0, 0);

@@ -4,7 +4,7 @@
 //==========================================================
 // <T>线段。</T>
 //==========================================================
-export abstract class Curve {
+export abstract class FCurve {
 
    private __arcLengthDivisions;
    public needsUpdate;

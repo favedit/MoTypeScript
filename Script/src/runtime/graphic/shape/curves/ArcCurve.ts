@@ -1,4 +1,4 @@
-import {Curve} from '../brep/Curve';
+import {FCurve} from '../brep/FCurve';
 import {EllipseCurve} from './EllipseCurve';
 
 export class ArcCurve extends EllipseCurve {

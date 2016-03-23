@@ -1,12 +1,12 @@
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
-import {SVertex} from '../../core/SVertex';
-import {Curve} from '../brep/Curve';
+import {SVertex} from '../brep/SVertex';
+import {FCurve} from '../brep/FCurve';
 
 //==========================================================
 // <T>直线线段。</T>
 //==========================================================
-export class LineCurve3 extends Curve {
+export class LineCurve3 extends FCurve {
    // 开始点
    public start: SPoint3;
    // 结束点
@@ -25,8 +25,8 @@ export class LineCurve3 extends Curve {
    // <T>输出所有点集合。</T>
    //==========================================================
    public writePoints(buffer: FObjects<SVertex>): void {
-      buffer.push(this.start);
-      buffer.push(this.end);
+      //buffer.push(this.start);
+      //buffer.push(this.end);
    }
 
    public a(t) {

@@ -4,7 +4,7 @@ import {SColor4} from '../../common/math/SColor4';
 //==========================================================
 // <T>点。</T>
 //==========================================================
-export class Vertex {
+export class SVertex {
    // 默认颜色
    public static DefaultColor = new SColor4(1, 1, 1, 1);
    // 位置
@@ -17,7 +17,7 @@ export class Vertex {
    //==========================================================
    public constructor(position: SPoint3, color?: SColor4) {
       this.position = position;
-      this.color = color || Vertex.DefaultColor;
+      this.color = color || SVertex.DefaultColor;
    }
 
    //==========================================================

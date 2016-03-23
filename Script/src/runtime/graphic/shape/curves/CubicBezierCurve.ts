@@ -1,9 +1,9 @@
 import {SPoint2} from '../../../common/math/SPoint2';
-import {Curve} from '../brep/Curve';
+import {FCurve} from '../brep/FCurve';
 import {RCurve} from '../RCurve';
 import {RShape} from '../RShape';
 
-export class CubicBezierCurve extends Curve {
+export class CubicBezierCurve extends FCurve {
    public v0;
    public v1;
    public v2;

@@ -1,8 +1,8 @@
 import {SPoint2} from '../../common/math/SPoint2';
-import {Curve} from '../brep/Curve';
+import {FCurve} from '../brep/FCurve';
 import {RCurve} from '../RCurve';
 
-export class SplineCurve extends Curve {
+export class SplineCurve extends FCurve {
 
    public points;
 

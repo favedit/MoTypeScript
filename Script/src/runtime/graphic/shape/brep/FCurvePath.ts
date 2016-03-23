@@ -1,15 +1,15 @@
 import {FObjects} from '../../common/lang/FObjects';
 import {SPoint3} from '../../common/math/SPoint3';
-import {Curve} from './Curve';
+import {FCurve} from './FCurve';
 import {LineCurve} from '../curves/LineCurve';
-import {Geometry} from './Geometry';
+import {FGeometry} from './FGeometry';
 
 //==========================================================
 // <T>线段路径。</T>
 //==========================================================
-export class CurvePath extends Curve {
+export class FCurvePath extends FCurve {
    // 线段集合
-   public curves:Array<Curve>;
+   public curves:Array<FCurve>;
    // 自动关闭
    public autoClose;
    // 缓冲长度
@@ -21,7 +21,7 @@ export class CurvePath extends Curve {
    public constructor() {
       super();
       // 设置属性
-      this.curves = new Array<Curve>();
+      this.curves = new Array<FCurve>();
       this.autoClose = false;
    }
 

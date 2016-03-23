@@ -1,10 +1,10 @@
 import {FObjects} from '../../common/lang/FObjects';
-import {Vertex} from './Vertex';
+import {SVertex} from './SVertex';
 
 //==========================================================
 // <T>三维线段。</T>
 //==========================================================
-export class Curve3 {
+export class FCurve3 {
 
    //==========================================================
    // <T>构造处理。</T>
@@ -17,7 +17,7 @@ export class Curve3 {
    //
    // @return 点集合
    //==========================================================
-   public getVertexs(): FObjects<Vertex> {
+   public getVertexs(): FObjects<SVertex> {
       return null;
    }
 }
