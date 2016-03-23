@@ -15,7 +15,7 @@
 // @author maocy
 // @history 141231
 //==========================================================
-export class FE3dDimensional{
+export class FDimensional{
 //    o = MO.Class.inherits(this, o, MO.FE3dRenderable);
 //    //..........................................................
 //    // @attribute

@@ -7,12 +7,14 @@ export * from './FE3rComponent';
 export * from './FE3rIndexBuffer';
 export * from './FE3rMaterial';
 export * from './FE3rMaterialConsole';
-export * from './FE3rMaterialLoader';
-export * from './FE3rModel';
-export * from './FE3rModelConsole';
-export * from './FE3rModelMesh';
 export * from './FE3rObject';
 export * from './FE3rVertexBuffer';
+export * from './FRenderModel';
+export * from './FRenderModelConsole';
+export * from './FRenderModelMesh';
 
 import * as backup from './backup/index';
 export {backup as backup};
+
+import * as loader from './loader/index';
+export {loader as loader};

@@ -9,6 +9,7 @@ export * from './FLoader';
 export * from './FLoaderConsole';
 export * from './FLoggerConsole';
 export * from './FProcessLoadConsole';
+export * from './FProcessLoader';
 export * from './FStatistics';
 export * from './FStatisticsConsole';
 export * from './FThread';

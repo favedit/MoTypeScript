@@ -10,8 +10,7 @@ import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamer
 import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
 import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
 import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
-import {FE3dModelConsole} from '../../plugin/cl3d/shape/instance/FE3dModelConsole';
-//import {FE3dTemplatelConsole} from '../../plugin/cl3d/shape/instance/FE3dTemplatelConsole';
+import {FModelConsole} from '../../plugin/cl3d/shape/FModelConsole';
 import {FCube} from '../../plugin/cl3d/shape/FCube';
 import {SSettings} from '../application/SSettings';
 import {EEvent} from '../../runtime/ui/EEvent';
@@ -19,7 +18,7 @@ import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
 
 import {FTemplateResourceConsole} from '../../plugin/cl3d/resource/FTemplateResourceConsole';
 import {FE3rMaterialConsole} from '../../plugin/cl3d/shape/render/FE3rMaterialConsole';
-import {FE3dTemplateConsole} from '../../plugin/cl3d/shape/instance/FE3dTemplateConsole';
+import {FTemplateConsole} from '../../plugin/cl3d/shape/FTemplateConsole';
 
 import {SVertex} from '../../runtime/graphic/shape/brep/SVertex';
 import {FPath3} from '../../runtime/graphic/shape/brep/FPath3';
@@ -80,7 +79,7 @@ export class FCanvasView extends FView {
       // cube.setup(context);
       // this.contentLayer.pushRenderable(cube);
 
-      // var modelConsole: FE3dModelConsole = RConsole.find(FE3dModelConsole);
+      // var modelConsole: FModelConsole = RConsole.find(FModelConsole);
       // var model = modelConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.model');
       // model.matrix.tx = 0.2;
       // model.matrix.sx = 0.1;
@@ -97,7 +96,7 @@ export class FCanvasView extends FView {
       // var trConsole:FTemplateResourceConsole = RConsole.find(FTemplateResourceConsole);
       // var templateResource = trConsole.loadByUrl('/sk/res/model/xiong/xiong.template');
 
-      var trConsole:FE3dTemplateConsole = RConsole.find(FE3dTemplateConsole);
+      var trConsole:FTemplateConsole = RConsole.find(FTemplateConsole);
       var template = trConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
       template.matrix.sx = 0.05;
       template.matrix.sy = 0.05;
@@ -105,16 +104,16 @@ export class FCanvasView extends FView {
       template.matrix.updateForce();
       template.matrix.addRotationX(-Math.PI / 2);
       template.matrix.addRotationY(Math.PI);
-      //this.contentLayer.push(template);
+      this.contentLayer.push(template);
 
-      var path3 = new FPath3();
-      path3.moveTo(0, 0, 0);
-      path3.lineTo(1, 1, 0);
-      path3.lineTo(2, 2, 1);
-      path3.lineTo(2, 2, 2);
-      var renderable = new FCurve3Renderable(path3);
-      renderable.setup(context);
-      this.contentLayer.push(renderable);
+      // var path3 = new FPath3();
+      // path3.moveTo(0, 0, 0);
+      // path3.lineTo(1, 1, 0);
+      // path3.lineTo(2, 2, 1);
+      // path3.lineTo(2, 2, 2);
+      // var renderable = new FCurve3Renderable(path3);
+      // renderable.setup(context);
+      // this.contentLayer.push(renderable);
 
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);

@@ -12,6 +12,9 @@ export * from './IView';
 export * from './SFieldChangeEvent';
 export * from './SSettings';
 
+import * as entity from './entity/index';
+export {entity as entity};
+
 import * as setting from './setting/index';
 export {setting as setting};
 

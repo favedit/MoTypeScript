@@ -8,7 +8,7 @@ import {FConsole} from '../../runtime/core/FConsole'
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
 import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole'
 import {FE3rMaterial} from './FE3rMaterial'
-import {FE3rMaterialLoader} from './FE3rMaterialLoader';
+import {FMaterialLoader} from './loader/FMaterialLoader';
 
 //==========================================================
 // <T>渲染材质控制台。</T>
@@ -111,15 +111,15 @@ export class FE3rMaterialConsole extends FConsole {
          throw new FError(this, 'Material guid is empty');
       }
       // 查找材质
-      var loader: FE3rMaterialLoader = this._materials.get(url);
+      var loader: FMaterialLoader = this._materials.get(url);
       if (loader) {
          return loader;
       }
       // 获得路径
       var resource = this._materialResourceConsole.loadByUrl(url);
       // 创建材质
-      loader = RClass.create(FE3rMaterialLoader);
-      loader.linkGraphicContext(context);
+      loader = RClass.create(FMaterialLoader);
+      loader.graphicContext = context;
       loader.resource = resource;
       this._materials.set(url, loader);
       // 追加到加载队列
