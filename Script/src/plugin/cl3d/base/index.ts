@@ -12,9 +12,6 @@ export * from './FScene';
 export * from './FSceneStatistics';
 export * from './SRenderableInfo';
 
-import * as framework from './framework/index';
-export {framework as framework};
-
 import * as geom from './geom/index';
 export {geom as geom};
 

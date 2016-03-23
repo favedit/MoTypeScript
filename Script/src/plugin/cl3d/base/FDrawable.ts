@@ -28,9 +28,9 @@ export class FDrawable extends FGraphicObject implements IDrawable {
    // 脏标志
    public dirty: boolean;
    // 矩阵
-   public matrix;
+   public matrix: SMatrix3d;
    // 当前矩阵（空间计算后）
-   public currentMatrix;
+   public currentMatrix: SMatrix3d;
 
    //==========================================================
    // <T>构造处理。</T>

@@ -6,6 +6,9 @@ export {base as base};
 import * as core from './core/index';
 export {core as core};
 
+import * as framework from './framework/index';
+export {framework as framework};
+
 import * as graphic from './graphic/index';
 export {graphic as graphic};
 

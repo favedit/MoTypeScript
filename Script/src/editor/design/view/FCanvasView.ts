@@ -16,14 +16,6 @@ import {SSettings} from '../application/SSettings';
 import {EEvent} from '../../runtime/ui/EEvent';
 import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
 
-import {FTemplateResourceConsole} from '../../plugin/cl3d/resource/FTemplateResourceConsole';
-import {FE3rMaterialConsole} from '../../plugin/cl3d/shape/render/FE3rMaterialConsole';
-import {FTemplateConsole} from '../../plugin/cl3d/shape/FTemplateConsole';
-
-import {SVertex} from '../../runtime/graphic/shape/brep/SVertex';
-import {FPath3} from '../../runtime/graphic/shape/brep/FPath3';
-import {FCurve3Renderable} from '../../plugin/cl3d/shape/FCurve3Renderable';
-
 declare var id_info;
 
 //==========================================================
@@ -31,17 +23,21 @@ declare var id_info;
 //==========================================================
 export class FCanvasView extends FView {
    // 画板
-   public canvas: FCanvas = null;
+   public canvas: FCanvas;
    // 场景
-   public scene: FScene = null;
+   public scene: FScene;
    // 背景层
-   public backgroundLayer: FDisplayLayer = null;
+   public backgroundLayer: FDisplayLayer;
    // 内容层
-   public contentLayer: FDisplayLayer = null;
+   public contentLayer: FDisplayLayer;
    // 内容层
-   public camera: FPerspectiveCamera = null;
+   public camera: FPerspectiveCamera;
    // 内容层
-   public pipeline: FPipeline = null;
+   public pipeline: FPipeline;
+
+   _cameraMoveRate = 0.4;
+   _cameraKeyRotation = 0.03;
+   _cameraMouseRotation = 0.005;
    // 按键管理器
    @ALinker(FKeyboardConsole)
    public _keyboardConsole: FKeyboardConsole = null;
@@ -74,58 +70,15 @@ export class FCanvasView extends FView {
       camera.projection.size.set(hCanvas.offsetWidth, hCanvas.offsetHeight);
       camera.projection.update();
       // 创建物件
-      //var cube = new mo.plugin.cl3d.shape.FSphere();
-      // var cube = new FCube();
-      // cube.setup(context);
-      // this.contentLayer.pushRenderable(cube);
-
-      // var modelConsole: FModelConsole = RConsole.find(FModelConsole);
-      // var model = modelConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.model');
-      // model.matrix.tx = 0.2;
-      // model.matrix.sx = 0.1;
-      // model.matrix.sy = 0.1;
-      // model.matrix.sz = 0.1;
-      // model.matrix.updateForce();
-      // model.matrix.addRotationX(-Math.PI / 2);
-      // model.matrix.addRotationY(Math.PI);
-      // this.contentLayer.pushDisplay(model);
-
-      //var mrConsole: FE3rMaterialConsole = RConsole.find(FE3rMaterialConsole);
-      //var material = mrConsole.loadByUrl(context, '/sk/res/model/xiong/xiong.material');
-
-      // var trConsole:FTemplateResourceConsole = RConsole.find(FTemplateResourceConsole);
-      // var templateResource = trConsole.loadByUrl('/sk/res/model/xiong/xiong.template');
-
-      var trConsole:FTemplateConsole = RConsole.find(FTemplateConsole);
-      var template = trConsole.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
-      template.matrix.sx = 0.05;
-      template.matrix.sy = 0.05;
-      template.matrix.sz = 0.05;
-      template.matrix.updateForce();
-      template.matrix.addRotationX(-Math.PI / 2);
-      template.matrix.addRotationY(Math.PI);
-      this.contentLayer.push(template);
-
-      // var path3 = new FPath3();
-      // path3.moveTo(0, 0, 0);
-      // path3.lineTo(1, 1, 0);
-      // path3.lineTo(2, 2, 1);
-      // path3.lineTo(2, 2, 2);
-      // var renderable = new FCurve3Renderable(path3);
-      // renderable.setup(context);
-      // this.contentLayer.push(renderable);
-
+      var cube = new FCube();
+      cube.setup(context);
+      this.contentLayer.pushRenderable(cube);
       // 设置渲染管道
       var pipelineConsole = RConsole.find(FPipelineConsole);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);
       pipeline.scene = scene;
       pipeline.camera = camera;
-      //pipeline.start();
    }
-
-   _cameraMoveRate = 0.4;
-   _cameraKeyRotation = 0.03;
-   _cameraMouseRotation = 0.005;
 
    //==========================================================
    // <T>逻辑处理。</T>

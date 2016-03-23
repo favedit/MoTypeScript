@@ -1,4 +1,6 @@
 import {FObject} from '../../../../runtime/common/lang/FObject';
+import {FListeners} from '../../../../runtime/common/lang/FListeners';
+import {RObject} from '../../../../runtime/common/lang/RObject';
 import {FCamera} from '../../../runtime/graphic/camera/FCamera';
 import {FContext} from '../../graphic/FContext';
 import {FContent} from '../../graphic/FContent';
@@ -16,27 +18,29 @@ import {FRegion} from '../../base/FRegion';
 export abstract class FPipeline extends FContent {
    // 场景
    public scene: FScene;
-
    // 绘制技术
    public drawTechnique: FTechnique;
-
    // 选择技术
    public selectTechnique: FSelectTechnique;
-
    // 舞台
    public region: FRegion;
-
-   // 舞台
+   // 相机
    public camera: FCamera;
-
    // 激活状态
    public statusActive: boolean;
+   // 进入帧监听器
+   public enterFrameListeners: FListeners;
+   // 离开帧监听器
+   public leaveFrameListeners: FListeners;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this.enterFrameListeners = new FListeners(this);
+      this.leaveFrameListeners = new FListeners(this);
    }
 
    //==========================================================
@@ -56,8 +60,14 @@ export abstract class FPipeline extends FContent {
    // <T>构造处理。</T>
    //==========================================================
    public process() {
+      // 进入帧处理
+      this.enterFrameListeners.process();
+      // 场景处理
       this.scene.process(this.region);
+      // 渲染处理
       this.onProcess();
+      // 离开帧处理
+      this.leaveFrameListeners.process();
    }
 
    //==========================================================
@@ -79,5 +89,14 @@ export abstract class FPipeline extends FContent {
    //==========================================================
    public stop() {
       this.statusActive = false;
+   }
+
+   //==========================================================
+   // <T>停止处理。</T>
+   //==========================================================
+   public dispose() {
+      this.enterFrameListeners = RObject.dispose(this.enterFrameListeners);
+      this.leaveFrameListeners = RObject.dispose(this.leaveFrameListeners);
+      super.dispose();
    }
 }
