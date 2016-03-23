@@ -2,6 +2,7 @@ import {RConsole} from '../../../runtime/core/RConsole';
 import {FRegion} from '../../base/FRegion';
 import {FTechniqueConsole} from '../FTechniqueConsole';
 import {FGeneralTechnique} from '../FGeneralTechnique';
+import {FShadowTechnique} from '../FShadowTechnique';
 import {FSelectTechnique} from '../FSelectTechnique';
 import {FPipeline} from './FPipeline';
 
@@ -31,6 +32,7 @@ export class FForwardPipeline extends FPipeline {
       // 设置渲染技术
       var techniqueConsole: FTechniqueConsole = RConsole.find(FTechniqueConsole);
       this.drawTechnique = techniqueConsole.find(this._graphicContext, FGeneralTechnique);
+      // this.drawTechnique = techniqueConsole.find(this._graphicContext, FShadowTechnique);
       this.selectTechnique = <FSelectTechnique>techniqueConsole.find(this._graphicContext, FSelectTechnique);
    }
 

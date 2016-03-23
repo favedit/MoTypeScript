@@ -49,9 +49,8 @@ export class FTechnique extends FContent {
    //==========================================================
    // <T>选择技术模式。</T>
    //
-   // @method
-   // @param p:code:String 代码
-   // @return FG3dTechniqueMode 技术模式
+   // @param code 代码
+   // @return 技术模式
    //==========================================================
    public selectMode(p) {
    }
@@ -59,9 +58,8 @@ export class FTechnique extends FContent {
    //==========================================================
    // <T>增加过程模式。</T>
    //
-   // @method
-   // @param p:code:String 代码
-   // @return FG3dTechniqueMode 技术模式
+   // @param code 代码
+   // @return 技术模式
    //==========================================================
    public pushPass(pass: FTechniquePass): void {
       RAssert.debugNotNull(pass);

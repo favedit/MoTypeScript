@@ -1,50 +1,51 @@
-﻿//==========================================================
+﻿import {ERegionParameter} from '../../base/ERegionParameter';
+import {FRenderable} from '../../base/FRenderable';
+import {FRegion} from '../../base/FRegion';
+import {FAutomaticEffect} from './FAutomaticEffect';
+
+//==========================================================
 // <T>阴影深度自动渲染器。</T>
 //
 // @author maocy
 // @history 141230
 //==========================================================
-export class FE3dShadowDepthAutomaticEffect{
-//    o = MO.Class.inherits(this, o, MO.FG3dAutomaticEffect);
-//    //..........................................................
-//    // @attribute
-//    o._code          = 'shadow.depth.automatic';
-//    //..........................................................
-//    // @method
-//    o.drawRenderable = MO.FE3dShadowDepthAutomaticEffect_drawRenderable;
-//    return o;
-// }
+export class FShadowDepthAutomaticEffect extends FAutomaticEffect {
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.code = 'shadow.depth.automatic';
+   }
 
-// //==========================================================
-// // <T>绘制渲染对象。</T>
-// //
-// // @method
-// // @param pg:region:FG3dRegion 渲染区域
-// // @param pr:renderable:FG3dRenderable 渲染对象
-// //==========================================================
-// MO.FE3dShadowDepthAutomaticEffect_drawRenderable = function FE3dShadowDepthAutomaticEffect_drawRenderable(pg, pr){
-//    var o = this;
-//    var c = o._graphicContext;
-//    var p = o._program;
-//    // 获得参数
-//    var lvm = pg.calculate(MO.EG3dRegionParameter.LightViewMatrix);
-//    var lvpm = pg.calculate(MO.EG3dRegionParameter.LightViewProjectionMatrix);
-//    var lci = pg.calculate(MO.EG3dRegionParameter.LightInfo);
-//    // 关闭混合选项
-//    c.setBlendFactors(false);
-//    // 绑定所有属性流
-//    p.setParameter('vc_camera', lci);
-//    p.setParameter('vc_model_matrix', pr.currentMatrix());
-//    p.setParameter('vc_view_matrix', lvm);
-//    p.setParameter('vc_vp_matrix', lvpm);
-//    // 设置材质
-//    p.setParameter('fc_camera', lci);
-//    p.setParameter4('fc_alpha', 0, 0, 0, 0.1);
-//    // 绑定所有属性流
-//    o.bindAttributes(pr);
-//    // 绑定所有取样器
-//    o.bindSamplers(pr);
-//    // 绘制处理
-//    c.drawTriangles(pr.indexBuffer());
-// }
+   //==========================================================
+   // <T>绘制渲染对象。</T>
+   //
+   // @param region 渲染区域
+   // @param renderable 渲染对象
+   //==========================================================
+   public drawRenderable(region: FRegion, renderable: FRenderable) {
+      var context = this._graphicContext;
+      var program = this.program;
+      // 获得参数
+      var lvm = region.calculate(ERegionParameter.LightViewMatrix);
+      var lvpm = region.calculate(ERegionParameter.LightViewProjectionMatrix);
+      var lci = region.calculate(ERegionParameter.LightInfo);
+      // 关闭混合选项
+      context.setBlendFactors(false);
+      // 绑定所有属性流
+      program.setParameter('vc_camera', lci);
+      program.setParameter('vc_model_matrix', renderable.currentMatrix);
+      program.setParameter('vc_view_matrix', lvm);
+      program.setParameter('vc_vp_matrix', lvpm);
+      // 设置材质
+      program.setParameter('fc_camera', lci);
+      program.setParameter4('fc_alpha', 0, 0, 0, 0.1);
+      // 绑定所有属性流
+      this.bindAttributes(renderable);
+      // 绑定所有取样器
+      this.bindSamplers(renderable);
+      // 绘制处理
+      super.drawRenderable(region, renderable);
+   }
 }

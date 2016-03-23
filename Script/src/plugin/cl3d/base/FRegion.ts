@@ -5,6 +5,7 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 import {SPoint2} from '../../../runtime/common/math/SPoint2';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
+import {SVector4} from '../../../runtime/common/math/SVector4';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
@@ -66,13 +67,13 @@ export class FRegion extends FObject implements IProcessContext {
    public selectPosition: SPoint2;
    // 最后帧
    public finish: boolean;
-   //public lightInfo = null;
    // 主方向光源
    // public directionalLight;
    // 光源集合
    // public lights: FObjects<FLight> = null;
    // @attribute
    // public ratioMatrix = null;
+   public lightInfo;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -99,7 +100,7 @@ export class FRegion extends FObject implements IProcessContext {
       this.selectPosition = new SPoint2();
       this.finish = false;
       //this.ratioMatrix = new SMatrix3d();
-      // this.lightInfo = new SVector4();
+      this.lightInfo = new SVector4();
       //this.lights = new FObjects<FLight>();
       //o._materialMap = RClass.create(FG3dMaterialMap);
    }
@@ -233,8 +234,8 @@ export class FRegion extends FObject implements IProcessContext {
             return this.lightProjectionMatrix;
          case ERegionParameter.LightViewProjectionMatrix:
             return this.lightViewProjectionMatrix;
-         // case ERegionParameter.LightInfo:
-         // return this.lightInfo;
+         case ERegionParameter.LightInfo:
+            return this.lightInfo;
       }
       throw new FError(this, 'Unknown parameter type. (type_cd={1})', parameterCd);
    }

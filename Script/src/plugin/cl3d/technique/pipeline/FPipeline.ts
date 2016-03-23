@@ -2,7 +2,7 @@ import {FObject} from '../../../../runtime/common/lang/FObject';
 import {FListeners} from '../../../../runtime/common/lang/FListeners';
 import {RObject} from '../../../../runtime/common/lang/RObject';
 import {FCamera} from '../../../runtime/graphic/camera/FCamera';
-import {FContext} from '../../graphic/FContext';
+import {FGraphicContext} from '../../graphic/FGraphicContext';
 import {FContent} from '../../graphic/FContent';
 import {FTechnique} from '../FTechnique';
 import {FSelectTechnique} from '../FSelectTechnique';

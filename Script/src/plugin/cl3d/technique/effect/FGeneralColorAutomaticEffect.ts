@@ -1,10 +1,12 @@
 ﻿import {EDataType} from '../../../../runtime/common/lang/EDataType';
 import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
-import {FFloatStream} from '../../base/util/FFloatStream';
-import {ERegionParameter} from '../../base/ERegionParameter';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
 import {FPhongMaterial} from '../../../../runtime/graphic/material/FPhongMaterial';
+import {ERegionParameter} from '../../base/ERegionParameter';
+import {FRenderable} from '../../base/FRenderable';
+import {FRegion} from '../../base/FRegion';
+import {FFloatStream} from '../../base/util/FFloatStream';
 import {FAutomaticEffect} from './FAutomaticEffect';
 
 //==========================================================
@@ -83,7 +85,7 @@ export class FGeneralColorAutomaticEffect extends FAutomaticEffect {
    // @param region 渲染区域
    // @param renderable 渲染对象
    //==========================================================
-   public drawRenderable(region, renderable) {
+   public drawRenderable(region: FRegion, renderable: FRenderable) {
       var program = this.program;
       // 获得参数
       var cameraPosition = region.calculate(ERegionParameter.CameraPosition);
@@ -94,34 +96,34 @@ export class FGeneralColorAutomaticEffect extends FAutomaticEffect {
       // var materialInfo = material.info;
       this.bindMaterial(material);
       // 设置骨头集合
-      if (renderable._optionMerge) {
-         var mergeRenderables = renderable.mergeRenderables();
-         var mergeCount = mergeRenderables.count();
-         var data = RTypeArray.findTemp(EDataType.Float32, 16 * mergeCount);
-         for (var i = 0; i < mergeCount; i++) {
-            var mergeRenderable = mergeRenderables.at(i);
-            var matrix = mergeRenderable.currentMatrix;
-            matrix.writeData(data, 16 * i);
-         }
-         program.setParameter('vc_model_matrix', data);
-      } else {
-         var matrix = renderable.currentMatrix;
-         program.setParameter('vc_model_matrix', matrix);
-      }
+      // if (renderable._optionMerge) {
+      //    var mergeRenderables = renderable.mergeRenderables();
+      //    var mergeCount = mergeRenderables.count();
+      //    var data = RTypeArray.findTemp(EDataType.Float32, 16 * mergeCount);
+      //    for (var i = 0; i < mergeCount; i++) {
+      //       var mergeRenderable = mergeRenderables.at(i);
+      //       var matrix = mergeRenderable.currentMatrix;
+      //       matrix.writeData(data, 16 * i);
+      //    }
+      //    program.setParameter('vc_model_matrix', data);
+      // } else {
+      var matrix = renderable.currentMatrix;
+      program.setParameter('vc_model_matrix', matrix);
+      // }
       program.setParameter('vc_vp_matrix', vpMatrix);
       program.setParameter('vc_camera_position', cameraPosition);
       program.setParameter('vc_light_direction', lightDirection);
       program.setParameter('fc_camera_position', cameraPosition);
       program.setParameter('fc_light_direction', lightDirection);
       // 设置材质
-      if (this._supportMaterialMap) {
-         var materialId = renderable._materialId;
-         program.setParameter4('fc_material', 1 / 32, materialId / 512, 0, 0);
-      } else {
-         var info = renderable.activeInfo;
-         this.buildMaterial(info, renderable);
-         program.setParameter('fc_materials', info.material.memory);
-      }
+      // if (this._supportMaterialMap) {
+      //    var materialId = renderable._materialId;
+      //    program.setParameter4('fc_material', 1 / 32, materialId / 512, 0, 0);
+      // } else {
+      var info = renderable.activeInfo;
+      this.buildMaterial(info, renderable);
+      program.setParameter('fc_materials', info.material.memory);
+      // }
       //program.setParameter('fc_specular_view_color', materialInfo.specularViewColor);
       //program.setParameter4('fc_specular_view', materialInfo.specularViewBase, materialInfo.specularViewRate, materialInfo.specularViewAverage, materialInfo.specularViewShadow);
       // 绘制处理

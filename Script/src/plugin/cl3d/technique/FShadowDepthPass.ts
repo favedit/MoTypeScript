@@ -1,64 +1,64 @@
-﻿//==========================================================
+﻿import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
+import {FTechniquePass} from './FTechniquePass';
+import {FRegion} from '../base/FRegion';
+
+//==========================================================
 // <T>阴影深度渲染过程。</T>
 //
 // @author maocy
 // @history 141230
 //==========================================================
-export class FE3dShadowDepthPass{
-//    o = MO.Class.inherits(this, o, MO.FG3dTechniquePass);
-//    //..........................................................
-//    // @attribute
-//    o._code         = 'depth';
-//    o._renderTarget = null;
-//    o._textureDepth = MO.Class.register(o, new MO.AGetter('_textureDepth'));
-//    o._renderTarget = null;
-//    //..........................................................
-//    // @method
-//    o.setup         = MO.FE3dShadowDepthPass_setup;
-//    o.drawRegion    = MO.FE3dShadowDepthPass_drawRegion;
-//    return o;
-// }
+export class FShadowDepthPass extends FTechniquePass {
+   // @attribute
+   public textureDepth;
+   public renderTarget;
 
-// //==========================================================
-// // <T>配置处理。</T>
-// //
-// // @method
-// //==========================================================
-// MO.FE3dShadowDepthPass_setup = function FE3dShadowDepthPass_setup(){
-//    var o = this;
-//    o.__base.FG3dTechniquePass.setup.call(o);
-//    var c = o._graphicContext;
-//    // 创建平面
-//    var d = o._textureDepth = c.createFlatTexture();
-//    d.setFilter(EG3dSamplerFilter.Linear, EG3dSamplerFilter.Linear);
-//    d.setWrap(EG3dSamplerFilter.ClampToEdge, EG3dSamplerFilter.ClampToEdge);
-//    // 创建渲染目标
-//    var t = o._renderTarget = c.createRenderTarget();
-//    t.size().set(2048, 2048);
-//    t.textures().push(d);
-//    t.build();
-// }
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.code = 'depth';
+   }
 
-// //==========================================================
-// // <T>绘制区域处理。</T>
-// //
-// // @method
-// // @param p:region:FG3dRetion 区域
-// //==========================================================
-// MO.FE3dShadowDepthPass_drawRegion = function FE3dShadowDepthPass_drawRegion(p){
-//    var o = this;
-//    var c = o._graphicContext;
-//    // 设置渲染目标
-//    if(o._finish){
-//       c.setRenderTarget(null);
-//       var bc = p._backgroundColor;
-//       o._context.clear(bc.red, bc.green, bc.blue, bc.alpha, 1);
-//    }else{
-//       c.setRenderTarget(o._renderTarget);
-//       c.clear(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
-//    }
-//    // 绘制处理
-//    p._textureDepth = o._textureDepth;
-//    o.__base.FG3dTechniquePass.drawRegion.call(o, p)
-// }
+   //==========================================================
+   // <T>配置处理。</T>
+   //
+   // @method
+   //==========================================================
+   public setup() {
+      super.setup();
+      var context = this._graphicContext;
+      // 创建平面
+      var texture = this.textureDepth = context.createFlatTexture();
+      texture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
+      texture.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      // 创建渲染目标
+      var renderTarget = this.renderTarget = context.createRenderTarget();
+      renderTarget.size.set(2048, 2048);
+      renderTarget.textures.push(texture);
+      renderTarget.build();
+   }
+
+   //==========================================================
+   // <T>绘制区域处理。</T>
+   //
+   // @method
+   // @param region 区域
+   //==========================================================
+   public drawRegion(region: FRegion) {
+      var context = this._graphicContext;
+      // 设置渲染目标
+      if (this.finish) {
+         var color = region.backgroundColor;
+         context.setRenderTarget(null);
+         context.clear(color.red, color.green, color.blue, color.alpha, 1);
+      } else {
+         context.setRenderTarget(this.renderTarget);
+         context.clear(0, 0, 0, 1, 1, 1);
+      }
+      // 绘制处理
+      //region._textureDepth = this._textureDepth;
+      super.drawRegion(region)
+   }
 }

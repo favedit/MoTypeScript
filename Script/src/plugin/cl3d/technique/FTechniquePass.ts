@@ -10,13 +10,21 @@ import {FEffectConsole} from '../graphic/FEffectConsole';
 //==========================================================
 export class FTechniquePass extends FContent {
    // @attribute
-   public technique = null;
-   public fullCode: string = null;
-   public code: string = null;
-   public index = null;
-   public finish = false;
+   public technique;
+   public fullCode: string;
+   public code: string;
+   public index: number;
+   public finish: boolean;
    // @attribute
-   public materialMap = null;
+   public materialMap;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.finish = false;
+   }
 
    //==========================================================
    // <T>获得全代码。</T>

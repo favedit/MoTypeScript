@@ -1,5 +1,5 @@
-﻿import {FTechniquePass} from './FTechniquePass';
-import {FRegion} from '../base/FRegion';
+﻿import {FRegion} from '../base/FRegion';
+import {FTechniquePass} from './FTechniquePass';
 
 //==========================================================
 // <T>通用颜色渲染过程。</T>
@@ -19,8 +19,7 @@ export class FGeneralColorPass extends FTechniquePass {
    //==========================================================
    // <T>绘制区域处理。</T>
    //
-   // @method
-   // @param region:FG3dRetion 区域
+   // @param region 区域
    //==========================================================
    public drawRegion(region: FRegion) {
       // 设置渲染目标

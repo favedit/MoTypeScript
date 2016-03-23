@@ -7,10 +7,9 @@ import {EIndexStride} from '../graphic/EIndexStride'
 import {FVertexBuffer} from '../graphic/FVertexBuffer'
 import {FIndexBuffer} from '../graphic/FIndexBuffer'
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial'
-import {FContext} from '../graphic/FContext'
+import {FGraphicContext} from '../graphic/FGraphicContext'
 import {FRenderable} from '../base/FRenderable';
 // import {EAttributeFormat} from '../../graphic/EAttributeFormat'
-// import {FContext} from '../../graphic/FContext'
 
 //==========================================================
 // <T>渲染立方体。</T>
@@ -48,7 +47,7 @@ export class FSphere extends FRenderable {
    //
    // @method
    //==========================================================
-   public setup(context: FContext) {
+   public setup(context: FGraphicContext) {
       // 计算坐标
       var countAngle = this.splitCount * 2;
       var countZ = this.splitCount;

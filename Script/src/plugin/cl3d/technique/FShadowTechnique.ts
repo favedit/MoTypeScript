@@ -1,74 +1,76 @@
-﻿//==========================================================
+﻿import {RClass} from '../../../runtime/common/reflect/RClass'
+import {FRegion} from '../base/FRegion';
+import {ETechniqueMode} from './ETechniqueMode'
+import {FTechnique} from './FTechnique';
+import {FShadowDepthPass} from './FShadowDepthPass';
+import {FShadowColorPass} from './FShadowColorPass';
+
+//==========================================================
 // <T>阴影渲染技术。</T>
 //
 // @author maocy
 // @history 150119
 //==========================================================
-export class FE3dShadowTechnique{
-//    o = MO.Class.inherits(this, o, MO.FE3dTechnique);
-//    //..........................................................
-//    // @attribute
-//    o._code        = 'shadow';
-//    // @attribute
-//    o._passDepth   = MO.Class.register(o, new MO.AGetter('_passDepth'));
-//    o._passColor   = MO.Class.register(o, new MO.AGetter('_passColor'));
-//    //..........................................................
-//    // @method
-//    o.setup        = MO.FE3dShadowTechnique_setup;
-//    o.updateRegion = MO.FE3dShadowTechnique_updateRegion;
-//    return o;
-// }
+export class FShadowTechnique extends FTechnique {
+   // 深度渲染过程
+   public passDepth: FShadowDepthPass;
+   // 颜色渲染过程
+   public passColor: FShadowColorPass;
 
-// //==========================================================
-// // <T>配置处理。</T>
-// //
-// // @method
-// //==========================================================
-// MO.FE3dShadowTechnique_setup = function FE3dShadowTechnique_setup(){
-//    var o = this;
-//    o.__base.FE3dTechnique.setup.call(o);
-//    //..........................................................
-//    // 创建支持模式
-//    o.registerMode(MO.EG3dTechniqueMode.Ambient);
-//    o.registerMode(MO.EG3dTechniqueMode.DiffuseLevel);
-//    o.registerMode(MO.EG3dTechniqueMode.DiffuseColor);
-//    o.registerMode(MO.EG3dTechniqueMode.SpecularLevel);
-//    o.registerMode(MO.EG3dTechniqueMode.SpecularColor);
-//    o.registerMode(MO.EG3dTechniqueMode.Result);
-//    //..........................................................
-//    var ps = o._passes;
-//    // 创建光深处理过程
-//    var passDepth = o._passDepth = MO.Class.create(MO.FE3dShadowDepthPass);
-//    passDepth.linkGraphicContext(o);
-//    passDepth.setup();
-//    o.pushPass(passDepth);
-//    // 创建颜色处理过程
-//    var passColor = o._passColor = MO.Class.create(MO.FE3dShadowColorPass);
-//    passColor.linkGraphicContext(o);
-//    passColor.setup();
-//    o.pushPass(passColor);
-//    // 设置深度纹理
-//    passColor.setTextureDepth(passDepth.textureDepth());
-// }
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.code = 'shadow';
+   }
 
-// //==========================================================
-// // <T>更新区域处理。</T>
-// //
-// // @method
-// // @param p:region:FG3dRetion 区域
-// //==========================================================
-// MO.FE3dShadowTechnique_updateRegion = function FE3dShadowTechnique_updateRegion(p){
-//    var o = this;
-//    o.__base.FE3dTechnique.updateRegion.call(o, p);
-//    var g = o._graphicContext;
-//    var gs = g.size();
-//    // 更新相机
-//    var c = p.camera();
-//    //c.projection().size().assign(gs);
-//    // 更新光照
-//    var l = p.directionalLight();
-//    var lc = l.camera();
-//    //lc.projection().size().assign(gs);
-//    //lc.updateFlatCamera(c);
-// }
+   //==========================================================
+   // <T>配置处理。</T>
+   //
+   // @method
+   //==========================================================
+   public setup() {
+      super.setup();
+      //..........................................................
+      // 创建支持模式
+      this.registerMode(ETechniqueMode.Ambient);
+      this.registerMode(ETechniqueMode.DiffuseLevel);
+      this.registerMode(ETechniqueMode.DiffuseColor);
+      this.registerMode(ETechniqueMode.SpecularLevel);
+      this.registerMode(ETechniqueMode.SpecularColor);
+      this.registerMode(ETechniqueMode.Result);
+      //..........................................................
+      // 创建光深处理过程
+      var passDepth: FShadowDepthPass = this.passDepth = RClass.create(FShadowDepthPass);
+      passDepth.linkGraphicContext(this);
+      passDepth.setup();
+      this.pushPass(passDepth);
+      // 创建颜色处理过程
+      var passColor: FShadowColorPass = this.passColor = RClass.create(FShadowColorPass);
+      passColor.linkGraphicContext(this);
+      passColor.setup();
+      this.pushPass(passColor);
+      // 设置深度纹理
+      passColor.textureDepth = passDepth.textureDepth;
+   }
+
+   //==========================================================
+   // <T>更新区域处理。</T>
+   //
+   // @param region 区域
+   //==========================================================
+   // public updateRegion(region: FRegion) {
+   //    super.updateRegion(region);
+   //    var g = this._graphicContext;
+   //    var gs = g.size();
+   //    // 更新相机
+   //    var c = region.camera();
+   //    //c.projection().size().assign(gs);
+   //    // 更新光照
+   //    var l = region.directionalLight();
+   //    var lc = l.camera();
+   //    //lc.projection().size().assign(gs);
+   //    //lc.updateFlatCamera(c);
+   // }
 }

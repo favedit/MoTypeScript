@@ -2,6 +2,8 @@ import {RConsole} from '../../runtime/core/RConsole';
 import {FGeneralColorAutomaticEffect} from './technique/effect/FGeneralColorAutomaticEffect';
 import {FGeneralColorLineEffect} from './technique/effect/FGeneralColorLineEffect';
 import {FSelectAutomaticEffect} from './technique/effect/FSelectAutomaticEffect';
+import {FShadowDepthAutomaticEffect} from './technique/effect/FShadowDepthAutomaticEffect';
+import {FShadowColorAutomaticEffect} from './technique/effect/FShadowColorAutomaticEffect';
 import {FEffectConsole} from './graphic/FEffectConsole';
 
 //==========================================================
@@ -31,6 +33,11 @@ export class REngine {
       // 通用效果器
       effectConsole.register('general.color.line.automatic', FGeneralColorLineEffect);
       effectConsole.register('general.color.phong.automatic', FGeneralColorAutomaticEffect);
+      // 阴影效果器
+      effectConsole.register('shadow.depth.line.automatic', FShadowDepthAutomaticEffect);
+      effectConsole.register('shadow.depth.phong.automatic', FShadowDepthAutomaticEffect);
+      effectConsole.register('shadow.color.line.automatic', FShadowColorAutomaticEffect);
+      effectConsole.register('shadow.color.phong.automatic', FShadowColorAutomaticEffect);
 
       // 选取效果器
       // effectConsole.register('select.select.flat', MO.FG3dSelectAutomaticEffect);

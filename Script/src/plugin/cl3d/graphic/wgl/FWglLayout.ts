@@ -9,7 +9,7 @@ import {FLayout} from '../FLayout';
 //==========================================================
 export class FWglLayout extends FLayout {
    // 句柄
-   public handle = null;
+   public handle: any;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -19,8 +19,7 @@ export class FWglLayout extends FLayout {
    public setup() {
       super.setup();
       // 创建层
-      var context = this.graphicContext;
-      this.handle = context._handleLayout.createVertexArrayOES();
+      this.handle = this._graphicContext.createVertexArrayObject();
    }
 
    //==========================================================
@@ -29,8 +28,7 @@ export class FWglLayout extends FLayout {
    // @method
    //==========================================================
    public bind() {
-      var context = this.graphicContext;
-      context._handleLayout.bindVertexArrayOES(this.handle);
+      this._graphicContext.bindVertexArrayObject(this.handle);
    }
 
    //==========================================================
@@ -39,8 +37,7 @@ export class FWglLayout extends FLayout {
    // @method
    //==========================================================
    public unbind() {
-      var context = this.graphicContext;
-      context._handleLayout.bindVertexArrayOES(null);
+      this._graphicContext.bindVertexArrayObject(null);
    }
 
    //==========================================================
@@ -49,8 +46,7 @@ export class FWglLayout extends FLayout {
    // @method
    //==========================================================
    public active() {
-      var context = this.graphicContext;
-      context._handleLayout.bindVertexArrayOES(this.handle);
+      this._graphicContext.bindVertexArrayObject(this.handle);
    }
 
    //==========================================================
@@ -59,8 +55,7 @@ export class FWglLayout extends FLayout {
    // @method
    //==========================================================
    public deactive() {
-      var context = this.graphicContext;
-      context._handleLayout.bindVertexArrayOES(null);
+      this._graphicContext.bindVertexArrayObject(null);
    }
 
    //==========================================================
@@ -69,11 +64,10 @@ export class FWglLayout extends FLayout {
    // @method
    //==========================================================
    public dispose() {
-      var context = this.graphicContext;
       // 释放对象
-      var layout = this.handle;
-      if (layout) {
-         context._handleLayout.deleteVertexArrayOES(layout);
+      var handle = this.handle;
+      if (handle) {
+         this._graphicContext.deleteVertexArrayObject(handle);
          this.handle = null;
       }
       // 父处理

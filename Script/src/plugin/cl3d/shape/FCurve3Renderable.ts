@@ -1,6 +1,6 @@
 import {FRenderable} from '../base/FRenderable';
 import {EAttributeFormat} from '../graphic/EAttributeFormat';
-import {FContext} from '../graphic/FContext';
+import {FGraphicContext} from '../graphic/FGraphicContext';
 import {EDrawMode} from '../graphic/EDrawMode';
 import {FVertexBuffer} from '../graphic/FVertexBuffer';
 import {FIndexBuffer} from '../graphic/FIndexBuffer';
@@ -41,7 +41,7 @@ export class FCurve3Renderable extends FRenderable {
    //
    // @param context 环境
    //==========================================================
-   public setup(context: FContext) {
+   public setup(context: FGraphicContext) {
       var vertexs = this.curve.getVertexs();
       var vertexCount = this.vertexCount = vertexs.count();
       // 设置顶点数据

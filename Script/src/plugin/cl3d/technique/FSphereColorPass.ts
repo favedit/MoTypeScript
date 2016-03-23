@@ -4,7 +4,7 @@
 // @author maocy
 // @history 141230
 //==========================================================
-export class FE3dSphereColorPass{
+export class FSphereColorPass{
 //    o = MO.Class.inherits(this, o, MO.FG3dTechniquePass);
 //    //..........................................................
 //    // @attribute

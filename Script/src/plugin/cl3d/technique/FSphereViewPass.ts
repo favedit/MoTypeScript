@@ -1,12 +1,12 @@
-﻿//==========================================================
+﻿import {FTechniquePass} from './FTechniquePass';
+
+//==========================================================
 // <T>阴影深度渲染过程。</T>
 //
 // @author maocy
 // @history 141230
 //==========================================================
-export class FE3dSphereViewPass{
-//    o = MO.Class.inherits(this, o, MO.FG3dTechniquePass);
-//    //..........................................................
+export class FSphereViewPass extends FTechniquePass{
 //    // @attribute
 //    o._code          = 'view';
 //    // @attribute
@@ -18,16 +18,6 @@ export class FE3dSphereViewPass{
 //    o._textureColor  = MO.Class.register(o, new MO.AGetSet('_textureColor'));
 //    o._effectView    = null;
 //    o._effectResult  = null;
-//    //..........................................................
-//    // @method
-//    o.construct      = MO.FE3dSphereViewPass_construct;
-//    o.setup          = MO.FE3dSphereViewPass_setup;
-//    o.setSphere      = MO.FE3dSphereViewPass_setSphere;
-//    // @method
-//    o.drawBegin      = MO.FE3dSphereViewPass_drawBegin
-//    o.drawRegion     = MO.FE3dSphereViewPass_drawRegion;
-//    return o;
-// }
 
 // //==========================================================
 // // <T>构造处理。</T>

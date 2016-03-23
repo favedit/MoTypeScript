@@ -1,12 +1,12 @@
-﻿//==========================================================
+﻿import {FTechnique} from './FTechnique';
+
+//==========================================================
 // <T>阴影渲染技术。</T>
 //
 // @author maocy
 // @history 150119
 //==========================================================
-export class FE3dSphereTechnique{
-//    o = MO.Class.inherits(this, o, MO.FE3dTechnique);
-//    //..........................................................
+export class FSphereTechnique extends FTechnique{
 //    // @attribute
 //    o._code      = 'general';
 //    // @attribute

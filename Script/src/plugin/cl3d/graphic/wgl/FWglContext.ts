@@ -17,10 +17,11 @@ import {EDrawMode} from '../EDrawMode';
 import {SLayoutBuffer} from '../SLayoutBuffer';
 import {SLayoutSampler} from '../SLayoutSampler';
 import {SContextCapability} from '../SContextCapability';
-import {FContext} from '../FContext';
+import {FGraphicContext} from '../FGraphicContext';
 import {FProgram} from '../FProgram';
 import {FVertexBuffer} from '../FVertexBuffer';
 import {FIndexBuffer} from '../FIndexBuffer';
+import {SWglSetting} from './SWglSetting';
 import {FWglVertexBuffer} from './FWglVertexBuffer';
 import {FWglIndexBuffer} from './FWglIndexBuffer';
 import {FWglFlatTexture} from './FWglFlatTexture';
@@ -37,14 +38,12 @@ import {RWglUtility} from './RWglUtility';
 // @refer https://www.khronos.org/registry/webgl
 // @history 141230
 //==========================================================
-export class FWglContext extends FContext {
+export class FWglContext extends FGraphicContext {
    // @attribute
-   public handle: WebGLRenderingContext;
-   public _handleInstance;
-   public _handleLayout;
-   protected _handleDrawBuffers;
-   protected _handleSamplerS3tc;
-   protected _handleDebugShader;
+   public setting: SWglSetting;
+   public handle: any;
+   public handleSamplerS3tc;
+   public handleDebugShader;
    // @attribute
    protected _activeRenderTarget;
    protected _activeTextureSlot;
@@ -94,50 +93,9 @@ export class FWglContext extends FContext {
    //
    // @param hCanvas 页面画布标签
    //==========================================================
-   public linkCanvas(hCanvas) {
-      super.linkCanvas(hCanvas)
-      // 获得环境
-      this._hCanvas = hCanvas;
-      if (hCanvas.getContext) {
-         // 设置参数
-         var parameters: any = new Object();
-         parameters.alpha = this._optionAlpha;
-         parameters.antialias = this._optionAntialias;
-         parameters.depth = true;
-         parameters.stencil = false;
-         parameters.premultipliedAlpha = false;
-         // 初始化对象
-         var hHandle = null;
-         var codes = ['experimental-webgl2', 'webgl2', 'experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl']
-         var count: number = codes.length;
-         for (var n: number = 0; n < count; n++) {
-            var code: string = codes[n];
-            hHandle = hCanvas.getContext(code, parameters);
-            if (hHandle) {
-               RLogger.debug(this, 'Create context3d. (code={1}, handle={2})', code, hHandle);
-               break;
-            }
-         }
-         if (!hHandle) {
-            RLogger.error(this, 'Create context3d failure.');
-            var event = new SEvent(this);
-            //event.code = MO.EGraphicError.UnsupportWebGL;
-            //event.message = "Current browser can't support WebGL technique.";
-            //MO.Window.processDeviceError(event);
-            event.dispose();
-            return false;
-         }
-         this.handle = hHandle;
-         //o._contextAttributes = handle.getContextAttributes();
-      } else {
-         var event = new SEvent(this);
-         //event.code = MO.EGraphicError.UnsupportWebGL;
-         //event.message = "Canvas can't support WebGL technique.";
-         //MO.Window.processDeviceError(event);
-         event.dispose();
-         return false;
-      }
-      let handle = this.handle;
+   public setup(hCanvas: HTMLCanvasElement, handle: any) {
+      super.linkCanvas(hCanvas);
+      this.handle = handle;
       // 设置状态
       this.setDepthMode(true, EDepthMode.LessEqual);
       this.setCullingMode(true, ECullMode.Front);
@@ -152,33 +110,7 @@ export class FWglContext extends FContext {
       capability.fragmentConst = handle.getParameter(handle.MAX_FRAGMENT_UNIFORM_VECTORS);
       capability.samplerCount = handle.getParameter(handle.MAX_VERTEX_TEXTURE_IMAGE_UNITS);
       capability.samplerSize = handle.getParameter(handle.MAX_TEXTURE_SIZE);
-      // 测试实例绘制支持
-      var extension = this._handleInstance = handle.getExtension('ANGLE_instanced_arrays');
-      if (extension) {
-         capability.optionInstance = true;
-      }
       capability.mergeCount = parseInt(((capability.vertexConst - 32) / 4) as any);
-      // 测试顶点布局支持
-      var extension = this._handleLayout = handle.getExtension('OES_vertex_array_object');
-      if (extension) {
-         capability.optionLayout = true;
-      }
-      // 测试32位索引支持
-      var extension = handle.getExtension('OES_element_index_uint');
-      if (extension) {
-         capability.optionIndex32 = true;
-      }
-      // 测试多渲染支持
-      var extension = this._handleDrawBuffers = handle.getExtension('WEBGL_draw_buffers');
-      if (extension) {
-         capability.optionDrawBuffers = true;
-      }
-      // 测试纹理压缩支持
-      var extension = this._handleSamplerS3tc = handle.getExtension('WEBGL_compressed_texture_s3tc');
-      if (extension) {
-         capability.samplerCompressRgb = extension.COMPRESSED_RGB_S3TC_DXT1_EXT;
-         capability.samplerCompressRgba = extension.COMPRESSED_RGBA_S3TC_DXT5_EXT;
-      }
       // 测定渲染精度
       var shader: any = capability.shader = new Object();
       var vertexPrecision: any = shader.vertexPrecision = new Object();
@@ -199,12 +131,17 @@ export class FWglContext extends FContext {
          fragmentPrecision.intMedium = handle.getShaderPrecisionFormat(handle.FRAGMENT_SHADER, handle.MEDIUM_INT);
          fragmentPrecision.intHigh = handle.getShaderPrecisionFormat(handle.FRAGMENT_SHADER, handle.HIGH_INT);
       }
+      // 测试纹理压缩支持
+      var extension = this.handleSamplerS3tc = handle.getExtension('WEBGL_compressed_texture_s3tc');
+      if (extension) {
+         capability.samplerCompressRgb = extension.COMPRESSED_RGB_S3TC_DXT1_EXT;
+         capability.samplerCompressRgba = extension.COMPRESSED_RGBA_S3TC_DXT5_EXT;
+      }
       // 测试调试渲染器支持
-      var extension = this._handleDebugShader = handle.getExtension('WEBGL_debug_shaders');
+      var extension = this.handleDebugShader = handle.getExtension('WEBGL_debug_shaders');
       if (extension) {
          capability.optionShaderSource = true;
       }
-      return true;
    }
 
    //==========================================================
@@ -332,20 +269,7 @@ export class FWglContext extends FContext {
    // @return 是否允许
    //==========================================================
    public enableDrawBuffers() {
-      if (!this.statusDrawBuffers) {
-         var handle = this.handle;
-         // 检查句柄
-         var extension = this._handleDrawBuffers;
-         if (!extension) {
-            return false;
-         }
-         // 检查浮点纹理采样
-         extension.drawBuffersWEBGL([
-            extension.COLOR_ATTACHMENT0_WEBGL
-         ]);
-         // 设置状态
-         this.statusDrawBuffers = true;
-      }
+      return true;
    }
 
    //==========================================================
@@ -676,7 +600,7 @@ export class FWglContext extends FContext {
             return result;
          }
          // 修改视角
-         var size:any = this._size;
+         var size: any = this._size;
          graphic.viewport(0, 0, size.width, size.height);
          //var rectangle = this._viewportRectangle;
          //graphic.viewport(0, 0, rectangle.width, rectangle.height);
@@ -1171,21 +1095,19 @@ export class FWglContext extends FContext {
    // @method
    //==========================================================
    public dispose() {
-      var o = this;
       // 释放属性
-      o._data9 = null;
-      o._data16 = null;
+      this._data9 = null;
+      this._data16 = null;
       // 释放属性
-      o.recordBuffers = RObject.dispose(o.recordBuffers);
-      o.recordSamplers = RObject.dispose(o.recordSamplers);
+      this.recordBuffers = RObject.dispose(this.recordBuffers);
+      this.recordSamplers = RObject.dispose(this.recordSamplers);
       // 释放属性
       //o._contextAttributes = null;
-      o._parameters = null;
-      o._extensions = null;
-      o._activeTextureSlot = null;
-      o._handleDrawBuffers = null;
-      o._handleSamplerS3tc = null;
-      o._handleDebugShader = null;
+      this._parameters = null;
+      this._extensions = null;
+      this._activeTextureSlot = null;
+      this.handleSamplerS3tc = null;
+      this.handleDebugShader = null;
       // 父处理
       super.dispose();
    }

@@ -11,6 +11,7 @@ import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FControl} from './../../runtime/ui/FControl';
 import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
 import {FWglContext} from '../graphic/wgl/FWglContext';
+import {RWglContext} from '../graphic/wgl/RWglContext';
 
 //==========================================================
 // <T>模板画板。</T>
@@ -110,8 +111,7 @@ export class FCanvas extends FControl {
       hCanvas.height = size.height;
       hPanel.appendChild(hCanvas);
       // 创建环境
-      var context = this._graphicContext = new FWglContext();
-      context.linkCanvas(hCanvas);
+      this._graphicContext = RWglContext.create(hCanvas);
       // 创建相机
       var camera = this._camera = new FPerspectiveCamera();
       camera.projection.size.assign(size);

@@ -1,36 +1,36 @@
-﻿//==========================================================
+﻿import {FRegion} from '../base/FRegion';
+import {FTechniquePass} from './FTechniquePass';
+
+//==========================================================
 // <T>阴影颜色渲染过程。</T>
 //
 // @author maocy
 // @history 141230
 //==========================================================
-export class FE3dShadowColorPass{
-//    o = MO.Class.inherits(this, o, MO.FG3dTechniquePass);
-//    //..........................................................
-//    // @attribute
-//    o._code           = 'color';
-//    o._textureDepth   = MO.Class.register(o, new MO.AGetSet('_textureDepth'));
-//    // @attribute
-//    //..........................................................
-//    // @method
-//    o.drawRegion      = MO.FE3dShadowColorPass_drawRegion;
-//    return o;
-// }
+export class FShadowColorPass extends FTechniquePass {
+   // @attribute
+   public textureDepth;
 
-// //==========================================================
-// // <T>绘制区域处理。</T>
-// //
-// // @method
-// // @param p:region:FG3dRetion 区域
-// //==========================================================
-// MO.FE3dShadowColorPass_drawRegion = function FE3dShadowColorPass_drawRegion(p){
-//    var o = this;
-//    var c = o._graphicContext;
-//    // 设置渲染目标
-//    c.setRenderTarget(null);
-//    var bc = p._backgroundColor;
-//    c.clear(bc.red, bc.green, bc.blue, bc.alpha, 1);
-//    // 绘制处理
-//    o.__base.FG3dTechniquePass.drawRegion.call(o, p)
-// }
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this.code = 'color';
+   }
+
+   //==========================================================
+   // <T>绘制区域处理。</T>
+   //
+   // @param region 区域
+   //==========================================================
+   public drawRegion(region: FRegion) {
+      var context = this._graphicContext;
+      // 设置渲染目标
+      var color = region.backgroundColor;
+      context.setRenderTarget(null);
+      context.clear(color.red, color.green, color.blue, color.alpha, 1);
+      // 绘制处理
+      super.drawRegion(region)
+   }
 }

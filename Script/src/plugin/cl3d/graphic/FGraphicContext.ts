@@ -2,7 +2,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
-import {FGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
+import {FGraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
 import {EFillMode} from './EFillMode';
 import {FContextStatistics} from './FContextStatistics';
 import {FVertexBuffer} from './FVertexBuffer';
@@ -14,19 +14,19 @@ import {FIndexBuffer} from './FIndexBuffer';
 // @author maocy
 // @history 141230
 //==========================================================
-export abstract class FContext extends FGraphicContext {
+export abstract class FGraphicContext extends FBaseGraphicContext {
    //..........................................................
+   // @attribute
+   public hCanvas: HTMLCanvasElement;
    // @attribute
    protected _optionAlpha = true;
    protected _optionAntialias = false;
-   //_viewportRectangle = MO.Class.register(o, new MO.AGetter('_viewportRectangle'));
-   protected _viewportRectangle = null;
+   protected _viewportRectangle;
    //o._logicSize          = MO.Class.register(o, new MO.AGetter('_logicSize'));
    //o._ratio              = MO.Class.register(o, new MO.AGetSet('_ratio'));
    //o._sizeRatio          = MO.Class.register(o, new MO.AGetter('_sizeRatio'));
-   protected capability = null;
-   //_statistics = MO.Class.register(o, new MO.AGetter('_statistics'));
-   protected _statistics: FContextStatistics = null;
+   protected capability;
+   protected _statistics: FContextStatistics;
    // @attribute
    protected _fillModeCd: EFillMode = EFillMode.Face;
    protected _optionDepth = false;
@@ -36,35 +36,13 @@ export abstract class FContext extends FGraphicContext {
    protected _statusBlend = false;
    protected _blendSourceCd = 0;
    protected _blendTargetCd = 0;
-   protected _program = null;
+   protected _program;
    // @attribute
-   protected _storePrograms = null;
-   protected _storeLayouts = null;
-   protected _storeBuffers = null;
-   protected _storeTextures = null;
-   protected _storeTargets = null;
-   //..........................................................
-   // @method
-   //o.setViewport = MO.Method.virtual(o, 'setViewport');
-   //o.setFillMode = MO.Method.virtual(o, 'setFillMode');
-   //o.setDepthMode = MO.Method.virtual(o, 'setDepthMode');
-   //o.setCullingMode = MO.Method.virtual(o, 'setCullingMode');
-   //o.setBlendFactors = MO.Method.virtual(o, 'setBlendFactors');
-   //o.setScissorRectangle = MO.Method.virtual(o, 'setScissorRectangle');
-   //o.setRenderTarget = MO.Method.virtual(o, 'setRenderTarget');
-   //o.setProgram = MO.Method.virtual(o, 'setProgram');
-   // @method
-   //o.bindVertexBuffer = MO.Method.virtual(o, 'bindVertexBuffer');
-   //o.bindTexture = MO.Method.virtual(o, 'bindTexture');
-   // @method
-   //o.prepare = MO.FG3dContext_prepare;
-   //o.clear = MO.Method.virtual(o, 'clear');
-   //o.clearColor = MO.Method.virtual(o, 'clearColor');
-   //o.clearDepth = MO.Method.virtual(o, 'clearDepth');
-   //o.drawTriangles = MO.Method.virtual(o, 'drawTriangles');
-   //o.present = MO.Method.virtual(o, 'present');
-   // @method
-   //o.dispose = MO.FG3dContext_dispose;
+   protected _storePrograms;
+   protected _storeLayouts;
+   protected _storeBuffers;
+   protected _storeTextures;
+   protected _storeTargets;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -93,9 +71,9 @@ export abstract class FContext extends FGraphicContext {
    // @method
    // @param h:hCanvas:HtmlCanvasTag 页面画布标签
    //==========================================================
-   public linkCanvas(h) {
-      var o = this;
-      o._size.set(h.width, h.height);
+   public linkCanvas(hCanvas) {
+      this.hCanvas = hCanvas;
+      this._size.set(hCanvas.width, hCanvas.height);
    }
 
    //==========================================================
@@ -135,7 +113,7 @@ export abstract class FContext extends FGraphicContext {
    // @param clazz:Function 类对象
    // @return FG3dVertexBuffer 顶点缓冲
    //==========================================================
-   public abstract createVertexBuffer(clazz?: Function):FVertexBuffer;
+   public abstract createVertexBuffer(clazz?: Function): FVertexBuffer;
 
    //==========================================================
    // <T>创建索引缓冲。</T>
@@ -144,7 +122,7 @@ export abstract class FContext extends FGraphicContext {
    // @param clazz:Function 类对象
    // @return FG3dIndexBuffer 索引缓冲
    //==========================================================
-   public abstract createIndexBuffer(clazz?: Function):FIndexBuffer;
+   public abstract createIndexBuffer(clazz?: Function): FIndexBuffer;
 
    //==========================================================
    // <T>创建平面渲染纹理。</T>

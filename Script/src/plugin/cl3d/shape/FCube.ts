@@ -1,6 +1,6 @@
 import {FRenderable} from '../base/FRenderable'
 import {EAttributeFormat} from '../graphic/EAttributeFormat'
-import {FContext} from '../graphic/FContext'
+import {FGraphicContext} from '../graphic/FGraphicContext'
 import {FVertexBuffer} from '../graphic/FVertexBuffer'
 import {FIndexBuffer} from '../graphic/FIndexBuffer'
 import {FPhongMaterial} from '../../../runtime/graphic/material/FPhongMaterial'
@@ -33,7 +33,7 @@ export class FCube extends FRenderable {
    // @param w:width:Number 宽度
    // @param h:height:Number 高度
    //==========================================================
-   public setup(context: FContext) {
+   public setup(context: FGraphicContext) {
       this.vertexCount = 8;
       // 设置顶点数据
       var vertexPositionData = [
