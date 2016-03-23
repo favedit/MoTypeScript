@@ -19,16 +19,13 @@ import {FViewport} from './FViewport';
 //==========================================================
 export class FCamera extends FObject {
    // @attribute 变换矩阵
-   //_matrix = MO.Class.register(o, new MO.AGetter('_matrix'));
-   public matrix = null;
+   public matrix: SMatrix3d;
    // @attribute 相机位置
-   //_position = MO.Class.register(o, new MO.AGetter('_position'));
-   public position = null;
-   public target = null;
+   public position: SPoint3;
+   public target: SPoint3;
    // @attribute 相机方向
-   //_direction = MO.Class.register(o, new MO.AGetter('_direction'));
-   public direction = null;
-   public directionTarget = null;
+   public direction: SVector3;
+   public directionTarget: SVector3;
    // @attribute 中心位置
    public centerFront = 0.6;
    public centerBack = 1.0;
@@ -36,16 +33,14 @@ export class FCamera extends FObject {
    public focalNear = 0.1;
    public focalFar = 200.0;
    // @attribute 视截体
-   //_frustum = MO.Class.register(o, new MO.AGetter('_frustum'));
-   public frustum = null;
-   //_planes = MO.Class.register(o, new MO.AGetter('_planes'));
-   public planes = null;
-   public viewport = null;
+   public frustum: SFrustum;
+   public planes: SFrustumPlanes;
+   public viewport: FViewport;
    // @attribute 轴线
-   protected _axisUp = null;
-   protected _axisX = null;
-   protected _axisY = null;
-   protected _axisZ = null;
+   protected _axisUp: SVector3;
+   protected _axisX: SVector3;
+   protected _axisY: SVector3;
+   protected _axisZ: SVector3;
 
    //==========================================================
    // <T>构造处理。</T>

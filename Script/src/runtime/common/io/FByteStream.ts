@@ -8,8 +8,8 @@ import {FDataStream} from './FDataStream'
 //==========================================================
 export class FByteStream extends FDataStream {
    //..........................................................
-   protected _length: number = 0;
-   protected _memory = null;
+   protected _length: number;
+   protected _memory: ArrayBuffer;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -19,6 +19,7 @@ export class FByteStream extends FDataStream {
    //==========================================================
    public constructor() {
       super();
+      this._length = 0
    }
 
    //==========================================================
@@ -35,8 +36,6 @@ export class FByteStream extends FDataStream {
 
    //==========================================================
    // <T>反转数据处理。</T>
-   //
-   // @method
    //==========================================================
    public flip() {
       this._length = this.position;

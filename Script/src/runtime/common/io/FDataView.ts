@@ -7,209 +7,244 @@ import {FObject} from '../lang/FObject';
 // @history 150105
 //==========================================================
 export class FDataView extends FObject {
-   //..........................................................
-   // @attribute
-   protected _viewer = null;
-   //_endianCd = MO.Class.register(o, new MO.AGetSet('_endianCd'), false);
-   protected endianCd: boolean = false;
+   // 编码
+   public endianCd: boolean;
+   // 查看器
+   protected _viewer: DataView;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor(memory?: any) {
+      super();
+      this.endianCd = false;
+   }
 
    //==========================================================
    // <T>获得有8位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 8位有符号整数
+   // @param index 索引位置
+   // @return 8位有符号整数
    //==========================================================
-   public getInt8(p) {
-      return this._viewer.getInt8(p, this.endianCd);
+   public getInt8(index: number): number {
+      return this._viewer.getInt8(index);
    }
 
    //==========================================================
    // <T>获得有16位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 16位有符号整数
+   // @param index 索引位置
+   // @return 16位有符号整数
    //==========================================================
-   public getInt16(p) {
-      return this._viewer.getInt16(p, this.endianCd);
+   public getInt16(index: number): number {
+      return this._viewer.getInt16(index, this.endianCd);
    }
 
    //==========================================================
    // <T>获得有32位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 32位有符号整数
+   // @param index 索引位置
+   // @return 32位有符号整数
    //==========================================================
-   public getInt32(p) {
-      return this._viewer.getInt32(p, this.endianCd);
+   public getInt32(index: number): number {
+      return this._viewer.getInt32(index, this.endianCd);
    }
 
    //==========================================================
    // <T>获得有64位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 64位有符号整数
+   // @param index 索引位置
+   // @return 64位有符号整数
    //==========================================================
-   public getInt64(p) {
-      return this._viewer.getInt64(p, this.endianCd);
+   public getInt64(index: number): number {
+      var result = 0;
+      var value1 = this._viewer.getInt32(index, this.endianCd);
+      var value2 = this._viewer.getInt32(index + 4, this.endianCd);
+      if (this.endianCd) {
+         result = value1 << 32 + value2;
+      } else {
+         result = value2 << 32 + value1;
+      }
+      return result;
    }
 
    //==========================================================
    // <T>获得有8位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 8位无符号整数
+   // @param index 索引位置
+   // @return 8位无符号整数
    //==========================================================
-   public getUint8(p) {
-      return this._viewer.getUint8(p, this.endianCd);
+   public getUint8(index: number): number {
+      return this._viewer.getUint8(index);
    }
 
    //==========================================================
    // <T>获得有16位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 16位无符号整数
+   // @param index 索引位置
+   // @return 16位无符号整数
    //==========================================================
-   public getUint16(p) {
-      return this._viewer.getUint16(p, this.endianCd);
+   public getUint16(index: number): number {
+      return this._viewer.getUint16(index, this.endianCd);
    }
 
    //==========================================================
    // <T>获得有32位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 32位无符号整数
+   // @param index 索引位置
+   // @return 32位无符号整数
    //==========================================================
-   public getUint32(p) {
-      return this._viewer.getUint32(p, this.endianCd);
+   public getUint32(index: number): number {
+      return this._viewer.getUint32(index, this.endianCd);
    }
 
    //==========================================================
    // <T>获得有64位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Integer 64位无符号整数
+   // @param index 索引位置
+   // @return 64位无符号整数
    //==========================================================
-   public getUint64(p) {
-      return this._viewer.getUint64(p, this.endianCd);
+   public getUint64(index: number): number {
+      var result = 0;
+      var value1 = this._viewer.getUint32(index, this.endianCd);
+      var value2 = this._viewer.getUint32(index + 4, this.endianCd);
+      if (this.endianCd) {
+         result = value1 << 32 + value2;
+      } else {
+         result = value2 << 32 + value1;
+      }
+      return result;
    }
 
    //==========================================================
    // <T>获得浮点数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Number 浮点数
+   // @param index 索引位置
+   // @return 浮点数
    //==========================================================
-   public getFloat(p) {
-      return this._viewer.getFloat32(p, this.endianCd);
+   public getFloat(index: number): number {
+      return this._viewer.getFloat32(index, this.endianCd);
    }
 
    //==========================================================
    // <T>获得双精度浮点数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @return Number 双精度浮点数
+   // @param index 索引位置
+   // @return 双精度浮点数
    //==========================================================
-   public getDouble(p) {
-      return this._viewer.getFloat64(p, this.endianCd);
+   public getDouble(index: number): number {
+      return this._viewer.getFloat64(index, this.endianCd);
    }
 
    //==========================================================
    // <T>设置有8位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 8位有符号整数
+   // @param index 索引位置
+   // @param value 8位有符号整数
    //==========================================================
-   public setInt8(p, v) {
-      this._viewer.setInt8(p, v, this.endianCd);
+   public setInt8(index: number, value: number) {
+      this._viewer.setInt8(index, value);
    }
 
    //==========================================================
    // <T>设置有16位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 16位有符号整数
+   // @param index 索引位置
+   // @param value 16位有符号整数
    //==========================================================
-   public setInt16(p, v) {
-      this._viewer.setInt16(p, v, this.endianCd);
+   public setInt16(index: number, value: number) {
+      this._viewer.setInt16(index, value, this.endianCd);
    }
 
    //==========================================================
    // <T>设置有32位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 32位有符号整数
+   // @param index 索引位置
+   // @param value 32位有符号整数
    //==========================================================
-   public setInt32(p, v) {
-      this._viewer.setInt32(p, v, this.endianCd);
+   public setInt32(index: number, value: number) {
+      this._viewer.setInt32(index, value, this.endianCd);
    }
 
    //==========================================================
    // <T>设置有64位有符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 64位有符号整数
+   // @param index 索引位置
+   // @param value 64位有符号整数
    //==========================================================
-   public setInt64(p, v) {
-      this._viewer.setInt64(p, v, this.endianCd);
+   public setInt64(index: number, value: number) {
+      if (this.endianCd) {
+         this._viewer.setUint32(index, value >> 32, this.endianCd);
+         this._viewer.setUint32(index, value & 0xFFFFFFFF, this.endianCd);
+      } else {
+         this._viewer.setUint32(index, value & 0xFFFFFFFF, this.endianCd);
+         this._viewer.setUint32(index, value >> 32, this.endianCd);
+      }
    }
 
    //==========================================================
    // <T>设置有8位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 8位无符号整数
+   // @param index 索引位置
+   // @param value 8位无符号整数
    //==========================================================
-   public setUint8(p, v) {
-      this._viewer.setUint8(p, v, this.endianCd);
+   public setUint8(index: number, value: number) {
+      this._viewer.setUint8(index, value);
    }
 
    //==========================================================
    // <T>设置有16位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 16位无符号整数
+   // @param index 索引位置
+   // @param value 16位无符号整数
    //==========================================================
-   public setUint16(p, v) {
-      this._viewer.setUint16(p, v, this.endianCd);
+   public setUint16(index: number, value: number) {
+      this._viewer.setUint16(index, value, this.endianCd);
    }
 
    //==========================================================
    // <T>设置有32位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 32位无符号整数
+   // @param index 索引位置
+   // @param value 32位无符号整数
    //==========================================================
-   public setUint32(p, v) {
-      this._viewer.setUint32(p, v, this.endianCd);
+   public setUint32(index: number, value: number) {
+      this._viewer.setUint32(index, value, this.endianCd);
    }
 
    //==========================================================
    // <T>设置有64位无符号整数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Integer 64位无符号整数
+   // @param index 索引位置
+   // @param value 64位无符号整数
    //==========================================================
-   public setUint64(p, v) {
-      this._viewer.setUint64(p, v, this.endianCd);
+   public setUint64(index: number, value: number) {
+      if (this.endianCd) {
+         this._viewer.setUint32(index, value >> 32, this.endianCd);
+         this._viewer.setUint32(index, value & 0xFFFFFFFF, this.endianCd);
+      } else {
+         this._viewer.setUint32(index, value & 0xFFFFFFFF, this.endianCd);
+         this._viewer.setUint32(index, value >> 32, this.endianCd);
+      }
    }
 
    //==========================================================
    // <T>设置浮点数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Number 浮点数
+   // @param index 索引位置
+   // @param value 浮点数
    //==========================================================
-   public setFloat(p, v) {
-      this._viewer.setFloat32(p, v, this.endianCd);
+   public setFloat(index: number, value: number) {
+      this._viewer.setFloat32(index, value, this.endianCd);
    }
 
    //==========================================================
    // <T>设置双精度浮点数。</T>
    //
-   // @param p:index:Integer 索引位置
-   // @param v:value:Number 双精度浮点数
+   // @param index 索引位置
+   // @param value 双精度浮点数
    //==========================================================
-   public setDouble(p, v) {
-      this._viewer.setDouble(p, v, this.endianCd);
+   public setDouble(index: number, value: number) {
+      this._viewer.setFloat64(index, value, this.endianCd);
    }
 }

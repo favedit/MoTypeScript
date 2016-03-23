@@ -11,12 +11,18 @@ import {FDataView} from './FDataView'
 //==========================================================
 export class FDataStream extends FDataView {
    // 数据视图
-   public viewer: DataView = null;
-   // 字节顺序
-   public endianCd: boolean = false;
+   public viewer: DataView;
    // 位置
    public position: number = 0;
-   
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor(memory?: any) {
+      super();
+      this.position = 0;
+   }
+
    //==========================================================
    // <T>关联数据。</T>
    //

@@ -15,14 +15,14 @@ import {FPerspectiveProjection} from './FPerspectiveProjection';
 //==========================================================
 export class FPerspectiveCamera extends FCamera {
    // 投影
-   public projection: FProjection = null;
+   public projection: FProjection;
    // 四元数
-   public rotation: SVector3 = null;
-   public rotationMatrix: SMatrix3x3 = null;
-   public quaternion: SQuaternion = null;
-   public quaternionX: SQuaternion = null;
-   public quaternionY: SQuaternion = null;
-   public quaternionZ: SQuaternion = null;
+   public rotation: SVector3;
+   public rotationMatrix: SMatrix3x3;
+   public quaternion: SQuaternion;
+   public quaternionX: SQuaternion;
+   public quaternionY: SQuaternion;
+   public quaternionZ: SQuaternion;
 
    //==========================================================
    // <T>构造处理。</T>
