@@ -18,23 +18,21 @@ import {FModelResource} from './FModelResource';
 //==========================================================
 export class FModelResourceConsole extends FConsole {
    // 模型集合
-   protected models: FDictionary<FModelResource> = null;
+   protected _models: FDictionary<FModelResource>;
    // 资源控制台
    @ALinker(FResourceConsole)
-   protected _resourceConsole: FResourceConsole = null;
+   protected _resourceConsole: FResourceConsole;
    //    o._meshs            = MO.Class.register(o, new MO.AGetter('_meshs'));
    //    o._skeletons        = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations       = MO.Class.register(o, new MO.AGetter('_animations'));
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 设置变量
-      this.models = new FDictionary<FModelResource>();
+      this._models = new FDictionary<FModelResource>();
       // this._meshs = new MO.TDictionary();
       // this._skeletons = new MO.TDictionary();
       // this._animations = new MO.TDictionary();
@@ -46,6 +44,15 @@ export class FModelResourceConsole extends FConsole {
       //rt._pipeline = rp;
       //rc.registerType(rt);
       //rc.factory().register('resource3d.model', FE3sModel);
+   }
+
+   //==========================================================
+   // <T>获得模型集合。</T>
+   //
+   // @return 模型集合
+   //==========================================================
+   public models(): FDictionary<FModelResource> {
+      return this._models;
    }
 
    // //==========================================================
@@ -167,7 +174,7 @@ export class FModelResourceConsole extends FConsole {
       var url = args.url;
       var identity = url;
       // 查找模型
-      var models = this.models;
+      var models = this._models;
       var model: FModelResource = models.get(identity);
       if (model) {
          return model;
@@ -233,7 +240,7 @@ export class FModelResourceConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.models = RObject.free(this.models);
+      this._models = RObject.dispose(this._models, true);
       // this._meshs = RObject.free(this._meshs);
       // this._skeletons = RObject.free(this._skeletons);
       // this._animations = RObject.free(this._animations);

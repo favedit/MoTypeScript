@@ -18,7 +18,7 @@ export class FModelResource extends FResource {
    //    o._dataCompress  = true;
    //    o._dataBlock     = true;
    //    // @attribute
-   public meshes: FDictionary<FMeshResource> = null;
+   public meshes: FDictionary<FMeshResource>;
    //    o._skeletons     = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations    = MO.Class.register(o, new MO.AGetter('_animations'));
    //    o._display       = MO.Class.register(o, new MO.AGetter('_display'));
