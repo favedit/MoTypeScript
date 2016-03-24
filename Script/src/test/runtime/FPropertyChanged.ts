@@ -22,8 +22,8 @@ export class FPropertyChanged {
    }
 }
 
-var value = new FPropertyChanged();
-value.name = "asd";
-value.name = "das";
-value.value = "gagffsdg";
-console.log(value);
+// var value = new FPropertyChanged();
+// value.name = "asd";
+// value.name = "das";
+// value.value = "gagffsdg";
+// console.log(value);

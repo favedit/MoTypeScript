@@ -2,6 +2,7 @@ import {RRuntime} from '../../runtime/common/RRuntime';
 import {RConsole} from '../../runtime/core/RConsole';
 import {FEnvironmentConsole} from '../../runtime/core/console/FEnvironmentConsole';
 import {FDeviceConsole} from '../../runtime/ui/console/FDeviceConsole';
+import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
 import {FSimpleScene} from '../../plugin/cl3d/framework/FSimpleScene';
 import {FTemplateConsole} from '../../plugin/cl3d/shape/FTemplateConsole';
 import {FCanvas} from '../../plugin/cl3d/framework/FCanvas';
@@ -42,4 +43,5 @@ template.matrix.addRotationY(Math.PI);
 scene.contentLayer.push(template);
 //............................................................
 // 启动绘制
+(<FForwardPipeline>canvas.pipeline).optionShadow = true;
 canvas.start();

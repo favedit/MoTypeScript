@@ -4,6 +4,7 @@ import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FGraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
 import {EFillMode} from './EFillMode';
+import {SContextCapability} from './SContextCapability';
 import {FContextStatistics} from './FContextStatistics';
 import {FVertexBuffer} from './FVertexBuffer';
 import {FIndexBuffer} from './FIndexBuffer';
@@ -25,7 +26,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
    //o._logicSize          = MO.Class.register(o, new MO.AGetter('_logicSize'));
    //o._ratio              = MO.Class.register(o, new MO.AGetSet('_ratio'));
    //o._sizeRatio          = MO.Class.register(o, new MO.AGetter('_sizeRatio'));
-   protected capability;
+   protected capability: SContextCapability;
    protected _statistics: FContextStatistics;
    // @attribute
    protected _fillModeCd: EFillMode = EFillMode.Face;

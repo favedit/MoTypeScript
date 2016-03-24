@@ -7,16 +7,17 @@
 //==========================================================
 export class SContextCapability {
    // @attribute
-   public vendor = null;
-   public version = null;
-   public shaderVersion = null;
+   public vendor;
+   public version;
+   public shaderVersion;
    // @attribute
-   public optionDebug = false;
-   public optionInstance = false;
-   public optionLayout = false;
-   public optionMaterialMap = false;
-   public optionIndex32 = false;
-   public optionShaderSource = false;
+   public optionDebug:boolean = true;
+   public optionInstance:boolean = false;
+   public optionLayout:boolean = false;
+   public optionMaterialMap:boolean = false;
+   public optionIndex32:boolean = false;
+   public optionShaderSource:boolean = false;
+   public optionDrawBuffers:boolean = false;
    // @attribute
    public mergeCount = 0;
    public attributeCount = null;

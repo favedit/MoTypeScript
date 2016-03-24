@@ -606,8 +606,8 @@ export class FWglContext extends FGraphicContext {
          //graphic.viewport(0, 0, rectangle.width, rectangle.height);
       } else {
          // 绑定渲染目标
-         graphic.bindFramebuffer(graphic.FRAMEBUFFER, renderTarget._handle);
-         result = this.checkError("bindFramebuffer", "Bind frame buffer. (frame_buffer={1})", renderTarget._handle);
+         graphic.bindFramebuffer(graphic.FRAMEBUFFER, renderTarget.handle);
+         result = this.checkError("bindFramebuffer", "Bind frame buffer. (frame_buffer={1})", renderTarget.handle);
          if (!result) {
             return result;
          }

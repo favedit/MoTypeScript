@@ -35,7 +35,8 @@ export class FCanvas extends FControl {
    protected _cameraMoveRate = 0.4;
    protected _cameraKeyRotation = 0.03;
    protected _cameraMouseRotation = 0.005;
-   protected pipeline: FPipeline;
+   // 渲染管道
+   public pipeline: FPipeline;
    // 场景
    public scene: FScene;
    // 按键管理器
@@ -119,6 +120,11 @@ export class FCanvas extends FControl {
       camera.position.set(0, 0, -10);
       camera.lookAt(0, 0, 0);
       camera.update();
+      // 设置渲染管道
+      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, FForwardPipeline);
+      pipeline.scene = this.scene;
+      pipeline.camera = this.camera;
+      pipeline.enterFrameListeners.register(this, this.onProcess);
       // 设置事件
       this.attachEvent(hCanvas, EEvent.MouseMove, this.onMouseMove);
    }
@@ -136,13 +142,13 @@ export class FCanvas extends FControl {
       // 按键处理
       var camera = this.camera;
       var keyboardConsole = this._keyboardConsole;
-      // 上下处理
+      // 前后处理
       var distance = this._cameraMoveRate;
-      var keyUp = keyboardConsole.isKeyPress(EKeyCode.W)
-      var keyDown = keyboardConsole.isKeyPress(EKeyCode.S)
-      if (keyUp && !keyDown) {
+      var keyForward = keyboardConsole.isKeyPress(EKeyCode.W)
+      var keyBack = keyboardConsole.isKeyPress(EKeyCode.S)
+      if (keyForward && !keyBack) {
          camera.doWalk(distance);
-      } else if (!keyUp && keyDown) {
+      } else if (!keyForward && keyBack) {
          camera.doWalk(-distance);
       }
       // 左右处理
@@ -154,6 +160,15 @@ export class FCanvas extends FControl {
       } else if (!keyLeft && keyRight) {
          camera.doYaw(-rotation);
       }
+      // 上下处理
+      var distance = this._cameraMoveRate;
+      var keyUp = keyboardConsole.isKeyPress(EKeyCode.Q)
+      var keyDown = keyboardConsole.isKeyPress(EKeyCode.E)
+      if (keyUp && !keyDown) {
+         camera.doFly(distance);
+      } else if (!keyUp && keyDown) {
+         camera.doFly(-distance);
+      }
       camera.update();
    }
 
@@ -162,10 +177,9 @@ export class FCanvas extends FControl {
    //==========================================================
    public start() {
       // 设置渲染管道
-      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, FForwardPipeline);
+      var pipeline = this.pipeline;
       pipeline.scene = this.scene;
       pipeline.camera = this.camera;
-      pipeline.enterFrameListeners.register(this, this.onProcess);
       pipeline.start();
    }
 

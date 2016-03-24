@@ -14,6 +14,8 @@ import {FPipeline} from './FPipeline';
 // @version 141230
 //==========================================================
 export class FForwardPipeline extends FPipeline {
+   // 阴影标志
+   protected _optionShadow: boolean;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -29,11 +31,28 @@ export class FForwardPipeline extends FPipeline {
       super.setup();
       // 设置渲染区域
       this.region = new FRegion();
+      this.optionShadow = false;
       // 设置渲染技术
       var techniqueConsole: FTechniqueConsole = RConsole.find(FTechniqueConsole);
-      this.drawTechnique = techniqueConsole.find(this._graphicContext, FGeneralTechnique);
-      // this.drawTechnique = techniqueConsole.find(this._graphicContext, FShadowTechnique);
       this.selectTechnique = <FSelectTechnique>techniqueConsole.find(this._graphicContext, FSelectTechnique);
+   }
+
+   //==========================================================
+   // <T>获得阴影标志。</T>
+   //==========================================================
+   public get optionShadow() {
+      return this._optionShadow;
+   }
+
+   //==========================================================
+   // <T>设置阴影标志。</T>
+   //==========================================================
+   public set optionShadow(value) {
+      this._optionShadow = value;
+      // 设置渲染技术
+      var techniqueConsole: FTechniqueConsole = RConsole.find(FTechniqueConsole);
+      var techniqueClass = value ? FShadowTechnique : FGeneralTechnique;
+      this.drawTechnique = techniqueConsole.find(this._graphicContext, techniqueClass);
    }
 
    //==========================================================

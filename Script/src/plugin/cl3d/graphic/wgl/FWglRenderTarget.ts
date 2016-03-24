@@ -9,10 +9,10 @@ import {FRenderTarget} from '../FRenderTarget';
 //==========================================================
 export class FWglRenderTarget extends FRenderTarget {
    // @attribute
-   protected _optionDepth = true;
+   public optionDepth;
    // @attribute
-   protected _handle = null;
-   protected _handleDepth = null;
+   public handle;
+   public handleDepth;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -22,7 +22,7 @@ export class FWglRenderTarget extends FRenderTarget {
       var graphic = context.handle;
       //............................................................
       // 创建帧缓冲
-      this._handle = graphic.createFramebuffer();
+      this.handle = graphic.createFramebuffer();
       return context.checkError('createFramebuffer', 'Create frame buffer failure.');
    }
 
@@ -35,16 +35,16 @@ export class FWglRenderTarget extends FRenderTarget {
       var handle = context.handle;
       //............................................................
       // 绑定帧缓冲
-      handle.bindFramebuffer(handle.FRAMEBUFFER, this._handle);
+      handle.bindFramebuffer(handle.FRAMEBUFFER, this.handle);
       var result = context.checkError('bindFramebuffer', 'Bind frame buffer failure.');
       if (!result) {
          return result;
       }
       //............................................................
       // 创建深度缓冲区
-      if (this._optionDepth) {
+      if (this.optionDepth) {
          // 绑定深度缓冲区
-         var depthHandle = this._handleDepth = handle.createRenderbuffer();
+         var depthHandle = this.handleDepth = handle.createRenderbuffer();
          var result = context.checkError('createRenderbuffer', 'Create render buffer failure.');
          if (!result) {
             return result;
@@ -55,13 +55,14 @@ export class FWglRenderTarget extends FRenderTarget {
             return result;
          }
          handle.renderbufferStorage(handle.RENDERBUFFER, handle.DEPTH_COMPONENT16, size.width, size.height);
+         //handle.renderbufferStorage(handle.RENDERBUFFER, handle.DEPTH_COMPONENT24, size.width, size.height);
          var result = context.checkError('renderbufferStorage', 'Set render buffer storage format failure.');
          if (!result) {
             return result;
          }
          // 绑定深度缓冲区
          handle.framebufferRenderbuffer(handle.FRAMEBUFFER, handle.DEPTH_ATTACHMENT, handle.RENDERBUFFER, depthHandle);
-         var result = context.checkError('framebufferRenderbuffer', "Set depth buffer to frame buffer failure. (framebuffer=%d, depthbuffer=%d)", this._handle, depthHandle);
+         var result = context.checkError('framebufferRenderbuffer', "Set depth buffer to frame buffer failure. (framebuffer=%d, depthbuffer=%d)", this.handle, depthHandle);
          if (!result) {
             return result;
          }
@@ -92,7 +93,7 @@ export class FWglRenderTarget extends FRenderTarget {
          }
          // 绑定数据
          handle.framebufferTexture2D(handle.FRAMEBUFFER, attachment0 + i, handle.TEXTURE_2D, texture.handle, 0);
-         var result = context.checkError('framebufferTexture2D', "Set color buffer into frame buffer failure. (framebuffer_id=%d, texture_id=%d)", this._handle, texture.handle);
+         var result = context.checkError('framebufferTexture2D', "Set color buffer into frame buffer failure. (framebuffer_id=%d, texture_id=%d)", this.handle, texture.handle);
          if (!result) {
             return result;
          }
@@ -107,16 +108,16 @@ export class FWglRenderTarget extends FRenderTarget {
    public dispose() {
       var context = this._graphicContext;
       // 释放深度对象
-      var handleDepth = this._handleDepth;
+      var handleDepth = this.handleDepth;
       if (handleDepth) {
          context._handle.deleteRenderbuffer(handleDepth);
-         this._handleDepth = null;
+         this.handleDepth = null;
       }
       // 释放对象
-      var handle = this._handle;
+      var handle = this.handle;
       if (handle) {
          context._handle.deleteFramebuffer(handle);
-         this._handle = null;
+         this.handle = null;
       }
       // 父处理
       super.dispose();

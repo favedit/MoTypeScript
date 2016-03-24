@@ -11,6 +11,7 @@ import {FRegion} from '../base/FRegion';
 export class FShadowDepthPass extends FTechniquePass {
    // @attribute
    public textureDepth;
+   public textureColor;
    public renderTarget;
 
    //==========================================================
@@ -29,14 +30,21 @@ export class FShadowDepthPass extends FTechniquePass {
    public setup() {
       super.setup();
       var context = this._graphicContext;
+      context.enableDrawBuffers();
       // 创建平面
       var texture = this.textureDepth = context.createFlatTexture();
       texture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
       texture.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      // 创建平面
+      var texture = this.textureColor = context.createFlatTexture();
+      texture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
+      texture.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
       // 创建渲染目标
       var renderTarget = this.renderTarget = context.createRenderTarget();
+      renderTarget.optionDepth = true;
       renderTarget.size.set(2048, 2048);
-      renderTarget.textures.push(texture);
+      renderTarget.textures.push(this.textureDepth);
+      renderTarget.textures.push(this.textureColor);
       renderTarget.build();
    }
 
