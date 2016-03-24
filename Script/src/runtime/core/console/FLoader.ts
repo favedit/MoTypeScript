@@ -1,4 +1,4 @@
-import {EDataContent} from '../../common/lang/EDataContent';
+import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {FObject} from '../../common/lang/FObject';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {FObject} from '../../common/lang/FObject';
 //==========================================================
 export abstract class FLoader extends FObject {
    // 内容类型
-   public contentCd: EDataContent = EDataContent.Unknown;
+   public contentCd: DataContentEnum = DataContentEnum.Unknown;
    // 内容
    public content: any = null;
    // 数据

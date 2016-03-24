@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FObjects} from '../../common/lang/FObjects';
 import {RLogger} from '../../common/lang/RLogger';
 import {EThreadStatus} from './EThreadStatus';
@@ -15,7 +15,7 @@ import {FThread} from './FThread';
 //==========================================================
 export class FThreadConsole extends FConsole {
    // @attribute 范围标志
-   protected _scopeCd = EScope.Global;
+   protected _scopeCd = ScopeEnum.Global;
    // @attribute 激活标志
    protected _active: boolean = true;
    // @attribute 激活标志

@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {RString} from '../../common/lang/RString';
 import {RObject} from '../../common/lang/RObject';
@@ -17,7 +17,7 @@ import {FConsole} from '../FConsole';
 //==========================================================
 export class FEnvironmentConsole extends FConsole {
    // 范围类型
-   protected _scopeCd = EScope.Local;
+   protected _scopeCd = ScopeEnum.Local;
    // 环境变量
    protected _environments: FDictionary<FEnvironment> = null;
 

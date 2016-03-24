@@ -1,4 +1,4 @@
-import {EDataType} from '../lang/EDataType';
+import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {FError} from '../lang/FError';
 import {RFloat} from '../lang/RFloat';
 
@@ -260,15 +260,15 @@ export class SValue3 {
    //==========================================================
    public unserialize2(input, dataCd) {
       switch (dataCd) {
-         case EDataType.Int32:
+         case DataTypeEnum.Int32:
             this.x = input.readInt32();
             this.y = input.readInt32();
             break;
-         case EDataType.Float32:
+         case DataTypeEnum.Float32:
             this.x = input.readFloat();
             this.y = input.readFloat();
             break;
-         case EDataType.Float64:
+         case DataTypeEnum.Float64:
             this.x = input.readDouble();
             this.y = input.readDouble();
             break;
@@ -284,17 +284,17 @@ export class SValue3 {
    //==========================================================
    public unserialize3(input, dataCd) {
       switch (dataCd) {
-         case EDataType.Int32:
+         case DataTypeEnum.Int32:
             this.x = input.readInt32();
             this.y = input.readInt32();
             this.z = input.readInt32();
             break;
-         case EDataType.Float32:
+         case DataTypeEnum.Float32:
             this.x = input.readFloat();
             this.y = input.readFloat();
             this.z = input.readFloat();
             break;
-         case EDataType.Float64:
+         case DataTypeEnum.Float64:
             this.x = input.readDouble();
             this.y = input.readDouble();
             this.z = input.readDouble();

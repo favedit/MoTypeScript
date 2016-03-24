@@ -1,4 +1,4 @@
-import {EResult} from '../../common/lang/EResult';
+import {ResultEnum} from '../../common/lang/ResultEnum';
 import {FObject} from '../../common/lang/FObject';
 import {EThreadStatus} from './EThreadStatus';
 
@@ -51,7 +51,7 @@ export abstract class FThread extends FObject {
    //
    // @return 处理结果
    //==========================================================
-   public abstract onProcess():EResult;
+   public abstract onProcess():ResultEnum;
 
    //==========================================================
    // <T>调用处理。</T>

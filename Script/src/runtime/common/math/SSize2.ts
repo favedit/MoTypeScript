@@ -1,5 +1,5 @@
 import {FError} from '../lang/FError';
-import {EDataType} from '../lang/EDataType';
+import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -127,7 +127,7 @@ export class SSize2 {
    public unserialize(input, dataCd) {
       var o = this;
       if (!dataCd) {
-         dataCd = EDataType.Float16;
+         dataCd = DataTypeEnum.Float16;
       }
       o.width = input.readData(dataCd);
       o.height = input.readData(dataCd);

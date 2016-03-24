@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FObjects} from '../../common/lang/FObjects';
 import {RObject} from '../../common/lang/RObject';
 import {RClass} from '../../common/reflect/RClass';
@@ -13,7 +13,7 @@ import {FAudioContext} from './FAudioContext';
 //==========================================================
 export class FAudioContextConsole extends FConsole {
    // @attribute
-   protected _scopeCd = EScope.Global;
+   protected _scopeCd = ScopeEnum.Global;
    // @attribute
    protected _contexts = null;
 

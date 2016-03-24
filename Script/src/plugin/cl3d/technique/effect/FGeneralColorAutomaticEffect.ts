@@ -1,4 +1,4 @@
-﻿import {EDataType} from '../../../../runtime/common/lang/EDataType';
+﻿import {DataTypeEnum} from '../../../../runtime/common/lang/DataTypeEnum';
 import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';

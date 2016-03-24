@@ -3,6 +3,8 @@ export * from './ESampler';
 export * from './FAutomaticEffect';
 export * from './FControlAutomaticEffect';
 export * from './FControlFrameEffect';
+export * from './FDeferredDataPhongAutomaticEffect';
+export * from './FDeferredMergePhongAutomaticEffect';
 export * from './FGeneralColorAutomaticEffect';
 export * from './FGeneralColorFillEffect';
 export * from './FGeneralColorFlatEffect';

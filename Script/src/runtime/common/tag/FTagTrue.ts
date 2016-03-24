@@ -1,4 +1,4 @@
-import {EResult} from '../lang/EResult';
+import {ResultEnum} from '../lang/ResultEnum';
 import {RBoolean} from '../lang/RBoolean';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
@@ -21,7 +21,7 @@ export class FTagTrue extends FTag {
    // @param p:context:FTagContext 环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): EResult {
+   public onBegin(context: FTagContext): ResultEnum {
       var result = false;
       var ns = this.source.split('|');
       var c = ns.length;
@@ -33,7 +33,7 @@ export class FTagTrue extends FTag {
             break;
          }
       }
-      return result ? EResult.Continue : EResult.Skip;
+      return result ? ResultEnum.Continue : ResultEnum.Skip;
    }
 
    //==========================================================

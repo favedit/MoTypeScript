@@ -1,4 +1,4 @@
-import {EDataType} from '../../../runtime/common/lang/EDataType';
+import {DataTypeEnum} from '../../../runtime/common/lang/DataTypeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
 import {FObjects} from '../../../runtime/common/lang/FObjects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
@@ -112,9 +112,9 @@ export class FRenderModelMesh extends FRenderable {
          var indexBuffer: FE3rIndexBuffer = context.createIndexBuffer(FE3rIndexBuffer);
          indexBuffer.resource = streamResource;
          var dataCd = streamResource.elementDataCd;
-         if (dataCd == EDataType.Uint16) {
+         if (dataCd == DataTypeEnum.Uint16) {
             indexBuffer.strideCd = EIndexStride.Uint16;
-         } else if (dataCd == EDataType.Uint32) {
+         } else if (dataCd == DataTypeEnum.Uint32) {
             indexBuffer.strideCd = EIndexStride.Uint32;
          } else {
             throw new FError(this, "Unknown data type.");

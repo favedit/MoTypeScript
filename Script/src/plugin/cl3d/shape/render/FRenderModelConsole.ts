@@ -1,4 +1,4 @@
-import {EScope} from '../../runtime/common/lang/EScope'
+import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {FDictionary} from '../../runtime/common/lang/FDictionary'
 import {RString} from '../../runtime/common/lang/RString'
 import {RObject} from '../../runtime/common/lang/RObject'
@@ -39,7 +39,7 @@ export class FRenderModelConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       this._models = new FDictionary<FRenderModel>();
       this._meshs = new FDictionary<FRenderModelMesh>();
       this._dynamicMeshs = new FDictionary<FRenderModelMesh>();

@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150112
 //==========================================================
-export enum EDataType {
+export enum DataTypeEnum {
    // @member 未知
    Unknown = 0,
    // @member 8位有符号整数

@@ -1,4 +1,4 @@
-import {EDataContent} from '../../../runtime/common/lang/EDataContent';
+import {DataContentEnum} from '../../../runtime/common/lang/DataContentEnum';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
 import {FError} from '../../../runtime/common/lang/FError';
 import {RClass} from '../../../runtime/common/reflect/RClass';
@@ -152,11 +152,11 @@ export class FResource extends FBaseResource {
    public load(loader: FResourceLoader): void {
       var data: any = loader.data;
       switch (loader.contentCd) {
-         case EDataContent.Json: {
+         case DataContentEnum.Json: {
             this.loadConfig(data);
             break;
          }
-         case EDataContent.Binary: {
+         case DataContentEnum.Binary: {
             // 创建读取流
             var stream: FDataStream = RClass.create(FDataStream);
             stream.endianCd = true;

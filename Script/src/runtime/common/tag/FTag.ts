@@ -1,4 +1,4 @@
-import {EResult} from '../lang/EResult';
+import {ResultEnum} from '../lang/ResultEnum';
 import {FObject} from '../lang/FObject';
 import {FObjects} from '../lang/FObjects';
 import {FString} from '../lang/FString';
@@ -36,7 +36,7 @@ export class FTag extends FObject {
    // @return 处理结果
    //==========================================================
    public onBegin(context) {
-      return EResult.Continue;
+      return ResultEnum.Continue;
    }
 
    //==========================================================
@@ -46,7 +46,7 @@ export class FTag extends FObject {
    // @return 处理结果
    //==========================================================
    public onEnd(context) {
-      return EResult.Continue;
+      return ResultEnum.Continue;
    }
 
    //==========================================================
@@ -90,7 +90,7 @@ export class FTag extends FObject {
    public parse(context) {
       // 开始处理
       var resultCd = this.onBegin(context);
-      if (resultCd == EResult.Continue) {
+      if (resultCd == ResultEnum.Continue) {
          // 子标签处理
          var children = this._children;
          if (children) {
@@ -98,7 +98,7 @@ export class FTag extends FObject {
             for (var i = 0; i < count; i++) {
                var child = children.get(i);
                resultCd = child.parse(context);
-               if (resultCd == EResult.Cancel) {
+               if (resultCd == ResultEnum.Cancel) {
                   return resultCd;
                }
                context._trimLeft = child._trimLeft;

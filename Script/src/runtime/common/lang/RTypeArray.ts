@@ -1,4 +1,4 @@
-import {EDataType} from './EDataType';
+import {DataTypeEnum} from './DataTypeEnum';
 import {FError} from './FError';
 
 //==========================================================
@@ -54,22 +54,22 @@ export class RTypeArray {
    //==========================================================
    public static createArray(typeCd, length) {
       switch (typeCd) {
-         case EDataType.Boolean:
-         case EDataType.Int8:
+         case DataTypeEnum.Boolean:
+         case DataTypeEnum.Int8:
             return new Int8Array(length);
-         case EDataType.Int16:
+         case DataTypeEnum.Int16:
             return new Int16Array(length);
-         case EDataType.Int32:
+         case DataTypeEnum.Int32:
             return new Int32Array(length);
-         case EDataType.Uint8:
+         case DataTypeEnum.Uint8:
             return new Uint8Array(length);
-         case EDataType.Uint16:
+         case DataTypeEnum.Uint16:
             return new Uint16Array(length);
-         case EDataType.Uint32:
+         case DataTypeEnum.Uint32:
             return new Uint32Array(length);
-         case EDataType.Float32:
+         case DataTypeEnum.Float32:
             return new Float32Array(length);
-         case EDataType.Float64:
+         case DataTypeEnum.Float64:
             return new Float64Array(length);
       }
       throw new FError('Create unknown type array. (type={1}, length={2})', typeCd, length);

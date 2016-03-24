@@ -1,4 +1,4 @@
-import {EDataType} from '../lang/EDataType';
+import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {RString} from '../lang/RString'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'

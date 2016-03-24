@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150415
 //==========================================================
-export enum EDataContent {
+export enum DataContentEnum {
    // 未知
    Unknown,
    // JSON

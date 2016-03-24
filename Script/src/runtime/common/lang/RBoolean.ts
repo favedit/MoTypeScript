@@ -1,4 +1,4 @@
-import {EBoolean} from './EBoolean';
+import {BooleanEnum} from './BooleanEnum';
 import {FError} from './FError';
 
 //==========================================================
@@ -18,7 +18,7 @@ export class RBoolean {
    // @return String 字符串
    //==========================================================
    public static format(value) {
-      return value ? EBoolean.True : EBoolean.False;
+      return value ? BooleanEnum.True : BooleanEnum.False;
    }
 
    //==========================================================
@@ -33,7 +33,7 @@ export class RBoolean {
          if (value.constructor == Boolean) {
             return value;
          } else if (value.constructor == String) {
-            return (value == EBoolean.True);
+            return (value == BooleanEnum.True);
          } else if (value.constructor == Number) {
             return value > 0;
          } else {
@@ -52,7 +52,7 @@ export class RBoolean {
    // @param valueFalse:String 假字符串
    // @return String 字符串
    //==========================================================
-   public static toString(value, valueTrue: string = EBoolean.True, valueFalse: string = EBoolean.False) {
+   public static toString(value, valueTrue: string = BooleanEnum.True, valueFalse: string = BooleanEnum.False) {
       return value ? valueTrue : valueFalse;
    }
 }

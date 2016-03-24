@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FObjects} from '../../common/lang/FObjects';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../FConsole';
@@ -15,7 +15,7 @@ import {FResourceThreadPipeline} from './FResourceThreadPipeline';
 //==========================================================
 export class FResourceDataConsole extends FConsole {
    // @attribute
-   protected _scopeCd = EScope.Global;
+   protected _scopeCd = ScopeEnum.Global;
    // @attribute
    protected _loadDatas = null;
    protected _processDatas = null;

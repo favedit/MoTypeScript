@@ -1,4 +1,4 @@
-import {EDataContent} from '../../runtime/common/lang/EDataContent';
+import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
@@ -87,7 +87,7 @@ export class FTemplateResourceConsole extends FConsole {
       //template.setVendor(vendor);
       //template.setSourceUrl(url);
       // 创建加载器
-      this._resourceConsole.loadContent(EDataContent.Json, template, url);
+      this._resourceConsole.loadContent(DataContentEnum.Json, template, url);
       templates.set(identity, template);
       return template;
    }

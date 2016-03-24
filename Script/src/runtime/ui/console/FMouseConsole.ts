@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FListeners} from '../../common/lang/FListeners';
 import {RObject} from '../../common/lang/RObject';
 import {ALinker} from '../../common/reflect/ALinker';
@@ -46,7 +46,7 @@ export class FMouseConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this.scopeCd = EScope.Local;
+      this.scopeCd = ScopeEnum.Local;
       // 设置属性
       this._eventMouse = new SMouseEvent();
       this._clickListeners = new FListeners();

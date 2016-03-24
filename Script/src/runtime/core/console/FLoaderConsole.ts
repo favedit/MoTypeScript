@@ -1,7 +1,7 @@
 // import {AProperty} from '../../common/reflect/AProperty';
 // import {ALogger} from '../../common/reflect/ALogger';
-import {EScope} from '../../common/lang/EScope';
-import {EDataContent} from '../../common/lang/EDataContent';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
+import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {FObjects} from '../../common/lang/FObjects';
 import {RObject} from '../../common/lang/RObject';
 import {SListenerContext} from '../../common/lang/SListenerContext';
@@ -55,7 +55,7 @@ export class FLoaderConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Global;
+      this._scopeCd = ScopeEnum.Global;
       this._loaders = new FObjects<FLoader>();
       this._processLoaders = new FObjects<FLoader>();
       // 创建线程
@@ -82,7 +82,7 @@ export class FLoaderConsole extends FConsole {
             var url: string = loader.url;
             // 加载处理
             var connection: FHttpConnection = null;
-            if (loader.contentCd == EDataContent.Json) {
+            if (loader.contentCd == DataContentEnum.Json) {
                connection = jsonConsole.sendAsync(url);
             } else {
                connection = httpConsole.sendAsync(url);

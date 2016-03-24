@@ -1,4 +1,4 @@
-import {EDataType} from '../lang/EDataType';
+import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {RString} from '../lang/RString'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'
@@ -21,7 +21,7 @@ export class FPropertyAnnotation extends FAnnotation {
    //
    // @param name 名称
    //============================================================
-   public constructor(name: string, dataName: String = null, dataCd: EDataType = EDataType.Unknown, dataClass: any = null, dataDefault: any = null) {
+   public constructor(name: string, dataName: String = null, dataCd: DataTypeEnum = DataTypeEnum.Unknown, dataClass: any = null, dataDefault: any = null) {
       super(name);
       this._annotationCd = EAnnotation.Property;
       // 设置数据名称

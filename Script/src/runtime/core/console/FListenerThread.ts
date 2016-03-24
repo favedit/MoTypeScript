@@ -1,4 +1,4 @@
-import {EResult} from '../../common/lang/EResult';
+import {ResultEnum} from '../../common/lang/ResultEnum';
 import {FListeners} from '../../common/lang/FListeners';
 import {RObject} from '../../common/lang/RObject';
 import {FThread} from './FThread';
@@ -29,9 +29,9 @@ export class FListenerThread extends FThread {
    //
    // @return 处理结果
    //==========================================================
-   public onProcess(): EResult {
+   public onProcess(): ResultEnum {
       this.processListeners.process();
-      return EResult.Success;
+      return ResultEnum.Success;
    }
 
    //==========================================================

@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {RObject} from '../../common/lang/RObject';
 import {ALinker} from '../../common/reflect/ALinker';
@@ -30,7 +30,7 @@ export class FImageConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._scopeCd = EScope.Global;
+      this._scopeCd = ScopeEnum.Global;
       this._images = new FDictionary<FImage>();
    }
 

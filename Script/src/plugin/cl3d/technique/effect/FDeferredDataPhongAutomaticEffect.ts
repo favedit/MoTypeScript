@@ -1,4 +1,4 @@
-﻿import {EDataType} from '../../../../runtime/common/lang/EDataType';
+﻿import {DataTypeEnum} from '../../../../runtime/common/lang/DataTypeEnum';
 import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FFloatStream} from '../../base/util/FFloatStream';
@@ -97,7 +97,7 @@ export class FDeferredDataPhongAutomaticEffect extends FAutomaticEffect {
       if (renderable._optionMerge) {
          var mergeRenderables = renderable.mergeRenderables();
          var mergeCount = mergeRenderables.count();
-         var data = RTypeArray.findTemp(EDataType.Float32, 16 * mergeCount);
+         var data = RTypeArray.findTemp(DataTypeEnum.Float32, 16 * mergeCount);
          for (var i = 0; i < mergeCount; i++) {
             var mergeRenderable = mergeRenderables.at(i);
             var matrix = mergeRenderable.currentMatrix;

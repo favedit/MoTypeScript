@@ -1,4 +1,4 @@
-import {EScope} from '../lang/EScope';
+import {ScopeEnum} from '../lang/ScopeEnum';
 import {RClass} from './RClass';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {RClass} from './RClass';
 // @author maocy
 // @version 160227
 //==========================================================
-export function ALinker(clazz: Function, scopeCd: EScope = EScope.Global, factory: any = null) {
+export function ALinker(clazz: Function, scopeCd: ScopeEnum = ScopeEnum.Global, factory: any = null) {
    return function(target, name): any {
       // 设置描述器
       var descriptor: any = new Object();

@@ -1,4 +1,4 @@
-﻿import {EScope} from '../../../runtime/common/lang/EScope';
+﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {RClass} from '../../../runtime/common/reflect/RClass';
@@ -20,7 +20,7 @@ export class FTechniqueConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       this._techniques = new FDictionary<FTechnique>();
    }
 

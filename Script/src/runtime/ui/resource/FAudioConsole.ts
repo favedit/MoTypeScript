@@ -1,5 +1,5 @@
 import {FDictionary} from '../../common/lang/FDictionary';
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {RObject} from '../../common/lang/RObject';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
@@ -26,7 +26,7 @@ export class FAudioConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this.scopeCd = EScope.Global;
+      this.scopeCd = ScopeEnum.Global;
       this._audios = new FDictionary<FAudio>();
    }
 

@@ -1,5 +1,5 @@
-import {EScope} from '../../common/lang/EScope';
-import {EDataContent} from '../../common/lang/EDataContent';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
+import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
 // import {FError} from '../../common/lang/FError';
 import {RObject} from '../../common/lang/RObject';
@@ -61,7 +61,7 @@ export class FResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._scopeCd = EScope.Global;
+      this._scopeCd = ScopeEnum.Global;
       //_factory = RClass.create(MO.FClassFactory);
       //_types = new common.lang.FDictionary();
       this._packages = new FDictionary<FResourcePackage>();
@@ -260,7 +260,7 @@ export class FResourceConsole extends FConsole {
    // @param content 内容
    // @param uri 网络地址
    //==========================================================
-   public loadContent(contentCd: EDataContent, content: FResource, url: string): void {
+   public loadContent(contentCd: DataContentEnum, content: FResource, url: string): void {
       // 创建加载器
       var loader: FResourceLoader = RClass.create(FResourceLoader);
       loader.contentCd = contentCd;

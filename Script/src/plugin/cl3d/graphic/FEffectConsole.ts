@@ -1,4 +1,4 @@
-﻿import {EScope} from '../../../runtime/common/lang/EScope';
+﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {FLooper} from '../../../runtime/common/lang/FLooper';
@@ -45,7 +45,7 @@ export class FEffectConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       this._configs = new FDictionary();
       this._loadEffects = new FLooper();
       this._registerEffects = new FDictionary<Function>();

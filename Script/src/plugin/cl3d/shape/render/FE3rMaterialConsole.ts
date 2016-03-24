@@ -1,4 +1,4 @@
-import {EScope} from '../../runtime/common/lang/EScope'
+import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {FDictionary} from '../../runtime/common/lang/FDictionary'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
 import {RClass} from '../../runtime/common/reflect/RClass'
@@ -32,7 +32,7 @@ export class FE3rMaterialConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       this._materials = new FDictionary();
    }
 

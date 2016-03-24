@@ -1,5 +1,5 @@
-import {EAccess} from '../lang/EAccess';
-import {EDataType} from '../lang/EDataType';
+import {AccessEnum} from '../lang/AccessEnum';
+import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {SAccessEvent} from '../lang/SAccessEvent';
 import {FPropertyAnnotation} from './FPropertyAnnotation';
 import {RMemory} from '../RMemory';
@@ -15,7 +15,7 @@ import {RClass} from './RClass';
 export function AProperty(
       dataName: String = null,
       dataChanged: string = 'onFieldChanged',
-      dataCd: EDataType = EDataType.Object,
+      dataCd: DataTypeEnum = DataTypeEnum.Object,
       dataClass: any = null,
       dataDefault: any = null) {
    return function(target: any, name: string): void {

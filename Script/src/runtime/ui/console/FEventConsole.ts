@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FError} from '../../common/lang/FError';
 // import {SListenerContext} from '../../common/lang/SListenerContext';
 // import {FListener} from '../../common/lang/FListener';
@@ -62,7 +62,7 @@ export class FEventConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       // 创建属性
       // this._processEvents = new FObjects<any>();
       // this._events = new FObjects<any>();

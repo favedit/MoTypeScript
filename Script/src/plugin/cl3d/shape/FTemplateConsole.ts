@@ -1,4 +1,4 @@
-import {EScope} from '../../runtime/common/lang/EScope';
+import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum';
 import {RObject} from '../../runtime/common/lang/RObject';
 import {RString} from '../../runtime/common/lang/RString';
 import {FObjectPools} from '../../runtime/common/lang/FObjectPools';
@@ -39,7 +39,7 @@ export class FTemplateConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       this._pools = RClass.create(FObjectPools);
    }
 

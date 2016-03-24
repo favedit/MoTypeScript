@@ -1,4 +1,4 @@
-export enum EAccess {
+export enum AccessEnum {
    Unknown,
    Get,
    Set,

@@ -1,4 +1,4 @@
-import {EResult} from '../lang/EResult';
+import {ResultEnum} from '../lang/ResultEnum';
 import {RBoolean} from '../lang/RBoolean';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
@@ -21,9 +21,9 @@ export class FTagFalse extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): EResult {
+   public onBegin(context: FTagContext): ResultEnum {
       var value = context.get(this.source);
-      return RBoolean.parse(value) ? EResult.Skip : EResult.Continue;
+      return RBoolean.parse(value) ? ResultEnum.Skip : ResultEnum.Continue;
    }
 
    //==========================================================

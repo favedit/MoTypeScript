@@ -1,4 +1,4 @@
-import {EDataContent} from '../../runtime/common/lang/EDataContent';
+import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
 import {RObject} from '../../runtime/common/lang/RObject';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
@@ -178,7 +178,7 @@ export class FModelResourceConsole extends FConsole {
       //model.setVendor(vendor);
       //model.setSourceUrl(url);
       // 创建加载器
-      this._resourceConsole.loadContent(EDataContent.Binary, model, url);
+      this._resourceConsole.loadContent(DataContentEnum.Binary, model, url);
       // 存储模型
       models.set(identity, model);
       return model;

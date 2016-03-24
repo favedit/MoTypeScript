@@ -1,4 +1,4 @@
-import {EScope} from '../common/lang/EScope';
+import {ScopeEnum} from '../common/lang/ScopeEnum';
 import {FObject} from '../common/lang/FObject';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {FObject} from '../common/lang/FObject';
 //==========================================================
 export class FConsole extends FObject {
    // 范围类型
-   protected _scopeCd: EScope;
+   protected _scopeCd: ScopeEnum;
    // 设置状态
    protected _statusSetup: boolean;
    // 激活状态
@@ -26,7 +26,7 @@ export class FConsole extends FObject {
    public constructor() {
       super();
       // 设置属性
-      this._scopeCd = EScope.Global;
+      this._scopeCd = ScopeEnum.Global;
       this._statusSetup = false;
       this._statusActive = false;
       this._statusLoad = false;
@@ -37,7 +37,7 @@ export class FConsole extends FObject {
    //
    // @return 范围
    //==========================================================
-   public get scopeCd(): EScope {
+   public get scopeCd(): ScopeEnum {
       return this._scopeCd;
    }
 

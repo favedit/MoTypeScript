@@ -1,7 +1,7 @@
 import {ALinker} from '../../common/reflect/ALinker';
 import {AProperty} from '../../common/reflect/AProperty';
-import {EScope} from '../../common/lang/EScope';
-import {EDataType} from '../../common/lang/EDataType';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
+import {DataTypeEnum} from '../../common/lang/DataTypeEnum';
 import {RObject} from '../../common/lang/RObject';
 import {RLogger} from '../../common/lang/RLogger';
 import {RClass} from '../../common/reflect/RClass';
@@ -49,7 +49,7 @@ export class FLoggerConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.scopeCd = EScope.Global;
+      this.scopeCd = ScopeEnum.Global;
       //RLogger.outputListeners.register(this, this.onOutput);
    }
 

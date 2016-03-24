@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FObjectPool} from '../../common/lang/FObjectPool';
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
@@ -29,7 +29,7 @@ export class FHttpConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._scopeCd = EScope.Local;
+      this._scopeCd = ScopeEnum.Local;
       this._pool = RClass.create(FObjectPool);
    }
 

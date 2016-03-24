@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150114
 //===========================================================
-export enum EResult {
+export enum ResultEnum {
    // @attribute Integer 成功
    Success = 0,
    // @attribute Integer 继续

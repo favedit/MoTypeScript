@@ -1,6 +1,6 @@
 import {ALinker} from '../common/reflect/ALinker';
 import {ALogger} from '../common/reflect/ALogger';
-import {EScope} from '../common/lang/EScope';
+import {ScopeEnum} from '../common/lang/ScopeEnum';
 import {FObjects} from '../common/lang/FObjects';
 import {RString} from '../common/lang/RString';
 import {RLogger} from '../common/lang/RLogger';

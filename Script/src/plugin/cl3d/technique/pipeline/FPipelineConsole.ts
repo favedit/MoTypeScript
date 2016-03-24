@@ -1,4 +1,4 @@
-import {EScope} from '../../../../runtime/common/lang/EScope';
+import {ScopeEnum} from '../../../../runtime/common/lang/ScopeEnum';
 import {FObjects} from '../../../../runtime/common/lang/FObjects';
 import {RAssert} from '../../../../runtime/common/RAssert';
 import {ALinker} from '../../../../runtime/common/reflect/ALinker';
@@ -31,7 +31,7 @@ export class FPipelineConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._scopeCd = EScope.Global;
+      this._scopeCd = ScopeEnum.Global;
       this._pipelines = new FObjects<FPipeline>();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);

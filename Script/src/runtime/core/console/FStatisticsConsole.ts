@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {FConsole} from '../FConsole';
 import {FStatistics} from './FStatistics';
@@ -12,7 +12,7 @@ import {FStatistics} from './FStatistics';
 //==========================================================
 export class FStatisticsConsole extends FConsole {
    // 范围 
-   protected _scopeCd = EScope.Local;
+   protected _scopeCd = ScopeEnum.Local;
    // 统计集合
    protected _statisticses = new FDictionary<FStatistics>();
 

@@ -1,4 +1,4 @@
-import {EDataContent} from '../../runtime/common/lang/EDataContent';
+import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
 import {RObject} from '../../runtime/common/lang/RObject';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
@@ -138,7 +138,7 @@ export class FMaterialResourceConsole extends FConsole {
       material.guid = identity;
       //template.setVendor(vendor);
       // 创建加载器
-      this._resourceConsole.loadContent(EDataContent.Json, material, url);
+      this._resourceConsole.loadContent(DataContentEnum.Json, material, url);
       materials.set(identity, material);
       return material;
    }

@@ -1,4 +1,4 @@
-import {EDataType} from '../lang/EDataType';
+import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {FString} from '../lang/FString';
 import {FError} from '../lang/FError'
 import {FDataView} from './FDataView'
@@ -301,27 +301,27 @@ export class FDataStream extends FDataView {
    //==========================================================
    public readData(dataCd): any {
       switch (dataCd) {
-         case EDataType.Int8:
+         case DataTypeEnum.Int8:
             return this.readInt8();
-         case EDataType.Int16:
+         case DataTypeEnum.Int16:
             return this.readInt16();
-         case EDataType.Int32:
+         case DataTypeEnum.Int32:
             return this.readInt32();
-         case EDataType.Int64:
+         case DataTypeEnum.Int64:
             return this.readInt64();
-         case EDataType.Uint8:
+         case DataTypeEnum.Uint8:
             return this.readUint8();
-         case EDataType.Uint16:
+         case DataTypeEnum.Uint16:
             return this.readUint16();
-         case EDataType.Uint32:
+         case DataTypeEnum.Uint32:
             return this.readUint32();
-         case EDataType.Uint64:
+         case DataTypeEnum.Uint64:
             return this.readUint64();
-         case EDataType.Float32:
+         case DataTypeEnum.Float32:
             return this.readFloat();
-         case EDataType.Float64:
+         case DataTypeEnum.Float64:
             return this.readDouble();
-         case EDataType.String:
+         case DataTypeEnum.String:
             return this.readString();
       }
       throw new FError(this, 'Unknown data cd. (data_cd={1})', dataCd);
@@ -541,27 +541,27 @@ export class FDataStream extends FDataView {
    //==========================================================
    public writeData(dataCd, value) {
       switch (dataCd) {
-         case EDataType.Int8:
+         case DataTypeEnum.Int8:
             return this.writeInt8(value);
-         case EDataType.Int16:
+         case DataTypeEnum.Int16:
             return this.writeInt16(value);
-         case EDataType.Int32:
+         case DataTypeEnum.Int32:
             return this.writeInt32(value);
-         case EDataType.Int64:
+         case DataTypeEnum.Int64:
             return this.writeInt64(value);
-         case EDataType.Uint8:
+         case DataTypeEnum.Uint8:
             return this.writeUint8(value);
-         case EDataType.Uint16:
+         case DataTypeEnum.Uint16:
             return this.writeUint16(value);
-         case EDataType.Uint32:
+         case DataTypeEnum.Uint32:
             return this.writeUint32(value);
-         case EDataType.Uint64:
+         case DataTypeEnum.Uint64:
             return this.writeUint64(value);
-         case EDataType.Float32:
+         case DataTypeEnum.Float32:
             return this.writeFloat(value);
-         case EDataType.Float64:
+         case DataTypeEnum.Float64:
             return this.writeDouble(value);
-         case EDataType.String:
+         case DataTypeEnum.String:
             return this.writeString(value);
       }
       throw new FError(this, 'Unknown data cd. (data_cd={1})', dataCd);

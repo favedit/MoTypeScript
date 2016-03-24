@@ -1,4 +1,4 @@
-import {EEnum} from './EEnum';
+import {EnumObject} from './EnumObject';
 
 //==========================================================
 // <T>范围枚举。</T>
@@ -7,7 +7,7 @@ import {EEnum} from './EEnum';
 // @author maocy
 // @version 141230
 //==========================================================
-export class EScope extends EEnum {
+export class ScopeEnum extends EnumObject {
    // @member 未知
    public static Unknown = 0;
    // @member 本地范围

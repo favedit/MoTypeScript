@@ -4,7 +4,7 @@
 // @author maocy
 // @version 141229
 //===========================================================
-export class EBoolean {
+export class BooleanEnum {
    // 值为真
    static True: string = 'Y';
    // 值为假

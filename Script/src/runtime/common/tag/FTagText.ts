@@ -1,4 +1,4 @@
-import {EResult} from '../lang/EResult';
+import {ResultEnum} from '../lang/ResultEnum';
 import {RString} from '../lang/RString';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
@@ -20,7 +20,7 @@ export class FTagText extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): EResult {
+   public onBegin(context: FTagContext): ResultEnum {
       var text = this.text;
       if (context.trimLeft) {
          if (RString.startsWith(text, '\r')) {
@@ -39,7 +39,7 @@ export class FTagText extends FTag {
          }
       }
       context.write(text);
-      return EResult.Skip;
+      return ResultEnum.Skip;
    }
 
    //==========================================================

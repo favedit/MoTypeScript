@@ -1,4 +1,4 @@
-import {EScope} from '../../common/lang/EScope';
+import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FListeners} from '../../common/lang/FListeners';
 import {RObject} from '../../common/lang/RObject';
 import {ALinker} from '../../common/reflect/ALinker';

@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141230
 //===========================================================
-export class ECharCase {
+export class CharCaseEnum {
    // 字符大写
    public static Upper = 'U';
    // 字符小写

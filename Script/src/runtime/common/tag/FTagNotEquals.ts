@@ -1,4 +1,4 @@
-import {EResult} from '../lang/EResult';
+import {ResultEnum} from '../lang/ResultEnum';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
@@ -21,7 +21,7 @@ export class FTagNotEquals extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): EResult {
+   public onBegin(context: FTagContext): ResultEnum {
       var result = true;
       var s = context.get(this.source);
       var vs = this.value.split('|');
@@ -33,7 +33,7 @@ export class FTagNotEquals extends FTag {
             break;
          }
       }
-      return result ? EResult.Continue : EResult.Skip;
+      return result ? ResultEnum.Continue : ResultEnum.Skip;
    }
 
    //==========================================================
