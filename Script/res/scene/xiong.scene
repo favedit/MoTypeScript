@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "version": 1,
+    "guid": "XXXX",
+    "code": "xiong",
+    "label": "灰熊"
+  },
+  "asset": {
+    materials:[
+      {
+         "class_name": "TemplateRenderable",
+         "model_url": "${resource}/model/xiong/xiong.model",
+         "mesh_code": "001",
+         "material_url": "${resource}/model/xiong/xiong.material"
+       }
+   ],
+    templates:[
+      {
+         "class_name": "TemplateRenderable",
+         "model_url": "${resource}/model/xiong/xiong.model",
+         "mesh_code": "001",
+         "material_url": "${resource}/model/xiong/xiong.material"
+      }
+   ]
+  }
+  "content": [
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/xiong/xiong.model",
+      "mesh_code": "001",
+      "material_url": "${resource}/model/xiong/xiong.material"
+    }
+  ]
+}
