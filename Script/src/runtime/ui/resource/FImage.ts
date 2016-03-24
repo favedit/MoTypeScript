@@ -1,4 +1,4 @@
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
@@ -83,7 +83,7 @@ export class FImage extends ObjectBase {
       image._size.set(hImage.naturalWidth, hImage.naturalHeight);
       image._ready = true;
       // 处理加载事件
-      var event = new SEvent(image);
+      var event = new Event(image);
       image._loadListeners.process(event);
       event.dispose();
       //console.log('Load image success. (url={1})', image._url);

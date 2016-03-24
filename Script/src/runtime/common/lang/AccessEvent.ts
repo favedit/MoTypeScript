@@ -1,4 +1,4 @@
-import {SEvent} from './SEvent';
+import {Event} from './Event';
 
 //==========================================================
 // <T>事件信息类。</T>
@@ -7,7 +7,7 @@ import {SEvent} from './SEvent';
 // @author maocy
 // @version 150113
 //==========================================================
-export class AccessEvent extends SEvent {
+export class AccessEvent extends Event {
 
    public oldValue: any;
 

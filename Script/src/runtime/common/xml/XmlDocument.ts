@@ -2,7 +2,7 @@ import {ObjectBase} from '../lang/ObjectBase';
 import {StringBuffer} from '../lang/StringBuffer';
 import {Fatal} from '../lang/Fatal';
 import {ClassUtil} from '../reflect/ClassUtil';
-import {FXmlNode} from '../xml/FXmlNode';
+import {XmlNode} from '../xml/XmlNode';
 
 //==========================================================
 // <T>配置文档。</T>
@@ -11,9 +11,9 @@ import {FXmlNode} from '../xml/FXmlNode';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FXmlDocument extends ObjectBase {
+export class XmlDocument extends ObjectBase {
    // @attribute
-   protected _root: FXmlNode = null;
+   protected _root: XmlNode = null;
 
    //==========================================================
    // <T>创建一个节点对象。</T>
@@ -25,7 +25,7 @@ export class FXmlDocument extends ObjectBase {
    // @return TXmlNode 节点对象
    //==========================================================
    public create(n, a, v) {
-      var r: any = new FXmlNode();
+      var r: any = new XmlNode();
       r._name = n;
       r._attributes = a;
       r._value = v;
@@ -43,7 +43,7 @@ export class FXmlDocument extends ObjectBase {
       var o = this;
       var r: any = o._root;
       if (!r) {
-         r = o._root = new FXmlNode();
+         r = o._root = new XmlNode();
          r._name = 'Configuration';
       }
       return r;

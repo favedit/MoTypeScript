@@ -15,7 +15,7 @@ import {ClassUtil} from '../reflect/ClassUtil';
 // @author maocy
 // @version 141229
 //==========================================================
-export class FNode extends ObjectBase {
+export class Node extends ObjectBase {
    //..........................................................
    // @attribute
    protected _name: string = null;
@@ -29,7 +29,7 @@ export class FNode extends ObjectBase {
    // @method
    // @param name 名称
    //==========================================================
-   constructor(name: string = 'Node') {
+   public constructor(name: string = 'Node') {
       super();
       this._name = name;
    }

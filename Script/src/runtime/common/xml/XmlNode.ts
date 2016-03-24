@@ -1,8 +1,8 @@
 import {Attributes} from '../lang/Attributes';
 import {StringBuffer} from '../lang/StringBuffer';
 import {ClassUtil} from '../reflect/ClassUtil';
-import {FNode} from './FNode';
-import {RXml} from './RXml';
+import {Node} from './Node';
+import {XmlUtil} from './XmlUtil';
 
 //==========================================================
 // <T>节点工具类。</T>
@@ -11,9 +11,9 @@ import {RXml} from './RXml';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FXmlNode extends FNode {
+export class XmlNode extends Node {
 
-   constructor(name: string = null) {
+   public constructor(name: string = null) {
       super(name);
    }
 
@@ -27,7 +27,7 @@ export class FXmlNode extends FNode {
    //==========================================================
    public create(name, attribtues) {
       var o = this;
-      var xnode: any = new FXmlNode();
+      var xnode: any = new XmlNode();
       xnode._name = name;
       xnode._attributes = attribtues;
       if (!ClassUtil.isClass(attribtues, Attributes)) {
@@ -62,7 +62,7 @@ export class FXmlNode extends FNode {
          var ac = as.count();
          for (var n = 0; n < ac; n++) {
             s.append(' ', as.name(n), '="');
-            RXml.buildText(s, as.value(n));
+            XmlUtil.buildText(s, as.value(n));
             s.append('"');
          }
       }
@@ -77,7 +77,7 @@ export class FXmlNode extends FNode {
             ns.get(n).innerXml(s, l + 1);
          }
       }
-      RXml.buildText(s, o._value)
+      XmlUtil.buildText(s, o._value)
       if (o._nodes || o._value != null) {
          s.appendRepeat('   ', l);
          s.append('</', o._name, '>');

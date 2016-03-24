@@ -1,4 +1,4 @@
-import {SEvent} from '../common/lang/SEvent';
+import {Event} from '../common/lang/Event';
 import {RHtml} from '../utility/RHtml';
 import {EMouseButton} from './EMouseButton';
 
@@ -9,7 +9,7 @@ import {EMouseButton} from './EMouseButton';
 // @author maocy
 // @version 150113
 //==========================================================
-export class SMouseEvent extends SEvent {
+export class SMouseEvent extends Event {
    //..........................................................
    // @attribute
    public button = null;

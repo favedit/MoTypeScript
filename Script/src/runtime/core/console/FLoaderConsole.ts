@@ -5,7 +5,7 @@ import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ListenerContext} from '../../common/lang/ListenerContext';
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 // import {RLogger} from '../../common/lang/LoggerUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';

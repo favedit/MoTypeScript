@@ -1,7 +1,7 @@
 import {Fatal} from '../../common/lang/Fatal';
 import {Attributes} from '../../common/lang/Attributes';
 import {Listeners} from '../../common/lang/Listeners';
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {StringUtil} from '../../common/lang/StringUtil';
 

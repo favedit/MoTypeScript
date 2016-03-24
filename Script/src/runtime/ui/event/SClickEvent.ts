@@ -1,4 +1,4 @@
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 
 //==========================================================
 // <T>单击事件类。</T>
@@ -7,7 +7,7 @@ import {SEvent} from '../../common/lang/SEvent';
 // @author maocy
 // @version 150327
 //==========================================================
-export class SClickEvent extends SEvent {
+export class SClickEvent extends Event {
    public constructor(sender) {
       super(sender);
    }

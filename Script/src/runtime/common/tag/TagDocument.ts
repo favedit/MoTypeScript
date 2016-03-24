@@ -3,8 +3,8 @@ import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
 import {Fatal} from '../lang/Fatal';
 import {ClassUtil} from '../reflect/ClassUtil';
-import {ENodeType} from '../xml/ENodeType';
-import {RXml} from '../xml/RXml';
+import {NodeTypeEnum} from '../xml/NodeTypeEnum';
+import {XmlUtil} from '../xml/XmlUtil';
 import {Tag} from './Tag';
 import {TagWrite} from './TagWrite';
 import {TagTrue} from './TagTrue';
@@ -93,7 +93,7 @@ export class TagDocument extends ObjectBase {
          for (var i: number = 0; i < elementCount; i++) {
             var elementAttribute = elementAttributes[i];
             if (elementAttribute.nodeName) {
-               tag.set(elementAttribute.nodeName, RXml.formatText(elementAttribute.value));
+               tag.set(elementAttribute.nodeName, XmlUtil.formatText(elementAttribute.value));
             }
          }
       }
@@ -104,17 +104,17 @@ export class TagDocument extends ObjectBase {
          for (var i: number = 0; i < elementCount; i++) {
             var elementNode = elementNodes[i];
             switch (elementNode.nodeType) {
-               case ENodeType.Text:
+               case NodeTypeEnum.Text:
                   var tagText: TagText = ClassUtil.create(TagText);
                   tagText.text = elementNode.nodeValue;
                   tag.push(tagText);
                   break;
-               case ENodeType.Data:
+               case NodeTypeEnum.Data:
                   var tagText: TagText = ClassUtil.create(TagText);
                   tagText.text = elementNode.data;
                   tag.push(tagText);
                   break;
-               case ENodeType.Node:
+               case NodeTypeEnum.Node:
                   this.loadNode(tag, elementNode);
                   break;
             }
@@ -137,7 +137,7 @@ export class TagDocument extends ObjectBase {
       value = value.replace(new RegExp(' < ', 'g'), ' &lt; ');
       value = value.replace(new RegExp(' > ', 'g'), ' &gt; ');
       // 解析内容
-      var xnode = RXml.makeString(value);
+      var xnode = XmlUtil.makeString(value);
       this.loadNode(null, xnode.firstChild);
    }
 

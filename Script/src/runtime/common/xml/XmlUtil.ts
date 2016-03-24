@@ -4,9 +4,9 @@ import {Fatal} from '../lang/Fatal';
 import {Attributes} from '../lang/Attributes';
 import {StringUtil} from '../lang/StringUtil';
 import {MethodUtil} from '../reflect/MethodUtil';
-import {ENodeType} from './ENodeType';
-import {FNode} from './FNode';
-import {FXmlDocument} from './FXmlDocument';
+import {NodeTypeEnum} from './NodeTypeEnum';
+import {Node} from './Node';
+import {XmlDocument} from './XmlDocument';
 
 //==========================================================
 // <T>配置工具类。</T>
@@ -15,7 +15,7 @@ import {FXmlDocument} from './FXmlDocument';
 // @author maocy
 // @version 150104
 //==========================================================
-export class RXml {
+export class XmlUtil {
    public static httpActiveX = false;
    public static httpVendor = null;
    public static domActiveX = false;
@@ -227,9 +227,9 @@ export class RXml {
          for (var n = 0; n < ecc; n++) {
             var en = ecs[n];
             var ect = en.nodeType;
-            if (ect == ENodeType.Text) {
+            if (ect == NodeTypeEnum.Text) {
                xt.append(en.nodeValue);
-            } else if (ect == ENodeType.Data) {
+            } else if (ect == NodeTypeEnum.Data) {
                xt.append(en.data);
             }
          }
@@ -245,7 +245,7 @@ export class RXml {
       if (ecs) {
          var cc = ecs.length;
          for (var n = 0; n < cc; n++) {
-            if (ecs[n].nodeType == ENodeType.Node) {
+            if (ecs[n].nodeType == NodeTypeEnum.Node) {
                this.buildNode(pd, xc, ecs[n]);
             }
          }
@@ -262,7 +262,7 @@ export class RXml {
    public static makeNode(p) {
       var o: any = this;
       if (p.documentElement) {
-         var d = new FXmlDocument();
+         var d = new XmlDocument();
          o.buildNode(d, null, p.documentElement);
          return d.root();
       } else if (p.tagName == 'SCRIPT') {
@@ -271,7 +271,7 @@ export class RXml {
             s = p.text;
          }
          if (s) {
-            var d = new FXmlDocument();
+            var d = new XmlDocument();
             var xd = o.makeString(s)
             o.buildNode(d, null, xd.documentElement);
             return d.root();
@@ -288,7 +288,7 @@ export class RXml {
    // @return TXmlDocument 配置文档
    //==========================================================
    public static makeDocument(p) {
-      var d = new FXmlDocument();
+      var d = new XmlDocument();
       if (p.documentElement) {
          this.buildNode(d, null, p.documentElement);
       }
@@ -309,7 +309,7 @@ export class RXml {
          return null;
       }
       if (!n) {
-         n = new FNode();
+         n = new Node();
       }
       var np = new Attributes();
       np.unpack(s);

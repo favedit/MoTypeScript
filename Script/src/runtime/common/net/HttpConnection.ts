@@ -1,5 +1,5 @@
 import {Attributes} from '../lang/Attributes';
-import {SEvent} from '../lang/SEvent';
+import {Event} from '../lang/Event';
 import {ObjectBase} from '../lang/ObjectBase';
 import {Listeners} from '../lang/Listeners';
 import {Fatal} from '../lang/Fatal';
@@ -50,7 +50,7 @@ export class HttpConnection extends ObjectBase {
       // 设置属性
       this._heads = new Attributes();
       this._attributes = new Attributes();
-      this._event = new SEvent(this);
+      this._event = new Event(this);
       this.loadListeners = new Listeners();
       this.completeListeners = new Listeners();
       // 创建链接

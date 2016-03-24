@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150104
 //==========================================================
-export class ENodeType {
+export class NodeTypeEnum {
    // @attribute 节点
    public static Node = 1;
    // @attribute 文本

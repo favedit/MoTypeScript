@@ -1,4 +1,4 @@
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 import {RHtml} from '../utility/RHtml';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {RHtml} from '../utility/RHtml';
 // @author maocy
 // @version 150213
 //==========================================================
-export class SResizeEvent extends SEvent {
+export class SResizeEvent extends Event {
    // @attribute
    public width = null;
    public height = null;

@@ -1,4 +1,4 @@
-import {SEvent} from '../lang/SEvent';
+import {Event} from '../lang/Event';
 
 //==========================================================
 // <T>配置事件信息类。</T>
@@ -7,7 +7,7 @@ import {SEvent} from '../lang/SEvent';
 // @author maocy
 // @version 150120
 //==========================================================
-export class SXmlEvent extends SEvent {
+export class XmlEvent extends Event {
    //..........................................................
    // @attribute
    connection = null;

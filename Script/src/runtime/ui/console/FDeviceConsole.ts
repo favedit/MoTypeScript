@@ -2,7 +2,7 @@ import {PlatformEnum} from '../../common/PlatformEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {Attributes} from '../../common/lang/Attributes';
 import {Fatal} from '../../common/lang/Fatal';
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 import {StringUtil} from '../../common/lang/StringUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {EnumUtil} from '../../common/lang/EnumUtil';
@@ -27,9 +27,9 @@ export class FDeviceConsole extends FConsole {
    protected _optionSelect = true;
    // @attribute
    protected _eventResize = new SResizeEvent();
-   protected _eventVisibility = new SEvent();
-   protected _eventOrientation = new SEvent();
-   protected _eventUnload = new SEvent();
+   protected _eventVisibility = new Event();
+   protected _eventOrientation = new Event();
+   protected _eventUnload = new Event();
    // @attribute
    protected _agent = null;
    protected _capability: SBrowserCapability = null;

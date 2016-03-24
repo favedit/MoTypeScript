@@ -1,7 +1,7 @@
 import {Fatal} from '../lang/Fatal';
 import {LoggerUtil} from '../lang/LoggerUtil';
-import {FXmlDocument} from '../xml/FXmlDocument';
-import {RXml} from '../xml/RXml';
+import {XmlDocument} from '../xml/XmlDocument';
+import {XmlUtil} from '../xml/XmlUtil';
 import {HttpContentEnum} from './HttpContentEnum';
 import {HttpConnection} from './HttpConnection';
 
@@ -78,8 +78,8 @@ export class XmlConnection extends HttpConnection {
          return LoggerUtil.fatal(this, 'Read xml error. (url={1})', this._url)
       }
       // 建立文档对象
-      var document = new FXmlDocument();
-      RXml.buildNode(document, null, element);
+      var document = new XmlDocument();
+      XmlUtil.buildNode(document, null, element);
       var root = this._outputNode = document.root();
       // 完成处理
       this._statusFree = true;

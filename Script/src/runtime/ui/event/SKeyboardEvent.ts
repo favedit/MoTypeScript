@@ -1,4 +1,4 @@
-import {SEvent} from '../../common/lang/SEvent';
+import {Event} from '../../common/lang/Event';
 
 //==========================================================
 // <T>按键按下事件信息类。</T>
@@ -7,7 +7,7 @@ import {SEvent} from '../../common/lang/SEvent';
 // @author maocy
 // @version 150113
 //==========================================================
-export class SKeyboardEvent extends SEvent {
+export class SKeyboardEvent extends Event {
    //..........................................................
    // @attribute
    public altKey = false;

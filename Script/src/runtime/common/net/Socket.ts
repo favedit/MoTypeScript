@@ -1,4 +1,4 @@
-import {SEvent} from '../lang/SEvent';
+import {Event} from '../lang/Event';
 import {ObjectBase} from '../lang/ObjectBase';
 import {ObjectUtil} from '../lang/ObjectUtil';
 
@@ -142,11 +142,11 @@ export class Socket extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._eventOpen = new SEvent(this);
-      this._eventSend = new SEvent(this);
-      this._eventReceive = new SEvent(this);
-      this._eventClose = new SEvent(this);
-      this._eventError = new SEvent(this);
+      this._eventOpen = new Event(this);
+      this._eventSend = new Event(this);
+      this._eventReceive = new Event(this);
+      this._eventClose = new Event(this);
+      this._eventError = new Event(this);
    }
 
    //==========================================================

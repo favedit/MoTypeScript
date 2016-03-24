@@ -7,7 +7,7 @@ import {Struct} from './Struct';
 // @author maocy
 // @version 150113
 //==========================================================
-export class SEvent extends Struct {
+export class Event extends Struct {
    //..........................................................
    // @attribute
    public code = null;

@@ -1,4 +1,4 @@
-import {SEvent} from '../lang/SEvent';
+import {Event} from '../lang/Event';
 import {ObjectBase} from '../lang/ObjectBase';
 import {LoggerUtil} from '../lang/LoggerUtil';
 
@@ -59,7 +59,7 @@ export class FileViewer extends ObjectBase {
          o._length = reader.result.byteLength;
          o._data = reader.result;
          // 完成处理
-         var event = new SEvent(o);
+         var event = new Event(o);
          o.processLoadListener(event);
          event.dispose();
       }

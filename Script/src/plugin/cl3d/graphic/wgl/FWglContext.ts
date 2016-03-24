@@ -1,10 +1,10 @@
-import {SEvent} from '../../../../runtime/common/lang/SEvent';
+import {Event} from '../../../../runtime/common/lang/Event';
 import {Objects} from '../../../../runtime/common/lang/Objects';
 import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
-import {RXml} from '../../../../runtime/common/xml/RXml';
+import {XmlUtil} from '../../../../runtime/common/xml/XmlUtil';
 import {RuntimeUtil} from '../../../../runtime/common/RuntimeUtil';
 import {EParameterFormat} from '../EParameterFormat';
 import {EAttributeFormat} from '../EAttributeFormat';
@@ -1082,11 +1082,11 @@ export class FWglContext extends FGraphicContext {
       // 存储参数集合
       var parameters = o.parameters();
       var xparameters = xconfig.create('Parameters');
-      RXml.saveObject(xparameters, 'Parameter', parameters);
+      XmlUtil.saveObject(xparameters, 'Parameter', parameters);
       // 存储扩展集合
       var extensions = o.extensions();
       var xextensions = xconfig.create('Extensions');
-      RXml.saveObject(xextensions, 'Extension', extensions);
+      XmlUtil.saveObject(xextensions, 'Extension', extensions);
    }
 
    //==========================================================
