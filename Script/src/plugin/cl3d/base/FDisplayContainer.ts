@@ -1,4 +1,4 @@
-import {FError} from '../../../runtime/common/lang/FError'
+import {Fatal} from '../../../runtime/common/lang/Fatal'
 import {Objects} from '../../../runtime/common/lang/Objects'
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
@@ -72,7 +72,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
       } else if (item instanceof FDisplay) {
          this.pushDisplay(item);
       } else {
-         throw new FError(this, 'Unknown item type.');
+         throw new Fatal(this, 'Unknown item type.');
       }
    }
 

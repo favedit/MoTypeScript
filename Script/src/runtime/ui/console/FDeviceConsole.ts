@@ -1,7 +1,7 @@
 import {PlatformEnum} from '../../common/PlatformEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {Attributes} from '../../common/lang/Attributes';
-import {FError} from '../../common/lang/FError';
+import {Fatal} from '../../common/lang/Fatal';
 import {SEvent} from '../../common/lang/SEvent';
 import {StringUtil} from '../../common/lang/StringUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
@@ -596,7 +596,7 @@ export class FDeviceConsole extends FConsole {
          } else if ((orientation == 90) || (orientation == -90)) {
             this._orientationCd = EOrientation.Horizontal;
          } else {
-            throw new FError(this, 'Unknown orientation mode.');
+            throw new Fatal(this, 'Unknown orientation mode.');
          }
       }
       return this._orientationCd;

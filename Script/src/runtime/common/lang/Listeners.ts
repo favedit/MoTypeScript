@@ -3,7 +3,7 @@ import {Objects} from './Objects'
 import {ObjectUtil} from './ObjectUtil'
 import {StringBuffer} from './StringBuffer'
 import {Listener} from './Listener'
-import {FError} from './FError'
+import {Fatal} from './Fatal'
 import {RClass} from '../reflect/RClass'
 import {RuntimeUtil} from './RuntimeUtil'
 
@@ -77,7 +77,7 @@ export class Listeners extends ObjectBase {
       // 检查是否已经注册
       var listener: Listener = this.find(owner, callback);
       if (listener) {
-         throw new FError(this, 'Listener is already register. (owner={1}, process={2})', owner, callback);
+         throw new Fatal(this, 'Listener is already register. (owner={1}, process={2})', owner, callback);
       }
       // 注册监听器
       listener = new Listener();
@@ -100,7 +100,7 @@ export class Listeners extends ObjectBase {
       // 检查是否已经注册
       var listener: Listener = this.find(owner, callback);
       if (!listener) {
-         throw new FError(this, 'Listener is not register. (owner={1}, process={2})', owner, callback);
+         throw new Fatal(this, 'Listener is not register. (owner={1}, process={2})', owner, callback);
       }
       // 注销监听器
       this.remove(listener);
@@ -117,10 +117,10 @@ export class Listeners extends ObjectBase {
    public push(listener: Listener) {
       // 检查参数
       if (!listener) {
-         throw new FError(this, 'Listener is null.');
+         throw new Fatal(this, 'Listener is null.');
       }
       if (!listener.callback) {
-         throw new FError(this, 'Listener process is null.');
+         throw new Fatal(this, 'Listener process is null.');
       }
       // 增加监听器
       var listeners: Objects<Listener> = this.listeners;
@@ -139,7 +139,7 @@ export class Listeners extends ObjectBase {
    public remove(listener) {
       // 检查参数
       if (!listener) {
-         throw new FError(this, 'Listener is null.');
+         throw new Fatal(this, 'Listener is null.');
       }
       // 移除监听器
       this.listeners.remove(listener);

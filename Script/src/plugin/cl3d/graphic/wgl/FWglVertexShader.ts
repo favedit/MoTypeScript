@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {FVertexShader} from '../FVertexShader';
 
 //==========================================================
@@ -57,7 +57,7 @@ export class FWglVertexShader extends FVertexShader {
          var info = graphic.getShaderInfoLog(handle);
          graphic.deleteShader(handle);
          this.handle = null;
-         throw new FError(this, 'Upload vertex shader source failure. (error={1})\n{2}', info, source);
+         throw new Fatal(this, 'Upload vertex shader source failure. (error={1})\n{2}', info, source);
       }
       this.source = source;
    }

@@ -1,7 +1,7 @@
 import {RMethod} from '../reflect/RMethod'
 import {RClass} from '../reflect/RClass'
 import {MemoryUtil} from '../MemoryUtil'
-import {SListenerContext} from './SListenerContext'
+import {ListenerContext} from './ListenerContext'
 import {ObjectBase} from './ObjectBase'
 import {ObjectUtil} from './ObjectUtil'
 import {ListenerUtil} from './ListenerUtil'
@@ -35,7 +35,7 @@ export class Listener extends ObjectBase {
          owner = sender;
       }
       // 创建监听环境
-      var context: SListenerContext = MemoryUtil.alloc(SListenerContext);
+      var context: ListenerContext = MemoryUtil.alloc(ListenerContext);
       context.sender = sender;
       context.owner = owner;
       context.callback = this.callback;

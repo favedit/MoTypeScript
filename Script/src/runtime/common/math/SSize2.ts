@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {RClass} from '../reflect/RClass';
 
@@ -145,7 +145,7 @@ export class SSize2 {
          o.width = parseInt(r[0]);
          o.height = parseInt(r[1]);
       } else {
-         throw new FError(o, "Parse value failure. (value={1})", v);
+         throw new Fatal(o, "Parse value failure. (value={1})", v);
       }
    }
 

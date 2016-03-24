@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FGraphicContext} from './FGraphicContext';
 
@@ -35,7 +35,7 @@ export class FGraphicObject extends ObjectBase {
       } else if (context instanceof FGraphicObject) {
          this._graphicContext = (context as FGraphicObject).graphicContext;
       } else {
-         throw new FError(this, 'Link graphic context failure. (context={1})', context);
+         throw new Fatal(this, 'Link graphic context failure. (context={1})', context);
       }
    }
 

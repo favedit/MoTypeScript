@@ -1,5 +1,5 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
@@ -314,7 +314,7 @@ export class SValue3 {
          this.y = parseFloat(items[1]);
          this.z = parseFloat(items[2]);
       } else {
-         throw new FError(this, "Parse value failure. (value={1})", value);
+         throw new Fatal(this, "Parse value failure. (value={1})", value);
       }
    }
 

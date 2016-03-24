@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 
 //==========================================================
 // <T>直线样式。</T>
@@ -38,7 +38,7 @@ export class SBorderLine {
          this.style = items[1];
          this.color = items[2];
       } else {
-         throw new FError(this, "Parse value failure. (source={1})", source);
+         throw new Fatal(this, "Parse value failure. (source={1})", source);
       }
    }
 

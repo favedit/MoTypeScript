@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {FImage} from '../../../../runtime/ui/resource/FImage';
 import {FFlatTexture} from '../FFlatTexture';
 import {RWglUtility} from './RWglUtility';
@@ -77,11 +77,11 @@ export class FWglFlatTexture extends FFlatTexture {
          data = content;
       } else if (clazz == Float32Array) {
          if (!context.enableFloatTexture()) {
-            throw new FError(this, 'Invalid content float format.');
+            throw new Fatal(this, 'Invalid content float format.');
          }
          data = content;
       } else {
-         throw new FError(this, 'Invalid content format.');
+         throw new Fatal(this, 'Invalid content format.');
       }
       // 设置属性
       // o.width = width;
@@ -137,7 +137,7 @@ export class FWglFlatTexture extends FFlatTexture {
          //} else if (MO.Class.isClass(content, MO.MCanvasObject)) {
          //data = content.htmlCanvas();
       } else {
-         throw new FError(this, 'Invalid image format.');
+         throw new Fatal(this, 'Invalid image format.');
       }
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);

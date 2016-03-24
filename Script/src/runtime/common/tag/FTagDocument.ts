@@ -1,7 +1,7 @@
 import {ObjectBase} from '../lang/ObjectBase';
 import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {RClass} from '../reflect/RClass';
 import {ENodeType} from '../xml/ENodeType';
 import {RXml} from '../xml/RXml';
@@ -64,7 +64,7 @@ export class FTagDocument extends ObjectBase {
             tag = RClass.create(FTagNotEquals);
             break;
          default:
-            throw new FError(this, 'Unknown tag type. (name={1})', name);
+            throw new Fatal(this, 'Unknown tag type. (name={1})', name);
       }
       return tag;
    }

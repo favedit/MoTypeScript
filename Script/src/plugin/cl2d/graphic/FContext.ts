@@ -1,4 +1,4 @@
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
@@ -50,7 +50,7 @@ export class FContext extends FGraphicContext {
          // 初始化对象
          var handle = hCanvas.getContext('2d');
          if (!handle) {
-            throw new FError(this, "Current browser can't support Context2D technique.");
+            throw new Fatal(this, "Current browser can't support Context2D technique.");
          }
          this._handle = handle;
       }
@@ -499,7 +499,7 @@ export class FContext extends FGraphicContext {
             height = data.height;
          }
          //} else {
-         throw new FError(o, 'Unknown content type');
+         throw new Fatal(o, 'Unknown content type');
       }
       // 绘制位图
       //handle.drawImage(data, x, y, width, height);

@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {FloatUtil} from '../../../runtime/common/lang/FloatUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';

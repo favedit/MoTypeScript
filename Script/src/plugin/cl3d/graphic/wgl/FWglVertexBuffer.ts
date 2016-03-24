@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {EAttributeFormat} from '../EAttributeFormat';
 import {FVertexBuffer} from '../FVertexBuffer';
 
@@ -68,14 +68,14 @@ export class FWglVertexBuffer extends FVertexBuffer {
                arrays = new Uint8Array(data);
                break;
             default:
-               throw new FError(this, 'Unknown data type.');
+               throw new Fatal(this, 'Unknown data type.');
          }
       } else if (dataClass == Uint8Array) {
          arrays = data;
       } else if (dataClass == Float32Array) {
          arrays = data;
       } else {
-         throw new FError(this, 'Upload vertex data type is invalid. (data={1})', data);
+         throw new Fatal(this, 'Upload vertex data type is invalid. (data={1})', data);
       }
       // 绑定数据
       graphics.bindBuffer(graphics.ARRAY_BUFFER, this.handle);

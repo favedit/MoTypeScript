@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SPoint2} from '../../../runtime/common/math/SPoint2';
@@ -237,7 +237,7 @@ export class FRegion extends ObjectBase implements IProcessContext {
          case ERegionParameter.LightInfo:
             return this.lightInfo;
       }
-      throw new FError(this, 'Unknown parameter type. (type_cd={1})', parameterCd);
+      throw new Fatal(this, 'Unknown parameter type. (type_cd={1})', parameterCd);
    }
 
    //==========================================================

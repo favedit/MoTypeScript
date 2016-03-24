@@ -1,4 +1,4 @@
-import {FError} from '../../common/lang/FError';
+import {Fatal} from '../../common/lang/Fatal';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 
 //==========================================================

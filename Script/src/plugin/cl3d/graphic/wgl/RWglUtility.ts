@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {EFillMode} from '../EFillMode';
 import {EDrawMode} from '../EDrawMode';
 import {ECullMode} from '../ECullMode';
@@ -31,7 +31,7 @@ export class RWglUtility {
          case EFillMode.Face:
             return graphic.FILL;
       }
-      throw new FError(this, "Convert fill mode failure. (fill_cd={1})", fillCd);
+      throw new Fatal(this, "Convert fill mode failure. (fill_cd={1})", fillCd);
    }
 
    //==========================================================
@@ -63,7 +63,7 @@ export class RWglUtility {
          case EDrawMode.QuadStrip:
             return graphic.QUAD_STRIP;
       }
-      throw new FError(this, "Convert draw mode failure. (draw_cd={1})", drawCd);
+      throw new Fatal(this, "Convert draw mode failure. (draw_cd={1})", drawCd);
    }
 
    //==========================================================
@@ -83,7 +83,7 @@ export class RWglUtility {
          case ECullMode.Both:
             return graphic.FRONT_AND_BACK;
       }
-      throw new FError(this, "Convert cull mode failure. (cull_cd={1})", cullCd);
+      throw new Fatal(this, "Convert cull mode failure. (cull_cd={1})", cullCd);
    }
 
    //==========================================================
@@ -111,7 +111,7 @@ export class RWglUtility {
          case EDepthMode.Always:
             return graphic.ALWAYS;
       }
-      throw new FError(this, "Convert depth mode failure. (depth_cd={1})", depthCd);
+      throw new Fatal(this, "Convert depth mode failure. (depth_cd={1})", depthCd);
    }
 
    //==========================================================
@@ -147,7 +147,7 @@ export class RWglUtility {
          case EBlendMode.SrcAlphaSaturate:
             return graphic.SRC_ALPHA_SATURATE;
       }
-      throw new FError(this, "Convert blend factors failure. (blend_cd={1})", blendCd);
+      throw new Fatal(this, "Convert blend factors failure. (blend_cd={1})", blendCd);
    }
 
    //==========================================================
@@ -165,7 +165,7 @@ export class RWglUtility {
          case EIndexStride.Uint32:
             return graphic.UNSIGNED_INT;
       }
-      throw new FError(this, "Convert index stride failure. (stride_cd={1})", strideCd);
+      throw new Fatal(this, "Convert index stride failure. (stride_cd={1})", strideCd);
    }
 
    //==========================================================
@@ -191,6 +191,6 @@ export class RWglUtility {
          case ESamplerFilter.ClampToBorder:
             return graphic.CLAMP_TO_BORDER;
       }
-      throw new FError(this, "Convert sampler filter failure. (filter_cd={1})", filterCd);
+      throw new Fatal(this, "Convert sampler filter failure. (filter_cd={1})", filterCd);
    }
 }

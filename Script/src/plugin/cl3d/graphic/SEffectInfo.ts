@@ -1,4 +1,4 @@
-import {FArray} from '../../../runtime/common/lang/FArray';
+import {DataArray} from '../../../runtime/common/lang/DataArray';
 // import {EG3dCullMode} from './EG3dCullMode';
 // import {EG3dDepthMode} from './EG3dDepthMode';
 // import {EG3dBlendMode} from './EG3dBlendMode';
@@ -64,8 +64,8 @@ export class SEffectInfo {
    public fragmentEmissive = null;
    public fragmentHeight = null;
    // @attribute 参数信息
-   public attributes: FArray = new FArray();
-   public samplers: FArray = new FArray();
+   public attributes: DataArray = new DataArray();
+   public samplers: DataArray = new DataArray();
 
    //==========================================================
    // <T>判断是否存在属性信息。</T>

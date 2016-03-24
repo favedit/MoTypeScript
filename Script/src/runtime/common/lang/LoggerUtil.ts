@@ -1,7 +1,7 @@
 import {RMethod} from '../reflect/RMethod';
 import {RClass} from '../reflect/RClass';
 import {RuntimeUtil} from '../RuntimeUtil';
-import {SLogger} from './SLogger';
+import {LoggerInfo} from './LoggerInfo';
 import {StringBuffer} from './StringBuffer';
 import {Listeners} from './Listeners';
 import {ArrayUtil} from './ArrayUtil';
@@ -19,7 +19,7 @@ export class LoggerUtil {
    // 标签长度
    private static _labelLength: number = 40;
    // 日志长度
-   private static _logger: SLogger = new SLogger();
+   private static _logger: LoggerInfo = new LoggerInfo();
    // 输出监听集合
    private static _lsnsOutput: Listeners = new Listeners();
 
@@ -61,7 +61,7 @@ export class LoggerUtil {
       result.append(formatMessage);
       var outputMessage = result.flush();
       // 日志输出
-      var logger: SLogger = this._logger;
+      var logger: LoggerInfo = this._logger;
       logger.sender = sender;
       logger.message = outputMessage;
       this._lsnsOutput.process(logger);

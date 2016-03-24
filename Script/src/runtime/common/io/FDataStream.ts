@@ -1,6 +1,6 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {StringBuffer} from '../lang/StringBuffer';
-import {FError} from '../lang/FError'
+import {Fatal} from '../lang/Fatal'
 import {FDataView} from './FDataView'
 
 //==========================================================
@@ -40,7 +40,7 @@ export class FDataStream extends FDataView {
       } else if (dataClass == ArrayBuffer) {
          buffer = data;
       } else {
-         throw new FError(this, 'Unknown data type.');
+         throw new Fatal(this, 'Unknown data type.');
       }
       // 设置视图
       this.viewer = new DataView(buffer);
@@ -247,7 +247,7 @@ export class FDataStream extends FDataView {
       }
       // 暂时不支持开始位置选择
       if (offset != 0) {
-         throw new FError(this, 'Unsupport.');
+         throw new Fatal(this, 'Unsupport.');
       }
       var position = this.position;
       var endianCd = this.endianCd;
@@ -324,7 +324,7 @@ export class FDataStream extends FDataView {
          case DataTypeEnum.String:
             return this.readString();
       }
-      throw new FError(this, 'Unknown data cd. (data_cd={1})', dataCd);
+      throw new Fatal(this, 'Unknown data cd. (data_cd={1})', dataCd);
    }
 
    //==========================================================
@@ -487,7 +487,7 @@ export class FDataStream extends FDataView {
       }
       // 暂时不支持开始位置选择
       if (offset != 0) {
-         throw new FError(this, 'Unsupport.');
+         throw new Fatal(this, 'Unsupport.');
       }
       var position = this.position;
       var endianCd = this.endianCd;
@@ -564,6 +564,6 @@ export class FDataStream extends FDataView {
          case DataTypeEnum.String:
             return this.writeString(value);
       }
-      throw new FError(this, 'Unknown data cd. (data_cd={1})', dataCd);
+      throw new Fatal(this, 'Unknown data cd. (data_cd={1})', dataCd);
    }
 }

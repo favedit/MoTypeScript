@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FError} from '../../common/lang/FError';
-// import {SListenerContext} from '../../common/lang/SListenerContext';
+import {Fatal} from '../../common/lang/Fatal';
+// import {SListenerContext} from '../../common/lang/ListenerContext';
 // import {FListener} from '../../common/lang/Listener';
 // import {FObjects} from '../../common/lang/Objects';
 // import {RObject} from '../../common/lang/ObjectUtil';
@@ -89,7 +89,7 @@ export class FEventConsole extends FConsole {
          case EEvent.MouseUp:
             return new SMouseEvent();
          default:
-            throw new FError(this, 'Unknown event.');
+            throw new Fatal(this, 'Unknown event.');
       }
    }
 

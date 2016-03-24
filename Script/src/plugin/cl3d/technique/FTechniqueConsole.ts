@@ -1,5 +1,5 @@
 ﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FConsole} from '../../../runtime/core/FConsole';

@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {Dictionary} from '../../common/lang/Dictionary';
-// import {FError} from '../../common/lang/FError';
+// import {FError} from '../../common/lang/Fatal';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 // import {RString} from '../../common/lang/StringUtil';
 import {RClass} from '../../common/reflect/RClass';

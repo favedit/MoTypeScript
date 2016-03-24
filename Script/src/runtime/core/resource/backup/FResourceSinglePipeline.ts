@@ -1,4 +1,4 @@
-import {FError} from '../../common/lang/FError';
+import {Fatal} from '../../common/lang/Fatal';
 import {FResourcePipeline} from './FResourcePipeline';
 
 //==========================================================
@@ -41,7 +41,7 @@ export class FResourceSinglePipeline extends FResourcePipeline {
       } else if (buffer.constructor == ArrayBuffer) {
          bufferData = buffer;
       } else {
-         throw new FError(o, 'Unknown buffer type.');
+         throw new Fatal(o, 'Unknown buffer type.');
       }
       // 设置数据
       //data.completeData(bufferData);
@@ -86,7 +86,7 @@ export class FResourceSinglePipeline extends FResourcePipeline {
       } else if (compressData.constructor == Uint8Array) {
          processData = compressData;
       } else {
-         throw new FError(o, 'Unknown data type.');
+         throw new Fatal(o, 'Unknown data type.');
       }
       // 解压缩处理
       //LZMAD.decompress(processData, function(buffer){o.onComplete(buffer);}, null);

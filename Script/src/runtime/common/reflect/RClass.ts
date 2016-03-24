@@ -1,5 +1,5 @@
 import {AssertUtil} from '../AssertUtil'
-import {FError} from '../lang/FError'
+import {Fatal} from '../lang/Fatal'
 import {FAnnotation} from './FAnnotation'
 import {FClass} from './FClass'
 import {RMethod} from './RMethod'

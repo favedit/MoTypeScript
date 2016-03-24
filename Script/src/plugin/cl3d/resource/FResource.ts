@@ -1,6 +1,6 @@
 import {DataContentEnum} from '../../../runtime/common/lang/DataContentEnum';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../../runtime/common/io/FDataStream';
 import {FResource as FBaseResource} from '../../runtime/core/resource/FResource';
@@ -169,7 +169,7 @@ export class FResource extends FBaseResource {
             break;
          }
          default:
-            throw new FError(this, "Content type is invalid.");
+            throw new Fatal(this, "Content type is invalid.");
       }
    }
 

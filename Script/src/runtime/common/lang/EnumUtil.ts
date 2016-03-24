@@ -1,5 +1,5 @@
 import {RClass} from '../reflect/RClass';
-import {FError} from './FError';
+import {Fatal} from './Fatal';
 
 //============================================================
 // <T>枚举管理类。</T>
@@ -47,7 +47,7 @@ export class EnumUtil {
       var o = this;
       var result = o.tryEncode(instance, value);
       if (result == null) {
-         throw new FError(o, 'Invalid value (enum={1}, value={2})', RClass.dump(instance), value);
+         throw new Fatal(o, 'Invalid value (enum={1}, value={2})', RClass.dump(instance), value);
       }
       return result;
    }
@@ -81,7 +81,7 @@ export class EnumUtil {
    public static decode(instance, value) {
       var result = this.tryDecode(instance, value);
       if (result == null) {
-         throw new FError(this, 'Invalid value (enum={1}, value={2})', RClass.dump(instance), value);
+         throw new Fatal(this, 'Invalid value (enum={1}, value={2})', RClass.dump(instance), value);
       }
       return result;
    }

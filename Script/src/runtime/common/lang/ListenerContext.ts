@@ -7,7 +7,7 @@ import {Struct} from '../lang/Struct';
 // @author maocy
 // @version 160306
 //==========================================================
-export class SListenerContext extends Struct {
+export class ListenerContext extends Struct {
    // 发送者
    public sender: any = null;
    // 拥有者

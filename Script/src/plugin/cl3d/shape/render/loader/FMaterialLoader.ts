@@ -1,4 +1,4 @@
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {FProcessLoader} from '../../../runtime/core/console/FProcessLoader';
 import {FPhongMaterial} from '../../material/FPhongMaterial';
 
@@ -31,7 +31,7 @@ export class FMaterialLoader extends FProcessLoader {
             if (resource.className == 'phong') {
                material = new FPhongMaterial();
             } else {
-               throw new FError(this, 'Unknown material.');
+               throw new Fatal(this, 'Unknown material.');
             }
             material.linkGraphicContext(this.graphicContext);
             material.loadResource(resource);

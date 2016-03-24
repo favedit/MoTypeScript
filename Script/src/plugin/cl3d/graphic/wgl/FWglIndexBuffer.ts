@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {EIndexStride} from '../EIndexStride';
 import {FIndexBuffer} from '../FIndexBuffer';
 
@@ -62,20 +62,20 @@ export class FWglIndexBuffer extends FIndexBuffer {
          } else if (this.strideCd == EIndexStride.Uint32) {
             memory = new Uint32Array(data);
          } else {
-            throw new FError(this, 'Index stride is invalid.');
+            throw new Fatal(this, 'Index stride is invalid.');
          }
       } else if (dataClass == Uint16Array) {
          if (this.strideCd != EIndexStride.Uint16) {
-            throw new FError(this, 'Index stride16 is invalid.');
+            throw new Fatal(this, 'Index stride16 is invalid.');
          }
          memory = data;
       } else if (dataClass == Uint32Array) {
          if (this.strideCd != EIndexStride.Uint32) {
-            throw new FError(this, 'Index stride16 is invalid.');
+            throw new Fatal(this, 'Index stride16 is invalid.');
          }
          memory = data;
       } else {
-         throw new FError(this, 'Upload index data type is invalid. (value={1})', data);
+         throw new Fatal(this, 'Upload index data type is invalid. (value={1})', data);
       }
       // 上传数据
       graphic.bindBuffer(graphic.ELEMENT_ARRAY_BUFFER, this.handle);

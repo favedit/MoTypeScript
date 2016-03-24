@@ -1,4 +1,4 @@
-import {FArray} from '../../../runtime/common/lang/FArray';
+import {DataArray} from '../../../runtime/common/lang/DataArray';
 import {SOutline3} from '../../../runtime/common/math/SOutline3';
 import {RMath} from '../../../runtime/common/math/RMath';
 import {EDrawMode} from '../graphic/EDrawMode';
@@ -98,7 +98,7 @@ export class FSphere extends FRenderable {
       //..........................................................
       // 计算索引
       var drawModeCd = this.drawModeCd;
-      var indexes: FArray = new FArray();
+      var indexes: DataArray = new DataArray();
       for (var rz = 0; rz < countZ; rz++) {
          for (var r = 0; r < countAngle; r++) {
             var i = (countAngle + 1) * rz;

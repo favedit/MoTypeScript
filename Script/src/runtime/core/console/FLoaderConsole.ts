@@ -4,7 +4,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {SListenerContext} from '../../common/lang/SListenerContext';
+import {ListenerContext} from '../../common/lang/ListenerContext';
 import {SEvent} from '../../common/lang/SEvent';
 // import {RLogger} from '../../common/lang/LoggerUtil';
 import {ALinker} from '../../common/reflect/ALinker';
@@ -104,7 +104,7 @@ export class FLoaderConsole extends FConsole {
    // @method
    // @param connection:FHttpConnection 链接
    //==========================================================
-   public onLoad(sender: SListenerContext, event: any): void {
+   public onLoad(sender: ListenerContext, event: any): void {
       // 设置资源
       var loader: FLoader = sender.attributes[0];
       loader.data = event.content;

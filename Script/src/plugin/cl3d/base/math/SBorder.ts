@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {SBorderLine} from './SBorderLine';
 
@@ -30,7 +30,7 @@ export class SBorder {
          this.right.parse(items[2]);
          this.bottom.parse(items[3]);
       } else {
-         throw new FError(this, "Parse value failure. (source={1})", source);
+         throw new Fatal(this, "Parse value failure. (source={1})", source);
       }
    }
 

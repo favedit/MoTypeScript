@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -100,7 +100,7 @@ export class SPadding {
          this.right = parseInt(r[2]);
          this.bottom = parseInt(r[3]);
       } else {
-         throw new FError(this, "Parse value failure. (value={1})", v);
+         throw new Fatal(this, "Parse value failure. (value={1})", v);
       }
    }
 

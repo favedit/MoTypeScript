@@ -1,7 +1,7 @@
 import {ObjectBase} from '../lang/ObjectBase'
 import {Objects} from '../lang/Objects'
 import {Dictionary} from '../lang/Dictionary'
-import {FError} from '../lang/FError'
+import {Fatal} from '../lang/Fatal'
 import {LoggerUtil} from '../lang/LoggerUtil'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'
@@ -90,7 +90,7 @@ export class FClass extends ObjectBase {
       var name = annotation.name;
       var code = annotation.code;
       if (!annotationCd || !code) {
-         throw new FError(this, "Unknown annotation. (class={1}, annotation={2}, name={3}, code={4})", RClass.dump(this), annotation, name, code);
+         throw new Fatal(this, "Unknown annotation. (class={1}, annotation={2}, name={3}, code={4})", RClass.dump(this), annotation, name, code);
       }
       // 获得一个描述器的类型容器
       var annotations: Dictionary<FAnnotation> = this._annotations.get(annotationCd);
@@ -102,7 +102,7 @@ export class FClass extends ObjectBase {
       if (!annotation.isDuplicate()) {
          var annotationFind: FAnnotation = annotations.get(code);
          if (annotationFind) {
-            throw new FError(this, "Duplicate annotation. (class={1}, annotation={2}, name={3}, code={4}, value={5})", RClass.dump(this), annotation, name, code, annotation.toString());
+            throw new Fatal(this, "Duplicate annotation. (class={1}, annotation={2}, name={3}, code={4}, value={5})", RClass.dump(this), annotation, name, code, annotation.toString());
          }
       }
       // 设置内容

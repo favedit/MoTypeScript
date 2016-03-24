@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {LoggerUtil} from '../lang/LoggerUtil';
 import {FXmlDocument} from '../xml/FXmlDocument';
 import {RXml} from '../xml/RXml';
@@ -50,7 +50,7 @@ export class FXmlConnection extends FHttpConnection {
             xml = data.xml();
             this._inputNode = data.root();
          } else {
-            throw new FError(this, 'Unknown send data type.');
+            throw new Fatal(this, 'Unknown send data type.');
          }
          this._inputData = xml;
          this._contentLength = xml.length;
@@ -71,7 +71,7 @@ export class FXmlConnection extends FHttpConnection {
       } else if (handle.responseXml) {
          element = handle.responseXml.documentElement;
       } else {
-         throw new FError(this, "Fetch xml data failure.");
+         throw new Fatal(this, "Fetch xml data failure.");
       }
       if (!element) {
          //return RLogger.fatal(this, 'Read xml error. (url={1})\n{2}', this._url, this._outputText)

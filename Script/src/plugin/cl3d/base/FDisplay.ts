@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
@@ -108,7 +108,7 @@ export class FDisplay extends FDrawable implements IDisplay {
       if (item instanceof FRenderable) {
          this.pushRenderable(item);
       } else {
-         throw new FError(this, 'Unknown item type.');
+         throw new Fatal(this, 'Unknown item type.');
       }
    }
 

@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
@@ -130,7 +130,7 @@ export class FCamera extends ObjectBase {
    // @param p:radian:Number 弧度
    //==========================================================
    public doPitch(p) {
-      throw new FError(this, 'Unsupport.')
+      throw new Fatal(this, 'Unsupport.')
    }
 
    //==========================================================
@@ -140,7 +140,7 @@ export class FCamera extends ObjectBase {
    // @param p:radian:Number 弧度
    //==========================================================
    public doYaw(p) {
-      throw new FError(this, 'Unsupport.')
+      throw new Fatal(this, 'Unsupport.')
    }
 
    //==========================================================
@@ -150,7 +150,7 @@ export class FCamera extends ObjectBase {
    // @param p:radian:Number 弧度
    //==========================================================
    public doRoll(p) {
-      throw new FError(this, 'Unsupport.')
+      throw new Fatal(this, 'Unsupport.')
    }
 
    //==========================================================

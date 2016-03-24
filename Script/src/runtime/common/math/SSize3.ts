@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -68,7 +68,7 @@ export class SSize3 {
          o.height = parseInt(r[1]);
          o.deep = parseInt(r[2]);
       } else {
-         throw new FError(o, "Parse value failure. (value={1})", v);
+         throw new Fatal(o, "Parse value failure. (value={1})", v);
       }
    }
 

@@ -1,6 +1,6 @@
 import {ObjectBase} from '../lang/ObjectBase';
 import {StringBuffer} from '../lang/StringBuffer';
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {RClass} from '../reflect/RClass';
 import {FXmlNode} from '../xml/FXmlNode';
 
@@ -60,7 +60,7 @@ export class FXmlDocument extends ObjectBase {
       if (!o._root) {
          o._root = p;
       } else {
-         throw new FError(o, 'Root node is already exists.');
+         throw new Fatal(o, 'Root node is already exists.');
       }
    }
 

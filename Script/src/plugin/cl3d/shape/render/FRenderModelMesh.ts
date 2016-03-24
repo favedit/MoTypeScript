@@ -1,5 +1,5 @@
 import {DataTypeEnum} from '../../../runtime/common/lang/DataTypeEnum';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
@@ -95,7 +95,7 @@ export class FRenderModelMesh extends FRenderable {
                vertexBuffer.formatCd = EAttributeFormat.Byte4Normal;
                break;
             default:
-               throw new FError(this, "Unknown code");
+               throw new Fatal(this, "Unknown code");
          }
          vertexBuffer.upload(pixels, streamResource.dataStride, dataCount);
          this.pushVertexBuffer(vertexBuffer);
@@ -117,7 +117,7 @@ export class FRenderModelMesh extends FRenderable {
          } else if (dataCd == DataTypeEnum.Uint32) {
             indexBuffer.strideCd = EIndexStride.Uint32;
          } else {
-            throw new FError(this, "Unknown data type.");
+            throw new Fatal(this, "Unknown data type.");
          }
          indexBuffer.upload(data, 3 * dataCount);
          this.pushIndexBuffer(indexBuffer);

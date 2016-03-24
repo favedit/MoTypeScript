@@ -1,6 +1,6 @@
 import {RuntimeUtil} from '../RuntimeUtil'
 import {RClass} from '../reflect/RClass'
-import {FError} from './FError'
+import {Fatal} from './Fatal'
 
 //==========================================================
 // <T>对象管理类。</T>
@@ -94,7 +94,7 @@ export class ObjectUtil {
                var value = item[name];
                if (value != null) {
                   if (!RClass.isBaseType(value.constructor)) {
-                     throw new FError(this, 'Free object is not base object.');
+                     throw new Fatal(this, 'Free object is not base object.');
                   }
                   item[name] = null;
                }
@@ -122,7 +122,7 @@ export class ObjectUtil {
             item.dispose(flag);
             item.__dispose = true;
          } else {
-            throw new FError(this, 'Object has disposed.');
+            throw new Fatal(this, 'Object has disposed.');
          }
       }
       return null;

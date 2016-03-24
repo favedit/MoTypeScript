@@ -2,7 +2,7 @@ import {SEvent} from '../../../../runtime/common/lang/SEvent';
 import {Objects} from '../../../../runtime/common/lang/Objects';
 import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {RXml} from '../../../../runtime/common/xml/RXml';
 import {RuntimeUtil} from '../../../../runtime/common/RuntimeUtil';
@@ -423,7 +423,7 @@ export class FWglContext extends FGraphicContext {
             //graphic.polygonMode(graphic.FRONT, graphic.FILL);
             break;
          default:
-            throw new FError('Invalid parameter. (fill_mode={1})', fillModeCd);
+            throw new Fatal('Invalid parameter. (fill_mode={1})', fillModeCd);
       }
       this._fillModeCd = fillModeCd;
       return true;
@@ -720,7 +720,7 @@ export class FWglContext extends FGraphicContext {
                bytes = this._data16;
                data.writeData(bytes, 0);
             } else {
-               throw new FError(this, 'Unknown data type.');
+               throw new Fatal(this, 'Unknown data type.');
             }
             //graphic.uniformMatrix4fv(slot, graphic.FALSE, bytes);
             graphic.uniformMatrix4fv(slot, false, bytes);
@@ -730,7 +730,7 @@ export class FWglContext extends FGraphicContext {
             break;
          }
          default: {
-            throw new FError(this, 'Unknown format type. (format_cd={1})', formatCd);
+            throw new Fatal(this, 'Unknown format type. (format_cd={1})', formatCd);
          }
       }
       return result;
@@ -806,7 +806,7 @@ export class FWglContext extends FGraphicContext {
             graphic.vertexAttribPointer(slot, 4, graphic.UNSIGNED_BYTE, true, stride, offset);
             break;
          default:
-            throw new FError(this, "Unknown vertex format. (format_cd=%d)", formatCd);
+            throw new Fatal(this, "Unknown vertex format. (format_cd=%d)", formatCd);
       }
       // 检查错误
       result = this.checkError("glVertexAttribPointer", "Bind vertex attribute pointer. (slot=%d, format_cd=%d)", slot, formatCd);
@@ -874,7 +874,7 @@ export class FWglContext extends FGraphicContext {
             break;
          }
          default: {
-            throw new FError(this, 'Unknown texture type.');
+            throw new Fatal(this, 'Unknown texture type.');
          }
       }
       return result;

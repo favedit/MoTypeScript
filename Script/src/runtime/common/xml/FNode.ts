@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {IntegerUtil} from '../lang/IntegerUtil';
 import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
@@ -287,7 +287,7 @@ export class FNode extends ObjectBase {
          var as = arguments;
          var ac = as.length;
          if ((ac - 1) % 2) {
-            throw new FError(this, 'Attributes is not pair. (length={1})', ac);
+            throw new Fatal(this, 'Attributes is not pair. (length={1})', ac);
          }
          // 查找所有节点
          for (var ni = 0; ni < nc; ni++) {

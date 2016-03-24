@@ -1,5 +1,5 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
-import {FError} from '../../runtime/common/lang/FError';
+import {Fatal} from '../../runtime/common/lang/Fatal';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FConsole} from '../../runtime/core/FConsole';
 import {FVendor} from './FVendor';
@@ -88,7 +88,7 @@ export class FVendorConsole extends FConsole {
          // this._vendors.set('template', this.createVendor(FVendorLocal, MO.RBrowser.contentPath('/ar3/template/{guid}.bin')));
          // this._vendors.set('scene', this.createVendor(FVendorLocal, MO.RBrowser.contentPath('/ar3/scene/{guid}.bin')));
       } else {
-         throw new FError(this, 'Unknown setup code. (code={1})', name);
+         throw new Fatal(this, 'Unknown setup code. (code={1})', name);
       }
       this._setuped = true;
    }

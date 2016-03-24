@@ -1,6 +1,6 @@
 import {RClass} from '../reflect/RClass';
 import {StringBuffer} from '../lang/StringBuffer';
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {Attributes} from '../lang/Attributes';
 import {StringUtil} from '../lang/StringUtil';
 import {RMethod} from '../reflect/RMethod';
@@ -357,7 +357,7 @@ export class RXml {
                   o.saveObject(xtag, 'Property', value);
                   break;
                default:
-                  throw new FError(this, 'Invalid object.');
+                  throw new Fatal(this, 'Invalid object.');
             }
          }
       }

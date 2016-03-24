@@ -12,13 +12,13 @@ import {ArrayUtil} from './ArrayUtil'
 // @author maocy
 // @version 150101
 //==========================================================
-export class FError {
+export class Fatal {
    public constructor(po: any, pm: string, ...pp: Array<any>) {
       //..........................................................
       // @construct
       var r: StringBuffer = new StringBuffer();
       // 建立函数调用信息
-      var f = FError.caller;
+      var f = Fatal.caller;
       var s = new StringBuffer();
       var t = new Array();
       while (f) {

@@ -1,5 +1,5 @@
 import {BooleanEnum} from './BooleanEnum';
-import {FError} from './FError';
+import {Fatal} from './Fatal';
 
 //==========================================================
 // <T>布尔操作的管理类。</T>
@@ -37,7 +37,7 @@ export class BooleanUtil {
          } else if (value.constructor == Number) {
             return value > 0;
          } else {
-            throw new FError(this, 'Unknown type.');
+            throw new Fatal(this, 'Unknown type.');
          }
       }
       return false;

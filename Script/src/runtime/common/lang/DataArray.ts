@@ -9,7 +9,7 @@ import {StringBuffer} from './StringBuffer'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FArray extends ObjectBase {
+export class DataArray extends ObjectBase {
    //..........................................................
    // @attribute
    protected _length: number = 0;

@@ -1,5 +1,5 @@
 import {DataTypeEnum} from './DataTypeEnum';
-import {FError} from './FError';
+import {Fatal} from './Fatal';
 
 //==========================================================
 // <T>类型数组的工具类</T>
@@ -72,7 +72,7 @@ export class TypeArrayUtil {
          case DataTypeEnum.Float64:
             return new Float64Array(length);
       }
-      throw new FError('Create unknown type array. (type={1}, length={2})', typeCd, length);
+      throw new Fatal('Create unknown type array. (type={1}, length={2})', typeCd, length);
    }
 
    //==========================================================

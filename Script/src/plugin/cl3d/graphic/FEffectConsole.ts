@@ -1,5 +1,5 @@
 ﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {Looper} from '../../../runtime/common/lang/Looper';
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
@@ -106,7 +106,7 @@ export class FEffectConsole extends FConsole {
    public create(context, name) {
       var clazz = this._registerEffects.get(name);
       if (!clazz) {
-         throw new FError(this, 'Unknown effect type name. (type={1})', clazz);
+         throw new Fatal(this, 'Unknown effect type name. (type={1})', clazz);
       }
       var effect = RClass.create(clazz);
       effect.linkGraphicContext(context);

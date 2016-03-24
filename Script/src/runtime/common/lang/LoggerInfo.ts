@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150729
 //==========================================================
-export class SLogger {
+export class LoggerInfo {
    // 实例
    sender: any = null;
    // 消息

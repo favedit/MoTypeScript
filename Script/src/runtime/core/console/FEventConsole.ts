@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {SListenerContext} from '../../common/lang/SListenerContext';
+import {ListenerContext} from '../../common/lang/ListenerContext';
 import {Listener} from '../../common/lang/Listener';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
@@ -39,7 +39,7 @@ export class FEventConsole extends FConsole {
    // @param v:value:String 待检验的字符串
    // @return Boolean 是否整数
    //==========================================================
-   public static listenerProcess(context: SListenerContext) {
+   public static listenerProcess(context: ListenerContext) {
       context.process();
       MemoryUtil.free(event);
    }
@@ -77,7 +77,7 @@ export class FEventConsole extends FConsole {
    // @param context 环境
    // @param parameters 参数集合
    //==========================================================
-   public onProcess(context: SListenerContext, parameters: any) {
+   public onProcess(context: ListenerContext, parameters: any) {
       // 检查数据
       var events = this._events;
       if (events.isEmpty()) {

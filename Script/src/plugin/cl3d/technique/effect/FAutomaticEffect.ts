@@ -1,4 +1,4 @@
-﻿import {FError} from '../../../../runtime/common/lang/FError';
+﻿import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {StringBuffer} from '../../../../runtime/common/lang/StringBuffer';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {FEffect} from '../../graphic/FEffect';
@@ -604,7 +604,7 @@ export class FAutomaticEffect extends FEffect {
          var indexBuffer = indexBuffers.first();
          context.drawTriangles(indexBuffer);
       } else {
-         throw new FError(this, 'Index buffer is not found.');
+         throw new Fatal(this, 'Index buffer is not found.');
       }
       // 取消绑定取样器集合（TODO：不执行也正确）
       // layout.unbindSamplers();

@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {HexUtil} from '../lang/HexUtil'
 import {FloatUtil} from '../lang/FloatUtil';
 
@@ -123,7 +123,7 @@ export class SColor4 {
          o.green = HexUtil.parse(value.substring(2, 4)) / 255;
          o.blue = HexUtil.parse(value.substring(4, 6)) / 255;
       } else {
-         throw new FError(o, 'Invalid value.');
+         throw new Fatal(o, 'Invalid value.');
       }
    }
 

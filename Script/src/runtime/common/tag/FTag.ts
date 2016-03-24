@@ -3,7 +3,7 @@ import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
 import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -65,7 +65,7 @@ export class FTag extends ObjectBase {
    // @param value 内容
    //==========================================================
    public set(name, value) {
-      throw new FError(this, 'Unknown attribute name. (name={1}, value={2})', name, value);
+      throw new Fatal(this, 'Unknown attribute name. (name={1}, value={2})', name, value);
    }
 
    //==========================================================

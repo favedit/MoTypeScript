@@ -1,4 +1,4 @@
-import {SAccessEvent} from '../../runtime/common/lang/SAccessEvent';
+import {AccessEvent} from '../../runtime/common/lang/AccessEvent';
 import {DataTypeEnum} from '../../runtime/common/lang/DataTypeEnum';
 import {AccessEnum} from '../../runtime/common/lang/AccessEnum';
 import {AProperty} from '../../runtime/common/reflect/AProperty';
@@ -13,11 +13,11 @@ export class FPropertyChanged {
    @AProperty(null, 'onFieldChanged2')
    public value: string = null;
 
-   public onFieldChanged1(sender, event: SAccessEvent) {
+   public onFieldChanged1(sender, event: AccessEvent) {
       console.log(sender, event.oldValue + " 1-> " + event.value);
    }
 
-   public onFieldChanged2(sender, event: SAccessEvent) {
+   public onFieldChanged2(sender, event: AccessEvent) {
       console.log(sender, event.oldValue + " 2-> " + event.value);
    }
 }

@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
@@ -185,7 +185,7 @@ export class SValue4 {
          this.z = parseFloat(items[2]);
          this.w = parseFloat(items[3]);
       } else {
-         throw new FError(this, "Parse value failure. (value={1})", value);
+         throw new Fatal(this, "Parse value failure. (value={1})", value);
       }
    }
 

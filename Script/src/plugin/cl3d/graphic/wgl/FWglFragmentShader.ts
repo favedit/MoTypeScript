@@ -1,4 +1,4 @@
-import {FError} from '../../../../runtime/common/lang/FError';
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {FFragmentShader} from '../FFragmentShader';
 
 //==========================================================
@@ -58,7 +58,7 @@ export class FWglFragmentShader extends FFragmentShader {
          var info = graphic.getShaderInfoLog(handle);
          graphic.deleteShader(handle);
          this.handle = null;
-         throw new FError(this, 'Upload fragment shader source failure. (error={1})\n{2}', info, source);
+         throw new Fatal(this, 'Upload fragment shader source failure. (error={1})\n{2}', info, source);
       }
       this.source = source;
    }

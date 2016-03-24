@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {TypeArrayUtil} from '../../../runtime/common/lang/TypeArrayUtil';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
@@ -237,7 +237,7 @@ export abstract class FProgram extends FContent {
          data[2] = value.z;
          data[3] = value.w;
       } else {
-         throw new FError(this, 'Bind invalid parameter type. (name={1}, type={2})', name, clazz);
+         throw new Fatal(this, 'Bind invalid parameter type. (name={1}, type={2})', name, clazz);
       }
       // 检查数据变更
       if (parameter.attachData(data)) {
@@ -276,7 +276,7 @@ export abstract class FProgram extends FContent {
       // 获得定义
       var sampler = this.findSampler(name);
       if (!sampler) {
-         throw new FError(this, 'Bind invalid sampler. (name={1})', name);
+         throw new Fatal(this, 'Bind invalid sampler. (name={1})', name);
       }
       // 设置内容
       this._graphicContext.bindTexture(sampler.slot, sampler.index, texture);

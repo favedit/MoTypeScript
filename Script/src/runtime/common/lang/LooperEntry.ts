@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150110
 //==========================================================
-export class SLooperEntry {
+export class LooperEntry {
    // @attribute
    prior = null;
    next = null;

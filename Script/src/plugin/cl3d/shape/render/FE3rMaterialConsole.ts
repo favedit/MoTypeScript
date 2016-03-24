@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {Dictionary} from '../../runtime/common/lang/Dictionary'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
 import {RClass} from '../../runtime/common/reflect/RClass'
-import {FError} from '../../runtime/common/lang/FError'
+import {Fatal} from '../../runtime/common/lang/Fatal'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {FConsole} from '../../runtime/core/FConsole'
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
@@ -72,10 +72,10 @@ export class FE3rMaterialConsole extends FConsole {
    public loadByUrl(context, url) {
       // 检查参数
       if (!context) {
-         throw new FError(this, 'Graphics context is empty');
+         throw new Fatal(this, 'Graphics context is empty');
       }
       if (!url) {
-         throw new FError(this, 'Material guid is empty');
+         throw new Fatal(this, 'Material guid is empty');
       }
       // 查找材质
       var material: FE3rMaterial = this._materials.get(url);
@@ -105,10 +105,10 @@ export class FE3rMaterialConsole extends FConsole {
    public loadLoaderByUrl(context, url) {
       // 检查参数
       if (!context) {
-         throw new FError(this, 'Graphics context is empty');
+         throw new Fatal(this, 'Graphics context is empty');
       }
       if (!url) {
-         throw new FError(this, 'Material guid is empty');
+         throw new Fatal(this, 'Material guid is empty');
       }
       // 查找材质
       var loader: FMaterialLoader = this._materials.get(url);

@@ -1,4 +1,4 @@
-import {SListenerContext} from './SListenerContext'
+import {ListenerContext} from './ListenerContext'
 import {MemoryUtil} from '../MemoryUtil'
 
 //==========================================================
@@ -17,7 +17,7 @@ export class ListenerUtil {
    // @param v:value:String 待检验的字符串
    // @return Boolean 是否整数
    //==========================================================
-   public static process(context: SListenerContext) {
+   public static process(context: ListenerContext) {
       context.process();
       MemoryUtil.free(context);
    }

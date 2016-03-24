@@ -1,4 +1,4 @@
-import {FError} from '../../common/lang/FError';
+import {Fatal} from '../../common/lang/Fatal';
 import {Attributes} from '../../common/lang/Attributes';
 import {Listeners} from '../../common/lang/Listeners';
 import {SEvent} from '../../common/lang/SEvent';
@@ -101,7 +101,7 @@ export class RWindow {
             }
             return storage;
       }*/
-      throw new FError(o, 'Unknown scope. (scope_cd={1})', scopeCd);
+      throw new Fatal(o, 'Unknown scope. (scope_cd={1})', scopeCd);
    }
 
    //==========================================================

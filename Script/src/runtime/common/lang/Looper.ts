@@ -2,7 +2,7 @@ import {MemoryUtil} from '../MemoryUtil';
 import {RuntimeUtil} from '../RuntimeUtil';
 import {ObjectBase} from './ObjectBase';
 import {StringBuffer} from './StringBuffer';
-import {SLooperEntry} from './SLooperEntry';
+import {LooperEntry} from './LooperEntry';
 
 //==========================================================
 // <T>自循环链表。</T>
@@ -216,7 +216,7 @@ export class Looper extends ObjectBase {
    // @param value:Object 对象
    //==========================================================
    public push(value) {
-      var entry = MemoryUtil.alloc(SLooperEntry);
+      var entry = MemoryUtil.alloc(LooperEntry);
       entry.value = value;
       this.innerPush(entry);
    }

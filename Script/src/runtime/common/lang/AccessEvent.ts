@@ -7,7 +7,9 @@ import {SEvent} from './SEvent';
 // @author maocy
 // @version 150113
 //==========================================================
-export class SAccessEvent extends SEvent {
-   public oldValue:any = null;
-   public value:any = null;
+export class AccessEvent extends SEvent {
+
+   public oldValue: any;
+
+   public value: any;
 }

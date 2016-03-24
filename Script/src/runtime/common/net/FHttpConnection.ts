@@ -2,7 +2,7 @@ import {Attributes} from '../lang/Attributes';
 import {SEvent} from '../lang/SEvent';
 import {ObjectBase} from '../lang/ObjectBase';
 import {Listeners} from '../lang/Listeners';
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {ObjectUtil} from '../lang/ObjectUtil';
 import {LoggerUtil} from '../lang/LoggerUtil';
 import {RNet} from '../net/RNet';
@@ -74,7 +74,7 @@ export class FHttpConnection extends ObjectBase {
             this._inputData = input;
             this._contentLength = input.byteLength;
          } else {
-            throw new FError(this, 'Unknown send data type.');
+            throw new Fatal(this, 'Unknown send data type.');
          }
       }
    }

@@ -1,5 +1,5 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
-import {FError} from '../../../runtime/common/lang/FError';
+import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {BooleanUtil} from '../../../runtime/common/lang/BooleanUtil';
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
@@ -120,7 +120,7 @@ export class FEffect extends FContent {
                var linker = attribute.linker;
                var vertexBuffer = renderable.findVertexBuffer(linker);
                if (!vertexBuffer) {
-                  throw new FError(this, "Can't find renderable vertex buffer. (linker={1})", linker);
+                  throw new Fatal(this, "Can't find renderable vertex buffer. (linker={1})", linker);
                }
                program.setAttribute(attribute.name, vertexBuffer, vertexBuffer.formatCd);
             }
@@ -267,10 +267,10 @@ export class FEffect extends FContent {
             } else if (name == 'fragment') {
                this._fragmentSource = xnode.value();
             } else {
-               throw new FError(this, 'Unknown source type. (name={1})', name);
+               throw new Fatal(this, 'Unknown source type. (name={1})', name);
             }
          } else {
-            throw new FError(this, 'Unknown config type. (name={1})', xnode.name());
+            throw new Fatal(this, 'Unknown config type. (name={1})', xnode.name());
          }
       }
       // 建立代码模板

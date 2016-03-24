@@ -1,4 +1,4 @@
-import {FError} from '../../common/lang/FError';
+import {Fatal} from '../../common/lang/Fatal';
 import {FResourcePipeline} from './FResourcePipeline';
 
 //==========================================================
@@ -41,7 +41,7 @@ export class FResourceThreadPipeline extends FResourcePipeline {
       } else if (buffer.constructor == Uint8Array) {
          bufferData = buffer;
       } else {
-         throw new FError(o, 'Unknown buffer type.');
+         throw new Fatal(o, 'Unknown buffer type.');
       }
       // 设置数据
       //var data = o._data;

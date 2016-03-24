@@ -1,4 +1,4 @@
-import {FError} from '../lang/FError';
+import {Fatal} from '../lang/Fatal';
 import {SValue2} from './SValue2';
 
 //============================================================
@@ -45,7 +45,7 @@ export class SPoint2 extends SValue2 {
          o.x = parseInt(items[0]);
          o.y = parseInt(items[1]);
       } else {
-         throw new FError(o, "Parse value failure. (value={1})", source);
+         throw new Fatal(o, "Parse value failure. (value={1})", source);
       }
    }
 
@@ -61,7 +61,7 @@ export class SPoint2 extends SValue2 {
          o.x = parseFloat(items[0]);
          o.y = parseFloat(items[1]);
       } else {
-         throw new FError(o, "Parse value failure. (value={1})", source);
+         throw new Fatal(o, "Parse value failure. (value={1})", source);
       }
    }
 
