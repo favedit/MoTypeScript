@@ -87,28 +87,28 @@ export class RConsole {
    // @param name:string 类名称
    // @return Object 控制台实例
    //==========================================================
-   public static createByName(name) {
-      var r = null;
-      if (name) {
-         // 创建对象实例
-         r = RClass.createByName(name);
-         // 关联对象属性
-         var o = this;
-         for (var rn in r) {
-            if (RString.startsWith(rn, 'lnk')) {
-               var v = r[rn];
-               if ('string' == typeof (v) && RString.startsWith(v, '&')) {
-                  var c = o.find(v.substr(1));
-                  if (!c) {
-                     //return MO.Message.fatal(o, null, "Can't link console. (name={0}, property={1}:{2})", n, rn, v);
-                  }
-                  r[rn] = c;
-               }
-            }
-         }
-      }
-      return r;
-   }
+   // public static createByName(name) {
+   //    var r = null;
+   //    if (name) {
+   //       // 创建对象实例
+   //       r = RClass.createByName(name);
+   //       // 关联对象属性
+   //       var o = this;
+   //       for (var rn in r) {
+   //          if (RString.startsWith(rn, 'lnk')) {
+   //             var v = r[rn];
+   //             if ('string' == typeof (v) && RString.startsWith(v, '&')) {
+   //                var c = o.find(v.substr(1));
+   //                if (!c) {
+   //                   //return MO.Message.fatal(o, null, "Can't link console. (name={0}, property={1}:{2})", n, rn, v);
+   //                }
+   //                r[rn] = c;
+   //             }
+   //          }
+   //       }
+   //    }
+   //    return r;
+   // }
 
    //==========================================================
    // <T>根据类函数获得一个控制台实例。</T>

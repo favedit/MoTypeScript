@@ -16,38 +16,43 @@ import {RClass} from '../reflect/RClass';
 export class FTag extends FObject {
    //..........................................................
    // @attribute
-   protected _name = 'Tag';
-   protected _children = null;
-   protected _trimLeft = false;
-   protected _trimRight = false;
+   protected _name: string;
+   protected _children: FObjects<FTag>;
+   protected _trimLeft: boolean;
+   protected _trimRight: boolean;
+
+   //==========================================================
+   // <T>构建处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      this._name = 'Tag';
+   }
 
    //==========================================================
    // <T>开始处理。</T>
    //
-   // @method
-   // @param p:context:FTagContext 环境
-   // @return EResult 处理结果
+   // @param context 环境
+   // @return 处理结果
    //==========================================================
-   public onBegin(p) {
+   public onBegin(context) {
       return EResult.Continue;
    }
 
    //==========================================================
    // <T>结束处理。</T>
    //
-   // @method
-   // @param p:context:FTagContext 环境
-   // @return EResult 处理结果
+   // @param context 环境
+   // @return 处理结果
    //==========================================================
-   public onEnd(p) {
+   public onEnd(context) {
       return EResult.Continue;
    }
 
    //==========================================================
    // <T>获得名称。</T>
    //
-   // @method
-   // @return String 名称
+   // @return 名称
    //==========================================================
    public name() {
       return this._name;
@@ -56,66 +61,61 @@ export class FTag extends FObject {
    //==========================================================
    // <T>设置属性值。</T>
    //
-   // @method
-   // @param n:name:String 名称
-   // @param v:level:Integer 内容
+   // @param name 名称
+   // @param value 内容
    //==========================================================
-   public set(n, v) {
-      throw new FError(this, 'Unknown attribute name. (name={1}, value={2})', n, v);
+   public set(name, value) {
+      throw new FError(this, 'Unknown attribute name. (name={1}, value={2})', name, value);
    }
 
    //==========================================================
    // <T>增加一个子标签。</T>
    //
    // @method
-   // @param p:tag:FTag 子标签
+   // @param tag 子标签
    //==========================================================
-   public push(p) {
-      var o = this;
-      var ts = o._children;
-      if (ts == null) {
-         ts = o._children = new FObjects();
+   public push(tag) {
+      var children = this._children;
+      if (!children) {
+         children = this._children = new FObjects<FTag>();
       }
-      ts.push(p);
+      children.push(tag);
    }
 
    //==========================================================
    // <T>解析处理。</T>
    //
-   // @method
-   // @param p:context:FTagContext 环境
+   // @param context 环境
    //==========================================================
-   public parse(p) {
-      var o = this;
+   public parse(context) {
       // 开始处理
-      var r = o.onBegin(p);
-      if (r == EResult.Continue) {
+      var resultCd = this.onBegin(context);
+      if (resultCd == EResult.Continue) {
          // 子标签处理
-         var ts = o._children;
-         if (ts) {
-            var c = ts.count();
-            for (var i = 0; i < c; i++) {
-               var t = ts.get(i);
-               r = t.parse(p);
-               if (r == EResult.Cancel) {
-                  return r;
+         var children = this._children;
+         if (children) {
+            var count = children.count();
+            for (var i = 0; i < count; i++) {
+               var child = children.get(i);
+               resultCd = child.parse(context);
+               if (resultCd == EResult.Cancel) {
+                  return resultCd;
                }
-               p._trimLeft = t._trimLeft;
-               p._trimRight = t._trimRight;
+               context._trimLeft = child._trimLeft;
+               context._trimRight = child._trimRight;
             }
          }
-         return o.onEnd(p);
+         return this.onEnd(context);
       }
-      return r;
+      return resultCd;
    }
 
    //==========================================================
    //<T>获得字符串。</T>
    //
-   // @method
-   // @return String 字符串
+   // @return 字符串
    //==========================================================
-   public toString() {
+   public toString(): string {
       return null;
    }
 
@@ -128,7 +128,6 @@ export class FTag extends FObject {
    // @param pl:level:Integer 级别
    //==========================================================
    public innerDump(ps, pt, pl) {
-      var o = this;
       ps.appendRepeat('   ', pl);
       ps.append(RClass.dump(pt));
       // 追加属性
@@ -137,14 +136,14 @@ export class FTag extends FObject {
          ps.append(' [', s, ']');
       }
       // 追加子标签
-      var ts = pt._children;
-      if (ts) {
+      var children = pt._children;
+      if (children) {
          ps.append('\n');
-         var c = ts.count();
-         for (var i = 0; i < c; i++) {
-            var t = ts.get(i);
-            o.innerDump(ps, t, pl + 1);
-            if (i < c - 1) {
+         var count = children.count();
+         for (var i = 0; i < count; i++) {
+            var child = children.get(i);
+            this.innerDump(ps, child, pl + 1);
+            if (i < count - 1) {
                ps.append('\n');
             }
          }

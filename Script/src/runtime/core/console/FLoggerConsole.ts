@@ -1,6 +1,5 @@
 import {ALinker} from '../../common/reflect/ALinker';
 import {AProperty} from '../../common/reflect/AProperty';
-import {ALogger} from '../../common/reflect/ALogger';
 import {EScope} from '../../common/lang/EScope';
 import {EDataType} from '../../common/lang/EDataType';
 import {RObject} from '../../common/lang/RObject';
@@ -71,7 +70,6 @@ export class FLoggerConsole extends FConsole {
    //
    // @method
    //==========================================================
-   @ALogger()
    public connect(url) {
       var socket = this._socket = RClass.create(FBufferedSocket);
       socket.connect(url);

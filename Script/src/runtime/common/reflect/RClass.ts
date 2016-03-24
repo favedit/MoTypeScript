@@ -274,11 +274,14 @@ export class RClass {
    //==========================================================
    public static get(typeClass: Function): FClass {
       RAssert.debugNotNull(typeClass);
-      var clazz = typeClass.prototype.__clazz;
-      if (clazz == null) {
-         clazz = typeClass.prototype.__clazz = new FClass();
-         clazz.build(typeClass);
+      var clazz: FClass = typeClass.prototype.__clazz;
+      if (clazz) {
+         if (clazz.linker === typeClass) {
+            return clazz;
+         }
       }
+      clazz = typeClass.prototype.__clazz = new FClass();
+      clazz.build(typeClass);
       return clazz;
       // var findClass = typeClass.prototype;
       // if (typeClass.constructor != Function) {
@@ -363,16 +366,16 @@ export class RClass {
    // @param className 类名称
    // @return 类对象的实例
    //==========================================================
-   public static createByName(className: string): any {
-      /*var o = this;
-      // 获得类对象
-      var clazz = o.forName(className);
-      if (!clazz) {
-         throw new FError(o, 'Cant find class. (name={1})', clazz);
-      }
-      // 创建类的实例
-      return clazz.newInstance();*/
-   }
+   // public static createByName(className: string): any {
+   //    /*var o = this;
+   //    // 获得类对象
+   //    var clazz = o.forName(className);
+   //    if (!clazz) {
+   //       throw new FError(o, 'Cant find class. (name={1})', clazz);
+   //    }
+   //    // 创建类的实例
+   //    return clazz.newInstance();*/
+   // }
 
    //==========================================================
    // <T>根据一个类函数创建类的实例。</T>

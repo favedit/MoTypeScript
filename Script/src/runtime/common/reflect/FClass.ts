@@ -24,8 +24,8 @@ export class FClass extends FObject {
    public shortName: string;
    // 全名称
    public fullName: string;
-   // 构造函数
-   protected _constructor: any;
+   // 关联函数
+   public linker: any;
    // 唯一实例对象
    protected _instance: any;
    // 描述器集合
@@ -52,7 +52,7 @@ export class FClass extends FObject {
       var instance = this._instance;
       if (!instance) {
          // 创建实例
-         var clazz: any = this._constructor;
+         var clazz: any = this.linker;
          if (clazz.instance) {
             instance = this._instance = clazz.instance();
          } else {
@@ -198,7 +198,7 @@ export class FClass extends FObject {
    // @param clazz 类对象
    //==========================================================
    public build(clazz: Function): void {
-      this._constructor = clazz;
+      this.linker = clazz;
    }
 
    //==========================================================
@@ -207,7 +207,7 @@ export class FClass extends FObject {
    // @return 对象实例
    //==========================================================
    public newInstance(): any {
-      var instance = new this._constructor();
+      var instance = new this.linker();
       instance.__class = this;
       return instance;
    }

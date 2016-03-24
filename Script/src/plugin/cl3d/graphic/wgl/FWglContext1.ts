@@ -28,7 +28,6 @@ export class FWglContext1 extends FWglContext {
    //==========================================================
    public setup(hCanvas: HTMLCanvasElement, handle: WebGLRenderingContext) {
       super.setup(hCanvas, handle);
-      debugger;
       var capability = this.capability;
       // 测试实例绘制支持
       var extension = this._handleInstance = handle.getExtension('ANGLE_instanced_arrays');

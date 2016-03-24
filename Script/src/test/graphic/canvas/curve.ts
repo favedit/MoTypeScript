@@ -19,14 +19,14 @@ environmentConsole.registerValue('resource', '/sk/res');
 //............................................................
 // 创建画板
 var canvas = new FCanvas();
-canvas.size.set(800, 400);
+canvas.size.set(800, 200);
 canvas.setup(window.document.body);
 var context = canvas.graphicContext;
 // 创建场景
 var scene = canvas.scene = new FSimpleScene();
 scene.linkGraphicContext(context);
 scene.setup();
-scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
+scene.backgroundColor.set(0.9, 0.9, 0.9, 1);
 // 创建相机
 var camera = canvas.camera;
 camera.position.set(0, 0, -20);
