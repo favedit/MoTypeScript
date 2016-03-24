@@ -3,9 +3,9 @@ import {Size2} from './../../runtime/common/math/Size2';
 import {FGraphicObject} from './../../runtime/graphic/core/FGraphicObject';
 import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
 import {FScene} from '../../plugin/cl3d/base/FScene';
-import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
-import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
-import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
+import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';
+import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
+import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
 import {EEvent} from '../../../runtime/ui/EEvent';
 import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FControl} from './../../runtime/ui/FControl';
@@ -36,15 +36,15 @@ export class FCanvas extends FControl {
    protected _cameraKeyRotation = 0.03;
    protected _cameraMouseRotation = 0.005;
    // 渲染管道
-   public pipeline: FPipeline;
+   public pipeline: Pipeline;
    // 场景
    public scene: FScene;
    // 按键管理器
    @Linker(FKeyboardConsole)
    public _keyboardConsole: FKeyboardConsole = null;
    // 管道管理器
-   @Linker(FPipelineConsole)
-   public _pipelineConsole: FPipelineConsole = null;
+   @Linker(PipelineService)
+   public _pipelineConsole: PipelineService = null;
    //    o._logicSize          = MO.Class.register(o, new MO.AGetter('_logicSize'));
    //    o._screenSize         = MO.Class.register(o, new MO.AGetter('_screenSize'));
    //    o._interval           = 10;
@@ -121,7 +121,7 @@ export class FCanvas extends FControl {
       camera.lookAt(0, 0, 0);
       camera.update();
       // 设置渲染管道
-      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, FForwardPipeline);
+      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, ForwardPipeline);
       pipeline.scene = this.scene;
       pipeline.camera = this.camera;
       pipeline.enterFrameListeners.register(this, this.onProcess);

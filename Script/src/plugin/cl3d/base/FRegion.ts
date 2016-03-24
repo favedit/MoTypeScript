@@ -9,8 +9,8 @@ import {Vector4} from '../../../runtime/common/math/Vector4';
 import {Color4} from '../../../runtime/common/math/Color4';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
-import {FTechniquePass} from '../technique/FTechniquePass';
-import {FTechnique} from '../technique/FTechnique';
+import {TechniquePass} from '../technique/TechniquePass';
+import {Technique} from '../technique/Technique';
 import {ERegionParameter} from './ERegionParameter';
 import {FRenderable} from './FRenderable';
 import {FDisplay} from './FDisplay';
@@ -30,9 +30,9 @@ export class FRegion extends ObjectBase implements IProcessContext {
    // 背景色
    public backgroundColor: Color4;
    // 当前技术
-   public technique: FTechnique;
+   public technique: Technique;
    // 当前过程
-   public techniquePass: FTechniquePass;
+   public techniquePass: TechniquePass;
    // 当前相机
    public camera;
    // 当前投影
@@ -127,7 +127,7 @@ export class FRegion extends ObjectBase implements IProcessContext {
    // @method
    // @param pass 技术过程
    //==========================================================
-   public setTechniquePass(pass: FTechniquePass, finish: boolean): void {
+   public setTechniquePass(pass: TechniquePass, finish: boolean): void {
       this.techniquePass = pass;
       this.spaceName = pass.fullCode;
       this.finish = finish;

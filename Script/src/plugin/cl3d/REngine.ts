@@ -1,11 +1,11 @@
 import {ServiceUtil} from '../../runtime/core/ServiceUtil';
-import {FGeneralColorAutomaticEffect} from './technique/effect/FGeneralColorAutomaticEffect';
-import {FGeneralColorLineEffect} from './technique/effect/FGeneralColorLineEffect';
-import {FSelectAutomaticEffect} from './technique/effect/FSelectAutomaticEffect';
-import {FShadowDepthAutomaticEffect} from './technique/effect/FShadowDepthAutomaticEffect';
-import {FShadowColorAutomaticEffect} from './technique/effect/FShadowColorAutomaticEffect';
-import {FDeferredDataPhongAutomaticEffect} from './technique/effect/FDeferredDataPhongAutomaticEffect';
-import {FDeferredMergePhongAutomaticEffect} from './technique/effect/FDeferredMergePhongAutomaticEffect';
+import {GeneralColorAutomaticEffect} from './technique/effect/GeneralColorAutomaticEffect';
+import {GeneralColorLineEffect} from './technique/effect/GeneralColorLineEffect';
+import {SelectAutomaticEffect} from './technique/effect/SelectAutomaticEffect';
+import {ShadowDepthAutomaticEffect} from './technique/effect/ShadowDepthAutomaticEffect';
+import {ShadowColorAutomaticEffect} from './technique/effect/ShadowColorAutomaticEffect';
+import {DeferredDataPhongAutomaticEffect} from './technique/effect/DeferredDataPhongAutomaticEffect';
+import {DeferredMergePhongAutomaticEffect} from './technique/effect/DeferredMergePhongAutomaticEffect';
 import {FEffectConsole} from './graphic/FEffectConsole';
 
 //==========================================================
@@ -30,21 +30,21 @@ export class REngine {
    public static staticConstructor() {
       var effectConsole = ServiceUtil.find(FEffectConsole);
       // 选择效果器
-      effectConsole.register('select.select.line.automatic', FSelectAutomaticEffect);
-      effectConsole.register('select.select.phong.automatic', FSelectAutomaticEffect);
+      effectConsole.register('select.select.line.automatic', SelectAutomaticEffect);
+      effectConsole.register('select.select.phong.automatic', SelectAutomaticEffect);
       // 通用效果器
-      effectConsole.register('general.color.line.automatic', FGeneralColorLineEffect);
-      effectConsole.register('general.color.phong.automatic', FGeneralColorAutomaticEffect);
+      effectConsole.register('general.color.line.automatic', GeneralColorLineEffect);
+      effectConsole.register('general.color.phong.automatic', GeneralColorAutomaticEffect);
       // 阴影效果器
-      effectConsole.register('shadow.depth.line.automatic', FShadowDepthAutomaticEffect);
-      effectConsole.register('shadow.depth.phong.automatic', FShadowDepthAutomaticEffect);
-      effectConsole.register('shadow.color.line.automatic', FShadowColorAutomaticEffect);
-      effectConsole.register('shadow.color.phong.automatic', FShadowColorAutomaticEffect);
+      effectConsole.register('shadow.depth.line.automatic', ShadowDepthAutomaticEffect);
+      effectConsole.register('shadow.depth.phong.automatic', ShadowDepthAutomaticEffect);
+      effectConsole.register('shadow.color.line.automatic', ShadowColorAutomaticEffect);
+      effectConsole.register('shadow.color.phong.automatic', ShadowColorAutomaticEffect);
       // 延迟渲染效果器
-      effectConsole.register('deferred.data.line.automatic', FDeferredDataPhongAutomaticEffect);
-      effectConsole.register('deferred.data.phong.automatic', FDeferredDataPhongAutomaticEffect);
-      effectConsole.register('deferred.merge.line.automatic', FDeferredMergePhongAutomaticEffect);
-      effectConsole.register('deferred.merge.phong.automatic', FDeferredMergePhongAutomaticEffect);
+      effectConsole.register('deferred.data.line.automatic', DeferredDataPhongAutomaticEffect);
+      effectConsole.register('deferred.data.phong.automatic', DeferredDataPhongAutomaticEffect);
+      effectConsole.register('deferred.merge.line.automatic', DeferredMergePhongAutomaticEffect);
+      effectConsole.register('deferred.merge.phong.automatic', DeferredMergePhongAutomaticEffect);
 
       // 选取效果器
       // effectConsole.register('select.select.flat', MO.FG3dSelectAutomaticEffect);

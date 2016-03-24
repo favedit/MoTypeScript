@@ -7,9 +7,9 @@ import {FCanvas} from '../../base/view/webgl/FCanvas';
 import {FScene} from '../../plugin/cl3d/base/FScene';
 import {FDisplayLayer} from '../../plugin/cl3d/base/FDisplayLayer';
 import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
-import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
-import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
-import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
+import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';
+import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
+import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
 import {FModelConsole} from '../../plugin/cl3d/shape/FModelConsole';
 import {FCube} from '../../plugin/cl3d/shape/FCube';
 import {SSettings} from '../application/SSettings';
@@ -33,7 +33,7 @@ export class FCanvasView extends View {
    // 内容层
    public camera: PerspectiveCamera;
    // 内容层
-   public pipeline: FPipeline;
+   public pipeline: Pipeline;
 
    _cameraMoveRate = 0.4;
    _cameraKeyRotation = 0.03;
@@ -74,8 +74,8 @@ export class FCanvasView extends View {
       cube.setup(context);
       this.contentLayer.pushRenderable(cube);
       // 设置渲染管道
-      var pipelineConsole = ServiceUtil.find(FPipelineConsole);
-      var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);
+      var pipelineConsole = ServiceUtil.find(PipelineService);
+      var pipeline = this.pipeline = pipelineConsole.alloc(context, ForwardPipeline);
       pipeline.scene = scene;
       pipeline.camera = camera;
    }
