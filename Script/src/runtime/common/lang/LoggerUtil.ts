@@ -1,6 +1,6 @@
 import {RMethod} from '../reflect/RMethod';
 import {RClass} from '../reflect/RClass';
-import {RRuntime} from '../RRuntime';
+import {RuntimeUtil} from '../RuntimeUtil';
 import {SLogger} from './SLogger';
 import {FString} from './FString';
 import {Listeners} from './Listeners';
@@ -255,7 +255,7 @@ export class LoggerUtil {
       var text = result.flush();
       //o.output(owner, text);
       // 显示信息
-      if (RRuntime.isPlatformPc() && !RRuntime.isRelease()) {
+      if (RuntimeUtil.isPlatformPc() && !RuntimeUtil.isRelease()) {
          throw new Error(text);
       }
    }

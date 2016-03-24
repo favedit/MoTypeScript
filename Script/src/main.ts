@@ -1,6 +1,6 @@
 // 初始化空间
 import * as mo from './index';
-mo.runtime.common.RRuntime.namespace(mo, 'mo');
+mo.runtime.common.RuntimeUtil.namespace(mo, 'mo');
 
 // 设置参数
 var settings = new mo.editor.design.application.SSettings();

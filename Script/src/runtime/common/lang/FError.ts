@@ -13,7 +13,7 @@ import {ArrayUtil} from './ArrayUtil'
 // @version 150101
 //==========================================================
 export class FError {
-   constructor(po: any, pm: string, ...pp: Array<any>) {
+   public constructor(po: any, pm: string, ...pp: Array<any>) {
       //..........................................................
       // @construct
       var r: FString = new FString();

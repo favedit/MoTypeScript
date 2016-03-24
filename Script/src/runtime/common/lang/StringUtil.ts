@@ -1,4 +1,4 @@
-import {RRuntime} from '../RRuntime';
+import {RuntimeUtil} from '../RuntimeUtil';
 import {FString} from './FString';
 import {FloatUtil} from './FloatUtil';
 import {IntegerUtil} from './IntegerUtil';
@@ -386,7 +386,7 @@ export class StringUtil {
       if (!data) {
          data = this._hashData = new Int32Array(1);
       }
-      data[0] = RRuntime.nvl(code, 0);
+      data[0] = RuntimeUtil.nvl(code, 0);
       var length = source.length;
       for (var i = 0; i < length; i++) {
          var value = source.charCodeAt(i);

@@ -9,7 +9,7 @@ import {RClass} from '../reflect/RClass';
 // @author maochunyang
 // @version 1.0.1
 //===========================================================
-export class FDate {
+export class DateTime {
    //..........................................................
    // @attribute
    public date = null;
@@ -470,7 +470,7 @@ export class FDate {
    public clone() {
       var value = new Date();
       value.setTime(this.date.getTime());
-      return new FDate(value);
+      return new DateTime(value);
    }
 
    //===========================================================

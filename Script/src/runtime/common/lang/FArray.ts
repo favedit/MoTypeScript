@@ -1,4 +1,4 @@
-import {RRuntime} from '../RRuntime'
+import {RuntimeUtil} from '../RuntimeUtil'
 import {ObjectBase} from './ObjectBase'
 import {FString} from './FString'
 
@@ -217,7 +217,7 @@ export class FArray extends ObjectBase {
    public dump(): string {
       var result: FString = new FString();
       var count: number = this._length;
-      result.append(RRuntime.className(this), ':', count);
+      result.append(RuntimeUtil.className(this), ':', count);
       if (count > 0) {
          var memory = this._memory;
          for (var n: number = 0; n < count; n++) {

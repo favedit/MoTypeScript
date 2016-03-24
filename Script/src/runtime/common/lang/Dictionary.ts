@@ -1,4 +1,4 @@
-import {RRuntime} from '../RRuntime'
+import {RuntimeUtil} from '../RuntimeUtil'
 import {FMap} from './FMap'
 import {FString} from './FString'
 
@@ -16,7 +16,7 @@ export class Dictionary<V> extends FMap<string, V> {
    // @method
    //==========================================================
    public sortByName(comparer, parameters) {
-      RRuntime.pairSort(this._names, this._values, 0, this._count, comparer, parameters);
+      RuntimeUtil.pairSort(this._names, this._values, 0, this._count, comparer, parameters);
       this.rebuild();
    }
 
@@ -49,7 +49,7 @@ export class Dictionary<V> extends FMap<string, V> {
       var o = this;
       var result: FString = new FString();
       var count = o._count;
-      result.append(RRuntime.className(o), ': ', count);
+      result.append(RuntimeUtil.className(o), ': ', count);
       if (count > 0) {
          var names = o._names;
          var values = o._values;

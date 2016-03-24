@@ -9,7 +9,7 @@ import {PlatformEnum} from './PlatformEnum';
 // @author maocy
 // @version 141226
 //==========================================================
-export class RRuntime extends SingletonObject {
+export class RuntimeUtil extends SingletonObject {
    //..........................................................
    // 版本
    public static version: string = '1.0.0';

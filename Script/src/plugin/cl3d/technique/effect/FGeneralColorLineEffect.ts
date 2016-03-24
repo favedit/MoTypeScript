@@ -1,5 +1,5 @@
 ﻿import {DataTypeEnum} from '../../../../runtime/common/lang/DataTypeEnum';
-import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
+import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FFloatStream} from '../../base/util/FFloatStream';
 import {ERegionParameter} from '../../base/ERegionParameter';

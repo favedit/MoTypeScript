@@ -1,8 +1,8 @@
-import {SMemoryPoolEntry} from './SMemoryPoolEntry';
-import {TMemoryPool} from './TMemoryPool';
+import {MemoryPoolEntry} from './MemoryPoolEntry';
+import {MemoryPool} from './MemoryPool';
 import {SingletonObject} from './lang/SingletonObject';
 import {AssertUtil} from './AssertUtil';
-import {RRuntime} from './RRuntime';
+import {RuntimeUtil} from './RuntimeUtil';
 
 //==========================================================
 // <T>内存管理类。</T>
@@ -13,7 +13,7 @@ import {RRuntime} from './RRuntime';
 //==========================================================
 export class MemoryUtil extends SingletonObject {
    // 未使用节点
-   protected static _entryUnused: SMemoryPoolEntry = null;
+   protected static _entryUnused: MemoryPoolEntry = null;
    // 缓冲池
    protected static _pools: any = new Object();
 
@@ -22,14 +22,14 @@ export class MemoryUtil extends SingletonObject {
    //
    // @return 节点
    //============================================================
-   public static entryAlloc(): SMemoryPoolEntry {
-      var entry: SMemoryPoolEntry = null;
-      var unused: SMemoryPoolEntry = this._entryUnused;
+   public static entryAlloc(): MemoryPoolEntry {
+      var entry: MemoryPoolEntry = null;
+      var unused: MemoryPoolEntry = this._entryUnused;
       if (unused) {
          entry = unused;
          this._entryUnused = unused.next;
       } else {
-         entry = new SMemoryPoolEntry();
+         entry = new MemoryPoolEntry();
       }
       return entry;
    }
@@ -39,7 +39,7 @@ export class MemoryUtil extends SingletonObject {
    //
    // @param entry 节点
    //============================================================
-   public static entryFree(entry: SMemoryPoolEntry): void {
+   public static entryFree(entry: MemoryPoolEntry): void {
       AssertUtil.debugNotNull(entry);
       entry.next = this._entryUnused;
       this._entryUnused = entry;
@@ -55,12 +55,12 @@ export class MemoryUtil extends SingletonObject {
    public static alloc(clazz: Function): any {
       // 获得类名
       AssertUtil.debugNotNull(clazz);
-      var className: string = RRuntime.className(clazz);
+      var className: string = RuntimeUtil.className(clazz);
       // 获得缓冲池
       var pools: any = this._pools;
-      var pool: TMemoryPool = pools[className];
+      var pool: MemoryPool = pools[className];
       if (!pool) {
-         pool = new TMemoryPool();
+         pool = new MemoryPool();
          pool.itemClass = clazz;
          pools[className] = pool;
       }

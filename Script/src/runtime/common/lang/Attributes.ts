@@ -1,7 +1,7 @@
 import {Dictionary} from './Dictionary'
 import {FString} from './FString'
 import {StringUtil} from './StringUtil'
-import {RRuntime} from '../RRuntime'
+import {RuntimeUtil} from '../RuntimeUtil'
 
 //==========================================================
 // <T>名称和内容都是字符串的关联保存表的工具类。</T>
@@ -149,7 +149,7 @@ export class Attributes extends Dictionary<string> {
    public dump(): string {
       var result: FString = new FString();
       var count = this._count;
-      result.append(RRuntime.className(this), ' : ', count);
+      result.append(RuntimeUtil.className(this), ' : ', count);
       if (count > 0) {
          var names = this._names;
          var values = this._values;

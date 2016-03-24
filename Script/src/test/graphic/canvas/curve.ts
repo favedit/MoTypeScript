@@ -1,4 +1,4 @@
-import {RRuntime} from '../../runtime/common/RRuntime';
+import {RuntimeUtil} from '../../runtime/common/RuntimeUtil';
 import {RConsole} from '../../runtime/core/RConsole';
 import {FEnvironmentConsole} from '../../runtime/core/console/FEnvironmentConsole';
 import {FDeviceConsole} from '../../runtime/ui/console/FDeviceConsole';
@@ -9,7 +9,7 @@ import {FCanvas} from '../../plugin/cl3d/framework/FCanvas';
 
 // 初始化空间
 import * as mo from '../../index';
-RRuntime.namespace(mo, 'mo');
+RuntimeUtil.namespace(mo, 'mo');
 //............................................................
 // 设置环境
 var deviceConsole = RConsole.find(FDeviceConsole);

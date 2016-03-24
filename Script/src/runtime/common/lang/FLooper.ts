@@ -1,5 +1,5 @@
 import {MemoryUtil} from '../MemoryUtil';
-import {RRuntime} from '../RRuntime';
+import {RuntimeUtil} from '../RuntimeUtil';
 import {ObjectBase} from './ObjectBase';
 import {FString} from './FString';
 import {SLooperEntry} from './SLooperEntry';
@@ -295,7 +295,7 @@ export class FLooper extends ObjectBase {
       var o = this;
       var count = o._count;
       var result: FString = new FString();
-      result.append(RRuntime.className(this), ': ', count);
+      result.append(RuntimeUtil.className(this), ': ', count);
       if (count > 0) {
          var entry = o._current;
          for (var i = 0; i < count; i++) {

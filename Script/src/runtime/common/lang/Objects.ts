@@ -1,6 +1,6 @@
 import {ObjectBase} from './ObjectBase';
 import {FString} from './FString';
-import {RRuntime} from '../RRuntime';
+import {RuntimeUtil} from '../RuntimeUtil';
 
 // =========================================================
 // <T>对象集合。</T>
@@ -413,7 +413,7 @@ export class Objects<T> extends ObjectBase {
    public dump(): string {
       var count: number = this._count;
       var result: FString = new FString();
-      result.append(RRuntime.className(this), ':', count);
+      result.append(RuntimeUtil.className(this), ':', count);
       if (count) {
          for (var i = 0; i < count; i++) {
             result.append(' [', this._items[i], ']');

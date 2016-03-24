@@ -1,5 +1,5 @@
 ﻿import {DataTypeEnum} from '../../../../runtime/common/lang/DataTypeEnum';
-import {RTypeArray} from '../../../../runtime/common/lang/RTypeArray';
+import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
 import {FPhongMaterial} from '../../../../runtime/graphic/material/FPhongMaterial';

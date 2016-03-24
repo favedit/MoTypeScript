@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RTypeArray} from '../../../runtime/common/lang/RTypeArray';
+import {TypeArrayUtil} from '../../../runtime/common/lang/TypeArrayUtil';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SPoint4} from '../../../runtime/common/math/SPoint4';
@@ -220,18 +220,18 @@ export abstract class FProgram extends FContent {
       if ((clazz == Float32Array) || (clazz == SMatrix3d)) {// || (t == sk.common.math.SPerspectiveMatrix3d)) {
          data = value;
       } else if (clazz == SColor4) {
-         data = RTypeArray.float4();
+         data = TypeArrayUtil.float4();
          data[0] = value.red;
          data[1] = value.green;
          data[2] = value.blue;
          data[3] = value.alpha;
       } else if ((clazz == SPoint3) || (clazz == SVector3)) {
-         data = RTypeArray.float3();
+         data = TypeArrayUtil.float3();
          data[0] = value.x;
          data[1] = value.y;
          data[2] = value.z;
       } else if ((clazz == SPoint4) || (clazz == SVector4)) {
-         data = RTypeArray.float4();
+         data = TypeArrayUtil.float4();
          data[0] = value.x;
          data[1] = value.y;
          data[2] = value.z;
@@ -257,7 +257,7 @@ export abstract class FProgram extends FContent {
    // @param w W数据
    //==========================================================
    public setParameter4(name, x, y, z, w) {
-      var data = RTypeArray.float4();
+      var data = TypeArrayUtil.float4();
       data[0] = x;
       data[1] = y;
       data[2] = z;

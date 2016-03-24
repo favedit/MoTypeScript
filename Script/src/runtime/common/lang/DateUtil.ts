@@ -1,5 +1,5 @@
 import {IntegerUtil} from './IntegerUtil';
-import {FDate} from './FDate';
+import {DateTime} from './DateTime';
 import {StringUtil} from './StringUtil';
 
 //===========================================================
@@ -31,7 +31,7 @@ export class DateUtil {
    // @return TDate 日期
    //===========================================================
    public static nvl(value) {
-      return value ? value : new FDate();
+      return value ? value : new DateTime();
    }
 
    //===========================================================
@@ -42,7 +42,7 @@ export class DateUtil {
    // @return String 字符串
    //===========================================================
    public static format(format) {
-      return this.formatDate(new FDate(), format);
+      return this.formatDate(new DateTime(), format);
    }
 
    //===========================================================
@@ -318,7 +318,7 @@ export class DateUtil {
    // @return TDate 日期
    //===========================================================
    public static make(yyyy, mm, dd, hh, mi, ss) {
-      return new FDate(new Date(yyyy, mm, dd));
+      return new DateTime(new Date(yyyy, mm, dd));
    }
 
    //===========================================================
@@ -342,7 +342,7 @@ export class DateUtil {
          value.setDate(date);
          return value;
       }
-      return new FDate(date);
+      return new DateTime(date);
    }
 
    //===========================================================

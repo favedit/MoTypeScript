@@ -1,5 +1,5 @@
 import {AssertUtil} from '../AssertUtil';
-import {RRuntime} from '../RRuntime';
+import {RuntimeUtil} from '../RuntimeUtil';
 import {FString} from './FString'
 import {ObjectBase} from './ObjectBase';
 
@@ -487,7 +487,7 @@ export class FMap<N, V> extends ObjectBase {
       if (values) {
          for (var i = 0; i < count; i++) {
             if (flag) {
-               RRuntime.dispose(values[i]);
+               RuntimeUtil.dispose(values[i]);
             }
             values[i] = null;
          }

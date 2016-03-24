@@ -3,7 +3,7 @@ import {DataTypeEnum} from '../../runtime/common/lang/DataTypeEnum';
 import {AccessEnum} from '../../runtime/common/lang/AccessEnum';
 import {AProperty} from '../../runtime/common/reflect/AProperty';
 import * as mo from '../../index';
-mo.runtime.common.RRuntime.namespace(mo, 'mo');
+mo.runtime.common.RuntimeUtil.namespace(mo, 'mo');
 
 export class FPropertyChanged {
 

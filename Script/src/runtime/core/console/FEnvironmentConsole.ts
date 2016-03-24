@@ -4,7 +4,7 @@ import {StringUtil} from '../../common/lang/StringUtil';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {AssertUtil} from '../../common/AssertUtil';
-import {RRuntime} from '../../common/RRuntime';
+import {RuntimeUtil} from '../../common/RuntimeUtil';
 import {FEnvironment} from './FEnvironment';
 import {FConsole} from '../FConsole';
 
@@ -114,7 +114,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public parseUrl(value) {
       var result = null;
-      var version = RRuntime.version;
+      var version = RuntimeUtil.version;
       var url = this.parse(value);
       if (url.indexOf('?') != -1) {
          result = url + '&' + version;

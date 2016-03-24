@@ -8,7 +8,7 @@ import {FError} from './FError';
 // @author maocy
 // @version 150112
 //==========================================================
-export class RTypeArray {
+export class TypeArrayUtil {
    // @attribute
    private static _float3 = null;
    private static _float4 = null;

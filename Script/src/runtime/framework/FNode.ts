@@ -1,4 +1,4 @@
-import {FDispatcher} from '../common/lang/FDispatcher';
+import {Dispatcher} from '../common/lang/Dispatcher';
 import {Objects} from '../common/lang/Objects';
 import {FClassFactory} from './FClassFactory';
 import {SFieldChangeEvent} from './SFieldChangeEvent';
@@ -7,7 +7,7 @@ import {ENodeAction} from './ENodeAction';
 //==========================================================
 // <T>节点</T>
 //==========================================================
-export class FNode extends FDispatcher {
+export class FNode extends Dispatcher {
 
    // 类工厂
    //public classFactory: FClassFactory = null;

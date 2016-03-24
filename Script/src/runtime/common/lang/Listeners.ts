@@ -5,7 +5,7 @@ import {FString} from './FString'
 import {Listener} from './Listener'
 import {FError} from './FError'
 import {RClass} from '../reflect/RClass'
-import {RRuntime} from './RRuntime'
+import {RuntimeUtil} from './RuntimeUtil'
 
 //==========================================================
 // <T>监听器集合管理的工具类。</T>
@@ -27,7 +27,7 @@ export class Listeners extends ObjectBase {
    //==========================================================
    public constructor(sender: any = null) {
       super();
-      this.sender = RRuntime.nvl(sender, this);
+      this.sender = RuntimeUtil.nvl(sender, this);
    }
 
    //==========================================================

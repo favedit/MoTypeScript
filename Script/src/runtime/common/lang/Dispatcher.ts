@@ -7,7 +7,7 @@ import {ObjectUtil} from './ObjectUtil';
 //==========================================================
 // <T>调度器。</T>
 //==========================================================
-export class FDispatcher extends ObjectBase {
+export class Dispatcher extends ObjectBase {
    // 监听器集合字典
    public _listenerss: Dictionary<Listeners> = null;
 

@@ -1,4 +1,4 @@
-import {FDispatcher} from '../../runtime/common/lang/FDispatcher';
+import {Dispatcher} from '../../runtime/common/lang/Dispatcher';
 
-export class FComponent extends FDispatcher {
+export class FComponent extends Dispatcher {
 }

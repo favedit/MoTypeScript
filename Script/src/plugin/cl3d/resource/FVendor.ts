@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 import {Attributes} from '../../runtime/common/lang/Attributes';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {RRuntime} from '../../runtime/common/RRuntime';
+import {RuntimeUtil} from '../../runtime/common/RuntimeUtil';
 
 //==========================================================
 // <T>资源提供商。</T>
@@ -70,13 +70,13 @@ export class FVendor extends ObjectBase {
    //==========================================================
    public makeUrl(): string {
       var url = this.makeSource();
-      if (RRuntime.isDebug()) {
+      if (RuntimeUtil.isDebug()) {
          if (url.indexOf('?') == -1) {
             url += '?';
          } else {
             url += '&';
          }
-         url += 'version=' + RRuntime.version;
+         url += 'version=' + RuntimeUtil.version;
       }
       return url;
    }

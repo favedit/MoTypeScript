@@ -1,4 +1,4 @@
-import {RRuntime} from '../RRuntime'
+import {RuntimeUtil} from '../RuntimeUtil'
 import {RClass} from '../reflect/RClass'
 import {FError} from './FError'
 
@@ -82,7 +82,7 @@ export class ObjectUtil {
    //==========================================================
    public static free(item): any {
       if (item) {
-         if (RRuntime.isDebug()) {
+         if (RuntimeUtil.isDebug()) {
             // 调试模式
             for (var name in item) {
                // 基础类型

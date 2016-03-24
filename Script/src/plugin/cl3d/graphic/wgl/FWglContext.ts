@@ -5,7 +5,7 @@ import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {FError} from '../../../../runtime/common/lang/FError';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {RXml} from '../../../../runtime/common/xml/RXml';
-import {RRuntime} from '../../../../runtime/common/RRuntime';
+import {RuntimeUtil} from '../../../../runtime/common/RuntimeUtil';
 import {EParameterFormat} from '../EParameterFormat';
 import {EAttributeFormat} from '../EAttributeFormat';
 import {EIndexStride} from '../EIndexStride';

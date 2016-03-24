@@ -5,9 +5,9 @@
 // @author maocy
 // @version 150523
 //==========================================================
-export class SMemoryPoolEntry {
+export class MemoryPoolEntry {
    // 下一个节点
-   public next: SMemoryPoolEntry ;
+   public next: MemoryPoolEntry ;
    // 内容
    public value: any;
 

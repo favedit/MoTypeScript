@@ -1,5 +1,6 @@
-import {MemoryUtil} from '../MemoryUtil';
-import {AssertUtil} from '../AssertUtil';
+﻿import {MemoryPoolEntry} from './MemoryPoolEntry';
+import {AssertUtil} from './AssertUtil';
+import {MemoryUtil} from './MemoryUtil';
 
 //==========================================================
 // <T>内存对象池。</T>
@@ -8,36 +9,38 @@ import {AssertUtil} from '../AssertUtil';
 // @author maocy
 // @version 150523
 //==========================================================
-export class FMemoryPool {
-   // @attribute
-   _constructor = null;
-   _unused = null;
-   // @attribute
-   _createCount = 0;
-   _allocCount = 0;
-   _freeCount = 0;
+export class MemoryPool {
+   // 未使用节点
+   protected _unused: MemoryPoolEntry = null;
+   // 构造器
+   public itemClass: Function = null;
+   // 创建个数
+   public createCount: number = 0;
+   // 收集个数
+   public allocCount: number = 0;
+   // 自由个数
+   public freeCount: number = 0;
 
    //==========================================================
    // <T>收集一个自由对象。</T>
    //
    // @method
-   // @return FObject 对象
+   // @return 对象
    //==========================================================
-   public alloc() {
-      var o = this;
-      var value = null;
-      var unused = o._unused;
+   public alloc(): any {
+      var value: any = null;
+      var unused: MemoryPoolEntry = this._unused;
       if (unused) {
          value = unused.value;
-         o._unused = unused.next;
+         this._unused = unused.next;
          // 释放节点
          MemoryUtil.entryFree(unused);
       } else {
-         value = new o._constructor();
-         value.__pool = o;
-         o._createCount++;
+         value = new (this.itemClass as any)();
+         value.__pool = this;
+         this.createCount++;
       }
-      o._allocCount++;
+      this.allocCount++;
       return value;
    }
 
@@ -45,21 +48,20 @@ export class FMemoryPool {
    // <T>释放 一个自由对象。</T>
    //
    // @method
-   // @param FObject 对象
+   // @param 对象
    //==========================================================
-   public free(value) {
-      var o = this;
+   public free(value: any): void {
       AssertUtil.debugNotNull(value);
       // 释放资源
       if (value.free) {
          value.free();
       }
       // 放回缓冲池
-      var entry = MemoryUtil.entryAlloc();
+      var entry: MemoryPoolEntry = MemoryUtil.entryAlloc();
       entry.value = value;
-      entry.next = o._unused;
-      o._unused = entry;
-      o._freeCount++;
+      entry.next = this._unused;
+      this._unused = entry;
+      this.freeCount++;
    }
 
    //==========================================================
@@ -68,9 +70,9 @@ export class FMemoryPool {
    // @method
    //==========================================================
    public dispose() {
-      var entry = this._unused;
+      var entry: MemoryPoolEntry = this._unused;
       while (entry) {
-         var current = entry;
+         var current: MemoryPoolEntry = entry;
          entry = current.next;
          current.dispose();
          // 释放节点

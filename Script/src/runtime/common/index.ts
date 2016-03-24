@@ -1,12 +1,12 @@
 export * from './AssertUtil';
 export * from './LoggerEnum';
+export * from './MemoryPool';
+export * from './MemoryPoolEntry';
 export * from './MemoryUtil';
 export * from './PlatformEnum';
 export * from './ProcessEnum';
-export * from './RRuntime';
+export * from './RuntimeUtil';
 export * from './ScopeEnum';
-export * from './SMemoryPoolEntry';
-export * from './TMemoryPool';
 
 import * as io from './io/index';
 export {io as io};
