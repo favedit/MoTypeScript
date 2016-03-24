@@ -44,17 +44,19 @@ export class DeferredTechnique extends Technique {
       this.registerMode(TechniqueModeEnum.Result);
       //..........................................................
       // 创建数据处理过程
-      var passData = this._passData = ClassUtil.create(DeferredDataPass);
+      var passData: DeferredDataPass = this._passData = ClassUtil.create(DeferredDataPass);
       passData.linkGraphicContext(this._graphicContext);
       passData.setup();
       this.pushPass(passData);
       // 创建合并处理过程
-      var passMerge = this._passMerge = ClassUtil.create(DeferredMergePass);
+      var passMerge: DeferredMergePass = this._passMerge = ClassUtil.create(DeferredMergePass);
       passMerge.linkGraphicContext(this._graphicContext);
       passMerge.setup();
       this.pushPass(passMerge);
       //..........................................................
       // 设置关联
-      //passData.
+      passMerge.textureDepth = passData.textureDepth;
+      passMerge.textureNormal = passData.textureNormal;
+      passMerge.textureColor = passData.textureColor;
    }
 }

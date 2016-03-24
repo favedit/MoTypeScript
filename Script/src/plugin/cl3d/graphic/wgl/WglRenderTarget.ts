@@ -1,3 +1,4 @@
+import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {RenderTarget} from '../RenderTarget';
 
@@ -8,10 +9,9 @@ import {RenderTarget} from '../RenderTarget';
 // @history 150116
 //==========================================================
 export class WglRenderTarget extends RenderTarget {
-   // @attribute
-   public optionDepth;
-   // @attribute
+   // 句柄
    public handle;
+   // 深度句柄
    public handleDepth;
 
    //==========================================================
@@ -54,8 +54,8 @@ export class WglRenderTarget extends RenderTarget {
          if (!result) {
             return result;
          }
-         handle.renderbufferStorage(handle.RENDERBUFFER, handle.DEPTH_COMPONENT16, size.width, size.height);
-         //handle.renderbufferStorage(handle.RENDERBUFFER, handle.DEPTH_COMPONENT24, size.width, size.height);
+         var depthCd = context.capability.optionDepth24 ? handle.DEPTH_COMPONENT24 : handle.DEPTH_COMPONENT16;
+         handle.renderbufferStorage(handle.RENDERBUFFER, depthCd, size.width, size.height);
          var result = context.checkError('renderbufferStorage', 'Set render buffer storage format failure.');
          if (!result) {
             return result;
@@ -72,12 +72,19 @@ export class WglRenderTarget extends RenderTarget {
       var textures = this._textures;
       var textureCount = textures.count();
       var attachment0 = handle.COLOR_ATTACHMENT0;
-      if (context.statusDrawBuffers) {
-         var extension = context.handleDrawBuffers();
-         attachment0 = extension.COLOR_ATTACHMENT0_WEBGL;
-      }
+      // if (context.statusDrawBuffers) {
+      //    var extension = context.handleDrawBuffers();
+      //    attachment0 = extension.COLOR_ATTACHMENT0_WEBGL;
+      // }
+      // 绑定帧集合
+      var buffers = [];
       for (var i = 0; i < textureCount; i++) {
-         var texture = textures.get(i);
+         buffers.push(attachment0 + i);
+      }
+      handle.drawBuffers(buffers);
+      // 绑定纹理缓冲集合
+      for (var i = 0; i < textureCount; i++) {
+         var texture: any = textures.get(i);
          AssertUtil.debugNotNull(texture);
          AssertUtil.debugNotNull(texture.handle);
          // 设置信息
@@ -85,7 +92,6 @@ export class WglRenderTarget extends RenderTarget {
          handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MAG_FILTER, handle.LINEAR);
          handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MIN_FILTER, handle.LINEAR);
          // 设置存储
-         //handle.texImage2D(handle.TEXTURE_2D, 0, handle.RGBA, size.width, size.height, 0, handle.RGBA, handle.UNSIGNED_BYTE, null);
          handle.texImage2D(handle.TEXTURE_2D, 0, handle.RGBA, size.width, size.height, 0, handle.RGBA, handle.UNSIGNED_BYTE, null);
          var result = context.checkError('texImage2D', "Alloc texture storage. (texture_id, size=%dx%d)", texture.handle, size.width, size.height);
          if (!result) {
@@ -97,6 +103,10 @@ export class WglRenderTarget extends RenderTarget {
          if (!result) {
             return result;
          }
+      }
+      var result = handle.checkFramebufferStatus(handle.FRAMEBUFFER);
+      if (result != handle.FRAMEBUFFER_COMPLETE) {
+         throw new Fatal(this, 'Frame buffer failure.');
       }
       // 清空渲染目标
       handle.bindFramebuffer(handle.FRAMEBUFFER, null);

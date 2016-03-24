@@ -1,5 +1,8 @@
+import {FMaterial} from '../../runtime/graphic/material/FMaterial';
 import {Renderable} from '../base/Renderable';
 import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum';
+import {VertexBuffer} from '../graphic/VertexBuffer';
+import {IndexBuffer} from '../graphic/IndexBuffer';
 
 //==========================================================
 // <T>渲染平面。</T>
@@ -8,15 +11,15 @@ import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum';
 //  3 ─ 2
 //
 // @author maocy
-// @history 141231
+// @history 160324
 //==========================================================
 export class PlaneRenderable extends Renderable {
    // 顶点坐标缓冲
-   protected _vertexPositionBuffer;
+   protected _vertexPositionBuffer: VertexBuffer;
    // 顶点纹理缓冲
-   protected _vertexCoordBuffer;
+   protected _vertexCoordBuffer: VertexBuffer;
    // 索引缓冲
-   protected _indexBuffer;
+   protected _indexBuffer: IndexBuffer;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -32,24 +35,25 @@ export class PlaneRenderable extends Renderable {
       var context = this._graphicContext;
       // 设置顶点数据
       var vertexPositionData = [-1, 1, 1, 1, 1, -1, -1, -1];
-      var buffer = this._vertexPositionBuffer = context.createVertexBuffer();
-      buffer.setCode('position');
-      buffer.setFormatCd(AttributeFormatEnum.Float2);
-      buffer.upload(vertexPositionData, 4 * 2, 4);
-      this.pushVertexBuffer(buffer);
+      var vertexPositionBuffer: VertexBuffer = this._vertexPositionBuffer = context.createVertexBuffer();
+      vertexPositionBuffer.code = 'position';
+      vertexPositionBuffer.formatCd = AttributeFormatEnum.Float2;
+      vertexPositionBuffer.upload(vertexPositionData, 4 * 2, 4);
+      this.pushVertexBuffer(vertexPositionBuffer);
       // 设置纹理数据
       var vertexCoordData = [0, 1, 1, 1, 1, 0, 0, 0];
-      var buffer = this._vertexCoordBuffer = context.createVertexBuffer();
-      buffer.setCode('coord');
-      buffer.setFormatCd(AttributeFormatEnum.Float2);
-      buffer.upload(vertexCoordData, 4 * 2, 4);
-      this.pushVertexBuffer(buffer);
+      var vertexCoordBuffer: VertexBuffer = this._vertexCoordBuffer = context.createVertexBuffer();
+      vertexCoordBuffer.code = 'coord';
+      vertexCoordBuffer.formatCd = AttributeFormatEnum.Float2;
+      vertexCoordBuffer.upload(vertexCoordData, 4 * 2, 4);
+      this.pushVertexBuffer(vertexCoordBuffer);
       // 设置索引数据
       var indexData = [0, 1, 2, 0, 2, 3];
-      var buffer = this._indexBuffer = context.createIndexBuffer();
-      buffer.upload(indexData, 6);
-      this.pushIndexBuffer(buffer);
+      var indexBuffer: IndexBuffer = this._indexBuffer = context.createIndexBuffer();
+      indexBuffer.upload(indexData, 6);
+      this.pushIndexBuffer(indexBuffer);
       // 设置纹理集合
+      this.material = new FMaterial();
       //this._textures = new MO.TDictionary();
       //this._material.info().optionDouble = true;
    }

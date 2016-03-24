@@ -2,6 +2,7 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {Color4} from '../../../runtime/common/math/Color4';
+import {FTexture} from '../../../runtime/graphic/material/FTexture';
 import {Content} from './Content';
 
 //==========================================================
@@ -12,9 +13,10 @@ import {Content} from './Content';
 //==========================================================
 export class RenderTarget extends Content {
    // @attribute
-   public size: Size2 = new Size2();
-   public color: Color4 = new Color4(0, 0, 0, 1);
-   protected _textures: Objects<any> = new Objects();
+   public optionDepth: boolean;
+   public size: Size2;
+   public color: Color4;
+   protected _textures: Objects<FTexture>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -23,9 +25,16 @@ export class RenderTarget extends Content {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this.size = new Size2();
       this.color = new Color4(0, 0, 0, 1);
-      this._textures = new Objects();
+      this._textures = new Objects<FTexture>();
+   }
+
+   //==========================================================
+   // <T>构建处理。</T>
+   //==========================================================
+   public build() {
    }
 
    //==========================================================
@@ -61,15 +70,23 @@ export class RenderTarget extends Content {
    //==========================================================
    // <T>获得纹理集合。</T>
    //
-   // @method
-   // @return TObjects 纹理集合
+   // @return 纹理集合
    //==========================================================
    public get textures() {
+      return this._textures;
+   }
+
+   //==========================================================
+   // <T>增加一个纹理。</T>
+   //
+   // @param texture 纹理
+   //==========================================================
+   public pushTexture(texture: FTexture) {
       var textures = this._textures;
       if (!textures) {
-         textures = this._textures = new Objects();
+         textures = this._textures = new Objects<FTexture>();
       }
-      return textures;
+      textures.push(texture);
    }
 
    //==========================================================

@@ -1,4 +1,5 @@
 ﻿import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
+import {Region} from '../base/Region';
 import {Content} from '../graphic/Content';
 import {EffectConsole} from '../graphic/EffectConsole';
 
@@ -15,6 +16,7 @@ export class TechniquePass extends Content {
    public code: string;
    public index: number;
    public finish: boolean;
+   protected _first: boolean;
    // @attribute
    public materialMap;
 
@@ -23,6 +25,7 @@ export class TechniquePass extends Content {
    //==========================================================
    public constructor() {
       super();
+      this._first = true;
       this.finish = false;
    }
 
@@ -109,12 +112,23 @@ export class TechniquePass extends Content {
    }
 
    //==========================================================
+   // <T>首次绘制处理。</T>
+   //
+   // @param region 区域
+   //==========================================================
+   public drawFirst(region: Region) {
+   }
+
+   //==========================================================
    // <T>开始绘制处理。</T>
    //
-   // @method
-   // @param region:FG3dRetion 区域
+   // @param region 区域
    //==========================================================
-   public drawBegin(region) {
+   public drawBegin(region: Region) {
+      if (this._first) {
+         this.drawFirst(region);
+         this._first = false;
+      }
       this.technique.clear(region.backgroundColor);
    }
 
@@ -124,7 +138,7 @@ export class TechniquePass extends Content {
    // @method
    // @param region:FG3dRetion 区域
    //==========================================================
-   public drawRegion(region) {
+   public drawRegion(region: Region) {
       // 获得渲染集合
       var renderables = region.renderables;
       var count = renderables.count();
@@ -147,10 +161,9 @@ export class TechniquePass extends Content {
          //mm.resize(MO.EG3dMaterialMap.Count, count);
          //var mm = region.materialMap();
          for (var i = 0; i < count; i++) {
-            var r = renderables.get(i);
-            r._materialId = i;
-            var m = r.material();
-            var mi = m.info();
+            var renderable: any = renderables.get(i);
+            renderable._materialId = i;
+            var material = renderable.material;
             //mm.setUint8(i, MO.EG3dMaterialMap.AmbientColor, mi.ambientColor);
             //mm.setUint8(i, MO.EG3dMaterialMap.DiffuseColor, mi.diffuseColor);
             //mm.setUint8(i, MO.EG3dMaterialMap.SpecularColor, mi.specularColor);
@@ -158,7 +171,7 @@ export class TechniquePass extends Content {
             //mm.setUint8(i, MO.EG3dMaterialMap.EmissiveColor, mi.emissiveColor);
          }
          mm.update();
-         region._materialMap = mm;
+         //region._materialMap = mm;
       }
       //..........................................................
       // 根据效果类型进行分组

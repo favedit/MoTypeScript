@@ -5,7 +5,7 @@ import {SelectAutomaticEffect} from './technique/effect/SelectAutomaticEffect';
 import {ShadowDepthAutomaticEffect} from './technique/effect/ShadowDepthAutomaticEffect';
 import {ShadowColorAutomaticEffect} from './technique/effect/ShadowColorAutomaticEffect';
 import {DeferredDataPhongAutomaticEffect} from './technique/effect/DeferredDataPhongAutomaticEffect';
-import {DeferredMergePhongAutomaticEffect} from './technique/effect/DeferredMergePhongAutomaticEffect';
+import {DeferredMergeAutomaticEffect} from './technique/effect/DeferredMergeAutomaticEffect';
 import {EffectConsole} from './graphic/EffectConsole';
 
 //==========================================================
@@ -43,8 +43,7 @@ export class REngine {
       // 延迟渲染效果器
       effectConsole.register('deferred.data.line.automatic', DeferredDataPhongAutomaticEffect);
       effectConsole.register('deferred.data.phong.automatic', DeferredDataPhongAutomaticEffect);
-      effectConsole.register('deferred.merge.line.automatic', DeferredMergePhongAutomaticEffect);
-      effectConsole.register('deferred.merge.phong.automatic', DeferredMergePhongAutomaticEffect);
+      effectConsole.register('deferred.merge.automatic', DeferredMergeAutomaticEffect);
 
       // 选取效果器
       // effectConsole.register('select.select.flat', MO.FG3dSelectAutomaticEffect);

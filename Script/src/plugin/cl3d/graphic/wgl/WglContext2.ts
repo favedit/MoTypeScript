@@ -25,13 +25,11 @@ export class WglContext2 extends WglContext {
    public setup(hCanvas: HTMLCanvasElement, handle: any) {
       super.setup(hCanvas, handle);
       var capability = this.capability;
-      // 测试实例绘制支持
+      // 设置信息
       capability.optionInstance = true;
-      // 测试顶点布局支持
       capability.optionLayout = true;
-      // 测试32位索引支持
+      capability.optionDepth24 = true;
       capability.optionIndex32 = true;
-      // 测试多渲染支持
       capability.optionDrawBuffers = true;
       // "EXT_color_buffer_float",
       // "EXT_disjoint_timer_query",

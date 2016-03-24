@@ -3,7 +3,7 @@ export * from './AutomaticEffect';
 export * from './ControlAutomaticEffect';
 export * from './ControlFrameEffect';
 export * from './DeferredDataPhongAutomaticEffect';
-export * from './DeferredMergePhongAutomaticEffect';
+export * from './DeferredMergeAutomaticEffect';
 export * from './GeneralColorAutomaticEffect';
 export * from './GeneralColorFillEffect';
 export * from './GeneralColorFlatEffect';

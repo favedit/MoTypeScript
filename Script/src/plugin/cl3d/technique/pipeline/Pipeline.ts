@@ -1,6 +1,7 @@
 import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {Listeners} from '../../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
+import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {Camera} from '../../../runtime/graphic/camera/Camera';
 import {GraphicContext} from '../../graphic/GraphicContext';
 import {Content} from '../../graphic/Content';
@@ -51,10 +52,60 @@ export abstract class Pipeline extends Content {
 
    //==========================================================
    // <T>逻辑处理。</T>
-   //
-   // @method
    //==========================================================
-   public abstract onProcess(): boolean;
+   public onProcess(): boolean {
+      // 检查参数
+      var context = this._graphicContext;
+      AssertUtil.debugNotNull(context);
+      var scene = this.scene;
+      if (!scene) {
+         return false;
+      }
+      var technique = this.drawTechnique;
+      if (!technique) {
+         return false;
+      }
+      var region: Region = this.region;
+      region.camera = this.camera;
+      region.backgroundColor = scene.backgroundColor;
+      // 统计处理
+      //var statistics = region._statistics = this._statistics;
+      //statistics.resetFrame();
+      //statistics._frame.begin();
+      //..........................................................
+      //statistics._frameProcess.begin();
+      // 更新区域（更新光源相机等特殊处理）
+      context.prepare();
+      //technique.updateRegion(region);
+      // 清空区域
+      region.prepare();
+      //region.change();
+      // 处理所有层
+      var layers = scene.layers;
+      var layerCount = layers.count();
+      for (var i = 0; i < layerCount; i++) {
+         var layer = layers.at(i);
+         // 过滤单个层渲染信息
+         region.reset();
+         //layer.process(region);
+         layer.filterRenderables(region);
+         region.update();
+      }
+      // 处理所有渲染集合
+      // RConsole.find(FE3dStageConsole).process(region);
+      //statistics._frameProcess.end();
+      //..........................................................
+      // 绘制舞台
+      //statistics._frameDraw.begin();
+      if (region.isChanged()) {
+         technique.drawStage(scene, region);
+      }
+      //statistics._frameDraw.end();
+      //..........................................................
+      // 处理完成
+      //statistics._frame.end();
+      return true;
+   }
 
    //==========================================================
    // <T>构造处理。</T>

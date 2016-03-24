@@ -145,6 +145,7 @@
    ]]></Source>
    <Source name='fragment'><![CDATA[
       // 声明环境
+      //#extension GL_EXT_draw_buffers : require
       #ifdef GL_ES
       precision highp float;
       #endif
@@ -339,7 +340,11 @@
          //gl_FragColor = vec4(fc_ambient_color.xyz, 1.0);
          //gl_FragColor = vec4(-fc_light_direction.xyz, 1.0);
          //gl_FragColor = vec4(specularFactor, specularFactor, specularFactor, 1.0);
-         gl_FragColor = result;
+         //gl_FragColor = result;
+         gl_FragData[0] = result;
+         gl_FragData[1] = result;
+         //gl_FragData[0] = vec4(result.xyz, 1.0);
+         //gl_FragData[0] = vec4(result.xyz, 1.0);
       }
    ]]></Source>
 </Configuration>

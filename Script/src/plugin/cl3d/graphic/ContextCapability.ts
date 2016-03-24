@@ -11,20 +11,21 @@ export class ContextCapability {
    public version;
    public shaderVersion;
    // @attribute
-   public optionDebug:boolean = true;
-   public optionInstance:boolean = false;
-   public optionLayout:boolean = false;
-   public optionMaterialMap:boolean = false;
-   public optionIndex32:boolean = false;
-   public optionShaderSource:boolean = false;
-   public optionDrawBuffers:boolean = false;
+   public optionDebug: boolean;
+   public optionInstance: boolean;
+   public optionLayout: boolean;
+   public optionMaterialMap: boolean;
+   public optionDepth24: boolean;
+   public optionIndex32: boolean;
+   public optionShaderSource: boolean;
+   public optionDrawBuffers: boolean;
    // @attribute
    public mergeCount = 0;
-   public attributeCount = null;
+   public attributeCount: number;
    public vertexCount = 65536;
-   public vertexConst = null;
-   public fragmentConst = null;
-   public varyingCount = null;
+   public vertexConst: number;
+   public fragmentConst: number;
+   public varyingCount: number;
    // @attribute
    public samplerCount = null;
    public samplerSize = null;

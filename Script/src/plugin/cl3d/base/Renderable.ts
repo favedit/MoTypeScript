@@ -163,6 +163,7 @@ export class Renderable extends Drawable implements IRenderable {
          infos.set(code, info)
       }
       info.effect = effect;
+      this.activeInfo = info;
    }
 
    //==========================================================
