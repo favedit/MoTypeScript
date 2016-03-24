@@ -1,5 +1,5 @@
 import {ObjectBase} from '../lang/ObjectBase';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {FError} from '../lang/FError';
 import {RClass} from '../reflect/RClass';
 import {FXmlNode} from '../xml/FXmlNode';
@@ -71,7 +71,7 @@ export class FXmlDocument extends ObjectBase {
    // @return String 配置字符串
    //==========================================================
    public xml() {
-      var xml = new FString();
+      var xml = new StringBuffer();
       xml.append("<?xml version='1.0' encoding='UTF-8'?>");
       this.root().innerXml(xml, 0);
       return xml.flush();
@@ -85,7 +85,7 @@ export class FXmlDocument extends ObjectBase {
    //==========================================================
    public dump() {
       var o = this;
-      var r = new FString();
+      var r = new StringBuffer();
       r.appendLine(RClass.shortName(o));
       o.root().dump(r);
       return r.flush();

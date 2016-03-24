@@ -1,5 +1,5 @@
 import {RuntimeUtil} from '../RuntimeUtil';
-import {FString} from './FString';
+import {StringBuffer} from './StringBuffer';
 import {FloatUtil} from './FloatUtil';
 import {IntegerUtil} from './IntegerUtil';
 
@@ -344,9 +344,9 @@ export class StringUtil {
    // @param p:value:String 字符串对象
    // @return String 非空字符串对象
    //==========================================================
-   public static nvlString(value: FString): FString {
+   public static nvlString(value: StringBuffer): StringBuffer {
       if (value == null) {
-         return new FString();
+         return new StringBuffer();
       }
       return value;
    }
@@ -468,7 +468,7 @@ export class StringUtil {
       p = p.replace(/\\r/g, '');
       var ls = p.split('\n');
       var c = ls.length;
-      var r: FString = new FString();
+      var r: StringBuffer = new StringBuffer();
       for (var i = 0; i < c; i++) {
          var l: string = ls[i]
          l = this.trim(l);
@@ -696,7 +696,7 @@ export class StringUtil {
    public static toUnderline(v) {
       var r = null;
       if (v) {
-         var s: FString = new FString();
+         var s: StringBuffer = new StringBuffer();
          var c = v.length;
          for (var i = 0; i < c; i++) {
             var h = v.charAt(i);

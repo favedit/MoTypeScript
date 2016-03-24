@@ -1,5 +1,5 @@
 ﻿import {FError} from '../../../../runtime/common/lang/FError';
-import {FString} from '../../../../runtime/common/lang/FString';
+import {StringBuffer} from '../../../../runtime/common/lang/StringBuffer';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {FEffect} from '../../graphic/FEffect';
 import {FRegion} from '../../base/FRegion';
@@ -98,7 +98,7 @@ export class FAutomaticEffect extends FEffect {
       var context = this.graphicContext;
       var capability = context.capability;
       // 获得参数
-      var flag = new FString();
+      var flag = new StringBuffer();
       flag.append(info.techniqueModeCode)
       tagContext.set("technique.mode", info.techniqueModeCode);
       //............................................................

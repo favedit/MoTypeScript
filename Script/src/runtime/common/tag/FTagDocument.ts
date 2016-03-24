@@ -1,5 +1,5 @@
 import {ObjectBase} from '../lang/ObjectBase';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
 import {FError} from '../lang/FError';
 import {RClass} from '../reflect/RClass';
@@ -160,7 +160,7 @@ export class FTagDocument extends ObjectBase {
    // @return String 运行信息
    //==========================================================
    public dump() {
-      var result = new FString();
+      var result = new StringBuffer();
       result.appendLine(RClass.dump(this));
       //r.appendLine(this.root().dump(r));
       return result.flush();

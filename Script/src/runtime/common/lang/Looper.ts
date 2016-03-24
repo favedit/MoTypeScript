@@ -1,7 +1,7 @@
 import {MemoryUtil} from '../MemoryUtil';
 import {RuntimeUtil} from '../RuntimeUtil';
 import {ObjectBase} from './ObjectBase';
-import {FString} from './FString';
+import {StringBuffer} from './StringBuffer';
 import {SLooperEntry} from './SLooperEntry';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {SLooperEntry} from './SLooperEntry';
 // @author maocy
 // @version 150110
 //==========================================================
-export class FLooper extends ObjectBase {
+export class Looper extends ObjectBase {
    // 总数
    _count: number = 0;
    // 记录数
@@ -294,7 +294,7 @@ export class FLooper extends ObjectBase {
    public dump() {
       var o = this;
       var count = o._count;
-      var result: FString = new FString();
+      var result: StringBuffer = new StringBuffer();
       result.append(RuntimeUtil.className(this), ': ', count);
       if (count > 0) {
          var entry = o._current;

@@ -1,4 +1,4 @@
-import {FSpeed} from '../../../runtime/common/lang/FSpeed';
+import {Speed} from '../../../runtime/common/lang/Speed';
 import {FStatistics} from '../../../runtime/core/console/FStatistics';
 
 //==========================================================
@@ -20,11 +20,11 @@ export class FSceneStatistics extends FStatistics {
    //==========================================================
    public constructor() {
       super();
-      this.frame = new FSpeed();
-      this.frameProcess = new FSpeed();
-      this.frameDraw = new FSpeed();
-      this.frameDrawSort = new FSpeed();
-      this.frameDrawRenderable = new FSpeed();
+      this.frame = new Speed();
+      this.frameProcess = new Speed();
+      this.frameDraw = new Speed();
+      this.frameDrawSort = new Speed();
+      this.frameDrawRenderable = new Speed();
    }
 
    //==========================================================

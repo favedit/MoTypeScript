@@ -1,7 +1,7 @@
 import {ResultEnum} from '../lang/ResultEnum';
 import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
 import {FError} from '../lang/FError';
 import {RClass} from '../reflect/RClass';
@@ -157,7 +157,7 @@ export class FTag extends ObjectBase {
    // @return String 运行信息
    //==========================================================
    public dump() {
-      var result = new FString();
+      var result = new StringBuffer();
       this.innerDump(result, this, 0);
       return result.flush();
    }

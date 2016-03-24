@@ -1,7 +1,7 @@
 ﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
-import {FLooper} from '../../../runtime/common/lang/FLooper';
+import {Looper} from '../../../runtime/common/lang/Looper';
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
@@ -27,7 +27,7 @@ import {FEffect} from './FEffect';
 export class FEffectConsole extends FConsole {
    // @attribute
    public _configs: Dictionary<any>;
-   public _loadEffects: FLooper;
+   public _loadEffects: Looper;
    public _registerEffects: Dictionary<Function>;
    public _templateEffects: Dictionary<FEffect>;
    public _effects: Dictionary<FEffect>;
@@ -47,7 +47,7 @@ export class FEffectConsole extends FConsole {
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
       this._configs = new Dictionary();
-      this._loadEffects = new FLooper();
+      this._loadEffects = new Looper();
       this._registerEffects = new Dictionary<Function>();
       this._templateEffects = new Dictionary<FEffect>();
       this._effects = new Dictionary<FEffect>();

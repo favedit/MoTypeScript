@@ -1,4 +1,4 @@
-import {FString} from './FString';
+import {StringBuffer} from './StringBuffer';
 import {StringUtil} from './StringUtil';
 
 //==========================================================
@@ -196,7 +196,7 @@ export class FloatUtil {
          sr = s.substring(f + 1, f + r + 1);
       }
       var fl = StringUtil.lpad(sl, l, lp);
-      var flc: FString = new FString();
+      var flc: StringBuffer = new StringBuffer();
       //插入逗号
       for (var i = 1; i - 1 < fl.length; i++) {
          flc.append(fl.substring(i - 1, i));

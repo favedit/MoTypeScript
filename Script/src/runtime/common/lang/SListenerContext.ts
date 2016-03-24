@@ -1,4 +1,4 @@
-import {SObject} from '../lang/SObject';
+import {Struct} from '../lang/Struct';
 
 //==========================================================
 // <T>监听环境。</T>
@@ -7,7 +7,7 @@ import {SObject} from '../lang/SObject';
 // @author maocy
 // @version 160306
 //==========================================================
-export class SListenerContext extends SObject {
+export class SListenerContext extends Struct {
    // 发送者
    public sender: any = null;
    // 拥有者

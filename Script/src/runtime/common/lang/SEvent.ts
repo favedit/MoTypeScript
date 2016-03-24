@@ -1,4 +1,4 @@
-import {SObject} from './SObject';
+import {Struct} from './Struct';
 
 //==========================================================
 // <T>事件信息类。</T>
@@ -7,7 +7,7 @@ import {SObject} from './SObject';
 // @author maocy
 // @version 150113
 //==========================================================
-export class SEvent extends SObject {
+export class SEvent extends Struct {
    //..........................................................
    // @attribute
    public code = null;

@@ -1,6 +1,6 @@
 import {RuntimeUtil} from '../RuntimeUtil'
 import {ObjectBase} from './ObjectBase'
-import {FString} from './FString'
+import {StringBuffer} from './StringBuffer'
 
 //==========================================================
 // <T>数组的操作类。</T>
@@ -215,7 +215,7 @@ export class FArray extends ObjectBase {
    // @return 信息字符串
    //==========================================================
    public dump(): string {
-      var result: FString = new FString();
+      var result: StringBuffer = new StringBuffer();
       var count: number = this._length;
       result.append(RuntimeUtil.className(this), ':', count);
       if (count > 0) {

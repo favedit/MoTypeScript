@@ -1,5 +1,5 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {FError} from '../lang/FError'
 import {FDataView} from './FDataView'
 
@@ -56,7 +56,7 @@ export class FDataStream extends FDataView {
       var position = this.position;
       var length = this.viewer.getUint16(position, this.endianCd);
       position += 2;
-      var result = new FString();
+      var result = new StringBuffer();
       for (var i = 0; i < length; i++) {
          var value = this.viewer.getUint16(position, this.endianCd);
          position += 2;
@@ -220,7 +220,7 @@ export class FDataStream extends FDataView {
       var position = this.position;
       var length = viewer.getUint16(position, endianCd);
       position += 2;
-      var value = new FString();
+      var value = new StringBuffer();
       for (var i = 0; i < length; i++) {
          var character = viewer.getUint16(position, endianCd);
          value.push(String.fromCharCode(character));

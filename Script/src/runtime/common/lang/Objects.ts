@@ -1,5 +1,5 @@
 import {ObjectBase} from './ObjectBase';
-import {FString} from './FString';
+import {StringBuffer} from './StringBuffer';
 import {RuntimeUtil} from '../RuntimeUtil';
 
 // =========================================================
@@ -412,7 +412,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    public dump(): string {
       var count: number = this._count;
-      var result: FString = new FString();
+      var result: StringBuffer = new StringBuffer();
       result.append(RuntimeUtil.className(this), ':', count);
       if (count) {
          for (var i = 0; i < count; i++) {

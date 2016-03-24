@@ -1,5 +1,5 @@
 import {RMethod} from '../reflect/RMethod'
-import {FString} from './FString'
+import {StringBuffer} from './StringBuffer'
 import {ArrayUtil} from './ArrayUtil'
 
 //==========================================================
@@ -16,10 +16,10 @@ export class FError {
    public constructor(po: any, pm: string, ...pp: Array<any>) {
       //..........................................................
       // @construct
-      var r: FString = new FString();
+      var r: StringBuffer = new StringBuffer();
       // 建立函数调用信息
       var f = FError.caller;
-      var s = new FString();
+      var s = new StringBuffer();
       var t = new Array();
       while (f) {
          if (ArrayUtil.contains(t, f)) {

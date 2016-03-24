@@ -8,7 +8,7 @@ import {LoggerUtil} from './LoggerUtil'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FSpeed extends ObjectBase {
+export class Speed extends ObjectBase {
    //..........................................................
    // @attribute
    public parameters = null;

@@ -1,5 +1,5 @@
 import {Dictionary} from './Dictionary'
-import {FString} from './FString'
+import {StringBuffer} from './StringBuffer'
 import {StringUtil} from './StringUtil'
 import {RuntimeUtil} from '../RuntimeUtil'
 
@@ -19,7 +19,7 @@ export class Attributes extends Dictionary<string> {
    // @return String 字符串
    //==========================================================
    public joinValue(split): string {
-      var source: FString = new FString();
+      var source: StringBuffer = new StringBuffer();
       var count = this._count;
       for (var i: number = 0; i < count; i++) {
          if (i > 0) {
@@ -39,7 +39,7 @@ export class Attributes extends Dictionary<string> {
    // @return String 字符串
    //==========================================================
    public join(name, value): string {
-      var source: FString = new FString();
+      var source: StringBuffer = new StringBuffer();
       if (!name) {
          name = '=';
       }
@@ -91,7 +91,7 @@ export class Attributes extends Dictionary<string> {
    // @return String 打包字符串
    //==========================================================
    public pack(): string {
-      var source: FString = new FString();
+      var source: StringBuffer = new StringBuffer();
       var count = this._count;
       var names = this._names;
       var values = this._values;
@@ -147,7 +147,7 @@ export class Attributes extends Dictionary<string> {
    // @return String 字符串
    //==========================================================
    public dump(): string {
-      var result: FString = new FString();
+      var result: StringBuffer = new StringBuffer();
       var count = this._count;
       result.append(RuntimeUtil.className(this), ' : ', count);
       if (count > 0) {

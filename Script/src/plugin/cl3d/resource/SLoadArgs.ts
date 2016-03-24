@@ -1,4 +1,4 @@
-import {SObject} from '../../runtime/common/lang/SObject'
+import {Struct} from '../../runtime/common/lang/Struct'
 
 //==========================================================
 // <T>资源加载参数。</T>
@@ -6,7 +6,7 @@ import {SObject} from '../../runtime/common/lang/SObject'
 // @author maocy
 // @history 151225
 //==========================================================
-export class SLoadArgs extends SObject {
+export class SLoadArgs extends Struct {
    // 唯一编号
    public guid: string = null;
    // 代码

@@ -1,4 +1,4 @@
-import {FString} from '../../common/lang/FString';
+import {StringBuffer} from '../../common/lang/StringBuffer';
 import {FloatUtil} from '../../common/lang/FloatUtil';
 import {SPoint3} from '../../common/math/SPoint3';
 import {RMath} from '../../common/math/RMath';
@@ -360,7 +360,7 @@ export class SMatrix3x3 {
    //==========================================================
    public toString() {
       var d = this._data;
-      var r = new FString();
+      var r = new StringBuffer();
       for (var y = 0; y < 3; y++) {
          if (y > 0) {
             r.append('|');

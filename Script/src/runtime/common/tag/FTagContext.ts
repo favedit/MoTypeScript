@@ -1,6 +1,6 @@
 import {ObjectBase} from '../lang/ObjectBase';
 import {Attributes} from '../lang/Attributes';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {BooleanUtil} from '../lang/BooleanUtil';
 import {ObjectUtil} from '../lang/ObjectUtil';
 import {StringUtil} from '../lang/StringUtil';
@@ -17,7 +17,7 @@ export class FTagContext extends ObjectBase {
    public trimLeft: boolean;
    public trimRight: boolean;
    public _attributes: Attributes;
-   public _source: FString;
+   public _source: StringBuffer;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -29,7 +29,7 @@ export class FTagContext extends ObjectBase {
       this.trimLeft = false;
       this.trimRight = false;
       this._attributes = new Attributes();
-      this._source = new FString();
+      this._source = new StringBuffer();
    }
 
    //==========================================================

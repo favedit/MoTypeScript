@@ -1,5 +1,5 @@
 import {Attributes} from '../lang/Attributes';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {RClass} from '../reflect/RClass';
 import {FNode} from './FNode';
 import {RXml} from './RXml';
@@ -93,7 +93,7 @@ export class FXmlNode extends FNode {
    // @return String 配置文本
    //==========================================================
    public xml() {
-      var xml = new FString();
+      var xml = new StringBuffer();
       this.innerXml(xml, 0);
       return xml.flush();
    }

@@ -1,5 +1,5 @@
 import {RClass} from '../reflect/RClass';
-import {FString} from '../lang/FString';
+import {StringBuffer} from '../lang/StringBuffer';
 import {FError} from '../lang/FError';
 import {Attributes} from '../lang/Attributes';
 import {StringUtil} from '../lang/StringUtil';
@@ -219,7 +219,7 @@ export class RXml {
          }
       }
       // 建立文本
-      var xt = new FString();
+      var xt = new StringBuffer();
       xt.append(pe.value);
       var ecs = pe.childNodes
       if (ecs) {

@@ -1,6 +1,6 @@
 import {AssertUtil} from '../AssertUtil';
 import {RuntimeUtil} from '../RuntimeUtil';
-import {FString} from './FString'
+import {StringBuffer} from './StringBuffer'
 import {ObjectBase} from './ObjectBase';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {ObjectBase} from './ObjectBase';
 // @author maocy
 // @version 141226
 //==========================================================
-export class FMap<N, V> extends ObjectBase {
+export class HashMap<N, V> extends ObjectBase {
    // 总数
    protected _count: number = 0;
    // 对照表
@@ -274,7 +274,7 @@ export class FMap<N, V> extends ObjectBase {
    // @method
    // @param map:TMap 表
    //==========================================================
-   public assign(map: FMap<N, V>): void {
+   public assign(map: HashMap<N, V>): void {
       this.clear();
       this.append(map);
    }
@@ -285,7 +285,7 @@ export class FMap<N, V> extends ObjectBase {
    // @method
    // @param map:TMap 表
    //==========================================================
-   public append(map: FMap<N, V>): void {
+   public append(map: HashMap<N, V>): void {
       if (map) {
          var count = map.count();
          for (var i = 0; i < count; i++) {
@@ -446,7 +446,7 @@ export class FMap<N, V> extends ObjectBase {
    // @return String 信息字符串
    //==========================================================
    public toString(): string {
-      var result: FString = new FString();
+      var result: StringBuffer = new StringBuffer();
       var count = this._count;
       var names = this._names;
       var values = this._values;

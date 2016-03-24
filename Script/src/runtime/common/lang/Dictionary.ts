@@ -1,6 +1,6 @@
 import {RuntimeUtil} from '../RuntimeUtil'
-import {FMap} from './FMap'
-import {FString} from './FString'
+import {HashMap} from './HashMap'
+import {StringBuffer} from './StringBuffer'
 
 //==========================================================
 // <T>名称和内容的关联保存表的工具类。</T>
@@ -9,7 +9,7 @@ import {FString} from './FString'
 // @author maocy
 // @version 141229
 //==========================================================
-export class Dictionary<V> extends FMap<string, V> {
+export class Dictionary<V> extends HashMap<string, V> {
    //==========================================================
    // <T>按照名称排序。</T>
    //
@@ -28,7 +28,7 @@ export class Dictionary<V> extends FMap<string, V> {
    // @return String 字符串
    //==========================================================
    public joinName(split) {
-      var source = new FString();
+      var source = new StringBuffer();
       var count = this._count;
       for (var i: number = 0; i < count; i++) {
          if (i > 0) {
@@ -47,7 +47,7 @@ export class Dictionary<V> extends FMap<string, V> {
    //==========================================================
    public dump(): string {
       var o = this;
-      var result: FString = new FString();
+      var result: StringBuffer = new StringBuffer();
       var count = o._count;
       result.append(RuntimeUtil.className(o), ': ', count);
       if (count > 0) {

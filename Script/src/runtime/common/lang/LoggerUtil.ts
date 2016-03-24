@@ -2,7 +2,7 @@ import {RMethod} from '../reflect/RMethod';
 import {RClass} from '../reflect/RClass';
 import {RuntimeUtil} from '../RuntimeUtil';
 import {SLogger} from './SLogger';
-import {FString} from './FString';
+import {StringBuffer} from './StringBuffer';
 import {Listeners} from './Listeners';
 import {ArrayUtil} from './ArrayUtil';
 import {DateUtil} from './DateUtil';
@@ -41,7 +41,7 @@ export class LoggerUtil {
    //==========================================================
    public static output(sender: any, code: string, message: string, parameters: Array<any>): string {
       // 格式化参数
-      var result = new FString();
+      var result = new StringBuffer();
       result.append(DateUtil.format('yymmdd-hh24miss.ms'));
       result.append(code);
       var formatMessage: string = message;
@@ -215,7 +215,7 @@ export class LoggerUtil {
    public static fatal(owner: any, error: any, message: string, ...params: Array<any>) {
       var o = this;
       // 建立函数调用关系的堆栈
-      var stack = new FString();
+      var stack = new StringBuffer();
       var stacks = new Array();
       //var caller = RLogger.fatal.caller;
       //while (caller) {
@@ -234,7 +234,7 @@ export class LoggerUtil {
          //stack.append('   ' + (count - i) + ': ' + RMethod.shortName(caller));
       }
       // 建立消息信息
-      var result = new FString();
+      var result = new StringBuffer();
       //result.appendLine(RContext.get('RMessage:fatal'));
       result.appendLine(StringUtil.repeat('-', 60));
       result.append(RClass.dump(owner), ': ');

@@ -7,7 +7,7 @@ import {ObjectBase} from './ObjectBase'
 // @author maocy
 // @version 141226
 //==========================================================
-export class FString extends ObjectBase {
+export class StringBuffer extends ObjectBase {
    //..........................................................
    // @attribute
    protected _count: number = 0;

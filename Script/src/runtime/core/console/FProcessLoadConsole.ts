@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FLooper} from '../../runtime/common/lang/FLooper'
+import {Looper} from '../../runtime/common/lang/Looper'
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../FConsole';
@@ -23,7 +23,7 @@ export class FProcessLoadConsole extends FConsole {
    // 处理间隔
    protected _interval: number = 50;
    // 循环器
-   protected _looper: FLooper = null;
+   protected _looper: Looper = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,7 +34,7 @@ export class FProcessLoadConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._looper = new FLooper();
+      this._looper = new Looper();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
       thread.interval = this._interval;

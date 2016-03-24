@@ -1,7 +1,7 @@
 import {ObjectBase} from './ObjectBase'
 import {Objects} from './Objects'
 import {ObjectUtil} from './ObjectUtil'
-import {FString} from './FString'
+import {StringBuffer} from './StringBuffer'
 import {Listener} from './Listener'
 import {FError} from './FError'
 import {RClass} from '../reflect/RClass'
@@ -198,7 +198,7 @@ export class Listeners extends ObjectBase {
    // @return String 运行信息
    //==========================================================
    public dump() {
-      var result = new FString();
+      var result = new StringBuffer();
       result.append(RClass.shortName(this));
       var listeners: Objects<Listener> = this.listeners;
       var count: number = listeners.count();
