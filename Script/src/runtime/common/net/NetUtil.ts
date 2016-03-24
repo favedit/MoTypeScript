@@ -7,7 +7,7 @@ import {ClassUtil} from '../reflect/ClassUtil';
 // @author maocy
 // @version 150104
 //==========================================================
-export class RNet {
+export class NetUtil {
    //..........................................................
    // @attribute
    public static httpActiveX = false;

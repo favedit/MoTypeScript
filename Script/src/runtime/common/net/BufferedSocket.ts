@@ -1,5 +1,5 @@
 import {ObjectUtil} from '../lang/ObjectUtil';
-import {FSocket} from './FSocket';
+import {Socket} from './Socket';
 
 //==========================================================
 // <T>网络端口。</T>
@@ -8,12 +8,10 @@ import {FSocket} from './FSocket';
 // @author maocy
 // @history 15029
 //==========================================================
-export class FBufferedSocket extends FSocket {
+export class BufferedSocket extends Socket {
    //..........................................................
    // @attribute
-   //o._bufferSends    = MO.Class.register(o, new MO.AGetter('_bufferSends'));
    protected _bufferSends: Array<string> = new Array<string>();
-   //o._bufferReceives = MO.Class.register(o, new MO.AGetter('_bufferReceives'));
    protected _bufferReceives: Array<string> = new Array<string>();
 
    //==========================================================

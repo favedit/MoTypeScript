@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141230
 //===========================================================
-export class EHttpStatus {
+export class HttpStatusEnum {
    // @attribute Integer 未初始化
    public static Uninitialized = 0;
    // @attribute Integer 打开

@@ -6,7 +6,7 @@ import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {TagContext} from '../../../runtime/common/tag/TagContext';
-import {FXmlConnection} from '../../../runtime/common/net/FXmlConnection';
+import {XmlConnection} from '../../../runtime/common/net/XmlConnection';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FEnvironmentConsole} from '../../../runtime/core/console/FEnvironmentConsole';
 import {FConsole} from '../../../runtime/core/FConsole';
@@ -265,7 +265,7 @@ export class FEffectConsole extends FConsole {
          var uri = "${resource}/shader/" + name + ".xml";
          var url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
          // 获得网络数据
-         xconfig = ClassUtil.create(FXmlConnection).send(url);
+         xconfig = ClassUtil.create(XmlConnection).send(url);
          // 加载配置信息
          this._configs.set(name, xconfig);
       }

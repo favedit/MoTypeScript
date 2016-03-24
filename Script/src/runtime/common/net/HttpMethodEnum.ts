@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150104
 //==========================================================
-export class EHttpMethod {
+export class HttpMethodEnum {
    // @member GET请求
    public static Get = 'GET';
    // @member POST请求

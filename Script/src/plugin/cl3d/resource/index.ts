@@ -13,6 +13,8 @@ export * from './FModelResourceConsole';
 export * from './FResource';
 export * from './FResourceComponent';
 export * from './FResourceObject';
+export * from './FSceneResource';
+export * from './FSceneResourceConsole';
 export * from './FStreamResource';
 export * from './FTemplateRenderableResource';
 export * from './FTemplateResource';

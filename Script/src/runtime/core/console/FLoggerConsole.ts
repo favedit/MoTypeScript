@@ -5,7 +5,7 @@ import {DataTypeEnum} from '../../common/lang/DataTypeEnum';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FBufferedSocket} from '../../common/net/FBufferedSocket';
+import {BufferedSocket} from '../../common/net/BufferedSocket';
 import {FEnvironmentConsole} from './FEnvironmentConsole';
 import {FConsole} from '../FConsole';
 
@@ -71,7 +71,7 @@ export class FLoggerConsole extends FConsole {
    // @method
    //==========================================================
    public connect(url) {
-      var socket = this._socket = ClassUtil.create(FBufferedSocket);
+      var socket = this._socket = ClassUtil.create(BufferedSocket);
       socket.connect(url);
    }
 

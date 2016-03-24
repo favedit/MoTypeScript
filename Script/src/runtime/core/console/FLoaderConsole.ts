@@ -9,8 +9,8 @@ import {SEvent} from '../../common/lang/SEvent';
 // import {RLogger} from '../../common/lang/LoggerUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FHttpConnection} from '../../common/net/FHttpConnection';
-import {FJsonConnection} from '../../common/net/FJsonConnection';
+import {HttpConnection} from '../../common/net/HttpConnection';
+import {JsonConnection} from '../../common/net/JsonConnection';
 // import {FBufferedSocket} from '../../common/net/FBufferedSocket';
 // import {FEnvironmentConsole} from './FEnvironmentConsole';
 import {FListenerThread} from '../console/FListenerThread';
@@ -81,7 +81,7 @@ export class FLoaderConsole extends FConsole {
             var loader: FLoader = loaders.shift();
             var url: string = loader.url;
             // 加载处理
-            var connection: FHttpConnection = null;
+            var connection: HttpConnection = null;
             if (loader.contentCd == DataContentEnum.Json) {
                connection = jsonConsole.sendAsync(url);
             } else {

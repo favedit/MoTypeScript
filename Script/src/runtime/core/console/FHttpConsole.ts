@@ -2,8 +2,8 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {ObjectPool} from '../../common/lang/ObjectPool';
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {EHttpContent} from '../../common/net/EHttpContent';
-import {FHttpConnection} from '../../common/net/FHttpConnection';
+import {HttpContentEnum} from '../../common/net/HttpContentEnum';
+import {HttpConnection} from '../../common/net/HttpConnection';
 import {FConsole} from '../FConsole';
 import {FEnvironmentConsole} from './FEnvironmentConsole';
 
@@ -51,7 +51,7 @@ export class FHttpConsole extends FConsole {
    // @return 网络链接
    //==========================================================
    public create() {
-      return ClassUtil.create(FHttpConnection);
+      return ClassUtil.create(HttpConnection);
    }
 
    //==========================================================
@@ -68,7 +68,7 @@ export class FHttpConsole extends FConsole {
          this._pool.push(this.create());
       }
       // 收集对象
-      var connection: FHttpConnection = pool.alloc();
+      var connection: HttpConnection = pool.alloc();
       connection.reset();
       connection.completeListeners.register(this, this.onComplete);
       return connection;
@@ -128,7 +128,7 @@ export class FHttpConsole extends FConsole {
       var sendUrl: string = this._environmentConsole.parse(url);
       var connection = this.alloc();
       connection._asynchronous = false;
-      connection._contentCd = EHttpContent.Text;
+      connection._contentCd = HttpContentEnum.Text;
       connection.send(sendUrl, data);
       return connection.content();
    }
@@ -145,7 +145,7 @@ export class FHttpConsole extends FConsole {
       var sendUrl: string = this._environmentConsole.parse(url);
       var connection = this.alloc();
       connection._asynchronous = true;
-      connection._contentCd = EHttpContent.Text;
+      connection._contentCd = HttpContentEnum.Text;
       connection.send(sendUrl, data);
       return connection;
    }

@@ -1,4 +1,4 @@
-import {FSocket} from './FSocket';
+import {Socket} from './Socket';
 
 //==========================================================
 // <T>二进制网络端口。</T>
@@ -7,7 +7,7 @@ import {FSocket} from './FSocket';
 // @author maocy
 // @history 151007
 //==========================================================
-export class FBinarySocket extends FSocket {
+export class BinarySocket extends Socket {
    //==========================================================
    // <T>链接处理。</T>
    //

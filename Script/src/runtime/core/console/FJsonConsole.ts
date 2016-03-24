@@ -1,5 +1,5 @@
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FJsonConnection} from '../../common/net/FJsonConnection';
+import {JsonConnection} from '../../common/net/JsonConnection';
 import {FHttpConsole} from './FHttpConsole';
 
 //==========================================================
@@ -17,6 +17,6 @@ export class FJsonConsole extends FHttpConsole {
    // @return 网络链接
    //==========================================================
    public create() {
-      return ClassUtil.create(FJsonConnection);
+      return ClassUtil.create(JsonConnection);
    }
 }

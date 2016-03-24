@@ -5,10 +5,10 @@ import {Listeners} from '../lang/Listeners';
 import {Fatal} from '../lang/Fatal';
 import {ObjectUtil} from '../lang/ObjectUtil';
 import {LoggerUtil} from '../lang/LoggerUtil';
-import {RNet} from '../net/RNet';
-import {EHttpMethod} from './EHttpMethod';
-import {EHttpContent} from './EHttpContent';
-import {EHttpStatus} from './EHttpStatus';
+import {NetUtil} from '../net/NetUtil';
+import {HttpMethodEnum} from './HttpMethodEnum';
+import {HttpContentEnum} from './HttpContentEnum';
+import {HttpStatusEnum} from './HttpStatusEnum';
 
 //==========================================================
 // <T>页面通讯链接。</T>
@@ -17,11 +17,11 @@ import {EHttpStatus} from './EHttpStatus';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FHttpConnection extends ObjectBase {
+export class HttpConnection extends ObjectBase {
    // @attribute
    protected _asynchronous: boolean = false;
-   protected _methodCd = EHttpMethod.Get;
-   protected _contentCd = EHttpContent.Binary;
+   protected _methodCd = HttpMethodEnum.Get;
+   protected _contentCd = HttpContentEnum.Binary;
    protected _url = null;
    // @attribute
    protected _linker = null;
@@ -54,7 +54,7 @@ export class FHttpConnection extends ObjectBase {
       this.loadListeners = new Listeners();
       this.completeListeners = new Listeners();
       // 创建链接
-      var handle = this._handle = RNet.createConnection();
+      var handle = this._handle = NetUtil.createConnection();
       handle._linker = this;
       handle.onreadystatechange = this.onConnectionReady;
    }
@@ -88,7 +88,7 @@ export class FHttpConnection extends ObjectBase {
       var linker = this._linker;
       if (linker._asynchronous) {
          var handle = linker._handle;
-         if (handle.readyState == EHttpStatus.Loaded) {
+         if (handle.readyState == HttpStatusEnum.Loaded) {
             if (handle.status == 200) {
                linker.setOutputData();
                linker.onConnectionComplete();
@@ -153,7 +153,7 @@ export class FHttpConnection extends ObjectBase {
    public setHeaders() {
       var handle = this._handle;
       // 传输格式
-      if (this._contentCd == EHttpContent.Binary) {
+      if (this._contentCd == HttpContentEnum.Binary) {
          // 二进制内容
          //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
          //   handle.setRequestHeader('Accept-Charset', 'x-user-defined');
@@ -196,7 +196,7 @@ export class FHttpConnection extends ObjectBase {
    public setOutputData() {
       var handle = this._handle;
       // 传输格式
-      if (this._contentCd == EHttpContent.Binary) {
+      if (this._contentCd == HttpContentEnum.Binary) {
          this._outputData = handle.response;
       } else {
          this._outputData = handle.responseText;
@@ -268,7 +268,7 @@ export class FHttpConnection extends ObjectBase {
       this._url = url;
       this._input = data;
       // 设置状态
-      this._methodCd = (data != null) ? EHttpMethod.Post : EHttpMethod.Get;
+      this._methodCd = (data != null) ? HttpMethodEnum.Post : HttpMethodEnum.Get;
       this._statusFree = false;
       // 发送信息
       this.onConnectionSend();

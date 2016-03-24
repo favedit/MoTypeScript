@@ -1,5 +1,5 @@
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FXmlConnection} from '../../common/net/FXmlConnection';
+import {XmlConnection} from '../../common/net/XmlConnection';
 import {FHttpConsole} from './FHttpConsole';
 
 //==========================================================
@@ -18,6 +18,6 @@ export class FXmlConsole extends FHttpConsole{
    // @return 网络链接
    //==========================================================
    public create(){
-      return ClassUtil.create(FXmlConnection);
+      return ClassUtil.create(XmlConnection);
    }
 }

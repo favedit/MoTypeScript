@@ -14,11 +14,11 @@ import {Annotation} from './Annotation'
 //============================================================
 export class LoggerAnnotation extends Annotation {
    // 数据名称
-   protected _count: number = 0;
+   protected _count: number;
    // 数据名称
-   protected _successCount: number = 0;
+   protected _successCount: number;
    // 回调处理
-   protected _callback: Function = null;
+   protected _callback: Function;
 
    //============================================================
    // <T>构造处理。</T>
@@ -27,6 +27,9 @@ export class LoggerAnnotation extends Annotation {
    //============================================================
    public constructor(name: string, callback: Function) {
       super(name);
+      // 设置选项
+      this._count = 0;
+      this._successCount = 0;
       this._annotationCd = AnnotationEnum.Logger;
       this._callback = callback;
    }

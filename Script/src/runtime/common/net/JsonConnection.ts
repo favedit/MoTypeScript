@@ -1,5 +1,5 @@
-import {EHttpContent} from './EHttpContent';
-import {FHttpConnection} from './FHttpConnection';
+import {HttpContentEnum} from './HttpContentEnum';
+import {HttpConnection} from './HttpConnection';
 
 //==========================================================
 // <T>配置通讯链接。</T>
@@ -8,7 +8,7 @@ import {FHttpConnection} from './FHttpConnection';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FJsonConnection extends FHttpConnection {
+export class JsonConnection extends HttpConnection {
 
    protected _content: any = null;
 
@@ -20,7 +20,7 @@ export class FJsonConnection extends FHttpConnection {
    public constructor() {
       super();
       // 设置属性
-      this._contentCd = EHttpContent.Text;
+      this._contentCd = HttpContentEnum.Text;
    }
 
    //==========================================================

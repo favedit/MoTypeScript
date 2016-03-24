@@ -1,9 +1,9 @@
-import {EDataContent} from '../../runtime/common/lang/EDataContent';
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
-import {RObject} from '../../runtime/common/lang/RObject';
-import {ALinker} from '../../runtime/common/reflect/ALinker';
-import {RClass} from '../../runtime/common/reflect/RClass';
-import {RMemory} from '../../runtime/common/RMemory';
+import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
+import {Linker} from '../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
+import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
 import {SLoadArgs} from './SLoadArgs';
@@ -17,9 +17,9 @@ import {FSceneResource} from './FSceneResource';
 //==========================================================
 export class FSceneResourceConsole extends FConsole {
    // 场景集合
-   public _scenes: FDictionary<FSceneResource>;
+   public _scenes: Dictionary<FSceneResource>;
    // 资源控制台
-   @ALinker(FResourceConsole)
+   @Linker(FResourceConsole)
    protected _resourceConsole: FResourceConsole;
    //    // @attribute
    //    o._vendorCode = 'scene';
@@ -31,7 +31,7 @@ export class FSceneResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._scenes = new FDictionary<FSceneResource>();
+      this._scenes = new Dictionary<FSceneResource>();
       // this._meshs = new MO.TDictionary();
       // this._skeletons = new MO.TDictionary();
       // this._animations = new MO.TDictionary();
@@ -50,7 +50,7 @@ export class FSceneResourceConsole extends FConsole {
    //
    // @return 场景集合
    //==========================================================
-   public scenes(): FDictionary<FSceneResource> {
+   public scenes(): Dictionary<FSceneResource> {
       return this._scenes;
    }
 
@@ -85,12 +85,12 @@ export class FSceneResourceConsole extends FConsole {
          return scene;
       }
       // 创建模型资源
-      scene = RClass.create(FSceneResource);
+      scene = ClassUtil.create(FSceneResource);
       // scene.setGuid(identity);
       // scene.setVendor(vendor);
       // scene.setSourceUrl(url);
       // 创建加载器
-      this._resourceConsole.loadContent(EDataContent.Json, scene, url);
+      this._resourceConsole.loadContent(DataContentEnum.Json, scene, url);
       // 存储模型
       scenes.set(identity, scene);
       return scene;
@@ -103,10 +103,10 @@ export class FSceneResourceConsole extends FConsole {
    // @return 场景资源
    //==========================================================
    public loadByGuid(guid): FSceneResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.guid = guid;
       var scene = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return scene;
    }
 
@@ -117,10 +117,10 @@ export class FSceneResourceConsole extends FConsole {
    // @return 场景资源
    //==========================================================
    public loadByCode(code): FSceneResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.code = code;
       var scene = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return scene;
    }
 
@@ -131,10 +131,10 @@ export class FSceneResourceConsole extends FConsole {
    // @return 场景资源
    //==========================================================
    public loadByUrl(url: string): FSceneResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.url = url;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -144,7 +144,7 @@ export class FSceneResourceConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._scenes = RObject.dispose(this._scenes, true);
+      this._scenes = ObjectUtil.dispose(this._scenes, true);
       // 父处理
       super.dispose();
    }

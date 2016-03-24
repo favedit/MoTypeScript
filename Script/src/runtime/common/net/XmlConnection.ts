@@ -2,8 +2,8 @@ import {Fatal} from '../lang/Fatal';
 import {LoggerUtil} from '../lang/LoggerUtil';
 import {FXmlDocument} from '../xml/FXmlDocument';
 import {RXml} from '../xml/RXml';
-import {EHttpContent} from './EHttpContent';
-import {FHttpConnection} from './FHttpConnection';
+import {HttpContentEnum} from './HttpContentEnum';
+import {HttpConnection} from './HttpConnection';
 
 //==========================================================
 // <T>配置通讯链接。</T>
@@ -12,7 +12,7 @@ import {FHttpConnection} from './FHttpConnection';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FXmlConnection extends FHttpConnection {
+export class XmlConnection extends HttpConnection {
    // 输入节点
    public _inputNode = null;
    // 输出节点
@@ -26,7 +26,7 @@ export class FXmlConnection extends FHttpConnection {
    public constructor() {
       super();
       // 设置属性
-      this._contentCd = EHttpContent.Text;
+      this._contentCd = HttpContentEnum.Text;
    }
 
    //==========================================================

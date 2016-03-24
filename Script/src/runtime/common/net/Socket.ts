@@ -9,7 +9,7 @@ import {ObjectUtil} from '../lang/ObjectUtil';
 // @author maocy
 // @history 15029
 //==========================================================
-export class FSocket extends ObjectBase {
+export class Socket extends ObjectBase {
    // @attribute
    //_url              = MO.Class.register(o, new MO.AGetSet('_url'));
    protected _url = null;
