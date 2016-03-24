@@ -1,7 +1,7 @@
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {Size2} from './../../runtime/common/math/Size2';
 import {FGraphicObject} from './../../runtime/graphic/core/FGraphicObject';
-import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamera';
+import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
 import {FScene} from '../../plugin/cl3d/base/FScene';
 import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
 import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
@@ -31,7 +31,7 @@ export class FCanvas extends FControl {
    protected _hCanvas: HTMLCanvasElement;
    protected _size: Size2;
    protected _graphicContext: any;
-   protected _camera: FPerspectiveCamera;
+   protected _camera: PerspectiveCamera;
    protected _cameraMoveRate = 0.4;
    protected _cameraKeyRotation = 0.03;
    protected _cameraMouseRotation = 0.005;
@@ -96,7 +96,7 @@ export class FCanvas extends FControl {
    //
    // @return 相机
    //==========================================================
-   public get camera(): FPerspectiveCamera {
+   public get camera(): PerspectiveCamera {
       return this._camera;
    }
 
@@ -114,7 +114,7 @@ export class FCanvas extends FControl {
       // 创建环境
       this._graphicContext = RWglContext.create(hCanvas);
       // 创建相机
-      var camera = this._camera = new FPerspectiveCamera();
+      var camera = this._camera = new PerspectiveCamera();
       camera.projection.size.assign(size);
       camera.projection.update();
       camera.position.set(0, 0, -10);

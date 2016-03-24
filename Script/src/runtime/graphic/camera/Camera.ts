@@ -9,7 +9,7 @@ import {RConst} from '../../../runtime/graphic/math/RConst';
 import {SFrustumPlanes} from '../../../runtime/graphic/math/SFrustumPlanes';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {MathUtil} from '../../../runtime/common/math/MathUtil';
-import {FViewport} from './FViewport';
+import {Viewport} from './Viewport';
 
 //==========================================================
 // <T>渲染相机。</T>
@@ -17,7 +17,7 @@ import {FViewport} from './FViewport';
 // @author maocy
 // @history 141231
 //==========================================================
-export class FCamera extends ObjectBase {
+export class Camera extends ObjectBase {
    // @attribute 变换矩阵
    public matrix: SMatrix3d;
    // @attribute 相机位置
@@ -35,7 +35,7 @@ export class FCamera extends ObjectBase {
    // @attribute 视截体
    public frustum: SFrustum;
    public planes: SFrustumPlanes;
-   public viewport: FViewport;
+   public viewport: Viewport;
    // @attribute 轴线
    protected _axisUp: Vector3;
    protected _axisX: Vector3;
@@ -58,7 +58,7 @@ export class FCamera extends ObjectBase {
       // 初始化变量
       this.frustum = new SFrustum();
       this.planes = new SFrustumPlanes();
-      this.viewport = ClassUtil.create(FViewport);
+      this.viewport = ClassUtil.create(Viewport);
       // 初始化变量
       this._axisUp = new Vector3(0, 1, 0);
       this._axisX = new Vector3();

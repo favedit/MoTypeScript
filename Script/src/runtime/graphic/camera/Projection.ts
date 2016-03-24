@@ -9,7 +9,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FProjection extends ObjectBase {
+export class Projection extends ObjectBase {
    // 矩阵
    public matrix: SMatrix3d;
    // 尺寸

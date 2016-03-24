@@ -6,7 +6,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 // @author maocy
 // @history 141231
 //==========================================================
-export class FViewport extends ObjectBase {
+export class Viewport extends ObjectBase {
    public left = 0;
    public top = 0;
    public width = 0;

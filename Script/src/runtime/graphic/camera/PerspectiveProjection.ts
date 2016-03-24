@@ -1,6 +1,6 @@
 import {RMatrix} from '../../../runtime/graphic/math/RMatrix';
 import {MathUtil} from '../../../runtime/common/math/MathUtil';
-import {FProjection} from './FProjection';
+import {Projection} from './Projection';
 
 //==========================================================
 // <T>渲染投影。</T>
@@ -8,7 +8,7 @@ import {FProjection} from './FProjection';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FPerspectiveProjection extends FProjection {
+export class PerspectiveProjection extends Projection {
    //============================================================
    // <T>更新矩阵。</T>
    //

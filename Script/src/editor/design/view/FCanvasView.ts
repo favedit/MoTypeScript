@@ -6,7 +6,7 @@ import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
 import {FScene} from '../../plugin/cl3d/base/FScene';
 import {FDisplayLayer} from '../../plugin/cl3d/base/FDisplayLayer';
-import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamera';
+import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
 import {FPipeline} from '../../plugin/cl3d/technique/pipeline/FPipeline';
 import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
 import {FPipelineConsole} from '../../plugin/cl3d/technique/pipeline/FPipelineConsole';
@@ -31,7 +31,7 @@ export class FCanvasView extends View {
    // 内容层
    public contentLayer: FDisplayLayer;
    // 内容层
-   public camera: FPerspectiveCamera;
+   public camera: PerspectiveCamera;
    // 内容层
    public pipeline: FPipeline;
 
@@ -63,7 +63,7 @@ export class FCanvasView extends View {
       var layer = this.contentLayer = new FDisplayLayer();
       scene.registerLayer('content', layer);
       // 创建相机
-      var camera = this.camera = new FPerspectiveCamera();
+      var camera = this.camera = new PerspectiveCamera();
       camera.position.set(0, 0, -20);
       camera.lookAt(0, 0, 0);
       camera.update();

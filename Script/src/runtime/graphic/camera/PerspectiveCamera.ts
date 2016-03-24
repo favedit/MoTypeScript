@@ -3,9 +3,9 @@ import {Vector3} from '../../runtime/common/math/Vector3';
 import {Quaternion} from '../../runtime/common/math/Quaternion';
 import {SMatrix3x3} from '../../runtime/graphic/math/SMatrix3x3';
 import {MathUtil} from '../../runtime/common/math/MathUtil';
-import {FCamera} from './FCamera';
-import {FProjection} from './FProjection';
-import {FPerspectiveProjection} from './FPerspectiveProjection';
+import {Camera} from './Camera';
+import {Projection} from './Projection';
+import {PerspectiveProjection} from './PerspectiveProjection';
 
 //==========================================================
 // <T>渲染相机。</T>
@@ -13,9 +13,9 @@ import {FPerspectiveProjection} from './FPerspectiveProjection';
 // @author maocy
 // @history 141231
 //==========================================================
-export class FPerspectiveCamera extends FCamera {
+export class PerspectiveCamera extends Camera {
    // 投影
-   public projection: FProjection;
+   public projection: Projection;
    // 四元数
    public rotation: Vector3;
    public rotationMatrix: SMatrix3x3;
@@ -32,7 +32,7 @@ export class FPerspectiveCamera extends FCamera {
    public constructor() {
       super();
       // 初始化变量
-      this.projection = new FPerspectiveProjection();
+      this.projection = new PerspectiveProjection();
       this.rotation = new Vector3();
       this.rotationMatrix = new SMatrix3x3();
       this.quaternion = new Quaternion();

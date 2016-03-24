@@ -1,5 +1,5 @@
 import {RMatrix} from '../../../runtime/graphic/math/RMatrix';
-import {FProjection} from './FProjection';
+import {Projection} from './Projection';
 
 //==========================================================
 // <T>渲染正交投影。</T>
@@ -7,7 +7,7 @@ import {FProjection} from './FProjection';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FOrthoProjection extends FProjection {
+export class OrthoProjection extends Projection {
    //============================================================
    // <T>更新矩阵。</T>
    //

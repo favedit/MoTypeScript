@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {Listeners} from '../../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
-import {FCamera} from '../../../runtime/graphic/camera/FCamera';
+import {Camera} from '../../../runtime/graphic/camera/Camera';
 import {FGraphicContext} from '../../graphic/FGraphicContext';
 import {FContent} from '../../graphic/FContent';
 import {FTechnique} from '../FTechnique';
@@ -25,7 +25,7 @@ export abstract class FPipeline extends FContent {
    // 舞台
    public region: FRegion;
    // 相机
-   public camera: FCamera;
+   public camera: Camera;
    // 激活状态
    public statusActive: boolean;
    // 进入帧监听器
