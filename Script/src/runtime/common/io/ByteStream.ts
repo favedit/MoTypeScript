@@ -1,4 +1,4 @@
-import {FDataStream} from './FDataStream'
+import {DataStream} from './DataStream'
 
 //==========================================================
 // <T>数据流。</T>
@@ -6,7 +6,7 @@ import {FDataStream} from './FDataStream'
 // @author maocy
 // @history 141230
 //==========================================================
-export class FByteStream extends FDataStream {
+export class ByteStream extends DataStream {
    //..........................................................
    protected _length: number;
    protected _memory: ArrayBuffer;

@@ -6,7 +6,7 @@ import {ObjectBase} from '../lang/ObjectBase';
 // @author maocy
 // @history 150105
 //==========================================================
-export class FDataView extends ObjectBase {
+export class DataViewer extends ObjectBase {
    // 编码
    public endianCd: boolean;
    // 查看器

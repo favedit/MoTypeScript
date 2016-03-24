@@ -1,4 +1,4 @@
-import {FDataView} from './FDataView'
+import {DataViewer} from './DataViewer'
 
 //==========================================================
 // <T>字节数组。</T>
@@ -6,7 +6,7 @@ import {FDataView} from './FDataView'
 // @author maocy
 // @history 150105
 //==========================================================
-export class FBytes extends FDataView {
+export class Bytes extends DataViewer {
    // 内存
    protected _memory: ArrayBuffer;
 

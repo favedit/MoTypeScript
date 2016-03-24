@@ -10,8 +10,8 @@ import {Fatal} from './Fatal';
 //==========================================================
 export class TypeArrayUtil {
    // @attribute
-   private static _float3 = null;
-   private static _float4 = null;
+   private static _float3;
+   private static _float4;
    private static _data = new Object();
 
    //==========================================================
@@ -21,10 +21,9 @@ export class TypeArrayUtil {
    // @return Float32Array 浮点数
    //==========================================================
    public static float3() {
-      var o = this;
-      var value = o._float3;
+      var value = this._float3;
       if (value == null) {
-         value = o._float3 = new Float32Array(3);
+         value = this._float3 = new Float32Array(3);
       }
       return value;
    }
@@ -36,10 +35,9 @@ export class TypeArrayUtil {
    // @return Float32Array 浮点数
    //==========================================================
    public static float4() {
-      var o = this;
-      var value = o._float4;
+      var value = this._float4;
       if (value == null) {
-         value = o._float4 = new Float32Array(4);
+         value = this._float4 = new Float32Array(4);
       }
       return value;
    }
@@ -84,8 +82,7 @@ export class TypeArrayUtil {
    // @return Array 数组
    //==========================================================
    public static findTemp(typeCd, length) {
-      var o = this;
-      var data = o._data;
+      var data = this._data;
       // 获得类型集合
       var collection = data[typeCd];
       if (collection == null) {
@@ -94,7 +91,7 @@ export class TypeArrayUtil {
       // 获得类型长度
       var result = collection[length];
       if (result == null) {
-         result = collection[length] = o.createArray(typeCd, length);
+         result = collection[length] = this.createArray(typeCd, length);
       }
       return result;
    }

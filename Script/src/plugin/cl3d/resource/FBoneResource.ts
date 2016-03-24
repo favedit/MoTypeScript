@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../runtime/common/lang/Objects';
 import {RClass} from '../../runtime/common/reflect/RClass';
-import {FDataStream} from '../../runtime/common/io/FDataStream';
+import {DataStream} from '../../runtime/common/io/DataStream';
 
 //==========================================================
 // <T>资源骨头信息。</T>
@@ -23,7 +23,7 @@ export class FBoneResource extends ObjectBase {
    // @method
    // @param input 数据流
    //==========================================================
-   public unserialize(input: FDataStream) {
+   public unserialize(input: DataStream) {
       // 读取属性
       this.index = input.readUint8();
       // 读取所有子骨头

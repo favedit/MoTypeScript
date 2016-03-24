@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../runtime/common/lang/ObjectBase'
-import {FDataStream} from '../../runtime/common/io/FDataStream'
+import {DataStream} from '../../runtime/common/io/DataStream'
 
 //==========================================================
 // <T>资源对象。</T>
@@ -18,7 +18,7 @@ export class FResourceObject extends ObjectBase {
    //
    // @param input 数据流
    //==========================================================
-   public unserialize(input: FDataStream) {
+   public unserialize(input: DataStream) {
       this.typeName = input.readString();
       this.version = input.readInt32();
    }

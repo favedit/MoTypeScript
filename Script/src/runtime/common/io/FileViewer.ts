@@ -9,7 +9,7 @@ import {LoggerUtil} from '../lang/LoggerUtil';
 // @author maocy
 // @version 150401
 //==========================================================
-export class FFileReader extends ObjectBase {
+export class FileViewer extends ObjectBase {
    //..........................................................
    // @attribute
    protected __linker = null;

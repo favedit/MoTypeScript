@@ -1,4 +1,4 @@
-import {FDataStream} from '../../common/io/FDataStream';
+import {DataStream} from '../../common/io/DataStream';
 import {RClass} from '../../common/reflect/RClass';
 import {FLoader} from '../console/FLoader';
 

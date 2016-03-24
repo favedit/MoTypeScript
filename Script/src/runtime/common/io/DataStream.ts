@@ -1,7 +1,7 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {StringBuffer} from '../lang/StringBuffer';
 import {Fatal} from '../lang/Fatal'
-import {FDataView} from './FDataView'
+import {DataViewer} from './DataViewer'
 
 //==========================================================
 // <T>数据流基类。</T>
@@ -9,7 +9,7 @@ import {FDataView} from './FDataView'
 // @author maocy
 // @history 150105
 //==========================================================
-export class FDataStream extends FDataView {
+export class DataStream extends DataViewer {
    // 数据视图
    public viewer: DataView;
    // 位置

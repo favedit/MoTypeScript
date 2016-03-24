@@ -2,7 +2,7 @@ import {DataContentEnum} from '../../../runtime/common/lang/DataContentEnum';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {RClass} from '../../../runtime/common/reflect/RClass';
-import {FDataStream} from '../../../runtime/common/io/FDataStream';
+import {DataStream} from '../../../runtime/common/io/DataStream';
 import {FResource as FBaseResource} from '../../runtime/core/resource/FResource';
 import {FResourceLoader} from '../../runtime/core/resource/FResourceLoader';
 
@@ -114,7 +114,7 @@ export class FResource extends FBaseResource {
    //
    // @param input:FByteStream 数据流
    //==========================================================
-   public unserialize(input: FDataStream): void {
+   public unserialize(input: DataStream): void {
       this.typeCode = input.readString();
       this.version = input.readInt32();
       this.guid = input.readString();
@@ -158,7 +158,7 @@ export class FResource extends FBaseResource {
          }
          case DataContentEnum.Binary: {
             // 创建读取流
-            var stream: FDataStream = RClass.create(FDataStream);
+            var stream: DataStream = RClass.create(DataStream);
             stream.endianCd = true;
             stream.link(data);
             // 反序列化数据

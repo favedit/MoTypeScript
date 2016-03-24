@@ -1,7 +1,7 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
-import {FDataStream} from '../../runtime/common/io/FDataStream';
+import {DataStream} from '../../runtime/common/io/DataStream';
 import {FResource} from './FResource';
 import {FMeshResource} from './FMeshResource';
 
@@ -69,7 +69,7 @@ export class FModelResource extends FResource {
    //
    // @param input 数据流
    //==========================================================
-   public unserialize(input: FDataStream): void {
+   public unserialize(input: DataStream): void {
       // 读取父信息
       super.unserialize(input);
       //..........................................................

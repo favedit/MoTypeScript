@@ -1,4 +1,4 @@
-import {FDataStream} from '../../runtime/common/io/FDataStream'
+import {DataStream} from '../../runtime/common/io/DataStream'
 import {FResourceObject} from './FResourceObject'
 
 //==========================================================
@@ -20,7 +20,7 @@ export class FResourceComponent extends FResourceObject {
    //
    // @param input 数据流
    //==========================================================
-   public unserialize(input: FDataStream) {
+   public unserialize(input: DataStream) {
       super.unserialize(input);
       this.guid = input.readString();
       this.code = input.readString();

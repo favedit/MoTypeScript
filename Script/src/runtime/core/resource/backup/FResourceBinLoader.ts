@@ -1,4 +1,4 @@
-import {FDataView} from '../../common/io/FDataView';
+import {DataViewer} from '../../common/io/DataViewer';
 import {FResourceLoader} from './FResourceLoader';
 import {RClass} from '../../common/reflect/RClass';
 
@@ -20,7 +20,7 @@ export class FResourceBinLoader extends FResourceLoader {
       var o = this;
       var content = event.content;
       // 创建读取流
-      var view = RClass.create(FDataView);
+      var view = RClass.create(DataViewer);
       view.setEndianCd(true);
       view.link(content);
       // 反序列化数据

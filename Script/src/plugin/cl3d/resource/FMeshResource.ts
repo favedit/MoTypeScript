@@ -1,7 +1,7 @@
 import {Objects} from '../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../runtime/common/reflect/RClass';
-import {FDataStream} from '../../runtime/common/io/FDataStream';
+import {DataStream} from '../../runtime/common/io/DataStream';
 import {FResourceComponent} from './FResourceComponent';
 import {FStreamResource} from './FStreamResource';
 
@@ -37,7 +37,7 @@ export class FMeshResource extends FResourceComponent {
    //
    // @param input 数据流
    //==========================================================
-   public unserialize(input: FDataStream): void {
+   public unserialize(input: DataStream): void {
       super.unserialize(input);
       // 读取属性
       //this._outline.unserialize(input);

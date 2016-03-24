@@ -1,4 +1,4 @@
-import {FDataStream} from '../../runtime/common/io/FDataStream';
+import {DataStream} from '../../runtime/common/io/DataStream';
 import {EAttributeFormat} from '../graphic/EAttributeFormat';
 import {FResourceObject} from './FResourceObject';
 
@@ -25,7 +25,7 @@ export class FStreamResource extends FResourceObject {
    // @param input:FByteStream 数据流
    // @return 处理结果
    //==========================================================
-   public unserialize(input: FDataStream): void {
+   public unserialize(input: DataStream): void {
       super.unserialize(input);
       // 读取属性
       this.code = input.readString();
