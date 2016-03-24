@@ -9,8 +9,8 @@ import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {MemoryUtil} from '../../common/MemoryUtil';
 import {FConsole} from '../FConsole';
-import {FListenerThread} from './FListenerThread';
-import {FThreadConsole} from './FThreadConsole';
+import {ListenerThread} from './ListenerThread';
+import {ThreadService} from './ThreadService';
 
 //==========================================================
 // <T>环境控制台。</T>
@@ -19,12 +19,12 @@ import {FThreadConsole} from './FThreadConsole';
 // @author maocy
 // @version 150606
 //==========================================================
-export class FEventConsole extends FConsole {
+export class EventService extends FConsole {
    // 线程控制台
-   @Linker(FThreadConsole)
-   public _threadConsole: FThreadConsole = null;
+   @Linker(ThreadService)
+   public _threadConsole: ThreadService = null;
    // 线程对象
-   protected _thread: FListenerThread = null;
+   protected _thread: ListenerThread = null;
    // 处理间隔
    protected _interval: number = 50;
    // 处理事件集合(对事件中产生的事件排队)
@@ -64,7 +64,7 @@ export class FEventConsole extends FConsole {
       this._processEvents = new Objects<any>();
       this._events = new Objects<any>();
       // 创建线程
-      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
+      var thread: ListenerThread = this._thread = ClassUtil.create(ListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);

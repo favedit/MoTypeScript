@@ -1,5 +1,5 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
-import {FProcessLoader} from '../../../runtime/core/console/FProcessLoader';
+import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
 import {FPhongMaterial} from '../../material/FPhongMaterial';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {FPhongMaterial} from '../../material/FPhongMaterial';
 // @author maocy
 // @history 160323
 //==========================================================
-export class FTextureLoader extends FProcessLoader {
+export class FTextureLoader extends ProcessLoader {
    // 图形环境
    public graphicContext;
    // 资源

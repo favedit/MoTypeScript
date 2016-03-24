@@ -8,7 +8,7 @@ import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FConsole} from '../../runtime/core/FConsole';
 import {RConsole} from '../../runtime/core/RConsole';
-import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole';
+import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
 import {SLoadArgs} from '../resource/SLoadArgs';
 import {FTemplateResource} from '../resource/FTemplateResource';
 import {FTemplateResourceConsole} from '../resource/FTemplateResourceConsole';
@@ -28,8 +28,8 @@ export class FTemplateConsole extends FConsole {
    @Linker(FTemplateResourceConsole)
    protected _resourceConsole: FTemplateResourceConsole;
    // 加载处理器
-   @Linker(FProcessLoadConsole)
-   protected _processLoadConsole: FProcessLoadConsole;
+   @Linker(ProcessLoadService)
+   protected _processLoadConsole: ProcessLoadService;
 
    //==========================================================
    // <T>构造处理。</T>

@@ -1,4 +1,4 @@
-import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
+import {ProcessLoadable} from '../../../runtime/core/service/ProcessLoadable';
 import {FE3rObject} from './FE3rObject';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {FE3rObject} from './FE3rObject';
 // @author maocy
 // @history 150206
 //==========================================================
-export class FE3rComponent extends FE3rObject implements IProcessLoadable {
+export class FE3rComponent extends FE3rObject implements ProcessLoadable {
    // 加载状态
    public statusLoading: boolean = false;
 

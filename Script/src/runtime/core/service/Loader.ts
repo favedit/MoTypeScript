@@ -8,7 +8,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 // @author maocy
 // @version 160306
 //==========================================================
-export abstract class FLoader extends ObjectBase {
+export abstract class Loader extends ObjectBase {
    // 内容类型
    public contentCd: DataContentEnum = DataContentEnum.Unknown;
    // 内容

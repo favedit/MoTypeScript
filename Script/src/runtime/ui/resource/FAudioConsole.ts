@@ -4,7 +4,7 @@ import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
-import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {FAudio} from './FAudio';
 
 //==========================================================
@@ -37,7 +37,7 @@ export class FAudioConsole extends FConsole {
    // @return 资源对象
    //==========================================================
    public create(uri) {
-      var url = RConsole.find(FEnvironmentConsole).parse(uri);
+      var url = RConsole.find(EnvironmentService).parse(uri);
       var audio: FAudio = ClassUtil.create(FAudio);
       audio.loadUrl(url);
       return audio;

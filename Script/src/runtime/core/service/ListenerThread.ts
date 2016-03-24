@@ -1,7 +1,7 @@
 import {ResultEnum} from '../../common/lang/ResultEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {FThread} from './FThread';
+import {Thread} from './Thread';
 
 //==========================================================
 // <T>监听线程。</T>
@@ -10,7 +10,7 @@ import {FThread} from './FThread';
 // @author maocy
 // @version 160306
 //==========================================================
-export class FListenerThread extends FThread {
+export class ListenerThread extends Thread {
    // 处理监听集合
    public processListeners: Listeners = null;
 

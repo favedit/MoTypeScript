@@ -8,7 +8,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {EnumUtil} from '../../common/lang/EnumUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {FConsole} from '../../core/FConsole';
-import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {EEvent} from '../EEvent';
 //import {SMouseEvent} from '../event/SMouseEvent';
 //import {SKeyboardEvent} from '../event/SKeyboardEvent';
@@ -55,8 +55,8 @@ export class FDeviceConsole extends FConsole {
    protected _localStorage = null;
    protected _sessionStorage = null;
    // 环境控制台
-   @Linker(FEnvironmentConsole)
-   protected _environmentConsole: FEnvironmentConsole = null;
+   @Linker(EnvironmentService)
+   protected _environmentConsole: EnvironmentService;
    // 监听器集合
    public loadListeners = new Listeners();
    public loadedListeners = new Listeners();

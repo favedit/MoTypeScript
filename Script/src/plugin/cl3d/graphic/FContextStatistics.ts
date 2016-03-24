@@ -1,4 +1,4 @@
-import {FStatistics} from '../../../runtime/core/console/FStatistics';
+import {Statistics} from '../../../runtime/core/service/Statistics';
 
 //==========================================================
 // <T>统计基类。</T>
@@ -7,7 +7,7 @@ import {FStatistics} from '../../../runtime/core/console/FStatistics';
 // @author maocy
 // @version 150303
 //==========================================================
-export class FContextStatistics extends FStatistics {
+export class FContextStatistics extends Statistics {
    // @attribute
    public frameClearCount: number = 0;
    public frameFillModeCount: number = 0;

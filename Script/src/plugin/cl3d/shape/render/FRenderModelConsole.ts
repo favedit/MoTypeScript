@@ -8,7 +8,7 @@ import {MemoryUtil} from '../../runtime/common/MemoryUtil'
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {FConsole} from '../../runtime/core/FConsole'
 import {RConsole} from '../../runtime/core/RConsole'
-import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
+import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {SLoadArgs} from '../resource/SLoadArgs'
 import {FModelResourceConsole} from '../resource/FModelResourceConsole'
 import {FRenderModel} from './FRenderModel'
@@ -30,8 +30,8 @@ export class FRenderModelConsole extends FConsole {
    @Linker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole = null;
    // 处理加载控制台
-   @Linker(FProcessLoadConsole)
-   protected _processLoadConsole: FProcessLoadConsole = null;
+   @Linker(ProcessLoadService)
+   protected _processLoadConsole: ProcessLoadService = null;
 
    //==========================================================
    // <T>构造处理。</T>

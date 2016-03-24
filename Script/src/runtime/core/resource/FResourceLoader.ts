@@ -1,6 +1,6 @@
 import {DataStream} from '../../common/io/DataStream';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FLoader} from '../console/FLoader';
+import {Loader} from '../service/Loader';
 
 //==========================================================
 // <T>资源加载器。</T>
@@ -9,7 +9,7 @@ import {FLoader} from '../console/FLoader';
 // @author maocy
 // @version 160122
 //==========================================================
-export class FResourceLoader extends FLoader {
+export class FResourceLoader extends Loader {
    //o._resource = MO.Class.register(o, new MO.AGetSet('_resource'));
    //o._url = MO.Class.register(o, new MO.AGetSet('_url'));
    // @attribute

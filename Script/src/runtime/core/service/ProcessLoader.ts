@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
+import {ProcessLoadable} from './ProcessLoadable';
 
 //==========================================================
 // <T>材质。</T>
@@ -7,7 +7,7 @@ import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
 // @author maocy
 // @history 160323
 //==========================================================
-export class FProcessLoader extends ObjectBase implements IProcessLoadable {
+export class ProcessLoader extends ObjectBase implements ProcessLoadable {
    // 状态
    public statusLoading: boolean;
    // 准备好

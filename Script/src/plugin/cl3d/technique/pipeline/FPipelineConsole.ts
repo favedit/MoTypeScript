@@ -4,8 +4,8 @@ import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {Linker} from '../../../../runtime/common/reflect/Linker';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {FConsole} from '../../../../runtime/core/FConsole';
-import {FListenerThread} from '../../../../runtime/core/console/FListenerThread';
-import {FThreadConsole} from '../../../../runtime/core/console/FThreadConsole';
+import {ListenerThread} from '../../../../runtime/core/service/ListenerThread';
+import {ThreadService} from '../../../../runtime/core/service/ThreadService';
 import {FGraphicContext} from '../../../../runtime/graphic/core/FGraphicContext';
 import {FPipeline} from './FPipeline';
 import {FForwardPipeline} from './FForwardPipeline';
@@ -19,11 +19,11 @@ import {FForwardPipeline} from './FForwardPipeline';
 export class FPipelineConsole extends FConsole {
    protected _pipelines: Objects<FPipeline> = null;
    // 线程
-   protected _thread: FListenerThread = null;
+   protected _thread: ListenerThread = null;
    protected _interval = 150;
    // 线程控制台
-   @Linker(FThreadConsole)
-   protected _threadConsole: FThreadConsole = null;
+   @Linker(ThreadService)
+   protected _threadConsole: ThreadService = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,7 +34,7 @@ export class FPipelineConsole extends FConsole {
       this._scopeCd = ScopeEnum.Global;
       this._pipelines = new Objects<FPipeline>();
       // 创建线程
-      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
+      var thread: ListenerThread = this._thread = ClassUtil.create(ListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);

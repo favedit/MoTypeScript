@@ -1,5 +1,5 @@
 import {Speed} from '../../../runtime/common/lang/Speed';
-import {FStatistics} from '../../../runtime/core/console/FStatistics';
+import {Statistics} from '../../../runtime/core/service/Statistics';
 
 //==========================================================
 // <T>统计基类。</T>
@@ -8,7 +8,7 @@ import {FStatistics} from '../../../runtime/core/console/FStatistics';
 // @author maocy
 // @version 150303
 //==========================================================
-export class FSceneStatistics extends FStatistics {
+export class FSceneStatistics extends Statistics {
    public frame;
    public frameProcess;
    public frameDraw;

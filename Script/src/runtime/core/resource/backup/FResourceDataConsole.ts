@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../FConsole';
-import {FEnvironmentConsole} from '../console/FEnvironmentConsole';
+import {EnvironmentService} from '../service/EnvironmentService';
 import {RConsole} from '../RConsole';
 import {FResourceThreadPipeline} from './FResourceThreadPipeline';
 

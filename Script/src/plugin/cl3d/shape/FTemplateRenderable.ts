@@ -4,7 +4,7 @@ import {RConsole} from '../../../runtime/core/RConsole';
 import {FRenderable} from '../base/FRenderable';
 import {FRenderModelConsole} from '../shape/render/FRenderModelConsole';
 import {FE3rMaterialConsole} from '../shape/render/FE3rMaterialConsole';
-import {FProcessLoadConsole} from '../runtime/core/console/FProcessLoadConsole'
+import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
 
 //==========================================================
 // <T>渲染几何体。</T>

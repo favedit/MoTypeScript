@@ -8,7 +8,7 @@ import {Dictionary} from '../../common/lang/Dictionary';
 // @author maocy
 // @version 150606
 //==========================================================
-export class FEnvironment extends ObjectBase {
+export class Environment extends ObjectBase {
    // 名称
    public name: string = null;
    // 内容

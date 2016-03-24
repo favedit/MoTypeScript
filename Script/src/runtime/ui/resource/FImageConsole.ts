@@ -5,7 +5,7 @@ import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
-import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {FImage} from './FImage';
 
 //==========================================================
@@ -19,8 +19,8 @@ export class FImageConsole extends FConsole {
    // 图像集合
    protected _images: Dictionary<FImage>;
    // 环境控制台
-   @Linker(FEnvironmentConsole)
-   protected _environmentConsole: FEnvironmentConsole;
+   @Linker(EnvironmentService)
+   protected _environmentConsole: EnvironmentService;
 
    //==========================================================
    // <T>构造处理。</T>

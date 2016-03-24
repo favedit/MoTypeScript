@@ -4,7 +4,7 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {Linker} from '../../runtime/common/reflect/Linker'
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil'
 import {FConsole} from '../../runtime/core/FConsole'
-import {FEnvironmentConsole} from '../../runtime/core/console/FEnvironmentConsole'
+import {EnvironmentService} from '../../runtime/core/service/EnvironmentService'
 import {FE3rBitmap} from './FE3rBitmap'
 import {FE3rBitmapFlatPack} from './FE3rBitmapFlatPack'
 import {FE3rBitmapCubePack} from './FE3rBitmapCubePack'
@@ -21,8 +21,8 @@ export class FE3rBitmapConsole extends FConsole {
    protected _bitmaps: Dictionary<FE3rBitmap> = null;
    protected _dataUrl = '/cloud.resource.material.wv'
    // 环境控制台
-   @Linker(FEnvironmentConsole)
-   protected _environmentConsole: FEnvironmentConsole = null;
+   @Linker(EnvironmentService)
+   protected _environmentConsole: EnvironmentService = null;
 
    //==========================================================
    // <T>构造处理。</T>

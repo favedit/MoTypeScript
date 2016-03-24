@@ -1,24 +1,19 @@
-// import {AProperty} from '../../common/reflect/Property';
-// import {ALogger} from '../../common/reflect/ALogger';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ListenerContext} from '../../common/lang/ListenerContext';
 import {Event} from '../../common/lang/Event';
-// import {RLogger} from '../../common/lang/LoggerUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {HttpConnection} from '../../common/net/HttpConnection';
 import {JsonConnection} from '../../common/net/JsonConnection';
-// import {FBufferedSocket} from '../../common/net/FBufferedSocket';
-// import {FEnvironmentConsole} from './FEnvironmentConsole';
-import {FListenerThread} from '../console/FListenerThread';
-import {FThreadConsole} from '../console/FThreadConsole';
-import {FHttpConsole} from '../console/FHttpConsole';
-import {FJsonConsole} from '../console/FJsonConsole';
 import {FConsole} from '../FConsole';
-import {FLoader} from './FLoader';
+import {ListenerThread} from './ListenerThread';
+import {ThreadService} from './ThreadService';
+import {HttpService} from './HttpService';
+import {JsonService} from './JsonService';
+import {Loader} from './Loader';
 
 //==========================================================
 // <T>日志控制台。</T>
@@ -27,27 +22,26 @@ import {FLoader} from './FLoader';
 // @author maocy
 // @version 150729
 //==========================================================
-//@ALinker('ASD')
-export class FLoaderConsole extends FConsole {
+export class LoaderService extends FConsole {
    // 加载集合
-   protected _loaders: Objects<FLoader> = null;
+   protected _loaders: Objects<Loader>;
    // 加载中集合
-   protected _processLoaders: Objects<FLoader> = null;
+   protected _processLoaders: Objects<Loader>;
    // 加载上限
    protected _processLimit = 8;
    // 线程
-   protected _thread: FListenerThread = null;
+   protected _thread: ListenerThread;
    // 间隔
    protected _interval = 150;
    // 线程控制台
-   @Linker(FThreadConsole)
-   protected _threadConsole: FThreadConsole = null;
+   @Linker(ThreadService)
+   protected _threadConsole: ThreadService;
    // 请求控制台
-   @Linker(FHttpConsole)
-   protected _httpConsole: FHttpConsole = null;
+   @Linker(HttpService)
+   protected _httpConsole: HttpService;
    // JSON控制台
-   @Linker(FJsonConsole)
-   protected _jsonConsole: FJsonConsole = null;
+   @Linker(JsonService)
+   protected _jsonConsole: JsonService;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -56,10 +50,10 @@ export class FLoaderConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Global;
-      this._loaders = new Objects<FLoader>();
-      this._processLoaders = new Objects<FLoader>();
+      this._loaders = new Objects<Loader>();
+      this._processLoaders = new Objects<Loader>();
       // 创建线程
-      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
+      var thread: ListenerThread = this._thread = ClassUtil.create(ListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);
@@ -69,16 +63,16 @@ export class FLoaderConsole extends FConsole {
    // <T>逻辑处理。</T>
    //==========================================================
    public onProcess() {
-      var loaders: Objects<FLoader> = this._loaders;
-      var processLoaders: Objects<FLoader> = this._processLoaders;
-      var httpConsole: FHttpConsole = this._httpConsole;
-      var jsonConsole: FJsonConsole = this._jsonConsole;
+      var loaders: Objects<Loader> = this._loaders;
+      var processLoaders: Objects<Loader> = this._processLoaders;
+      var httpConsole: HttpService = this._httpConsole;
+      var jsonConsole: JsonService = this._jsonConsole;
       //..........................................................
       // 获取数据
       var processCount: number = processLoaders.count();
       if (!loaders.isEmpty()) {
          for (var n: number = this._processLimit - processCount; n > 0; n--) {
-            var loader: FLoader = loaders.shift();
+            var loader: Loader = loaders.shift();
             var url: string = loader.url;
             // 加载处理
             var connection: HttpConnection = null;
@@ -106,7 +100,7 @@ export class FLoaderConsole extends FConsole {
    //==========================================================
    public onLoad(sender: ListenerContext, event: any): void {
       // 设置资源
-      var loader: FLoader = sender.attributes[0];
+      var loader: Loader = sender.attributes[0];
       loader.data = event.content;
       loader.process();
       // var resource = event.connection._resource;
@@ -126,7 +120,7 @@ export class FLoaderConsole extends FConsole {
    //
    // @method
    //==========================================================
-   public push(loader: FLoader) {
+   public push(loader: Loader) {
       this._loaders.push(loader);
    }
 

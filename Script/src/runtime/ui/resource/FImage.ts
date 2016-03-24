@@ -4,7 +4,7 @@ import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {Size2} from '../../common/math/Size2';
-import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {RConsole} from '../../core/RConsole';
 import {RHtml} from '../utility/RHtml';
 
@@ -106,7 +106,7 @@ export class FImage extends ObjectBase {
    // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
-      var url = this._url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
+      var url = this._url = RConsole.find(EnvironmentService).parseUrl(uri);
       // 创建图片
       var hImage = this._handle;
       if (!hImage) {

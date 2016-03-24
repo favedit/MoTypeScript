@@ -1,4 +1,4 @@
-import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
+import {ProcessLoadable} from '../../../runtime/core/service/ProcessLoadable';
 import {FDisplay} from './FDisplay';
 
 //==========================================================
@@ -7,7 +7,7 @@ import {FDisplay} from './FDisplay';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FActor extends FDisplay implements IProcessLoadable {
+export class FActor extends FDisplay implements ProcessLoadable {
    // 加载状态
    public statusLoading: boolean = false;
 

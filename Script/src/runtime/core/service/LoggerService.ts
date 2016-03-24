@@ -6,7 +6,7 @@ import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {BufferedSocket} from '../../common/net/BufferedSocket';
-import {FEnvironmentConsole} from './FEnvironmentConsole';
+import {EnvironmentService} from './EnvironmentService';
 import {FConsole} from '../FConsole';
 
 //==========================================================
@@ -17,10 +17,10 @@ import {FConsole} from '../FConsole';
 // @version 150729
 //==========================================================
 //@ALinker('ASD')
-export class FLoggerConsole extends FConsole {
+export class LoggerService extends FConsole {
 
-   @Linker(FEnvironmentConsole)
-   protected _environmentConsole: FEnvironmentConsole;
+   @Linker(EnvironmentService)
+   protected _environmentConsole: EnvironmentService;
 
    //@AProperty(EDataType.String)
    protected _code: string = null;
@@ -35,7 +35,7 @@ export class FLoggerConsole extends FConsole {
    // @method
    //==========================================================
    public static instance() {
-      var loggerConsole = new FLoggerConsole();
+      var loggerConsole = new LoggerService();
       //var loggerConsole:FLoggerConsole = RClass.getInstance(FLoggerConsole);
       LoggerUtil.outputListeners.register(loggerConsole, loggerConsole.onOutput);
       return loggerConsole;

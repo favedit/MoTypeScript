@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150105
 //==========================================================
-export enum EThreadStatus {
+export enum ThreadStatusEnum {
    // @attribute 睡眠
    Sleep,
    // @attribute 激活

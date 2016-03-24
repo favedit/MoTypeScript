@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {RConsole} from '../../core/RConsole';
-import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {FDeviceConsole} from '../console/FDeviceConsole';
 import {RHtml} from '../utility/RHtml';
 
@@ -124,7 +124,7 @@ export class FAudio extends ObjectBase {
    // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
-      var url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
+      var url = RConsole.find(EnvironmentService).parseUrl(uri);
       // 创建图片
       var hAudio = this._hAudio;
       if (!hAudio) {

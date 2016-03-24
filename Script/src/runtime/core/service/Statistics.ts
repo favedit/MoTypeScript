@@ -7,9 +7,9 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 // @author maocy
 // @version 150303
 //==========================================================
-export class FStatistics extends ObjectBase {
+export class Statistics extends ObjectBase {
    // 代码
-   public code: string = null;
+   public code: string;
 
    //==========================================================
    // <T>重置所有数据。</T>

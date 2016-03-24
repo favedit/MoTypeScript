@@ -6,7 +6,7 @@ import {AssertUtil} from '../../runtime/common/AssertUtil'
 import {MemoryUtil} from '../../runtime/common/MemoryUtil'
 import {Linker} from '../../runtime/common/reflect/Linker'
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
-import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
+import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {FConsole} from '../../runtime/core/FConsole'
 import {RConsole} from '../../runtime/core/RConsole'
 import {SLoadArgs} from '../resource/SLoadArgs'
@@ -24,8 +24,8 @@ export class FModelConsole extends FConsole {
    // 缓冲集合
    protected _pools: ObjectPools;
    // 加载管理器
-   @Linker(FProcessLoadConsole)
-   protected _processLoadConsole: FProcessLoadConsole;
+   @Linker(ProcessLoadService)
+   protected _processLoadConsole: ProcessLoadService;
    // 渲染模型管理器
    @Linker(FRenderModelConsole)
    protected _renderModelConsole: FRenderModelConsole;

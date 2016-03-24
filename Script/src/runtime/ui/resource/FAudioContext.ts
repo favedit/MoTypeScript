@@ -3,7 +3,7 @@ import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Dictionary} from '../../common/lang/Dictionary';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {RConsole} from '../../core/RConsole';
 import {FAudio} from './FAudio';
 import {FAudioBuffer} from './FAudioBuffer';
@@ -67,7 +67,7 @@ export class FAudioContext extends ObjectBase {
    //==========================================================
    public createBuffer(uri) {
       var o = this;
-      var url = RConsole.find(FEnvironmentConsole).parse(uri);
+      var url = RConsole.find(EnvironmentService).parse(uri);
       // 创建缓冲
       var buffer = null;
       o._handle = null;

@@ -1,6 +1,6 @@
 import {RuntimeUtil} from '../../runtime/common/RuntimeUtil';
 import {RConsole} from '../../runtime/core/RConsole';
-import {FEnvironmentConsole} from '../../runtime/core/console/FEnvironmentConsole';
+import {EnvironmentService} from '../../runtime/core/service/EnvironmentService';
 import {FDeviceConsole} from '../../runtime/ui/console/FDeviceConsole';
 import {FForwardPipeline} from '../../plugin/cl3d/technique/pipeline/FForwardPipeline';
 import {FSimpleScene} from '../../plugin/cl3d/framework/FSimpleScene';
@@ -14,7 +14,7 @@ RuntimeUtil.namespace(mo, 'mo');
 // 设置环境
 var deviceConsole = RConsole.find(FDeviceConsole);
 deviceConsole.setup(window);
-var environmentConsole = RConsole.find(FEnvironmentConsole);
+var environmentConsole = RConsole.find(EnvironmentService);
 environmentConsole.registerValue('resource', '/sk/res');
 //............................................................
 // 创建画板

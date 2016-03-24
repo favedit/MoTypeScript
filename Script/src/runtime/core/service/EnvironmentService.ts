@@ -5,7 +5,7 @@ import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {AssertUtil} from '../../common/AssertUtil';
 import {RuntimeUtil} from '../../common/RuntimeUtil';
-import {FEnvironment} from './FEnvironment';
+import {Environment} from './Environment';
 import {FConsole} from '../FConsole';
 
 //==========================================================
@@ -15,11 +15,11 @@ import {FConsole} from '../FConsole';
 // @author maocy
 // @version 150606
 //==========================================================
-export class FEnvironmentConsole extends FConsole {
+export class EnvironmentService extends FConsole {
    // 范围类型
    protected _scopeCd = ScopeEnum.Local;
    // 环境变量
-   protected _environments: Dictionary<FEnvironment> = null;
+   protected _environments: Dictionary<Environment> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -28,7 +28,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this._environments = new Dictionary<FEnvironment>();
+      this._environments = new Dictionary<Environment>();
    }
 
    //==========================================================
@@ -53,7 +53,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public registerValue(name, value) {
       AssertUtil.debugNotEmpty(name);
-      var environment = ClassUtil.create(FEnvironment);
+      var environment = ClassUtil.create(Environment);
       environment.set(name, value);
       this._environments.set(name, environment);
       return environment;
@@ -79,7 +79,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public findValue(name) {
       var value = null;
-      var environment:FEnvironment = this._environments.get(name);
+      var environment:Environment = this._environments.get(name);
       if (environment) {
          value = environment.value;
       }

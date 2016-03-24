@@ -1,10 +1,10 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
-import {EThreadStatus} from './EThreadStatus';
+import {ThreadStatusEnum} from './ThreadStatusEnum';
 import {FConsole} from '../FConsole';
 import {RConsole} from '../RConsole';
-import {FThread} from './FThread';
+import {Thread} from './Thread';
 
 //==========================================================
 // <T>线程控制台。</T>
@@ -13,14 +13,14 @@ import {FThread} from './FThread';
 // @author maocy
 // @version 150105
 //==========================================================
-export class FThreadConsole extends FConsole {
+export class ThreadService extends FConsole {
    // @attribute 范围标志
    protected _scopeCd = ScopeEnum.Global;
    // @attribute 激活标志
    protected _active: boolean = true;
    // @attribute 激活标志
    protected _interval: number = 5;
-   protected _threads: Objects<FThread> = null;
+   protected _threads: Objects<Thread> = null;
    //..........................................................
    // @html
    protected _hIntervalId = null;
@@ -32,7 +32,7 @@ export class FThreadConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this._threads = new Objects<FThread>();
+      this._threads = new Objects<Thread>();
       // 设置回调
       //var flag = o._requestFlag = MO.Window.requestAnimationFrame(o.ohInterval);
       //if(!flag){
@@ -47,7 +47,7 @@ export class FThreadConsole extends FConsole {
    // @method
    // @return 线程集合
    //==========================================================
-   public get threads(): Objects<FThread> {
+   public get threads(): Objects<Thread> {
       return this._threads;
    }
 
@@ -58,7 +58,7 @@ export class FThreadConsole extends FConsole {
    //==========================================================
    public ohInterval() {
       // RConsole.find();
-      var threadConsole: FThreadConsole = RConsole.find(FThreadConsole);
+      var threadConsole: ThreadService = RConsole.find(ThreadService);
       // RLogger.debug(threadConsole, 'Frame start ----------------------------');
       threadConsole.processAll();
    }
@@ -90,16 +90,16 @@ export class FThreadConsole extends FConsole {
    // @method
    // @param thread 线程
    //==========================================================
-   public process(thread:FThread) {
+   public process(thread:Thread) {
       if (thread) {
          var statusCd = thread.statusCd;
          switch (statusCd) {
-            case EThreadStatus.Sleep:
+            case ThreadStatusEnum.Sleep:
                break;
-            case EThreadStatus.Active:
+            case ThreadStatusEnum.Active:
                thread.process(this._interval);
                break;
-            case EThreadStatus.Finish:
+            case ThreadStatusEnum.Finish:
                this._threads.remove(thread);
                thread.dispose();
                break;
@@ -115,11 +115,11 @@ export class FThreadConsole extends FConsole {
    public processAll() {
       // 激活处理
       if (this._active) {
-         var threads:Objects<FThread> = this._threads;
+         var threads:Objects<Thread> = this._threads;
          var count:number = threads.count();
          //try{
          for (var n:number = 0; n < count; n++) {
-            var thread:FThread = threads.at(n);
+            var thread:Thread = threads.at(n);
             this.process(thread);
          }
          //}catch(error){

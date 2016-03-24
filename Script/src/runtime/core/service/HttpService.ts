@@ -5,7 +5,7 @@ import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {HttpContentEnum} from '../../common/net/HttpContentEnum';
 import {HttpConnection} from '../../common/net/HttpConnection';
 import {FConsole} from '../FConsole';
-import {FEnvironmentConsole} from './FEnvironmentConsole';
+import {EnvironmentService} from './EnvironmentService';
 
 //==========================================================
 // <T>页面数据通讯的控制台。</T>
@@ -14,12 +14,12 @@ import {FEnvironmentConsole} from './FEnvironmentConsole';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FHttpConsole extends FConsole {
+export class HttpService extends FConsole {
    // 缓冲池
    public _pool: ObjectPool = null;
    // 环境控制台
-   @Linker(FEnvironmentConsole)
-   protected _environmentConsole: FEnvironmentConsole = null;
+   @Linker(EnvironmentService)
+   protected _environmentService: EnvironmentService = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -93,7 +93,7 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public sendSync(url: string, data?: any) {
-      var sendUrl: string = this._environmentConsole.parse(url);
+      var sendUrl: string = this._environmentService.parse(url);
       var connection = this.alloc();
       connection._asynchronous = false;
       connection.send(sendUrl, data);
@@ -109,7 +109,7 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public sendAsync(url: string, data?: any) {
-      var sendUrl: string = this._environmentConsole.parse(url);
+      var sendUrl: string = this._environmentService.parse(url);
       var connection = this.alloc();
       connection._asynchronous = true;
       connection.send(sendUrl, data);
@@ -125,7 +125,7 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public fetchSync(url, data) {
-      var sendUrl: string = this._environmentConsole.parse(url);
+      var sendUrl: string = this._environmentService.parse(url);
       var connection = this.alloc();
       connection._asynchronous = false;
       connection._contentCd = HttpContentEnum.Text;
@@ -142,7 +142,7 @@ export class FHttpConsole extends FConsole {
    // @return FHttpConnection 链接对象
    //==========================================================
    public fetchAsync(url, data) {
-      var sendUrl: string = this._environmentConsole.parse(url);
+      var sendUrl: string = this._environmentService.parse(url);
       var connection = this.alloc();
       connection._asynchronous = true;
       connection._contentCd = HttpContentEnum.Text;

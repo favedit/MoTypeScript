@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Dictionary} from '../../common/lang/Dictionary';
 import {FConsole} from '../FConsole';
-import {FStatistics} from './FStatistics';
+import {Statistics} from './Statistics';
 
 //==========================================================
 // <T>统计控制台。</T>
@@ -10,11 +10,11 @@ import {FStatistics} from './FStatistics';
 // @author maocy
 // @version 150303
 //==========================================================
-export class FStatisticsConsole extends FConsole {
+export class StatisticsService extends FConsole {
    // 范围 
    protected _scopeCd = ScopeEnum.Local;
    // 统计集合
-   protected _statisticses = new Dictionary<FStatistics>();
+   protected _statisticses = new Dictionary<Statistics>();
 
    //==========================================================
    // <T>注册一个统计器。</T>

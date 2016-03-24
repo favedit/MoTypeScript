@@ -5,7 +5,7 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {Fatal} from '../../runtime/common/lang/Fatal'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {FConsole} from '../../runtime/core/FConsole'
-import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
+import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole'
 import {FE3rMaterial} from './FE3rMaterial'
 import {FMaterialLoader} from './loader/FMaterialLoader';
@@ -23,8 +23,8 @@ export class FE3rMaterialConsole extends FConsole {
    @Linker(FMaterialResourceConsole)
    protected _materialResourceConsole: FMaterialResourceConsole;
    // 处理加载控制台
-   @Linker(FProcessLoadConsole)
-   protected _processLoadConsole: FProcessLoadConsole = null;
+   @Linker(ProcessLoadService)
+   protected _processLoadConsole: ProcessLoadService = null;
 
    //==========================================================
    // <T>构造处理。</T>

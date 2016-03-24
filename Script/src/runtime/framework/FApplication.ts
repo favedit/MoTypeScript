@@ -3,8 +3,8 @@ import {Objects} from '../common/lang/Objects';
 import {ObjectUtil} from '../common/lang/ObjectUtil';
 import {Linker} from '../common/reflect/Linker';
 import {ClassUtil} from '../common/reflect/ClassUtil';
-import {FListenerThread} from '../core/console/FListenerThread';
-import {FThreadConsole} from '../core/console/FThreadConsole';
+import {ListenerThread} from '../core/service/ListenerThread';
+import {ThreadService} from '../core/service/ThreadService';
 import {FView} from './view/FView';
 import {SSettings} from './SSettings';
 
@@ -15,7 +15,7 @@ export class FApplication extends ObjectBase {
    // 配置标志
    protected _setuped: boolean = false;
    // 线程
-   protected _thread: FListenerThread = null;
+   protected _thread: ListenerThread = null;
    // 间隔
    protected _interval = 150;
    // 配置信息
@@ -25,8 +25,8 @@ export class FApplication extends ObjectBase {
    // 视图集合
    protected _views: Objects<FView> = null;
    // 线程控制台
-   @Linker(FThreadConsole)
-   protected _threadConsole: FThreadConsole = null;
+   @Linker(ThreadService)
+   protected _threadConsole: ThreadService = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -60,7 +60,7 @@ export class FApplication extends ObjectBase {
       // 设置属性
       this._settings = settings;
       // 创建线程
-      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
+      var thread: ListenerThread = this._thread = ClassUtil.create(ListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.process);
    }

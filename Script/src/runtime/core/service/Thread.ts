@@ -1,6 +1,6 @@
 import {ResultEnum} from '../../common/lang/ResultEnum';
 import {ObjectBase} from '../../common/lang/ObjectBase';
-import {EThreadStatus} from './EThreadStatus';
+import {ThreadStatusEnum} from './ThreadStatusEnum';
 
 //==========================================================
 // <T>线程。</T>
@@ -9,7 +9,7 @@ import {EThreadStatus} from './EThreadStatus';
 // @author maocy
 // @version 150105
 //==========================================================
-export abstract class FThread extends ObjectBase {
+export abstract class Thread extends ObjectBase {
    // 名称
    public name: string = null;
    // 延时
@@ -17,7 +17,7 @@ export abstract class FThread extends ObjectBase {
    // 间隔
    public interval: number = 100;
    // 状态
-   public statusCd: EThreadStatus = EThreadStatus.Sleep;
+   public statusCd: ThreadStatusEnum = ThreadStatusEnum.Sleep;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,7 +34,7 @@ export abstract class FThread extends ObjectBase {
    // @method
    //==========================================================
    public start() {
-      this.statusCd = EThreadStatus.Active;
+      this.statusCd = ThreadStatusEnum.Active;
    }
 
    //==========================================================
@@ -43,7 +43,7 @@ export abstract class FThread extends ObjectBase {
    // @method
    //==========================================================
    public stop() {
-      this.statusCd = EThreadStatus.Finish;
+      this.statusCd = ThreadStatusEnum.Finish;
    }
 
    //==========================================================

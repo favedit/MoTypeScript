@@ -4,7 +4,7 @@
 // @author maocy
 // @history 151226
 //==========================================================
-export interface IProcessLoadable {
+export interface ProcessLoadable {
    // 状态
    statusLoading: boolean;
 

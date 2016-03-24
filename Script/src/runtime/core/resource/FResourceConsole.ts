@@ -6,13 +6,13 @@ import {ObjectUtil} from '../../common/lang/ObjectUtil';
 // import {RString} from '../../common/lang/StringUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {Linker} from '../../common/reflect/Linker';
-import {FListenerThread} from '../console/FListenerThread';
-import {FThreadConsole} from '../console/FThreadConsole';
-import {FEnvironmentConsole} from '../console/FEnvironmentConsole';
-import {FLoaderConsole} from '../console/FLoaderConsole';
+import {ListenerThread} from '../service/ListenerThread';
+import {ThreadService} from '../service/ThreadService';
+import {EnvironmentService} from '../service/EnvironmentService';
+import {LoaderService} from '../service/LoaderService';
 import {FConsole} from '../FConsole';
 // import {RConsole} from '../RConsole';
-// import {FEnvironmentConsole} from '../console/FEnvironmentConsole';
+// import {FEnvironmentConsole} from '../service/EnvironmentService';
 // import {FResourceSingleStorage} from './FResourceSingleStorage';
 // import {FResourceBlockStorage} from './FResourceBlockStorage';
 // import {FResourcePackage} from './FResourcePackage';
@@ -40,18 +40,18 @@ export class FResourceConsole extends FConsole {
    // protected _loadingResources = null;
    // protected _processStorages = null;
    // 线程
-   protected _thread: FListenerThread = null;
+   protected _thread: ListenerThread = null;
    protected _interval: number = 150;
    // protected _loadLimit = 8;
    // 线程控制台
-   @Linker(FThreadConsole)
-   protected _threadConsole: FThreadConsole = null;
+   @Linker(ThreadService)
+   protected _threadConsole: ThreadService;
    // 环境控制台
-   @Linker(FEnvironmentConsole)
-   protected _environmentConsole: FEnvironmentConsole = null;
+   @Linker(EnvironmentService)
+   protected _environmentConsole: EnvironmentService;
    // 加载控制台
-   @Linker(FLoaderConsole)
-   protected _loaderConsole: FLoaderConsole = null;
+   @Linker(LoaderService)
+   protected _loaderConsole: LoaderService;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -70,7 +70,7 @@ export class FResourceConsole extends FConsole {
       //_loadingResources = new common.lang.FObjects();
       //_processStorages = new common.lang.FLooper();
       // 创建线程
-      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
+      var thread: ListenerThread = this._thread = ClassUtil.create(ListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);

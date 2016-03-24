@@ -1,22 +1,23 @@
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {JsonConnection} from '../../common/net/JsonConnection';
-import {FHttpConsole} from './FHttpConsole';
+import {XmlConnection} from '../../common/net/XmlConnection';
+import {HttpService} from './HttpService';
 
 //==========================================================
-// <T>JSON数据通讯的控制台。</T>
+// <T>XML数据通讯的控制台。</T>
 //
 // @console
 // @author maocy
 // @version 150104
 //==========================================================
-export class FJsonConsole extends FHttpConsole {
+export class XmlService extends HttpService{
+
    //==========================================================
    // <T>创建一个网络链接。</T>
    //
    // @method
    // @return 网络链接
    //==========================================================
-   public create() {
-      return ClassUtil.create(JsonConnection);
+   public create(){
+      return ClassUtil.create(XmlConnection);
    }
 }
