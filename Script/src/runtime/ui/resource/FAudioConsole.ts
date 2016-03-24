@@ -1,7 +1,7 @@
 import {Dictionary} from '../../common/lang/Dictionary';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
@@ -38,7 +38,7 @@ export class FAudioConsole extends FConsole {
    //==========================================================
    public create(uri) {
       var url = RConsole.find(FEnvironmentConsole).parse(uri);
-      var audio: FAudio = RClass.create(FAudio);
+      var audio: FAudio = ClassUtil.create(FAudio);
       audio.loadUrl(url);
       return audio;
    }

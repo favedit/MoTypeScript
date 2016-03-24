@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../lang/ScopeEnum';
-import {RClass} from './RClass';
+import {ClassUtil} from './ClassUtil';
 
 //==========================================================
 // <T>实例关联描述类。</T>
@@ -8,17 +8,17 @@ import {RClass} from './RClass';
 // @author maocy
 // @version 160227
 //==========================================================
-export function ALinker(clazz: Function, scopeCd: ScopeEnum = ScopeEnum.Global, factory: any = null) {
+export function Linker(clazz: Function, scopeCd: ScopeEnum = ScopeEnum.Global, factory: any = null) {
    return function(target, name): any {
       // 设置描述器
       var descriptor: any = new Object();
       descriptor.get = function() {
          // 获得实例对象
-         return RClass.getInstance(clazz);
+         return ClassUtil.getInstance(clazz);
       };
       descriptor.set = function(value) {
          // 设置实例内容
-         RClass.setInstance(clazz, value);
+         ClassUtil.setInstance(clazz, value);
       };
       return descriptor;
    }

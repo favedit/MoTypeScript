@@ -1,5 +1,5 @@
-import {EAnnotation} from './EAnnotation'
-import {FClass} from './FClass'
+import {AnnotationEnum} from './AnnotationEnum'
+import {Class} from './Class'
 
 //============================================================
 // <T>描述类。</T>
@@ -9,18 +9,18 @@ import {FClass} from './FClass'
 // @author maocy
 // @version 150104
 //============================================================
-export class FAnnotation {
+export class Annotation {
    // 类对象
-   protected _clazz: FClass = null;
+   protected _clazz: Class;
 
    // 描述器类型
-   protected _annotationCd: EAnnotation = null;
+   protected _annotationCd: AnnotationEnum;
 
    // 名称
-   protected _name: string = null;
+   protected _name: string;
 
    // 内容
-   protected _value: any = null;
+   protected _value: any;
 
    // 可继承
    protected _inherit = false;
@@ -45,7 +45,7 @@ export class FAnnotation {
    //
    // @return 类对象
    //============================================================
-   public get clazz(): FClass {
+   public get clazz(): Class {
       return this._clazz;
    }
    
@@ -54,7 +54,7 @@ export class FAnnotation {
    //
    // @param clazz 类对象
    //============================================================
-   public set clazz(clazz: FClass) {
+   public set clazz(clazz: Class) {
       this._clazz = clazz;
    }
 
@@ -63,7 +63,7 @@ export class FAnnotation {
    //
    // @return 描述类型
    //============================================================
-   public get annotationCd():EAnnotation {
+   public get annotationCd():AnnotationEnum {
       return this._annotationCd;
    }
 

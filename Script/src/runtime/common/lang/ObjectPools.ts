@@ -1,7 +1,7 @@
 ﻿import {ObjectBase} from './ObjectBase'
 import {Dictionary} from './Dictionary'
 import {ObjectPool} from './ObjectPool'
-import {RClass} from '../reflect/RClass'
+import {ClassUtil} from '../reflect/ClassUtil'
 
 //==========================================================
 // <T>对象池集合。</T>
@@ -34,7 +34,7 @@ export class ObjectPools extends ObjectBase {
    public pool(code) {
       var pool = this._pools.get(code);
       if (!pool) {
-         pool = RClass.create(ObjectPool);
+         pool = ClassUtil.create(ObjectPool);
          this._pools.set(code, pool);
       }
       return pool;

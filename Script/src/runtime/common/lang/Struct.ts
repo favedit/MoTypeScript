@@ -1,4 +1,4 @@
-import {RMethod} from '../reflect/RMethod'
+import {MethodUtil} from '../reflect/MethodUtil'
 
 //==========================================================
 // <T>资源加载参数。</T>
@@ -10,10 +10,10 @@ export class Struct {
    //==========================================================
    // <T>回收处理。</T>
    //==========================================================
-   public free: Function = RMethod.structFree;
+   public free: Function = MethodUtil.structFree;
 
    //==========================================================
    // <T>释放处理。</T>
    //==========================================================
-   public dispose: Function = RMethod.structDispose;
+   public dispose: Function = MethodUtil.structDispose;
 }

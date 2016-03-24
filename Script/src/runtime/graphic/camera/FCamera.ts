@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SFrustum} from '../../../runtime/graphic/math/SFrustum';
@@ -58,7 +58,7 @@ export class FCamera extends ObjectBase {
       // 初始化变量
       this.frustum = new SFrustum();
       this.planes = new SFrustumPlanes();
-      this.viewport = RClass.create(FViewport);
+      this.viewport = ClassUtil.create(FViewport);
       // 初始化变量
       this._axisUp = new SVector3(0, 1, 0);
       this._axisX = new SVector3();

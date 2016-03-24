@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {ObjectPools} from '../../../runtime/common/lang/ObjectPools';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCanvas} from './FCanvas';
 
@@ -22,7 +22,7 @@ export class FCanvasConsole extends FConsole {
       super();
       // 设置属性
       this.scopeCd = ScopeEnum.Local;
-      this._pools = RClass.create(ObjectPools);
+      this._pools = ClassUtil.create(ObjectPools);
    }
 
    //==========================================================
@@ -41,7 +41,7 @@ export class FCanvasConsole extends FConsole {
       var canvas = pools.alloc(code);
       if (!canvas) {
           // 创建画板
-          canvas = RClass.create(clazz);
+          canvas = ClassUtil.create(clazz);
           canvas.size().set(width, height);
           // canvas.build(RWindow._hDocument);
       }

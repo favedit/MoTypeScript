@@ -1,6 +1,6 @@
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {ALinker} from '../../../runtime/common/reflect/ALinker';
+import {Linker} from '../../../runtime/common/reflect/Linker';
 import {FActor} from '../base/FActor';
 import {FTemplateResource} from '../resource/FTemplateResource';
 import {FModelResource} from '../resource/FModelResource';
@@ -27,10 +27,10 @@ export class FTemplate extends FActor {
    //    o._skeletons       = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations      = MO.Class.register(o, new MO.AGetter('_animations'));
    // 材质管理器
-   @ALinker(FMaterialResourceConsole)
+   @Linker(FMaterialResourceConsole)
    protected _materialResourceConsole: FMaterialResourceConsole = null;
    // 模型管理器
-   @ALinker(FModelResourceConsole)
+   @Linker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole = null;
 
    //==========================================================

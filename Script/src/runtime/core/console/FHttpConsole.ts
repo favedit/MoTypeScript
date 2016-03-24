@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {ObjectPool} from '../../common/lang/ObjectPool';
-import {ALinker} from '../../common/reflect/ALinker';
-import {RClass} from '../../common/reflect/RClass';
+import {Linker} from '../../common/reflect/Linker';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {EHttpContent} from '../../common/net/EHttpContent';
 import {FHttpConnection} from '../../common/net/FHttpConnection';
 import {FConsole} from '../FConsole';
@@ -18,7 +18,7 @@ export class FHttpConsole extends FConsole {
    // 缓冲池
    public _pool: ObjectPool = null;
    // 环境控制台
-   @ALinker(FEnvironmentConsole)
+   @Linker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole = null;
 
    //==========================================================
@@ -30,7 +30,7 @@ export class FHttpConsole extends FConsole {
       super();
       // 设置变量
       this._scopeCd = ScopeEnum.Local;
-      this._pool = RClass.create(ObjectPool);
+      this._pool = ClassUtil.create(ObjectPool);
    }
 
    //==========================================================
@@ -51,7 +51,7 @@ export class FHttpConsole extends FConsole {
    // @return 网络链接
    //==========================================================
    public create() {
-      return RClass.create(FHttpConnection);
+      return ClassUtil.create(FHttpConnection);
    }
 
    //==========================================================

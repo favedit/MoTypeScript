@@ -1,4 +1,4 @@
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {IntegerUtil} from '../lang/IntegerUtil';
 import {StringUtil} from '../lang/StringUtil';
 
@@ -177,7 +177,7 @@ export class SSquare {
    //============================================================
    public dump(d) {
       d = StringUtil.nvlString(d);
-      d.append(RClass.shortName(this));
+      d.append(ClassUtil.shortName(this));
       d.append(' [', this.left, ',', this.top, '-', this.right, ',', this.bottom, '] ');
       d.append('(', this.width(), '-', this.height(), ')');
       return d;

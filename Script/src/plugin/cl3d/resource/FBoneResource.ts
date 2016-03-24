@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../runtime/common/lang/Objects';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
 
 //==========================================================
@@ -31,7 +31,7 @@ export class FBoneResource extends ObjectBase {
       if (count > 0) {
          var bones = this.bones = new Objects<FBoneResource>();
          for (var n: number = 0; n < count; n++) {
-            var bone = RClass.create(FBoneResource);
+            var bone = ClassUtil.create(FBoneResource);
             bone.unserialize(input);
             bones.push(bone);
          }

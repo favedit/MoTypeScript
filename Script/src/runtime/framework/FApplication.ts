@@ -1,8 +1,8 @@
 import {ObjectBase} from '../common/lang/ObjectBase';
 import {Objects} from '../common/lang/Objects';
 import {ObjectUtil} from '../common/lang/ObjectUtil';
-import {ALinker} from '../common/reflect/ALinker';
-import {RClass} from '../common/reflect/RClass';
+import {Linker} from '../common/reflect/Linker';
+import {ClassUtil} from '../common/reflect/ClassUtil';
 import {FListenerThread} from '../core/console/FListenerThread';
 import {FThreadConsole} from '../core/console/FThreadConsole';
 import {FView} from './view/FView';
@@ -25,7 +25,7 @@ export class FApplication extends ObjectBase {
    // 视图集合
    protected _views: Objects<FView> = null;
    // 线程控制台
-   @ALinker(FThreadConsole)
+   @Linker(FThreadConsole)
    protected _threadConsole: FThreadConsole = null;
 
    //==========================================================
@@ -60,7 +60,7 @@ export class FApplication extends ObjectBase {
       // 设置属性
       this._settings = settings;
       // 创建线程
-      var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
+      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.process);
    }

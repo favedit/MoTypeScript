@@ -1,5 +1,5 @@
-import {RMethod} from '../reflect/RMethod';
-import {RClass} from '../reflect/RClass';
+import {MethodUtil} from '../reflect/MethodUtil';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {RuntimeUtil} from '../RuntimeUtil';
 import {LoggerInfo} from './LoggerInfo';
 import {StringBuffer} from './StringBuffer';
@@ -51,7 +51,7 @@ export class LoggerUtil {
          var value = '';
          if (parameter != null) {
             if (typeof (parameter) == 'function') {
-               value = RMethod.shortName(parameter);
+               value = MethodUtil.shortName(parameter);
             } else {
                value = parameter.toString();
             }
@@ -81,7 +81,7 @@ export class LoggerUtil {
       // 获得函数名称
       var name = null;
       if (owner) {
-         name = RMethod.shortName(owner.constructor);
+         name = MethodUtil.shortName(owner.constructor);
       }
       //var caller = RLogger.debug.caller;
       //if (caller) {
@@ -114,7 +114,7 @@ export class LoggerUtil {
       // 获得函数名称
       var name = null;
       if (owner) {
-         name = RMethod.shortName(owner.constructor);
+         name = MethodUtil.shortName(owner.constructor);
       }
       //var caller = RLogger.info.caller;
       //if (caller) {
@@ -148,7 +148,7 @@ export class LoggerUtil {
       // 获得函数名称
       var name = null;
       if (owner) {
-         name = RMethod.shortName(owner.constructor);
+         name = MethodUtil.shortName(owner.constructor);
       }
       //var caller = RLogger.warn.caller;
       //if (caller) {
@@ -182,7 +182,7 @@ export class LoggerUtil {
       // 获得函数名称
       var name = null;
       if (owner) {
-         name = RMethod.shortName(owner.constructor);
+         name = MethodUtil.shortName(owner.constructor);
       }
       //var caller = RLogger.error.caller;
       //if (caller) {
@@ -237,13 +237,13 @@ export class LoggerUtil {
       var result = new StringBuffer();
       //result.appendLine(RContext.get('RMessage:fatal'));
       result.appendLine(StringUtil.repeat('-', 60));
-      result.append(RClass.dump(owner), ': ');
+      result.append(ClassUtil.dump(owner), ': ');
       if (message) {
          var count = arguments.length;
          for (var i = 3; i < count; i++) {
             var parameter = arguments[i];
             if ('function' == typeof (parameter)) {
-               parameter = RMethod.shortName(parameter);
+               parameter = MethodUtil.shortName(parameter);
             }
             message = message.replace('{' + (i - 2) + '}', parameter);
          }

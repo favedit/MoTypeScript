@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FModelResource} from '../../resource/FModelResource';
 import {FE3rComponent} from './FE3rComponent';
 import {FRenderModelMesh} from './FRenderModelMesh';
@@ -91,7 +91,7 @@ export class FRenderModel extends FE3rComponent {
          for (var i = 0; i < meshCount; i++) {
             var meshResource = meshResources.at(i);
             // 创建渲染网格
-            var mesh = RClass.create(FRenderModelMesh);
+            var mesh = ClassUtil.create(FRenderModelMesh);
             mesh.linkGraphicContext(this.graphicContext);
             mesh.loadResource(meshResource);
             meshes.push(mesh);

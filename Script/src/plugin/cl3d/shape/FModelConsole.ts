@@ -4,8 +4,8 @@ import {StringUtil} from '../../runtime/common/lang/StringUtil'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {AssertUtil} from '../../runtime/common/AssertUtil'
 import {MemoryUtil} from '../../runtime/common/MemoryUtil'
-import {ALinker} from '../../runtime/common/reflect/ALinker'
-import {RClass} from '../../runtime/common/reflect/RClass'
+import {Linker} from '../../runtime/common/reflect/Linker'
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
 import {FConsole} from '../../runtime/core/FConsole'
 import {RConsole} from '../../runtime/core/RConsole'
@@ -24,10 +24,10 @@ export class FModelConsole extends FConsole {
    // 缓冲集合
    protected _pools: ObjectPools;
    // 加载管理器
-   @ALinker(FProcessLoadConsole)
+   @Linker(FProcessLoadConsole)
    protected _processLoadConsole: FProcessLoadConsole;
    // 渲染模型管理器
-   @ALinker(FRenderModelConsole)
+   @Linker(FRenderModelConsole)
    protected _renderModelConsole: FRenderModelConsole;
 
    //==========================================================
@@ -39,7 +39,7 @@ export class FModelConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._pools = RClass.create(ObjectPools);
+      this._pools = ClassUtil.create(ObjectPools);
    }
 
    //==========================================================
@@ -75,7 +75,7 @@ export class FModelConsole extends FConsole {
          var renderable = this._renderModelConsole.load(args);
          AssertUtil.debugNotNull(renderable);
          // 加载模型
-         model = RClass.create(FModel);
+         model = ClassUtil.create(FModel);
          model.linkGraphicContext(context);
          //model.setPoolCode(identity);
          model.renderable = renderable;

@@ -1,7 +1,7 @@
 import {ObjectBase} from '../lang/ObjectBase';
 import {StringBuffer} from '../lang/StringBuffer';
 import {Fatal} from '../lang/Fatal';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {FXmlNode} from '../xml/FXmlNode';
 
 //==========================================================
@@ -86,7 +86,7 @@ export class FXmlDocument extends ObjectBase {
    public dump() {
       var o = this;
       var r = new StringBuffer();
-      r.appendLine(RClass.shortName(o));
+      r.appendLine(ClassUtil.shortName(o));
       o.root().dump(r);
       return r.flush();
    }

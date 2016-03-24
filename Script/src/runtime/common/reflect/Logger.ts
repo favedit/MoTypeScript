@@ -1,5 +1,5 @@
-import {FLoggerAnnotation} from './FLoggerAnnotation';
-import {RClass} from './RClass';
+import {LoggerAnnotation} from './LoggerAnnotation';
+import {ClassUtil} from './ClassUtil';
 
 //==========================================================
 // <T>日志描述类。</T>
@@ -8,11 +8,11 @@ import {RClass} from './RClass';
 // @author maocy
 // @version 160227
 //==========================================================
-export function ALogger() {
+export function Logger() {
    return function(target, name, descriptor) {
       // 注册描述器
-      var annotation: FLoggerAnnotation = new FLoggerAnnotation(name, descriptor.value);
-      RClass.registerAnnotation(target, annotation);
+      var annotation: LoggerAnnotation = new LoggerAnnotation(name, descriptor.value);
+      ClassUtil.registerAnnotation(target, annotation);
       // 函数跟踪
       var callback = descriptor.value;
       //descriptor.value = function(...parameters: Array<any>) {

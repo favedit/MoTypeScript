@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../../core/FConsole';
 import {FAudioContext} from './FAudioContext';
 
@@ -37,7 +37,7 @@ export class FAudioContextConsole extends FConsole {
    //==========================================================
    public create(uri) {
       var o = this;
-      var context = RClass.create(FAudioContext);
+      var context = ClassUtil.create(FAudioContext);
       context.setup();
       o._contexts.push(context);
       return context;

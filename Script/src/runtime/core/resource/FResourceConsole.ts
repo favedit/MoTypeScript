@@ -4,8 +4,8 @@ import {Dictionary} from '../../common/lang/Dictionary';
 // import {FError} from '../../common/lang/Fatal';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 // import {RString} from '../../common/lang/StringUtil';
-import {RClass} from '../../common/reflect/RClass';
-import {ALinker} from '../../common/reflect/ALinker';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
+import {Linker} from '../../common/reflect/Linker';
 import {FListenerThread} from '../console/FListenerThread';
 import {FThreadConsole} from '../console/FThreadConsole';
 import {FEnvironmentConsole} from '../console/FEnvironmentConsole';
@@ -44,13 +44,13 @@ export class FResourceConsole extends FConsole {
    protected _interval: number = 150;
    // protected _loadLimit = 8;
    // 线程控制台
-   @ALinker(FThreadConsole)
+   @Linker(FThreadConsole)
    protected _threadConsole: FThreadConsole = null;
    // 环境控制台
-   @ALinker(FEnvironmentConsole)
+   @Linker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole = null;
    // 加载控制台
-   @ALinker(FLoaderConsole)
+   @Linker(FLoaderConsole)
    protected _loaderConsole: FLoaderConsole = null;
 
    //==========================================================
@@ -70,7 +70,7 @@ export class FResourceConsole extends FConsole {
       //_loadingResources = new common.lang.FObjects();
       //_processStorages = new common.lang.FLooper();
       // 创建线程
-      var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
+      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);
@@ -262,7 +262,7 @@ export class FResourceConsole extends FConsole {
    //==========================================================
    public loadContent(contentCd: DataContentEnum, content: FResource, url: string): void {
       // 创建加载器
-      var loader: FResourceLoader = RClass.create(FResourceLoader);
+      var loader: FResourceLoader = ClassUtil.create(FResourceLoader);
       loader.contentCd = contentCd;
       loader.url = url;
       loader.content = content;
@@ -283,10 +283,10 @@ export class FResourceConsole extends FConsole {
          // 解析地址
          var url: string = this._environmentConsole.parse(uri);
          // 创建资源包
-         resourcePackage = RClass.create(FResourcePackage);
+         resourcePackage = ClassUtil.create(FResourcePackage);
          resourcePackages.set(uri, resourcePackage);
          // 创建加载器
-         var loader: FResourceLoader = RClass.create(FResourceLoader);
+         var loader: FResourceLoader = ClassUtil.create(FResourceLoader);
          loader.url = url;
          loader.content = resourcePackage;
          this._loaderConsole.push(loader);

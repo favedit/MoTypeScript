@@ -1,4 +1,4 @@
-// import {AProperty} from '../../common/reflect/AProperty';
+// import {AProperty} from '../../common/reflect/Property';
 // import {ALogger} from '../../common/reflect/ALogger';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
@@ -7,8 +7,8 @@ import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ListenerContext} from '../../common/lang/ListenerContext';
 import {SEvent} from '../../common/lang/SEvent';
 // import {RLogger} from '../../common/lang/LoggerUtil';
-import {ALinker} from '../../common/reflect/ALinker';
-import {RClass} from '../../common/reflect/RClass';
+import {Linker} from '../../common/reflect/Linker';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FHttpConnection} from '../../common/net/FHttpConnection';
 import {FJsonConnection} from '../../common/net/FJsonConnection';
 // import {FBufferedSocket} from '../../common/net/FBufferedSocket';
@@ -40,13 +40,13 @@ export class FLoaderConsole extends FConsole {
    // 间隔
    protected _interval = 150;
    // 线程控制台
-   @ALinker(FThreadConsole)
+   @Linker(FThreadConsole)
    protected _threadConsole: FThreadConsole = null;
    // 请求控制台
-   @ALinker(FHttpConsole)
+   @Linker(FHttpConsole)
    protected _httpConsole: FHttpConsole = null;
    // JSON控制台
-   @ALinker(FJsonConsole)
+   @Linker(FJsonConsole)
    protected _jsonConsole: FJsonConsole = null;
 
    //==========================================================
@@ -59,7 +59,7 @@ export class FLoaderConsole extends FConsole {
       this._loaders = new Objects<FLoader>();
       this._processLoaders = new Objects<FLoader>();
       // 创建线程
-      var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
+      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);

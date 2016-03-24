@@ -1,12 +1,11 @@
-import {ALinker} from '../common/reflect/ALinker';
-import {ALogger} from '../common/reflect/ALogger';
+import {Linker} from '../common/reflect/Linker';
 import {ScopeEnum} from '../common/lang/ScopeEnum';
 import {Objects} from '../common/lang/Objects';
 import {StringUtil} from '../common/lang/StringUtil';
 import {LoggerUtil} from '../common/lang/LoggerUtil';
 import {AssertUtil} from '../common/AssertUtil';
 import {Dictionary} from '../common/lang/Dictionary';
-import {RClass} from '../common/reflect/RClass';
+import {ClassUtil} from '../common/reflect/ClassUtil';
 import {FConsole} from './FConsole';
 
 //==========================================================
@@ -61,7 +60,7 @@ export class RConsole {
       var r = null;
       if (n) {
          // 创建对象实例
-         r = RClass.create(n);
+         r = ClassUtil.create(n);
          // 关联对象属性
          var o = this;
          for (var rn in r) {
@@ -120,7 +119,7 @@ export class RConsole {
    public static get(v) {
       var o = this;
       // 获得名称
-      var n = RClass.shortName(v);
+      var n = ClassUtil.shortName(v);
       // 查找本地控制台
       var r = o._consoles.get(n);
       return r;
@@ -140,7 +139,7 @@ export class RConsole {
       if (value.constructor == String) {
          name = value;
       } else if (value.constructor == Function) {
-         name = RClass.shortName(value);
+         name = ClassUtil.shortName(value);
       } else {
          return LoggerUtil.fatal(this, null, 'Parameter type is invalid. (console={1})', value);
       }
@@ -156,7 +155,7 @@ export class RConsole {
          return console;
       }
       //console = new value();
-      console = RClass.getInstance(value);
+      console = ClassUtil.getInstance(value);
       consoles.set(name, console);
       // 创建控制台实例
       //var template = RClass.forName(name);

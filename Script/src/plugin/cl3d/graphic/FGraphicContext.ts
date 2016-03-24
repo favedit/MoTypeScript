@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FGraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
 import {EFillMode} from './EFillMode';
 import {SContextCapability} from './SContextCapability';
@@ -56,7 +56,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
       //this._viewportRectangle = new MO.SRectangle();
       //this._logicSize = new MO.SSize2(1280, 720);
       //this._sizeRatio = new MO.SSize2(1, 1);
-      this._statistics = RClass.create(FContextStatistics);
+      this._statistics = ClassUtil.create(FContextStatistics);
       //MO.Console.find(MO.FStatisticsConsole).register('graphic3d.context', o._statistics);
       // 设置属性
       this._storePrograms = new Objects();
@@ -85,7 +85,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
    // @return MGraphicObject 环境对象
    //==========================================================
    public createObject(clazz) {
-      var instance = RClass.create(clazz);
+      var instance = ClassUtil.create(clazz);
       instance.linkGraphicContext(this);
       instance.setup();
       return instance;

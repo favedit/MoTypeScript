@@ -1,4 +1,4 @@
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FXmlConnection} from '../../common/net/FXmlConnection';
 import {FHttpConsole} from './FHttpConsole';
 
@@ -18,6 +18,6 @@ export class FXmlConsole extends FHttpConsole{
    // @return 网络链接
    //==========================================================
    public create(){
-      return RClass.create(FXmlConnection);
+      return ClassUtil.create(FXmlConnection);
    }
 }

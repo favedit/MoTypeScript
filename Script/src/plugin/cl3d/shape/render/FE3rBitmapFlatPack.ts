@@ -1,5 +1,5 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FImage} from '../../../runtime/ui/resource/FImage';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
 
@@ -41,7 +41,7 @@ export class FE3rBitmapFlatPack extends FE3rBitmapPack {
    //==========================================================
    public loadUrl(url) {
       var o = this;
-      var image = o._image = RClass.create(FImage);
+      var image = o._image = ClassUtil.create(FImage);
       image.addLoadListener(o, o.onLoad);
       image.loadUrl(url);
    }

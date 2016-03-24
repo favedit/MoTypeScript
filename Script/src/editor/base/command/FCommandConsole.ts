@@ -2,7 +2,7 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
-import {ALinker} from '../../../runtime/common/reflect/ALinker';
+import {Linker} from '../../../runtime/common/reflect/Linker';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCommand} from './FCommand';
 import {FTransactionConsole} from '../transaction/FTransactionConsole';
@@ -21,7 +21,7 @@ export class FCommandConsole extends FConsole {
    // 队列
    protected pendings: Objects<FCommand> = null;
    // 事务控制台
-   @ALinker(FTransactionConsole)
+   @Linker(FTransactionConsole)
    protected _transactionConsole: FTransactionConsole = null;
    // 监听器
    public commandStartingListeners: Listeners = null;

@@ -2,7 +2,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {SSize2} from '../../../runtime/common/math/SSize2';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {RBuilder} from '../../../runtime/ui/utility/RBuilder';
 import {FContent} from '../graphic/FContent';
 import {FContext} from '../graphic/FContext';
@@ -64,7 +64,7 @@ export class FCanvas extends FContent {
    // @return FG2dCanvasContext 绘制环境
    //==========================================================
    public createContext() {
-      return RClass.create(FContext);
+      return ClassUtil.create(FContext);
    }
 
    //==========================================================

@@ -1,4 +1,4 @@
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>配置工具类。</T>
@@ -86,7 +86,7 @@ export class RNet {
    // @return Boolean 返回Boolean类型
    //==========================================================
    public static isNode(n) {
-      return RClass.isName(n, 'TNode');
+      return ClassUtil.isName(n, 'TNode');
    }
 
    //==========================================================

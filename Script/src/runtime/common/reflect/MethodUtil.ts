@@ -1,5 +1,5 @@
 import {StringUtil} from '../lang/StringUtil'
-import {RClass} from './RClass'
+import {ClassUtil} from './ClassUtil'
 
 //==========================================================
 // <T>对象类的函数处理的工具类。</T>
@@ -8,7 +8,7 @@ import {RClass} from './RClass'
 // @author maocy
 // @version 141229
 //==========================================================
-export class RMethod {
+export class MethodUtil {
    //==========================================================
    // <T>获得函数的字符串名称。</T>
    //

@@ -1,4 +1,4 @@
-import {FTagDocument} from '../../../runtime/common/tag/FTagDocument';
+import {TagDocument} from '../../../runtime/common/tag/TagDocument';
 
 //==========================================================
 // <T>渲染程序模板。</T>
@@ -6,7 +6,7 @@ import {FTagDocument} from '../../../runtime/common/tag/FTagDocument';
 // @author maocy
 // @history 150116
 //==========================================================
-export class FShaderTemplate extends FTagDocument {
+export class FShaderTemplate extends TagDocument {
    //==========================================================
    // <T>构造处理</T>
    //==========================================================

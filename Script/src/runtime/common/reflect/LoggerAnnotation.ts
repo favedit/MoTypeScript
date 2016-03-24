@@ -1,7 +1,7 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {StringUtil} from '../lang/StringUtil'
-import {EAnnotation} from './EAnnotation'
-import {FAnnotation} from './FAnnotation'
+import {AnnotationEnum} from './AnnotationEnum'
+import {Annotation} from './Annotation'
 
 //============================================================
 // <T>日志描述类。</T>
@@ -12,7 +12,7 @@ import {FAnnotation} from './FAnnotation'
 // @author maocy
 // @version 141231
 //============================================================
-export class FLoggerAnnotation extends FAnnotation {
+export class LoggerAnnotation extends Annotation {
    // 数据名称
    protected _count: number = 0;
    // 数据名称
@@ -27,7 +27,7 @@ export class FLoggerAnnotation extends FAnnotation {
    //============================================================
    public constructor(name: string, callback: Function) {
       super(name);
-      this._annotationCd = EAnnotation.Logger;
+      this._annotationCd = AnnotationEnum.Logger;
       this._callback = callback;
    }
 

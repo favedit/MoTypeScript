@@ -1,8 +1,8 @@
 import {AssertUtil} from '../AssertUtil'
 import {Fatal} from '../lang/Fatal'
-import {FAnnotation} from './FAnnotation'
-import {FClass} from './FClass'
-import {RMethod} from './RMethod'
+import {Annotation} from './Annotation'
+import {Class} from './Class'
+import {MethodUtil} from './MethodUtil'
 
 //==========================================================
 // <T>对象类的管理工具类。</T>
@@ -11,7 +11,7 @@ import {RMethod} from './RMethod'
 // @author maocy
 // @version 141229
 //==========================================================
-export class RClass {
+export class ClassUtil {
    // 类对象集合
    private static _classes: any = new Object();
 
@@ -160,12 +160,12 @@ export class RClass {
          }
          // 如果对象是函数的情况
          if (typeof (instance) == 'function') {
-            return RMethod.shortName(instance);
+            return MethodUtil.shortName(instance);
          }
          // 如果对象是普通对象的情况
          var clazz = instance.constructor;
          if (clazz) {
-            return RMethod.shortName(clazz);
+            return MethodUtil.shortName(clazz);
          }
       }
       return null;
@@ -197,10 +197,10 @@ export class RClass {
             return 'String';
          }
          if (type == Function) {
-            return RMethod.shortName(type);
+            return MethodUtil.shortName(type);
          }
          if (type.constructor == Function) {
-            return RMethod.shortName(type);
+            return MethodUtil.shortName(type);
          }
          // 一般类实例对象
          if (instance.__class) {
@@ -247,8 +247,8 @@ export class RClass {
    // @param className 类名称
    // @return 类对象
    //==========================================================
-   public static findByName(className: string): FClass {
-      var clazz: FClass = this._classes[className];
+   public static findByName(className: string): Class {
+      var clazz: Class = this._classes[className];
       return clazz;
    }
 
@@ -259,9 +259,9 @@ export class RClass {
    // @param clazz 类函数
    // @return 类对象
    //==========================================================
-   public static find(typeClass: Function): FClass {
+   public static find(typeClass: Function): Class {
       var className: string = this.shortName(typeClass);
-      var clazz: FClass = this._classes[className];
+      var clazz: Class = this._classes[className];
       return clazz;
    }
 
@@ -272,15 +272,15 @@ export class RClass {
    // @param clazz 类函数
    // @return 类对象
    //==========================================================
-   public static get(typeClass: Function): FClass {
+   public static get(typeClass: Function): Class {
       AssertUtil.debugNotNull(typeClass);
-      var clazz: FClass = typeClass.prototype.__clazz;
+      var clazz: Class = typeClass.prototype.__clazz;
       if (clazz) {
          if (clazz.linker === typeClass) {
             return clazz;
          }
       }
-      clazz = typeClass.prototype.__clazz = new FClass();
+      clazz = typeClass.prototype.__clazz = new Class();
       clazz.build(typeClass);
       return clazz;
       // var findClass = typeClass.prototype;
@@ -304,7 +304,7 @@ export class RClass {
    // @return 类对象
    //==========================================================
    public static getInstance(typeClass: Function): any {
-      var clazz: FClass = this.get(typeClass);
+      var clazz: Class = this.get(typeClass);
       return clazz.instance;
    }
 
@@ -317,7 +317,7 @@ export class RClass {
    //==========================================================
    public static setInstance(typeClass: Function, value: any): void {
       if (value != null) {
-         var clazz: FClass = this.get(typeClass);
+         var clazz: Class = this.get(typeClass);
          var instance: any = clazz.instance;
          if (instance) {
             if (instance.set) {
@@ -334,7 +334,7 @@ export class RClass {
    // @param instanceClass 实例类型
    //==========================================================
    public static registerClass(typeClass: Function, instanceClass: Function): void {
-      var clazz: FClass = this.get(typeClass);
+      var clazz: Class = this.get(typeClass);
       clazz.build(instanceClass);
    }
 
@@ -345,7 +345,7 @@ export class RClass {
    // @param instance 实例
    //==========================================================
    public static registerInstance(typeClass: Function, instance: any): void {
-      var clazz: FClass = this.get(typeClass);
+      var clazz: Class = this.get(typeClass);
       clazz.instance = instance;
    }
 
@@ -355,8 +355,8 @@ export class RClass {
    // @param typeClass 类型
    // @param instance 实例
    //==========================================================
-   public static registerAnnotation(typeClass: Function, annotation: FAnnotation): void {
-      var clazz: FClass = this.get(typeClass);
+   public static registerAnnotation(typeClass: Function, annotation: Annotation): void {
+      var clazz: Class = this.get(typeClass);
       clazz.register(annotation);
    }
 
@@ -385,7 +385,7 @@ export class RClass {
    // @return 类对象的实例
    //==========================================================
    public static create(typeClass: Function): any {
-      var clazz: FClass = this.get(typeClass);
+      var clazz: Class = this.get(typeClass);
       var instance: any = clazz.newInstance();
       return instance;
    }
@@ -418,7 +418,7 @@ export class RClass {
             return 'String<' + instance.length + '>:' + instance;
          case 'Function':
             // 字符串的情况
-            return 'Function<' + RMethod.shortName(instance) + '>@' + this.codeOf(instance);
+            return 'Function<' + MethodUtil.shortName(instance) + '>@' + this.codeOf(instance);
          case 'Html':
             // HTML对象的情况
             return 'Html<' + instance.tagName + '>@' + this.codeOf(instance);

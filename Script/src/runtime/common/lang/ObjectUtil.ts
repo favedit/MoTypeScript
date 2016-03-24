@@ -1,5 +1,5 @@
 import {RuntimeUtil} from '../RuntimeUtil'
-import {RClass} from '../reflect/RClass'
+import {ClassUtil} from '../reflect/ClassUtil'
 import {Fatal} from './Fatal'
 
 //==========================================================
@@ -39,7 +39,7 @@ export class ObjectUtil {
       for (var n in o) {
          var v = o[n];
          if (v != null) {
-            if (!RClass.isBaseType(v.constructor)) {
+            if (!ClassUtil.isBaseType(v.constructor)) {
                v = ObjectUtil.clone(v);
             }
          }
@@ -61,7 +61,7 @@ export class ObjectUtil {
             var v = s[n];
             if (v != null) {
                var c: any = (v as any).constructor;
-               if (!RClass.isBaseType(c)) {
+               if (!ClassUtil.isBaseType(c)) {
                   if (t[n] == null) {
                      t[n] = new c();
                   }
@@ -93,7 +93,7 @@ export class ObjectUtil {
                // 检查类型
                var value = item[name];
                if (value != null) {
-                  if (!RClass.isBaseType(value.constructor)) {
+                  if (!ClassUtil.isBaseType(value.constructor)) {
                      throw new Fatal(this, 'Free object is not base object.');
                   }
                   item[name] = null;

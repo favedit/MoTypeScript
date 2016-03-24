@@ -2,8 +2,8 @@ import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {StringUtil} from '../../runtime/common/lang/StringUtil';
 import {ObjectPools} from '../../runtime/common/lang/ObjectPools';
-import {ALinker} from '../../runtime/common/reflect/ALinker';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {Linker} from '../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FConsole} from '../../runtime/core/FConsole';
@@ -25,10 +25,10 @@ export class FTemplateConsole extends FConsole {
    // 缓冲集合
    protected _pools: ObjectPools;
    // 加载处理器
-   @ALinker(FTemplateResourceConsole)
+   @Linker(FTemplateResourceConsole)
    protected _resourceConsole: FTemplateResourceConsole;
    // 加载处理器
-   @ALinker(FProcessLoadConsole)
+   @Linker(FProcessLoadConsole)
    protected _processLoadConsole: FProcessLoadConsole;
 
    //==========================================================
@@ -40,7 +40,7 @@ export class FTemplateConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._pools = RClass.create(ObjectPools);
+      this._pools = ClassUtil.create(ObjectPools);
    }
 
    //==========================================================
@@ -76,7 +76,7 @@ export class FTemplateConsole extends FConsole {
          var resource = this._resourceConsole.load(args);
          AssertUtil.debugNotNull(resource);
          // 加载模板
-         template = RClass.create(FTemplate);
+         template = ClassUtil.create(FTemplate);
          template.linkGraphicContext(context);
          template.resource = resource;
          //template.setPoolCode(identity);

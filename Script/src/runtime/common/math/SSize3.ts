@@ -1,5 +1,5 @@
 import {Fatal} from '../lang/Fatal';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>三维尺寸结构。</T>
@@ -89,6 +89,6 @@ export class SSize3 {
    //============================================================
    public dump() {
       var o = this;
-      return RClass.dump(o) + ' [' + o.width + ',' + o.height + ',' + o.deep + ']';
+      return ClassUtil.dump(o) + ' [' + o.width + ',' + o.height + ',' + o.deep + ']';
    }
 }

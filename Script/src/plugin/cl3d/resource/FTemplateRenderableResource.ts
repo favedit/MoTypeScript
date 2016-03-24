@@ -1,5 +1,5 @@
 import {Listeners} from '../../../runtime/common/lang/Listeners';
-import {ALinker} from '../../../runtime/common/reflect/ALinker';
+import {Linker} from '../../../runtime/common/reflect/Linker';
 import {FResourceObject} from './FResourceObject';
 import {FModelResource} from './FModelResource';
 import {FModelResourceConsole} from './FModelResourceConsole';
@@ -20,10 +20,10 @@ export class FTemplateRenderableResource extends FResourceObject {
    public material: FMaterialResource;
    public materialUrl: string;
    // 材质管理器
-   @ALinker(FMaterialResourceConsole)
+   @Linker(FMaterialResourceConsole)
    protected _materialResourceConsole: FMaterialResourceConsole;
    // 模型管理器
-   @ALinker(FModelResourceConsole)
+   @Linker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole;
 
    //==========================================================

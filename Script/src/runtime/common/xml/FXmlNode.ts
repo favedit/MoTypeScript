@@ -1,6 +1,6 @@
 import {Attributes} from '../lang/Attributes';
 import {StringBuffer} from '../lang/StringBuffer';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {FNode} from './FNode';
 import {RXml} from './RXml';
 
@@ -30,7 +30,7 @@ export class FXmlNode extends FNode {
       var xnode: any = new FXmlNode();
       xnode._name = name;
       xnode._attributes = attribtues;
-      if (!RClass.isClass(attribtues, Attributes)) {
+      if (!ClassUtil.isClass(attribtues, Attributes)) {
          var a = arguments;
          var len = a.length;
          for (var n = 1; n < len; n += 2) {

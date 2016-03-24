@@ -5,7 +5,7 @@
 // @author maocy
 // @version 160227
 //==========================================================
-export function AReadonly() {
+export function Readonly() {
    return function(target: any, name: string): void {
    }
 }

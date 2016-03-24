@@ -1,18 +1,18 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {BooleanUtil} from '../lang/BooleanUtil';
-import {FTagContext} from './FTagContext';
-import {FTag} from './FTag';
+import {TagContext} from './TagContext';
+import {Tag} from './Tag';
 
 //==========================================================
-// <T>标签判断非类。</T>
+// <T>标签判断真类。</T>
 //
 // @class
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTagFalse extends FTag {
+export class TagNotEquals extends Tag {
    public trimLeft = true;
    public source = null;
+   public value = null;
 
    //==========================================================
    // <T>开始处理。</T>
@@ -21,9 +21,19 @@ export class FTagFalse extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): ResultEnum {
-      var value = context.get(this.source);
-      return BooleanUtil.parse(value) ? ResultEnum.Skip : ResultEnum.Continue;
+   public onBegin(context: TagContext): ResultEnum {
+      var result = true;
+      var s = context.get(this.source);
+      var vs = this.value.split('|');
+      var c = vs.length;
+      for (var i = 0; i < c; i++) {
+         var v = vs[i]
+         if (s == v) {
+            result = false;
+            break;
+         }
+      }
+      return result ? ResultEnum.Continue : ResultEnum.Skip;
    }
 
    //==========================================================
@@ -38,6 +48,9 @@ export class FTagFalse extends FTag {
          case 'source':
             this.source = value;
             return;
+         case 'value':
+            this.value = value;
+            return;
       }
       super.set(name, value);
    }
@@ -49,6 +62,6 @@ export class FTagFalse extends FTag {
    // @return String 字符串
    //==========================================================
    public toString() {
-      return 'source=' + this.source;
+      return 'source=' + this.source + ', value=' + this.value;
    }
 }

@@ -1,6 +1,6 @@
 import {DataStream} from '../../common/io/DataStream';
 import {DataViewer} from '../../common/io/DataViewer';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FResourceStorage} from './FResourceStorage';
 import {FResourceBlockStorageData} from './FResourceBlockStorageData';
 
@@ -66,7 +66,7 @@ export class FResourceBlockStorage extends FResourceStorage {
       var resource = o._resource;
       //o._compressLength = buffer.byteLength;
       // 创建读取流
-      var view = RClass.create(DataViewer);
+      var view = ClassUtil.create(DataViewer);
       view.setEndianCd(true);
       view.link(buffer);
       // 反序列化数据
@@ -81,7 +81,7 @@ export class FResourceBlockStorage extends FResourceStorage {
          var blockData = new ArrayBuffer(size);
          view.readBytes(blockData, 0, size);
          // 创建数据块
-         var block = RClass.create(FResourceBlockStorageData);
+         var block = ClassUtil.create(FResourceBlockStorageData);
          block._guid = resource.guid();
          block._index = i;
          block.setCompressData(blockData);
@@ -100,7 +100,7 @@ export class FResourceBlockStorage extends FResourceStorage {
       var o = this;
       var resource = o._resource;
       // 合并数据流
-      var stream = RClass.create(DataStream);
+      var stream = ClassUtil.create(DataStream);
       stream.setEndianCd(true);
       stream.setLength(o._dataLength);
       var blocks = o._blocks;

@@ -1,5 +1,5 @@
 import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
-import {RClass} from '../../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {EShader} from '../EShader';
 import {FProgram} from '../FProgram';
 import {FProgramParameter} from '../FProgramParameter';
@@ -39,7 +39,7 @@ export class FWglProgram extends FProgram {
    public vertexShader(): FVertexShader {
       var shader = this._vertexShader;
       if (!shader) {
-         shader = this._vertexShader = RClass.create(FWglVertexShader);
+         shader = this._vertexShader = ClassUtil.create(FWglVertexShader);
          shader.linkGraphicContext(this.graphicContext);
          shader.setup();
       }
@@ -55,7 +55,7 @@ export class FWglProgram extends FProgram {
    public fragmentShader(): FFragmentShader {
       var shader = this._fragmentShader;
       if (!shader) {
-         shader = this._fragmentShader = RClass.create(FWglFragmentShader);
+         shader = this._fragmentShader = ClassUtil.create(FWglFragmentShader);
          shader.linkGraphicContext(this.graphicContext);
          shader.setup();
       }

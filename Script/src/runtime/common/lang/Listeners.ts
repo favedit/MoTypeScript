@@ -4,7 +4,7 @@ import {ObjectUtil} from './ObjectUtil'
 import {StringBuffer} from './StringBuffer'
 import {Listener} from './Listener'
 import {Fatal} from './Fatal'
-import {RClass} from '../reflect/RClass'
+import {ClassUtil} from '../reflect/ClassUtil'
 import {RuntimeUtil} from './RuntimeUtil'
 
 //==========================================================
@@ -199,7 +199,7 @@ export class Listeners extends ObjectBase {
    //==========================================================
    public dump() {
       var result = new StringBuffer();
-      result.append(RClass.shortName(this));
+      result.append(ClassUtil.shortName(this));
       var listeners: Objects<Listener> = this.listeners;
       var count: number = listeners.count();
       for (var n: number = 0; n < count; n++) {

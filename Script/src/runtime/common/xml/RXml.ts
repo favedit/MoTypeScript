@@ -1,9 +1,9 @@
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {StringBuffer} from '../lang/StringBuffer';
 import {Fatal} from '../lang/Fatal';
 import {Attributes} from '../lang/Attributes';
 import {StringUtil} from '../lang/StringUtil';
-import {RMethod} from '../reflect/RMethod';
+import {MethodUtil} from '../reflect/MethodUtil';
 import {ENodeType} from './ENodeType';
 import {FNode} from './FNode';
 import {FXmlDocument} from './FXmlDocument';
@@ -132,7 +132,7 @@ export class RXml {
    // @return Boolean 返回Boolean类型
    //==========================================================
    public static isNode(n) {
-      return RClass.isName(n, 'TNode');
+      return ClassUtil.isName(n, 'TNode');
    }
 
    //==========================================================
@@ -351,7 +351,7 @@ export class RXml {
                   xtag.setValue(value);
                   break;
                case 'function':
-                  xtag.setValue(RMethod.shortName(value));
+                  xtag.setValue(MethodUtil.shortName(value));
                   break;
                case 'object':
                   o.saveObject(xtag, 'Property', value);

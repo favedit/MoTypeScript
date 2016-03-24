@@ -3,8 +3,8 @@ import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {BooleanUtil} from '../../../runtime/common/lang/BooleanUtil';
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
-import {FTagContext} from '../../../runtime/common/tag/FTagContext';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
+import {TagContext} from '../../../runtime/common/tag/TagContext';
 import {RConsole} from '../../../runtime/core/RConsole';
 import {FRegion} from '../base/FRegion';
 import {EFillMode} from './EFillMode';
@@ -246,17 +246,17 @@ export class FEffect extends FContent {
             }
          } else if (xnode.isName('Parameter')) {
             // 设置参数
-            var parameter: FProgramParameter = RClass.create(FProgramParameter);
+            var parameter: FProgramParameter = ClassUtil.create(FProgramParameter);
             parameter.loadConfig(xnode);
             program.parameters().set(parameter.name, parameter);
          } else if (xnode.isName('Attribute')) {
             // 设置属性
-            var attribute: FProgramAttribute = RClass.create(FProgramAttribute);
+            var attribute: FProgramAttribute = ClassUtil.create(FProgramAttribute);
             attribute.loadConfig(xnode);
             program.attributes().set(attribute.name, attribute);
          } else if (xnode.isName('Sampler')) {
             // 设置取样
-            var sampler: FProgramSampler = RClass.create(FProgramSampler);
+            var sampler: FProgramSampler = ClassUtil.create(FProgramSampler);
             sampler.loadConfig(xnode);
             program.samplers().set(sampler.name, sampler);
          } else if (xnode.isName('Source')) {
@@ -274,9 +274,9 @@ export class FEffect extends FContent {
          }
       }
       // 建立代码模板
-      var vertexTemplate = this.vertexTemplate = RClass.create(FShaderTemplate);
+      var vertexTemplate = this.vertexTemplate = ClassUtil.create(FShaderTemplate);
       vertexTemplate.load(this._vertexSource);
-      var fragmentTemplate = this.fragmentTemplate = RClass.create(FShaderTemplate);
+      var fragmentTemplate = this.fragmentTemplate = ClassUtil.create(FShaderTemplate);
       fragmentTemplate.load(this._fragmentSource);
    }
 
@@ -291,7 +291,7 @@ export class FEffect extends FContent {
       var parameterCount = parameters.count();
       // 设置环境
       //var tagContext = RInstance.get(sk.common.tag.FTagContext);
-      var tagContext = new FTagContext();
+      var tagContext = new TagContext();
       this.buildInfo(tagContext, effectInfo);
       // 生成顶点代码
       var source = this.vertexTemplate.parse(tagContext);

@@ -1,4 +1,4 @@
-﻿import {RClass} from '../../../runtime/common/reflect/RClass'
+﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil'
 import {FRegion} from '../base/FRegion';
 import {ETechniqueMode} from './ETechniqueMode'
 import {FTechnique} from './FTechnique';
@@ -42,12 +42,12 @@ export class FShadowTechnique extends FTechnique {
       this.registerMode(ETechniqueMode.Result);
       //..........................................................
       // 创建光深处理过程
-      var passDepth: FShadowDepthPass = this.passDepth = RClass.create(FShadowDepthPass);
+      var passDepth: FShadowDepthPass = this.passDepth = ClassUtil.create(FShadowDepthPass);
       passDepth.linkGraphicContext(this);
       passDepth.setup();
       this.pushPass(passDepth);
       // 创建颜色处理过程
-      var passColor: FShadowColorPass = this.passColor = RClass.create(FShadowColorPass);
+      var passColor: FShadowColorPass = this.passColor = ClassUtil.create(FShadowColorPass);
       passColor.linkGraphicContext(this);
       passColor.setup();
       this.pushPass(passColor);

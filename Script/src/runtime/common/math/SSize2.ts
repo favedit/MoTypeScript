@@ -1,6 +1,6 @@
 import {Fatal} from '../lang/Fatal';
 import {DataTypeEnum} from '../lang/DataTypeEnum';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>二维尺寸结构。</T>
@@ -187,6 +187,6 @@ export class SSize2 {
    //============================================================
    public dump() {
       var o = this;
-      return RClass.dump(o) + ' [' + o.width + ',' + o.height + ']';
+      return ClassUtil.dump(o) + ' [' + o.width + ',' + o.height + ']';
    }
 }

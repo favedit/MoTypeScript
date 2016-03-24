@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Dictionary} from '../../common/lang/Dictionary';
 import {StringUtil} from '../../common/lang/StringUtil';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {AssertUtil} from '../../common/AssertUtil';
 import {RuntimeUtil} from '../../common/RuntimeUtil';
 import {FEnvironment} from './FEnvironment';
@@ -53,7 +53,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public registerValue(name, value) {
       AssertUtil.debugNotEmpty(name);
-      var environment = RClass.create(FEnvironment);
+      var environment = ClassUtil.create(FEnvironment);
       environment.set(name, value);
       this._environments.set(name, environment);
       return environment;

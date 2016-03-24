@@ -1,8 +1,8 @@
 import {ScopeEnum} from '../../../../runtime/common/lang/ScopeEnum';
 import {Objects} from '../../../../runtime/common/lang/Objects';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
-import {ALinker} from '../../../../runtime/common/reflect/ALinker';
-import {RClass} from '../../../../runtime/common/reflect/RClass';
+import {Linker} from '../../../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {FConsole} from '../../../../runtime/core/FConsole';
 import {FListenerThread} from '../../../../runtime/core/console/FListenerThread';
 import {FThreadConsole} from '../../../../runtime/core/console/FThreadConsole';
@@ -22,7 +22,7 @@ export class FPipelineConsole extends FConsole {
    protected _thread: FListenerThread = null;
    protected _interval = 150;
    // 线程控制台
-   @ALinker(FThreadConsole)
+   @Linker(FThreadConsole)
    protected _threadConsole: FThreadConsole = null;
 
    //==========================================================
@@ -34,7 +34,7 @@ export class FPipelineConsole extends FConsole {
       this._scopeCd = ScopeEnum.Global;
       this._pipelines = new Objects<FPipeline>();
       // 创建线程
-      var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
+      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);
@@ -45,7 +45,7 @@ export class FPipelineConsole extends FConsole {
    //==========================================================
    public alloc(context: FGraphicContext, clazz: Function = FForwardPipeline): FPipeline {
       AssertUtil.debugNotNull(context);
-      var pipeline: FPipeline = RClass.create(clazz);
+      var pipeline: FPipeline = ClassUtil.create(clazz);
       pipeline.linkGraphicContext(context);
       pipeline.setup();
       this._pipelines.push(pipeline);

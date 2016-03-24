@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {ALinker} from '../../common/reflect/ALinker';
+import {Linker} from '../../common/reflect/Linker';
 import {FConsole} from '../../core/FConsole';
 import {RHtml} from '../utility/RHtml';
 import {FDeviceConsole} from './FDeviceConsole';
@@ -35,7 +35,7 @@ export class FMouseConsole extends FConsole {
    // 鼠标滚动监听器
    protected _mouseWheelListeners: Listeners;
    // 设备控制台
-   @ALinker(FDeviceConsole)
+   @Linker(FDeviceConsole)
    protected _deviceConsole: FDeviceConsole;
 
    //protected _activeCapture = null;

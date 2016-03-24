@@ -1,8 +1,8 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {ALinker} from '../../runtime/common/reflect/ALinker';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {Linker} from '../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
@@ -20,7 +20,7 @@ export class FModelResourceConsole extends FConsole {
    // 模型集合
    protected models: Dictionary<FModelResource> = null;
    // 资源控制台
-   @ALinker(FResourceConsole)
+   @Linker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
    //    o._meshs            = MO.Class.register(o, new MO.AGetter('_meshs'));
    //    o._skeletons        = MO.Class.register(o, new MO.AGetter('_skeletons'));
@@ -173,7 +173,7 @@ export class FModelResourceConsole extends FConsole {
          return model;
       }
       // 创建模型资源
-      model = RClass.create(FModelResource);
+      model = ClassUtil.create(FModelResource);
       //model.setGuid(identity);
       //model.setVendor(vendor);
       //model.setSourceUrl(url);

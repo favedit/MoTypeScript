@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FResource} from './FResource';
 import {FMaterialTextureResource} from './FMaterialTextureResource';
 
@@ -76,7 +76,7 @@ export class FMaterialResource extends FResource {
          var textures = this.textures = new Objects<FMaterialTextureResource>();
          for (var n: number = 0; n < count; n++) {
             var jtexture = jtextures[n];
-            var renderable = RClass.create(FMaterialTextureResource);
+            var renderable = ClassUtil.create(FMaterialTextureResource);
             renderable.loadConfig(jtexture);
             textures.push(renderable);
          }

@@ -3,7 +3,7 @@ import {Objects} from '../../../../runtime/common/lang/Objects';
 import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {Fatal} from '../../../../runtime/common/lang/Fatal';
-import {RClass} from '../../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {RXml} from '../../../../runtime/common/xml/RXml';
 import {RuntimeUtil} from '../../../../runtime/common/RuntimeUtil';
 import {EParameterFormat} from '../EParameterFormat';
@@ -306,7 +306,7 @@ export class FWglContext extends FGraphicContext {
    // @return 顶点缓冲
    //==========================================================
    public createLayout(clazz: Function = FWglLayout) {
-      var layout = RClass.create(FWglLayout);
+      var layout = ClassUtil.create(FWglLayout);
       layout.linkGraphicContext(this);
       if (this.capability.optionLayout) {
          layout.setup();

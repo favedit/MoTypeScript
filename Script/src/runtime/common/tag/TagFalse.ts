@@ -1,19 +1,19 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {FTagContext} from './FTagContext';
-import {FTag} from './FTag';
+import {BooleanUtil} from '../lang/BooleanUtil';
+import {TagContext} from './TagContext';
+import {Tag} from './Tag';
 
 //==========================================================
-// <T>标签输出类。</T>
+// <T>标签判断非类。</T>
 //
 // @class
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTagWrite extends FTag {
-   //..........................................................
-   // @attribute
+export class TagFalse extends Tag {
+   public trimLeft = true;
    public source = null;
-   
+
    //==========================================================
    // <T>开始处理。</T>
    //
@@ -21,10 +21,9 @@ export class FTagWrite extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): ResultEnum {
+   public onBegin(context: TagContext): ResultEnum {
       var value = context.get(this.source);
-      context.write(value);
-      return ResultEnum.Skip;
+      return BooleanUtil.parse(value) ? ResultEnum.Skip : ResultEnum.Continue;
    }
 
    //==========================================================
@@ -42,7 +41,6 @@ export class FTagWrite extends FTag {
       }
       super.set(name, value);
    }
-
 
    //==========================================================
    //<T>获得字符串。</T>

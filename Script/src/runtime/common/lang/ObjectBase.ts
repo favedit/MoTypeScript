@@ -1,5 +1,5 @@
 import {ObjectIdUtil} from './ObjectIdUtil';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>所有可继承对象的基类。</T>

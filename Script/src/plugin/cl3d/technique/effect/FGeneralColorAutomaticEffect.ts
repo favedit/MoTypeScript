@@ -1,6 +1,6 @@
 ﻿import {DataTypeEnum} from '../../../../runtime/common/lang/DataTypeEnum';
 import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
-import {RClass} from '../../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
 import {FPhongMaterial} from '../../../../runtime/graphic/material/FPhongMaterial';
 import {ERegionParameter} from '../../base/ERegionParameter';
@@ -36,7 +36,7 @@ export class FGeneralColorAutomaticEffect extends FAutomaticEffect {
       // 建立容器
       var data = effectInfo.material;
       if (!data) {
-         data = effectInfo.material = RClass.create(FFloatStream);
+         data = effectInfo.material = ClassUtil.create(FFloatStream);
          data.setLength(40);
          material.dirty = true;
       }

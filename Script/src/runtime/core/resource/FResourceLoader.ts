@@ -1,5 +1,5 @@
 import {DataStream} from '../../common/io/DataStream';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FLoader} from '../console/FLoader';
 
 //==========================================================

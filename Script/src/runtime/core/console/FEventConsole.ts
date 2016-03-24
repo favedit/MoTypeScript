@@ -5,8 +5,8 @@ import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ListenerUtil} from '../../common/lang/ListenerUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
-import {ALinker} from '../../common/reflect/ALinker';
-import {RClass} from '../../common/reflect/RClass';
+import {Linker} from '../../common/reflect/Linker';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {MemoryUtil} from '../../common/MemoryUtil';
 import {FConsole} from '../FConsole';
 import {FListenerThread} from './FListenerThread';
@@ -21,7 +21,7 @@ import {FThreadConsole} from './FThreadConsole';
 //==========================================================
 export class FEventConsole extends FConsole {
    // 线程控制台
-   @ALinker(FThreadConsole)
+   @Linker(FThreadConsole)
    public _threadConsole: FThreadConsole = null;
    // 线程对象
    protected _thread: FListenerThread = null;
@@ -64,11 +64,11 @@ export class FEventConsole extends FConsole {
       this._processEvents = new Objects<any>();
       this._events = new Objects<any>();
       // 创建线程
-      var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
+      var thread: FListenerThread = this._thread = ClassUtil.create(FListenerThread);
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);
-      LoggerUtil.debug(this, 'Add event thread. (thread={1})', RClass.dump(thread));
+      LoggerUtil.debug(this, 'Add event thread. (thread={1})', ClassUtil.dump(thread));
    }
 
    //==========================================================

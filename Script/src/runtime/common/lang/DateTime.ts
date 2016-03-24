@@ -1,6 +1,6 @@
 import {IntegerUtil} from './IntegerUtil';
 import {DateUtil} from './DateUtil';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //===========================================================
 // 日期时间的工具类
@@ -480,6 +480,6 @@ export class DateTime {
    // @return String 字符串
    //===========================================================
    public dump() {
-      return RClass.dump(this) + ' ' + DateUtil.formatDate(this);
+      return ClassUtil.dump(this) + ' ' + DateUtil.formatDate(this);
    }
 }

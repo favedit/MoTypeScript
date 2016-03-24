@@ -1,8 +1,8 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {ALinker} from '../../runtime/common/reflect/ALinker';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {Linker} from '../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
@@ -20,7 +20,7 @@ export class FMaterialResourceConsole extends FConsole {
    // 模板集合
    public _materials: Dictionary<FMaterialResource> = null;
    // 资源控制台
-   @ALinker(FResourceConsole)
+   @Linker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
 
    //==========================================================
@@ -134,7 +134,7 @@ export class FMaterialResourceConsole extends FConsole {
          return material;
       }
       // 创建模板
-      material = RClass.create(FMaterialResource);
+      material = ClassUtil.create(FMaterialResource);
       material.guid = identity;
       //template.setVendor(vendor);
       // 创建加载器

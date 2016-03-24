@@ -1,4 +1,4 @@
-import {RMethod} from '../reflect/RMethod'
+import {MethodUtil} from '../reflect/MethodUtil'
 import {StringBuffer} from './StringBuffer'
 import {ArrayUtil} from './ArrayUtil'
 
@@ -34,7 +34,7 @@ export class Fatal {
          if (n > 0) {
             s.appendLine();
          }
-         s.append('   ' + (c - n) + ': ' + RMethod.shortName(f));
+         s.append('   ' + (c - n) + ': ' + MethodUtil.shortName(f));
       }
       // 建立描述参数信息
       var a = arguments;
@@ -43,7 +43,7 @@ export class Fatal {
          var v = a[n];
          var vs = null;
          if (typeof (v) == 'function') {
-            vs = RMethod.shortName(v);
+            vs = MethodUtil.shortName(v);
          } else {
             vs = v;
          }

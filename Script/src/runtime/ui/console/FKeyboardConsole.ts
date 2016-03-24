@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {ALinker} from '../../common/reflect/ALinker';
+import {Linker} from '../../common/reflect/Linker';
 import {FConsole} from '../../core/FConsole';
 import {EKeyStatus} from '../EKeyStatus';
 import {EKeyCode} from '../EKeyCode';
@@ -21,7 +21,7 @@ export class FKeyboardConsole extends FConsole {
    protected _keyUpListeners: Listeners;
    protected _keyPressListeners: Listeners;
    // 设备控制台
-   @ALinker(FDeviceConsole)
+   @Linker(FDeviceConsole)
    protected _deviceConsole: FDeviceConsole;
 
    //===========================================================

@@ -1,7 +1,7 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {StringUtil} from '../lang/StringUtil'
-import {EAnnotation} from './EAnnotation'
-import {FAnnotation} from './FAnnotation'
+import {AnnotationEnum} from './AnnotationEnum'
+import {Annotation} from './Annotation'
 
 //============================================================
 // <T>属性描述类。</T>
@@ -12,7 +12,7 @@ import {FAnnotation} from './FAnnotation'
 // @author maocy
 // @version 141231
 //============================================================
-export class FPropertyAnnotation extends FAnnotation {
+export class PropertyAnnotation extends Annotation {
    // 数据名称
    protected _dataName: string = null;
 
@@ -23,7 +23,7 @@ export class FPropertyAnnotation extends FAnnotation {
    //============================================================
    public constructor(name: string, dataName: String = null, dataCd: DataTypeEnum = DataTypeEnum.Unknown, dataClass: any = null, dataDefault: any = null) {
       super(name);
-      this._annotationCd = EAnnotation.Property;
+      this._annotationCd = AnnotationEnum.Property;
       // 设置数据名称
       var code = null;
       if (dataName == null) {
@@ -53,7 +53,7 @@ export class FPropertyAnnotation extends FAnnotation {
    //============================================================
    public build() {
    }
-   
+
    //============================================================
    // <T>加载属性值。</T>
    //
@@ -63,7 +63,7 @@ export class FPropertyAnnotation extends FAnnotation {
    public load(value, config) {
       value[this._name] = config.get(this._dataName);
    }
-   
+
    //============================================================
    // <T>存储属性值。</T>
    //
@@ -73,7 +73,7 @@ export class FPropertyAnnotation extends FAnnotation {
    public save(value, config) {
       config.set(this._dataName, value[this._name]);
    }
-   
+
    //============================================================
    // <T>获得字符串。</T>
    //

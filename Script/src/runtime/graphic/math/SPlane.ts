@@ -1,4 +1,4 @@
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 
 //==========================================================
 // <T>平面结构。</T>
@@ -87,6 +87,6 @@ export class SPlane {
    // @return 运行信息
    //============================================================
    public dump() {
-      return RClass.dump(this) + ' [' + this.toString() + ']';
+      return ClassUtil.dump(this) + ' [' + this.toString() + ']';
    }
 }

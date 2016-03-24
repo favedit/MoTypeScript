@@ -1,16 +1,16 @@
 import {AccessEvent} from '../../runtime/common/lang/AccessEvent';
 import {DataTypeEnum} from '../../runtime/common/lang/DataTypeEnum';
 import {AccessEnum} from '../../runtime/common/lang/AccessEnum';
-import {AProperty} from '../../runtime/common/reflect/AProperty';
+import {Property} from '../../runtime/common/reflect/Property';
 import * as mo from '../../index';
 mo.runtime.common.RuntimeUtil.namespace(mo, 'mo');
 
 export class FPropertyChanged {
 
-   @AProperty("set_name", 'onFieldChanged1', DataTypeEnum.Float32)
+   @Property("set_name", 'onFieldChanged1', DataTypeEnum.Float32)
    public name = null;
 
-   @AProperty(null, 'onFieldChanged2')
+   @Property(null, 'onFieldChanged2')
    public value: string = null;
 
    public onFieldChanged1(sender, event: AccessEvent) {

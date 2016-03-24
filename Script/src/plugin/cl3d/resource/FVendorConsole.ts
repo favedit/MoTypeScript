@@ -1,6 +1,6 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {Fatal} from '../../runtime/common/lang/Fatal';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {FConsole} from '../../runtime/core/FConsole';
 import {FVendor} from './FVendor';
 import {FVendorNet} from './FVendorNet';
@@ -37,7 +37,7 @@ export class FVendorConsole extends FConsole {
    // @return 主题
    //==========================================================
    public createVendor(clazz, url) {
-      var vendor = RClass.create(clazz);
+      var vendor = ClassUtil.create(clazz);
       vendor.setContentUrl(url);
       return vendor;
    }

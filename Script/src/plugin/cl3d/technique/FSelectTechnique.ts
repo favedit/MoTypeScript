@@ -1,4 +1,4 @@
-﻿import {RClass} from '../../../runtime/common/reflect/RClass';
+﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FTechnique} from './FTechnique';
 import {FRenderable} from '../base/FRenderable';
 import {FRegion} from '../base/FRegion';
@@ -35,7 +35,7 @@ export class FSelectTechnique extends FTechnique {
       this.registerMode(ETechniqueMode.Result);
       //..........................................................
       // 创建选取处理过程
-      var pass = this._passSelect = RClass.create(FSelectPass);
+      var pass = this._passSelect = ClassUtil.create(FSelectPass);
       pass.linkGraphicContext(this._graphicContext);
       pass.setup();
       this.pushPass(pass);

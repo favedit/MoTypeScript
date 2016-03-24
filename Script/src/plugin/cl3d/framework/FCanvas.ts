@@ -1,4 +1,4 @@
-import {ALinker} from '../../runtime/common/reflect/ALinker';
+import {Linker} from '../../runtime/common/reflect/Linker';
 import {SSize2} from './../../runtime/common/math/SSize2';
 import {FGraphicObject} from './../../runtime/graphic/core/FGraphicObject';
 import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamera';
@@ -40,10 +40,10 @@ export class FCanvas extends FControl {
    // 场景
    public scene: FScene;
    // 按键管理器
-   @ALinker(FKeyboardConsole)
+   @Linker(FKeyboardConsole)
    public _keyboardConsole: FKeyboardConsole = null;
    // 管道管理器
-   @ALinker(FPipelineConsole)
+   @Linker(FPipelineConsole)
    public _pipelineConsole: FPipelineConsole = null;
    //    o._logicSize          = MO.Class.register(o, new MO.AGetter('_logicSize'));
    //    o._screenSize         = MO.Class.register(o, new MO.AGetter('_screenSize'));

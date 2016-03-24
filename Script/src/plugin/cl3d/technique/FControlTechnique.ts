@@ -1,4 +1,4 @@
-﻿import {RClass} from '../../../runtime/common/reflect/RClass'
+﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil'
 import {FTechnique} from './FTechnique';
 import {FRegion} from '../base/FRegion';
 import {ETechniqueMode} from './ETechniqueMode'
@@ -35,7 +35,7 @@ export class FE3dControlTechnique extends FTechnique {
       this.registerMode(ETechniqueMode.Result);
       //..........................................................
       // 创建选取处理过程
-      var pass = this._passControl = RClass.create(FControlPass);
+      var pass = this._passControl = ClassUtil.create(FControlPass);
       pass.linkGraphicContext(this);
       pass.setup();
       this.pushPass(pass);

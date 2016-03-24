@@ -6,7 +6,7 @@ import {SEvent} from '../../common/lang/SEvent';
 import {StringUtil} from '../../common/lang/StringUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {EnumUtil} from '../../common/lang/EnumUtil';
-import {ALinker} from '../../common/reflect/ALinker';
+import {Linker} from '../../common/reflect/Linker';
 import {FConsole} from '../../core/FConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {EEvent} from '../EEvent';
@@ -55,7 +55,7 @@ export class FDeviceConsole extends FConsole {
    protected _localStorage = null;
    protected _sessionStorage = null;
    // 环境控制台
-   @ALinker(FEnvironmentConsole)
+   @Linker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole = null;
    // 监听器集合
    public loadListeners = new Listeners();

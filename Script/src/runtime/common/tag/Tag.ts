@@ -4,7 +4,7 @@ import {Objects} from '../lang/Objects';
 import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
 import {Fatal} from '../lang/Fatal';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>标签类。</T>
@@ -13,11 +13,11 @@ import {RClass} from '../reflect/RClass';
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTag extends ObjectBase {
+export class Tag extends ObjectBase {
    //..........................................................
    // @attribute
    protected _name: string;
-   protected _children: Objects<FTag>;
+   protected _children: Objects<Tag>;
    protected _trimLeft: boolean;
    protected _trimRight: boolean;
 
@@ -77,7 +77,7 @@ export class FTag extends ObjectBase {
    public push(tag) {
       var children = this._children;
       if (!children) {
-         children = this._children = new Objects<FTag>();
+         children = this._children = new Objects<Tag>();
       }
       children.push(tag);
    }
@@ -129,7 +129,7 @@ export class FTag extends ObjectBase {
    //==========================================================
    public innerDump(ps, pt, pl) {
       ps.appendRepeat('   ', pl);
-      ps.append(RClass.dump(pt));
+      ps.append(ClassUtil.dump(pt));
       // 追加属性
       var s = pt.toString();
       if (!StringUtil.isEmpty(s)) {

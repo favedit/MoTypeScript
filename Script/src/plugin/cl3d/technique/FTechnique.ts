@@ -1,5 +1,5 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FScene} from '../base/FScene';
 import {FRegion} from '../base/FRegion';
@@ -39,7 +39,7 @@ export class FTechnique extends FContent {
    // @return 技术模式
    //==========================================================
    public registerMode(code: string): FTechniqueMode {
-      var mode: FTechniqueMode = RClass.create(FTechniqueMode);
+      var mode: FTechniqueMode = ClassUtil.create(FTechniqueMode);
       mode.code = code;
       this.modes.push(mode);
       this.activeMode = mode;

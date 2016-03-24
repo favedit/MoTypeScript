@@ -1,6 +1,6 @@
 import {Objects} from '../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
 import {FResourceComponent} from './FResourceComponent';
 import {FStreamResource} from './FStreamResource';
@@ -47,7 +47,7 @@ export class FMeshResource extends FResourceComponent {
       if (streamCount > 0) {
          var streams: Objects<FStreamResource> = this.vertexStreams = new Objects<FStreamResource>();
          for (var n: number = 0; n < streamCount; n++) {
-            var stream: FStreamResource = RClass.create(FStreamResource);
+            var stream: FStreamResource = ClassUtil.create(FStreamResource);
             stream.unserialize(input)
             streams.push(stream);
          }
@@ -57,7 +57,7 @@ export class FMeshResource extends FResourceComponent {
       if (streamCount > 0) {
          var streams: Objects<FStreamResource> = this.indexStreams = new Objects<FStreamResource>();
          for (var n: number = 0; n < streamCount; n++) {
-            var stream: FStreamResource = RClass.create(FStreamResource);
+            var stream: FStreamResource = ClassUtil.create(FStreamResource);
             stream.unserialize(input)
             streams.push(stream);
          }

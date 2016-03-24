@@ -1,6 +1,6 @@
 import {DataViewer} from '../../common/io/DataViewer';
 import {FResourceLoader} from './FResourceLoader';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 
 //==========================================================
 // <T>资源BIN加载器。</T>
@@ -20,7 +20,7 @@ export class FResourceBinLoader extends FResourceLoader {
       var o = this;
       var content = event.content;
       // 创建读取流
-      var view = RClass.create(DataViewer);
+      var view = ClassUtil.create(DataViewer);
       view.setEndianCd(true);
       view.link(content);
       // 反序列化数据

@@ -1,9 +1,9 @@
 import {AccessEnum} from '../lang/AccessEnum';
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {AccessEvent} from '../lang/AccessEvent';
-import {FPropertyAnnotation} from './FPropertyAnnotation';
+import {PropertyAnnotation} from './PropertyAnnotation';
 import {MemoryUtil} from '../MemoryUtil';
-import {RClass} from './RClass';
+import {ClassUtil} from './ClassUtil';
 
 //==========================================================
 // <T>实例关联描述类。</T>
@@ -12,16 +12,16 @@ import {RClass} from './RClass';
 // @author maocy
 // @version 160227
 //==========================================================
-export function AProperty(
-      dataName: String = null,
-      dataChanged: string = 'onFieldChanged',
-      dataCd: DataTypeEnum = DataTypeEnum.Object,
-      dataClass: any = null,
-      dataDefault: any = null) {
+export function Property(
+   dataName: String = null,
+   dataChanged: string = 'onFieldChanged',
+   dataCd: DataTypeEnum = DataTypeEnum.Object,
+   dataClass: any = null,
+   dataDefault: any = null) {
    return function(target: any, name: string): void {
       // 注册描述器
-      var annotation: FPropertyAnnotation = new FPropertyAnnotation(name, dataName, dataCd, dataClass, dataDefault);
-      RClass.registerAnnotation(target, annotation);
+      var annotation: PropertyAnnotation = new PropertyAnnotation(name, dataName, dataCd, dataClass, dataDefault);
+      ClassUtil.registerAnnotation(target, annotation);
       // 设置属性
       var propertyName: string = '__' + name;
       var descriptor: any = new Object();

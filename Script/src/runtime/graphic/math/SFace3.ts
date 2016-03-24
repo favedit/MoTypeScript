@@ -1,7 +1,7 @@
 import {Objects} from '../../common/lang/Objects';
 import {SVector3} from '../../common/math/SVector3';
 import {SColor4} from '../../common/math/SColor4';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 
 //==========================================================
 // <T>三点面。</T>
@@ -50,7 +50,7 @@ export class SFace3 {
    }
 
    public clone() {
-      var instance = RClass.create(SFace3);
+      var instance = ClassUtil.create(SFace3);
       return instance.assign(this);
    }
 }

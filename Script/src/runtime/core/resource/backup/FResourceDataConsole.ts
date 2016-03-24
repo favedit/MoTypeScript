@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../FConsole';
 import {FEnvironmentConsole} from '../console/FEnvironmentConsole';
 import {RConsole} from '../RConsole';
@@ -120,7 +120,7 @@ export class FResourceDataConsole extends FConsole {
       var o = this;
       var pool = o._pipelinePool;
       if (!pool.hasFree()) {
-         var pipeline = RClass.create(FResourceThreadPipeline);
+         var pipeline = ClassUtil.create(FResourceThreadPipeline);
          pipeline.setConsole(o);
          pool.push(pipeline);
       }

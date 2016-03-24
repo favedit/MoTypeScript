@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FImage} from '../../../runtime/ui/resource/FImage';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
 
@@ -36,7 +36,7 @@ export class FE3rBitmapCubePack extends FE3rBitmapPack {
       //var t = p._formatName;
       var images = this._images = new Objects<FImage>();
       for (var i: number = 0; i < 6; i++) {
-         var image: FImage = RClass.create(FImage);
+         var image: FImage = ClassUtil.create(FImage);
          // image._index = i;
          // image.setOptionAlpha(false);
          //if(capability.blobCreate){

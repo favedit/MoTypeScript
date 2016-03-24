@@ -1,7 +1,7 @@
 ﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FTechnique} from './FTechnique';
 
@@ -44,12 +44,12 @@ export class FTechniqueConsole extends FConsole {
       //   throw new FError(this, 'Unknown context.');
       //}
       // 查找技术
-      var code = context.hashCode + '|' + RClass.shortName(clazz);
+      var code = context.hashCode + '|' + ClassUtil.shortName(clazz);
       var techniques = this._techniques;
       var technique: FTechnique = techniques.get(code);
       if (!technique) {
          // 创建技术
-         technique = RClass.create(clazz);
+         technique = ClassUtil.create(clazz);
          technique.linkGraphicContext(context);
          technique.setup();
          var techniqueCode = technique.code;

@@ -1,5 +1,5 @@
 import {Fatal} from '../lang/Fatal';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>填充结构。</T>
@@ -133,6 +133,6 @@ export class SPadding {
    // @return String 运行信息
    //============================================================
    public dump(d) {
-      return RClass.dump(this) + ' [' + this.left + ',' + this.top + ',' + this.right + ',' + this.bottom + ']';
+      return ClassUtil.dump(this) + ' [' + this.left + ',' + this.top + ',' + this.right + ',' + this.bottom + ']';
    }
 }

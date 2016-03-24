@@ -6,7 +6,7 @@ import {BooleanUtil} from '../lang/BooleanUtil';
 import {FloatUtil} from '../lang/FloatUtil';
 import {Attributes} from '../lang/Attributes';
 import {StringUtil} from '../lang/StringUtil';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>节点工具类。</T>
@@ -374,7 +374,7 @@ export class FNode extends ObjectBase {
       if (space == null) {
          space = '';
       }
-      dump.append(space, node._name, '(', RClass.shortName(node), ')');
+      dump.append(space, node._name, '(', ClassUtil.shortName(node), ')');
       var attributes = node._attributes;
       if (attributes) {
          var count = attributes.count();

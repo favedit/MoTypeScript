@@ -1,4 +1,4 @@
-import {ALinker} from '../../runtime/common/reflect/ALinker';
+import {Linker} from '../../runtime/common/reflect/Linker';
 import {RConsole} from '../../../runtime/core/RConsole';
 import {FView} from '../../runtime/framework/view/FView';
 import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
@@ -39,7 +39,7 @@ export class FCanvasView extends FView {
    _cameraKeyRotation = 0.03;
    _cameraMouseRotation = 0.005;
    // 按键管理器
-   @ALinker(FKeyboardConsole)
+   @Linker(FKeyboardConsole)
    public _keyboardConsole: FKeyboardConsole = null;
 
    //==========================================================

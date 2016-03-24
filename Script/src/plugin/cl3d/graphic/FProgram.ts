@@ -8,7 +8,7 @@ import {SPoint4} from '../../../runtime/common/math/SPoint4';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SVector4} from '../../../runtime/common/math/SVector4';
 import {SColor4} from '../../../runtime/common/math/SColor4';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {EParameterFormat} from './EParameterFormat';
@@ -56,7 +56,7 @@ export abstract class FProgram extends FContent {
    // @return 参数
    //==========================================================
    public registerParameter(name: string, formatCd: EParameterFormat): void {
-      var parameter = RClass.create(FProgramParameter);
+      var parameter = ClassUtil.create(FProgramParameter);
       parameter._name = name;
       parameter.formatCd = formatCd;
       this.parameters().set(name, parameter);
@@ -105,7 +105,7 @@ export abstract class FProgram extends FContent {
    // @return 属性
    //==========================================================
    public registerAttribute(name: string): FProgramAttribute {
-      var attribute: FProgramAttribute = RClass.create(FProgramAttribute);
+      var attribute: FProgramAttribute = ClassUtil.create(FProgramAttribute);
       attribute.name = name;
       this.attributes().set(name, attribute);
       return attribute;
@@ -155,7 +155,7 @@ export abstract class FProgram extends FContent {
    // @return 参数
    //==========================================================
    public registerSampler(name: string): FProgramSampler {
-      var sampler = RClass.create(FProgramSampler);
+      var sampler = ClassUtil.create(FProgramSampler);
       sampler._name = name;
       this.samplers().set(name, sampler);
       return sampler;

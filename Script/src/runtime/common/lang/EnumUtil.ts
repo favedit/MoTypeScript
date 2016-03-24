@@ -1,4 +1,4 @@
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {Fatal} from './Fatal';
 
 //============================================================
@@ -47,7 +47,7 @@ export class EnumUtil {
       var o = this;
       var result = o.tryEncode(instance, value);
       if (result == null) {
-         throw new Fatal(o, 'Invalid value (enum={1}, value={2})', RClass.dump(instance), value);
+         throw new Fatal(o, 'Invalid value (enum={1}, value={2})', ClassUtil.dump(instance), value);
       }
       return result;
    }
@@ -81,7 +81,7 @@ export class EnumUtil {
    public static decode(instance, value) {
       var result = this.tryDecode(instance, value);
       if (result == null) {
-         throw new Fatal(this, 'Invalid value (enum={1}, value={2})', RClass.dump(instance), value);
+         throw new Fatal(this, 'Invalid value (enum={1}, value={2})', ClassUtil.dump(instance), value);
       }
       return result;
    }

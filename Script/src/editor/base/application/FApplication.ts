@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {ALinker} from '../../../runtime/common/reflect/ALinker';
+import {Linker} from '../../../runtime/common/reflect/Linker';
 import {FApplication as FBaseApplication} from '../../../runtime/framework/FApplication';
 import {FDeviceConsole} from '../../../runtime/ui/console/FDeviceConsole';
 import {FTransactionConsole} from '../transaction/FTransactionConsole';
@@ -12,16 +12,16 @@ import {SSettings} from './SSettings';
 //==========================================================
 export class FApplication extends FBaseApplication {
    // 设备管理器
-   @ALinker(FDeviceConsole)
+   @Linker(FDeviceConsole)
    protected _deviceConsole: FDeviceConsole;
    // 命令管理器
-   @ALinker(FCommandConsole)
+   @Linker(FCommandConsole)
    protected _commandConsole: FCommandConsole;
    // 选择管理器
-   @ALinker(FSelectionConsole)
+   @Linker(FSelectionConsole)
    protected _selectionConsole: FSelectionConsole;
    // 事务管理器
-   @ALinker(FTransactionConsole)
+   @Linker(FTransactionConsole)
    protected _transactionConsole: FTransactionConsole;
 
    //==========================================================

@@ -1,8 +1,8 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Dictionary} from '../../common/lang/Dictionary';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {ALinker} from '../../common/reflect/ALinker';
-import {RClass} from '../../common/reflect/RClass';
+import {Linker} from '../../common/reflect/Linker';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
@@ -19,7 +19,7 @@ export class FImageConsole extends FConsole {
    // 图像集合
    protected _images: Dictionary<FImage>;
    // 环境控制台
-   @ALinker(FEnvironmentConsole)
+   @Linker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole;
 
    //==========================================================
@@ -42,7 +42,7 @@ export class FImageConsole extends FConsole {
    //==========================================================
    public create(url: string) {
       // 加载地址
-      var image = RClass.create(FImage);
+      var image = ClassUtil.create(FImage);
       image.loadUrl(url);
       return image;
    }

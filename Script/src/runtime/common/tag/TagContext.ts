@@ -12,7 +12,7 @@ import {StringUtil} from '../lang/StringUtil';
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTagContext extends ObjectBase {
+export class TagContext extends ObjectBase {
    public code: string;
    public trimLeft: boolean;
    public trimRight: boolean;

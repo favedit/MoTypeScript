@@ -2,16 +2,16 @@ import {ObjectBase} from '../lang/ObjectBase';
 import {StringBuffer} from '../lang/StringBuffer';
 import {StringUtil} from '../lang/StringUtil';
 import {Fatal} from '../lang/Fatal';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 import {ENodeType} from '../xml/ENodeType';
 import {RXml} from '../xml/RXml';
-import {FTag} from './FTag';
-import {FTagWrite} from './FTagWrite';
-import {FTagTrue} from './FTagTrue';
-import {FTagFalse} from './FTagFalse';
-import {FTagEquals} from './FTagEquals';
-import {FTagNotEquals} from './FTagNotEquals';
-import {FTagText} from './FTagText';
+import {Tag} from './Tag';
+import {TagWrite} from './TagWrite';
+import {TagTrue} from './TagTrue';
+import {TagFalse} from './TagFalse';
+import {TagEquals} from './TagEquals';
+import {TagNotEquals} from './TagNotEquals';
+import {TagText} from './TagText';
 
 //==========================================================
 // <T>配置文档。</T>
@@ -20,11 +20,11 @@ import {FTagText} from './FTagText';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FTagDocument extends ObjectBase {
+export class TagDocument extends ObjectBase {
    // @attribute
    public space: string = null;
    //_root = MO.Class.register(o, MO.AGetter('_root'));
-   public root: FTag = null;
+   public root: Tag = null;
 
    //==========================================================
    // <T>创建一个标签对象。</T>
@@ -46,22 +46,22 @@ export class FTagDocument extends ObjectBase {
       var tag = null;
       switch (name) {
          case 'source':
-            tag = RClass.create(FTag);
+            tag = ClassUtil.create(Tag);
             break;
          case 'write':
-            tag = RClass.create(FTagWrite);
+            tag = ClassUtil.create(TagWrite);
             break;
          case 'true':
-            tag = RClass.create(FTagTrue);
+            tag = ClassUtil.create(TagTrue);
             break;
          case 'false':
-            tag = RClass.create(FTagFalse);
+            tag = ClassUtil.create(TagFalse);
             break;
          case 'equals':
-            tag = RClass.create(FTagEquals);
+            tag = ClassUtil.create(TagEquals);
             break;
          case 'notEquals':
-            tag = RClass.create(FTagNotEquals);
+            tag = ClassUtil.create(TagNotEquals);
             break;
          default:
             throw new Fatal(this, 'Unknown tag type. (name={1})', name);
@@ -105,12 +105,12 @@ export class FTagDocument extends ObjectBase {
             var elementNode = elementNodes[i];
             switch (elementNode.nodeType) {
                case ENodeType.Text:
-                  var tagText: FTagText = RClass.create(FTagText);
+                  var tagText: TagText = ClassUtil.create(TagText);
                   tagText.text = elementNode.nodeValue;
                   tag.push(tagText);
                   break;
                case ENodeType.Data:
-                  var tagText: FTagText = RClass.create(FTagText);
+                  var tagText: TagText = ClassUtil.create(TagText);
                   tagText.text = elementNode.data;
                   tag.push(tagText);
                   break;
@@ -161,7 +161,7 @@ export class FTagDocument extends ObjectBase {
    //==========================================================
    public dump() {
       var result = new StringBuffer();
-      result.appendLine(RClass.dump(this));
+      result.appendLine(ClassUtil.dump(this));
       //r.appendLine(this.root().dump(r));
       return result.flush();
    }

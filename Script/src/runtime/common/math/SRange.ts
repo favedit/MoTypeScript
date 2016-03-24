@@ -1,6 +1,6 @@
 import {IntegerUtil} from '../lang/IntegerUtil';
 import {StringUtil} from '../lang/StringUtil';
-import {RClass} from '../reflect/RClass';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>范围结构。</T>
@@ -171,7 +171,7 @@ export class SRange {
    //============================================================
    public dump(d) {
       d = StringUtil.nvlString(d);
-      d.append(RClass.shortName(this));
+      d.append(ClassUtil.shortName(this));
       d.append(' [', this.left, ',', this.top, '-', this.right, ',', this.bottom, '] ');
       return d;
    }

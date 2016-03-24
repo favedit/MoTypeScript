@@ -2,10 +2,10 @@ import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {Dictionary} from '../../runtime/common/lang/Dictionary'
 import {StringUtil} from '../../runtime/common/lang/StringUtil'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
-import {ALinker} from '../../runtime/common/reflect/ALinker'
+import {Linker} from '../../runtime/common/reflect/Linker'
 import {AssertUtil} from '../../runtime/common/AssertUtil'
 import {MemoryUtil} from '../../runtime/common/MemoryUtil'
-import {RClass} from '../../runtime/common/reflect/RClass'
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {FConsole} from '../../runtime/core/FConsole'
 import {RConsole} from '../../runtime/core/RConsole'
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
@@ -27,10 +27,10 @@ export class FRenderModelConsole extends FConsole {
    protected _meshs: Dictionary<FRenderModelMesh>;
    protected _dynamicMeshs: Dictionary<FRenderModelMesh>;
    // 模型资源控制台
-   @ALinker(FModelResourceConsole)
+   @Linker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole = null;
    // 处理加载控制台
-   @ALinker(FProcessLoadConsole)
+   @Linker(FProcessLoadConsole)
    protected _processLoadConsole: FProcessLoadConsole = null;
 
    //==========================================================
@@ -126,7 +126,7 @@ export class FRenderModelConsole extends FConsole {
          // 获得路径
          var resource = this._modelResourceConsole.load(args);
          // 加载模型
-         model = RClass.create(FRenderModel);
+         model = ClassUtil.create(FRenderModel);
          model.linkGraphicContext(context);
          model.code = identity;
          model.resource = resource;

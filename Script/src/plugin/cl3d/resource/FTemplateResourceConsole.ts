@@ -1,7 +1,7 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
-import {ALinker} from '../../runtime/common/reflect/ALinker';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {Linker} from '../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
@@ -18,7 +18,7 @@ export class FTemplateResourceConsole extends FConsole {
    // 模板集合
    public templates:Dictionary<FTemplateResource> = null;
    // 资源控制台
-   @ALinker(FResourceConsole)
+   @Linker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
    // public serviceUrl = '/cloud.content.template.ws'
 
@@ -82,7 +82,7 @@ export class FTemplateResourceConsole extends FConsole {
          return template;
       }
       // 创建模板
-      template = RClass.create(FTemplateResource);
+      template = ClassUtil.create(FTemplateResource);
       //template.setGuid(identity);
       //template.setVendor(vendor);
       //template.setSourceUrl(url);

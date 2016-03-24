@@ -1,10 +1,10 @@
-import {ALinker} from '../../common/reflect/ALinker';
-import {AProperty} from '../../common/reflect/AProperty';
+import {Linker} from '../../common/reflect/Linker';
+import {Property} from '../../common/reflect/Property';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataTypeEnum} from '../../common/lang/DataTypeEnum';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FBufferedSocket} from '../../common/net/FBufferedSocket';
 import {FEnvironmentConsole} from './FEnvironmentConsole';
 import {FConsole} from '../FConsole';
@@ -19,7 +19,7 @@ import {FConsole} from '../FConsole';
 //@ALinker('ASD')
 export class FLoggerConsole extends FConsole {
 
-   @ALinker(FEnvironmentConsole)
+   @Linker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole;
 
    //@AProperty(EDataType.String)
@@ -71,7 +71,7 @@ export class FLoggerConsole extends FConsole {
    // @method
    //==========================================================
    public connect(url) {
-      var socket = this._socket = RClass.create(FBufferedSocket);
+      var socket = this._socket = ClassUtil.create(FBufferedSocket);
       socket.connect(url);
    }
 

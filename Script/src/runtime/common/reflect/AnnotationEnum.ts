@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141230
 //===========================================================
-export class EAnnotation {
+export class AnnotationEnum {
    // @attribute 代码
    public static Constructor = 'constructor';
    // @attribute 代码

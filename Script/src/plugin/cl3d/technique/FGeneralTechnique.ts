@@ -1,4 +1,4 @@
-﻿import {RClass} from '../../../runtime/common/reflect/RClass'
+﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil'
 import {FTechnique} from './FTechnique';
 import {ETechniqueMode} from './ETechniqueMode'
 import {FGeneralColorPass} from './FGeneralColorPass'
@@ -39,7 +39,7 @@ export class FGeneralTechnique extends FTechnique {
       this.registerMode(ETechniqueMode.Result);
       //..........................................................
       // 创建颜色处理过程
-      var pass = this._passColor = RClass.create(FGeneralColorPass);
+      var pass = this._passColor = ClassUtil.create(FGeneralColorPass);
       pass.linkGraphicContext(this.graphicContext);
       pass.setup();
       this.pushPass(pass);

@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {Dictionary} from '../../runtime/common/lang/Dictionary'
-import {ALinker} from '../../runtime/common/reflect/ALinker'
-import {RClass} from '../../runtime/common/reflect/RClass'
+import {Linker} from '../../runtime/common/reflect/Linker'
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {Fatal} from '../../runtime/common/lang/Fatal'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {FConsole} from '../../runtime/core/FConsole'
@@ -20,10 +20,10 @@ import {FMaterialLoader} from './loader/FMaterialLoader';
 export class FE3rMaterialConsole extends FConsole {
    // 材质集合
    protected _materials = null;
-   @ALinker(FMaterialResourceConsole)
+   @Linker(FMaterialResourceConsole)
    protected _materialResourceConsole: FMaterialResourceConsole;
    // 处理加载控制台
-   @ALinker(FProcessLoadConsole)
+   @Linker(FProcessLoadConsole)
    protected _processLoadConsole: FProcessLoadConsole = null;
 
    //==========================================================
@@ -85,7 +85,7 @@ export class FE3rMaterialConsole extends FConsole {
       // 获得路径
       var resource = this._materialResourceConsole.loadByUrl(url);
       // 创建材质
-      material = RClass.create(FE3rMaterial);
+      material = ClassUtil.create(FE3rMaterial);
       material.linkGraphicContext(context);
       material.resource = resource;
       this._materials.set(url, material);
@@ -118,7 +118,7 @@ export class FE3rMaterialConsole extends FConsole {
       // 获得路径
       var resource = this._materialResourceConsole.loadByUrl(url);
       // 创建材质
-      loader = RClass.create(FMaterialLoader);
+      loader = ClassUtil.create(FMaterialLoader);
       loader.graphicContext = context;
       loader.resource = resource;
       this._materials.set(url, loader);

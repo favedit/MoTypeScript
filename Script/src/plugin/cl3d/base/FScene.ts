@@ -2,7 +2,7 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IScene} from '../../../runtime/graphic/IScene';
@@ -55,7 +55,7 @@ export class FScene extends FGraphicObject implements IScene {
       this.statusActive = false;
       this.backgroundColor = new SColor4(0.5, 0.5, 0.5, 1.0);
       this.layers = new Dictionary<FDisplayLayer>();
-      this._statistics = RClass.create(FSceneStatistics);
+      this._statistics = ClassUtil.create(FSceneStatistics);
       this._allDisplays = new Objects<FDisplay>();
       // 设置变量
       this.enterFrameListeners = new Listeners(this);

@@ -1,5 +1,5 @@
-import {RMethod} from '../reflect/RMethod'
-import {RClass} from '../reflect/RClass'
+import {MethodUtil} from '../reflect/MethodUtil'
+import {ClassUtil} from '../reflect/ClassUtil'
 import {MemoryUtil} from '../MemoryUtil'
 import {ListenerContext} from './ListenerContext'
 import {ObjectBase} from './ObjectBase'
@@ -52,7 +52,7 @@ export class Listener extends ObjectBase {
    // @return String 字符串信息
    //==========================================================
    public toString() {
-      return RClass.shortName(this) + '(owner=' + RClass.shortName(this.owner) + ', callback=' + RMethod.shortName(this.callback) + ')';
+      return ClassUtil.shortName(this) + '(owner=' + ClassUtil.shortName(this.owner) + ', callback=' + MethodUtil.shortName(this.callback) + ')';
    }
 
    //============================================================

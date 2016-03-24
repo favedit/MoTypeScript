@@ -1,6 +1,6 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {FTagContext} from './FTagContext';
-import {FTag} from './FTag';
+import {TagContext} from './TagContext';
+import {Tag} from './Tag';
 
 //==========================================================
 // <T>标签判断真类。</T>
@@ -9,7 +9,7 @@ import {FTag} from './FTag';
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTagEquals extends FTag {
+export class TagEquals extends Tag {
    //..........................................................
    // @attribute
    public trimLeft = true;
@@ -23,7 +23,7 @@ export class FTagEquals extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): ResultEnum {
+   public onBegin(context: TagContext): ResultEnum {
       var resource = false;
       var s = context.get(this.source);
       var vs = this.value.split('|');

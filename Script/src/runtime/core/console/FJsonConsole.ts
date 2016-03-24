@@ -1,4 +1,4 @@
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FJsonConnection} from '../../common/net/FJsonConnection';
 import {FHttpConsole} from './FHttpConsole';
 
@@ -17,6 +17,6 @@ export class FJsonConsole extends FHttpConsole {
    // @return 网络链接
    //==========================================================
    public create() {
-      return RClass.create(FJsonConnection);
+      return ClassUtil.create(FJsonConnection);
    }
 }

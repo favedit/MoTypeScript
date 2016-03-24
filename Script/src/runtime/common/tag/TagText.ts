@@ -1,7 +1,7 @@
 import {ResultEnum} from '../lang/ResultEnum';
 import {StringUtil} from '../lang/StringUtil';
-import {FTagContext} from './FTagContext';
-import {FTag} from './FTag';
+import {TagContext} from './TagContext';
+import {Tag} from './Tag';
 
 //==========================================================
 // <T>标签类。</T>
@@ -10,7 +10,7 @@ import {FTag} from './FTag';
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTagText extends FTag {
+export class TagText extends Tag {
    public text: string = null;
 
    //==========================================================
@@ -20,7 +20,7 @@ export class FTagText extends FTag {
    // @param context  环境
    // @return EResult 处理结果
    //==========================================================
-   public onBegin(context: FTagContext): ResultEnum {
+   public onBegin(context: TagContext): ResultEnum {
       var text = this.text;
       if (context.trimLeft) {
          if (StringUtil.startsWith(text, '\r')) {

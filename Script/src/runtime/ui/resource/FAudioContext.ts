@@ -2,7 +2,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Dictionary} from '../../common/lang/Dictionary';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
-import {RClass} from '../../common/reflect/RClass';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
 import {FAudio} from './FAudio';
@@ -72,10 +72,10 @@ export class FAudioContext extends ObjectBase {
       var buffer = null;
       o._handle = null;
       if (o._handle) {
-         buffer = RClass.create(FAudioBuffer);
+         buffer = ClassUtil.create(FAudioBuffer);
          buffer.setContext(o);
       } else {
-         buffer = RClass.create(FAudio);
+         buffer = ClassUtil.create(FAudio);
       }
       buffer.loadUrl(url);
       return buffer;

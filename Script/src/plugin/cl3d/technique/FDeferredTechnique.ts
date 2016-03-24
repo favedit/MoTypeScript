@@ -1,4 +1,4 @@
-import {RClass} from '../../../runtime/common/reflect/RClass'
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil'
 import {FTechnique} from './FTechnique';
 import {ETechniqueMode} from './ETechniqueMode'
 import {FDeferredDataPass} from './FDeferredDataPass'
@@ -44,12 +44,12 @@ export class FDeferredTechnique extends FTechnique {
       this.registerMode(ETechniqueMode.Result);
       //..........................................................
       // 创建数据处理过程
-      var passData = this._passData = RClass.create(FDeferredDataPass);
+      var passData = this._passData = ClassUtil.create(FDeferredDataPass);
       passData.linkGraphicContext(this._graphicContext);
       passData.setup();
       this.pushPass(passData);
       // 创建合并处理过程
-      var passMerge = this._passMerge = RClass.create(FDeferredMergePass);
+      var passMerge = this._passMerge = ClassUtil.create(FDeferredMergePass);
       passMerge.linkGraphicContext(this._graphicContext);
       passMerge.setup();
       this.pushPass(passMerge);

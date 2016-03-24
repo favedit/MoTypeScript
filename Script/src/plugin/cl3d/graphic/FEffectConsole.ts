@@ -4,8 +4,8 @@ import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {Looper} from '../../../runtime/common/lang/Looper';
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
-import {RClass} from '../../../runtime/common/reflect/RClass';
-import {FTagContext} from '../../../runtime/common/tag/FTagContext';
+import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
+import {TagContext} from '../../../runtime/common/tag/TagContext';
 import {FXmlConnection} from '../../../runtime/common/net/FXmlConnection';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FEnvironmentConsole} from '../../../runtime/core/console/FEnvironmentConsole';
@@ -32,7 +32,7 @@ export class FEffectConsole extends FConsole {
    public _templateEffects: Dictionary<FEffect>;
    public _effects: Dictionary<FEffect>;
    public _effectInfo: SEffectInfo;
-   public _tagContext: FTagContext;
+   public _tagContext: TagContext;
    // @attribute
    public _thread;
    public _interval;
@@ -52,7 +52,7 @@ export class FEffectConsole extends FConsole {
       this._templateEffects = new Dictionary<FEffect>();
       this._effects = new Dictionary<FEffect>();
       this._effectInfo = new SEffectInfo();
-      this._tagContext = RClass.create(FTagContext);
+      this._tagContext = ClassUtil.create(TagContext);
       this._interval = 300;
    }
 
@@ -108,7 +108,7 @@ export class FEffectConsole extends FConsole {
       if (!clazz) {
          throw new Fatal(this, 'Unknown effect type name. (type={1})', clazz);
       }
-      var effect = RClass.create(clazz);
+      var effect = ClassUtil.create(clazz);
       effect.linkGraphicContext(context);
       effect.setup();
       return effect;
@@ -265,7 +265,7 @@ export class FEffectConsole extends FConsole {
          var uri = "${resource}/shader/" + name + ".xml";
          var url = RConsole.find(FEnvironmentConsole).parseUrl(uri);
          // 获得网络数据
-         xconfig = RClass.create(FXmlConnection).send(url);
+         xconfig = ClassUtil.create(FXmlConnection).send(url);
          // 加载配置信息
          this._configs.set(name, xconfig);
       }

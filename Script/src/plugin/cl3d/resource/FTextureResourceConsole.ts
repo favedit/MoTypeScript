@@ -1,6 +1,6 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {RClass} from '../../runtime/common/reflect/RClass';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {FConsole} from '../../runtime/core/FConsole';
 import {FTextureResource} from './FTextureResource';
 
@@ -85,7 +85,7 @@ export class FTextureResourceConsole extends FConsole {
       // var v = MO.Console.find(MO.FE3sVendorConsole).find('texture');
       // var u = v.makeUrl(p);
       // 创建纹理资源
-      texture = RClass.create(FTextureResource);
+      texture = ClassUtil.create(FTextureResource);
       texture.guid = url;
       texture.url = url;
       texture.load();
