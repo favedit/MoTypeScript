@@ -1,5 +1,5 @@
 import {SVector3} from './SVector3';
-import {RFloat} from '../lang/RFloat';
+import {FloatUtil} from '../lang/RFloat';
 
 //==========================================================
 // <T>四元数。</T>
@@ -277,7 +277,7 @@ export class SQuaternion {
       } else {
          r = new SVector3();
       }
-      r.x = Math.asin(RFloat.toRange((o.w * o.x - o.y * o.z) * 2, -1, 1));
+      r.x = Math.asin(FloatUtil.toRange((o.w * o.x - o.y * o.z) * 2, -1, 1));
       r.y = Math.atan2(2 * (o.w * o.y + o.z * o.x), 1 - 2 * (x2 + y2));
       r.z = Math.atan2(2 * (o.w * o.z + o.x * o.y), 1 - 2 * (z2 + x2));
       return r;

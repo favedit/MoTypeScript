@@ -1,6 +1,6 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {FError} from '../lang/FError';
-import {RFloat} from '../lang/RFloat';
+import {FloatUtil} from '../lang/RFloat';
 
 //==========================================================
 // <T>三维数据。</T>
@@ -324,9 +324,9 @@ export class SValue3 {
    // @return 字符串
    //==========================================================
    public toDisplay() {
-      var x = RFloat.format(this.x);
-      var y = RFloat.format(this.y);
-      var z = RFloat.format(this.z);
+      var x = FloatUtil.format(this.x);
+      var y = FloatUtil.format(this.y);
+      var z = FloatUtil.format(this.z);
       return x + ',' + y + ',' + z;
    }
 

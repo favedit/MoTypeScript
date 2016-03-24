@@ -1,5 +1,5 @@
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {FMaterial} from './FMaterial';
 import {FTexture} from './FTexture';
@@ -56,8 +56,8 @@ export class FPhongMaterial extends FMaterial {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this.ambientColor = RObject.dispose(this.ambientColor);
-      this.diffuseColor = RObject.dispose(this.diffuseColor);
+      this.ambientColor = ObjectUtil.dispose(this.ambientColor);
+      this.diffuseColor = ObjectUtil.dispose(this.diffuseColor);
       // 父处理
       super.dispose();
    }

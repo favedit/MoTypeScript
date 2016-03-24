@@ -1,6 +1,6 @@
 import {RMemory} from '../RMemory';
 import {RRuntime} from '../RRuntime';
-import {FObject} from './FObject';
+import {ObjectBase} from './ObjectBase';
 import {FString} from './FString';
 import {SLooperEntry} from './SLooperEntry';
 
@@ -11,7 +11,7 @@ import {SLooperEntry} from './SLooperEntry';
 // @author maocy
 // @version 150110
 //==========================================================
-export class FLooper extends FObject {
+export class FLooper extends ObjectBase {
    // 总数
    _count: number = 0;
    // 记录数

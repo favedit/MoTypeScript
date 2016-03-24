@@ -1,4 +1,4 @@
-import {FObject} from './FObject'
+import {ObjectBase} from './ObjectBase'
 
 //==========================================================
 // <T>字符串操作的工具类</T>
@@ -7,7 +7,7 @@ import {FObject} from './FObject'
 // @author maocy
 // @version 141226
 //==========================================================
-export class FString extends FObject {
+export class FString extends ObjectBase {
    //..........................................................
    // @attribute
    protected _count: number = 0;

@@ -4,8 +4,8 @@ import {RRuntime} from '../RRuntime';
 import {SLogger} from './SLogger';
 import {FString} from './FString';
 import {FListeners} from './FListeners';
-import {RArray} from './RArray';
-import {RDate} from './RDate';
+import {ArrayUtil} from './ArrayUtil';
+import {DateUtil} from './DateUtil';
 import {RString} from './RString';
 
 //==========================================================
@@ -15,7 +15,7 @@ import {RString} from './RString';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RLogger {
+export class LoggerUtil {
    // 标签长度
    private static _labelLength: number = 40;
    // 日志长度
@@ -42,7 +42,7 @@ export class RLogger {
    public static output(sender: any, code: string, message: string, parameters: Array<any>): string {
       // 格式化参数
       var result = new FString();
-      result.append(RDate.format('yymmdd-hh24miss.ms'));
+      result.append(DateUtil.format('yymmdd-hh24miss.ms'));
       result.append(code);
       var formatMessage: string = message;
       var count: number = parameters.length;

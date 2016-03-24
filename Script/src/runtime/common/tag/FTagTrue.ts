@@ -1,5 +1,5 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {RBoolean} from '../lang/RBoolean';
+import {BooleanUtil} from '../lang/BooleanUtil';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
@@ -28,7 +28,7 @@ export class FTagTrue extends FTag {
       for (var i: number = 0; i < c; i++) {
          var n = ns[i]
          var v = context.get(n);
-         if (RBoolean.parse(v)) {
+         if (BooleanUtil.parse(v)) {
             result = true;
             break;
          }

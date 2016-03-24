@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FListeners} from '../../common/lang/FListeners';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {RHtml} from '../utility/RHtml';
@@ -529,15 +529,15 @@ export class FMouseConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._eventMouse = RObject.dispose(this._eventMouse);
-      this._clickListeners = RObject.dispose(this._clickListeners);
-      this._doubleClickListeners = RObject.dispose(this._doubleClickListeners);
-      this._mouseDownListeners = RObject.dispose(this._mouseDownListeners);
-      this._mouseMoveListeners = RObject.dispose(this._mouseMoveListeners);
-      this._mouseUpListeners = RObject.dispose(this._mouseUpListeners);
-      this._mouseEnterListeners = RObject.dispose(this._mouseEnterListeners);
-      this._mouseLeaveListeners = RObject.dispose(this._mouseLeaveListeners);
-      this._mouseWheelListeners = RObject.dispose(this._mouseWheelListeners);
+      this._eventMouse = ObjectUtil.dispose(this._eventMouse);
+      this._clickListeners = ObjectUtil.dispose(this._clickListeners);
+      this._doubleClickListeners = ObjectUtil.dispose(this._doubleClickListeners);
+      this._mouseDownListeners = ObjectUtil.dispose(this._mouseDownListeners);
+      this._mouseMoveListeners = ObjectUtil.dispose(this._mouseMoveListeners);
+      this._mouseUpListeners = ObjectUtil.dispose(this._mouseUpListeners);
+      this._mouseEnterListeners = ObjectUtil.dispose(this._mouseEnterListeners);
+      this._mouseLeaveListeners = ObjectUtil.dispose(this._mouseLeaveListeners);
+      this._mouseWheelListeners = ObjectUtil.dispose(this._mouseWheelListeners);
       // 父处理
       super.dispose();
    }

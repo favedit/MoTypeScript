@@ -1,5 +1,5 @@
 import {ResultEnum} from '../../common/lang/ResultEnum';
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 import {EThreadStatus} from './EThreadStatus';
 
 //==========================================================
@@ -9,7 +9,7 @@ import {EThreadStatus} from './EThreadStatus';
 // @author maocy
 // @version 150105
 //==========================================================
-export abstract class FThread extends FObject {
+export abstract class FThread extends ObjectBase {
    // 名称
    public name: string = null;
    // 延时

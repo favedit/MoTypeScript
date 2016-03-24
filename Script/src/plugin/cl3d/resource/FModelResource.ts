@@ -1,6 +1,6 @@
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
-import {RObject} from '../../runtime/common/lang/RObject';
-import {RLogger} from '../../runtime/common/lang/RLogger';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
+import {LoggerUtil} from '../../runtime/common/lang/RLogger';
 import {FDataStream} from '../../runtime/common/io/FDataStream';
 import {FResource} from './FResource';
 import {FMeshResource} from './FMeshResource';
@@ -127,7 +127,7 @@ export class FModelResource extends FResource {
       // }
       //..........................................................
       //RLogger.info(this, "Unserialize model success. (guid={1}, code={2})", this._guid, this._code);
-      RLogger.info(this, "Unserialize model success. (guid={1}, code={2})");
+      LoggerUtil.info(this, "Unserialize model success. (guid={1}, code={2})");
    }
 
    // //==========================================================

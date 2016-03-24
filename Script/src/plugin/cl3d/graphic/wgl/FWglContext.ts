@@ -1,7 +1,7 @@
 import {SEvent} from '../../../../runtime/common/lang/SEvent';
 import {Objects} from '../../../../runtime/common/lang/Objects';
-import {RLogger} from '../../../../runtime/common/lang/RLogger';
-import {RObject} from '../../../../runtime/common/lang/RObject';
+import {LoggerUtil} from '../../../../runtime/common/lang/RLogger';
+import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {FError} from '../../../../runtime/common/lang/FError';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {RXml} from '../../../../runtime/common/xml/RXml';
@@ -395,7 +395,7 @@ export class FWglContext extends FGraphicContext {
       //o._size.set(width, height);
       //o._viewportRectangle.set(left, top, width, height);
       this.handle.viewport(left, top, width, height);
-      RLogger.debug(this, 'Context3d viewport. (location={1},{2}, size={3}x{4})', left, top, width, height);
+      LoggerUtil.debug(this, 'Context3d viewport. (location={1},{2}, size={3}x{4})', left, top, width, height);
    }
 
    //==========================================================
@@ -1066,7 +1066,7 @@ export class FWglContext extends FGraphicContext {
       //............................................................
       // 输出错误信息
       if (!result) {
-         RLogger.fatal(this, null, 'OpenGL check failure. (code={1}, description={2})', error, errorInfo);
+         LoggerUtil.fatal(this, null, 'OpenGL check failure. (code={1}, description={2})', error, errorInfo);
       }
       return result;
    }
@@ -1099,8 +1099,8 @@ export class FWglContext extends FGraphicContext {
       this._data9 = null;
       this._data16 = null;
       // 释放属性
-      this.recordBuffers = RObject.dispose(this.recordBuffers);
-      this.recordSamplers = RObject.dispose(this.recordSamplers);
+      this.recordBuffers = ObjectUtil.dispose(this.recordBuffers);
+      this.recordSamplers = ObjectUtil.dispose(this.recordSamplers);
       // 释放属性
       //o._contextAttributes = null;
       this._parameters = null;

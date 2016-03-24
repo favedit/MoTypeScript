@@ -4,8 +4,8 @@ import {FAttributes} from '../../common/lang/FAttributes';
 import {FError} from '../../common/lang/FError';
 import {SEvent} from '../../common/lang/SEvent';
 import {RString} from '../../common/lang/RString';
-import {RLogger} from '../../common/lang/RLogger';
-import {REnum} from '../../common/lang/REnum';
+import {LoggerUtil} from '../../common/lang/RLogger';
+import {EnumUtil} from '../../common/lang/EnumUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
@@ -350,7 +350,7 @@ export class FDeviceConsole extends FConsole {
          // RLogger.lsnsOutput.register(this, this.onLog);
       }
       // 输出日志
-      RLogger.debug(this, 'Parse browser agent. (platform_cd={1}, type_cd={2})', REnum.decode(EPlatform, platformCd), REnum.decode(EBrowser, this._typeCd));
+      LoggerUtil.debug(this, 'Parse browser agent. (platform_cd={1}, type_cd={2})', EnumUtil.decode(EPlatform, platformCd), EnumUtil.decode(EBrowser, this._typeCd));
       // 是否支持HTML5
       if (hWindow.applicationCache) {
          this._supportHtml5 = true;
@@ -375,7 +375,7 @@ export class FDeviceConsole extends FConsole {
          if (platformCd == EPlatform.Mobile) {
             // 强制不要超过3倍
             capability.pixelRatio = Math.min(pixelRatio, 3);
-            RLogger.debug(this, 'Parse browser agent. (pixel_ratio={1}, capability_ratio={2})', pixelRatio, capability.pixelRatio);
+            LoggerUtil.debug(this, 'Parse browser agent. (pixel_ratio={1}, capability_ratio={2})', pixelRatio, capability.pixelRatio);
          }
       }
       if (hWindow.Worker) {
@@ -388,7 +388,7 @@ export class FDeviceConsole extends FConsole {
          new Blob(["Test"], { 'type': 'text/plain' });
          capability.blobCreate = true;
       } catch (e) {
-         RLogger.warn(this, 'Browser blob not support.');
+         LoggerUtil.warn(this, 'Browser blob not support.');
       }
       // 设置函数
       var visibilityChange = null;
@@ -407,7 +407,7 @@ export class FDeviceConsole extends FConsole {
       }
       // 计算方向
       this.refreshOrientation();
-      RLogger.debug(this, 'Browser connect. (agent={1})', this._agent);
+      LoggerUtil.debug(this, 'Browser connect. (agent={1})', this._agent);
       //..........................................................
       // 关联鼠标事件
       var visibilitychange = this.defineEventGet('visibilitychange');
@@ -509,7 +509,7 @@ export class FDeviceConsole extends FConsole {
       var event = linker._eventOrientation;
       // event.orientationCd = orientationCd;
       linker.orientationListeners.process(event);
-      RLogger.debug(linker, 'Window orientation changed. (orientation_cd={1})', orientationCd);
+      LoggerUtil.debug(linker, 'Window orientation changed. (orientation_cd={1})', orientationCd);
    }
 
    //==========================================================

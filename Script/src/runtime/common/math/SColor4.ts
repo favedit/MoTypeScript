@@ -1,6 +1,6 @@
 import {FError} from '../lang/FError';
-import {RHex} from '../lang/RHex'
-import {RFloat} from '../lang/RFloat';
+import {HexUtil} from '../lang/HexUtil'
+import {FloatUtil} from '../lang/RFloat';
 
 //==========================================================
 // <T>颜色。</T>
@@ -119,9 +119,9 @@ export class SColor4 {
          value = value.substring(2);
       }
       if (value.length == 6) {
-         o.red = RHex.parse(value.substring(0, 2)) / 255;
-         o.green = RHex.parse(value.substring(2, 4)) / 255;
-         o.blue = RHex.parse(value.substring(4, 6)) / 255;
+         o.red = HexUtil.parse(value.substring(0, 2)) / 255;
+         o.green = HexUtil.parse(value.substring(2, 4)) / 255;
+         o.blue = HexUtil.parse(value.substring(4, 6)) / 255;
       } else {
          throw new FError(o, 'Invalid value.');
       }
@@ -213,7 +213,7 @@ export class SColor4 {
    // @return String 字符串
    //============================================================
    public toRgbaString() {
-      return 'rgba(' + parseInt((this.red * 255) as any) + ',' + parseInt((this.green * 255) as any) + ',' + parseInt((this.blue * 255) as any) + ',' + RFloat.format(this.alpha) + ')';
+      return 'rgba(' + parseInt((this.red * 255) as any) + ',' + parseInt((this.green * 255) as any) + ',' + parseInt((this.blue * 255) as any) + ',' + FloatUtil.format(this.alpha) + ')';
    }
 
    //============================================================
@@ -222,7 +222,7 @@ export class SColor4 {
    // @return String 字符串
    //============================================================
    public toString() {
-      return RFloat.format(this.red) + ',' + RFloat.format(this.green) + ',' + RFloat.format(this.blue) + ',' + RFloat.format(this.alpha);
+      return FloatUtil.format(this.red) + ',' + FloatUtil.format(this.green) + ',' + FloatUtil.format(this.blue) + ',' + FloatUtil.format(this.alpha);
    }
 
    //============================================================

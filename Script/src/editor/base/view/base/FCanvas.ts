@@ -1,4 +1,4 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {FControl} from '../../../../runtime/ui/FControl';
 
 //==========================================================

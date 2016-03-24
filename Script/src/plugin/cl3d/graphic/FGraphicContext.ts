@@ -1,6 +1,6 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FGraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
 import {EFillMode} from './EFillMode';
@@ -175,7 +175,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
             var program = programs.at(i);
             program.dispose();
          }
-         this._storePrograms = RObject.dispose(programs);
+         this._storePrograms = ObjectUtil.dispose(programs);
       }
       // 释放布局集合
       var layouts = this._storeLayouts;
@@ -185,7 +185,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
             var layout = layouts.at(i);
             layout.dispose();
          }
-         this._storeLayouts = RObject.dispose(layouts);
+         this._storeLayouts = ObjectUtil.dispose(layouts);
       }
       // 释放顶点缓冲集合
       var buffers = this._storeBuffers;
@@ -195,7 +195,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
             var buffer = buffers.at(i);
             buffer.dispose();
          }
-         this._storeBuffers = RObject.dispose(buffers);
+         this._storeBuffers = ObjectUtil.dispose(buffers);
       }
       // 释放像素缓冲集合
       var textures = this._storeTextures;
@@ -205,7 +205,7 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
             var texture = textures.at(i);
             texture.dispose();
          }
-         this._storeTextures = RObject.dispose(textures);
+         this._storeTextures = ObjectUtil.dispose(textures);
       }
       // 释放目标集合
       var targets = this._storeTargets;
@@ -215,15 +215,15 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
             var target = targets.at(i);
             target.dispose();
          }
-         this._storeTargets = RObject.dispose(targets);
+         this._storeTargets = ObjectUtil.dispose(targets);
       }
       // 释放属性
       this._program = null;
       //o._viewportRectangle = sk.common.lang.RObject.dispose(o._viewportRectangle);
       //o._logicSize = sk.common.lang.RObject.dispose(o._logicSize);
       //o._sizeRatio = sk.common.lang.RObject.dispose(o._sizeRatio);
-      this.capability = RObject.dispose(this.capability);
-      this._statistics = RObject.dispose(this._statistics);
+      this.capability = ObjectUtil.dispose(this.capability);
+      this._statistics = ObjectUtil.dispose(this._statistics);
       // 释放属性
       //o._handleInstance = null;
       //o._handleLayout = null;

@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
 
 //==========================================================
@@ -7,7 +7,7 @@ import {IProcessLoadable} from '../../../runtime/core/console/IProcessLoadable';
 // @author maocy
 // @history 160323
 //==========================================================
-export class FProcessLoader extends FObject implements IProcessLoadable {
+export class FProcessLoader extends ObjectBase implements IProcessLoadable {
    // 状态
    public statusLoading: boolean;
    // 准备好

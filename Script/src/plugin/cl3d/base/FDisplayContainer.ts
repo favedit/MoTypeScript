@@ -1,6 +1,6 @@
 import {FError} from '../../../runtime/common/lang/FError'
 import {Objects} from '../../../runtime/common/lang/Objects'
-import {RObject} from '../../../runtime/common/lang/RObject'
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
 import {RAssert} from '../../../runtime/common/RAssert'
 import {IDisplayContainer} from '../../../runtime/graphic/IDisplayContainer';
@@ -238,7 +238,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    //==========================================================
    public dispose(): void {
       // 释放所有子节点
-      this._displays = RObject.dispose(this._displays);
+      this._displays = ObjectUtil.dispose(this._displays);
       // 父处理
       super.dispose();
    }

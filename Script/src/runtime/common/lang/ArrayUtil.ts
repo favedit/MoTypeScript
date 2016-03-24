@@ -7,7 +7,7 @@ import {RAssert} from '../RAssert';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RArray {
+export class ArrayUtil {
    // @attribute
    public static array1 = new Array(1);
    public static array2 = new Array(2);

@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>资源基类。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author maocy
 // @version 150105
 //==========================================================
-export class FResourceObject extends FObject {
+export class FResourceObject extends ObjectBase {
    //..........................................................
    // @attribute
    //o._typeCode     = MO.Class.register(o, new MO.AGetter('_typeCode'));

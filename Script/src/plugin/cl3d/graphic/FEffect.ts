@@ -1,8 +1,8 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {FError} from '../../../runtime/common/lang/FError';
-import {RBoolean} from '../../../runtime/common/lang/RBoolean';
+import {BooleanUtil} from '../../../runtime/common/lang/BooleanUtil';
 import {RString} from '../../../runtime/common/lang/RString';
-import {REnum} from '../../../runtime/common/lang/REnum';
+import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FTagContext} from '../../../runtime/common/tag/FTagContext';
 import {RConsole} from '../../../runtime/core/RConsole';
@@ -216,33 +216,33 @@ export class FEffect extends FContent {
             var name = xnode.get('name');
             var value = xnode.get('value');
             if (name == 'fill_mode') {
-               this.stateFillCd = REnum.encode(EFillMode, value);
+               this.stateFillCd = EnumUtil.encode(EFillMode, value);
             } else if (name == 'cull_mode') {
-               this.stateCullCd = REnum.encode(ECullMode, value);
+               this.stateCullCd = EnumUtil.encode(ECullMode, value);
             } else if (name == 'depth_mode') {
                this.stateDepth = true;
-               this.stateDepthCd = REnum.encode(EDepthMode, value);
+               this.stateDepthCd = EnumUtil.encode(EDepthMode, value);
             } else if (name == 'depth_write') {
-               this.stateDepthWrite = RBoolean.parse(value);
+               this.stateDepthWrite = BooleanUtil.parse(value);
             } else if (name == 'blend_mode') {
-               this.stateBlend = RBoolean.parse(value);
+               this.stateBlend = BooleanUtil.parse(value);
                if (this.stateBlend) {
-                  this.stateBlendSourceCd = REnum.encode(EBlendMode, xnode.get('source'));
-                  this.stateBlendTargetCd = REnum.encode(EBlendMode, xnode.get('target'));
+                  this.stateBlendSourceCd = EnumUtil.encode(EBlendMode, xnode.get('source'));
+                  this.stateBlendTargetCd = EnumUtil.encode(EBlendMode, xnode.get('target'));
                }
             } else if (name == 'alpha_test') {
-               this.stateAlphaTest = RBoolean.parse(value);
+               this.stateAlphaTest = BooleanUtil.parse(value);
             }
          } else if (xnode.isName('Option')) {
             // 设置配置
             var name = xnode.get('name');
             var value = xnode.get('value');
             if (name == 'shadow') {
-               this.optionShadow = RBoolean.parse(value);
+               this.optionShadow = BooleanUtil.parse(value);
             } else if (name == 'lightmap') {
-               this.optionLightMap = RBoolean.parse(value);
+               this.optionLightMap = BooleanUtil.parse(value);
             } else if (name == 'fog') {
-               this.optionFog = RBoolean.parse(value);
+               this.optionFog = BooleanUtil.parse(value);
             }
          } else if (xnode.isName('Parameter')) {
             // 设置参数

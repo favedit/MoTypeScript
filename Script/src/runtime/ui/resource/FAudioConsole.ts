@@ -1,6 +1,6 @@
 import {FDictionary} from '../../common/lang/FDictionary';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
 import {RConsole} from '../../core/RConsole';
@@ -76,7 +76,7 @@ export class FAudioConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 清空变量
-      this._audios = RObject.dispose(this._audios);
+      this._audios = ObjectUtil.dispose(this._audios);
       // 父处理
       super.dispose();
    }

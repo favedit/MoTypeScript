@@ -1,5 +1,5 @@
 import {FError} from '../../../../runtime/common/lang/FError';
-import {RObject} from '../../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {SBorderLine} from './SBorderLine';
 
 //==========================================================
@@ -49,9 +49,9 @@ export class SBorder {
    // @method
    //============================================================
    public dispose() {
-      this.left = RObject.dispose(this.left)
-      this.top = RObject.dispose(this.top)
-      this.right = RObject.dispose(this.right)
-      this.bottom = RObject.dispose(this.bottom)
+      this.left = ObjectUtil.dispose(this.left)
+      this.top = ObjectUtil.dispose(this.top)
+      this.right = ObjectUtil.dispose(this.right)
+      this.bottom = ObjectUtil.dispose(this.bottom)
    }
 }

@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FListeners} from '../../common/lang/FListeners';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
 import {EKeyStatus} from '../EKeyStatus';
@@ -328,9 +328,9 @@ export class FKeyboardConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._keyDownListeners = RObject.dispose(this._keyDownListeners);
-      this._keyUpListeners = RObject.dispose(this._keyUpListeners);
-      this._keyPressListeners = RObject.dispose(this._keyPressListeners);
+      this._keyDownListeners = ObjectUtil.dispose(this._keyDownListeners);
+      this._keyUpListeners = ObjectUtil.dispose(this._keyUpListeners);
+      this._keyPressListeners = ObjectUtil.dispose(this._keyPressListeners);
       // 父处理
       super.dispose();
    }

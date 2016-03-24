@@ -1,4 +1,4 @@
-import {FObject} from '../lang/FObject';
+import {ObjectBase} from '../lang/ObjectBase';
 import {FString} from '../lang/FString';
 import {FError} from '../lang/FError';
 import {RClass} from '../reflect/RClass';
@@ -11,7 +11,7 @@ import {FXmlNode} from '../xml/FXmlNode';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FXmlDocument extends FObject {
+export class FXmlDocument extends ObjectBase {
    // @attribute
    protected _root: FXmlNode = null;
 

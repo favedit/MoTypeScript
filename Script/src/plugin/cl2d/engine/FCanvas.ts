@@ -1,6 +1,6 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
-import {RObject} from '../../../runtime/common/lang/RObject';
-import {RLogger} from '../../../runtime/common/lang/RLogger';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
+import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {RBuilder} from '../../../runtime/ui/utility/RBuilder';
@@ -122,7 +122,7 @@ export class FCanvas extends FContent {
       // 设置尺寸
       this._size.set(width, height);
       this.graphicContext.size().set(width, height);
-      RLogger.debug(this, 'Canvas2d resize. (size={1}x{2}, html={3})', width, height, hCanvas.outerHTML);
+      LoggerUtil.debug(this, 'Canvas2d resize. (size={1}x{2}, html={3})', width, height, hCanvas.outerHTML);
    }
 
    //==========================================================
@@ -169,7 +169,7 @@ export class FCanvas extends FContent {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._size = RObject.dispose(this._size);
+      this._size = ObjectUtil.dispose(this._size);
       //this._hPanel = MO.Window.Html.free(this._hPanel);
       //this._hCanvas = MO.Window.Html.free(this._hCanvas);
       // 父处理

@@ -1,5 +1,5 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {RBoolean} from '../lang/RBoolean';
+import {BooleanUtil} from '../lang/BooleanUtil';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
@@ -23,7 +23,7 @@ export class FTagFalse extends FTag {
    //==========================================================
    public onBegin(context: FTagContext): ResultEnum {
       var value = context.get(this.source);
-      return RBoolean.parse(value) ? ResultEnum.Skip : ResultEnum.Continue;
+      return BooleanUtil.parse(value) ? ResultEnum.Skip : ResultEnum.Continue;
    }
 
    //==========================================================

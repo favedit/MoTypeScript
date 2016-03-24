@@ -1,7 +1,7 @@
-// import {FObject} from '../common/lang/FObject';
+// import {FObject} from '../common/lang/ObjectBase';
 import {FDictionary} from '../common/lang/FDictionary';
 import {FListeners} from '../common/lang/FListeners';
-// import {RObject} from '../common/lang/RObject';
+// import {RObject} from '../common/lang/ObjectUtil';
 import {SColor4} from '../common/math/SColor4';
 // import {RAssert} from '../common/RAssert';
 import {IDisplayLayer} from './IDisplayLayer';

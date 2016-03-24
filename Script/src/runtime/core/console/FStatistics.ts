@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>统计基类。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author maocy
 // @version 150303
 //==========================================================
-export class FStatistics extends FObject {
+export class FStatistics extends ObjectBase {
    // 代码
    public code: string = null;
 

@@ -1,6 +1,6 @@
-import {FObject} from '../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 import {FAttributes} from '../../runtime/common/lang/FAttributes';
-import {RObject} from '../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RRuntime} from '../../runtime/common/RRuntime';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {RRuntime} from '../../runtime/common/RRuntime';
 // @author maocy
 // @history 150309
 //==========================================================
-export class FVendor extends FObject {
+export class FVendor extends ObjectBase {
    // 内容地址
    public _contentUrl: string = null;
    // 参数集合
@@ -92,7 +92,7 @@ export class FVendor extends FObject {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      this._parameters = RObject.dispose(this._parameters);
+      this._parameters = ObjectUtil.dispose(this._parameters);
       // 父处理
       super.dispose();
    }

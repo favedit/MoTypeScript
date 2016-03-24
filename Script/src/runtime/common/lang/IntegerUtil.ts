@@ -7,7 +7,7 @@ import {RString} from './RString';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RInteger {
+export class IntegerUtil {
    //..........................................................
    // @define
    static Chars: string = '0123456789-%';

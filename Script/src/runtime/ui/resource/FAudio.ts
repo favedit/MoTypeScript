@@ -1,5 +1,5 @@
-import {FObject} from '../../common/lang/FObject';
-import {RLogger} from '../../common/lang/RLogger';
+import {ObjectBase} from '../../common/lang/ObjectBase';
+import {LoggerUtil} from '../../common/lang/RLogger';
 import {RConsole} from '../../core/RConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {FDeviceConsole} from '../console/FDeviceConsole';
@@ -12,7 +12,7 @@ import {RHtml} from '../utility/RHtml';
 // @author maocy
 // @history 150526
 //==========================================================
-export class FAudio extends FObject {
+export class FAudio extends ObjectBase {
    // 地址
    protected _url: string = null;
    // 句柄
@@ -32,7 +32,7 @@ export class FAudio extends FObject {
       var linker = (this as any).__linker;
       linker._ready = true;
       linker._hAudio.oncanplay = null;
-      RLogger.info(linker, 'Audio load success. (url={1})', linker._url);
+      LoggerUtil.info(linker, 'Audio load success. (url={1})', linker._url);
    }
 
    //==========================================================
@@ -44,7 +44,7 @@ export class FAudio extends FObject {
       linker._loaded = true;
       linker._finish = true;
       linker._hAudio.oncanplaythrough = null;
-      RLogger.info(linker, 'Audio loaded success. (url={1})', linker._url);
+      LoggerUtil.info(linker, 'Audio loaded success. (url={1})', linker._url);
    }
 
    //==========================================================
@@ -53,7 +53,7 @@ export class FAudio extends FObject {
    public ohError(event) {
       var linker = (this as any).__linker;
       linker._finish = true;
-      RLogger.error(linker, 'Audio load failure. (url={1})', linker._url);
+      LoggerUtil.error(linker, 'Audio load failure. (url={1})', linker._url);
    }
 
    //==========================================================
@@ -105,7 +105,7 @@ export class FAudio extends FObject {
          }
       }
       hAudio.play();
-      RLogger.debug(this, 'Audio play. (url={1}, position={2})', this._url, position);
+      LoggerUtil.debug(this, 'Audio play. (url={1}, position={2})', this._url, position);
    }
 
    //==========================================================
@@ -115,7 +115,7 @@ export class FAudio extends FObject {
    //==========================================================
    public pause() {
       this._hAudio.pause();
-      RLogger.debug(this, 'Audio pause. (url={1})', this._url);
+      LoggerUtil.debug(this, 'Audio pause. (url={1})', this._url);
    }
 
    //==========================================================

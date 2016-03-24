@@ -1,4 +1,4 @@
-import {FObject} from '../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../runtime/common/lang/Objects';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../runtime/common/io/FDataStream';
@@ -9,7 +9,7 @@ import {FDataStream} from '../../runtime/common/io/FDataStream';
 // @author maocy
 // @history 150110
 //==========================================================
-export class FBoneResource extends FObject {
+export class FBoneResource extends ObjectBase {
    // 索引
    public index: number = null;
    // 跟踪

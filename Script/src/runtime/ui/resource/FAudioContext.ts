@@ -1,7 +1,7 @@
-import {FObject} from '../../common/lang/FObject';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {FDictionary} from '../../common/lang/FDictionary';
-import {RLogger} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/RLogger';
 import {RClass} from '../../common/reflect/RClass';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
@@ -14,7 +14,7 @@ import {FAudioBuffer} from './FAudioBuffer';
 // @author sunpeng
 // @history 150714
 //==========================================================
-export class FAudioContext extends FObject {
+export class FAudioContext extends ObjectBase {
    //..........................................................
    // @attribute
    //o._handle = MO.Class.register(o, new MO.AGetter('_handle'));
@@ -53,7 +53,7 @@ export class FAudioContext extends FObject {
          context = new (window as any).webkitAudioContext();
       }
       if (!context) {
-         return RLogger.error(o, 'Invalid audio context.');
+         return LoggerUtil.error(o, 'Invalid audio context.');
       }
       o._handle = context;
    }
@@ -88,7 +88,7 @@ export class FAudioContext extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._buffers = RObject.dispose(this._buffers);
+      this._buffers = ObjectUtil.dispose(this._buffers);
       // 父处理
       super.dispose();
    }

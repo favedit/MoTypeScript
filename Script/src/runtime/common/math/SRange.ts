@@ -1,4 +1,4 @@
-import {RInteger} from '../lang/RInteger';
+import {IntegerUtil} from '../lang/IntegerUtil';
 import {RString} from '../lang/RString';
 import {RClass} from '../reflect/RClass';
 
@@ -144,7 +144,7 @@ export class SRange {
    // @method
    //============================================================
    public inc(border) {
-      var n = RInteger.nvl(border, 1);
+      var n = IntegerUtil.nvl(border, 1);
       this.left -= n;
       this.top -= n;
       this.right += n;
@@ -157,7 +157,7 @@ export class SRange {
    // @method
    //============================================================
    public dec(border) {
-      var n = RInteger.nvl(border, 1);
+      var n = IntegerUtil.nvl(border, 1);
       this.left += n;
       this.top += n;
       this.right -= n;

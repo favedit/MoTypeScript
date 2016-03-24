@@ -1,4 +1,4 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>图形数据。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../../../runtime/common/lang/FObject';
 // @author maocy
 // @history 150308
 //==========================================================
-export class FFloatStream extends FObject {
+export class FFloatStream extends ObjectBase {
    public length = 0;
    public memory = null;
    public position = 0;

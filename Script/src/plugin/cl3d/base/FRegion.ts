@@ -1,7 +1,7 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SPoint2} from '../../../runtime/common/math/SPoint2';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
@@ -22,7 +22,7 @@ import {FDisplay} from './FDisplay';
 // @author maocy
 // @history 160305
 //==========================================================
-export class FRegion extends FObject implements IProcessContext {
+export class FRegion extends ObjectBase implements IProcessContext {
    // 改变状态
    public changed: boolean;
    // 命名空间
@@ -259,8 +259,8 @@ export class FRegion extends FObject implements IProcessContext {
    public dispose(): void {
       // this.ratioMatrix = RObject.free(this.ratioMatrix);
       // this.lights = RObject.free(this.lights);
-      this.renderables = RObject.free(this.renderables);
-      this.allRenderables = RObject.free(this.allRenderables);
+      this.renderables = ObjectUtil.free(this.renderables);
+      this.allRenderables = ObjectUtil.free(this.allRenderables);
       super.dispose();
    }
 }

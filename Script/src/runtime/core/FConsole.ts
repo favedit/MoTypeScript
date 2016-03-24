@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../common/lang/ScopeEnum';
-import {FObject} from '../common/lang/FObject';
+import {ObjectBase} from '../common/lang/ObjectBase';
 
 //==========================================================
 // <T>后台服务基类。</T>
@@ -8,7 +8,7 @@ import {FObject} from '../common/lang/FObject';
 // @author maocy
 // @version 141231
 //==========================================================
-export class FConsole extends FObject {
+export class FConsole extends ObjectBase {
    // 范围类型
    protected _scopeCd: ScopeEnum;
    // 设置状态

@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FImage} from '../../../runtime/ui/resource/FImage';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
@@ -80,7 +80,7 @@ export class FE3rBitmapCubePack extends FE3rBitmapPack {
       //      is[i] = MO.Lang.Object.dispose(m);
       //   }
       //}
-      this._images = RObject.dispose(this._images, true);
+      this._images = ObjectUtil.dispose(this._images, true);
       // 加载完成
       this._dataReady = true;
       this._ready = true;
@@ -93,7 +93,7 @@ export class FE3rBitmapCubePack extends FE3rBitmapPack {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._images = RObject.dispose(this._images, true);
+      this._images = ObjectUtil.dispose(this._images, true);
       // 父处理
       super.dispose();
    }

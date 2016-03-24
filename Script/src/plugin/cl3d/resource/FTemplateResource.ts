@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FResource} from './FResource';
 import {FTemplateRenderableResource} from './FTemplateRenderableResource';
 
@@ -90,7 +90,7 @@ export class FTemplateResource extends FResource {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      this.renderables = RObject.dispose(this.renderables);
+      this.renderables = ObjectUtil.dispose(this.renderables);
       // 父处理
       super.dispose();
    }

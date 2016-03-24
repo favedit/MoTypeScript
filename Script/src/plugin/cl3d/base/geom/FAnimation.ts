@@ -1,6 +1,6 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../../runtime/common/lang/Objects';
-import {RObject} from '../../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 
 //==========================================================
 // <T>渲染区域。</T>
@@ -8,7 +8,7 @@ import {RObject} from '../../../../runtime/common/lang/RObject';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FAnimation extends FObject {
+export class FAnimation extends ObjectBase {
    // @attribute
    protected _baseTick = 0;
    protected _currentTick = 0;
@@ -64,7 +64,7 @@ export class FAnimation extends FObject {
    // @method
    //==========================================================
    public dispose() {
-      this._bones = RObject.dispose(this._bones);
+      this._bones = ObjectUtil.dispose(this._bones);
       super.dispose();
    }
 }

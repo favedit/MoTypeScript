@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {FGraphicContext} from './FGraphicContext';
@@ -10,7 +10,7 @@ import {FGraphicContext} from './FGraphicContext';
 // @author maocy
 // @history 150206
 //==========================================================
-export class FGraphicObject extends FObject {
+export class FGraphicObject extends ObjectBase {
    // 图形环境
    public _graphicContext: any;
 

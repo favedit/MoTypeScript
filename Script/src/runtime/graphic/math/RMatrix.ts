@@ -1,4 +1,4 @@
-import {RArray} from '../../common/lang/RArray'
+import {ArrayUtil} from '../../common/lang/ArrayUtil'
 
 //==========================================================
 // <T>矩阵函数管理类</T>
@@ -169,7 +169,7 @@ export class RMatrix {
       var y = (top + bottom) / height;
       var z = znear / distance;
       // 设置数据
-      var data = RArray.copy(o.identity4x4, 0, 16, matrix.data(), 0);
+      var data = ArrayUtil.copy(o.identity4x4, 0, 16, matrix.data(), 0);
       data[0] = 2 / width;
       data[5] = 2 / height;
       data[10] = 1 / distance;
@@ -199,7 +199,7 @@ export class RMatrix {
       var y = (top + bottom) / height;
       var z = (znear + zfar) / distance;
       // 设置数据
-      var data = RArray.copy(o.identity4x4, 0, 16, matrix.data(), 0);
+      var data = ArrayUtil.copy(o.identity4x4, 0, 16, matrix.data(), 0);
       data[0] = 2 / width;
       data[5] = 2 / height;
       data[10] = -2 / distance;

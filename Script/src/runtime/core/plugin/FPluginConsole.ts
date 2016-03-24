@@ -1,5 +1,5 @@
 import {Objects} from '../../common/lang/Objects';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {FListeners} from '../../common/lang/FListeners';
 import {FConsole} from '../FConsole';
 import {IPlugin} from './IPlugin';
@@ -144,11 +144,11 @@ export class FPluginConsole extends FConsole {
    // @method
    //==========================================================
    public dispose(flag: boolean = false): void {
-      this.context = RObject.dispose(this.context);
-      this.plugins = RObject.dispose(this.plugins);
-      this.loadingPlugins = RObject.dispose(this.loadingPlugins);
-      this.activedListeners = RObject.dispose(this.activedListeners);
-      this.deactivedListeners = RObject.dispose(this.deactivedListeners);
+      this.context = ObjectUtil.dispose(this.context);
+      this.plugins = ObjectUtil.dispose(this.plugins);
+      this.loadingPlugins = ObjectUtil.dispose(this.loadingPlugins);
+      this.activedListeners = ObjectUtil.dispose(this.activedListeners);
+      this.deactivedListeners = ObjectUtil.dispose(this.deactivedListeners);
       super.dispose();
    }
 }

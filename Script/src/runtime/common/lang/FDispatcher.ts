@@ -1,13 +1,13 @@
-import {FObject} from './FObject';
+import {ObjectBase} from './ObjectBase';
 import {FDictionary} from './FDictionary';
 import {FListener} from './FListener';
 import {FListeners} from './FListeners';
-import {RObject} from './RObject';
+import {ObjectUtil} from './ObjectUtil';
 
 //==========================================================
 // <T>调度器。</T>
 //==========================================================
-export class FDispatcher extends FObject {
+export class FDispatcher extends ObjectBase {
    // 监听器集合字典
    public _listenerss: FDictionary<FListeners> = null;
 
@@ -141,7 +141,7 @@ export class FDispatcher extends FObject {
             var listeners = listenerss.at(n);
             listeners.dispose();
          }
-         this._listenerss = RObject.dispose(listenerss);
+         this._listenerss = ObjectUtil.dispose(listenerss);
       }
       super.dispose();
    }

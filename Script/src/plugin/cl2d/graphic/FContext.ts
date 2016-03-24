@@ -1,6 +1,6 @@
 import {FError} from '../../../runtime/common/lang/FError';
 import {SSize2} from '../../../runtime/common/math/SSize2';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 
 //==========================================================
@@ -828,8 +828,8 @@ export class FContext extends FGraphicContext {
       this._gridDrawWidth = null;
       this._gridDrawHeight = null;
       // 释放属性
-      this._globalScale = RObject.dispose(this._globalScale);
-      this._scale = RObject.dispose(this._scale);
+      this._globalScale = ObjectUtil.dispose(this._globalScale);
+      this._scale = ObjectUtil.dispose(this._scale);
       // 父处理
       super.dispose();
    }

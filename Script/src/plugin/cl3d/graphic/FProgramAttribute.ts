@@ -1,5 +1,5 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
-import {REnum} from '../../../runtime/common/lang/REnum';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
+import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {EAttributeFormat} from './EAttributeFormat';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {EAttributeFormat} from './EAttributeFormat';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FProgramAttribute extends FObject {
+export class FProgramAttribute extends ObjectBase {
    //..........................................................
    // @attribute 名称
    public name: string;
@@ -32,7 +32,7 @@ export class FProgramAttribute extends FObject {
    public loadConfig(xconfig) {
       this.name = xconfig.get('name');
       this.linker = xconfig.get('linker');
-      this.formatCd = REnum.encode(EAttributeFormat, xconfig.get('format'));
+      this.formatCd = EnumUtil.encode(EAttributeFormat, xconfig.get('format'));
    }
 
    //==========================================================

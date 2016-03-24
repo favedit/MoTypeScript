@@ -1,4 +1,4 @@
-﻿import {FObject} from './FObject'
+﻿import {ObjectBase} from './ObjectBase'
 import {FDictionary} from './FDictionary'
 import {ObjectPool} from './ObjectPool'
 import {RClass} from '../reflect/RClass'
@@ -10,7 +10,7 @@ import {RClass} from '../reflect/RClass'
 // @author maocy
 // @version 150411
 //==========================================================
-export class ObjectPools extends FObject {
+export class ObjectPools extends ObjectBase {
    // 缓冲字典
    public _pools: FDictionary<any> = null;
 

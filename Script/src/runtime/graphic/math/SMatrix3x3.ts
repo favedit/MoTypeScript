@@ -1,5 +1,5 @@
 import {FString} from '../../common/lang/FString';
-import {RFloat} from '../../common/lang/RFloat';
+import {FloatUtil} from '../../common/lang/RFloat';
 import {SPoint3} from '../../common/math/SPoint3';
 import {RMath} from '../../common/math/RMath';
 
@@ -371,7 +371,7 @@ export class SMatrix3x3 {
             if (x > 0) {
                r.append(',');
             }
-            r.append(RFloat.format(v, 0, null, 3, null));
+            r.append(FloatUtil.format(v, 0, null, 3, null));
          }
       }
       return r.flush();

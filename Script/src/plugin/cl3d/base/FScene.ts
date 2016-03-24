@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {RAssert} from '../../../runtime/common/RAssert';
@@ -271,10 +271,10 @@ export class FScene extends FGraphicObject implements IScene {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      this.backgroundColor = RObject.dispose(this.backgroundColor);
-      this.layers = RObject.dispose(this.layers);
-      this.enterFrameListeners = RObject.dispose(this.enterFrameListeners);
-      this.leaveFrameListeners = RObject.dispose(this.leaveFrameListeners);
+      this.backgroundColor = ObjectUtil.dispose(this.backgroundColor);
+      this.layers = ObjectUtil.dispose(this.layers);
+      this.enterFrameListeners = ObjectUtil.dispose(this.enterFrameListeners);
+      this.leaveFrameListeners = ObjectUtil.dispose(this.leaveFrameListeners);
       // 父处理
       super.dispose();
    }

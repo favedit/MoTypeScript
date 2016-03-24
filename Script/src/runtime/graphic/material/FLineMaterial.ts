@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {FMaterial} from './FMaterial';
 
@@ -34,7 +34,7 @@ export class FLineMaterial extends FMaterial {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this.lineColor = RObject.dispose(this.lineColor);
+      this.lineColor = ObjectUtil.dispose(this.lineColor);
       // 父处理
       super.dispose();
    }

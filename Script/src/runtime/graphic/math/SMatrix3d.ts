@@ -1,5 +1,5 @@
 import {SMatrix4x4} from './SMatrix4x4';
-import {RFloat} from '../../common/lang/RFloat';
+import {FloatUtil} from '../../common/lang/RFloat';
 
 //==========================================================
 // <T>三维矩阵。</T>
@@ -691,14 +691,14 @@ public parse(translation, scale, skew, perspective, quaternion){
    //==========================================================
    public saveConfig(p) {
       var o = this;
-      p.set('tx', RFloat.format(o.tx));
-      p.set('ty', RFloat.format(o.ty));
-      p.set('tz', RFloat.format(o.tz));
-      p.set('rx', RFloat.format(o.rx));
-      p.set('ry', RFloat.format(o.ry));
-      p.set('rz', RFloat.format(o.rz));
-      p.set('sx', RFloat.format(o.sx));
-      p.set('sy', RFloat.format(o.sy));
-      p.set('sz', RFloat.format(o.sz));
+      p.set('tx', FloatUtil.format(o.tx));
+      p.set('ty', FloatUtil.format(o.ty));
+      p.set('tz', FloatUtil.format(o.tz));
+      p.set('rx', FloatUtil.format(o.rx));
+      p.set('ry', FloatUtil.format(o.ry));
+      p.set('rz', FloatUtil.format(o.rz));
+      p.set('sx', FloatUtil.format(o.sx));
+      p.set('sy', FloatUtil.format(o.sy));
+      p.set('sz', FloatUtil.format(o.sz));
    }
 }

@@ -3,7 +3,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {Objects} from '../../common/lang/Objects';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {SListenerContext} from '../../common/lang/SListenerContext';
 import {SEvent} from '../../common/lang/SEvent';
 // import {RLogger} from '../../common/lang/RLogger';
@@ -135,7 +135,7 @@ export class FLoaderConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._loaders = RObject.dispose(this._loaders);
+      this._loaders = ObjectUtil.dispose(this._loaders);
       // 父处理
       super.dispose();
    }

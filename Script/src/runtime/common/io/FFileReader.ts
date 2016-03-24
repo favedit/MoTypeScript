@@ -1,6 +1,6 @@
 import {SEvent} from '../lang/SEvent';
-import {FObject} from '../lang/FObject';
-import {RLogger} from '../lang/RLogger';
+import {ObjectBase} from '../lang/ObjectBase';
+import {LoggerUtil} from '../lang/RLogger';
 
 //==========================================================
 // <T>文件读取器。</T>
@@ -9,7 +9,7 @@ import {RLogger} from '../lang/RLogger';
 // @author maocy
 // @version 150401
 //==========================================================
-export class FFileReader extends FObject {
+export class FFileReader extends ObjectBase {
    //..........................................................
    // @attribute
    protected __linker = null;
@@ -53,7 +53,7 @@ export class FFileReader extends FObject {
       var reader = o._reader;
       o._statusFree = true;
       if (reader.error) {
-         RLogger.error(o, 'Load file failure. (error={1])', reader.error);
+         LoggerUtil.error(o, 'Load file failure. (error={1])', reader.error);
       } else {
          // 设置属性
          o._length = reader.result.byteLength;

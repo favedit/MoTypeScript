@@ -1,4 +1,4 @@
-import {RLogger} from '../../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../../runtime/common/lang/RLogger';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {EShader} from '../EShader';
 import {FProgram} from '../FProgram';
@@ -134,7 +134,7 @@ export class FWglProgram extends FProgram {
       var pr = graphic.getProgramParameter(handle, graphic.LINK_STATUS);
       if (!pr) {
          var pi = graphic.getProgramInfoLog(handle);
-         RLogger.fatal(this, null, "Link program failure. (status={1}, reason={2})", pr, pi);
+         LoggerUtil.fatal(this, null, "Link program failure. (status={1}, reason={2})", pr, pi);
          // 释放程序
          graphic.deleteProgram(this.handle);
          this.handle = null;

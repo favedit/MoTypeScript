@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
-import {RLogger} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/RLogger';
 import {EThreadStatus} from './EThreadStatus';
 import {FConsole} from '../FConsole';
 import {RConsole} from '../RConsole';

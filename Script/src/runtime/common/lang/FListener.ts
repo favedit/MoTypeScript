@@ -2,9 +2,9 @@ import {RMethod} from '../reflect/RMethod'
 import {RClass} from '../reflect/RClass'
 import {RMemory} from '../RMemory'
 import {SListenerContext} from './SListenerContext'
-import {FObject} from './FObject'
-import {RObject} from './RObject'
-import {RListener} from './RListener'
+import {ObjectBase} from './ObjectBase'
+import {ObjectUtil} from './ObjectUtil'
+import {ListenerUtil} from './ListenerUtil'
 
 //==========================================================
 // <T>监听器。</T>
@@ -13,7 +13,7 @@ import {RListener} from './RListener'
 // @author maocy
 // @version 160306
 //==========================================================
-export class FListener extends FObject {
+export class FListener extends ObjectBase {
    //..........................................................
    // 拥有者
    public owner: any = null;
@@ -42,7 +42,7 @@ export class FListener extends FObject {
       context.attributes = this.attributes;
       context.parameters = parameters;
       // 消息处理
-      RListener.process(context);
+      ListenerUtil.process(context);
    }
 
    //==========================================================
@@ -63,6 +63,6 @@ export class FListener extends FObject {
    public dispose() {
       this.owner = null;
       this.callback = null;
-      RObject.free(this);
+      ObjectUtil.free(this);
    }
 }

@@ -1,6 +1,6 @@
 import {RMethod} from '../reflect/RMethod'
 import {FString} from './FString'
-import {RArray} from './RArray'
+import {ArrayUtil} from './ArrayUtil'
 
 //==========================================================
 // <T>错误处理类。</T>
@@ -22,7 +22,7 @@ export class FError {
       var s = new FString();
       var t = new Array();
       while (f) {
-         if (RArray.contains(t, f)) {
+         if (ArrayUtil.contains(t, f)) {
             break;
          }
          t.push(f);

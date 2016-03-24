@@ -1,5 +1,5 @@
 import {Objects} from '../../runtime/common/lang/Objects';
-import {RObject} from '../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../runtime/common/io/FDataStream';
 import {FResourceComponent} from './FResourceComponent';

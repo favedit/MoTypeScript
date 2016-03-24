@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FMaterial} from './FMaterial';
 
 //==========================================================
@@ -28,7 +28,7 @@ export class FCombinationMaterial extends FMaterial {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this._materials = RObject.dispose(this._materials);
+      this._materials = ObjectUtil.dispose(this._materials);
       // 父处理
       super.dispose();
    }

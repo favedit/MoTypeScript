@@ -1,4 +1,4 @@
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {SVector3} from '../../common/math/SVector3';
 import {FLight} from './FLight';
 
@@ -31,8 +31,8 @@ export class FDirectionalLight extends FLight {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._camera = RObject.dispose(this._camera);
-      this._direction = RObject.dispose(this._direction);
+      this._camera = ObjectUtil.dispose(this._camera);
+      this._direction = ObjectUtil.dispose(this._direction);
       // 父处理
       super.dispose();
    }

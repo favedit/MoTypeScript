@@ -1,9 +1,9 @@
 import {FError} from '../lang/FError';
-import {RInteger} from '../lang/RInteger';
-import {FObject} from '../lang/FObject';
+import {IntegerUtil} from '../lang/IntegerUtil';
+import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
-import {RBoolean} from '../lang/RBoolean';
-import {RFloat} from '../lang/RFloat';
+import {BooleanUtil} from '../lang/BooleanUtil';
+import {FloatUtil} from '../lang/RFloat';
 import {FAttributes} from '../lang/FAttributes';
 import {RString} from '../lang/RString';
 import {RClass} from '../reflect/RClass';
@@ -15,7 +15,7 @@ import {RClass} from '../reflect/RClass';
 // @author maocy
 // @version 141229
 //==========================================================
-export class FNode extends FObject {
+export class FNode extends ObjectBase {
    //..........................................................
    // @attribute
    protected _name: string = null;
@@ -193,7 +193,7 @@ export class FNode extends FObject {
    // @return Integer 数字内容
    //==========================================================
    public getInteger(name, defaultValue) {
-      return RInteger.parse(this.get(name, defaultValue));
+      return IntegerUtil.parse(this.get(name, defaultValue));
    }
 
    //==========================================================
@@ -231,7 +231,7 @@ export class FNode extends FObject {
    //==========================================================
    public setBoolean(n, v) {
       if (v != null) {
-         this.attributes().set(n, RBoolean.format(v));
+         this.attributes().set(n, BooleanUtil.format(v));
       }
    }
 
@@ -244,7 +244,7 @@ export class FNode extends FObject {
    //==========================================================
    public setFloat(n, v) {
       if (v != null) {
-         this.attributes().set(n, RFloat.format(v));
+         this.attributes().set(n, FloatUtil.format(v));
       }
    }
 

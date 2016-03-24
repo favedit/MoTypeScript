@@ -1,4 +1,4 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FImage} from '../../../runtime/ui/resource/FImage';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
@@ -29,7 +29,7 @@ export class FE3rBitmapFlatPack extends FE3rBitmapPack {
       texture.upload(this._image);
       texture.makeMipmap();
       // 释放位图
-      this._image = RObject.dispose(this._image);
+      this._image = ObjectUtil.dispose(this._image);
       // 加载完成
       this._dataReady = true;
    }
@@ -53,7 +53,7 @@ export class FE3rBitmapFlatPack extends FE3rBitmapPack {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._image = RObject.dispose(this._image);
+      this._image = ObjectUtil.dispose(this._image);
       // 父处理
       super.dispose();
    }

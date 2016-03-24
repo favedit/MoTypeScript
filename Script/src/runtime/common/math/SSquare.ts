@@ -1,5 +1,5 @@
 import {RClass} from '../reflect/RClass';
-import {RInteger} from '../lang/RInteger';
+import {IntegerUtil} from '../lang/IntegerUtil';
 import {RString} from '../lang/RString';
 
 //==========================================================
@@ -150,7 +150,7 @@ export class SSquare {
    // @method
    //============================================================
    public inc(border) {
-      var n = RInteger.nvl(border, 1);
+      var n = IntegerUtil.nvl(border, 1);
       this.left -= n;
       this.top -= n;
       this.right += n;
@@ -163,7 +163,7 @@ export class SSquare {
    // @method
    //============================================================
    public dec(border) {
-      var n = RInteger.nvl(border, 1);
+      var n = IntegerUtil.nvl(border, 1);
       this.left += n;
       this.top += n;
       this.right -= n;

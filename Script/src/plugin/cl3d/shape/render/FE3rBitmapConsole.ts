@@ -1,8 +1,8 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {FDictionary} from '../../runtime/common/lang/FDictionary'
-import {RObject} from '../../runtime/common/lang/RObject'
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
-import {RLogger} from '../../runtime/common/lang/RLogger'
+import {LoggerUtil} from '../../runtime/common/lang/RLogger'
 import {FConsole} from '../../runtime/core/FConsole'
 import {FEnvironmentConsole} from '../../runtime/core/console/FEnvironmentConsole'
 import {FE3rBitmap} from './FE3rBitmap'
@@ -52,7 +52,7 @@ export class FE3rBitmapConsole extends FConsole {
       // 生成地址
       var loadUrl: string = this._environmentConsole.parse(this._dataUrl);
       // var url = MO.Window.Browser.hostPath(this._dataUrl + '?guid=' + guid + '&code=' + code);
-      RLogger.info(this, 'Load bitmap. (url={1})', loadUrl);
+      LoggerUtil.info(this, 'Load bitmap. (url={1})', loadUrl);
       // 加载模型
       var graphic = context.graphicContext();
       if (code == 'environment') {
@@ -80,7 +80,7 @@ export class FE3rBitmapConsole extends FConsole {
       }
       // 生成地址
       var loadUrl: string = this._environmentConsole.parse(url);
-      RLogger.info(this, 'Load bitmap from url. (url={1})', loadUrl);
+      LoggerUtil.info(this, 'Load bitmap from url. (url={1})', loadUrl);
       // 创建渲染位图
       //var bitmap = context.createObject(FE3rBitmap);
       //bitmap.loadUrl(url);
@@ -93,7 +93,7 @@ export class FE3rBitmapConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放处理
-      this._bitmaps = RObject.dispose(this._bitmaps);
+      this._bitmaps = ObjectUtil.dispose(this._bitmaps);
       // 父处理
       super.dispose();
    }

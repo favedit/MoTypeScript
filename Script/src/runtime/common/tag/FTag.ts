@@ -1,5 +1,5 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {FObject} from '../lang/FObject';
+import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
 import {FString} from '../lang/FString';
 import {RString} from '../lang/RString';
@@ -13,7 +13,7 @@ import {RClass} from '../reflect/RClass';
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTag extends FObject {
+export class FTag extends ObjectBase {
    //..........................................................
    // @attribute
    protected _name: string;

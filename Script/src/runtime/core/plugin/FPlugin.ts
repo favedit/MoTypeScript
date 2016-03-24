@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 import {IPlugin} from './IPlugin';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {IPlugin} from './IPlugin';
 // @author maocy
 // @version 160309
 //==========================================================
-export class FPlugin extends FObject implements IPlugin {
+export class FPlugin extends ObjectBase implements IPlugin {
 
    // 类型
    public type = null;

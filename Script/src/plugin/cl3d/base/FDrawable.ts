@@ -1,4 +1,4 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RObjectId} from '../../../runtime/common/lang/RObjectId';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {RMath} from '../../../runtime/common/math/RMath';
@@ -104,8 +104,8 @@ export class FDrawable extends FGraphicObject implements IDrawable {
    public dispose() {
       // 释放属性
       this.parent = null;
-      this.matrix = RObject.dispose(this.matrix);
-      this.currentMatrix = RObject.dispose(this.currentMatrix);
+      this.matrix = ObjectUtil.dispose(this.matrix);
+      this.currentMatrix = ObjectUtil.dispose(this.currentMatrix);
       // 父处理
       super.dispose();
    }

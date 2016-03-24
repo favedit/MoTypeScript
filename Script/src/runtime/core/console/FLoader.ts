@@ -1,5 +1,5 @@
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>加载器。</T>
@@ -8,7 +8,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author maocy
 // @version 160306
 //==========================================================
-export abstract class FLoader extends FObject {
+export abstract class FLoader extends ObjectBase {
    // 内容类型
    public contentCd: DataContentEnum = DataContentEnum.Unknown;
    // 内容

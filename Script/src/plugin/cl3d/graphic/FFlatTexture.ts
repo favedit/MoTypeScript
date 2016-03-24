@@ -1,4 +1,4 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {FFlatTexture as FBaseFlatTexture} from '../../../runtime/graphic/material/FFlatTexture';
 

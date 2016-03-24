@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RObjectId} from '../../../runtime/common/lang/RObjectId';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
 import {RAssert} from '../../../runtime/common/RAssert';
@@ -297,9 +297,9 @@ export class FRenderable extends FDrawable implements IRenderable {
    public dispose() {
       // 释放属性
       this.activeInfo = null;
-      this._infos = RObject.dispose(this._infos, true);
-      this.vertexBuffers = RObject.dispose(this.vertexBuffers);
-      this.indexBuffers = RObject.dispose(this.indexBuffers);
+      this._infos = ObjectUtil.dispose(this._infos, true);
+      this.vertexBuffers = ObjectUtil.dispose(this.vertexBuffers);
+      this.indexBuffers = ObjectUtil.dispose(this.indexBuffers);
       // 父处理
       super.dispose();
    }

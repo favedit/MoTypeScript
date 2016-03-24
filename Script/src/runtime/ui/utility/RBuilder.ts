@@ -1,4 +1,4 @@
-﻿import {RInteger} from '../../common/lang/RInteger';
+﻿import {IntegerUtil} from '../../common/lang/IntegerUtil';
 import {RString} from '../../common/lang/RString';
 
 //==========================================================
@@ -210,10 +210,10 @@ export class RBuilder {
    public static createTable(d, s, b, cs, cp) {
       var h = this.create(d, 'TABLE', s);
       if (b) {
-         h.border = RInteger.nvl(b);
+         h.border = IntegerUtil.nvl(b);
       }
-      h.cellSpacing = RInteger.nvl(cs);
-      h.cellPadding = RInteger.nvl(cp);
+      h.cellSpacing = IntegerUtil.nvl(cs);
+      h.cellPadding = IntegerUtil.nvl(cp);
       return h;
    }
 

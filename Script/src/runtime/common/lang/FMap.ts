@@ -1,7 +1,7 @@
 import {RAssert} from '../RAssert';
 import {RRuntime} from '../RRuntime';
 import {FString} from './FString'
-import {FObject} from './FObject';
+import {ObjectBase} from './ObjectBase';
 
 //==========================================================
 // <T>名称和内容的关联保存表的工具类。</T>
@@ -10,11 +10,11 @@ import {FObject} from './FObject';
 // @author maocy
 // @version 141226
 //==========================================================
-export class FMap<N, V> extends FObject {
+export class FMap<N, V> extends ObjectBase {
    // 总数
    protected _count: number = 0;
    // 对照表
-   protected _table: any = new FObject();
+   protected _table: any = new ObjectBase();
    // 名称集合
    protected _names: Array<N> = new Array<N>();
    // 内容集合

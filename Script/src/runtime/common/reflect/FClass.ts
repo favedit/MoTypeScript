@@ -1,14 +1,14 @@
-import {FObject} from '../lang/FObject'
+import {ObjectBase} from '../lang/ObjectBase'
 import {Objects} from '../lang/Objects'
 import {FDictionary} from '../lang/FDictionary'
 import {FError} from '../lang/FError'
-import {RLogger} from '../lang/RLogger'
+import {LoggerUtil} from '../lang/RLogger'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'
 import {RClass} from './RClass'
 //import {FString} from '../lang/FString'
 //import {FObjects} from '../lang/Objects'
-//import {RObject} from '../lang/RObject'
+//import {RObject} from '../lang/ObjectUtil'
 //import {FMemoryPool} from '../lang/FMemoryPool'
 //import {RMethod} from './RMethod'
 
@@ -19,7 +19,7 @@ import {RClass} from './RClass'
 // @author maocy
 // @version 141226
 //==========================================================
-export class FClass extends FObject {
+export class FClass extends ObjectBase {
    // 短名称
    public shortName: string;
    // 全名称
@@ -131,7 +131,7 @@ export class FClass extends FObject {
    public getAnnotations(annotationCd: EAnnotation): FDictionary<FAnnotation> {
       var annotations: FDictionary<FAnnotation> = this.findAnnotations(annotationCd);
       if (!annotations) {
-         RLogger.fatal(this, null, "Can't find annotations. (class={1}, annotation_cd={2})", this.shortName, annotationCd);
+         LoggerUtil.fatal(this, null, "Can't find annotations. (class={1}, annotation_cd={2})", this.shortName, annotationCd);
       }
       return annotations;
    }
@@ -162,7 +162,7 @@ export class FClass extends FObject {
    public getAnnotation(annotationCd: EAnnotation, code: string): FAnnotation {
       var annotation: FAnnotation = this.findAnnotation(annotationCd, code);
       if (!annotation) {
-         RLogger.fatal(this, null, "Can't find annotation. (class={1}, annotation_cd={2}, code={3},)", this.shortName, annotationCd, code);
+         LoggerUtil.fatal(this, null, "Can't find annotation. (class={1}, annotation_cd={2}, code={3},)", this.shortName, annotationCd, code);
       }
       return annotation;
    }
@@ -187,7 +187,7 @@ export class FClass extends FObject {
    public getAttribute(code: string): FAnnotation {
       var attribute = this.findAttribute(code);
       if (!attribute) {
-         RLogger.fatal(this, null, "Can't find attribute. (class={1}, code={2},)", this.shortName, code);
+         LoggerUtil.fatal(this, null, "Can't find attribute. (class={1}, code={2},)", this.shortName, code);
       }
       return attribute;
    }

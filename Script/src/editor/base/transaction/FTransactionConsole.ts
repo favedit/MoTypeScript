@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RLogger} from '../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCommand} from '../command/FCommand';
 import {FSession} from './FSession';
@@ -56,7 +56,7 @@ export class FTransactionConsole extends FConsole {
    //==========================================================
    public endSession(failFunction) {
       if (this._sessionStack.isEmpty()) {
-         RLogger.warn(this, "EndSession when there is only default session in place.");
+         LoggerUtil.warn(this, "EndSession when there is only default session in place.");
       } else {
          var pdataCur = null;
          if (failFunction) {

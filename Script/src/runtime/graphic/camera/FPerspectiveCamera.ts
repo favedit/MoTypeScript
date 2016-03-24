@@ -1,4 +1,4 @@
-import {RObject} from '../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {SVector3} from '../../runtime/common/math/SVector3';
 import {SQuaternion} from '../../runtime/common/math/SQuaternion';
 import {SMatrix3x3} from '../../runtime/graphic/math/SMatrix3x3';
@@ -180,7 +180,7 @@ export class FPerspectiveCamera extends FCamera {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.projection = RObject.dispose(this.projection);
+      this.projection = ObjectUtil.dispose(this.projection);
       // 父处理
       super.dispose();
    }

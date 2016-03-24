@@ -2,7 +2,7 @@ import {DataTypeEnum} from '../../../runtime/common/lang/DataTypeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {EIndexStride} from '../../graphic/EIndexStride';
 import {EAttributeFormat} from '../../graphic/EAttributeFormat';
 import {FStreamResource} from '../resource/FStreamResource';

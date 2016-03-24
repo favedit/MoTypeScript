@@ -1,4 +1,4 @@
-import {RObject} from '../lang/RObject';
+import {ObjectUtil} from '../lang/ObjectUtil';
 import {FSocket} from './FSocket';
 
 //==========================================================
@@ -113,8 +113,8 @@ export class FBufferedSocket extends FSocket {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._bufferSends = RObject.dispose(this._bufferSends);
-      this._bufferReceives = RObject.dispose(this._bufferReceives);
+      this._bufferSends = ObjectUtil.dispose(this._bufferSends);
+      this._bufferReceives = ObjectUtil.dispose(this._bufferReceives);
       // 父处理
       super.dispose();
    }

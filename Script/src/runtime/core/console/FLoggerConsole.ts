@@ -2,8 +2,8 @@ import {ALinker} from '../../common/reflect/ALinker';
 import {AProperty} from '../../common/reflect/AProperty';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataTypeEnum} from '../../common/lang/DataTypeEnum';
-import {RObject} from '../../common/lang/RObject';
-import {RLogger} from '../../common/lang/RLogger';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
+import {LoggerUtil} from '../../common/lang/RLogger';
 import {RClass} from '../../common/reflect/RClass';
 import {FBufferedSocket} from '../../common/net/FBufferedSocket';
 import {FEnvironmentConsole} from './FEnvironmentConsole';
@@ -37,7 +37,7 @@ export class FLoggerConsole extends FConsole {
    public static instance() {
       var loggerConsole = new FLoggerConsole();
       //var loggerConsole:FLoggerConsole = RClass.getInstance(FLoggerConsole);
-      RLogger.outputListeners.register(loggerConsole, loggerConsole.onOutput);
+      LoggerUtil.outputListeners.register(loggerConsole, loggerConsole.onOutput);
       return loggerConsole;
    }
 
@@ -109,7 +109,7 @@ export class FLoggerConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._socket = RObject.dispose(this._socket);
+      this._socket = ObjectUtil.dispose(this._socket);
       // 父处理
       super.dispose();
    }

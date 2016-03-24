@@ -1,4 +1,4 @@
-import {RLogger} from '../../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../../runtime/common/lang/RLogger';
 import {RAssert} from '../../../../runtime/common/RAssert';
 import {SWglSetting} from './SWglSetting';
 import {FWglContext} from './FWglContext';
@@ -40,7 +40,7 @@ export class RWglContext {
             } else {
                context = new FWglContext1();
             }
-            RLogger.debug(null, 'Create context3d. (code={1}, handle={2})', code, hHandle);
+            LoggerUtil.debug(null, 'Create context3d. (code={1}, handle={2})', code, hHandle);
             break;
          }
       }
@@ -48,7 +48,7 @@ export class RWglContext {
       if (hHandle) {
          context.setup(hCanvas, hHandle);
       } else {
-         RLogger.error(null, 'Create context3d failure.');
+         LoggerUtil.error(null, 'Create context3d failure.');
          //var event = new SEvent(this);
          //event.code = MO.EGraphicError.UnsupportWebGL;
          //event.message = "Current browser can't support WebGL technique.";

@@ -1,4 +1,4 @@
-import {RFloat} from '../../common/lang/RFloat';
+import {FloatUtil} from '../../common/lang/RFloat';
 
 //==========================================================
 // <T>颜色。</T>
@@ -147,6 +147,6 @@ export class SCorners {
    // @return String 字符串
    //============================================================
    public toString() {
-      return RFloat.format(this.red) + ',' + RFloat.format(this.green) + ',' + RFloat.format(this.blue) + ',' + RFloat.format(this.alpha);
+      return FloatUtil.format(this.red) + ',' + FloatUtil.format(this.green) + ',' + FloatUtil.format(this.blue) + ',' + FloatUtil.format(this.alpha);
    }
 }

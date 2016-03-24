@@ -1,4 +1,4 @@
-import {RFloat} from '../../../runtime/common/lang/RFloat';
+import {FloatUtil} from '../../../runtime/common/lang/RFloat';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 
 //==========================================================
@@ -171,7 +171,7 @@ export class SMaterialInfo {
       // 设置反射
       o.optionReflect = info.optionReflect;
       o.reflectColor.assign(info.reflectColor);
-      o.reflectMerge = RFloat.toRange(info.reflectMerge, 0, 2);
+      o.reflectMerge = FloatUtil.toRange(info.reflectMerge, 0, 2);
       o.reflectShadow = info.reflectShadow;
       // 设置折射
       o.optionRefract = info.optionRefract;
@@ -257,7 +257,7 @@ export class SMaterialInfo {
       // 设置反射
       o.optionReflect = info.optionReflect;
       o.reflectColor.assignPower(info.reflectColor);
-      o.reflectMerge = RFloat.toRange(info.reflectMerge, 0, 2);
+      o.reflectMerge = FloatUtil.toRange(info.reflectMerge, 0, 2);
       o.reflectShadow = info.reflectShadow;
       // 设置折射
       o.optionRefract = info.optionRefract;

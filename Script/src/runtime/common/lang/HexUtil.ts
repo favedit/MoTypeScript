@@ -1,4 +1,4 @@
-import {FObject} from './FObject';
+import {ObjectBase} from './ObjectBase';
 import {RString} from './RString';
 
 //==========================================================
@@ -8,11 +8,11 @@ import {RString} from './RString';
 // @author maocy
 // @version 150201
 //==========================================================
-export class RHex {
+export class HexUtil {
    // @define
    public static NUMBER: string = '0x123456789ABCDEF';
    public static PAD: string = '0';
-   public static PAD2: FObject = new FObject();
+   public static PAD2: ObjectBase = new ObjectBase();
 
    //===========================================================
    // <T>判断是否有效16进制内容。</T>

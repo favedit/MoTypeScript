@@ -8,7 +8,7 @@ import {RString} from './RString';
 // @author maocy
 // @version 150131
 //==========================================================
-export class RFloat {
+export class FloatUtil {
    //..........................................................
    // @define
    public static Chars = '0123456789-.%';

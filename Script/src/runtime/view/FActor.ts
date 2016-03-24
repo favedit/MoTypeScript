@@ -1,6 +1,6 @@
-import {FObject} from '../common/lang/FObject';
+import {ObjectBase} from '../common/lang/ObjectBase';
 
-export class FActor extends FObject {
+export class FActor extends ObjectBase {
    //public drawable: FDrawable = null;
 
    public constructor() {

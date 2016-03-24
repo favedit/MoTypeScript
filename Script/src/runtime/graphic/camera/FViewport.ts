@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>渲染视角。</T>
@@ -6,7 +6,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 // @author maocy
 // @history 141231
 //==========================================================
-export class FViewport extends FObject {
+export class FViewport extends ObjectBase {
    public left = 0;
    public top = 0;
    public width = 0;

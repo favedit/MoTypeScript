@@ -1,8 +1,8 @@
-import {FObject} from '../lang/FObject';
+import {ObjectBase} from '../lang/ObjectBase';
 import {FAttributes} from '../lang/FAttributes';
 import {FString} from '../lang/FString';
-import {RBoolean} from '../lang/RBoolean';
-import {RObject} from '../lang/RObject';
+import {BooleanUtil} from '../lang/BooleanUtil';
+import {ObjectUtil} from '../lang/ObjectUtil';
 import {RString} from '../lang/RString';
 
 //==========================================================
@@ -12,7 +12,7 @@ import {RString} from '../lang/RString';
 // @author maocy
 // @version 150114
 //==========================================================
-export class FTagContext extends FObject {
+export class FTagContext extends ObjectBase {
    public code: string;
    public trimLeft: boolean;
    public trimRight: boolean;
@@ -72,7 +72,7 @@ export class FTagContext extends FObject {
    // @param value:String 内容
    //==========================================================
    public setBoolean(name: string, value: boolean) {
-      this._attributes.set(name, RBoolean.toString(value));
+      this._attributes.set(name, BooleanUtil.toString(value));
    }
 
    //==========================================================
@@ -112,8 +112,8 @@ export class FTagContext extends FObject {
    // @method
    //==========================================================
    public dispose() {
-      this._attributes = RObject.dispose(this._attributes);
-      this._source = RObject.dispose(this._source);
+      this._attributes = ObjectUtil.dispose(this._attributes);
+      this._source = ObjectUtil.dispose(this._source);
       super.dispose();
    }
 }

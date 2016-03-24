@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {ObjectPools} from '../../runtime/common/lang/ObjectPools'
 import {RString} from '../../runtime/common/lang/RString'
-import {RObject} from '../../runtime/common/lang/RObject'
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {RAssert} from '../../runtime/common/RAssert'
 import {RMemory} from '../../runtime/common/RMemory'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
@@ -154,7 +154,7 @@ export class FModelConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._pools = RObject.dispose(this._pools);
+      this._pools = ObjectUtil.dispose(this._pools);
       // 父处理
       super.dispose();
    }

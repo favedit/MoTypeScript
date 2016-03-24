@@ -1,6 +1,6 @@
-import {FObject} from '../common/lang/FObject';
+import {ObjectBase} from '../common/lang/ObjectBase';
 import {Objects} from '../runtime/common/lang/Objects';
-import {RObject} from '../runtime/common/lang/RObject';
+import {ObjectUtil} from '../runtime/common/lang/ObjectUtil';
 //import {Light} from './light/Light';
 
 //==========================================================

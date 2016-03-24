@@ -1,4 +1,4 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {ETexture} from './ETexture';
 import {FTexture} from './FTexture';
@@ -38,7 +38,7 @@ export class FFlatTexture extends FTexture {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.size = RObject.dispose(this.size);
+      this.size = ObjectUtil.dispose(this.size);
       // 父处理
       super.dispose();
    }

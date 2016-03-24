@@ -1,6 +1,6 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
-import {RObject} from '../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {RMemory} from '../../runtime/common/RMemory';
@@ -233,7 +233,7 @@ export class FModelResourceConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.models = RObject.free(this.models);
+      this.models = ObjectUtil.free(this.models);
       // this._meshs = RObject.free(this._meshs);
       // this._skeletons = RObject.free(this._skeletons);
       // this._animations = RObject.free(this._animations);

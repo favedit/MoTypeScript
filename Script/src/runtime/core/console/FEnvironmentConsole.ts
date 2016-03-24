@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {RString} from '../../common/lang/RString';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {RAssert} from '../../common/RAssert';
 import {RRuntime} from '../../common/RRuntime';
@@ -129,7 +129,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放处理
-      this._environments = RObject.dispose(this._environments);
+      this._environments = ObjectUtil.dispose(this._environments);
       // 父处理
       super.dispose();
    }

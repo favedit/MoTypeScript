@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject'
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase'
 
 //==========================================================
 // <T>画板对象。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../../runtime/common/lang/FObject'
 // @author maocy
 // @history 150701
 //==========================================================
-export class FCanvas extends FObject {
+export class FCanvas extends ObjectBase {
     //o = MO.Class.inherits(this, o, MO.FObject, MO.MEventDispatcher);
     //..........................................................
     // @attribute

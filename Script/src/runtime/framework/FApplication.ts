@@ -1,6 +1,6 @@
-import {FObject} from '../common/lang/FObject';
+import {ObjectBase} from '../common/lang/ObjectBase';
 import {Objects} from '../common/lang/Objects';
-import {RObject} from '../common/lang/RObject';
+import {ObjectUtil} from '../common/lang/ObjectUtil';
 import {ALinker} from '../common/reflect/ALinker';
 import {RClass} from '../common/reflect/RClass';
 import {FListenerThread} from '../core/console/FListenerThread';
@@ -11,7 +11,7 @@ import {SSettings} from './SSettings';
 //==========================================================
 // <T>应用程序。</T>
 //==========================================================
-export class FApplication extends FObject {
+export class FApplication extends ObjectBase {
    // 配置标志
    protected _setuped: boolean = false;
    // 线程
@@ -119,8 +119,8 @@ export class FApplication extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._views = RObject.dispose(this._views);
-      this._thread = RObject.dispose(this._thread);
+      this._views = ObjectUtil.dispose(this._views);
+      this._thread = ObjectUtil.dispose(this._thread);
       // 父处理
       super.dispose();
    }

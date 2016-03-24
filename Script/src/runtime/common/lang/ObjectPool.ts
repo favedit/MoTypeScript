@@ -1,6 +1,6 @@
-import {FObject} from './FObject'
+import {ObjectBase} from './ObjectBase'
 import {Objects} from './Objects'
-import {RObject} from './RObject'
+import {ObjectUtil} from './ObjectUtil'
 import {RAssert} from '../RAssert'
 
 //==========================================================
@@ -10,7 +10,7 @@ import {RAssert} from '../RAssert'
 // @author maocy
 // @version 150108
 //==========================================================
-export class ObjectPool extends FObject {
+export class ObjectPool extends ObjectBase {
    // @attribute
    public items:Objects<any> = null;
    public frees:Objects<any> = null;
@@ -84,8 +84,8 @@ export class ObjectPool extends FObject {
    // @method
    //==========================================================
    public dispose() {
-      this.items = RObject.dispose(this.items);
-      this.frees = RObject.dispose(this.frees);
+      this.items = ObjectUtil.dispose(this.items);
+      this.frees = ObjectUtil.dispose(this.frees);
       super.dispose();
    }
 

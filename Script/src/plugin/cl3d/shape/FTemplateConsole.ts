@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum';
-import {RObject} from '../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RString} from '../../runtime/common/lang/RString';
 import {ObjectPools} from '../../runtime/common/lang/ObjectPools';
 import {ALinker} from '../../runtime/common/reflect/ALinker';

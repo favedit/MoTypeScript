@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
 import {FAudioContext} from './FAudioContext';
@@ -51,7 +51,7 @@ export class FAudioContextConsole extends FConsole {
    public dispose() {
       var o = this;
       // 释放属性
-      this._contexts = RObject.dispose(this._contexts);
+      this._contexts = ObjectUtil.dispose(this._contexts);
       // 父处理
       super.dispose();
    }

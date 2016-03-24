@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObjectId} from '../../../runtime/common/lang/RObjectId';
 import {FListeners} from '../../../runtime/common/lang/FListeners';

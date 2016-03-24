@@ -1,8 +1,8 @@
 import {SEvent} from '../../common/lang/SEvent';
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 import {FListeners} from '../../common/lang/FListeners';
-import {RObject} from '../../common/lang/RObject';
-import {RLogger} from '../../common/lang/RLogger';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
+import {LoggerUtil} from '../../common/lang/RLogger';
 import {SSize2} from '../../common/math/SSize2';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
@@ -15,7 +15,7 @@ import {RHtml} from '../utility/RHtml';
 // @author maocy
 // @history 150105
 //==========================================================
-export class FImage extends FObject {
+export class FImage extends ObjectBase {
    // 准备好
    protected _ready;
    // 尺寸
@@ -87,7 +87,7 @@ export class FImage extends FObject {
       image._loadListeners.process(event);
       event.dispose();
       //console.log('Load image success. (url={1})', image._url);
-      RLogger.info(image, 'Load image success. (url={1})', image._url);
+      LoggerUtil.info(image, 'Load image success. (url={1})', image._url);
    }
 
    //==========================================================
@@ -97,7 +97,7 @@ export class FImage extends FObject {
       var image = (this as any).__linker;
       var url = image._url;
       //console.log('Load image failure. (url={1})', image._url);
-      RLogger.error(image, 'Load image failure. (url={1})', url);
+      LoggerUtil.error(image, 'Load image failure. (url={1})', url);
    }
 
    //==========================================================
@@ -124,8 +124,8 @@ export class FImage extends FObject {
    //==========================================================
    public dispose() {
       // 清空属性
-      this._size = RObject.dispose(this._size);
-      this._loadListeners = RObject.dispose(this._loadListeners);
+      this._size = ObjectUtil.dispose(this._size);
+      this._loadListeners = ObjectUtil.dispose(this._loadListeners);
       this._handle = RHtml.free(this._handle);
       // 父处理
       super.dispose();

@@ -1,6 +1,6 @@
-import {FObject} from '../../../runtime/common/lang/FObject'
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase'
 import {Objects} from '../../../runtime/common/lang/Objects'
-import {RObject} from '../../../runtime/common/lang/RObject'
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
 import {SSize2} from '../../../runtime/common/math/SSize2'
 import {RAssert} from '../../../runtime/common/RAssert'
 
@@ -11,7 +11,7 @@ import {RAssert} from '../../../runtime/common/RAssert'
 // @author maocy
 // @history 150701
 //==========================================================
-export class FDesktop extends FObject {
+export class FDesktop extends ObjectBase {
     //o = MO.Class.inherits(this, o, MO.FObject, MO.MEventDispatcher);
     //..........................................................
     // @attribute
@@ -133,13 +133,13 @@ export class FDesktop extends FObject {
     //==========================================================
     public dispose() {
         // 释放属性
-        this._size = RObject.dispose(this._size);
-        this._calculateSize = RObject.dispose(this._calculateSize);
-        this._logicSize = RObject.dispose(this._logicSize);
-        this._logicRate = RObject.dispose(this._logicRate);
-        this._screenSize = RObject.dispose(this._screenSize);
-        this._virtualSize = RObject.dispose(this._virtualSize);
-        this._canvases = RObject.dispose(this._canvases);
+        this._size = ObjectUtil.dispose(this._size);
+        this._calculateSize = ObjectUtil.dispose(this._calculateSize);
+        this._logicSize = ObjectUtil.dispose(this._logicSize);
+        this._logicRate = ObjectUtil.dispose(this._logicRate);
+        this._screenSize = ObjectUtil.dispose(this._screenSize);
+        this._virtualSize = ObjectUtil.dispose(this._virtualSize);
+        this._canvases = ObjectUtil.dispose(this._canvases);
         // 父处理
         super.dispose();
     }

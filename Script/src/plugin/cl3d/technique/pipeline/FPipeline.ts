@@ -1,6 +1,6 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {FListeners} from '../../../../runtime/common/lang/FListeners';
-import {RObject} from '../../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {FCamera} from '../../../runtime/graphic/camera/FCamera';
 import {FGraphicContext} from '../../graphic/FGraphicContext';
 import {FContent} from '../../graphic/FContent';
@@ -95,8 +95,8 @@ export abstract class FPipeline extends FContent {
    // <T>停止处理。</T>
    //==========================================================
    public dispose() {
-      this.enterFrameListeners = RObject.dispose(this.enterFrameListeners);
-      this.leaveFrameListeners = RObject.dispose(this.leaveFrameListeners);
+      this.enterFrameListeners = ObjectUtil.dispose(this.enterFrameListeners);
+      this.leaveFrameListeners = ObjectUtil.dispose(this.leaveFrameListeners);
       super.dispose();
    }
 }

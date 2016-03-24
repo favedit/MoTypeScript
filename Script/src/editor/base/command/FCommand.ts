@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>命令控制台。</T>
@@ -6,7 +6,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 // @author maocy
 // @history 160308
 //==========================================================
-export class FCommand extends FObject {
+export class FCommand extends ObjectBase {
    // 代码
    public code: string = null;
    // 描述

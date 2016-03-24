@@ -1,5 +1,5 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
-import {RObject} from '../../../../runtime/common/lang/RObject';
+import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
+import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {SQuaternion} from '../../../../runtime/common/math/SQuaternion';
 import {SVector3} from '../../../../runtime/common/math/SVector3';
 import {SPoint3} from '../../../../runtime/common/math/SPoint3';
@@ -11,7 +11,7 @@ import {SMatrix3d} from '../../../../runtime/graphic/math/SMatrix3d';
 // @author maocy
 // @history 151006
 //==========================================================
-export class FTrackBall extends FObject {
+export class FTrackBall extends ObjectBase {
    // @attribute
    //_matrix = MO.Class.register(o, new MO.AGetter('_matrix'));
    _matrix = new SMatrix3d();
@@ -113,7 +113,7 @@ export class FTrackBall extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._matrix = RObject.dispose(this._matrix);
+      this._matrix = ObjectUtil.dispose(this._matrix);
       // 父处理
       super.dispose();
    }

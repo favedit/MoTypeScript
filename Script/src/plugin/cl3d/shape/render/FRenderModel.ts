@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FModelResource} from '../../resource/FModelResource';
 import {FE3rComponent} from './FE3rComponent';
@@ -134,7 +134,7 @@ export class FRenderModel extends FE3rComponent {
    public dispose() {
       //this._ready = false;
       this.resource = null;
-      this.meshes = RObject.dispose(this.meshes);
+      this.meshes = ObjectUtil.dispose(this.meshes);
       //this._skeletons = RObject.dispose(this._skeletons);
       super.dispose();
    }

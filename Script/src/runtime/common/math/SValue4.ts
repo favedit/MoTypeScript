@@ -1,5 +1,5 @@
 import {FError} from '../lang/FError';
-import {RFloat} from '../lang/RFloat';
+import {FloatUtil} from '../lang/RFloat';
 
 //==========================================================
 // <T>四维数据。</T>
@@ -196,10 +196,10 @@ export class SValue4 {
    //==========================================================
    public toDisplay() {
       var o = this;
-      var x = RFloat.format(o.x);
-      var y = RFloat.format(o.y);
-      var z = RFloat.format(o.z);
-      var w = RFloat.format(o.w);
+      var x = FloatUtil.format(o.x);
+      var y = FloatUtil.format(o.y);
+      var z = FloatUtil.format(o.z);
+      var w = FloatUtil.format(o.w);
       return x + ',' + y + ',' + z + ',' + w;
    }
 

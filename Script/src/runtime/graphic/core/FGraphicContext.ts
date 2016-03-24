@@ -1,5 +1,5 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {SSize2} from '../../../runtime/common/math/SSize2';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FGraphicContext extends FObject {
+export class FGraphicContext extends ObjectBase {
    // 画板
    protected _hCanvas: HTMLCanvasElement = null;
    // 尺寸
@@ -60,7 +60,7 @@ export class FGraphicContext extends FObject {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this._size = RObject.dispose(this._size);
+      this._size = ObjectUtil.dispose(this._size);
       this._hCanvas = null;
       // 父处理
       super.dispose();

@@ -1,5 +1,5 @@
 import {FError} from '../../common/lang/FError';
-import {RLogger} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/RLogger';
 
 //==========================================================
 // <T>运行信息管理类。</T>

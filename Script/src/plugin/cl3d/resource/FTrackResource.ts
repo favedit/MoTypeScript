@@ -1,4 +1,4 @@
-import {FObject} from '../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>资源跟踪信息。</T>
@@ -6,7 +6,7 @@ import {FObject} from '../../runtime/common/lang/FObject';
 // @author maocy
 // @history 150105
 //==========================================================
-export class FTrackResource extends FObject {
+export class FTrackResource extends ObjectBase {
    //    // @attribute
    //    o._meshCode     = MO.Class.register(o, new MO.AGetter('_meshCode'));
    //    o._boneIndex    = MO.Class.register(o, new MO.AGetter('_boneIndex'), 0);

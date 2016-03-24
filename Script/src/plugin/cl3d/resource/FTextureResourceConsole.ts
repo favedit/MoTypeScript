@@ -1,5 +1,5 @@
 import {FDictionary} from '../../runtime/common/lang/FDictionary';
-import {RObject} from '../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FConsole} from '../../runtime/core/FConsole';
 import {FTextureResource} from './FTextureResource';
@@ -120,7 +120,7 @@ export class FTextureResourceConsole extends FConsole {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      this.textures = RObject.free(this.textures);
+      this.textures = ObjectUtil.free(this.textures);
       // 父处理
       super.dispose();
    }

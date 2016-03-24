@@ -9,7 +9,7 @@ import {RClass} from '../reflect/RClass';
 // @author maocy
 // @version 141230
 //==========================================================
-export class FObject {
+export class ObjectBase {
    // 类对象
    protected __class: any;
    // 哈希值

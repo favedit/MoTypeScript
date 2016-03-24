@@ -1,6 +1,6 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
-import {RBoolean} from '../../../runtime/common/lang/RBoolean';
-import {REnum} from '../../../runtime/common/lang/REnum';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
+import {BooleanUtil} from '../../../runtime/common/lang/BooleanUtil';
+import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {ETexture} from './ETexture';
 
 //==========================================================
@@ -9,7 +9,7 @@ import {ETexture} from './ETexture';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FProgramSampler extends FObject {
+export class FProgramSampler extends ObjectBase {
    //..........................................................
    // 名称
    public name: string;
@@ -49,8 +49,8 @@ export class FProgramSampler extends FObject {
    public loadConfig(xconfig) {
       this.name = xconfig.get('name');
       this.linker = xconfig.get('linker');
-      this.bind = RBoolean.parse(xconfig.get('bind', 'Y'));
-      this.formatCd = REnum.encode(ETexture, xconfig.get('format', 'Flat2d'));
+      this.bind = BooleanUtil.parse(xconfig.get('bind', 'Y'));
+      this.formatCd = EnumUtil.encode(ETexture, xconfig.get('format', 'Flat2d'));
    }
 
    //==========================================================

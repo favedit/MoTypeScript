@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {IDisplayLayer} from '../../../runtime/graphic/IDisplayLayer';
 import {FDisplayContainer} from './FDisplayContainer';
 import {FRegion} from './FRegion';
@@ -81,7 +81,7 @@ export class FDisplayLayer extends FDisplayContainer implements IDisplayLayer {
    //==========================================================
    public dispose(): void {
       // 释放所有子节点
-      this.visibleRenderables = RObject.dispose(this.visibleRenderables);
+      this.visibleRenderables = ObjectUtil.dispose(this.visibleRenderables);
       // 父处理
       super.dispose();
    }

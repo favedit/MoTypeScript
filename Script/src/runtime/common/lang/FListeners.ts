@@ -1,6 +1,6 @@
-import {FObject} from './FObject'
+import {ObjectBase} from './ObjectBase'
 import {Objects} from './Objects'
-import {RObject} from './RObject'
+import {ObjectUtil} from './ObjectUtil'
 import {FString} from './FString'
 import {FListener} from './FListener'
 import {FError} from './FError'
@@ -14,7 +14,7 @@ import {RRuntime} from './RRuntime'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FListeners extends FObject {
+export class FListeners extends ObjectBase {
    // 发送者
    public sender = null;
    // 监听集合
@@ -186,9 +186,9 @@ export class FListeners extends FObject {
             var listener: FListener = listeners.at(n);
             listener.dispose();
          }
-         this.listeners = RObject.dispose(listeners);
+         this.listeners = ObjectUtil.dispose(listeners);
       }
-      RObject.free(this);
+      ObjectUtil.free(this);
    }
 
    //==========================================================

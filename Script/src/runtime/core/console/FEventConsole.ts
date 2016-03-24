@@ -2,9 +2,9 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {SListenerContext} from '../../common/lang/SListenerContext';
 import {FListener} from '../../common/lang/FListener';
 import {Objects} from '../../common/lang/Objects';
-import {RObject} from '../../common/lang/RObject';
-import {RListener} from '../../common/lang/RListener';
-import {RLogger} from '../../common/lang/RLogger';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
+import {ListenerUtil} from '../../common/lang/ListenerUtil';
+import {LoggerUtil} from '../../common/lang/RLogger';
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {RMemory} from '../../common/RMemory';
@@ -68,7 +68,7 @@ export class FEventConsole extends FConsole {
       thread.interval = this._interval;
       thread.processListeners.register(this, this.onProcess);
       this._threadConsole.start(thread);
-      RLogger.debug(this, 'Add event thread. (thread={1})', RClass.dump(thread));
+      LoggerUtil.debug(this, 'Add event thread. (thread={1})', RClass.dump(thread));
    }
 
    //==========================================================
@@ -108,8 +108,8 @@ export class FEventConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放处理
-      this._processEvents = RObject.dispose(this._processEvents);
-      this._events = RObject.dispose(this._events);
+      this._processEvents = ObjectUtil.dispose(this._processEvents);
+      this._events = ObjectUtil.dispose(this._events);
       // 父处理
       super.dispose();
    }

@@ -1,5 +1,5 @@
-import {FObject} from '../../common/lang/FObject';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {FDictionary} from '../../common/lang/FDictionary';
 import {FResourceLoader} from './FResourceLoader';
 
@@ -10,7 +10,7 @@ import {FResourceLoader} from './FResourceLoader';
 // @author maocy
 // @version 150105
 //==========================================================
-export class FResourceType extends FObject {
+export class FResourceType extends ObjectBase {
    //o = MO.Class.inherits(this, o, MO.FObject);
    //..........................................................
    // @attribute
@@ -48,7 +48,7 @@ export class FResourceType extends FObject {
    //==========================================================
    public dispose() {
       var o = this;
-      o._resources = RObject.dispose(o._resources);
+      o._resources = ObjectUtil.dispose(o._resources);
       // 父处理
       super.dispose();
    }

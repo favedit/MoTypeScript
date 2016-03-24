@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {FContent} from './FContent';
@@ -78,9 +78,9 @@ export class FRenderTarget extends FContent {
    // @method
    //==========================================================
    public dispose() {
-      this.size = RObject.dispose(this.size);
-      this.color = RObject.dispose(this.color);
-      this._textures = RObject.dispose(this._textures);
+      this.size = ObjectUtil.dispose(this.size);
+      this.color = ObjectUtil.dispose(this.color);
+      this._textures = ObjectUtil.dispose(this._textures);
       // 父处理
       super.dispose();
    }

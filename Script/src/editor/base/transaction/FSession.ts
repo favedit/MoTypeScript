@@ -1,4 +1,4 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FCompositeRequest} from './common/FCompositeRequest';
 import {FRequest} from './FRequest';
@@ -6,7 +6,7 @@ import {FRequest} from './FRequest';
 //==========================================================
 // <T>会话处理。</T>
 //==========================================================
-export class FSession extends FObject {
+export class FSession extends ObjectBase {
    public _undoStack: Objects<any> = null;
    public _redoStack: Objects<any> = null;
 

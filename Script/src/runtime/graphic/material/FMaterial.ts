@@ -1,4 +1,4 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {FGraphicObject} from '../core/FGraphicObject';
@@ -105,8 +105,8 @@ export class FMaterial extends FGraphicObject {
    //==========================================================
    public dispose(): void {
       // 释放属性
-      this.effect = RObject.dispose(this.effect);
-      this.textures = RObject.dispose(this.textures);
+      this.effect = ObjectUtil.dispose(this.effect);
+      this.textures = ObjectUtil.dispose(this.textures);
       // 父处理
       super.dispose();
    }

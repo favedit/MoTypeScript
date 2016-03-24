@@ -1,4 +1,4 @@
-import {FObject} from '../lang/FObject';
+import {ObjectBase} from '../lang/ObjectBase';
 import {FString} from '../lang/FString';
 import {RString} from '../lang/RString';
 import {FError} from '../lang/FError';
@@ -20,7 +20,7 @@ import {FTagText} from './FTagText';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FTagDocument extends FObject {
+export class FTagDocument extends ObjectBase {
    // @attribute
    public space: string = null;
    //_root = MO.Class.register(o, MO.AGetter('_root'));

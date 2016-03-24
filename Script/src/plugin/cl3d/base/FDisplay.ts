@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FError} from '../../../runtime/common/lang/FError';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
@@ -223,11 +223,11 @@ export class FDisplay extends FDrawable implements IDisplay {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.position = RObject.dispose(this.position);
-      this.rotation = RObject.dispose(this.rotation);
-      this.scale = RObject.dispose(this.scale);
-      this.outline = RObject.free(this.outline);
-      this.renderables = RObject.dispose(this.renderables);
+      this.position = ObjectUtil.dispose(this.position);
+      this.rotation = ObjectUtil.dispose(this.rotation);
+      this.scale = ObjectUtil.dispose(this.scale);
+      this.outline = ObjectUtil.free(this.outline);
+      this.renderables = ObjectUtil.dispose(this.renderables);
       // 父处理
       super.dispose();
    }

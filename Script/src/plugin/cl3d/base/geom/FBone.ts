@@ -1,4 +1,4 @@
-import {FObject} from '../../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>渲染区域。</T>
@@ -6,7 +6,7 @@ import {FObject} from '../../../../runtime/common/lang/FObject';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FBone extends FObject {
+export class FBone extends ObjectBase {
    // @attribute
    protected _boneId = 0;
    protected _modeId = null;

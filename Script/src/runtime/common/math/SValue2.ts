@@ -1,6 +1,6 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {FError} from '../lang/FError';
-import {RFloat} from '../lang/RFloat';
+import {FloatUtil} from '../lang/RFloat';
 
 //==========================================================
 // <T>二维数据。</T>
@@ -256,8 +256,8 @@ export class SValue2 {
    // @return String 字符串
    //==========================================================
    public toDisplay() {
-      var x = RFloat.format(this.x);
-      var y = RFloat.format(this.y);
+      var x = FloatUtil.format(this.x);
+      var y = FloatUtil.format(this.y);
       return x + ',' + y;
    }
 

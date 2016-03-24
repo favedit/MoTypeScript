@@ -1,9 +1,9 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //===========================================================
 // <T>热键。</T>
 //===========================================================
-export class FHotKey extends FObject {
+export class FHotKey extends ObjectBase {
    public hotkeyHandler = null;
    public hotkeyMap = {};
    public cmdHotkeyMap = {};

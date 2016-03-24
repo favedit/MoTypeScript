@@ -2,7 +2,7 @@ import {FError} from '../../common/lang/FError';
 import {FAttributes} from '../../common/lang/FAttributes';
 import {FListeners} from '../../common/lang/FListeners';
 import {SEvent} from '../../common/lang/SEvent';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RString} from '../../common/lang/RString';
 
 //==========================================================

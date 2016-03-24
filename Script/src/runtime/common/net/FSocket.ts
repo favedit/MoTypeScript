@@ -1,6 +1,6 @@
 import {SEvent} from '../lang/SEvent';
-import {FObject} from '../lang/FObject';
-import {RObject} from '../lang/RObject';
+import {ObjectBase} from '../lang/ObjectBase';
+import {ObjectUtil} from '../lang/ObjectUtil';
 
 //==========================================================
 // <T>网络端口。</T>
@@ -9,7 +9,7 @@ import {RObject} from '../lang/RObject';
 // @author maocy
 // @history 15029
 //==========================================================
-export class FSocket extends FObject {
+export class FSocket extends ObjectBase {
    // @attribute
    //_url              = MO.Class.register(o, new MO.AGetSet('_url'));
    protected _url = null;
@@ -224,11 +224,11 @@ export class FSocket extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._eventOpen = RObject.dispose(this._eventOpen);
-      this._eventSend = RObject.dispose(this._eventSend);
-      this._eventReceive = RObject.dispose(this._eventReceive);
-      this._eventClose = RObject.dispose(this._eventClose);
-      this._eventError = RObject.dispose(this._eventError);
+      this._eventOpen = ObjectUtil.dispose(this._eventOpen);
+      this._eventSend = ObjectUtil.dispose(this._eventSend);
+      this._eventReceive = ObjectUtil.dispose(this._eventReceive);
+      this._eventClose = ObjectUtil.dispose(this._eventClose);
+      this._eventError = ObjectUtil.dispose(this._eventError);
       this._handle = null;
       // 父处理
       super.dispose();

@@ -1,6 +1,6 @@
 import {ResultEnum} from '../../common/lang/ResultEnum';
 import {FListeners} from '../../common/lang/FListeners';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {FThread} from './FThread';
 
 //==========================================================
@@ -39,7 +39,7 @@ export class FListenerThread extends FThread {
    //==========================================================
    public dispose(): void {
       // 释放处理
-      this.processListeners = RObject.dispose(this.processListeners);
+      this.processListeners = ObjectUtil.dispose(this.processListeners);
       // 父处理
       super.dispose();
    }

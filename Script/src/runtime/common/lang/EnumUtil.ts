@@ -8,7 +8,7 @@ import {FError} from './FError';
 // @author maocy
 // @version 141230
 //============================================================
-export class REnum {
+export class EnumUtil {
    //============================================================
    // <T>是否含有当前内容。</T>
    //

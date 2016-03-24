@@ -1,4 +1,4 @@
-import {FObject} from '../../runtime/common/lang/FObject'
+import {ObjectBase} from '../../runtime/common/lang/ObjectBase'
 import {FDataStream} from '../../runtime/common/io/FDataStream'
 
 //==========================================================
@@ -7,7 +7,7 @@ import {FDataStream} from '../../runtime/common/io/FDataStream'
 // @author maocy
 // @history 160307
 //==========================================================
-export class FResourceObject extends FObject {
+export class FResourceObject extends ObjectBase {
    // 类型名称
    public typeName: string = null;
    // 版本

@@ -1,7 +1,7 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {SSize2} from '../../../runtime/common/math/SSize2';
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>渲染投影。</T>
@@ -9,7 +9,7 @@ import {FObject} from '../../../runtime/common/lang/FObject';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FProjection extends FObject {
+export class FProjection extends ObjectBase {
    // 矩阵
    public matrix: SMatrix3d;
    // 尺寸
@@ -67,8 +67,8 @@ export class FProjection extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.matrix = RObject.dispose(this.matrix);
-      this.size = RObject.dispose(this.size);
+      this.matrix = ObjectUtil.dispose(this.matrix);
+      this.size = ObjectUtil.dispose(this.size);
       // 父处理
       super.dispose();
    }

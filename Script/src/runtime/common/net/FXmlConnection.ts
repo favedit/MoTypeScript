@@ -1,5 +1,5 @@
 import {FError} from '../lang/FError';
-import {RLogger} from '../lang/RLogger';
+import {LoggerUtil} from '../lang/RLogger';
 import {FXmlDocument} from '../xml/FXmlDocument';
 import {RXml} from '../xml/RXml';
 import {EHttpContent} from './EHttpContent';
@@ -75,7 +75,7 @@ export class FXmlConnection extends FHttpConnection {
       }
       if (!element) {
          //return RLogger.fatal(this, 'Read xml error. (url={1})\n{2}', this._url, this._outputText)
-         return RLogger.fatal(this, 'Read xml error. (url={1})', this._url)
+         return LoggerUtil.fatal(this, 'Read xml error. (url={1})', this._url)
       }
       // 建立文档对象
       var document = new FXmlDocument();

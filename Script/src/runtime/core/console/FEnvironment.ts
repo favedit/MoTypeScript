@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 import {FDictionary} from '../../common/lang/FDictionary';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {FDictionary} from '../../common/lang/FDictionary';
 // @author maocy
 // @version 150606
 //==========================================================
-export class FEnvironment extends FObject {
+export class FEnvironment extends ObjectBase {
    // 名称
    public name: string = null;
    // 内容

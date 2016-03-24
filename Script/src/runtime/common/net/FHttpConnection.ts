@@ -1,10 +1,10 @@
 import {FAttributes} from '../lang/FAttributes';
 import {SEvent} from '../lang/SEvent';
-import {FObject} from '../lang/FObject';
+import {ObjectBase} from '../lang/ObjectBase';
 import {FListeners} from '../lang/FListeners';
 import {FError} from '../lang/FError';
-import {RObject} from '../lang/RObject';
-import {RLogger} from '../lang/RLogger';
+import {ObjectUtil} from '../lang/ObjectUtil';
+import {LoggerUtil} from '../lang/RLogger';
 import {RNet} from '../net/RNet';
 import {EHttpMethod} from './EHttpMethod';
 import {EHttpContent} from './EHttpContent';
@@ -17,7 +17,7 @@ import {EHttpStatus} from './EHttpStatus';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FHttpConnection extends FObject {
+export class FHttpConnection extends ObjectBase {
    // @attribute
    protected _asynchronous: boolean = false;
    protected _methodCd = EHttpMethod.Get;
@@ -93,7 +93,7 @@ export class FHttpConnection extends FObject {
                linker.setOutputData();
                linker.onConnectionComplete();
             } else {
-               RLogger.fatal(linker, 'Connection failure. (url={1})', linker._url);
+               LoggerUtil.fatal(linker, 'Connection failure. (url={1})', linker._url);
             }
          }
       }
@@ -240,7 +240,7 @@ export class FHttpConnection extends FObject {
       handle.send(this._inputData);
       this.setOutputData();
       this.onConnectionComplete();
-      RLogger.info(this, 'Send http sync request. (method={1}, url={2})', this._methodCd, this._url);
+      LoggerUtil.info(this, 'Send http sync request. (method={1}, url={2})', this._methodCd, this._url);
    }
 
    //==========================================================
@@ -253,7 +253,7 @@ export class FHttpConnection extends FObject {
       handle.open(this._methodCd, this._url, true);
       this.setHeaders();
       handle.send(this._inputData);
-      RLogger.info(this, 'Send http asynchronous request. (method={1}, url={2})', this._methodCd, this._url);
+      LoggerUtil.info(this, 'Send http asynchronous request. (method={1}, url={2})', this._methodCd, this._url);
    }
 
    //==========================================================
@@ -289,9 +289,9 @@ export class FHttpConnection extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._heads = RObject.dispose(this._heads);
-      this._attributes = RObject.dispose(this._attributes);
-      this._event = RObject.dispose(this._event);
+      this._heads = ObjectUtil.dispose(this._heads);
+      this._attributes = ObjectUtil.dispose(this._attributes);
+      this._event = ObjectUtil.dispose(this._event);
       this._input = null;
       this._inputData = null;
       this._output = null;

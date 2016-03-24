@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FContent} from './FContent';
 
 //==========================================================
@@ -115,8 +115,8 @@ export class FLayout extends FContent {
    //==========================================================
    public dispose() {
       // 释放对象
-      this._buffers = RObject.dispose(this._buffers);
-      this._samplers = RObject.dispose(this._samplers);
+      this._buffers = ObjectUtil.dispose(this._buffers);
+      this._samplers = ObjectUtil.dispose(this._samplers);
       // 父处理
       super.dispose();
    }

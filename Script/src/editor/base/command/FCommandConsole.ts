@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
-import {RLogger} from '../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
 import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCommand} from './FCommand';
@@ -77,12 +77,12 @@ export class FCommandConsole extends FConsole {
    // <T>执行处理。</T>
    //==========================================================
    public execute(command: FCommand) {
-      RLogger.info(this, "Execute command. (code={1})", command.code);
+      LoggerUtil.info(this, "Execute command. (code={1})", command.code);
       // 挂起当前命令
       var current: FCommand = this.current;
       if (current) {
          if (current.canSuspend()) {
-            RLogger.info("Suspend command. (code={1})", current.code);
+            LoggerUtil.info("Suspend command. (code={1})", current.code);
             // this.signalCommandSuspending.dispatch({cmd: current});
             current.suspend();
             this.pendings.push(current);
@@ -111,7 +111,7 @@ export class FCommandConsole extends FConsole {
       }
       if (item === current) {
          if (current) {
-            RLogger.info(this, "Complete command. (code={1})" + current.code);
+            LoggerUtil.info(this, "Complete command. (code={1})" + current.code);
             // this.signalCommandTerminating.dispatch({cmd: current});
             var camelKey = current.complete(key);
             if (camelKey) {
@@ -122,7 +122,7 @@ export class FCommandConsole extends FConsole {
             //this.signalCommandTerminated.dispatch({cmd: current});
          }
          if (current && current.canCompleteContinuous()) {
-            RLogger.info(this, "Continues command. (code={1})", current.code);
+            LoggerUtil.info(this, "Continues command. (code={1})", current.code);
             // current = this.createCommand(current.code);
             //this.execute(current, key);
          } else {
@@ -153,7 +153,7 @@ export class FCommandConsole extends FConsole {
       } else {
          if (this.current) {
             event = this.current;
-            RLogger.info(this, "Cancel command. (code={1})", event.code);
+            LoggerUtil.info(this, "Cancel command. (code={1})", event.code);
             // this.signalCommandTerminating.dispatch({cmd: event});
             event.cancel();
             /** @type {null} */

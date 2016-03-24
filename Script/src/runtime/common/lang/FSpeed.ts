@@ -1,5 +1,5 @@
-﻿import {FObject} from './FObject'
-import {RLogger} from './RLogger'
+﻿import {ObjectBase} from './ObjectBase'
+import {LoggerUtil} from './RLogger'
 
 //==========================================================
 // <T>测速工具类。</T>
@@ -8,7 +8,7 @@ import {RLogger} from './RLogger'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FSpeed extends FObject {
+export class FSpeed extends ObjectBase {
    //..........................................................
    // @attribute
    public parameters = null;
@@ -75,7 +75,7 @@ export class FSpeed extends FObject {
    //==========================================================
    public record() {
       var sp = new Date().getTime() - this.start;
-      RLogger.debug(this, 'Speed test. (caller={1}, speed={2}, arguments={3})', this.callerName, sp, this.parameters);
+      LoggerUtil.debug(this, 'Speed test. (caller={1}, speed={2}, arguments={3})', this.callerName, sp, this.parameters);
       this.parameters = null;
       this.start = null;
       this.callerName = null;

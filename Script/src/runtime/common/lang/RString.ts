@@ -1,7 +1,7 @@
 import {RRuntime} from '../RRuntime';
 import {FString} from './FString';
-import {RFloat} from './RFloat';
-import {RInteger} from './RInteger';
+import {FloatUtil} from './RFloat';
+import {IntegerUtil} from './IntegerUtil';
 
 //==========================================================
 // <T>各种字符串处理的工具类。</T>
@@ -127,8 +127,8 @@ export class RString {
          var source = (parttern == null) ? '$a$A$f' : parttern;
          source = source.replace(/\a/g, this.LOWER);
          source = source.replace(/\A/g, this.UPPER);
-         source = source.replace(/\f/g, RFloat.NUMBER);
-         source = source.replace(/\n/g, RInteger.NUMBER);
+         source = source.replace(/\f/g, FloatUtil.NUMBER);
+         source = source.replace(/\n/g, IntegerUtil.NUMBER);
          // 检查匹配
          var count = value.length;
          for (var i = 0; i < count; i++) {

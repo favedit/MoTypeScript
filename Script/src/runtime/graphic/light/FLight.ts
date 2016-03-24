@@ -1,6 +1,6 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
-export class FLight extends FObject {
+export class FLight extends ObjectBase {
 
    public code: string;
 

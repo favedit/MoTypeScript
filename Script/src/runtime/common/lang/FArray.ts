@@ -1,5 +1,5 @@
 import {RRuntime} from '../RRuntime'
-import {FObject} from './FObject'
+import {ObjectBase} from './ObjectBase'
 import {FString} from './FString'
 
 //==========================================================
@@ -9,7 +9,7 @@ import {FString} from './FString'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FArray extends FObject {
+export class FArray extends ObjectBase {
    //..........................................................
    // @attribute
    protected _length: number = 0;

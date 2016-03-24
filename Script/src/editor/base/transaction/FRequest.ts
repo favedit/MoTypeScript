@@ -1,9 +1,9 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
 // <T>请求处理。</T>
 //==========================================================
-export class FRequest extends FObject {
+export class FRequest extends ObjectBase {
    // 是否提交
    public isCommitted = false;
 

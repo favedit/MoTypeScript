@@ -1,4 +1,4 @@
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 
 //==========================================================
 // <T>可渲染对象信息。</T>
@@ -20,6 +20,6 @@ export class SRenderableInfo {
    //==========================================================
    public reset() {
       this.effect = null;
-      this.layout = RObject.dispose(this.layout);
+      this.layout = ObjectUtil.dispose(this.layout);
    }
 }

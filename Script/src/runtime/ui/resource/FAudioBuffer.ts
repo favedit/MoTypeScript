@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>音频缓冲。</T>
@@ -6,7 +6,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author sunpeng
 // @history 150717
 //==========================================================
-export class FAudioBuffer extends FObject {
+export class FAudioBuffer extends ObjectBase {
    //o = MO.Class.inherits(this, o, MO.FObject, MO.MAudio);
    //..........................................................
    // @attribute

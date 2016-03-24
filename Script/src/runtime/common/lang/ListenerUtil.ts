@@ -8,7 +8,7 @@ import {RMemory} from '../RMemory'
 // @author maocy
 // @version 160306
 //==========================================================
-export class RListener {
+export class ListenerUtil {
 
    //==========================================================
    // <T>检验传入值是否是整型值。</T>

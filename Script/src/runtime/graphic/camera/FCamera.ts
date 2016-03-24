@@ -1,6 +1,6 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
@@ -17,7 +17,7 @@ import {FViewport} from './FViewport';
 // @author maocy
 // @history 141231
 //==========================================================
-export class FCamera extends FObject {
+export class FCamera extends ObjectBase {
    // @attribute 变换矩阵
    public matrix: SMatrix3d;
    // @attribute 相机位置
@@ -224,7 +224,7 @@ export class FCamera extends FObject {
    //==========================================================
    public dispose() {
       // 释放属性
-      this.matrix = RObject.dispose(this.matrix);
+      this.matrix = ObjectUtil.dispose(this.matrix);
       // 父处理
       super.dispose();
    }

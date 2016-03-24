@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
@@ -73,7 +73,7 @@ export class FImageConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 清空变量
-      this._images = RObject.dispose(this._images);
+      this._images = ObjectUtil.dispose(this._images);
       // 父处理
       super.dispose();
    }

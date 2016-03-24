@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>处理管道。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author maocy
 // @version 150105
 //==========================================================
-export class FPipeline extends FObject {
+export class FPipeline extends ObjectBase {
    // @attribute
    //_code = MO.Class.register(o, new MO.AGetter('_code'));
    protected _code: string = null;

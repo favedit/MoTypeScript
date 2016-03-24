@@ -1,7 +1,7 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
-import {RFloat} from '../../../runtime/common/lang/RFloat';
-import {REnum} from '../../../runtime/common/lang/REnum';
+import {FloatUtil} from '../../../runtime/common/lang/RFloat';
+import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {EParameterFormat} from './EParameterFormat';
 
@@ -11,7 +11,7 @@ import {EParameterFormat} from './EParameterFormat';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FProgramParameter extends FObject {
+export class FProgramParameter extends ObjectBase {
    // 名称
    public name: string;
    // 关联名称
@@ -84,7 +84,7 @@ export class FProgramParameter extends FObject {
    public loadConfig(xconfig) {
       this.name = xconfig.get('name');
       this.linker = xconfig.get('linker');
-      this.formatCd = REnum.encode(EParameterFormat, xconfig.get('format'));
+      this.formatCd = EnumUtil.encode(EParameterFormat, xconfig.get('format'));
       this.define = xconfig.get('define');
    }
 

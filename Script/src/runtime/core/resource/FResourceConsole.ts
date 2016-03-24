@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
 import {FDictionary} from '../../common/lang/FDictionary';
 // import {FError} from '../../common/lang/FError';
-import {RObject} from '../../common/lang/RObject';
+import {ObjectUtil} from '../../common/lang/ObjectUtil';
 // import {RString} from '../../common/lang/RString';
 import {RClass} from '../../common/reflect/RClass';
 import {ALinker} from '../../common/reflect/ALinker';
@@ -303,7 +303,7 @@ export class FResourceConsole extends FConsole {
       // 设置变量
       // this._factory = RObject.dispose(this._factory);
       // this._types = RObject.dispose(this._types);
-      this._packages = RObject.dispose(this._packages);
+      this._packages = ObjectUtil.dispose(this._packages);
       // this._resources = RObject.dispose(this._resources);
       // this._loadResources = RObject.dispose(this._loadResources);
       // this._loadingResources = RObject.dispose(this._loadingResources);

@@ -3,7 +3,7 @@ import {FDictionary} from '../../runtime/common/lang/FDictionary'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
 import {RClass} from '../../runtime/common/reflect/RClass'
 import {FError} from '../../runtime/common/lang/FError'
-import {RObject} from '../../runtime/common/lang/RObject'
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {FConsole} from '../../runtime/core/FConsole'
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
 import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole'
@@ -164,7 +164,7 @@ export class FE3rMaterialConsole extends FConsole {
    //==========================================================
    public dispose() {
       // 释放处理
-      this._materials = RObject.dispose(this._materials);
+      this._materials = ObjectUtil.dispose(this._materials);
       // 父处理
       super.dispose();
    }

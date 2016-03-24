@@ -1,5 +1,5 @@
-import {RInteger} from './RInteger';
-import {RDate} from './RDate';
+import {IntegerUtil} from './IntegerUtil';
+import {DateUtil} from './DateUtil';
 import {RClass} from '../reflect/RClass';
 
 //===========================================================
@@ -72,7 +72,7 @@ export class FDate {
    // @return Integer 天数
    //===========================================================
    public monthDays() {
-      return RDate.monthDays(this.year, this.month);
+      return DateUtil.monthDays(this.year, this.month);
    }
 
    //===========================================================
@@ -250,7 +250,7 @@ export class FDate {
    public addYear(value) {
       var o = this;
       var year = o.date.getFullYear();
-      o.date.setFullYear(year + RInteger.nvl(value, 1));
+      o.date.setFullYear(year + IntegerUtil.nvl(value, 1));
       o.refresh();
    }
 
@@ -263,7 +263,7 @@ export class FDate {
    public addMonth(value) {
       var o = this;
       var month = o.date.getMonth();
-      o.date.setMonth(month + RInteger.nvl(value, 1));
+      o.date.setMonth(month + IntegerUtil.nvl(value, 1));
       o.refresh();
    }
 
@@ -276,7 +276,7 @@ export class FDate {
    public addDay(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time + (1000 * 60 * 60 * 24 * RInteger.nvl(value, 1));
+      var tick = time + (1000 * 60 * 60 * 24 * IntegerUtil.nvl(value, 1));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -290,7 +290,7 @@ export class FDate {
    public addHour(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time + (1000 * 60 * 60 * RInteger.nvl(value, 1));
+      var tick = time + (1000 * 60 * 60 * IntegerUtil.nvl(value, 1));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -304,7 +304,7 @@ export class FDate {
    public addMinute(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time + (1000 * 60 * RInteger.nvl(value, 1));
+      var tick = time + (1000 * 60 * IntegerUtil.nvl(value, 1));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -318,7 +318,7 @@ export class FDate {
    public addSecond(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time + (1000 * RInteger.nvl(value, 1));
+      var tick = time + (1000 * IntegerUtil.nvl(value, 1));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -332,7 +332,7 @@ export class FDate {
    public add(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time + RInteger.nvl(value, 1);
+      var tick = time + IntegerUtil.nvl(value, 1);
       o.date.setTime(tick);
       o.refresh();
    }
@@ -346,7 +346,7 @@ export class FDate {
    public truncDay(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time - (time % (1000 * 60 * 60 * 24 * RInteger.nvl(value, 1)));
+      var tick = time - (time % (1000 * 60 * 60 * 24 * IntegerUtil.nvl(value, 1)));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -360,7 +360,7 @@ export class FDate {
    public truncHour(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time - (time % (1000 * 60 * 60 * RInteger.nvl(value, 1)));
+      var tick = time - (time % (1000 * 60 * 60 * IntegerUtil.nvl(value, 1)));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -374,7 +374,7 @@ export class FDate {
    public truncMinute(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time - (time % (1000 * 60 * RInteger.nvl(value, 1)));
+      var tick = time - (time % (1000 * 60 * IntegerUtil.nvl(value, 1)));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -388,7 +388,7 @@ export class FDate {
    public truncSecond(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time - (time % (1000 * RInteger.nvl(value, 1)));
+      var tick = time - (time % (1000 * IntegerUtil.nvl(value, 1)));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -402,7 +402,7 @@ export class FDate {
    public trunc(value) {
       var o = this;
       var time = o.date.getTime();
-      var tick = time - (time % RInteger.nvl(value, 1));
+      var tick = time - (time % IntegerUtil.nvl(value, 1));
       o.date.setTime(tick);
       o.refresh();
    }
@@ -437,7 +437,7 @@ export class FDate {
    // @param format:String 格式
    //===========================================================
    public parse(value, format) {
-      return RDate.parse(this, value, format);
+      return DateUtil.parse(this, value, format);
    }
 
    //===========================================================
@@ -447,7 +447,7 @@ export class FDate {
    // @param value:String 字符串
    //===========================================================
    public parseAuto(value) {
-      return RDate.autoParse(this, value);
+      return DateUtil.autoParse(this, value);
    }
 
    //===========================================================
@@ -458,7 +458,7 @@ export class FDate {
    // @return String 字符串
    //===========================================================
    public format(format) {
-      return RDate.formatDate(this, format);
+      return DateUtil.formatDate(this, format);
    }
 
    //===========================================================
@@ -480,6 +480,6 @@ export class FDate {
    // @return String 字符串
    //===========================================================
    public dump() {
-      return RClass.dump(this) + ' ' + RDate.formatDate(this);
+      return RClass.dump(this) + ' ' + DateUtil.formatDate(this);
    }
 }

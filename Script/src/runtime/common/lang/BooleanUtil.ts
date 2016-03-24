@@ -8,7 +8,7 @@ import {FError} from './FError';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RBoolean {
+export class BooleanUtil {
 
    //==========================================================
    // <T>把布尔值转化为字符串。</T>

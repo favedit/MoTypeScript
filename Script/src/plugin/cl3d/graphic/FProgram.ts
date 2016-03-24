@@ -1,6 +1,6 @@
-import {FObject} from '../../../runtime/common/lang/FObject';
+import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
-import {RObject} from '../../../runtime/common/lang/RObject';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RTypeArray} from '../../../runtime/common/lang/RTypeArray';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
@@ -314,12 +314,12 @@ export abstract class FProgram extends FContent {
    //==========================================================
    public dispose() {
       // 释放属性集合
-      this._attributes = RObject.dispose(this._attributes, true);
-      this._parameters = RObject.dispose(this._parameters, true);
-      this._samplers = RObject.dispose(this._samplers, true);
+      this._attributes = ObjectUtil.dispose(this._attributes, true);
+      this._parameters = ObjectUtil.dispose(this._parameters, true);
+      this._samplers = ObjectUtil.dispose(this._samplers, true);
       // 释放对象
-      this._vertexShader = RObject.dispose(this._vertexShader);
-      this._fragmentShader = RObject.dispose(this._fragmentShader);
+      this._vertexShader = ObjectUtil.dispose(this._vertexShader);
+      this._fragmentShader = ObjectUtil.dispose(this._fragmentShader);
       // 父处理
       super.dispose();
    }

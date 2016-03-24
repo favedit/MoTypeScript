@@ -1,4 +1,4 @@
-import {FObject} from './FObject';
+import {ObjectBase} from './ObjectBase';
 import {FString} from './FString';
 import {RRuntime} from '../RRuntime';
 
@@ -9,7 +9,7 @@ import {RRuntime} from '../RRuntime';
 // @author maocy
 // @version 141230
 // =========================================================
-export class Objects<T> extends FObject {
+export class Objects<T> extends ObjectBase {
    // 项目个数
    protected _count: number = 0;
    // 项目集合

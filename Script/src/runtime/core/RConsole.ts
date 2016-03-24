@@ -3,7 +3,7 @@ import {ALogger} from '../common/reflect/ALogger';
 import {ScopeEnum} from '../common/lang/ScopeEnum';
 import {Objects} from '../common/lang/Objects';
 import {RString} from '../common/lang/RString';
-import {RLogger} from '../common/lang/RLogger';
+import {LoggerUtil} from '../common/lang/RLogger';
 import {RAssert} from '../common/RAssert';
 import {FDictionary} from '../common/lang/FDictionary';
 import {RClass} from '../common/reflect/RClass';
@@ -142,7 +142,7 @@ export class RConsole {
       } else if (value.constructor == Function) {
          name = RClass.shortName(value);
       } else {
-         return RLogger.fatal(this, null, 'Parameter type is invalid. (console={1})', value);
+         return LoggerUtil.fatal(this, null, 'Parameter type is invalid. (console={1})', value);
       }
       // 查找全局控制台
       //var console = MO.Global.get(o.ConsolePreFix + name);

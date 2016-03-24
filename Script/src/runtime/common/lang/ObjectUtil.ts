@@ -9,7 +9,7 @@ import {FError} from './FError'
 // @author maocy
 // @version 141229
 //==========================================================
-export class RObject {
+export class ObjectUtil {
    //==========================================================
    // <T>获得第一个非空对象。</T>
    //
@@ -40,7 +40,7 @@ export class RObject {
          var v = o[n];
          if (v != null) {
             if (!RClass.isBaseType(v.constructor)) {
-               v = RObject.clone(v);
+               v = ObjectUtil.clone(v);
             }
          }
          r[n] = v;
@@ -65,7 +65,7 @@ export class RObject {
                   if (t[n] == null) {
                      t[n] = new c();
                   }
-                  RObject.copy(v, t[n]);
+                  ObjectUtil.copy(v, t[n]);
                }
             }
             t[n] = v;

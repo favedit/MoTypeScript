@@ -1,4 +1,4 @@
-import {FObject} from '../lang/FObject';
+import {ObjectBase} from '../lang/ObjectBase';
 
 //==========================================================
 // <T>数据观察基类。</T>
@@ -6,7 +6,7 @@ import {FObject} from '../lang/FObject';
 // @author maocy
 // @history 150105
 //==========================================================
-export class FDataView extends FObject {
+export class FDataView extends ObjectBase {
    // 编码
    public endianCd: boolean;
    // 查看器

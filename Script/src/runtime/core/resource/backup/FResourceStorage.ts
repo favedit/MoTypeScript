@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>资源存储。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author maocy
 // @version 150507
 //==========================================================
-export class FResourceStorage extends FObject {
+export class FResourceStorage extends ObjectBase {
    //..........................................................
    // @attribute
    protected _ready = false;

@@ -1,4 +1,4 @@
-import {FObject} from '../../common/lang/FObject';
+import {ObjectBase} from '../../common/lang/ObjectBase';
 
 //==========================================================
 // <T>资源存储分块。</T>
@@ -7,7 +7,7 @@ import {FObject} from '../../common/lang/FObject';
 // @author maocy
 // @version 150507
 //==========================================================
-export class FResourceBlockStorageData extends FObject {
+export class FResourceBlockStorageData extends ObjectBase {
 
    //==========================================================
    // <T>释放处理。</T>

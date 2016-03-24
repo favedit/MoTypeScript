@@ -1,4 +1,4 @@
-﻿import {RBoolean} from '../../common/lang/RBoolean';
+﻿import {BooleanUtil} from '../../common/lang/BooleanUtil';
 import {RObjectId} from '../../common/lang/RObjectId';
 import {SHtmlItem} from './SHtmlItem';
 
@@ -140,7 +140,7 @@ export class RHtml {
    // @return 文本内容
    //==========================================================
    public static checkGet(hTag) {
-      return RBoolean.toString(hTag.checked);
+      return BooleanUtil.toString(hTag.checked);
    }
 
    //==========================================================
@@ -150,7 +150,7 @@ export class RHtml {
    // @param value 文本内容
    //==========================================================
    public static checkSet(hTag, value) {
-      hTag.checked = RBoolean.parse(value);
+      hTag.checked = BooleanUtil.parse(value);
    }
 
    //==========================================================

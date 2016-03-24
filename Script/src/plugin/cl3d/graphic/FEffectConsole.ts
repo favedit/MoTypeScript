@@ -3,7 +3,7 @@ import {FError} from '../../../runtime/common/lang/FError';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {FLooper} from '../../../runtime/common/lang/FLooper';
 import {RString} from '../../../runtime/common/lang/RString';
-import {RLogger} from '../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FTagContext} from '../../../runtime/common/tag/FTagContext';
 import {FXmlConnection} from '../../../runtime/common/net/FXmlConnection';
@@ -201,7 +201,7 @@ export class FEffectConsole extends FConsole {
          // 创建效果器
          effect = this.create(context, code);
          effect.load();
-         RLogger.info(this, 'Create effect template. (code={1}, instance={2})', code, effect);
+         LoggerUtil.info(this, 'Create effect template. (code={1}, instance={2})', code, effect);
          // 存储效果器
          effects.set(code, effect);
       }
@@ -243,7 +243,7 @@ export class FEffectConsole extends FConsole {
             effect.flag = flag;
             effect.load();
             effect.build(this._effectInfo);
-            RLogger.info(this, 'Create effect. (name={1}, instance={2})', effectCode, effect);
+            LoggerUtil.info(this, 'Create effect. (name={1}, instance={2})', effectCode, effect);
          }
          // 存储效果器
          effects.set(flag, effect);

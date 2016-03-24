@@ -1,4 +1,4 @@
-import {RInteger} from './RInteger';
+import {IntegerUtil} from './IntegerUtil';
 import {FDate} from './FDate';
 import {RString} from './RString';
 
@@ -9,7 +9,7 @@ import {RString} from './RString';
 // @author maocy
 // @version 150619
 //===========================================================
-export class RDate {
+export class DateUtil {
    //..........................................................
    // @constant
    public static MinYear = 1800;
@@ -90,14 +90,14 @@ export class RDate {
          return '';
       }
       var value = format ? format.toLowerCase() : this.DataFormat;
-      value = value.replace(/yyyy/g, RInteger.format(date.year, 4));
-      value = value.replace(/yy/g, RInteger.format(date.year % 100, 2));
-      value = value.replace(/mm/g, RInteger.format(date.month, 2));
-      value = value.replace(/dd/g, RInteger.format(date.day, 2));
-      value = value.replace(/hh24/g, RInteger.format(date.hour, 2));
-      value = value.replace(/mi/g, RInteger.format(date.minute, 2));
-      value = value.replace(/ss/g, RInteger.format(date.second, 2));
-      value = value.replace(/ms/g, RInteger.format(date.ms, 3));
+      value = value.replace(/yyyy/g, IntegerUtil.format(date.year, 4));
+      value = value.replace(/yy/g, IntegerUtil.format(date.year % 100, 2));
+      value = value.replace(/mm/g, IntegerUtil.format(date.month, 2));
+      value = value.replace(/dd/g, IntegerUtil.format(date.day, 2));
+      value = value.replace(/hh24/g, IntegerUtil.format(date.hour, 2));
+      value = value.replace(/mi/g, IntegerUtil.format(date.minute, 2));
+      value = value.replace(/ss/g, IntegerUtil.format(date.second, 2));
+      value = value.replace(/ms/g, IntegerUtil.format(date.ms, 3));
       return value;
    }
 
@@ -186,23 +186,23 @@ export class RDate {
       if (value.indexOf(':') != -1) {
          var items = value.split(':');
          if (items.length >= 1) {
-            date.hour = RInteger.parse(items[0]);
+            date.hour = IntegerUtil.parse(items[0]);
          }
          if (items.length >= 2) {
-            date.minute = RInteger.parse(items[1]);
+            date.minute = IntegerUtil.parse(items[1]);
          }
          if (items.length >= 3) {
-            date.second = RInteger.parse(items[2]);
+            date.second = IntegerUtil.parse(items[2]);
          }
       } else if (value.length == 6) {
-         date.hour = RInteger.parse(value.substr(0, 2));
-         date.minute = RInteger.parse(value.substr(2, 2));
-         date.second = RInteger.parse(value.substr(4, 2));
+         date.hour = IntegerUtil.parse(value.substr(0, 2));
+         date.minute = IntegerUtil.parse(value.substr(2, 2));
+         date.second = IntegerUtil.parse(value.substr(4, 2));
       } else if (value.length == 4) {
-         date.hour = RInteger.parse(value.substr(0, 2));
-         date.minute = RInteger.parse(value.substr(2, 2));
+         date.hour = IntegerUtil.parse(value.substr(0, 2));
+         date.minute = IntegerUtil.parse(value.substr(2, 2));
       } else if (value.length == 2) {
-         date.hour = RInteger.parse(value.substr(0, 2));
+         date.hour = IntegerUtil.parse(value.substr(0, 2));
       }
    }
 
@@ -225,32 +225,32 @@ export class RDate {
             items = value.split('/');
          }
          if (items.length >= 1) {
-            date.year = RInteger.parse(items[0]);
+            date.year = IntegerUtil.parse(items[0]);
          }
          if (items.length >= 2) {
-            date.month = RInteger.parse(items[1]);
+            date.month = IntegerUtil.parse(items[1]);
          }
          if (items.length >= 3) {
-            date.day = RInteger.parse(items[2]);
+            date.day = IntegerUtil.parse(items[2]);
          }
       } else if (value.indexOf(':') != -1) {
          this.splitTime(date, value);
       } else if (value.length == 14) {
-         date.year = RInteger.parse(value.substr(0, 4));
-         date.month = RInteger.parse(value.substr(4, 2));
-         date.day = RInteger.parse(value.substr(6, 2));
-         date.hour = RInteger.parse(value.substr(8, 2));
-         date.minute = RInteger.parse(value.substr(10, 2));
-         date.second = RInteger.parse(value.substr(12, 2));
+         date.year = IntegerUtil.parse(value.substr(0, 4));
+         date.month = IntegerUtil.parse(value.substr(4, 2));
+         date.day = IntegerUtil.parse(value.substr(6, 2));
+         date.hour = IntegerUtil.parse(value.substr(8, 2));
+         date.minute = IntegerUtil.parse(value.substr(10, 2));
+         date.second = IntegerUtil.parse(value.substr(12, 2));
       } else if (value.length == 8) {
-         date.year = RInteger.parse(value.substr(0, 4));
-         date.month = RInteger.parse(value.substr(4, 2));
-         date.day = RInteger.parse(value.substr(6, 2));
+         date.year = IntegerUtil.parse(value.substr(0, 4));
+         date.month = IntegerUtil.parse(value.substr(4, 2));
+         date.day = IntegerUtil.parse(value.substr(6, 2));
       } else if (value.length == 6) {
-         date.year = RInteger.parse(value.substr(0, 4));
-         date.month = RInteger.parse(value.substr(4, 2));
+         date.year = IntegerUtil.parse(value.substr(0, 4));
+         date.month = IntegerUtil.parse(value.substr(4, 2));
       } else if (value.length == 4) {
-         date.year = RInteger.parse(value);
+         date.year = IntegerUtil.parse(value);
       }
    }
 
@@ -266,27 +266,27 @@ export class RDate {
       if (!items) {
          return false;
       }
-      var year = RInteger.parse(items["year"]);
+      var year = IntegerUtil.parse(items["year"]);
       if (year < o.MinYear || year > o.MaxYear) {
          return false;
       }
-      var month = RInteger.parse(items["month"]);
+      var month = IntegerUtil.parse(items["month"]);
       if (month < 1 || month > 12) {
          return false;
       }
-      var day = RInteger.parse(items["day"]);
+      var day = IntegerUtil.parse(items["day"]);
       if (day < 1 || day > o.monthDays(year, month)) {
          return false;
       }
-      var hour = RInteger.parse(items["hour"]);
+      var hour = IntegerUtil.parse(items["hour"]);
       if (hour < 0 || hour > 23) {
          return false;
       }
-      var second = RInteger.parse(items["second"]);
+      var second = IntegerUtil.parse(items["second"]);
       if (second < 0 || second > 59) {
          return false;
       }
-      var ms = RInteger.parse(items["ms"]);
+      var ms = IntegerUtil.parse(items["ms"]);
       if (ms < 0 || ms > 99) {
          return false;
       }
@@ -330,13 +330,13 @@ export class RDate {
    // @return TDate 返回日期时间
    //===========================================================
    public static makeDate(value, items) {
-      var year = RInteger.parse(items.year);
-      var month = RInteger.parse(items.month) - 1;
-      var day = RInteger.parse(items.day);
-      var hour = RInteger.parse(items.hour);
-      var minute = RInteger.parse(items.minute);
-      var second = RInteger.parse(items.second);
-      var ms = RInteger.parse(items.ms);
+      var year = IntegerUtil.parse(items.year);
+      var month = IntegerUtil.parse(items.month) - 1;
+      var day = IntegerUtil.parse(items.day);
+      var hour = IntegerUtil.parse(items.hour);
+      var minute = IntegerUtil.parse(items.minute);
+      var second = IntegerUtil.parse(items.second);
+      var ms = IntegerUtil.parse(items.ms);
       var date = new Date(year, month, day, hour, minute, second, ms);
       if (value) {
          value.setDate(date);
