@@ -1,7 +1,7 @@
 import {Objects} from '../common/lang/Objects';
-import {FNode} from '../framework/FNode';
+import {Node} from '../framework/Node';
 
-export class FEntity extends FNode {
+export class FEntity extends Node {
 
    public parents: Objects<FEntity> = null;
 

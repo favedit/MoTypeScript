@@ -9,7 +9,7 @@ import {Loader} from '../service/Loader';
 // @author maocy
 // @version 160122
 //==========================================================
-export class FResourceLoader extends Loader {
+export class ResourceLoader extends Loader {
    //o._resource = MO.Class.register(o, new MO.AGetSet('_resource'));
    //o._url = MO.Class.register(o, new MO.AGetSet('_url'));
    // @attribute

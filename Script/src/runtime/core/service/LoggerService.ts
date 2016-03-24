@@ -7,7 +7,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {BufferedSocket} from '../../common/net/BufferedSocket';
 import {EnvironmentService} from './EnvironmentService';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 
 //==========================================================
 // <T>日志控制台。</T>
@@ -17,7 +17,7 @@ import {FConsole} from '../FConsole';
 // @version 150729
 //==========================================================
 //@ALinker('ASD')
-export class LoggerService extends FConsole {
+export class LoggerService extends Service {
 
    @Linker(EnvironmentService)
    protected _environmentConsole: EnvironmentService;

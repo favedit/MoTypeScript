@@ -1,13 +1,13 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
-import {FConsole} from '../../../runtime/core/FConsole';
+import {Service} from '../../../runtime/core/Service';
 import {FCommand} from '../command/FCommand';
 import {FSession} from './FSession';
 
 //==========================================================
 // <T>事务控制台。</T>
 //==========================================================
-export class FTransactionConsole extends FConsole {
+export class FTransactionConsole extends Service {
    // 激活会话
    public _activeSession: FSession = null;
    // 会话栈

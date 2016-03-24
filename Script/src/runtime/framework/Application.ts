@@ -5,13 +5,13 @@ import {Linker} from '../common/reflect/Linker';
 import {ClassUtil} from '../common/reflect/ClassUtil';
 import {ListenerThread} from '../core/service/ListenerThread';
 import {ThreadService} from '../core/service/ThreadService';
-import {FView} from './view/FView';
+import {View} from './view/View';
 import {SSettings} from './SSettings';
 
 //==========================================================
 // <T>应用程序。</T>
 //==========================================================
-export class FApplication extends ObjectBase {
+export class Application extends ObjectBase {
    // 配置标志
    protected _setuped: boolean = false;
    // 线程
@@ -21,9 +21,9 @@ export class FApplication extends ObjectBase {
    // 配置信息
    protected _settings: SSettings = null;
    // 激活视图
-   protected _activeView: FView = null;
+   protected _activeView: View = null;
    // 视图集合
-   protected _views: Objects<FView> = null;
+   protected _views: Objects<View> = null;
    // 线程控制台
    @Linker(ThreadService)
    protected _threadConsole: ThreadService = null;
@@ -33,7 +33,7 @@ export class FApplication extends ObjectBase {
    //==========================================================
    public constructor() {
       super();
-      this._views = new Objects<FView>();
+      this._views = new Objects<View>();
    }
 
    //==========================================================
@@ -46,7 +46,7 @@ export class FApplication extends ObjectBase {
    //==========================================================
    // <T>获得视图集合。</T>
    //==========================================================
-   public get views(): Objects<FView> {
+   public get views(): Objects<View> {
       return this._views;
    }
 
@@ -68,7 +68,7 @@ export class FApplication extends ObjectBase {
    //==========================================================
    // <T>注册一个视图。</T>
    //==========================================================
-   public registerView(view: FView) {
+   public registerView(view: View) {
       view.application = this;
       view.setup();
       this._views.push(view);
@@ -77,7 +77,7 @@ export class FApplication extends ObjectBase {
    //==========================================================
    // <T>选择视图。</T>
    //==========================================================
-   public selectView(view: FView) {
+   public selectView(view: View) {
       view.active();
       this._activeView = view;
    }

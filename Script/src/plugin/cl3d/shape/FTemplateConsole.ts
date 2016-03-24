@@ -6,8 +6,8 @@ import {Linker} from '../../runtime/common/reflect/Linker';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
-import {FConsole} from '../../runtime/core/FConsole';
-import {RConsole} from '../../runtime/core/RConsole';
+import {Service} from '../../runtime/core/Service';
+import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
 import {SLoadArgs} from '../resource/SLoadArgs';
 import {FTemplateResource} from '../resource/FTemplateResource';
@@ -21,7 +21,7 @@ import {FTemplate} from './FTemplate';
 // @author maocy
 // @version 150106
 //==========================================================
-export class FTemplateConsole extends FConsole {
+export class FTemplateConsole extends Service {
    // 缓冲集合
    protected _pools: ObjectPools;
    // 加载处理器

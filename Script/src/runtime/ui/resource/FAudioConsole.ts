@@ -2,8 +2,8 @@ import {Dictionary} from '../../common/lang/Dictionary';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FConsole} from '../../core/FConsole';
-import {RConsole} from '../../core/RConsole';
+import {Service} from '../../core/Service';
+import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {FAudio} from './FAudio';
 
@@ -14,7 +14,7 @@ import {FAudio} from './FAudio';
 // @author maocy
 // @version 150707
 //==========================================================
-export class FAudioConsole extends FConsole {
+export class FAudioConsole extends Service {
    // 声音集合
    protected _audios: Dictionary<FAudio> = null;
 
@@ -37,7 +37,7 @@ export class FAudioConsole extends FConsole {
    // @return 资源对象
    //==========================================================
    public create(uri) {
-      var url = RConsole.find(EnvironmentService).parse(uri);
+      var url = ServiceUtil.find(EnvironmentService).parse(uri);
       var audio: FAudio = ClassUtil.create(FAudio);
       audio.loadUrl(url);
       return audio;

@@ -9,8 +9,8 @@ import {TagContext} from '../../../runtime/common/tag/TagContext';
 import {XmlConnection} from '../../../runtime/common/net/XmlConnection';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {EnvironmentService} from '../../../runtime/core/service/EnvironmentService';
-import {FConsole} from '../../../runtime/core/FConsole';
-import {RConsole} from '../../../runtime/core/RConsole';
+import {Service} from '../../../runtime/core/Service';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
 import {FRenderable} from '../base/FRenderable';
@@ -24,7 +24,7 @@ import {FEffect} from './FEffect';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FEffectConsole extends FConsole {
+export class FEffectConsole extends Service {
    // @attribute
    public _configs: Dictionary<any>;
    public _loadEffects: Looper;
@@ -263,7 +263,7 @@ export class FEffectConsole extends FConsole {
       if (!xconfig) {
          // 生成地址
          var uri = "${resource}/shader/" + name + ".xml";
-         var url = RConsole.find(EnvironmentService).parseUrl(uri);
+         var url = ServiceUtil.find(EnvironmentService).parseUrl(uri);
          // 获得网络数据
          xconfig = ClassUtil.create(XmlConnection).send(url);
          // 加载配置信息

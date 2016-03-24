@@ -1,4 +1,4 @@
-import {FConsole} from '../../../runtime/core/FConsole';
+import {Service} from '../../../runtime/core/Service';
 
 //==========================================================
 // <T>场景控制台。</T>
@@ -7,7 +7,7 @@ import {FConsole} from '../../../runtime/core/FConsole';
 // @author maocy
 // @version 150106
 //==========================================================
-export class FSceneConsole extends FConsole {
+export class FSceneConsole extends Service {
    //    // @attribute
    //    o._scopeCd  = MO.EScope.Local;
    //    // @attribute

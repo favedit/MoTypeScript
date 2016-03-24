@@ -1,13 +1,13 @@
 import {Dispatcher} from '../common/lang/Dispatcher';
 import {Objects} from '../common/lang/Objects';
-import {FClassFactory} from './FClassFactory';
+import {ClassFactory} from './ClassFactory';
 import {SFieldChangeEvent} from './SFieldChangeEvent';
-import {ENodeAction} from './ENodeAction';
+import {NodeActionEnum} from './NodeActionEnum';
 
 //==========================================================
 // <T>节点</T>
 //==========================================================
-export class FNode extends Dispatcher {
+export class Node extends Dispatcher {
 
    // 类工厂
    //public classFactory: FClassFactory = null;
@@ -31,7 +31,7 @@ export class FNode extends Dispatcher {
    //public parent: FNode = null;
 
    // 子节点
-   public children: Objects<FNode> = null;
+   public children: Objects<Node> = null;
 
    //==========================================================
    // <T>构建处理。</T>
@@ -48,7 +48,7 @@ export class FNode extends Dispatcher {
    // @param event 事件
    //==========================================================
    public onFieldChange(event: SFieldChangeEvent) {
-      this.processListener(ENodeAction.FieldChange, event);
+      this.processListener(NodeActionEnum.FieldChange, event);
    }
 
    //==========================================================
@@ -56,14 +56,14 @@ export class FNode extends Dispatcher {
    //
    // @param node 子节点
    //==========================================================
-   public addChild(node: FNode) {
-      var children: Objects<FNode> = this.children;
+   public addChild(node: Node) {
+      var children: Objects<Node> = this.children;
       if (!children) {
-         children = new Objects<FNode>();
+         children = new Objects<Node>();
       }
       if (!children.contains(node)) {
          children.push(node);
-         this.processListener(ENodeAction.AddChild, node);
+         this.processListener(NodeActionEnum.AddChild, node);
       }
    }
 
@@ -72,12 +72,12 @@ export class FNode extends Dispatcher {
    //
    // @param node 子节点
    //==========================================================
-   public remove(node: FNode) {
+   public remove(node: Node) {
       var children = this.children;
       if (children) {
          if (children.contains(node)) {
             children.remove(node);
-            this.processListener(ENodeAction.AddChild, node);
+            this.processListener(NodeActionEnum.AddChild, node);
          }
       }
    }

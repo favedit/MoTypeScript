@@ -1,4 +1,4 @@
-import {FResourceObject} from './FResourceObject';
+import {ResourceObject} from './ResourceObject';
 
 //==========================================================
 // <T>资源对象。</T>
@@ -7,7 +7,7 @@ import {FResourceObject} from './FResourceObject';
 // @author maocy
 // @version 150721
 //==========================================================
-export class FResource extends FResourceObject {
+export class Resource extends ResourceObject {
    // 类型代码
    public typeCode: string;
    // 版本号

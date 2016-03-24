@@ -2,7 +2,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
-import {FNode} from '../../../runtime/framework/FNode';
+import {Node} from '../../../runtime/framework/Node';
 //import {EntityFlagEnum} from './EntityFlagEnum';
 //import {EntityEventEnum} from "./EntityEventEnum";
 //import {Signal} from "../../util/Signal";
@@ -12,7 +12,7 @@ import {FNode} from '../../../runtime/framework/FNode';
 //==========================================================
 // <T>实体。</T>
 //==========================================================
-export class FEntity extends FNode {
+export class FEntity extends Node {
    // 实体编号
    public entityId: number = 0;
    // 实体编号

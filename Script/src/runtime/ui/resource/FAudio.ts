@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
-import {RConsole} from '../../core/RConsole';
+import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {FDeviceConsole} from '../console/FDeviceConsole';
 import {RHtml} from '../utility/RHtml';
@@ -124,7 +124,7 @@ export class FAudio extends ObjectBase {
    // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
-      var url = RConsole.find(EnvironmentService).parseUrl(uri);
+      var url = ServiceUtil.find(EnvironmentService).parseUrl(uri);
       // 创建图片
       var hAudio = this._hAudio;
       if (!hAudio) {
@@ -136,7 +136,7 @@ export class FAudio extends ObjectBase {
          hAudio.loop = false;
       }
       // 不支持声音完成检测
-      var deviceConsole: FDeviceConsole = RConsole.find(FDeviceConsole);
+      var deviceConsole: FDeviceConsole = ServiceUtil.find(FDeviceConsole);
       if (!deviceConsole.capability.soundFinish) {
          //this._ready = true;
          //this._loaded = true;

@@ -1,6 +1,6 @@
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
-import {RConsole} from '../../../runtime/core/RConsole';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FRenderable} from '../base/FRenderable';
 import {FRenderModelConsole} from '../shape/render/FRenderModelConsole';
 import {FE3rMaterialConsole} from '../shape/render/FE3rMaterialConsole';
@@ -111,14 +111,14 @@ export class FTemplateRenderable extends FRenderable {
       //var modelGuid = resource.modelGuid();
       var modelUrl = resource.modelUrl;
       //this._model = RConsole.find(FE3rModelConsole).loadByGuid(this, modelGuid);
-      this._model = RConsole.find(FRenderModelConsole).loadByUrl(this, modelUrl);
+      this._model = ServiceUtil.find(FRenderModelConsole).loadByUrl(this, modelUrl);
       // 设置资源
       //var materialGuid = resource.materialGuid();
       var materialUrl = resource.materialUrl;
       if (!StringUtil.isEmpty(materialUrl)) {
          //var material = this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
          //this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
-         this.materialLoader = RConsole.find(FE3rMaterialConsole).loadLoaderByUrl(this, materialUrl);
+         this.materialLoader = ServiceUtil.find(FE3rMaterialConsole).loadLoaderByUrl(this, materialUrl);
          //RConsole.find(FProcessLoadConsole).push();
          //this._materialResource = material.resource();
          //this.pushMaterial(material);

@@ -1,4 +1,4 @@
-import {RConsole} from '../../../runtime/core/RConsole';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FRegion} from '../../base/FRegion';
 import {FTechniqueConsole} from '../FTechniqueConsole';
 import {FGeneralTechnique} from '../FGeneralTechnique';
@@ -33,7 +33,7 @@ export class FForwardPipeline extends FPipeline {
       this.region = new FRegion();
       this.optionShadow = false;
       // 设置渲染技术
-      var techniqueConsole: FTechniqueConsole = RConsole.find(FTechniqueConsole);
+      var techniqueConsole: FTechniqueConsole = ServiceUtil.find(FTechniqueConsole);
       this.selectTechnique = <FSelectTechnique>techniqueConsole.find(this._graphicContext, FSelectTechnique);
    }
 
@@ -50,7 +50,7 @@ export class FForwardPipeline extends FPipeline {
    public set optionShadow(value) {
       this._optionShadow = value;
       // 设置渲染技术
-      var techniqueConsole: FTechniqueConsole = RConsole.find(FTechniqueConsole);
+      var techniqueConsole: FTechniqueConsole = ServiceUtil.find(FTechniqueConsole);
       var techniqueClass = value ? FShadowTechnique : FGeneralTechnique;
       this.drawTechnique = techniqueConsole.find(this._graphicContext, techniqueClass);
    }

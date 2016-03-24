@@ -1,5 +1,5 @@
 import {DataViewer} from '../../common/io/DataViewer';
-import {FResourceLoader} from './FResourceLoader';
+import {ResourceLoader} from './ResourceLoader';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 
 //==========================================================
@@ -9,7 +9,7 @@ import {ClassUtil} from '../../common/reflect/ClassUtil';
 // @author maocy
 // @version 160122
 //==========================================================
-export class FResourceBinLoader extends FResourceLoader {
+export class FResourceBinLoader extends ResourceLoader {
 
    //==========================================================
    // <T>加载完成处理。</T>

@@ -4,7 +4,7 @@ import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {HttpContentEnum} from '../../common/net/HttpContentEnum';
 import {HttpConnection} from '../../common/net/HttpConnection';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 import {EnvironmentService} from './EnvironmentService';
 
 //==========================================================
@@ -14,7 +14,7 @@ import {EnvironmentService} from './EnvironmentService';
 // @author maocy
 // @version 150104
 //==========================================================
-export class HttpService extends FConsole {
+export class HttpService extends Service {
    // 缓冲池
    public _pool: ObjectPool = null;
    // 环境控制台

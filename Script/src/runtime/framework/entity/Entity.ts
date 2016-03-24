@@ -1,4 +1,4 @@
-import {FNode} from '../FNode';
+import {Node} from '../Node';
 
 //==========================================================
 // <T>图形对象。</T>
@@ -7,7 +7,7 @@ import {FNode} from '../FNode';
 // @author maocy
 // @history 150206
 //==========================================================
-export class FObject extends FNode {
+export class Entity extends Node {
 
    //==========================================================
    // <T>关联图形环境。</T>

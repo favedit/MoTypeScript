@@ -1,9 +1,9 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 import {EnvironmentService} from '../service/EnvironmentService';
-import {RConsole} from '../RConsole';
+import {ServiceUtil} from '../ServiceUtil';
 import {FResourceThreadPipeline} from './FResourceThreadPipeline';
 
 //==========================================================
@@ -13,7 +13,7 @@ import {FResourceThreadPipeline} from './FResourceThreadPipeline';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FResourceDataConsole extends FConsole {
+export class FResourceDataConsole extends Service {
    // @attribute
    protected _scopeCd = ScopeEnum.Global;
    // @attribute

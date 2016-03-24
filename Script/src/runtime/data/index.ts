@@ -1,2 +1,2 @@
-export * from './FData';
-export * from './FDataConsole';
+export * from './Data';
+export * from './DataConsole';

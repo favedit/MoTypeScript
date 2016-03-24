@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FConsole} from '../../core/FConsole';
+import {Service} from '../../core/Service';
 import {FAudioContext} from './FAudioContext';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {FAudioContext} from './FAudioContext';
 // @author sunpeng
 // @history 150714
 //==========================================================
-export class FAudioContextConsole extends FConsole {
+export class FAudioContextConsole extends Service {
    // @attribute
    protected _scopeCd = ScopeEnum.Global;
    // @attribute

@@ -4,7 +4,7 @@ import {Linker} from '../../runtime/common/reflect/Linker'
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {Fatal} from '../../runtime/common/lang/Fatal'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
-import {FConsole} from '../../runtime/core/FConsole'
+import {Service} from '../../runtime/core/Service'
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole'
 import {FE3rMaterial} from './FE3rMaterial'
@@ -17,7 +17,7 @@ import {FMaterialLoader} from './loader/FMaterialLoader';
 // @author maocy
 // @version 150106
 //==========================================================
-export class FE3rMaterialConsole extends FConsole {
+export class FE3rMaterialConsole extends Service {
    // 材质集合
    protected _materials = null;
    @Linker(FMaterialResourceConsole)

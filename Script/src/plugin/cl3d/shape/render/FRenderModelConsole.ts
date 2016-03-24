@@ -6,8 +6,8 @@ import {Linker} from '../../runtime/common/reflect/Linker'
 import {AssertUtil} from '../../runtime/common/AssertUtil'
 import {MemoryUtil} from '../../runtime/common/MemoryUtil'
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
-import {FConsole} from '../../runtime/core/FConsole'
-import {RConsole} from '../../runtime/core/RConsole'
+import {Service} from '../../runtime/core/Service'
+import {ServiceUtil} from '../../runtime/core/ServiceUtil'
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {SLoadArgs} from '../resource/SLoadArgs'
 import {FModelResourceConsole} from '../resource/FModelResourceConsole'
@@ -21,7 +21,7 @@ import {FRenderModelMesh} from './FRenderModelMesh'
 // @author maocy
 // @version 150106
 //==========================================================
-export class FRenderModelConsole extends FConsole {
+export class FRenderModelConsole extends Service {
    // 模型集合
    protected _models: Dictionary<FRenderModel>;
    protected _meshs: Dictionary<FRenderModelMesh>;

@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Looper} from '../../runtime/common/lang/Looper'
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 import {ListenerThread} from './ListenerThread';
 import {ThreadService} from './ThreadService';
 import {ProcessLoadable} from './ProcessLoadable';
@@ -14,7 +14,7 @@ import {ProcessLoadable} from './ProcessLoadable';
 // @author maocy
 // @history 151226
 //==========================================================
-export class ProcessLoadService extends FConsole {
+export class ProcessLoadService extends Service {
    // 线程控制台
    @Linker(ThreadService)
    public _threadConsole: ThreadService = null;

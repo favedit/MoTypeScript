@@ -1,7 +1,7 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {Fatal} from '../../runtime/common/lang/Fatal';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
-import {FConsole} from '../../runtime/core/FConsole';
+import {Service} from '../../runtime/core/Service';
 import {FVendor} from './FVendor';
 import {FVendorNet} from './FVendorNet';
 import {FVendorLocal} from './FVendorLocal';
@@ -13,7 +13,7 @@ import {FVendorLocal} from './FVendorLocal';
 // @author maocy
 // @history 15031
 //==========================================================
-export class FVendorConsole extends FConsole {
+export class FVendorConsole extends Service {
    // 设置
    protected _setuped: boolean = false;
    // 提供商集合

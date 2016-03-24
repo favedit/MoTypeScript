@@ -2,7 +2,7 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FConsole} from '../../../runtime/core/FConsole';
+import {Service} from '../../../runtime/core/Service';
 import {FTechnique} from './FTechnique';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {FTechnique} from './FTechnique';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FTechniqueConsole extends FConsole {
+export class FTechniqueConsole extends Service {
    // 技术集合
    protected _techniques: Dictionary<FTechnique> = null;
 

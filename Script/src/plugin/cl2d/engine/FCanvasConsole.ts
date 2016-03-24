@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {ObjectPools} from '../../../runtime/common/lang/ObjectPools';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FConsole} from '../../../runtime/core/FConsole';
+import {Service} from '../../../runtime/core/Service';
 import {FCanvas} from './FCanvas';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {FCanvas} from './FCanvas';
 // @author maocy
 // @version 150411
 //==========================================================
-export class FCanvasConsole extends FConsole {
+export class FCanvasConsole extends Service {
    // 缓冲集合
    protected _pools: ObjectPools = null;
 

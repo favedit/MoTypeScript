@@ -1,8 +1,8 @@
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Listeners} from '../../common/lang/Listeners';
-import {FConsole} from '../FConsole';
-import {IPlugin} from './IPlugin';
+import {Service} from '../Service';
+import {PluginFace} from './PluginFace';
 
 //==========================================================
 // <T>插件管理器。</T>
@@ -11,13 +11,13 @@ import {IPlugin} from './IPlugin';
 // @author maocy
 // @version 160309
 //==========================================================
-export class FPluginConsole extends FConsole {
+export class PluginConsole extends Service {
    // 环境
    public context = null;
    // 插件集合
-   public plugins: Objects<IPlugin> = null;
+   public plugins: Objects<PluginFace> = null;
    // 加载集合
-   public loadingPlugins: Objects<IPlugin> = null;
+   public loadingPlugins: Objects<PluginFace> = null;
    // 激活监听器
    public activedListeners: Listeners = null;
    // 取消激活监听器
@@ -30,8 +30,8 @@ export class FPluginConsole extends FConsole {
       super();
       // 设置属性
       this.context = { app: AppView };
-      this.plugins = new Objects<IPlugin>();;
-      this.loadingPlugins = new Objects<IPlugin>();
+      this.plugins = new Objects<PluginFace>();;
+      this.loadingPlugins = new Objects<PluginFace>();
       this.activedListeners = new Listeners(this);
       this.deactivedListeners = new Listeners(this);
    };
@@ -40,7 +40,7 @@ export class FPluginConsole extends FConsole {
     * @param {?} plugin
     * @return {undefined}
     */
-   public register(plugin: IPlugin) {
+   public register(plugin: PluginFace) {
       this.plugins.push(plugin);
       // if (void 0 === this.plugins[plugin]) {
       //    /** @type {null} */
@@ -54,7 +54,7 @@ export class FPluginConsole extends FConsole {
     * @param {?} k
     * @return {?}
     */
-   public unregister(plugin: IPlugin) {
+   public unregister(plugin: PluginFace) {
       // var plugin = this.plugins[k];
       // if (plugin) {
       //    this.unload(k);
@@ -83,7 +83,7 @@ export class FPluginConsole extends FConsole {
             return this.plugins[plugin];
          }
          this.loadingPlugins.push(plugin);
-         var result: IPlugin = new (eval(plugin));
+         var result: PluginFace = new (eval(plugin));
          //assert(result instanceof hsw.plugin.IPlugin, 'all plugins should derived from "hsw.plugin.IPlugin" interface');
          /** @type {string} */
          result.type = plugin;
@@ -94,7 +94,7 @@ export class FPluginConsole extends FConsole {
             var dependencies = result.dependencies;
             var count = dependencies.count();
             for (var n = 0; n < count; n++) {
-               var dependencyPlugin: IPlugin = dependencies.at(n);
+               var dependencyPlugin: PluginFace = dependencies.at(n);
                var dependencyName = dependencyPlugin.name;
                udataCur[dependencyName] = this.load(dependencyPlugin);
             }
@@ -118,10 +118,10 @@ export class FPluginConsole extends FConsole {
    // <T>加载全部插件。</T>
    //==========================================================
    public loadAll() {
-      var plugins: Objects<IPlugin> = this.plugins;
+      var plugins: Objects<PluginFace> = this.plugins;
       var count: number = plugins.count();
       for (var n: number = 0; n < count; n++) {
-         var plugin: IPlugin = plugins.get(n);
+         var plugin: PluginFace = plugins.get(n);
          this.load(plugin);
       }
    }
@@ -130,10 +130,10 @@ export class FPluginConsole extends FConsole {
    // <T>卸载全部插件。</T>
    //==========================================================
    public unloadAll() {
-      var plugins: Objects<IPlugin> = this.plugins;
+      var plugins: Objects<PluginFace> = this.plugins;
       var count: number = plugins.count();
       for (var n: number = 0; n < count; n++) {
-         var plugin: IPlugin = plugins.get(n);
+         var plugin: PluginFace = plugins.get(n);
          this.unload(plugin);
       }
    }

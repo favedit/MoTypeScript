@@ -1,7 +1,7 @@
-import {FConsole} from '../../core/FConsole';
+import {Service} from '../../core/Service';
 
 //===========================================================
 // <T>热键管理器。</T>
 //===========================================================
-export class FHotKeyConsole extends FConsole{
+export class FHotKeyConsole extends Service{
 }

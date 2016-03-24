@@ -4,8 +4,8 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
-import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
-import {FConsole} from '../../runtime/core/FConsole';
+import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
+import {Service} from '../../runtime/core/Service';
 import {SLoadArgs} from './SLoadArgs';
 import {FModelResource} from './FModelResource';
 
@@ -16,12 +16,12 @@ import {FModelResource} from './FModelResource';
 // @author maocy
 // @history 150128
 //==========================================================
-export class FModelResourceConsole extends FConsole {
+export class FModelResourceConsole extends Service {
    // 模型集合
    protected models: Dictionary<FModelResource> = null;
    // 资源控制台
-   @Linker(FResourceConsole)
-   protected _resourceConsole: FResourceConsole = null;
+   @Linker(ResourceConsole)
+   protected _resourceConsole: ResourceConsole = null;
    //    o._meshs            = MO.Class.register(o, new MO.AGetter('_meshs'));
    //    o._skeletons        = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations       = MO.Class.register(o, new MO.AGetter('_animations'));

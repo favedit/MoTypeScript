@@ -1,4 +1,4 @@
-import {RConsole} from '../../../runtime/core/RConsole';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FRegion} from '../../base/FRegion';
 import {FDeferredTechnique} from '../FDeferredTechnique';
 import {FSelectTechnique} from '../FSelectTechnique';
@@ -29,7 +29,7 @@ export class FDeferredPipeline extends FPipeline{
       // 设置渲染区域
       this.region = new FRegion();
       // 设置渲染技术
-      var techniqueConsole: FTechniqueConsole = RConsole.find(FTechniqueConsole);
+      var techniqueConsole: FTechniqueConsole = ServiceUtil.find(FTechniqueConsole);
       this.drawTechnique = techniqueConsole.find(this._graphicContext, FDeferredTechnique);
       this.selectTechnique = <FSelectTechnique>techniqueConsole.find(this._graphicContext, FSelectTechnique);
    }

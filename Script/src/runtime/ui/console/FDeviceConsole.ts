@@ -7,7 +7,7 @@ import {StringUtil} from '../../common/lang/StringUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {EnumUtil} from '../../common/lang/EnumUtil';
 import {Linker} from '../../common/reflect/Linker';
-import {FConsole} from '../../core/FConsole';
+import {Service} from '../../core/Service';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {EEvent} from '../EEvent';
 //import {SMouseEvent} from '../event/SMouseEvent';
@@ -22,7 +22,7 @@ import {SBrowserCapability} from './SBrowserCapability';
 //==========================================================
 // <T>设备控制台。</T>
 //==========================================================
-export class FDeviceConsole extends FConsole {
+export class FDeviceConsole extends Service {
    // @attribute
    protected _optionSelect = true;
    // @attribute

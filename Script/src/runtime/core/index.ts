@@ -1,5 +1,5 @@
-export * from './FConsole';
-export * from './RConsole';
+export * from './Service';
+export * from './ServiceUtil';
 
 import * as plugin from './plugin/index';
 export {plugin as plugin};

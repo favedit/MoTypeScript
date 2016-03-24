@@ -6,7 +6,7 @@ import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {AssertUtil} from '../../common/AssertUtil';
 import {RuntimeUtil} from '../../common/RuntimeUtil';
 import {Environment} from './Environment';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 
 //==========================================================
 // <T>环境控制台。</T>
@@ -15,7 +15,7 @@ import {FConsole} from '../FConsole';
 // @author maocy
 // @version 150606
 //==========================================================
-export class EnvironmentService extends FConsole {
+export class EnvironmentService extends Service {
    // 范围类型
    protected _scopeCd = ScopeEnum.Local;
    // 环境变量

@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Linker} from '../../common/reflect/Linker';
-import {FConsole} from '../../core/FConsole';
+import {Service} from '../../core/Service';
 import {EKeyStatus} from '../EKeyStatus';
 import {EKeyCode} from '../EKeyCode';
 import {FDeviceConsole} from './FDeviceConsole';
@@ -12,7 +12,7 @@ import {SKeyboardEvent} from '../event/SKeyboardEvent';
 //===========================================================
 // <T>键盘管理器。</T>
 //===========================================================
-export class FKeyboardConsole extends FConsole {
+export class FKeyboardConsole extends Service {
    // 状态集合
    protected _status: Array<EKeyStatus>;
    // 监听器集合

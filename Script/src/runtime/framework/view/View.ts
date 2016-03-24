@@ -1,13 +1,13 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {IView} from '../IView';
-import {FApplication} from '../FApplication';
+import {Application} from '../Application';
 
 //==========================================================
 // <T>视窗。</T>
 //==========================================================
-export class FView extends ObjectBase implements IView {
+export class View extends ObjectBase implements IView {
    // 应用
-   public application: FApplication = null;
+   public application: Application = null;
    // 激活状态
    public statusSetup: boolean = false;
    // 激活状态

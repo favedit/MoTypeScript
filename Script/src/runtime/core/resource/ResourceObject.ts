@@ -7,7 +7,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 // @author maocy
 // @version 150105
 //==========================================================
-export class FResourceObject extends ObjectBase {
+export class ResourceObject extends ObjectBase {
    //..........................................................
    // @attribute
    //o._typeCode     = MO.Class.register(o, new MO.AGetter('_typeCode'));

@@ -8,7 +8,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {MemoryUtil} from '../../common/MemoryUtil';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 import {ListenerThread} from './ListenerThread';
 import {ThreadService} from './ThreadService';
 
@@ -19,7 +19,7 @@ import {ThreadService} from './ThreadService';
 // @author maocy
 // @version 150606
 //==========================================================
-export class EventService extends FConsole {
+export class EventService extends Service {
    // 线程控制台
    @Linker(ThreadService)
    public _threadConsole: ThreadService = null;

@@ -1,1 +1,1 @@
-export * from './FView';
+export * from './View';

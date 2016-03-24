@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Linker} from '../../common/reflect/Linker';
-import {FConsole} from '../../core/FConsole';
+import {Service} from '../../core/Service';
 import {RHtml} from '../utility/RHtml';
 import {FDeviceConsole} from './FDeviceConsole';
 import {EEvent} from '../EEvent';
@@ -15,7 +15,7 @@ import {SMouseEvent} from '../event/SMouseEvent';
 // @author maocy
 // @version 150203
 //==========================================================
-export class FMouseConsole extends FConsole {
+export class FMouseConsole extends Service {
    // 鼠标事件
    protected _eventMouse: SMouseEvent;
    // 鼠标单击监听器

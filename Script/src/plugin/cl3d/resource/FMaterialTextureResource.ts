@@ -1,4 +1,4 @@
-import {RConsole} from '../../runtime/core/RConsole';
+import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {FTextureResource} from './FTextureResource';
 import {FTextureResourceConsole} from './FTextureResourceConsole';
 
@@ -34,7 +34,7 @@ export class FMaterialTextureResource {
       this.coord = jconfig.coord;
       this.rate = jconfig.rate;
       // 加载纹理
-      var textureResourceConsole: FTextureResourceConsole = RConsole.find(FTextureResourceConsole);
+      var textureResourceConsole: FTextureResourceConsole = ServiceUtil.find(FTextureResourceConsole);
       this.textureResource = textureResourceConsole.loadByUrl(this.src);
    }
 }

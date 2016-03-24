@@ -1,4 +1,4 @@
-import {RConsole} from '../../runtime/core/RConsole';
+import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {FGeneralColorAutomaticEffect} from './technique/effect/FGeneralColorAutomaticEffect';
 import {FGeneralColorLineEffect} from './technique/effect/FGeneralColorLineEffect';
 import {FSelectAutomaticEffect} from './technique/effect/FSelectAutomaticEffect';
@@ -28,7 +28,7 @@ export class REngine {
    //==========================================================
    //public onSetup() {
    public static staticConstructor() {
-      var effectConsole = RConsole.find(FEffectConsole);
+      var effectConsole = ServiceUtil.find(FEffectConsole);
       // 选择效果器
       effectConsole.register('select.select.line.automatic', FSelectAutomaticEffect);
       effectConsole.register('select.select.phong.automatic', FSelectAutomaticEffect);

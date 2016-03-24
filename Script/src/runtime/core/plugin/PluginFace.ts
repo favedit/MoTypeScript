@@ -7,7 +7,7 @@ import {Objects} from '../../common/lang/Objects';
 // @author maocy
 // @version 160309
 //==========================================================
-export interface IPlugin {
+export interface PluginFace {
    // 类型
    type: string;
    // 名称
@@ -17,7 +17,7 @@ export interface IPlugin {
    // 描述
    description: string;
    // 依赖
-   dependencies: Objects<IPlugin>;
+   dependencies: Objects<PluginFace>;
 
    //==========================================================
    // <T>创建处理。</T>

@@ -2,8 +2,8 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Objects} from '../../common/lang/Objects';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ThreadStatusEnum} from './ThreadStatusEnum';
-import {FConsole} from '../FConsole';
-import {RConsole} from '../RConsole';
+import {Service} from '../Service';
+import {ServiceUtil} from '../ServiceUtil';
 import {Thread} from './Thread';
 
 //==========================================================
@@ -13,7 +13,7 @@ import {Thread} from './Thread';
 // @author maocy
 // @version 150105
 //==========================================================
-export class ThreadService extends FConsole {
+export class ThreadService extends Service {
    // @attribute 范围标志
    protected _scopeCd = ScopeEnum.Global;
    // @attribute 激活标志
@@ -58,7 +58,7 @@ export class ThreadService extends FConsole {
    //==========================================================
    public ohInterval() {
       // RConsole.find();
-      var threadConsole: ThreadService = RConsole.find(ThreadService);
+      var threadConsole: ThreadService = ServiceUtil.find(ThreadService);
       // RLogger.debug(threadConsole, 'Frame start ----------------------------');
       threadConsole.processAll();
    }

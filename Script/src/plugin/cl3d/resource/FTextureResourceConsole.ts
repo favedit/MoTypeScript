@@ -1,7 +1,7 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
-import {FConsole} from '../../runtime/core/FConsole';
+import {Service} from '../../runtime/core/Service';
 import {FTextureResource} from './FTextureResource';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {FTextureResource} from './FTextureResource';
 // @author maocy
 // @history 150108
 //==========================================================
-export class FTextureResourceConsole extends FConsole {
+export class FTextureResourceConsole extends Service {
    // 纹理集合
    public textures: Dictionary<FTextureResource> = null;
 

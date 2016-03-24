@@ -1,1 +1,1 @@
-export * from './FSettings';
+export * from './Settings';

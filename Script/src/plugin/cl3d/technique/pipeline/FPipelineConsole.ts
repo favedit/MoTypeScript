@@ -3,7 +3,7 @@ import {Objects} from '../../../../runtime/common/lang/Objects';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {Linker} from '../../../../runtime/common/reflect/Linker';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
-import {FConsole} from '../../../../runtime/core/FConsole';
+import {Service} from '../../../../runtime/core/Service';
 import {ListenerThread} from '../../../../runtime/core/service/ListenerThread';
 import {ThreadService} from '../../../../runtime/core/service/ThreadService';
 import {FGraphicContext} from '../../../../runtime/graphic/core/FGraphicContext';
@@ -16,7 +16,7 @@ import {FForwardPipeline} from './FForwardPipeline';
 // @author maocy
 // @history 141231
 //==========================================================
-export class FPipelineConsole extends FConsole {
+export class FPipelineConsole extends Service {
    protected _pipelines: Objects<FPipeline> = null;
    // 线程
    protected _thread: ListenerThread = null;

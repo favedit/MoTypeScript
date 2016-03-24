@@ -5,7 +5,7 @@ import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {TagContext} from '../../../runtime/common/tag/TagContext';
-import {RConsole} from '../../../runtime/core/RConsole';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FRegion} from '../base/FRegion';
 import {EFillMode} from './EFillMode';
 import {ECullMode} from './ECullMode';
@@ -320,7 +320,7 @@ export class FEffect extends FContent {
    // @method
    //==========================================================
    public load() {
-      var xconfig = RConsole.find(FEffectConsole).loadConfig(this.code);
+      var xconfig = ServiceUtil.find(FEffectConsole).loadConfig(this.code);
       this.loadConfig(xconfig);
    }
 }

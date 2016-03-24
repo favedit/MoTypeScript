@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Dictionary} from '../../common/lang/Dictionary';
-import {FResourceLoader} from './FResourceLoader';
+import {ResourceLoader} from './ResourceLoader';
 
 //==========================================================
 // <T>资源分组。</T>

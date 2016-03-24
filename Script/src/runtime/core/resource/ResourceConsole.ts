@@ -10,16 +10,16 @@ import {ListenerThread} from '../service/ListenerThread';
 import {ThreadService} from '../service/ThreadService';
 import {EnvironmentService} from '../service/EnvironmentService';
 import {LoaderService} from '../service/LoaderService';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 // import {RConsole} from '../RConsole';
 // import {FEnvironmentConsole} from '../service/EnvironmentService';
 // import {FResourceSingleStorage} from './FResourceSingleStorage';
 // import {FResourceBlockStorage} from './FResourceBlockStorage';
 // import {FResourcePackage} from './FResourcePackage';
 // import {FResourceDataConsole} from './FResourceDataConsole';
-import {FResource} from './FResource';
-import {FResourcePackage} from './FResourcePackage';
-import {FResourceLoader} from './FResourceLoader';
+import {Resource} from './Resource';
+import {ResourcePackage} from './ResourcePackage';
+import {ResourceLoader} from './ResourceLoader';
 
 //==========================================================
 // <T>资源控制台。</T>
@@ -28,12 +28,12 @@ import {FResourceLoader} from './FResourceLoader';
 // @author maocy
 // @version 150104
 //==========================================================
-export class FResourceConsole extends FConsole {
+export class ResourceConsole extends Service {
    // // @attribute
    // protected _factory = null;
    // protected _types = null;
    // 资源包集合
-   protected _packages: Dictionary<FResourcePackage> = null;
+   protected _packages: Dictionary<ResourcePackage> = null;
    // protected _resources = null;
    // // @attribute
    // protected _loadResources = null;
@@ -64,7 +64,7 @@ export class FResourceConsole extends FConsole {
       this._scopeCd = ScopeEnum.Global;
       //_factory = RClass.create(MO.FClassFactory);
       //_types = new common.lang.FDictionary();
-      this._packages = new Dictionary<FResourcePackage>();
+      this._packages = new Dictionary<ResourcePackage>();
       //_resources = new common.lang.FDictionary();
       //_loadResources = new common.lang.FObjects();
       //_loadingResources = new common.lang.FObjects();
@@ -260,9 +260,9 @@ export class FResourceConsole extends FConsole {
    // @param content 内容
    // @param uri 网络地址
    //==========================================================
-   public loadContent(contentCd: DataContentEnum, content: FResource, url: string): void {
+   public loadContent(contentCd: DataContentEnum, content: Resource, url: string): void {
       // 创建加载器
-      var loader: FResourceLoader = ClassUtil.create(FResourceLoader);
+      var loader: ResourceLoader = ClassUtil.create(ResourceLoader);
       loader.contentCd = contentCd;
       loader.url = url;
       loader.content = content;
@@ -275,18 +275,18 @@ export class FResourceConsole extends FConsole {
    // @method
    // @param uri:String 资源对象
    //==========================================================
-   public loadPackageByUrl(uri): FResourcePackage {
+   public loadPackageByUrl(uri): ResourcePackage {
       // 查找资源包
-      var resourcePackages: Dictionary<FResourcePackage> = this._packages;
-      var resourcePackage: FResourcePackage = resourcePackages.get(uri);
+      var resourcePackages: Dictionary<ResourcePackage> = this._packages;
+      var resourcePackage: ResourcePackage = resourcePackages.get(uri);
       if (!resourcePackage) {
          // 解析地址
          var url: string = this._environmentConsole.parse(uri);
          // 创建资源包
-         resourcePackage = ClassUtil.create(FResourcePackage);
+         resourcePackage = ClassUtil.create(ResourcePackage);
          resourcePackages.set(uri, resourcePackage);
          // 创建加载器
-         var loader: FResourceLoader = ClassUtil.create(FResourceLoader);
+         var loader: ResourceLoader = ClassUtil.create(ResourceLoader);
          loader.url = url;
          loader.content = resourcePackage;
          this._loaderConsole.push(loader);

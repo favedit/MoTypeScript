@@ -1,6 +1,6 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {Point2} from '../../../runtime/common/math/Point2';
-import {RConsole} from '../../../runtime/core/RConsole';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FEffectConsole} from '../graphic/FEffectConsole';
 import {ESamplerFilter} from '../graphic/ESamplerFilter';
 import {FTechniquePass} from './FTechniquePass';
@@ -59,7 +59,7 @@ export class FSelectPass extends FTechniquePass {
          if (renderable.optionSelect) {
             var info = renderable.selectInfo(spaceName);
             if (!info.effect) {
-               info.effect = RConsole.find(FEffectConsole).find(this._graphicContext, region, renderable);
+               info.effect = ServiceUtil.find(FEffectConsole).find(this._graphicContext, region, renderable);
             }
          }
       }

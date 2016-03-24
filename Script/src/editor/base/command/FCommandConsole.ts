@@ -3,7 +3,7 @@ import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {Linker} from '../../../runtime/common/reflect/Linker';
-import {FConsole} from '../../../runtime/core/FConsole';
+import {Service} from '../../../runtime/core/Service';
 import {FCommand} from './FCommand';
 import {FTransactionConsole} from '../transaction/FTransactionConsole';
 
@@ -13,7 +13,7 @@ import {FTransactionConsole} from '../transaction/FTransactionConsole';
 // @author maocy
 // @history 160308
 //==========================================================
-export class FCommandConsole extends FConsole {
+export class FCommandConsole extends Service {
    // 类型
    protected types: Dictionary<FCommand> = null;
    // 当前

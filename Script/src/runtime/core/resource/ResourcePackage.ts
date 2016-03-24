@@ -1,4 +1,4 @@
-import {FResourceObject} from './FResourceObject';
+import {ResourceObject} from './ResourceObject';
 
 //==========================================================
 // <T>资源打包。</T>
@@ -7,7 +7,7 @@ import {FResourceObject} from './FResourceObject';
 // @author maocy
 // @version 150727
 //==========================================================
-export class FResourcePackage extends FResourceObject {
+export class ResourcePackage extends ResourceObject {
    //..........................................................
    // @attribute
    //o._uri = MO.Class.register(o, new MO.AGetSet('_uri'));

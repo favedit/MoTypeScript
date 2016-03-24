@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
-import {IPlugin} from './IPlugin';
+import {PluginFace} from './PluginFace';
 
 //==========================================================
 // <T>插件对象。</T>
@@ -8,20 +8,20 @@ import {IPlugin} from './IPlugin';
 // @author maocy
 // @version 160309
 //==========================================================
-export class FPlugin extends ObjectBase implements IPlugin {
+export class Plugin extends ObjectBase implements PluginFace {
 
    // 类型
-   public type = null;
+   public type;
    // 名称
-   public name = null;
+   public name;
    // 有效
-   public enable = null;
+   public enable;
    // 描述
-   public description = null;
+   public description;
    // 依赖
-   public dependencies = null;
+   public dependencies;
    // 加载器
-   public loader = null;
+   public loader;
 
    //==========================================================
    // <T>构造处理。</T>

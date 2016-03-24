@@ -8,7 +8,7 @@ import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {HttpConnection} from '../../common/net/HttpConnection';
 import {JsonConnection} from '../../common/net/JsonConnection';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 import {ListenerThread} from './ListenerThread';
 import {ThreadService} from './ThreadService';
 import {HttpService} from './HttpService';
@@ -22,7 +22,7 @@ import {Loader} from './Loader';
 // @author maocy
 // @version 150729
 //==========================================================
-export class LoaderService extends FConsole {
+export class LoaderService extends Service {
    // 加载集合
    protected _loaders: Objects<Loader>;
    // 加载中集合

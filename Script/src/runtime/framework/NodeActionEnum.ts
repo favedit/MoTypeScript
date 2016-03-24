@@ -1,4 +1,4 @@
-export enum ENodeAction {
+export enum NodeActionEnum {
    FieldChange,
    AddChild,
    RemoveChild

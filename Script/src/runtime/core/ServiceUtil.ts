@@ -6,7 +6,7 @@ import {LoggerUtil} from '../common/lang/LoggerUtil';
 import {AssertUtil} from '../common/AssertUtil';
 import {Dictionary} from '../common/lang/Dictionary';
 import {ClassUtil} from '../common/reflect/ClassUtil';
-import {FConsole} from './FConsole';
+import {Service} from './Service';
 
 //==========================================================
 // <T>控制台对象的管理类。</T>
@@ -15,12 +15,12 @@ import {FConsole} from './FConsole';
 // @author maocy
 // @version 141230
 //==========================================================
-export class RConsole {
+export class ServiceUtil {
    //..........................................................
    // @attribute 注册类型集合
    protected static _registers = new Objects();
    // @attribute 控制台集合
-   protected static _consoles = new Dictionary<FConsole>();
+   protected static _consoles = new Dictionary<Service>();
 
    //==========================================================
    // <T>初始化控制台管理器。</T>
@@ -149,7 +149,7 @@ export class RConsole {
       //   return console;
       //}
       // 查找本地控制台
-      var consoles: Dictionary<FConsole> = this._consoles;
+      var consoles: Dictionary<Service> = this._consoles;
       var console = consoles.get(name);
       if (console) {
          return console;

@@ -3,8 +3,8 @@ import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {DataStream} from '../../../runtime/common/io/DataStream';
-import {FResource as FBaseResource} from '../../runtime/core/resource/FResource';
-import {FResourceLoader} from '../../runtime/core/resource/FResourceLoader';
+import {Resource as FBaseResource} from '../../runtime/core/resource/Resource';
+import {ResourceLoader} from '../../runtime/core/resource/ResourceLoader';
 
 //==========================================================
 // <T>资源对象。</T>
@@ -149,7 +149,7 @@ export class FResource extends FBaseResource {
    //
    // @param content 内容
    //==========================================================
-   public load(loader: FResourceLoader): void {
+   public load(loader: ResourceLoader): void {
       var data: any = loader.data;
       switch (loader.contentCd) {
          case DataContentEnum.Json: {

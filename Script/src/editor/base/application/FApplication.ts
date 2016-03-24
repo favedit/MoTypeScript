@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Linker} from '../../../runtime/common/reflect/Linker';
-import {FApplication as FBaseApplication} from '../../../runtime/framework/FApplication';
+import {Application as BaseApplication} from '../../../runtime/framework/Application';
 import {FDeviceConsole} from '../../../runtime/ui/console/FDeviceConsole';
 import {FTransactionConsole} from '../transaction/FTransactionConsole';
 import {FCommandConsole} from '../command/FCommandConsole';
@@ -10,7 +10,7 @@ import {SSettings} from './SSettings';
 //==========================================================
 // <T>编辑器应用程序。</T>
 //==========================================================
-export class FApplication extends FBaseApplication {
+export class FApplication extends BaseApplication {
    // 设备管理器
    @Linker(FDeviceConsole)
    protected _deviceConsole: FDeviceConsole;

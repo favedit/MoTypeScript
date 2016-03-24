@@ -1,4 +1,4 @@
-import {FResourceLoader} from './FResourceLoader';
+import {ResourceLoader} from './ResourceLoader';
 
 //==========================================================
 // <T>资源XML加载器。</T>
@@ -7,7 +7,7 @@ import {FResourceLoader} from './FResourceLoader';
 // @author maocy
 // @version 160122
 //==========================================================
-export class FResourceXmlLoader extends FResourceLoader {
+export class FResourceXmlLoader extends ResourceLoader {
    //==========================================================
    // <T>加载完成处理。</T>
    //

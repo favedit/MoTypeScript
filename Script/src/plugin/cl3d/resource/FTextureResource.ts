@@ -1,4 +1,4 @@
-import {RConsole} from '../../../runtime/core/RConsole';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FImage} from '../../../runtime/ui/resource/FImage';
 import {FImageConsole} from '../../../runtime/ui/resource/FImageConsole';
 import {FResource} from './FResource';
@@ -44,7 +44,7 @@ export class FTextureResource extends FResource {
    // @return 处理结果
    //==========================================================
    public load() {
-      var imageConsole: FImageConsole = RConsole.find(FImageConsole);
+      var imageConsole: FImageConsole = ServiceUtil.find(FImageConsole);
       this.image = imageConsole.load(this.url);
    }
 

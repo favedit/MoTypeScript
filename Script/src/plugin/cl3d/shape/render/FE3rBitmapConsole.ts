@@ -3,7 +3,7 @@ import {Dictionary} from '../../runtime/common/lang/Dictionary'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {Linker} from '../../runtime/common/reflect/Linker'
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil'
-import {FConsole} from '../../runtime/core/FConsole'
+import {Service} from '../../runtime/core/Service'
 import {EnvironmentService} from '../../runtime/core/service/EnvironmentService'
 import {FE3rBitmap} from './FE3rBitmap'
 import {FE3rBitmapFlatPack} from './FE3rBitmapFlatPack'
@@ -16,7 +16,7 @@ import {FE3rBitmapCubePack} from './FE3rBitmapCubePack'
 // @author maocy
 // @version 150106
 //==========================================================
-export class FE3rBitmapConsole extends FConsole {
+export class FE3rBitmapConsole extends Service {
    // 位图集合
    protected _bitmaps: Dictionary<FE3rBitmap> = null;
    protected _dataUrl = '/cloud.resource.material.wv'

@@ -1,4 +1,4 @@
-﻿import {RConsole} from '../../../runtime/core/RConsole';
+﻿import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {FContent} from '../graphic/FContent';
 import {FEffectConsole} from '../graphic/FEffectConsole';
 
@@ -96,7 +96,7 @@ export class FTechniquePass extends FContent {
    //==========================================================
    public activeEffects(region, renderables) {
       var spaceName = region.spaceName;
-      var effectConsole = RConsole.find(FEffectConsole);
+      var effectConsole = ServiceUtil.find(FEffectConsole);
       // 关联渲染器
       var count = renderables.count();
       for (var i = 0; i < count; i++) {

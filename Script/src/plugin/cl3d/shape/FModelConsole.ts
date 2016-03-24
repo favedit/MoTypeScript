@@ -7,8 +7,8 @@ import {MemoryUtil} from '../../runtime/common/MemoryUtil'
 import {Linker} from '../../runtime/common/reflect/Linker'
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
-import {FConsole} from '../../runtime/core/FConsole'
-import {RConsole} from '../../runtime/core/RConsole'
+import {Service} from '../../runtime/core/Service'
+import {ServiceUtil} from '../../runtime/core/ServiceUtil'
 import {SLoadArgs} from '../resource/SLoadArgs'
 import {FRenderModelConsole} from './render/FRenderModelConsole'
 import {FModel} from './FModel'
@@ -20,7 +20,7 @@ import {FModel} from './FModel'
 // @author maocy
 // @version 150106
 //==========================================================
-export class FModelConsole extends FConsole {
+export class FModelConsole extends Service {
    // 缓冲集合
    protected _pools: ObjectPools;
    // 加载管理器

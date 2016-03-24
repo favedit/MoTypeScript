@@ -3,8 +3,8 @@ import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
-import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
-import {FConsole} from '../../runtime/core/FConsole';
+import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
+import {Service} from '../../runtime/core/Service';
 import {SLoadArgs} from './SLoadArgs';
 import {FTemplateResource} from './FTemplateResource';
 
@@ -14,12 +14,12 @@ import {FTemplateResource} from './FTemplateResource';
 // @author maocy
 // @history 150108
 //==========================================================
-export class FTemplateResourceConsole extends FConsole {
+export class FTemplateResourceConsole extends Service {
    // 模板集合
    public templates:Dictionary<FTemplateResource> = null;
    // 资源控制台
-   @Linker(FResourceConsole)
-   protected _resourceConsole: FResourceConsole = null;
+   @Linker(ResourceConsole)
+   protected _resourceConsole: ResourceConsole = null;
    // public serviceUrl = '/cloud.content.template.ws'
 
    //==========================================================

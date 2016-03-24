@@ -4,8 +4,8 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
-import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
-import {FConsole} from '../../runtime/core/FConsole';
+import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
+import {Service} from '../../runtime/core/Service';
 import {SLoadArgs} from './SLoadArgs';
 import {FSceneResource} from './FSceneResource';
 
@@ -15,12 +15,12 @@ import {FSceneResource} from './FSceneResource';
 // @author maocy
 // @history 150108
 //==========================================================
-export class FSceneResourceConsole extends FConsole {
+export class FSceneResourceConsole extends Service {
    // 场景集合
    public _scenes: Dictionary<FSceneResource>;
    // 资源控制台
-   @Linker(FResourceConsole)
-   protected _resourceConsole: FResourceConsole;
+   @Linker(ResourceConsole)
+   protected _resourceConsole: ResourceConsole;
    //    // @attribute
    //    o._vendorCode = 'scene';
    //    o._dataUrl    = '/cloud.content.scene.wv'

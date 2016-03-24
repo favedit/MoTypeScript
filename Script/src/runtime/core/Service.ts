@@ -8,7 +8,7 @@ import {ObjectBase} from '../common/lang/ObjectBase';
 // @author maocy
 // @version 141231
 //==========================================================
-export class FConsole extends ObjectBase {
+export class Service extends ObjectBase {
    // 范围类型
    protected _scopeCd: ScopeEnum;
    // 设置状态

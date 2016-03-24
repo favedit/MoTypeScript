@@ -1,6 +1,6 @@
 import {Linker} from '../../runtime/common/reflect/Linker';
-import {RConsole} from '../../../runtime/core/RConsole';
-import {FView} from '../../runtime/framework/view/FView';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
+import {View} from '../../runtime/framework/view/View';
 import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
 import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
@@ -21,7 +21,7 @@ declare var id_info;
 //==========================================================
 // <T>画板视图。</T>
 //==========================================================
-export class FCanvasView extends FView {
+export class FCanvasView extends View {
    // 画板
    public canvas: FCanvas;
    // 场景
@@ -74,7 +74,7 @@ export class FCanvasView extends FView {
       cube.setup(context);
       this.contentLayer.pushRenderable(cube);
       // 设置渲染管道
-      var pipelineConsole = RConsole.find(FPipelineConsole);
+      var pipelineConsole = ServiceUtil.find(FPipelineConsole);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, FForwardPipeline);
       pipeline.scene = scene;
       pipeline.camera = camera;

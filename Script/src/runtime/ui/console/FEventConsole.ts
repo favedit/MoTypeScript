@@ -9,7 +9,7 @@ import {Fatal} from '../../common/lang/Fatal';
 // import {ALinker} from '../../common/reflect/Linker';
 // import {RClass} from '../../common/reflect/ClassUtil';
 // import {RMemory} from '../../common/MemoryUtil';
-import {FConsole} from '../../core/FConsole';
+import {Service} from '../../core/Service';
 import {EEvent} from '../EEvent';
 import {SMouseEvent} from '../event/SMouseEvent';
 //import {FListenerThread} from './FListenerThread';
@@ -22,7 +22,7 @@ import {SMouseEvent} from '../event/SMouseEvent';
 // @author maocy
 // @version 150606
 //==========================================================
-export class FEventConsole extends FConsole {
+export class FEventConsole extends Service {
    // 线程控制台
    //@ALinker(FThreadConsole)
    //public _threadConsole: FThreadConsole = null;

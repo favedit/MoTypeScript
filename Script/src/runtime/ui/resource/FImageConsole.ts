@@ -3,8 +3,8 @@ import {Dictionary} from '../../common/lang/Dictionary';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
-import {FConsole} from '../../core/FConsole';
-import {RConsole} from '../../core/RConsole';
+import {Service} from '../../core/Service';
+import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {FImage} from './FImage';
 
@@ -15,7 +15,7 @@ import {FImage} from './FImage';
 // @author maocy
 // @version 150707
 //==========================================================
-export class FImageConsole extends FConsole {
+export class FImageConsole extends Service {
    // 图像集合
    protected _images: Dictionary<FImage>;
    // 环境控制台

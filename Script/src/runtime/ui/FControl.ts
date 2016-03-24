@@ -1,7 +1,7 @@
 import {EEvent} from './EEvent';
 import {FComponent} from './FComponent';
 import {SMouseEvent} from './event/SMouseEvent';
-import {RConsole} from '../core/RConsole';
+import {ServiceUtil} from '../core/ServiceUtil';
 import {FEventConsole} from './console/FEventConsole';
 
 export class FControl extends FComponent {
@@ -21,7 +21,7 @@ export class FControl extends FComponent {
    // @return TEvent 关联的事件对象
    //==========================================================
    public attachEvent(hTag: any, eventCd: string, method: Function = null, capture: boolean = false) {
-      var eventConsole: FEventConsole = RConsole.find(FEventConsole);
+      var eventConsole: FEventConsole = ServiceUtil.find(FEventConsole);
       eventConsole.attachEvent(this, hTag, eventCd, method, capture);
    }
 }

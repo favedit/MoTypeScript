@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141230
 //===========================================================
-export enum EResourceStatus {
+export enum ResourceStatusEnum {
    // @attribute 未知
    Unknown,
    // @attribute 加载

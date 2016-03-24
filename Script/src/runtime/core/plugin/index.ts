@@ -1,3 +1,3 @@
-export * from './FPlugin';
-export * from './FPluginConsole';
-export * from './IPlugin';
+export * from './Plugin';
+export * from './PluginConsole';
+export * from './PluginFace';

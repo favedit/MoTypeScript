@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {Dictionary} from '../../common/lang/Dictionary';
-import {FConsole} from '../FConsole';
+import {Service} from '../Service';
 import {Statistics} from './Statistics';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {Statistics} from './Statistics';
 // @author maocy
 // @version 150303
 //==========================================================
-export class StatisticsService extends FConsole {
+export class StatisticsService extends Service {
    // 范围 
    protected _scopeCd = ScopeEnum.Local;
    // 统计集合
