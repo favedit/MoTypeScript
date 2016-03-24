@@ -2,7 +2,7 @@
 // import {ALogger} from '../../common/reflect/ALogger';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {RObject} from '../../common/lang/RObject';
 import {SListenerContext} from '../../common/lang/SListenerContext';
 import {SEvent} from '../../common/lang/SEvent';
@@ -30,9 +30,9 @@ import {FLoader} from './FLoader';
 //@ALinker('ASD')
 export class FLoaderConsole extends FConsole {
    // 加载集合
-   protected _loaders: FObjects<FLoader> = null;
+   protected _loaders: Objects<FLoader> = null;
    // 加载中集合
-   protected _processLoaders: FObjects<FLoader> = null;
+   protected _processLoaders: Objects<FLoader> = null;
    // 加载上限
    protected _processLimit = 8;
    // 线程
@@ -56,8 +56,8 @@ export class FLoaderConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Global;
-      this._loaders = new FObjects<FLoader>();
-      this._processLoaders = new FObjects<FLoader>();
+      this._loaders = new Objects<FLoader>();
+      this._processLoaders = new Objects<FLoader>();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
       thread.interval = this._interval;
@@ -69,8 +69,8 @@ export class FLoaderConsole extends FConsole {
    // <T>逻辑处理。</T>
    //==========================================================
    public onProcess() {
-      var loaders: FObjects<FLoader> = this._loaders;
-      var processLoaders: FObjects<FLoader> = this._processLoaders;
+      var loaders: Objects<FLoader> = this._loaders;
+      var processLoaders: Objects<FLoader> = this._processLoaders;
       var httpConsole: FHttpConsole = this._httpConsole;
       var jsonConsole: FJsonConsole = this._jsonConsole;
       //..........................................................

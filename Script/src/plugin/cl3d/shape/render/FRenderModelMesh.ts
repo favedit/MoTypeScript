@@ -1,6 +1,6 @@
 import {DataTypeEnum} from '../../../runtime/common/lang/DataTypeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {EIndexStride} from '../../graphic/EIndexStride';

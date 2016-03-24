@@ -1,4 +1,4 @@
-import {FObjects} from '../../runtime/common/lang/FObjects';
+import {Objects} from '../../runtime/common/lang/Objects';
 import {RObject} from '../../runtime/common/lang/RObject';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../runtime/common/io/FDataStream';
@@ -12,8 +12,8 @@ import {FStreamResource} from './FStreamResource';
 // @history 150128
 //==========================================================
 export class FMeshResource extends FResourceComponent {
-   public vertexStreams: FObjects<FStreamResource> = null;
-   public indexStreams: FObjects<FStreamResource> = null;
+   public vertexStreams: Objects<FStreamResource> = null;
+   public indexStreams: Objects<FStreamResource> = null;
    //    // @attribute
    //    o._dataCompress = true;
    //    o._typeName     = 'Mesh';
@@ -45,7 +45,7 @@ export class FMeshResource extends FResourceComponent {
       // 读取数据流集合
       var streamCount: number = input.readInt32();
       if (streamCount > 0) {
-         var streams: FObjects<FStreamResource> = this.vertexStreams = new FObjects<FStreamResource>();
+         var streams: Objects<FStreamResource> = this.vertexStreams = new Objects<FStreamResource>();
          for (var n: number = 0; n < streamCount; n++) {
             var stream: FStreamResource = RClass.create(FStreamResource);
             stream.unserialize(input)
@@ -55,7 +55,7 @@ export class FMeshResource extends FResourceComponent {
       // 读取数据流集合
       var streamCount: number = input.readInt32();
       if (streamCount > 0) {
-         var streams: FObjects<FStreamResource> = this.indexStreams = new FObjects<FStreamResource>();
+         var streams: Objects<FStreamResource> = this.indexStreams = new Objects<FStreamResource>();
          for (var n: number = 0; n < streamCount; n++) {
             var stream: FStreamResource = RClass.create(FStreamResource);
             stream.unserialize(input)

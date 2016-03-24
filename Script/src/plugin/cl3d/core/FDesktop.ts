@@ -1,5 +1,5 @@
 import {FObject} from '../../../runtime/common/lang/FObject'
-import {FObjects} from '../../../runtime/common/lang/FObjects'
+import {Objects} from '../../../runtime/common/lang/Objects'
 import {RObject} from '../../../runtime/common/lang/RObject'
 import {SSize2} from '../../../runtime/common/math/SSize2'
 import {RAssert} from '../../../runtime/common/RAssert'
@@ -71,7 +71,7 @@ export class FDesktop extends FObject {
         this._logicRate = new SSize2(1, 1);
         this._screenSize = new SSize2(1280, 720);
         this._virtualSize = new SSize2(1280, 720);
-        this._canvases = new FObjects();
+        this._canvases = new Objects();
     }
 
     //==========================================================

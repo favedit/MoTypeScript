@@ -1,5 +1,5 @@
 import {SEvent} from '../../../../runtime/common/lang/SEvent';
-import {FObjects} from '../../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../../runtime/common/lang/Objects';
 import {RLogger} from '../../../../runtime/common/lang/RLogger';
 import {RObject} from '../../../../runtime/common/lang/RObject';
 import {FError} from '../../../../runtime/common/lang/FError';
@@ -52,8 +52,8 @@ export class FWglContext extends FGraphicContext {
    protected _extensions;
    // @attribute
    protected _statusRecord;
-   public recordBuffers: FObjects<any>;
-   public recordSamplers: FObjects<any>;
+   public recordBuffers: Objects<any>;
+   public recordSamplers: Objects<any>;
    // @attribute
    public statusDepthMask;
    public statusFloatTexture;
@@ -69,8 +69,8 @@ export class FWglContext extends FGraphicContext {
       super();
       this.capability = new SContextCapability();
       this._statusRecord = false;
-      this.recordBuffers = new FObjects<any>();
-      this.recordSamplers = new FObjects<any>();
+      this.recordBuffers = new Objects<any>();
+      this.recordSamplers = new Objects<any>();
       this.statusDepthMask = false;
       this.statusFloatTexture = false;
       this.statusDrawBuffers = false;

@@ -1,5 +1,5 @@
 import {FDispatcher} from '../common/lang/FDispatcher';
-import {FObjects} from '../common/lang/FObjects';
+import {Objects} from '../common/lang/Objects';
 import {FClassFactory} from './FClassFactory';
 import {SFieldChangeEvent} from './SFieldChangeEvent';
 import {ENodeAction} from './ENodeAction';
@@ -31,7 +31,7 @@ export class FNode extends FDispatcher {
    //public parent: FNode = null;
 
    // 子节点
-   public children: FObjects<FNode> = null;
+   public children: Objects<FNode> = null;
 
    //==========================================================
    // <T>构建处理。</T>
@@ -57,9 +57,9 @@ export class FNode extends FDispatcher {
    // @param node 子节点
    //==========================================================
    public addChild(node: FNode) {
-      var children: FObjects<FNode> = this.children;
+      var children: Objects<FNode> = this.children;
       if (!children) {
-         children = new FObjects<FNode>();
+         children = new Objects<FNode>();
       }
       if (!children.contains(node)) {
          children.push(node);

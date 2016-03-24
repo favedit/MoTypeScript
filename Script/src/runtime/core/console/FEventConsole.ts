@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {SListenerContext} from '../../common/lang/SListenerContext';
 import {FListener} from '../../common/lang/FListener';
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {RObject} from '../../common/lang/RObject';
 import {RListener} from '../../common/lang/RListener';
 import {RLogger} from '../../common/lang/RLogger';
@@ -61,8 +61,8 @@ export class FEventConsole extends FConsole {
       super();
       this.scopeCd = ScopeEnum.Local;
       // 创建属性
-      this._processEvents = new FObjects<any>();
-      this._events = new FObjects<any>();
+      this._processEvents = new Objects<any>();
+      this._events = new Objects<any>();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
       thread.interval = this._interval;

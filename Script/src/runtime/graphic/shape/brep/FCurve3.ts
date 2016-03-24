@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {SVertex} from './SVertex';
 
 //==========================================================
@@ -17,7 +17,7 @@ export class FCurve3 {
    //
    // @return 点集合
    //==========================================================
-   public getVertexs(): FObjects<SVertex> {
+   public getVertexs(): Objects<SVertex> {
       return null;
    }
 }

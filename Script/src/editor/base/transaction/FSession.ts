@@ -1,5 +1,5 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FCompositeRequest} from './common/FCompositeRequest';
 import {FRequest} from './FRequest';
 
@@ -7,16 +7,16 @@ import {FRequest} from './FRequest';
 // <T>会话处理。</T>
 //==========================================================
 export class FSession extends FObject {
-   public _undoStack: FObjects<any> = null;
-   public _redoStack: FObjects<any> = null;
+   public _undoStack: Objects<any> = null;
+   public _redoStack: Objects<any> = null;
 
    //==========================================================
    // <T>请求处理。</T>
    //==========================================================
    public constructor() {
       super();
-      this._undoStack = new FObjects<any>();
-      this._redoStack = new FObjects<any>();
+      this._undoStack = new Objects<any>();
+      this._redoStack = new Objects<any>();
    };
 
    //==========================================================
@@ -74,7 +74,7 @@ export class FSession extends FObject {
    //==========================================================
    public toRequest() {
       var request: FRequest = null;
-      var undoStack: FObjects<any> = this._undoStack;
+      var undoStack: Objects<any> = this._undoStack;
       var count: number = undoStack.count();
       switch (count) {
          case 0:

@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FError} from '../../../runtime/common/lang/FError';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
@@ -28,7 +28,7 @@ export class FDisplay extends FDrawable implements IDisplay {
    // 轮廓
    public outline: SOutline3d;
    // 渲染集合
-   public renderables: FObjects<FRenderable>;
+   public renderables: Objects<FRenderable>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -68,9 +68,9 @@ export class FDisplay extends FDrawable implements IDisplay {
    // @param renderable 渲染对象
    //==========================================================
    public pushRenderable(renderable: FRenderable): void {
-      var renderables: FObjects<FRenderable> = this.renderables;
+      var renderables: Objects<FRenderable> = this.renderables;
       if (!renderables) {
-         renderables = this.renderables = new FObjects<FRenderable>();
+         renderables = this.renderables = new Objects<FRenderable>();
       }
       renderable.parent = this;
       renderables.push(renderable);

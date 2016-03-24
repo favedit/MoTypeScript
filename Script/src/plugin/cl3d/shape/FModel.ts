@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FRenderModel} from 'render/FRenderModel';
 import {FRenderModelMesh} from 'render/FRenderModelMesh';
 import {FActor} from '../base/FActor';
@@ -51,7 +51,7 @@ export class FModel extends FActor {
    //==========================================================
    public loadRenderable(modelRenderable: FRenderModel) {
       this.renderable = modelRenderable;
-      var meshes: FObjects<FRenderModelMesh> = modelRenderable.meshes;
+      var meshes: Objects<FRenderModelMesh> = modelRenderable.meshes;
       var count: number = meshes.count();
       for (var n: number = 0; n < count; n++) {
          var meshRenderable: FRenderModelMesh = meshes.at(n);

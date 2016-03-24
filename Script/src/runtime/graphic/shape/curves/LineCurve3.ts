@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVertex} from '../brep/SVertex';
 import {FCurve} from '../brep/FCurve';
@@ -24,7 +24,7 @@ export class LineCurve3 extends FCurve {
    //==========================================================
    // <T>输出所有点集合。</T>
    //==========================================================
-   public writePoints(buffer: FObjects<SVertex>): void {
+   public writePoints(buffer: Objects<SVertex>): void {
       //buffer.push(this.start);
       //buffer.push(this.end);
    }

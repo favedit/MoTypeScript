@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FRequest} from '../FRequest';
 
 //==========================================================
@@ -6,17 +6,17 @@ import {FRequest} from '../FRequest';
 //==========================================================
 export class FCompositeRequest extends FRequest {
    // 子请求集合
-   public requests: FObjects<FRequest> = null;
+   public requests: Objects<FRequest> = null;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
-   public constructor(requests: FObjects<FRequest> = null) {
+   public constructor(requests: Objects<FRequest> = null) {
       super();
       if (requests) {
          this.requests = requests;
       } else {
-         this.requests = new FObjects<FRequest>();
+         this.requests = new Objects<FRequest>();
       }
    }
 
@@ -47,7 +47,7 @@ export class FCompositeRequest extends FRequest {
    // <T>撤销处理。</T>
    //==========================================================
    public onUndo() {
-      var subRequests: FObjects<FRequest> = this.requests;
+      var subRequests: Objects<FRequest> = this.requests;
       var unlock = subRequests.count() - 1;
       for (; 0 <= unlock; unlock--) {
          subRequests[unlock].onUndo();
@@ -58,7 +58,7 @@ export class FCompositeRequest extends FRequest {
    // <T>重做处理。</T>
    //==========================================================
    public onRedo() {
-      var subRequests: FObjects<FRequest> = this.requests;
+      var subRequests: Objects<FRequest> = this.requests;
       var count: number = subRequests.count();
       for (var n: number = 0; n < count; n++) {
          var request: FRequest = subRequests.at(n);

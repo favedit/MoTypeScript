@@ -1,4 +1,4 @@
-﻿import {FObjects} from '../../../runtime/common/lang/FObjects';
+﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {SPoint2} from '../../../runtime/common/math/SPoint2';
 import {RConsole} from '../../../runtime/core/RConsole';
 import {FEffectConsole} from '../graphic/FEffectConsole';
@@ -50,7 +50,7 @@ export class FSelectPass extends FTechniquePass {
    // @param region 区域
    // @param renderables 渲染集合
    //==========================================================
-   public activeEffects(region: FRegion, renderables: FObjects<FRenderable>) {
+   public activeEffects(region: FRegion, renderables: Objects<FRenderable>) {
       var spaceName = region.spaceName;
       // 关联渲染器
       var count = renderables.count();

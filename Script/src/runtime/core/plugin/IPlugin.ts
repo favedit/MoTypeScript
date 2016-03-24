@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 
 //==========================================================
 // <T>插件接口。</T>
@@ -17,7 +17,7 @@ export interface IPlugin {
    // 描述
    description: string;
    // 依赖
-   dependencies: FObjects<IPlugin>;
+   dependencies: Objects<IPlugin>;
 
    //==========================================================
    // <T>创建处理。</T>

@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {SPoint3} from '../../common/math/SPoint3';
 import {FCurve} from './FCurve';
 import {LineCurve} from '../curves/LineCurve';

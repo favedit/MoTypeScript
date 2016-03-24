@@ -1,6 +1,6 @@
 import {ResultEnum} from '../lang/ResultEnum';
 import {FObject} from '../lang/FObject';
-import {FObjects} from '../lang/FObjects';
+import {Objects} from '../lang/Objects';
 import {FString} from '../lang/FString';
 import {RString} from '../lang/RString';
 import {FError} from '../lang/FError';
@@ -17,7 +17,7 @@ export class FTag extends FObject {
    //..........................................................
    // @attribute
    protected _name: string;
-   protected _children: FObjects<FTag>;
+   protected _children: Objects<FTag>;
    protected _trimLeft: boolean;
    protected _trimRight: boolean;
 
@@ -77,7 +77,7 @@ export class FTag extends FObject {
    public push(tag) {
       var children = this._children;
       if (!children) {
-         children = this._children = new FObjects<FTag>();
+         children = this._children = new Objects<FTag>();
       }
       children.push(tag);
    }

@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FResource} from './FResource';
 import {FMaterialTextureResource} from './FMaterialTextureResource';
@@ -13,7 +13,7 @@ import {FMaterialTextureResource} from './FMaterialTextureResource';
 export class FMaterialResource extends FResource {
    //    // @attribute
    //    o._material     = MO.Class.register(o, new MO.AGetter('_material'));
-   public textures: FObjects<FMaterialTextureResource>;
+   public textures: Objects<FMaterialTextureResource>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -73,7 +73,7 @@ export class FMaterialResource extends FResource {
       var jtextures = jconfig.textures;
       if (jtextures) {
          var count: number = jtextures.length;
-         var textures = this.textures = new FObjects<FMaterialTextureResource>();
+         var textures = this.textures = new Objects<FMaterialTextureResource>();
          for (var n: number = 0; n < count; n++) {
             var jtexture = jtextures[n];
             var renderable = RClass.create(FMaterialTextureResource);

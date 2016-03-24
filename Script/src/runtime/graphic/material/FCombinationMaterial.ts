@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {FMaterial} from './FMaterial';
 
@@ -10,7 +10,7 @@ import {FMaterial} from './FMaterial';
 //==========================================================
 export class FCombinationMaterial extends FMaterial {
    // 材质集合 
-   protected _materials: FObjects<FMaterial>;
+   protected _materials: Objects<FMaterial>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -20,7 +20,7 @@ export class FCombinationMaterial extends FMaterial {
    public constructor() {
       super();
       // 设置属性 
-      this._materials = new FObjects<FMaterial>();
+      this._materials = new Objects<FMaterial>();
    }
 
    //==========================================================

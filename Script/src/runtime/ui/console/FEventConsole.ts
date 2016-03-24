@@ -2,7 +2,7 @@ import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FError} from '../../common/lang/FError';
 // import {SListenerContext} from '../../common/lang/SListenerContext';
 // import {FListener} from '../../common/lang/FListener';
-// import {FObjects} from '../../common/lang/FObjects';
+// import {FObjects} from '../../common/lang/Objects';
 // import {RObject} from '../../common/lang/RObject';
 // import {RListener} from '../../common/lang/RListener';
 // import {RLogger} from '../../common/lang/RLogger';

@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {FMaterial} from './FMaterial';

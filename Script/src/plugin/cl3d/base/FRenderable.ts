@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {RObjectId} from '../../../runtime/common/lang/RObjectId';
@@ -41,7 +41,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    // 顶点缓冲集合
    public vertexBuffers: FDictionary<FVertexBuffer>;
    // 索引缓冲集合
-   public indexBuffers: FObjects<FIndexBuffer>;
+   public indexBuffers: Objects<FIndexBuffer>;
    // 纹理集合
    // public textures: FDictionary<any>;
    // 激活信息
@@ -250,7 +250,7 @@ export class FRenderable extends FDrawable implements IRenderable {
       // 获得集合
       var buffers = this.indexBuffers;
       if (!buffers) {
-         buffers = this.indexBuffers = new FObjects<FIndexBuffer>();
+         buffers = this.indexBuffers = new Objects<FIndexBuffer>();
       }
       // 设置缓冲
       buffers.push(buffer);

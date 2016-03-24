@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
 import {RLogger} from '../../../runtime/common/lang/RLogger';
@@ -19,7 +19,7 @@ export class FCommandConsole extends FConsole {
    // 当前
    protected current: FCommand = null;
    // 队列
-   protected pendings: FObjects<FCommand> = null;
+   protected pendings: Objects<FCommand> = null;
    // 事务控制台
    @ALinker(FTransactionConsole)
    protected _transactionConsole: FTransactionConsole = null;

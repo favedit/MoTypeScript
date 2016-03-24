@@ -1,4 +1,4 @@
-//import {FObjects} from '../../common/lang/FObjects';
+//import {FObjects} from '../../common/lang/Objects';
 //import {SVertex} from '../core/SVertex';
 
 //==========================================================

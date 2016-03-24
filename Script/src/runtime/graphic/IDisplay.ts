@@ -1,4 +1,4 @@
-import {FObjects} from '../common/lang/FObjects';
+import {Objects} from '../common/lang/Objects';
 import {SPoint3} from '../common/math/SPoint3';
 import {SVector3} from '../common/math/SVector3';
 import {IDrawable} from './IDrawable';
@@ -19,7 +19,7 @@ export interface IDisplay extends IDrawable {
    // 缩放
    scale: SVector3;
    // 渲染集合
-   renderables: FObjects<IRenderable>;
+   renderables: Objects<IRenderable>;
 
    //==========================================================
    // <T>判断是否含有渲染对象。</T>

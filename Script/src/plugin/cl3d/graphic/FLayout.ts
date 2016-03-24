@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {FContent} from './FContent';
 
@@ -11,9 +11,9 @@ import {FContent} from './FContent';
 //==========================================================
 export class FLayout extends FContent {
    // 缓冲集合
-   public _buffers: FObjects<any> = null;
+   public _buffers: Objects<any> = null;
    // 取样集合
-   public _samplers: FObjects<any> = null;
+   public _samplers: Objects<any> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -35,7 +35,7 @@ export class FLayout extends FContent {
       if (!buffers.isEmpty()) {
          var items = this._buffers;
          if (!items) {
-            items = this._buffers = new FObjects();
+            items = this._buffers = new Objects();
          }
          items.assign(buffers);
       }
@@ -68,7 +68,7 @@ export class FLayout extends FContent {
       if (!samplers.isEmpty()) {
          var items = this._samplers;
          if (!items) {
-            items = this._samplers = new FObjects();
+            items = this._samplers = new Objects();
          }
          items.assign(samplers);
       }

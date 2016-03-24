@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {RLogger} from '../../common/lang/RLogger';
 import {EThreadStatus} from './EThreadStatus';
 import {FConsole} from '../FConsole';
@@ -20,7 +20,7 @@ export class FThreadConsole extends FConsole {
    protected _active: boolean = true;
    // @attribute 激活标志
    protected _interval: number = 5;
-   protected _threads: FObjects<FThread> = null;
+   protected _threads: Objects<FThread> = null;
    //..........................................................
    // @html
    protected _hIntervalId = null;
@@ -32,7 +32,7 @@ export class FThreadConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this._threads = new FObjects<FThread>();
+      this._threads = new Objects<FThread>();
       // 设置回调
       //var flag = o._requestFlag = MO.Window.requestAnimationFrame(o.ohInterval);
       //if(!flag){
@@ -47,7 +47,7 @@ export class FThreadConsole extends FConsole {
    // @method
    // @return 线程集合
    //==========================================================
-   public get threads(): FObjects<FThread> {
+   public get threads(): Objects<FThread> {
       return this._threads;
    }
 
@@ -115,7 +115,7 @@ export class FThreadConsole extends FConsole {
    public processAll() {
       // 激活处理
       if (this._active) {
-         var threads:FObjects<FThread> = this._threads;
+         var threads:Objects<FThread> = this._threads;
          var count:number = threads.count();
          //try{
          for (var n:number = 0; n < count; n++) {

@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {SPoint3} from '../../common/math/SPoint3';
 import {SColor4} from '../../common/math/SColor4';
 import {SVertex} from './SVertex';
@@ -12,11 +12,11 @@ export class FPath3 extends FCurve3 {
 
    protected startVertex: SVertex;
 
-   public vertexs: FObjects<SVertex>;
+   public vertexs: Objects<SVertex>;
 
    public constructor() {
       super();
-      this.vertexs = new FObjects<SVertex>();
+      this.vertexs = new Objects<SVertex>();
    }
 
    public moveTo(x: number, y: number, z: number, r: number = 1, g: number = 1, b: number = 1, a: number = 1): void {
@@ -44,7 +44,7 @@ export class FPath3 extends FCurve3 {
    //
    // @return 点集合
    //==========================================================
-   public getVertexs(): FObjects<SVertex> {
+   public getVertexs(): Objects<SVertex> {
       return this.vertexs;
    }
 }

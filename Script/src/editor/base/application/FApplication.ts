@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FApplication as FBaseApplication} from '../../../runtime/framework/FApplication';
 import {FDeviceConsole} from '../../../runtime/ui/console/FDeviceConsole';

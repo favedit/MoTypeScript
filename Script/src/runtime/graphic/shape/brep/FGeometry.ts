@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {SPoint3} from '../../common/math/SPoint3';
 import {SVector3} from '../../common/math/SVector3';
 import {SColor4} from '../../common/math/SColor4';
@@ -298,7 +298,7 @@ export class FGeometry {
       var vertexCount = this._vertices.length;
       var faceCount = this._faces.length;
       // 创建集合
-      var vertices = new FObjects<SVector3>();
+      var vertices = new Objects<SVector3>();
       for (let i: number = 0; i < vertexCount; i++) {
          vertices[i] = new SVector3();
       }

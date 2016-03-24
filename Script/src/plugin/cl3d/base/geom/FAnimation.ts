@@ -1,5 +1,5 @@
 import {FObject} from '../../../../runtime/common/lang/FObject';
-import {FObjects} from '../../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../../runtime/common/lang/Objects';
 import {RObject} from '../../../../runtime/common/lang/RObject';
 
 //==========================================================
@@ -13,7 +13,7 @@ export class FAnimation extends FObject {
    protected _baseTick = 0;
    protected _currentTick = 0;
    protected _lastTick = 0
-   protected _bones = new FObjects();
+   protected _bones = new Objects();
 
    //==========================================================
    // <T>根据编号查找骨头。</T>

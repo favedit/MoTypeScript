@@ -1,6 +1,6 @@
 ﻿import {FObject} from './FObject'
 import {FDictionary} from './FDictionary'
-import {FObjectPool} from './FObjectPool'
+import {ObjectPool} from './ObjectPool'
 import {RClass} from '../reflect/RClass'
 
 //==========================================================
@@ -10,7 +10,7 @@ import {RClass} from '../reflect/RClass'
 // @author maocy
 // @version 150411
 //==========================================================
-export class FObjectPools extends FObject {
+export class ObjectPools extends FObject {
    // 缓冲字典
    public _pools: FDictionary<any> = null;
 
@@ -34,7 +34,7 @@ export class FObjectPools extends FObject {
    public pool(code) {
       var pool = this._pools.get(code);
       if (!pool) {
-         pool = RClass.create(FObjectPool);
+         pool = RClass.create(ObjectPool);
          this._pools.set(code, pool);
       }
       return pool;

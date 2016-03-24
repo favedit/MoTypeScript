@@ -1,5 +1,5 @@
 import {FObject} from './FObject'
-import {FObjects} from './FObjects'
+import {Objects} from './Objects'
 import {RObject} from './RObject'
 import {FString} from './FString'
 import {FListener} from './FListener'
@@ -18,7 +18,7 @@ export class FListeners extends FObject {
    // 发送者
    public sender = null;
    // 监听集合
-   public listeners: FObjects<FListener> = null;
+   public listeners: Objects<FListener> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -36,7 +36,7 @@ export class FListeners extends FObject {
    // @return  是否为空
    //==========================================================
    public isEmpty() {
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       if (listeners) {
          return listeners.isEmpty();
       }
@@ -52,7 +52,7 @@ export class FListeners extends FObject {
    // @return TListener 监听器
    //==========================================================
    public find(owner: any, callback: Function): FListener {
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
@@ -123,9 +123,9 @@ export class FListeners extends FObject {
          throw new FError(this, 'Listener process is null.');
       }
       // 增加监听器
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       if (!listeners) {
-         listeners = this.listeners = new FObjects<FListener>();
+         listeners = this.listeners = new Objects<FListener>();
       }
       listeners.push(listener);
    }
@@ -153,7 +153,7 @@ export class FListeners extends FObject {
    // @param parameters 参数集合
    //==========================================================
    public process(...parameters: Array<any>) {
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
@@ -167,7 +167,7 @@ export class FListeners extends FObject {
    // <T>清空处理。</T>
    //==========================================================
    public clear() {
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       if (listeners) {
          listeners.clear();
       }
@@ -179,7 +179,7 @@ export class FListeners extends FObject {
    // @method
    //============================================================
    public dispose() {
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
@@ -200,7 +200,7 @@ export class FListeners extends FObject {
    public dump() {
       var result = new FString();
       result.append(RClass.shortName(this));
-      var listeners: FObjects<FListener> = this.listeners;
+      var listeners: Objects<FListener> = this.listeners;
       var count: number = listeners.count();
       for (var n: number = 0; n < count; n++) {
          result.append('\n   ' + listeners.at(n));

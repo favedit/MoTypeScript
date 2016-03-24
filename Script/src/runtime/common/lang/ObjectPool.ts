@@ -1,5 +1,5 @@
 import {FObject} from './FObject'
-import {FObjects} from './FObjects'
+import {Objects} from './Objects'
 import {RObject} from './RObject'
 import {RAssert} from '../RAssert'
 
@@ -10,10 +10,10 @@ import {RAssert} from '../RAssert'
 // @author maocy
 // @version 150108
 //==========================================================
-export class FObjectPool extends FObject {
+export class ObjectPool extends FObject {
    // @attribute
-   public items:FObjects<any> = null;
-   public frees:FObjects<any> = null;
+   public items:Objects<any> = null;
+   public frees:Objects<any> = null;
    // @attribute
    public _allocCount = 0;
    public _freeCount = 0;
@@ -25,8 +25,8 @@ export class FObjectPool extends FObject {
    //==========================================================
    public constructor() {
       super();
-      this.items = new FObjects<any>();
-      this.frees = new FObjects<any>();
+      this.items = new Objects<any>();
+      this.frees = new Objects<any>();
    }
 
    //==========================================================

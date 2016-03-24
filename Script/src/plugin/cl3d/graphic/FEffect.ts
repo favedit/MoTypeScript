@@ -1,4 +1,4 @@
-﻿import {FObjects} from '../../../runtime/common/lang/FObjects';
+﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {FError} from '../../../runtime/common/lang/FError';
 import {RBoolean} from '../../../runtime/common/lang/RBoolean';
 import {RString} from '../../../runtime/common/lang/RString';
@@ -143,7 +143,7 @@ export class FEffect extends FContent {
    // @param offset 开始位置
    // @param count 总数
    //==========================================================
-   public drawRenderables(region: FRegion, renderables: FObjects<FRenderable>, offset, count) {
+   public drawRenderables(region: FRegion, renderables: Objects<FRenderable>, offset, count) {
       // 选择技术
       this.graphicContext.setProgram(this.program);
       // 绘制所有对象

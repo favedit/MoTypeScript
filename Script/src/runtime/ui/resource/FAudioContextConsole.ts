@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {RObject} from '../../common/lang/RObject';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../../core/FConsole';
@@ -25,7 +25,7 @@ export class FAudioContextConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._contexts = new FObjects();
+      this._contexts = new Objects();
    }
 
    //==========================================================

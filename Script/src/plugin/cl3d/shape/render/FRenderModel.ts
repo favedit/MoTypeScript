@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FModelResource} from '../../resource/FModelResource';
@@ -16,7 +16,7 @@ export class FRenderModel extends FE3rComponent {
    //    // @attribute
    public resource: FModelResource;
    //    // @attribute
-   public meshes: FObjects<FRenderModelMesh>;
+   public meshes: Objects<FRenderModelMesh>;
    //    o._skeletons           = MO.Class.register(o, new MO.AGetter('_skeletons'));
 
    //==========================================================
@@ -86,7 +86,7 @@ export class FRenderModel extends FE3rComponent {
       // 读取网格集合
       var meshResources = resource.meshes;
       if (meshResources) {
-         var meshes = this.meshes = new FObjects<FRenderModelMesh>();
+         var meshes = this.meshes = new Objects<FRenderModelMesh>();
          var meshCount = meshResources.count();
          for (var i = 0; i < meshCount; i++) {
             var meshResource = meshResources.at(i);

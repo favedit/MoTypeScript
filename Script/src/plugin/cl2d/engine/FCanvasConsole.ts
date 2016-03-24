@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
-import {FObjectPools} from '../../../runtime/common/lang/FObjectPools';
+import {ObjectPools} from '../../../runtime/common/lang/ObjectPools';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCanvas} from './FCanvas';
@@ -13,7 +13,7 @@ import {FCanvas} from './FCanvas';
 //==========================================================
 export class FCanvasConsole extends FConsole {
    // 缓冲集合
-   protected _pools: FObjectPools = null;
+   protected _pools: ObjectPools = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -22,7 +22,7 @@ export class FCanvasConsole extends FConsole {
       super();
       // 设置属性
       this.scopeCd = ScopeEnum.Local;
-      this._pools = RClass.create(FObjectPools);
+      this._pools = RClass.create(ObjectPools);
    }
 
    //==========================================================

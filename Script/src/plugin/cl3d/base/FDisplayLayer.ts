@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {IDisplayLayer} from '../../../runtime/graphic/IDisplayLayer';
 import {FDisplayContainer} from './FDisplayContainer';
@@ -28,7 +28,7 @@ export class FDisplayLayer extends FDisplayContainer implements IDisplayLayer {
    public constructor() {
       super();
       // 设置参数
-      this.visibleRenderables = new FObjects();
+      this.visibleRenderables = new Objects();
    }
 
    //==========================================================

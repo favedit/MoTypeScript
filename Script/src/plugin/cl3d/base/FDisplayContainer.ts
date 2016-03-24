@@ -1,5 +1,5 @@
 import {FError} from '../../../runtime/common/lang/FError'
-import {FObjects} from '../../../runtime/common/lang/FObjects'
+import {Objects} from '../../../runtime/common/lang/Objects'
 import {RObject} from '../../../runtime/common/lang/RObject'
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
 import {RAssert} from '../../../runtime/common/RAssert'
@@ -16,7 +16,7 @@ import {FRegion} from './FRegion';
 //==========================================================
 export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    // 显示集合
-   public _displays: FObjects<FDisplay> = null;
+   public _displays: Objects<FDisplay> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -54,7 +54,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    // @return 是否含有
    //==========================================================
    public hasDisplay(): boolean {
-      var displays: FObjects<FDisplay> = this._displays;
+      var displays: Objects<FDisplay> = this._displays;
       if (displays) {
          return !displays.isEmpty();
       }
@@ -132,9 +132,9 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    public pushDisplay(display: FDisplay): void {
       RAssert.debugNotNull(display);
       // 获得显示集合
-      var displays: FObjects<FDisplay> = this._displays;
+      var displays: Objects<FDisplay> = this._displays;
       if (!displays) {
-         displays = this._displays = new FObjects<FDisplay>();
+         displays = this._displays = new Objects<FDisplay>();
       }
       // 设置显示对象
       display.parent = this;
@@ -149,7 +149,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    public removeDisplay(display: FDisplay): void {
       RAssert.debugNotNull(display);
       // 获得显示集合
-      var displays: FObjects<FDisplay> = this._displays;
+      var displays: Objects<FDisplay> = this._displays;
       if (displays) {
          // 移除显示对象
          displays.remove(display);
@@ -161,7 +161,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    // <T>清空渲染对象集合。</T>
    //==========================================================
    public clearDisplays(): void {
-      var displays: FObjects<FDisplay> = this._displays;
+      var displays: Objects<FDisplay> = this._displays;
       if (displays) {
          displays.clear();
       }
@@ -177,7 +177,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
       var result: boolean = super.filterDisplays(region);
       if (result) {
          // 过滤显示集合
-         var displays: FObjects<FDisplay> = this._displays;
+         var displays: Objects<FDisplay> = this._displays;
          if (displays) {
             var count: number = displays.count();
             for (var n: number = 0; n < count; n++) {
@@ -199,7 +199,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
       var result: boolean = super.filterRenderables(region);
       if (result) {
          // 过滤显示集合
-         var displays: FObjects<FDisplay> = this._displays;
+         var displays: Objects<FDisplay> = this._displays;
          if (displays) {
             var count: number = displays.count();
             for (var n: number = 0; n < count; n++) {

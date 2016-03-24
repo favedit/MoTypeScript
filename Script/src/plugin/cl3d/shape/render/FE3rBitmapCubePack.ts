@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FImage} from '../../../runtime/ui/resource/FImage';
@@ -12,7 +12,7 @@ import {FE3rBitmapPack} from './FE3rBitmapPack';
 //==========================================================
 export class FE3rBitmapCubePack extends FE3rBitmapPack {
    // 图形集合
-   protected _images: FObjects<FImage> = null;
+   protected _images: Objects<FImage> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,7 +34,7 @@ export class FE3rBitmapCubePack extends FE3rBitmapPack {
       // 加载二进制数据
       //var d = p.data();
       //var t = p._formatName;
-      var images = this._images = new FObjects<FImage>();
+      var images = this._images = new Objects<FImage>();
       for (var i: number = 0; i < 6; i++) {
          var image: FImage = RClass.create(FImage);
          // image._index = i;

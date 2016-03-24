@@ -9,7 +9,7 @@ import {RRuntime} from '../RRuntime';
 // @author maocy
 // @version 141230
 // =========================================================
-export class FObjects<T> extends FObject {
+export class Objects<T> extends FObject {
    // 项目个数
    protected _count: number = 0;
    // 项目集合
@@ -179,7 +179,7 @@ export class FObjects<T> extends FObject {
    // @method
    // @param values:TObjects 集合
    //===========================================================
-   public assign(values: FObjects<T>): void {
+   public assign(values: Objects<T>): void {
       var items = this._items;
       var count = this._count = values.count();
       var valueItems = values.items();
@@ -194,7 +194,7 @@ export class FObjects<T> extends FObject {
    // @method
    // @param values:TObjects 集合
    //===========================================================
-   public append(values: FObjects<T>): void {
+   public append(values: Objects<T>): void {
       var count = values.count();
       for (var i = 0; i < count; i++) {
          this.push(values.at(i));

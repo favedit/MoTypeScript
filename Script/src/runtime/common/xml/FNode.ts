@@ -1,7 +1,7 @@
 import {FError} from '../lang/FError';
 import {RInteger} from '../lang/RInteger';
 import {FObject} from '../lang/FObject';
-import {FObjects} from '../lang/FObjects';
+import {Objects} from '../lang/Objects';
 import {RBoolean} from '../lang/RBoolean';
 import {RFloat} from '../lang/RFloat';
 import {FAttributes} from '../lang/FAttributes';
@@ -167,7 +167,7 @@ export class FNode extends FObject {
       var o = this;
       var nodes = o._nodes;
       if (!nodes) {
-         nodes = o._nodes = new FObjects();
+         nodes = o._nodes = new Objects();
       }
       return nodes;
    }

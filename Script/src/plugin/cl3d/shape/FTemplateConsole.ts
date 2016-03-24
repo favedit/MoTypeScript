@@ -1,7 +1,7 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum';
 import {RObject} from '../../runtime/common/lang/RObject';
 import {RString} from '../../runtime/common/lang/RString';
-import {FObjectPools} from '../../runtime/common/lang/FObjectPools';
+import {ObjectPools} from '../../runtime/common/lang/ObjectPools';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {RAssert} from '../../runtime/common/RAssert';
@@ -23,7 +23,7 @@ import {FTemplate} from './FTemplate';
 //==========================================================
 export class FTemplateConsole extends FConsole {
    // 缓冲集合
-   protected _pools: FObjectPools;
+   protected _pools: ObjectPools;
    // 加载处理器
    @ALinker(FTemplateResourceConsole)
    protected _resourceConsole: FTemplateResourceConsole;
@@ -40,7 +40,7 @@ export class FTemplateConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._pools = RClass.create(FObjectPools);
+      this._pools = RClass.create(ObjectPools);
    }
 
    //==========================================================

@@ -1,5 +1,5 @@
 import {FObject} from '../../runtime/common/lang/FObject';
-import {FObjects} from '../../runtime/common/lang/FObjects';
+import {Objects} from '../../runtime/common/lang/Objects';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../runtime/common/io/FDataStream';
 
@@ -15,7 +15,7 @@ export class FBoneResource extends FObject {
    // 跟踪
    public track: any = null;
    // 骨头集合
-   public bones: FObjects<FBoneResource> = null;
+   public bones: Objects<FBoneResource> = null;
 
    //==========================================================
    // <T>从输入流里反序列化信息内容</T>
@@ -29,7 +29,7 @@ export class FBoneResource extends FObject {
       // 读取所有子骨头
       var count: number = input.readUint8();
       if (count > 0) {
-         var bones = this.bones = new FObjects<FBoneResource>();
+         var bones = this.bones = new Objects<FBoneResource>();
          for (var n: number = 0; n < count; n++) {
             var bone = RClass.create(FBoneResource);
             bone.unserialize(input);

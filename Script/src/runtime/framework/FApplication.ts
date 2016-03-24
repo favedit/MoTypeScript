@@ -1,5 +1,5 @@
 import {FObject} from '../common/lang/FObject';
-import {FObjects} from '../common/lang/FObjects';
+import {Objects} from '../common/lang/Objects';
 import {RObject} from '../common/lang/RObject';
 import {ALinker} from '../common/reflect/ALinker';
 import {RClass} from '../common/reflect/RClass';
@@ -23,7 +23,7 @@ export class FApplication extends FObject {
    // 激活视图
    protected _activeView: FView = null;
    // 视图集合
-   protected _views: FObjects<FView> = null;
+   protected _views: Objects<FView> = null;
    // 线程控制台
    @ALinker(FThreadConsole)
    protected _threadConsole: FThreadConsole = null;
@@ -33,7 +33,7 @@ export class FApplication extends FObject {
    //==========================================================
    public constructor() {
       super();
-      this._views = new FObjects<FView>();
+      this._views = new Objects<FView>();
    }
 
    //==========================================================
@@ -46,7 +46,7 @@ export class FApplication extends FObject {
    //==========================================================
    // <T>获得视图集合。</T>
    //==========================================================
-   public get views(): FObjects<FView> {
+   public get views(): Objects<FView> {
       return this._views;
    }
 

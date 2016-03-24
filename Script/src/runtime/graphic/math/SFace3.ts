@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {SVector3} from '../../common/math/SVector3';
 import {SColor4} from '../../common/math/SColor4';
 import {RClass} from '../../common/reflect/RClass';

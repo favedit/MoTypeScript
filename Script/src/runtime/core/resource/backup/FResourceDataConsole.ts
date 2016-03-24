@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {RClass} from '../../common/reflect/RClass';
 import {FConsole} from '../FConsole';
 import {FEnvironmentConsole} from '../console/FEnvironmentConsole';
@@ -34,8 +34,8 @@ export class FResourceDataConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this._loadDatas = new FObjects();
-      this._processDatas = new FObjects();
+      this._loadDatas = new Objects();
+      this._processDatas = new Objects();
       //this._pipelinePool = common.reflect.RClass.create(FObjectPool);
       // 是否支持多线程
       //var capability = MO.Window.Browser.capability();

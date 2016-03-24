@@ -1,4 +1,4 @@
-import {FObjects} from '../common/lang/FObjects'
+import {Objects} from '../common/lang/Objects'
 import {RObject} from '../common/lang/RObject'
 import {RAssert} from '../common/RAssert'
 import {IDisplay} from './IDisplay';
@@ -12,7 +12,7 @@ import {IDisplay} from './IDisplay';
 //==========================================================
 export interface IDisplayContainer extends IDisplay {
    // 显示集合
-   _displays: FObjects<IDisplay>;
+   _displays: Objects<IDisplay>;
 
    //==========================================================
    // <T>判断是否含有子显示对象。</T>

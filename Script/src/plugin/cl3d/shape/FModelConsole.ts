@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
-import {FObjectPools} from '../../runtime/common/lang/FObjectPools'
+import {ObjectPools} from '../../runtime/common/lang/ObjectPools'
 import {RString} from '../../runtime/common/lang/RString'
 import {RObject} from '../../runtime/common/lang/RObject'
 import {RAssert} from '../../runtime/common/RAssert'
@@ -22,7 +22,7 @@ import {FModel} from './FModel'
 //==========================================================
 export class FModelConsole extends FConsole {
    // 缓冲集合
-   protected _pools: FObjectPools;
+   protected _pools: ObjectPools;
    // 加载管理器
    @ALinker(FProcessLoadConsole)
    protected _processLoadConsole: FProcessLoadConsole;
@@ -39,7 +39,7 @@ export class FModelConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._pools = RClass.create(FObjectPools);
+      this._pools = RClass.create(ObjectPools);
    }
 
    //==========================================================

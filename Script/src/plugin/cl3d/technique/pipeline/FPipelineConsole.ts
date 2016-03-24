@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../../../runtime/common/lang/ScopeEnum';
-import {FObjects} from '../../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../../runtime/common/lang/Objects';
 import {RAssert} from '../../../../runtime/common/RAssert';
 import {ALinker} from '../../../../runtime/common/reflect/ALinker';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
@@ -17,7 +17,7 @@ import {FForwardPipeline} from './FForwardPipeline';
 // @history 141231
 //==========================================================
 export class FPipelineConsole extends FConsole {
-   protected _pipelines: FObjects<FPipeline> = null;
+   protected _pipelines: Objects<FPipeline> = null;
    // 线程
    protected _thread: FListenerThread = null;
    protected _interval = 150;
@@ -32,7 +32,7 @@ export class FPipelineConsole extends FConsole {
       super();
       // 设置变量
       this._scopeCd = ScopeEnum.Global;
-      this._pipelines = new FObjects<FPipeline>();
+      this._pipelines = new Objects<FPipeline>();
       // 创建线程
       var thread: FListenerThread = this._thread = RClass.create(FListenerThread);
       thread.interval = this._interval;

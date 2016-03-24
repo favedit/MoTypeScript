@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {SColor4} from '../../../runtime/common/math/SColor4';
@@ -14,7 +14,7 @@ export class FRenderTarget extends FContent {
    // @attribute
    public size: SSize2 = new SSize2();
    public color: SColor4 = new SColor4(0, 0, 0, 1);
-   protected _textures: FObjects<any> = new FObjects();
+   protected _textures: Objects<any> = new Objects();
 
    //==========================================================
    // <T>构造处理。</T>
@@ -25,7 +25,7 @@ export class FRenderTarget extends FContent {
       super();
       this.size = new SSize2();
       this.color = new SColor4(0, 0, 0, 1);
-      this._textures = new FObjects();
+      this._textures = new Objects();
    }
 
    //==========================================================
@@ -67,7 +67,7 @@ export class FRenderTarget extends FContent {
    public get textures() {
       var textures = this._textures;
       if (!textures) {
-         textures = this._textures = new FObjects();
+         textures = this._textures = new Objects();
       }
       return textures;
    }

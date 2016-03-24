@@ -1,4 +1,4 @@
-﻿import {FObjects} from '../../../runtime/common/lang/FObjects';
+﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {RAssert} from '../../../runtime/common/RAssert';
 import {FScene} from '../base/FScene';
@@ -17,8 +17,8 @@ export class FTechnique extends FContent {
    // @attribute
    public code = null;
    public activeMode = null;
-   public modes: FObjects<FTechniqueMode> = null;
-   public passes: FObjects<FTechniquePass> = null;
+   public modes: Objects<FTechniqueMode> = null;
+   public passes: Objects<FTechniquePass> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,8 +27,8 @@ export class FTechnique extends FContent {
    //==========================================================
    public constructor() {
       super();
-      this.modes = new FObjects<FTechniqueMode>();
-      this.passes = new FObjects<FTechniquePass>();
+      this.modes = new Objects<FTechniqueMode>();
+      this.passes = new Objects<FTechniquePass>();
    }
 
    //==========================================================

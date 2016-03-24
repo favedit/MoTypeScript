@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RLogger} from '../../../runtime/common/lang/RLogger';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCommand} from '../command/FCommand';
@@ -11,7 +11,7 @@ export class FTransactionConsole extends FConsole {
    // 激活会话
    public _activeSession: FSession = null;
    // 会话栈
-   public _sessionStack: FObjects<FSession> = null;
+   public _sessionStack: Objects<FSession> = null;
       
    //==========================================================
    // <T>构造处理。</T>
@@ -27,7 +27,7 @@ export class FTransactionConsole extends FConsole {
       // this.signalRedone = new hsw.util.Signal(this);
       this._activeSession = new FSession();
       /** @type {Array} */
-      this._sessionStack = new FObjects<any>();
+      this._sessionStack = new Objects<any>();
    }
 
    //==========================================================

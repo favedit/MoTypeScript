@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {FResource} from './FResource';
 import {FTemplateRenderableResource} from './FTemplateRenderableResource';
@@ -11,7 +11,7 @@ import {FTemplateRenderableResource} from './FTemplateRenderableResource';
 //==========================================================
 export class FTemplateResource extends FResource {
    // 渲染集合
-   public renderables: FObjects<FTemplateRenderableResource> = null;
+   public renderables: Objects<FTemplateRenderableResource> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -66,7 +66,7 @@ export class FTemplateResource extends FResource {
       var content = config.content;
       var count: number = content.length;
       if (count > 0) {
-         var renderables = this.renderables = new FObjects<FTemplateRenderableResource>();
+         var renderables = this.renderables = new Objects<FTemplateRenderableResource>();
          for (var n: number = 0; n < count; n++) {
             var renderableConfig = content[n];
             var renderable = new FTemplateRenderableResource();

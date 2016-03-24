@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {FDictionary} from '../../../runtime/common/lang/FDictionary';
 import {FListeners} from '../../../runtime/common/lang/FListeners';
 import {RObject} from '../../../runtime/common/lang/RObject';
@@ -29,7 +29,7 @@ export class FScene extends FGraphicObject implements IScene {
    // 统计器
    protected _statistics: FSceneStatistics;
    // 全部显示集合
-   protected _allDisplays: FObjects<FDisplay>;
+   protected _allDisplays: Objects<FDisplay>;
    // 进入帧监听器集合
    public enterFrameListeners: FListeners;
    // 离开帧监听器集合
@@ -56,7 +56,7 @@ export class FScene extends FGraphicObject implements IScene {
       this.backgroundColor = new SColor4(0.5, 0.5, 0.5, 1.0);
       this.layers = new FDictionary<FDisplayLayer>();
       this._statistics = RClass.create(FSceneStatistics);
-      this._allDisplays = new FObjects<FDisplay>();
+      this._allDisplays = new Objects<FDisplay>();
       // 设置变量
       this.enterFrameListeners = new FListeners(this);
       this.leaveFrameListeners = new FListeners(this);

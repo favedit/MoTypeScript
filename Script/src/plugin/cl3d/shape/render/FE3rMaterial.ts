@@ -1,4 +1,4 @@
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
 import {FE3rComponent} from './FE3rComponent';
 
@@ -13,7 +13,7 @@ export class FE3rMaterial extends FE3rComponent {
    public dataReady = false;
    public ready = false;
    // @method
-   public textures = new FObjects<any>();
+   public textures = new Objects<any>();
    //_visible       = MO.Class.register(o, new MO.AGetSet('_visible'), true);
    //_guid          = MO.Class.register(o, new MO.AGetSet('_guid'));
    // @method

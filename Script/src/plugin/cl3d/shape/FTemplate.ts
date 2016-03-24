@@ -1,5 +1,5 @@
 import {FListeners} from '../../../runtime/common/lang/FListeners';
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FActor} from '../base/FActor';
 import {FTemplateResource} from '../resource/FTemplateResource';
@@ -20,7 +20,7 @@ export class FTemplate extends FActor {
    public _dataReady: boolean;
    public _ready: boolean;
    public resource: any;
-   public _meshs: any = new FObjects<any>();
+   public _meshs: any = new Objects<any>();
    // public renderables: any;
    //    // @attribute
    //    o._sprites         = MO.Class.register(o, new MO.AGetter('_sprites'));

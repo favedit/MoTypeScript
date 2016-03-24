@@ -1,7 +1,7 @@
 import {ALinker} from '../common/reflect/ALinker';
 import {ALogger} from '../common/reflect/ALogger';
 import {ScopeEnum} from '../common/lang/ScopeEnum';
-import {FObjects} from '../common/lang/FObjects';
+import {Objects} from '../common/lang/Objects';
 import {RString} from '../common/lang/RString';
 import {RLogger} from '../common/lang/RLogger';
 import {RAssert} from '../common/RAssert';
@@ -19,7 +19,7 @@ import {FConsole} from './FConsole';
 export class RConsole {
    //..........................................................
    // @attribute 注册类型集合
-   protected static _registers = new FObjects();
+   protected static _registers = new Objects();
    // @attribute 控制台集合
    protected static _consoles = new FDictionary<FConsole>();
 

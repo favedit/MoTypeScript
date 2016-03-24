@@ -1,6 +1,6 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
 import {FError} from '../../../runtime/common/lang/FError';
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {SPoint2} from '../../../runtime/common/math/SPoint2';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
@@ -38,11 +38,11 @@ export class FRegion extends FObject implements IProcessContext {
    // 当前投影
    public projection;
    // 显示集合
-   public displays: FObjects<FDisplay>;
+   public displays: Objects<FDisplay>;
    // 渲染集合
-   public renderables: FObjects<FRenderable>;
+   public renderables: Objects<FRenderable>;
    // 所有渲染集合
-   public allRenderables: FObjects<FRenderable>;
+   public allRenderables: Objects<FRenderable>;
    // 相机位置
    public cameraPosition: SPoint3;
    // 相机方向
@@ -84,9 +84,9 @@ export class FRegion extends FObject implements IProcessContext {
       super();
       // 初始化参数
       this.changed = false;
-      this.displays = new FObjects<FDisplay>();
-      this.renderables = new FObjects<FRenderable>();
-      this.allRenderables = new FObjects<FRenderable>();
+      this.displays = new Objects<FDisplay>();
+      this.renderables = new Objects<FRenderable>();
+      this.allRenderables = new Objects<FRenderable>();
       this.cameraPosition = new SPoint3();
       this.cameraDirection = new SVector3();
       this.cameraViewMatrix = new SMatrix3d();

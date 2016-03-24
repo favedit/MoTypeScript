@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FObjectPool} from '../../common/lang/FObjectPool';
+import {ObjectPool} from '../../common/lang/ObjectPool';
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
 import {EHttpContent} from '../../common/net/EHttpContent';
@@ -16,7 +16,7 @@ import {FEnvironmentConsole} from './FEnvironmentConsole';
 //==========================================================
 export class FHttpConsole extends FConsole {
    // 缓冲池
-   public _pool: FObjectPool = null;
+   public _pool: ObjectPool = null;
    // 环境控制台
    @ALinker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole = null;
@@ -30,7 +30,7 @@ export class FHttpConsole extends FConsole {
       super();
       // 设置变量
       this._scopeCd = ScopeEnum.Local;
-      this._pool = RClass.create(FObjectPool);
+      this._pool = RClass.create(ObjectPool);
    }
 
    //==========================================================

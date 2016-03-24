@@ -1,5 +1,5 @@
 import {FObject} from '../common/lang/FObject';
-import {FObjects} from '../runtime/common/lang/FObjects';
+import {Objects} from '../runtime/common/lang/Objects';
 import {RObject} from '../runtime/common/lang/RObject';
 //import {Light} from './light/Light';
 

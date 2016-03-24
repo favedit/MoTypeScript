@@ -1,5 +1,5 @@
 import {FObject} from '../../../runtime/common/lang/FObject';
-import {FObjects} from '../../../runtime/common/lang/FObjects';
+import {Objects} from '../../../runtime/common/lang/Objects';
 import {RObject} from '../../../runtime/common/lang/RObject';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FGraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
@@ -59,11 +59,11 @@ export abstract class FGraphicContext extends FBaseGraphicContext {
       this._statistics = RClass.create(FContextStatistics);
       //MO.Console.find(MO.FStatisticsConsole).register('graphic3d.context', o._statistics);
       // 设置属性
-      this._storePrograms = new FObjects();
-      this._storeLayouts = new FObjects();
-      this._storeBuffers = new FObjects();
-      this._storeTextures = new FObjects();
-      this._storeTargets = new FObjects();
+      this._storePrograms = new Objects();
+      this._storeLayouts = new Objects();
+      this._storeBuffers = new Objects();
+      this._storeTextures = new Objects();
+      this._storeTargets = new Objects();
    }
 
    //==========================================================

@@ -1,4 +1,4 @@
-import {FObjects} from '../../common/lang/FObjects';
+import {Objects} from '../../common/lang/Objects';
 import {RObject} from '../../common/lang/RObject';
 import {FListeners} from '../../common/lang/FListeners';
 import {FConsole} from '../FConsole';
@@ -15,9 +15,9 @@ export class FPluginConsole extends FConsole {
    // 环境
    public context = null;
    // 插件集合
-   public plugins: FObjects<IPlugin> = null;
+   public plugins: Objects<IPlugin> = null;
    // 加载集合
-   public loadingPlugins: FObjects<IPlugin> = null;
+   public loadingPlugins: Objects<IPlugin> = null;
    // 激活监听器
    public activedListeners: FListeners = null;
    // 取消激活监听器
@@ -30,8 +30,8 @@ export class FPluginConsole extends FConsole {
       super();
       // 设置属性
       this.context = { app: AppView };
-      this.plugins = new FObjects<IPlugin>();;
-      this.loadingPlugins = new FObjects<IPlugin>();
+      this.plugins = new Objects<IPlugin>();;
+      this.loadingPlugins = new Objects<IPlugin>();
       this.activedListeners = new FListeners(this);
       this.deactivedListeners = new FListeners(this);
    };
@@ -118,7 +118,7 @@ export class FPluginConsole extends FConsole {
    // <T>加载全部插件。</T>
    //==========================================================
    public loadAll() {
-      var plugins: FObjects<IPlugin> = this.plugins;
+      var plugins: Objects<IPlugin> = this.plugins;
       var count: number = plugins.count();
       for (var n: number = 0; n < count; n++) {
          var plugin: IPlugin = plugins.get(n);
@@ -130,7 +130,7 @@ export class FPluginConsole extends FConsole {
    // <T>卸载全部插件。</T>
    //==========================================================
    public unloadAll() {
-      var plugins: FObjects<IPlugin> = this.plugins;
+      var plugins: Objects<IPlugin> = this.plugins;
       var count: number = plugins.count();
       for (var n: number = 0; n < count; n++) {
          var plugin: IPlugin = plugins.get(n);
