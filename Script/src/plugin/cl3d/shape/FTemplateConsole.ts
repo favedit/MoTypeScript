@@ -1,11 +1,11 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {RString} from '../../runtime/common/lang/RString';
+import {StringUtil} from '../../runtime/common/lang/StringUtil';
 import {ObjectPools} from '../../runtime/common/lang/ObjectPools';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
-import {RAssert} from '../../runtime/common/RAssert';
-import {RMemory} from '../../runtime/common/RMemory';
+import {AssertUtil} from '../../runtime/common/AssertUtil';
+import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FConsole} from '../../runtime/core/FConsole';
 import {RConsole} from '../../runtime/core/RConsole';
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole';
@@ -53,28 +53,28 @@ export class FTemplateConsole extends FConsole {
    public alloc(args) {
       // 获得环境
       var context = args.context;
-      RAssert.debugNotNull(context);
+      AssertUtil.debugNotNull(context);
       // 获得标识
       var identity = null;
       var guid = args.guid;
-      if (!RString.isEmpty(guid)) {
+      if (!StringUtil.isEmpty(guid)) {
          identity = guid;
       }
       var code = args.code;
-      if (!RString.isEmpty(code)) {
+      if (!StringUtil.isEmpty(code)) {
          identity = code;
       }
       var url: string = args.url;
-      if (!RString.isEmpty(url)) {
+      if (!StringUtil.isEmpty(url)) {
          identity = url;
       }
-      RAssert.debugNotEmpty(identity);
+      AssertUtil.debugNotEmpty(identity);
       // 尝试从缓冲池中取出
       var template: FTemplate = this._pools.alloc(identity);
       if (!template) {
          // 加载渲染对象
          var resource = this._resourceConsole.load(args);
-         RAssert.debugNotNull(resource);
+         AssertUtil.debugNotNull(resource);
          // 加载模板
          template = RClass.create(FTemplate);
          template.linkGraphicContext(context);
@@ -96,11 +96,11 @@ export class FTemplateConsole extends FConsole {
    // @return FE3dTemplate 渲染模板
    //==========================================================
    public allocByGuid(context, guid) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.guid = guid;
       var template = this.alloc(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return template;
    }
 
@@ -113,11 +113,11 @@ export class FTemplateConsole extends FConsole {
    // @return FE3dTemplate 渲染模板
    //==========================================================
    public allocByCode(context, code) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.code = code;
       var template = this.alloc(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return template;
    }
 
@@ -130,11 +130,11 @@ export class FTemplateConsole extends FConsole {
    // @return FE3dTemplate 渲染模板
    //==========================================================
    public allocByUrl(context, url: string) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.url = url;
       var template = this.alloc(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return template;
    }
 

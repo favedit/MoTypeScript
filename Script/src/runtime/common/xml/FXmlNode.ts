@@ -1,4 +1,4 @@
-import {FAttributes} from '../lang/FAttributes';
+import {Attributes} from '../lang/Attributes';
 import {FString} from '../lang/FString';
 import {RClass} from '../reflect/RClass';
 import {FNode} from './FNode';
@@ -30,7 +30,7 @@ export class FXmlNode extends FNode {
       var xnode: any = new FXmlNode();
       xnode._name = name;
       xnode._attributes = attribtues;
-      if (!RClass.isClass(attribtues, FAttributes)) {
+      if (!RClass.isClass(attribtues, Attributes)) {
          var a = arguments;
          var len = a.length;
          for (var n = 1; n < len; n += 2) {

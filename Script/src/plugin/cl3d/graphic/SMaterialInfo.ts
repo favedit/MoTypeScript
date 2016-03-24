@@ -1,4 +1,4 @@
-import {FloatUtil} from '../../../runtime/common/lang/RFloat';
+import {FloatUtil} from '../../../runtime/common/lang/FloatUtil';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 
 //==========================================================

@@ -3,9 +3,9 @@ import {IntegerUtil} from '../lang/IntegerUtil';
 import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
 import {BooleanUtil} from '../lang/BooleanUtil';
-import {FloatUtil} from '../lang/RFloat';
-import {FAttributes} from '../lang/FAttributes';
-import {RString} from '../lang/RString';
+import {FloatUtil} from '../lang/FloatUtil';
+import {Attributes} from '../lang/Attributes';
+import {StringUtil} from '../lang/StringUtil';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -20,7 +20,7 @@ export class FNode extends ObjectBase {
    // @attribute
    protected _name: string = null;
    protected _value = null;
-   protected _attributes: FAttributes = null;
+   protected _attributes: Attributes = null;
    protected _nodes = null;
 
    //==========================================================
@@ -42,7 +42,7 @@ export class FNode extends ObjectBase {
    // @return Boolean 是否相等
    //==========================================================
    public isName(n) {
-      return RString.equals(this._name, n);
+      return StringUtil.equals(this._name, n);
    }
 
    //==========================================================
@@ -118,7 +118,7 @@ export class FNode extends ObjectBase {
       var o = this;
       var r = o._attributes;
       if (!r) {
-         r = o._attributes = new FAttributes();
+         r = o._attributes = new Attributes();
       }
       return r;
    }
@@ -217,7 +217,7 @@ export class FNode extends ObjectBase {
    // @param value:String 属性值
    //==========================================================
    public setNvl(name, value) {
-      if (!RString.isEmpty(value)) {
+      if (!StringUtil.isEmpty(value)) {
          this.attributes().set(name, value);
       }
    }
@@ -392,7 +392,7 @@ export class FNode extends ObjectBase {
       }
       if (node._value) {
          var value = node._value.toString();
-         if (!RString.isEmpty(value)) {
+         if (!StringUtil.isEmpty(value)) {
             dump.append(' {', value.length, ':', value, '}');
          }
       }
@@ -418,6 +418,6 @@ export class FNode extends ObjectBase {
    // @return String 调试信息
    //==========================================================
    public dump(d: any = null, space: string = null) {
-      return this.innerDump(RString.nvlString(d), this, space);
+      return this.innerDump(StringUtil.nvlString(d), this, space);
    }
 }

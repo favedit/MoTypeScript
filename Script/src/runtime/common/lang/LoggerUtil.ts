@@ -3,10 +3,10 @@ import {RClass} from '../reflect/RClass';
 import {RRuntime} from '../RRuntime';
 import {SLogger} from './SLogger';
 import {FString} from './FString';
-import {FListeners} from './FListeners';
+import {Listeners} from './Listeners';
 import {ArrayUtil} from './ArrayUtil';
 import {DateUtil} from './DateUtil';
-import {RString} from './RString';
+import {StringUtil} from './StringUtil';
 
 //==========================================================
 // <T>日志工具类。</T>
@@ -21,14 +21,14 @@ export class LoggerUtil {
    // 日志长度
    private static _logger: SLogger = new SLogger();
    // 输出监听集合
-   private static _lsnsOutput: FListeners = new FListeners();
+   private static _lsnsOutput: Listeners = new Listeners();
 
    //==========================================================
    // <T>获得输出监听集合。</T>
    //
    // @return 输出监听集合
    //==========================================================
-   public static get outputListeners(): FListeners {
+   public static get outputListeners(): Listeners {
       return this._lsnsOutput;
    }
 
@@ -98,7 +98,7 @@ export class LoggerUtil {
          name += '@' + owner.hashCode;
       }
       //..........................................................
-      var code: string = '|D [' + RString.rpad(name, this._labelLength) + '] ';
+      var code: string = '|D [' + StringUtil.rpad(name, this._labelLength) + '] ';
       this.output(owner, code, message, parameters);
    }
 
@@ -131,7 +131,7 @@ export class LoggerUtil {
          name += '@' + owner.hashCode;
       }
       //..........................................................
-      var code: string = '|I [' + RString.rpad(name, this._labelLength) + '] ';
+      var code: string = '|I [' + StringUtil.rpad(name, this._labelLength) + '] ';
       this.output(owner, code, message, parameters);
    }
 
@@ -165,7 +165,7 @@ export class LoggerUtil {
          name += '@' + owner.hashCode;
       }
       //..........................................................
-      var code: string = '|W [' + RString.rpad(name, o._labelLength) + '] ';
+      var code: string = '|W [' + StringUtil.rpad(name, o._labelLength) + '] ';
       this.output(owner, code, message, parameters);
    }
 
@@ -199,7 +199,7 @@ export class LoggerUtil {
          name += '@' + owner.hashCode;
       }
       //..........................................................
-      var code: string = '|E [' + RString.rpad(name, o._labelLength) + '] ';
+      var code: string = '|E [' + StringUtil.rpad(name, o._labelLength) + '] ';
       this.output(owner, code, message, parameters);
    }
 
@@ -236,7 +236,7 @@ export class LoggerUtil {
       // 建立消息信息
       var result = new FString();
       //result.appendLine(RContext.get('RMessage:fatal'));
-      result.appendLine(RString.repeat('-', 60));
+      result.appendLine(StringUtil.repeat('-', 60));
       result.append(RClass.dump(owner), ': ');
       if (message) {
          var count = arguments.length;
@@ -249,7 +249,7 @@ export class LoggerUtil {
          }
       }
       result.appendLine(message);
-      result.appendLine(RString.repeat('-', 60));
+      result.appendLine(StringUtil.repeat('-', 60));
       result.appendLine('Stack:');
       result.append(stack.flush());
       var text = result.flush();
@@ -287,7 +287,7 @@ export class LoggerUtil {
       //   name += '@' + owner.hashCode();
       //}
       //..........................................................
-      var code: string = '|S [' + RString.rpad(name, o._labelLength) + '] ';
+      var code: string = '|S [' + StringUtil.rpad(name, o._labelLength) + '] ';
       var result = this.output(owner, code, message, parameters);
       //..........................................................
       alert(result);

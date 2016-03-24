@@ -1,10 +1,10 @@
-export * from './ELogger';
-export * from './EPlatform';
-export * from './EProcess';
-export * from './EScope';
-export * from './RAssert';
-export * from './RMemory';
+export * from './AssertUtil';
+export * from './LoggerEnum';
+export * from './MemoryUtil';
+export * from './PlatformEnum';
+export * from './ProcessEnum';
 export * from './RRuntime';
+export * from './ScopeEnum';
 export * from './SMemoryPoolEntry';
 export * from './TMemoryPool';
 

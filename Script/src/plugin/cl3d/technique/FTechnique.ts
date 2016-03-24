@@ -1,6 +1,6 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {RClass} from '../../../runtime/common/reflect/RClass';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FScene} from '../base/FScene';
 import {FRegion} from '../base/FRegion';
 import {FContent} from '../graphic/FContent';
@@ -62,7 +62,7 @@ export class FTechnique extends FContent {
    // @return 技术模式
    //==========================================================
    public pushPass(pass: FTechniquePass): void {
-      RAssert.debugNotNull(pass);
+      AssertUtil.debugNotNull(pass);
       pass.technique = this;
       this.passes.push(pass);
    }

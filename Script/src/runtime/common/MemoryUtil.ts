@@ -1,7 +1,7 @@
 import {SMemoryPoolEntry} from './SMemoryPoolEntry';
 import {TMemoryPool} from './TMemoryPool';
-import {RSingleton} from './lang/RSingleton';
-import {RAssert} from './RAssert';
+import {SingletonObject} from './lang/SingletonObject';
+import {AssertUtil} from './AssertUtil';
 import {RRuntime} from './RRuntime';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {RRuntime} from './RRuntime';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RMemory extends RSingleton {
+export class MemoryUtil extends SingletonObject {
    // 未使用节点
    protected static _entryUnused: SMemoryPoolEntry = null;
    // 缓冲池
@@ -40,7 +40,7 @@ export class RMemory extends RSingleton {
    // @param entry 节点
    //============================================================
    public static entryFree(entry: SMemoryPoolEntry): void {
-      RAssert.debugNotNull(entry);
+      AssertUtil.debugNotNull(entry);
       entry.next = this._entryUnused;
       this._entryUnused = entry;
    }
@@ -54,7 +54,7 @@ export class RMemory extends RSingleton {
    //==========================================================
    public static alloc(clazz: Function): any {
       // 获得类名
-      RAssert.debugNotNull(clazz);
+      AssertUtil.debugNotNull(clazz);
       var className: string = RRuntime.className(clazz);
       // 获得缓冲池
       var pools: any = this._pools;
@@ -76,9 +76,9 @@ export class RMemory extends RSingleton {
    // @param value:Object 实例
    //==========================================================
    public static free(value) {
-      RAssert.debugNotNull(value);
+      AssertUtil.debugNotNull(value);
       var pool = value.__pool;
-      RAssert.debugNotNull(pool);
+      AssertUtil.debugNotNull(pool);
       pool.free(value);
    }
 

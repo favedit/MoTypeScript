@@ -1,4 +1,4 @@
-import {RString} from '../../runtime/common/lang/RString';
+import {StringUtil} from '../../runtime/common/lang/StringUtil';
 import {FVendor} from './FVendor';
 
 //==========================================================
@@ -31,7 +31,7 @@ export class FVendorNet extends FVendor {
       for (var i: number = 0; i < count; i++) {
          var name = parameters.name(i);
          var value = parameters.value(i);
-         if (!RString.isEmpty(value)) {
+         if (!StringUtil.isEmpty(value)) {
             if (first) {
                url += '&';
             } else {

@@ -1,5 +1,5 @@
-import {RMemory} from '../RMemory';
-import {RAssert} from '../RAssert';
+import {MemoryUtil} from '../MemoryUtil';
+import {AssertUtil} from '../AssertUtil';
 
 //==========================================================
 // <T>内存对象池。</T>
@@ -31,7 +31,7 @@ export class FMemoryPool {
          value = unused.value;
          o._unused = unused.next;
          // 释放节点
-         RMemory.entryFree(unused);
+         MemoryUtil.entryFree(unused);
       } else {
          value = new o._constructor();
          value.__pool = o;
@@ -49,13 +49,13 @@ export class FMemoryPool {
    //==========================================================
    public free(value) {
       var o = this;
-      RAssert.debugNotNull(value);
+      AssertUtil.debugNotNull(value);
       // 释放资源
       if (value.free) {
          value.free();
       }
       // 放回缓冲池
-      var entry = RMemory.entryAlloc();
+      var entry = MemoryUtil.entryAlloc();
       entry.value = value;
       entry.next = o._unused;
       o._unused = entry;
@@ -74,7 +74,7 @@ export class FMemoryPool {
          entry = current.next;
          current.dispose();
          // 释放节点
-         RMemory.entryFree(current);
+         MemoryUtil.entryFree(current);
       }
    }
 }

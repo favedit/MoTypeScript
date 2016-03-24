@@ -1,4 +1,4 @@
-import {RAssert} from '../../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {FWglContext} from './FWglContext';
 
 //==========================================================
@@ -84,7 +84,7 @@ export class FWglContext1 extends FWglContext {
    // @return 顶点数组对象
    //==========================================================
    public createVertexArrayObject() {
-      RAssert.debugNotNull(this._handleLayout);
+      AssertUtil.debugNotNull(this._handleLayout);
       return this._handleLayout.createVertexArrayOES();
    }
 
@@ -94,7 +94,7 @@ export class FWglContext1 extends FWglContext {
    // @param handle 顶点数组对象
    //==========================================================
    public bindVertexArrayObject(handle: any) {
-      RAssert.debugNotNull(this._handleLayout);
+      AssertUtil.debugNotNull(this._handleLayout);
       return this._handleLayout.bindVertexArrayOES(handle);
    }
 
@@ -104,7 +104,7 @@ export class FWglContext1 extends FWglContext {
    // @param handle 顶点数组对象
    //==========================================================
    public deleteVertexArrayObject(handle: any) {
-      RAssert.debugNotNull(this._handleLayout);
+      AssertUtil.debugNotNull(this._handleLayout);
       return this._handleLayout.deleteVertexArrayOES(handle);
    }
 

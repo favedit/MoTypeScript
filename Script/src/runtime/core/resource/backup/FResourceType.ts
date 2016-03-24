@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {FDictionary} from '../../common/lang/FDictionary';
+import {Dictionary} from '../../common/lang/Dictionary';
 import {FResourceLoader} from './FResourceLoader';
 
 //==========================================================
@@ -17,7 +17,7 @@ export class FResourceType extends ObjectBase {
    //o._code = MO.Class.register(o, new MO.AGetSet('_code'));
    //o._pipeline = MO.Class.register(o, new MO.AGetSet('_pipeline'));
    //o._resources = MO.Class.register(o, new MO.AGetter('_resources'));
-   protected _resources: FDictionary<any> = null;
+   protected _resources: Dictionary<any> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,7 +27,7 @@ export class FResourceType extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._resources = new FDictionary<any>();
+      this._resources = new Dictionary<any>();
    }
 
    //==========================================================

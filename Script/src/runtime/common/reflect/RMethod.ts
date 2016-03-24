@@ -1,4 +1,4 @@
-import {RString} from '../lang/RString'
+import {StringUtil} from '../lang/StringUtil'
 import {RClass} from './RClass'
 
 //==========================================================
@@ -24,7 +24,7 @@ export class RMethod {
                return value.__shortName;
             } else {
                var source: string = value.toString();
-               result = value.__shortName = RString.mid(source, 'function ', '(');
+               result = value.__shortName = StringUtil.mid(source, 'function ', '(');
             }
          }
       }

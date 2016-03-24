@@ -1,8 +1,8 @@
 import {ObjectBase} from '../lang/ObjectBase'
 import {Objects} from '../lang/Objects'
-import {FDictionary} from '../lang/FDictionary'
+import {Dictionary} from '../lang/Dictionary'
 import {FError} from '../lang/FError'
-import {LoggerUtil} from '../lang/RLogger'
+import {LoggerUtil} from '../lang/LoggerUtil'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'
 import {RClass} from './RClass'
@@ -29,9 +29,9 @@ export class FClass extends ObjectBase {
    // 唯一实例对象
    protected _instance: any;
    // 描述器集合
-   protected _annotations: FDictionary<FDictionary<FAnnotation>>;
+   protected _annotations: Dictionary<Dictionary<FAnnotation>>;
    // 属性集合
-   protected _attributes: FDictionary<FAnnotation>;
+   protected _attributes: Dictionary<FAnnotation>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -39,8 +39,8 @@ export class FClass extends ObjectBase {
    public constructor() {
       super();
       this.__dispose = true;
-      this._annotations = new FDictionary<FDictionary<FAnnotation>>();
-      this._attributes = new FDictionary<FAnnotation>();
+      this._annotations = new Dictionary<Dictionary<FAnnotation>>();
+      this._attributes = new Dictionary<FAnnotation>();
    }
 
    //==========================================================
@@ -93,9 +93,9 @@ export class FClass extends ObjectBase {
          throw new FError(this, "Unknown annotation. (class={1}, annotation={2}, name={3}, code={4})", RClass.dump(this), annotation, name, code);
       }
       // 获得一个描述器的类型容器
-      var annotations: FDictionary<FAnnotation> = this._annotations.get(annotationCd);
+      var annotations: Dictionary<FAnnotation> = this._annotations.get(annotationCd);
       if (!annotations) {
-         annotations = new FDictionary<FAnnotation>();
+         annotations = new Dictionary<FAnnotation>();
          this._annotations.set(annotationCd, annotations);
       }
       // 检查重复
@@ -117,8 +117,8 @@ export class FClass extends ObjectBase {
    // @param annotationCd 描述类型
    // @return 描述对象集合
    //==========================================================
-   public findAnnotations(annotationCd: EAnnotation): FDictionary<FAnnotation> {
-      var annotations: FDictionary<FAnnotation> = this._annotations.get(annotationCd as any);
+   public findAnnotations(annotationCd: EAnnotation): Dictionary<FAnnotation> {
+      var annotations: Dictionary<FAnnotation> = this._annotations.get(annotationCd as any);
       return annotations;
    }
 
@@ -128,8 +128,8 @@ export class FClass extends ObjectBase {
    // @param annotationCd 描述类型
    // @return 描述对象集合
    //==========================================================
-   public getAnnotations(annotationCd: EAnnotation): FDictionary<FAnnotation> {
-      var annotations: FDictionary<FAnnotation> = this.findAnnotations(annotationCd);
+   public getAnnotations(annotationCd: EAnnotation): Dictionary<FAnnotation> {
+      var annotations: Dictionary<FAnnotation> = this.findAnnotations(annotationCd);
       if (!annotations) {
          LoggerUtil.fatal(this, null, "Can't find annotations. (class={1}, annotation_cd={2})", this.shortName, annotationCd);
       }
@@ -145,7 +145,7 @@ export class FClass extends ObjectBase {
    //==========================================================
    public findAnnotation(annotationCd: EAnnotation, code: string): FAnnotation {
       var annotation: FAnnotation = null;
-      var annotations: FDictionary<FAnnotation> = this._annotations.get(annotationCd as any);
+      var annotations: Dictionary<FAnnotation> = this._annotations.get(annotationCd as any);
       if (annotations) {
          annotation = annotations.get(code);
       }

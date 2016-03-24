@@ -1,9 +1,9 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
 import {ObjectPools} from '../../runtime/common/lang/ObjectPools'
-import {RString} from '../../runtime/common/lang/RString'
+import {StringUtil} from '../../runtime/common/lang/StringUtil'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
-import {RAssert} from '../../runtime/common/RAssert'
-import {RMemory} from '../../runtime/common/RMemory'
+import {AssertUtil} from '../../runtime/common/AssertUtil'
+import {MemoryUtil} from '../../runtime/common/MemoryUtil'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
 import {RClass} from '../../runtime/common/reflect/RClass'
 import {FProcessLoadConsole} from '../../runtime/core/console/FProcessLoadConsole'
@@ -52,28 +52,28 @@ export class FModelConsole extends FConsole {
    public alloc(args) {
       // 获得环境
       var context = args.context;
-      RAssert.debugNotNull(context);
+      AssertUtil.debugNotNull(context);
       // 获得标识
       var identity: string = null;
       var guid: string = args.guid;
-      if (!RString.isEmpty(guid)) {
+      if (!StringUtil.isEmpty(guid)) {
          identity = guid;
       }
       var code: string = args.code;
-      if (!RString.isEmpty(code)) {
+      if (!StringUtil.isEmpty(code)) {
          identity = code;
       }
       var url: string = args.url;
-      if (!RString.isEmpty(url)) {
+      if (!StringUtil.isEmpty(url)) {
          identity = url;
       }
-      RAssert.debugNotEmpty(identity);
+      AssertUtil.debugNotEmpty(identity);
       // 尝试从缓冲池中取出
       var model: FModel = this._pools.alloc(identity);
       if (!model) {
          // 加载渲染对象
          var renderable = this._renderModelConsole.load(args);
-         RAssert.debugNotNull(renderable);
+         AssertUtil.debugNotNull(renderable);
          // 加载模型
          model = RClass.create(FModel);
          model.linkGraphicContext(context);
@@ -94,11 +94,11 @@ export class FModelConsole extends FConsole {
    // @return FE3dModel 渲染模型
    //==========================================================
    public allocByGuid(context, guid) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.guid = guid;
       var model = this.alloc(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -111,11 +111,11 @@ export class FModelConsole extends FConsole {
    // @return FE3dModel 渲染模型
    //==========================================================
    public allocByCode(context, code) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.code = code;
       var model = this.alloc(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -128,11 +128,11 @@ export class FModelConsole extends FConsole {
    // @return FE3dModel 渲染模型
    //==========================================================
    public allocByUrl(context, url) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.url = url;
       var model = this.alloc(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 

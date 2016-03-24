@@ -1,4 +1,4 @@
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {FError} from '../../runtime/common/lang/FError';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FConsole} from '../../runtime/core/FConsole';
@@ -17,7 +17,7 @@ export class FVendorConsole extends FConsole {
    // 设置
    protected _setuped: boolean = false;
    // 提供商集合
-   protected _vendors: FDictionary<FVendor> = null;
+   protected _vendors: Dictionary<FVendor> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,7 +27,7 @@ export class FVendorConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._vendors = new FDictionary<FVendor>();
+      this._vendors = new Dictionary<FVendor>();
    }
 
    //==========================================================

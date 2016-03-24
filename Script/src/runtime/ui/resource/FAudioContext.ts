@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {FDictionary} from '../../common/lang/FDictionary';
-import {LoggerUtil} from '../../common/lang/RLogger';
+import {Dictionary} from '../../common/lang/Dictionary';
+import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
@@ -21,7 +21,7 @@ export class FAudioContext extends ObjectBase {
    protected _handle = null;
    // @attribute
    //o._buffers = MO.Class.register(o, new MO.AGetter('_buffers'));
-   protected _buffers: FDictionary<any> = null;
+   protected _buffers: Dictionary<any> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -31,7 +31,7 @@ export class FAudioContext extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._buffers = new FDictionary<any>();
+      this._buffers = new Dictionary<any>();
    }
 
    //==========================================================

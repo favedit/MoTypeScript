@@ -1,8 +1,8 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
-import {RMemory} from '../../runtime/common/RMemory';
+import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
 import {SLoadArgs} from './SLoadArgs';
@@ -16,7 +16,7 @@ import {FTemplateResource} from './FTemplateResource';
 //==========================================================
 export class FTemplateResourceConsole extends FConsole {
    // 模板集合
-   public templates:FDictionary<FTemplateResource> = null;
+   public templates:Dictionary<FTemplateResource> = null;
    // 资源控制台
    @ALinker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
@@ -30,7 +30,7 @@ export class FTemplateResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this.templates = new FDictionary<FTemplateResource>();
+      this.templates = new Dictionary<FTemplateResource>();
    }
 
    // //==========================================================
@@ -99,10 +99,10 @@ export class FTemplateResourceConsole extends FConsole {
    // @return 模板资源
    //==========================================================
    public loadByGuid(guid): FTemplateResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.guid = guid;
       var template = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return template;
    }
 
@@ -113,10 +113,10 @@ export class FTemplateResourceConsole extends FConsole {
    // @return 模板资源
    //==========================================================
    public loadByCode(code): FTemplateResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.code = code;
       var template = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return template;
    }
 
@@ -127,10 +127,10 @@ export class FTemplateResourceConsole extends FConsole {
    // @return 模板资源
    //==========================================================
    public loadByUrl(url: string): FTemplateResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.url = url;
       var template = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return template;
    }
 

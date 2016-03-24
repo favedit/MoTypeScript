@@ -1,9 +1,9 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
-import {RMemory} from '../../runtime/common/RMemory';
+import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
 import {SLoadArgs} from './SLoadArgs';
@@ -18,7 +18,7 @@ import {FModelResource} from './FModelResource';
 //==========================================================
 export class FModelResourceConsole extends FConsole {
    // 模型集合
-   protected models: FDictionary<FModelResource> = null;
+   protected models: Dictionary<FModelResource> = null;
    // 资源控制台
    @ALinker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
@@ -34,7 +34,7 @@ export class FModelResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置变量
-      this.models = new FDictionary<FModelResource>();
+      this.models = new Dictionary<FModelResource>();
       // this._meshs = new MO.TDictionary();
       // this._skeletons = new MO.TDictionary();
       // this._animations = new MO.TDictionary();
@@ -191,10 +191,10 @@ export class FModelResourceConsole extends FConsole {
    // @return 模型资源
    //==========================================================
    public loadByGuid(guid: string): FModelResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.guid = guid;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -205,10 +205,10 @@ export class FModelResourceConsole extends FConsole {
    // @return 模型资源
    //==========================================================
    public loadByCode(code: string): FModelResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.code = code;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -219,10 +219,10 @@ export class FModelResourceConsole extends FConsole {
    // @return 模型资源
    //==========================================================
    public loadByUrl(url: string): FModelResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.url = url;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 

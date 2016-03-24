@@ -1,9 +1,9 @@
 // import {FObject} from '../common/lang/ObjectBase';
-import {FDictionary} from '../common/lang/FDictionary';
-import {FListeners} from '../common/lang/FListeners';
+import {Dictionary} from '../common/lang/Dictionary';
+import {Listeners} from '../common/lang/Listeners';
 // import {RObject} from '../common/lang/ObjectUtil';
 import {SColor4} from '../common/math/SColor4';
-// import {RAssert} from '../common/RAssert';
+// import {RAssert} from '../common/AssertUtil';
 import {IDisplayLayer} from './IDisplayLayer';
 //import {FRegion} from './FRegion';
 
@@ -22,11 +22,11 @@ export interface IScene {
    // 背景颜色
    backgroundColor: SColor4;
    // 显示层集合
-   layers: FDictionary<IDisplayLayer>;
+   layers: Dictionary<IDisplayLayer>;
    // 进入帧监听器集合
-   enterFrameListeners: FListeners;
+   enterFrameListeners: Listeners;
    // 离开帧监听器集合
-   leaveFrameListeners: FListeners;
+   leaveFrameListeners: Listeners;
 
    //==========================================================
    // <T>注册一个显示层。</T>

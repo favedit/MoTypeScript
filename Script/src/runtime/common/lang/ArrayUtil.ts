@@ -1,4 +1,4 @@
-import {RAssert} from '../RAssert';
+import {AssertUtil} from '../AssertUtil';
 
 //==========================================================
 // <T>数组操作的工具类</T>
@@ -140,11 +140,11 @@ export class ArrayUtil {
    // @param targetOffset:Integer 目标位置
    //==========================================================
    public static copy(source, sourceOffset, sourceCount, target, targetOffset) {
-      RAssert.debugNotNull(source);
-      RAssert.debugTrue((sourceOffset >= 0) && (sourceOffset + sourceCount <= source.length));
-      RAssert.debugTrue(sourceCount <= source.length);
-      RAssert.debugNotNull(target);
-      RAssert.debugTrue((targetOffset >= 0) && (targetOffset + sourceCount <= target.length));
+      AssertUtil.debugNotNull(source);
+      AssertUtil.debugTrue((sourceOffset >= 0) && (sourceOffset + sourceCount <= source.length));
+      AssertUtil.debugTrue(sourceCount <= source.length);
+      AssertUtil.debugNotNull(target);
+      AssertUtil.debugTrue((targetOffset >= 0) && (targetOffset + sourceCount <= target.length));
       for (var i = 0; i < sourceCount; i++) {
          target[i + targetOffset] = source[i + sourceOffset];
       }

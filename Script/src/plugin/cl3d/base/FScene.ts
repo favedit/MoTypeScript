@@ -1,10 +1,10 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
-import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
+import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {SColor4} from '../../../runtime/common/math/SColor4';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IScene} from '../../../runtime/graphic/IScene';
 import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
 import {FDisplay} from './FDisplay';
@@ -25,15 +25,15 @@ export class FScene extends FGraphicObject implements IScene {
    // 背景颜色
    public backgroundColor: SColor4;
    // 显示层集合
-   public layers: FDictionary<FDisplayLayer>;
+   public layers: Dictionary<FDisplayLayer>;
    // 统计器
    protected _statistics: FSceneStatistics;
    // 全部显示集合
    protected _allDisplays: Objects<FDisplay>;
    // 进入帧监听器集合
-   public enterFrameListeners: FListeners;
+   public enterFrameListeners: Listeners;
    // 离开帧监听器集合
-   public leaveFrameListeners: FListeners;
+   public leaveFrameListeners: Listeners;
 
    //    // @attribute
    //    o._technique              = MO.Class.register(o, new MO.AGetter('_technique'));
@@ -54,12 +54,12 @@ export class FScene extends FGraphicObject implements IScene {
       //this._timer = RClass.create(MO.FTimer);
       this.statusActive = false;
       this.backgroundColor = new SColor4(0.5, 0.5, 0.5, 1.0);
-      this.layers = new FDictionary<FDisplayLayer>();
+      this.layers = new Dictionary<FDisplayLayer>();
       this._statistics = RClass.create(FSceneStatistics);
       this._allDisplays = new Objects<FDisplay>();
       // 设置变量
-      this.enterFrameListeners = new FListeners(this);
-      this.leaveFrameListeners = new FListeners(this);
+      this.enterFrameListeners = new Listeners(this);
+      this.leaveFrameListeners = new Listeners(this);
       /// 创建统计
       //   MO.Console.find(MO.FStatisticsConsole).register('engine.stage', this._statistics);
       //   // 创建显示集合
@@ -75,8 +75,8 @@ export class FScene extends FGraphicObject implements IScene {
    // @param layer 显示层
    //==========================================================
    public registerLayer(code: string, layer: FDisplayLayer): void {
-      RAssert.debugNotEmpty(code);
-      RAssert.debugNotNull(layer);
+      AssertUtil.debugNotEmpty(code);
+      AssertUtil.debugNotNull(layer);
       // 存储层
       this.layers.set(code, layer);
    }
@@ -87,7 +87,7 @@ export class FScene extends FGraphicObject implements IScene {
    // @param name 名称
    //==========================================================
    public unregisterLayer(code: string): void {
-      RAssert.debugNotEmpty(code);
+      AssertUtil.debugNotEmpty(code);
       // 清空层
       this.layers.set(code, null);
    }
@@ -137,7 +137,7 @@ export class FScene extends FGraphicObject implements IScene {
       // 设置状态
       this.statusActive = true;
       // 层集合处理
-      var layers: FDictionary<FDisplayLayer> = this.layers;
+      var layers: Dictionary<FDisplayLayer> = this.layers;
       var count: number = layers.count();
       for (var n: number = 0; n < count; n++) {
          var layer: FDisplayLayer = layers.at(n);
@@ -150,7 +150,7 @@ export class FScene extends FGraphicObject implements IScene {
    //==========================================================
    public deactive(): void {
       // 层集合处理
-      var layers: FDictionary<FDisplayLayer> = this.layers;
+      var layers: Dictionary<FDisplayLayer> = this.layers;
       var count: number = layers.count();
       for (var n: number = 0; n < count; n++) {
          var layer: FDisplayLayer = layers.at(n);

@@ -2,14 +2,14 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {RTypeArray} from '../../../runtime/common/lang/RTypeArray';
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SPoint4} from '../../../runtime/common/math/SPoint4';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SVector4} from '../../../runtime/common/math/SVector4';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {RClass} from '../../../runtime/common/reflect/RClass';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {EParameterFormat} from './EParameterFormat';
 import {EShader} from './EShader';
@@ -29,9 +29,9 @@ import {FContent} from './FContent';
 export abstract class FProgram extends FContent {
    //..........................................................
    // @attribute
-   public _parameters: FDictionary<FProgramParameter> = null;
-   public _attributes: FDictionary<FProgramAttribute> = null;
-   public _samplers: FDictionary<FProgramSampler> = null;
+   public _parameters: Dictionary<FProgramParameter> = null;
+   public _attributes: Dictionary<FProgramAttribute> = null;
+   public _samplers: Dictionary<FProgramSampler> = null;
    // @attribute
    public _vertexShader: FVertexShader = null;
    public _fragmentShader: FFragmentShader = null;
@@ -80,10 +80,10 @@ export abstract class FProgram extends FContent {
    // @method
    // @return 参数集合
    //==========================================================
-   public parameters(): FDictionary<FProgramParameter> {
+   public parameters(): Dictionary<FProgramParameter> {
       var parameters = this._parameters;
       if (parameters == null) {
-         parameters = this._parameters = new FDictionary<FProgramParameter>();
+         parameters = this._parameters = new Dictionary<FProgramParameter>();
       }
       return parameters;
    }
@@ -128,10 +128,10 @@ export abstract class FProgram extends FContent {
    // @method
    // @return 属性集合
    //==========================================================
-   public attributes(): FDictionary<FProgramAttribute> {
+   public attributes(): Dictionary<FProgramAttribute> {
       var attributes = this._attributes;
       if (attributes == null) {
-         attributes = this._attributes = new FDictionary<FProgramAttribute>();
+         attributes = this._attributes = new Dictionary<FProgramAttribute>();
       }
       return attributes;
    }
@@ -178,10 +178,10 @@ export abstract class FProgram extends FContent {
    // @method
    // @return 取样集合
    //==========================================================
-   public samplers(): FDictionary<FProgramSampler> {
+   public samplers(): Dictionary<FProgramSampler> {
       var samplers = this._samplers;
       if (samplers == null) {
-         samplers = this._samplers = new FDictionary<FProgramSampler>();
+         samplers = this._samplers = new Dictionary<FProgramSampler>();
       }
       return samplers;
    }
@@ -197,7 +197,7 @@ export abstract class FProgram extends FContent {
    public setAttribute(name, buffer, format) {
       // 获得定义
       var attribute = this.findAttribute(name);
-      RAssert.debugNotNull(attribute);
+      AssertUtil.debugNotNull(attribute);
       // 设置内容
       this._graphicContext.bindVertexBuffer(attribute.slot, buffer, 0, format);
    }
@@ -213,7 +213,7 @@ export abstract class FProgram extends FContent {
    public setParameter(name, value, count?:any) {
       // 获得定义
       var parameter: FProgramParameter = this.findParameter(name);
-      RAssert.debugNotNull(parameter);
+      AssertUtil.debugNotNull(parameter);
       // 转换数据
       var data = null;
       var clazz = value.constructor;

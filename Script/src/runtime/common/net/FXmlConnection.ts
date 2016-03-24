@@ -1,5 +1,5 @@
 import {FError} from '../lang/FError';
-import {LoggerUtil} from '../lang/RLogger';
+import {LoggerUtil} from '../lang/LoggerUtil';
 import {FXmlDocument} from '../xml/FXmlDocument';
 import {RXml} from '../xml/RXml';
 import {EHttpContent} from './EHttpContent';

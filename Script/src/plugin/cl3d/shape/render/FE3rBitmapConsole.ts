@@ -1,8 +1,8 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
-import {FDictionary} from '../../runtime/common/lang/FDictionary'
+import {Dictionary} from '../../runtime/common/lang/Dictionary'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
-import {LoggerUtil} from '../../runtime/common/lang/RLogger'
+import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil'
 import {FConsole} from '../../runtime/core/FConsole'
 import {FEnvironmentConsole} from '../../runtime/core/console/FEnvironmentConsole'
 import {FE3rBitmap} from './FE3rBitmap'
@@ -18,7 +18,7 @@ import {FE3rBitmapCubePack} from './FE3rBitmapCubePack'
 //==========================================================
 export class FE3rBitmapConsole extends FConsole {
    // 位图集合
-   protected _bitmaps: FDictionary<FE3rBitmap> = null;
+   protected _bitmaps: Dictionary<FE3rBitmap> = null;
    protected _dataUrl = '/cloud.resource.material.wv'
    // 环境控制台
    @ALinker(FEnvironmentConsole)
@@ -31,7 +31,7 @@ export class FE3rBitmapConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._bitmaps = new FDictionary<FE3rBitmap>();
+      this._bitmaps = new Dictionary<FE3rBitmap>();
    }
 
    //==========================================================

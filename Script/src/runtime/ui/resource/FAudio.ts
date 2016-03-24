@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
-import {LoggerUtil} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {RConsole} from '../../core/RConsole';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {FDeviceConsole} from '../console/FDeviceConsole';

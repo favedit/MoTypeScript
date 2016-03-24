@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
-import {FDictionary} from '../../runtime/common/lang/FDictionary'
+import {Dictionary} from '../../runtime/common/lang/Dictionary'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
 import {RClass} from '../../runtime/common/reflect/RClass'
 import {FError} from '../../runtime/common/lang/FError'
@@ -33,7 +33,7 @@ export class FE3rMaterialConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._materials = new FDictionary();
+      this._materials = new Dictionary();
    }
 
    //==========================================================

@@ -1,5 +1,5 @@
 import {ObjectBase} from './ObjectBase';
-import {RString} from './RString';
+import {StringUtil} from './StringUtil';
 
 //==========================================================
 // <T>16进制工具。</T>
@@ -22,7 +22,7 @@ export class HexUtil {
    // @return Boolean 是否有效
    //===========================================================
    public static isValid(value) {
-      return RString.isPattern(value, this.NUMBER);
+      return StringUtil.isPattern(value, this.NUMBER);
    }
 
    //===========================================================
@@ -51,6 +51,6 @@ export class HexUtil {
       } else {
          result = '0';
       }
-      return length ? RString.lpad(result, length, this.PAD) : result;
+      return length ? StringUtil.lpad(result, length, this.PAD) : result;
    }
 }

@@ -1,4 +1,4 @@
-import {RString} from './RString';
+import {StringUtil} from './StringUtil';
 
 //==========================================================
 // <T>整型对象的工具类。</T>
@@ -24,7 +24,7 @@ export class IntegerUtil {
    // @return Boolean 是否整数
    //==========================================================
    public static isInt(v) {
-      return RString.isPattern(v, 'n');
+      return StringUtil.isPattern(v, 'n');
    }
 
    //==========================================================
@@ -97,7 +97,7 @@ export class IntegerUtil {
          return d;
       }
       // 去掉两边不可见字符
-      v = RString.trim(v.toString());
+      v = StringUtil.trim(v.toString());
       // 去掉左边0字符
       while (true) {
          if (v.charAt(0) != '0') {

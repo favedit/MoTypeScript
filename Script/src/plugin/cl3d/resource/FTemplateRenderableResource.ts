@@ -1,4 +1,4 @@
-import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FResourceObject} from './FResourceObject';
 import {FModelResource} from './FModelResource';

@@ -1,4 +1,4 @@
-import {LoggerUtil} from '../../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {EShader} from '../EShader';
 import {FProgram} from '../FProgram';

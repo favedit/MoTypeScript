@@ -1,6 +1,6 @@
 import {RRuntime} from '../RRuntime';
 import {FString} from './FString';
-import {FloatUtil} from './RFloat';
+import {FloatUtil} from './FloatUtil';
 import {IntegerUtil} from './IntegerUtil';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {IntegerUtil} from './IntegerUtil';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RString {
+export class StringUtil {
    //..........................................................
    // @attribute
    static EMPTY: string = '';

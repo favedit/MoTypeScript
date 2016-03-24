@@ -1,9 +1,9 @@
 import {DataContentEnum} from '../../runtime/common/lang/DataContentEnum';
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ALinker} from '../../runtime/common/reflect/ALinker';
 import {RClass} from '../../runtime/common/reflect/RClass';
-import {RMemory} from '../../runtime/common/RMemory';
+import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {FResourceConsole} from '../../runtime/core/resource/FResourceConsole';
 import {FConsole} from '../../runtime/core/FConsole';
 import {SLoadArgs} from './SLoadArgs';
@@ -18,7 +18,7 @@ import {FMaterialResource} from './FMaterialResource';
 //==========================================================
 export class FMaterialResourceConsole extends FConsole {
    // 模板集合
-   public _materials: FDictionary<FMaterialResource> = null;
+   public _materials: Dictionary<FMaterialResource> = null;
    // 资源控制台
    @ALinker(FResourceConsole)
    protected _resourceConsole: FResourceConsole = null;
@@ -31,7 +31,7 @@ export class FMaterialResourceConsole extends FConsole {
    public constructor() {
       super();
       // 设置属性
-      this._materials = new FDictionary<FMaterialResource>();
+      this._materials = new Dictionary<FMaterialResource>();
    }
 
    //==========================================================
@@ -39,7 +39,7 @@ export class FMaterialResourceConsole extends FConsole {
    //
    // @return 材质集合
    //==========================================================
-   public get materials(): FDictionary<FMaterialResource> {
+   public get materials(): Dictionary<FMaterialResource> {
       return this._materials;
    }
 
@@ -150,10 +150,10 @@ export class FMaterialResourceConsole extends FConsole {
    // @return 材质资源
    //==========================================================
    public loadByGuid(guid): FMaterialResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.guid = guid;
       var material = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return material;
    }
 
@@ -164,10 +164,10 @@ export class FMaterialResourceConsole extends FConsole {
    // @return 材质资源
    //==========================================================
    public loadByCode(code): FMaterialResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.code = code;
       var material = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return material;
    }
 
@@ -178,10 +178,10 @@ export class FMaterialResourceConsole extends FConsole {
    // @return 材质资源
    //==========================================================
    public loadByUrl(url: string): FMaterialResource {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.url = url;
       var material = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return material;
    }
 

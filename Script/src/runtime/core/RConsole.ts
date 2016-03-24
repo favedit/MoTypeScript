@@ -2,10 +2,10 @@ import {ALinker} from '../common/reflect/ALinker';
 import {ALogger} from '../common/reflect/ALogger';
 import {ScopeEnum} from '../common/lang/ScopeEnum';
 import {Objects} from '../common/lang/Objects';
-import {RString} from '../common/lang/RString';
-import {LoggerUtil} from '../common/lang/RLogger';
-import {RAssert} from '../common/RAssert';
-import {FDictionary} from '../common/lang/FDictionary';
+import {StringUtil} from '../common/lang/StringUtil';
+import {LoggerUtil} from '../common/lang/LoggerUtil';
+import {AssertUtil} from '../common/AssertUtil';
+import {Dictionary} from '../common/lang/Dictionary';
 import {RClass} from '../common/reflect/RClass';
 import {FConsole} from './FConsole';
 
@@ -21,7 +21,7 @@ export class RConsole {
    // @attribute 注册类型集合
    protected static _registers = new Objects();
    // @attribute 控制台集合
-   protected static _consoles = new FDictionary<FConsole>();
+   protected static _consoles = new Dictionary<FConsole>();
 
    //==========================================================
    // <T>初始化控制台管理器。</T>
@@ -65,9 +65,9 @@ export class RConsole {
          // 关联对象属性
          var o = this;
          for (var rn in r) {
-            if (RString.startsWith(rn, 'lnk')) {
+            if (StringUtil.startsWith(rn, 'lnk')) {
                var v = r[rn];
-               if ('string' == typeof (v) && RString.startsWith(v, '&')) {
+               if ('string' == typeof (v) && StringUtil.startsWith(v, '&')) {
                   var c = o.find(v.substr(1));
                   if (!c) {
                      //return sk.RMessage.fatal(o, null, "Can't link console. (name={0}, property={1}:{2})", n, rn, v);
@@ -134,7 +134,7 @@ export class RConsole {
    // @return Object 控制台实例
    //==========================================================
    public static find(value: any): any {
-      RAssert.debugNotNull(value);
+      AssertUtil.debugNotNull(value);
       // 获得名称
       var name = null;
       if (value.constructor == String) {
@@ -150,7 +150,7 @@ export class RConsole {
       //   return console;
       //}
       // 查找本地控制台
-      var consoles: FDictionary<FConsole> = this._consoles;
+      var consoles: Dictionary<FConsole> = this._consoles;
       var console = consoles.get(name);
       if (console) {
          return console;

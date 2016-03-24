@@ -1,6 +1,6 @@
 import {ObjectBase} from '../lang/ObjectBase';
 import {FString} from '../lang/FString';
-import {RString} from '../lang/RString';
+import {StringUtil} from '../lang/StringUtil';
 import {FError} from '../lang/FError';
 import {RClass} from '../reflect/RClass';
 import {ENodeType} from '../xml/ENodeType';
@@ -37,7 +37,7 @@ export class FTagDocument extends ObjectBase {
       // 获得名称
       var spaceName = this.space + '_';
       var name = null;
-      if (RString.startsWith(p, spaceName)) {
+      if (StringUtil.startsWith(p, spaceName)) {
          name = p.substring(spaceName.length);
       } else {
          name = p;

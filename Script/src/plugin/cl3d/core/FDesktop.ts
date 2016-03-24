@@ -2,7 +2,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase'
 import {Objects} from '../../../runtime/common/lang/Objects'
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
 import {SSize2} from '../../../runtime/common/math/SSize2'
-import {RAssert} from '../../../runtime/common/RAssert'
+import {AssertUtil} from '../../../runtime/common/AssertUtil'
 
 //==========================================================
 // <T>桌面对象。</T>
@@ -82,7 +82,7 @@ export class FDesktop extends ObjectBase {
     //==========================================================
     public canvasRegister(canvas) {
         var canvases = this._canvases;
-        RAssert.debugFalse(canvases.contains(canvas));
+        AssertUtil.debugFalse(canvases.contains(canvas));
         canvases.push(canvas);
     }
 
@@ -94,7 +94,7 @@ export class FDesktop extends ObjectBase {
     //==========================================================
     public canvasUnregister(canvas) {
         var canvases = this._canvases;
-        RAssert.debugTrue(canvases.contains(canvas));
+        AssertUtil.debugTrue(canvases.contains(canvas));
         canvases.remove(canvas);
     }
 

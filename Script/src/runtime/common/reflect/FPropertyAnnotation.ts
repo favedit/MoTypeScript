@@ -1,5 +1,5 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
-import {RString} from '../lang/RString'
+import {StringUtil} from '../lang/StringUtil'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'
 
@@ -27,12 +27,12 @@ export class FPropertyAnnotation extends FAnnotation {
       // 设置数据名称
       var code = null;
       if (dataName == null) {
-         if (RString.startsWith(name, '_')) {
+         if (StringUtil.startsWith(name, '_')) {
             code = name.substring(1);
          } else {
             code = name;
          }
-         code = RString.toUnderline(code);
+         code = StringUtil.toUnderline(code);
       } else {
          code = dataName;
       }

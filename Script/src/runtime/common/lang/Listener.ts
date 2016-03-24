@@ -1,6 +1,6 @@
 import {RMethod} from '../reflect/RMethod'
 import {RClass} from '../reflect/RClass'
-import {RMemory} from '../RMemory'
+import {MemoryUtil} from '../MemoryUtil'
 import {SListenerContext} from './SListenerContext'
 import {ObjectBase} from './ObjectBase'
 import {ObjectUtil} from './ObjectUtil'
@@ -13,7 +13,7 @@ import {ListenerUtil} from './ListenerUtil'
 // @author maocy
 // @version 160306
 //==========================================================
-export class FListener extends ObjectBase {
+export class Listener extends ObjectBase {
    //..........................................................
    // 拥有者
    public owner: any = null;
@@ -35,7 +35,7 @@ export class FListener extends ObjectBase {
          owner = sender;
       }
       // 创建监听环境
-      var context: SListenerContext = RMemory.alloc(SListenerContext);
+      var context: SListenerContext = MemoryUtil.alloc(SListenerContext);
       context.sender = sender;
       context.owner = owner;
       context.callback = this.callback;

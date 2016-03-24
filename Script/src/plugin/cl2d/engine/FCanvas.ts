@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {SSize2} from '../../../runtime/common/math/SSize2';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {RBuilder} from '../../../runtime/ui/utility/RBuilder';

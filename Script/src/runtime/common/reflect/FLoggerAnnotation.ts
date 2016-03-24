@@ -1,5 +1,5 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
-import {RString} from '../lang/RString'
+import {StringUtil} from '../lang/StringUtil'
 import {EAnnotation} from './EAnnotation'
 import {FAnnotation} from './FAnnotation'
 

@@ -1,9 +1,9 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RObjectId} from '../../../runtime/common/lang/RObjectId';
+import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
@@ -39,7 +39,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    // 顶点数量
    public vertexCount: number;
    // 顶点缓冲集合
-   public vertexBuffers: FDictionary<FVertexBuffer>;
+   public vertexBuffers: Dictionary<FVertexBuffer>;
    // 索引缓冲集合
    public indexBuffers: Objects<FIndexBuffer>;
    // 纹理集合
@@ -47,7 +47,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    // 激活信息
    public activeInfo: SRenderableInfo;
    // 信息集合
-   public _infos: FDictionary<SRenderableInfo>;
+   public _infos: Dictionary<SRenderableInfo>;
    //..........................................................
    // 轮廓可见性
    // public outlineVisible = true;
@@ -68,13 +68,13 @@ export class FRenderable extends FDrawable implements IRenderable {
    public constructor() {
       super();
       // 构造变量
-      this.id = RObjectId.nextId('renderable');
+      this.id = ObjectIdUtil.nextId('renderable');
       this.optionSelect = true;
       this.outline = new SOutline3d();
       this.calculateMatrix = new SMatrix3d();
       this.vertexCount = 0;
       this.materialReference = this;
-      this._infos = new FDictionary<SRenderableInfo>();
+      this._infos = new Dictionary<SRenderableInfo>();
    }
 
    //==========================================================
@@ -133,7 +133,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    // @return 效果器
    //==========================================================
    public effectFind(code: string) {
-      RAssert.debugNotEmpty(code);
+      AssertUtil.debugNotEmpty(code);
       var infos = this._infos;
       if (infos) {
          var info = infos.get(code);
@@ -151,11 +151,11 @@ export class FRenderable extends FDrawable implements IRenderable {
    // @param effect 效果器
    //==========================================================
    public effectSet(code: string, effect) {
-      RAssert.debugNotEmpty(code);
-      RAssert.debugNotNull(effect);
+      AssertUtil.debugNotEmpty(code);
+      AssertUtil.debugNotNull(effect);
       var infos = this._infos;
       if (!infos) {
-         infos = this._infos = new FDictionary<SRenderableInfo>();
+         infos = this._infos = new Dictionary<SRenderableInfo>();
       }
       var info = infos.get(code);
       if (!info) {
@@ -172,10 +172,10 @@ export class FRenderable extends FDrawable implements IRenderable {
    // @return 信息
    //==========================================================
    public selectInfo(code: string): SRenderableInfo {
-      RAssert.debugNotEmpty(code);
+      AssertUtil.debugNotEmpty(code);
       var infos = this._infos;
       if (!infos) {
-         infos = this._infos = new FDictionary<SRenderableInfo>();
+         infos = this._infos = new Dictionary<SRenderableInfo>();
       }
       var info = infos.get(code);
       if (!info) {
@@ -227,14 +227,14 @@ export class FRenderable extends FDrawable implements IRenderable {
    // @return buffer 顶点缓冲
    //==========================================================
    public pushVertexBuffer(buffer: FVertexBuffer): void {
-      RAssert.debugNotNull(buffer);
+      AssertUtil.debugNotNull(buffer);
       // 检查参数
       var code = buffer.code;
-      RAssert.debugNotEmpty(code);
+      AssertUtil.debugNotEmpty(code);
       // 获得集合
       var buffers = this.vertexBuffers;
       if (!buffers) {
-         buffers = this.vertexBuffers = new FDictionary<FVertexBuffer>();
+         buffers = this.vertexBuffers = new Dictionary<FVertexBuffer>();
       }
       // 设置缓冲
       buffers.set(code, buffer);
@@ -246,7 +246,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    // @return buffer 索引缓冲
    //==========================================================
    public pushIndexBuffer(buffer: FIndexBuffer): void {
-      RAssert.debugNotNull(buffer);
+      AssertUtil.debugNotNull(buffer);
       // 获得集合
       var buffers = this.indexBuffers;
       if (!buffers) {

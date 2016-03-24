@@ -1,6 +1,6 @@
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {FListeners} from '../../common/lang/FListeners';
+import {Listeners} from '../../common/lang/Listeners';
 import {FConsole} from '../FConsole';
 import {IPlugin} from './IPlugin';
 
@@ -19,9 +19,9 @@ export class FPluginConsole extends FConsole {
    // 加载集合
    public loadingPlugins: Objects<IPlugin> = null;
    // 激活监听器
-   public activedListeners: FListeners = null;
+   public activedListeners: Listeners = null;
    // 取消激活监听器
-   public deactivedListeners: FListeners = null;
+   public deactivedListeners: Listeners = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -32,8 +32,8 @@ export class FPluginConsole extends FConsole {
       this.context = { app: AppView };
       this.plugins = new Objects<IPlugin>();;
       this.loadingPlugins = new Objects<IPlugin>();
-      this.activedListeners = new FListeners(this);
-      this.deactivedListeners = new FListeners(this);
+      this.activedListeners = new Listeners(this);
+      this.deactivedListeners = new Listeners(this);
    };
 
    /**

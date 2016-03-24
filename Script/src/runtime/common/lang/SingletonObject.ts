@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150603
 //==========================================================
-export class RSingleton {
+export class SingletonObject {
    // 标志
    protected static _singleton: boolean = true;
    // 实例

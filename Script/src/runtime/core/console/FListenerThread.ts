@@ -1,5 +1,5 @@
 import {ResultEnum} from '../../common/lang/ResultEnum';
-import {FListeners} from '../../common/lang/FListeners';
+import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {FThread} from './FThread';
 
@@ -12,7 +12,7 @@ import {FThread} from './FThread';
 //==========================================================
 export class FListenerThread extends FThread {
    // 处理监听集合
-   public processListeners: FListeners = null;
+   public processListeners: Listeners = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -21,7 +21,7 @@ export class FListenerThread extends FThread {
    //==========================================================
    public constructor() {
       super();
-      this.processListeners = new FListeners(this);
+      this.processListeners = new Listeners(this);
    }
 
    //==========================================================

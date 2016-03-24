@@ -1,6 +1,6 @@
-import {RSingleton} from './lang/RSingleton';
-import {EProcess} from './EProcess';
-import {EPlatform} from './EPlatform';
+import {SingletonObject} from './lang/SingletonObject';
+import {ProcessEnum} from './ProcessEnum';
+import {PlatformEnum} from './PlatformEnum';
 
 //==========================================================
 // <T>运行库。</T>
@@ -9,14 +9,14 @@ import {EPlatform} from './EPlatform';
 // @author maocy
 // @version 141226
 //==========================================================
-export class RRuntime extends RSingleton {
+export class RRuntime extends SingletonObject {
    //..........................................................
    // 版本
    public static version: string = '1.0.0';
    // 模式
-   public static processCd: EProcess = EProcess.Release;
+   public static processCd: ProcessEnum = ProcessEnum.Release;
    // 平台
-   public static platformCd: EPlatform = EPlatform.Pc;
+   public static platformCd: PlatformEnum = PlatformEnum.Pc;
 
    //==========================================================
    // <T>测试是否调试模式。</T>
@@ -25,7 +25,7 @@ export class RRuntime extends RSingleton {
    // @return 是否调试模式
    //==========================================================
    public static isDebug() {
-      return this.processCd == EProcess.Debug;
+      return this.processCd == ProcessEnum.Debug;
    }
 
    //==========================================================
@@ -35,7 +35,7 @@ export class RRuntime extends RSingleton {
    // @return 是否运行模式
    //==========================================================
    public static isRelease() {
-      return this.processCd == EProcess.Release;
+      return this.processCd == ProcessEnum.Release;
    }
 
    //==========================================================
@@ -45,7 +45,7 @@ export class RRuntime extends RSingleton {
    // @return 是否PC平台模式
    //==========================================================
    public static isPlatformPc() {
-      return this.platformCd == EPlatform.Pc;
+      return this.platformCd == PlatformEnum.Pc;
    }
 
    //==========================================================
@@ -55,7 +55,7 @@ export class RRuntime extends RSingleton {
    // @return 是否移动平台模式
    //==========================================================
    public static isPlatformMobile() {
-      return this.platformCd == EPlatform.Mobile;
+      return this.platformCd == PlatformEnum.Mobile;
    }
 
    //==========================================================

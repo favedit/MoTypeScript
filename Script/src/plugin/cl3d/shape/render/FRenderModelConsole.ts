@@ -1,10 +1,10 @@
 import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
-import {FDictionary} from '../../runtime/common/lang/FDictionary'
-import {RString} from '../../runtime/common/lang/RString'
+import {Dictionary} from '../../runtime/common/lang/Dictionary'
+import {StringUtil} from '../../runtime/common/lang/StringUtil'
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
 import {ALinker} from '../../runtime/common/reflect/ALinker'
-import {RAssert} from '../../runtime/common/RAssert'
-import {RMemory} from '../../runtime/common/RMemory'
+import {AssertUtil} from '../../runtime/common/AssertUtil'
+import {MemoryUtil} from '../../runtime/common/MemoryUtil'
 import {RClass} from '../../runtime/common/reflect/RClass'
 import {FConsole} from '../../runtime/core/FConsole'
 import {RConsole} from '../../runtime/core/RConsole'
@@ -23,9 +23,9 @@ import {FRenderModelMesh} from './FRenderModelMesh'
 //==========================================================
 export class FRenderModelConsole extends FConsole {
    // 模型集合
-   protected _models: FDictionary<FRenderModel>;
-   protected _meshs: FDictionary<FRenderModelMesh>;
-   protected _dynamicMeshs: FDictionary<FRenderModelMesh>;
+   protected _models: Dictionary<FRenderModel>;
+   protected _meshs: Dictionary<FRenderModelMesh>;
+   protected _dynamicMeshs: Dictionary<FRenderModelMesh>;
    // 模型资源控制台
    @ALinker(FModelResourceConsole)
    protected _modelResourceConsole: FModelResourceConsole = null;
@@ -40,9 +40,9 @@ export class FRenderModelConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._models = new FDictionary<FRenderModel>();
-      this._meshs = new FDictionary<FRenderModelMesh>();
-      this._dynamicMeshs = new FDictionary<FRenderModelMesh>();
+      this._models = new Dictionary<FRenderModel>();
+      this._meshs = new Dictionary<FRenderModelMesh>();
+      this._dynamicMeshs = new Dictionary<FRenderModelMesh>();
    }
 
    // //==========================================================
@@ -103,22 +103,22 @@ export class FRenderModelConsole extends FConsole {
    public load(args) {
       // 获得环境
       var context = args.context;
-      RAssert.debugNotNull(context);
+      AssertUtil.debugNotNull(context);
       // 获得标识
       var identity = null;
       var guid = args.guid;
-      if (!RString.isEmpty(guid)) {
+      if (!StringUtil.isEmpty(guid)) {
          identity = guid;
       }
       var code = args.code;
-      if (!RString.isEmpty(code)) {
+      if (!StringUtil.isEmpty(code)) {
          identity = code;
       }
       var url = args.url;
-      if (!RString.isEmpty(url)) {
+      if (!StringUtil.isEmpty(url)) {
          identity = url;
       }
-      RAssert.debugNotEmpty(identity);
+      AssertUtil.debugNotEmpty(identity);
       // 查找模型
       var models = this._models;
       var model: FRenderModel = models.get(identity);
@@ -146,11 +146,11 @@ export class FRenderModelConsole extends FConsole {
    // @return FE3rModel 渲染模型
    //==========================================================
    public loadByGuid(context, guid) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.guid = guid;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -163,11 +163,11 @@ export class FRenderModelConsole extends FConsole {
    // @return FE3rModel 渲染模型
    //==========================================================
    public loadByCode(context, code) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.code = code;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 
@@ -180,11 +180,11 @@ export class FRenderModelConsole extends FConsole {
    // @return FE3rModel 渲染模型
    //==========================================================
    public loadByUrl(context, url) {
-      var args = RMemory.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.url = url;
       var model = this.load(args);
-      RMemory.free(args);
+      MemoryUtil.free(args);
       return model;
    }
 

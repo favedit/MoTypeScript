@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FListeners} from '../../common/lang/FListeners';
+import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
@@ -17,9 +17,9 @@ export class FKeyboardConsole extends FConsole {
    protected _status: Array<EKeyStatus>;
    // 监听器集合
    protected _eventKey: SKeyboardEvent;
-   protected _keyDownListeners: FListeners;
-   protected _keyUpListeners: FListeners;
-   protected _keyPressListeners: FListeners;
+   protected _keyDownListeners: Listeners;
+   protected _keyUpListeners: Listeners;
+   protected _keyPressListeners: Listeners;
    // 设备控制台
    @ALinker(FDeviceConsole)
    protected _deviceConsole: FDeviceConsole;
@@ -36,9 +36,9 @@ export class FKeyboardConsole extends FConsole {
       // 设置属性
       this._status = new Array<EKeyStatus>();
       this._eventKey = new SKeyboardEvent();
-      this._keyDownListeners = new FListeners();
-      this._keyUpListeners = new FListeners();
-      this._keyPressListeners = new FListeners();
+      this._keyDownListeners = new Listeners();
+      this._keyUpListeners = new Listeners();
+      this._keyPressListeners = new Listeners();
       // 设置状态
       var status = this._status = new Array();
       for (var i: number = 0; i < 256; i++) {
@@ -51,7 +51,7 @@ export class FKeyboardConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get keyDownListeners(): FListeners {
+   public get keyDownListeners(): Listeners {
       return this._keyDownListeners;
    }
 
@@ -60,7 +60,7 @@ export class FKeyboardConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get keyUpListeners(): FListeners {
+   public get keyUpListeners(): Listeners {
       return this._keyUpListeners;
    }
 
@@ -69,7 +69,7 @@ export class FKeyboardConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get keyPressListeners(): FListeners {
+   public get keyPressListeners(): Listeners {
       return this._keyPressListeners;
    }
 

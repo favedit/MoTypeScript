@@ -1,5 +1,5 @@
 ﻿import {BooleanUtil} from '../../common/lang/BooleanUtil';
-import {RObjectId} from '../../common/lang/RObjectId';
+import {ObjectIdUtil} from '../../common/lang/ObjectIdUtil';
 import {SHtmlItem} from './SHtmlItem';
 
 //==========================================================
@@ -26,7 +26,7 @@ export class RHtml {
    public static uid(value) {
       var uuid = value.__puuid;
       if (uuid == null) {
-         uuid = value.__puuid = RObjectId.nextId('html');
+         uuid = value.__puuid = ObjectIdUtil.nextId('html');
       }
       return uuid;
    }

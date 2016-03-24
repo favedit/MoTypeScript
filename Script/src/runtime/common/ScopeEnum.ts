@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141230
 //==========================================================
-export enum EScope {
+export enum ScopeEnum {
    // @member 未知
    Unknown = 0,
    // @member 本地范围

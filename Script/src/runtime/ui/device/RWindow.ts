@@ -1,9 +1,9 @@
 import {FError} from '../../common/lang/FError';
-import {FAttributes} from '../../common/lang/FAttributes';
-import {FListeners} from '../../common/lang/FListeners';
+import {Attributes} from '../../common/lang/Attributes';
+import {Listeners} from '../../common/lang/Listeners';
 import {SEvent} from '../../common/lang/SEvent';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {RString} from '../../common/lang/RString';
+import {StringUtil} from '../../common/lang/StringUtil';
 
 //==========================================================
 // <T>页面窗口的管理类。</T>

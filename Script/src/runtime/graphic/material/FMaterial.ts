@@ -1,6 +1,6 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FGraphicObject} from '../core/FGraphicObject';
 import {FTexture} from './FTexture';
 
@@ -32,7 +32,7 @@ export class FMaterial extends FGraphicObject {
    // 配置信息
    public optionAlpha: boolean;
    // 纹理集合
-   public textures: FDictionary<FTexture>;
+   public textures: Dictionary<FTexture>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -48,7 +48,7 @@ export class FMaterial extends FGraphicObject {
       this.optionDouble = false;
       this.optionAlpha = false;
       this.dirty = true;
-      this.textures = new FDictionary<FTexture>();
+      this.textures = new Dictionary<FTexture>();
    }
 
    //==========================================================
@@ -73,11 +73,11 @@ export class FMaterial extends FGraphicObject {
    // @param texture 纹理
    //==========================================================
    public setTexture(code: string, texture: FTexture) {
-      RAssert.debugNotEmpty(code);
-      RAssert.debugNotNull(texture);
+      AssertUtil.debugNotEmpty(code);
+      AssertUtil.debugNotNull(texture);
       var textures = this.textures;
       if (!textures) {
-         textures = this.textures = new FDictionary<FTexture>();
+         textures = this.textures = new Dictionary<FTexture>();
       }
       // 增加纹理
       textures.set(code, texture);

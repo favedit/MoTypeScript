@@ -1,4 +1,4 @@
-import {RAssert} from '../../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {FRenderTarget} from '../FRenderTarget';
 
 //==========================================================
@@ -78,8 +78,8 @@ export class FWglRenderTarget extends FRenderTarget {
       }
       for (var i = 0; i < textureCount; i++) {
          var texture = textures.get(i);
-         RAssert.debugNotNull(texture);
-         RAssert.debugNotNull(texture.handle);
+         AssertUtil.debugNotNull(texture);
+         AssertUtil.debugNotNull(texture.handle);
          // 设置信息
          handle.bindTexture(handle.TEXTURE_2D, texture.handle);
          handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MAG_FILTER, handle.LINEAR);

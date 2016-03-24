@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FGraphicContext} from './FGraphicContext';
 
 //==========================================================
@@ -29,7 +29,7 @@ export class FGraphicObject extends ObjectBase {
    // @param context 图形环境
    //==========================================================
    public linkGraphicContext(context) {
-      RAssert.debugNotNull(context);
+      AssertUtil.debugNotNull(context);
       if (context instanceof FGraphicContext) {
          this._graphicContext = context;
       } else if (context instanceof FGraphicObject) {

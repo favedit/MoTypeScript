@@ -1,15 +1,15 @@
 //==========================================================
-// <T>平台模式枚举。</T>
+// <T>工作模式枚举。</T>
 //
 // @enum
 // @author maocy
-// @version 150701
 //==========================================================
-export enum EPlatform {
+// @version 141226
+export enum ProcessEnum {
    // @member 未知
    Unknown = 0,
-   // @member PC平台
-   Pc = 1,
-   // @member 移动平台
-   Mobile = 2,
+   // @member 调试模式
+   Debug = 1,
+   // @member 运行模式
+   Release = 2,
 }

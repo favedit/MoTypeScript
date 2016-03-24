@@ -1,4 +1,4 @@
-import {RMemory} from '../RMemory';
+import {MemoryUtil} from '../MemoryUtil';
 import {RRuntime} from '../RRuntime';
 import {ObjectBase} from './ObjectBase';
 import {FString} from './FString';
@@ -63,7 +63,7 @@ export class FLooper extends ObjectBase {
          o._current = null;
       }
       // 释放入口
-      RMemory.free(entry);
+      MemoryUtil.free(entry);
    }
 
    //==========================================================
@@ -216,7 +216,7 @@ export class FLooper extends ObjectBase {
    // @param value:Object 对象
    //==========================================================
    public push(value) {
-      var entry = RMemory.alloc(SLooperEntry);
+      var entry = MemoryUtil.alloc(SLooperEntry);
       entry.value = value;
       this.innerPush(entry);
    }
@@ -267,7 +267,7 @@ export class FLooper extends ObjectBase {
          entry.prior.next = null;
          while (entry) {
             var next = entry.next;
-            RMemory.free(next);
+            MemoryUtil.free(next);
             entry = next;
          }
       }

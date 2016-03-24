@@ -1,13 +1,13 @@
 ﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {FLooper} from '../../../runtime/common/lang/FLooper';
-import {RString} from '../../../runtime/common/lang/RString';
-import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
+import {StringUtil} from '../../../runtime/common/lang/StringUtil';
+import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FTagContext} from '../../../runtime/common/tag/FTagContext';
 import {FXmlConnection} from '../../../runtime/common/net/FXmlConnection';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {FEnvironmentConsole} from '../../../runtime/core/console/FEnvironmentConsole';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {RConsole} from '../../../runtime/core/RConsole';
@@ -26,11 +26,11 @@ import {FEffect} from './FEffect';
 //==========================================================
 export class FEffectConsole extends FConsole {
    // @attribute
-   public _configs: FDictionary<any>;
+   public _configs: Dictionary<any>;
    public _loadEffects: FLooper;
-   public _registerEffects: FDictionary<Function>;
-   public _templateEffects: FDictionary<FEffect>;
-   public _effects: FDictionary<FEffect>;
+   public _registerEffects: Dictionary<Function>;
+   public _templateEffects: Dictionary<FEffect>;
+   public _effects: Dictionary<FEffect>;
    public _effectInfo: SEffectInfo;
    public _tagContext: FTagContext;
    // @attribute
@@ -46,11 +46,11 @@ export class FEffectConsole extends FConsole {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._configs = new FDictionary();
+      this._configs = new Dictionary();
       this._loadEffects = new FLooper();
-      this._registerEffects = new FDictionary<Function>();
-      this._templateEffects = new FDictionary<FEffect>();
-      this._effects = new FDictionary<FEffect>();
+      this._registerEffects = new Dictionary<Function>();
+      this._templateEffects = new Dictionary<FEffect>();
+      this._effects = new Dictionary<FEffect>();
       this._effectInfo = new SEffectInfo();
       this._tagContext = RClass.create(FTagContext);
       this._interval = 300;
@@ -80,8 +80,8 @@ export class FEffectConsole extends FConsole {
    // @param effect:FG3dEffect 效果器
    //==========================================================
    public register(name, effect) {
-      RAssert.debugNotEmpty(name);
-      RAssert.debugNotNull(effect);
+      AssertUtil.debugNotEmpty(name);
+      AssertUtil.debugNotNull(effect);
       this._registerEffects.set(name, effect);
    }
 
@@ -92,7 +92,7 @@ export class FEffectConsole extends FConsole {
    // @param name:String 名称
    //==========================================================
    public unregister(name) {
-      RAssert.debugNotEmpty(name);
+      AssertUtil.debugNotEmpty(name);
       this._registerEffects.set(name, null);
    }
 
@@ -149,7 +149,7 @@ export class FEffectConsole extends FConsole {
       for (var i = 0; i < count; i++) {
          var vertexBuffer = vertexBuffers.at(i);
          var vertexCode = vertexBuffer.code;
-         RAssert.debugNotEmpty(vertexCode);
+         AssertUtil.debugNotEmpty(vertexCode);
          // 法线压缩判定（临时处理）
          if (vertexCode == 'normal') {
             var stride = vertexBuffer.stride;
@@ -163,13 +163,13 @@ export class FEffectConsole extends FConsole {
       }
       // 设置纹理信息
       var material: FMaterial = renderable.material;
-      RAssert.debugNotNull(material);
+      AssertUtil.debugNotNull(material);
       var textures = material.textures;
       if (textures) {
          var count: number = textures.count();
          for (var i: number = 0; i < count; i++) {
             var textureCode: string = textures.name(i);
-            RAssert.debugNotEmpty(textureCode);
+            AssertUtil.debugNotEmpty(textureCode);
             effectInfo.samplers.push(textureCode);
          }
       }
@@ -221,7 +221,7 @@ export class FEffectConsole extends FConsole {
       if (context.graphicContext) {
          context = context.graphicContext;
       }
-      RAssert.debugTrue(context instanceof FGraphicContext);
+      AssertUtil.debugTrue(context instanceof FGraphicContext);
       // 获得效果名称
       var effectCode = renderable.material.effectCode;
       var effectFlag = region.spaceName + '.' + effectCode;

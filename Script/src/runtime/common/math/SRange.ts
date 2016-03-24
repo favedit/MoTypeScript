@@ -1,5 +1,5 @@
 import {IntegerUtil} from '../lang/IntegerUtil';
-import {RString} from '../lang/RString';
+import {StringUtil} from '../lang/StringUtil';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -170,7 +170,7 @@ export class SRange {
    // @method
    //============================================================
    public dump(d) {
-      d = RString.nvlString(d);
+      d = StringUtil.nvlString(d);
       d.append(RClass.shortName(this));
       d.append(' [', this.left, ',', this.top, '-', this.right, ',', this.bottom, '] ');
       return d;

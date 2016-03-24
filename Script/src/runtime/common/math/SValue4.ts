@@ -1,5 +1,5 @@
 import {FError} from '../lang/FError';
-import {FloatUtil} from '../lang/RFloat';
+import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
 // <T>四维数据。</T>

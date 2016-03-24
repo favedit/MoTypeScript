@@ -1,4 +1,4 @@
-import {FDictionary} from '../../common/lang/FDictionary';
+import {Dictionary} from '../../common/lang/Dictionary';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RClass} from '../../common/reflect/RClass';
@@ -16,7 +16,7 @@ import {FAudio} from './FAudio';
 //==========================================================
 export class FAudioConsole extends FConsole {
    // 声音集合
-   protected _audios: FDictionary<FAudio> = null;
+   protected _audios: Dictionary<FAudio> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,7 +27,7 @@ export class FAudioConsole extends FConsole {
       super();
       // 设置变量
       this.scopeCd = ScopeEnum.Global;
-      this._audios = new FDictionary<FAudio>();
+      this._audios = new Dictionary<FAudio>();
    }
 
    //==========================================================

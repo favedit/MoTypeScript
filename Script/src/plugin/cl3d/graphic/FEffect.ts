@@ -1,7 +1,7 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {FError} from '../../../runtime/common/lang/FError';
 import {BooleanUtil} from '../../../runtime/common/lang/BooleanUtil';
-import {RString} from '../../../runtime/common/lang/RString';
+import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FTagContext} from '../../../runtime/common/tag/FTagContext';
@@ -295,7 +295,7 @@ export class FEffect extends FContent {
       this.buildInfo(tagContext, effectInfo);
       // 生成顶点代码
       var source = this.vertexTemplate.parse(tagContext);
-      var formatSource = RString.formatLines(source);
+      var formatSource = StringUtil.formatLines(source);
       program.upload(EShader.Vertex, formatSource);
       // 生成像素代码
       var source = this.fragmentTemplate.parse(tagContext);
@@ -307,7 +307,7 @@ export class FEffect extends FContent {
             source = source.replace(new RegExp(parameterName, 'g'), parameterDefine);
          }
       }
-      var formatSource = RString.formatLines(source);
+      var formatSource = StringUtil.formatLines(source);
       program.upload(EShader.Fragment, formatSource);
       // 编译处理
       program.build();

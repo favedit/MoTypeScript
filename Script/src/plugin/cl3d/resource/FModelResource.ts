@@ -1,6 +1,6 @@
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {LoggerUtil} from '../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
 import {FDataStream} from '../../runtime/common/io/FDataStream';
 import {FResource} from './FResource';
 import {FMeshResource} from './FMeshResource';
@@ -18,7 +18,7 @@ export class FModelResource extends FResource {
    //    o._dataCompress  = true;
    //    o._dataBlock     = true;
    //    // @attribute
-   public meshes: FDictionary<FMeshResource> = null;
+   public meshes: Dictionary<FMeshResource> = null;
    //    o._skeletons     = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations    = MO.Class.register(o, new MO.AGetter('_animations'));
    //    o._display       = MO.Class.register(o, new MO.AGetter('_display'));
@@ -41,7 +41,7 @@ export class FModelResource extends FResource {
       super();
       // 设置属性
       this.typeCode = 'Model';
-      this.meshes = new FDictionary<FMeshResource>();
+      this.meshes = new Dictionary<FMeshResource>();
       //var display = this._display = MO.Class.create(MO.FE3sModelDisplay);
       //display._model = this;
    }
@@ -80,7 +80,7 @@ export class FModelResource extends FResource {
       // 读取几何体集合
       var meshCount: number = input.readInt32();
       if (meshCount > 0) {
-         var meshes = this.meshes = new FDictionary<FMeshResource>();
+         var meshes = this.meshes = new Dictionary<FMeshResource>();
          for (var n: number = 0; n < meshCount; n++) {
             //var mesh = modelConsole.unserialMesh(input)
             //var meshGuid = mesh.guid();

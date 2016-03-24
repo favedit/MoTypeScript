@@ -1,9 +1,9 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FDictionary} from '../../common/lang/FDictionary';
-import {RString} from '../../common/lang/RString';
+import {Dictionary} from '../../common/lang/Dictionary';
+import {StringUtil} from '../../common/lang/StringUtil';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {RClass} from '../../common/reflect/RClass';
-import {RAssert} from '../../common/RAssert';
+import {AssertUtil} from '../../common/AssertUtil';
 import {RRuntime} from '../../common/RRuntime';
 import {FEnvironment} from './FEnvironment';
 import {FConsole} from '../FConsole';
@@ -19,7 +19,7 @@ export class FEnvironmentConsole extends FConsole {
    // 范围类型
    protected _scopeCd = ScopeEnum.Local;
    // 环境变量
-   protected _environments: FDictionary<FEnvironment> = null;
+   protected _environments: Dictionary<FEnvironment> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -28,7 +28,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public constructor() {
       super();
-      this._environments = new FDictionary<FEnvironment>();
+      this._environments = new Dictionary<FEnvironment>();
    }
 
    //==========================================================
@@ -39,7 +39,7 @@ export class FEnvironmentConsole extends FConsole {
    //==========================================================
    public register(environment) {
       var name = environment.name();
-      RAssert.debugNotEmpty(name);
+      AssertUtil.debugNotEmpty(name);
       this._environments.set(name, environment);
    }
 
@@ -52,7 +52,7 @@ export class FEnvironmentConsole extends FConsole {
    // @return FEnvironment 环境
    //==========================================================
    public registerValue(name, value) {
-      RAssert.debugNotEmpty(name);
+      AssertUtil.debugNotEmpty(name);
       var environment = RClass.create(FEnvironment);
       environment.set(name, value);
       this._environments.set(name, environment);
@@ -94,13 +94,13 @@ export class FEnvironmentConsole extends FConsole {
    // @return String 解析内容
    //==========================================================
    public parse(value) {
-      RAssert.debugNotEmpty(value);
+      AssertUtil.debugNotEmpty(value);
       var result = value;
       var environments = this._environments;
       var count = environments.count();
       for (var i = 0; i < count; i++) {
          var environment = environments.at(i);
-         result = RString.replace(result, '\\${' + environment.name + '}', environment.value);
+         result = StringUtil.replace(result, '\\${' + environment.name + '}', environment.value);
       }
       return result;
    }

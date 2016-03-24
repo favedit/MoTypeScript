@@ -1,6 +1,6 @@
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {FError} from '../lang/FError';
-import {FloatUtil} from '../lang/RFloat';
+import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
 // <T>三维数据。</T>

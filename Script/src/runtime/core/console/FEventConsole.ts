@@ -1,13 +1,13 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {SListenerContext} from '../../common/lang/SListenerContext';
-import {FListener} from '../../common/lang/FListener';
+import {Listener} from '../../common/lang/Listener';
 import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ListenerUtil} from '../../common/lang/ListenerUtil';
-import {LoggerUtil} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
-import {RMemory} from '../../common/RMemory';
+import {MemoryUtil} from '../../common/MemoryUtil';
 import {FConsole} from '../FConsole';
 import {FListenerThread} from './FListenerThread';
 import {FThreadConsole} from './FThreadConsole';
@@ -41,7 +41,7 @@ export class FEventConsole extends FConsole {
    //==========================================================
    public static listenerProcess(context: SListenerContext) {
       context.process();
-      RMemory.free(event);
+      MemoryUtil.free(event);
    }
 
    //==========================================================
@@ -94,7 +94,7 @@ export class FEventConsole extends FConsole {
          for (var n: number = 0; n < count; n++) {
             var event: any = processEvents.at(n);
             event.process();
-            RMemory.free(event);
+            MemoryUtil.free(event);
          }
          // 清除运行队列
          processEvents.clear();

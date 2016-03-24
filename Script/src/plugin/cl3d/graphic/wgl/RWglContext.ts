@@ -1,5 +1,5 @@
-import {LoggerUtil} from '../../../../runtime/common/lang/RLogger';
-import {RAssert} from '../../../../runtime/common/RAssert';
+import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
+import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {SWglSetting} from './SWglSetting';
 import {FWglContext} from './FWglContext';
 import {FWglContext1} from './FWglContext1';
@@ -20,8 +20,8 @@ export class RWglContext {
    // @return 渲染环境
    //==========================================================
    public static create(hCanvas: HTMLCanvasElement, setting?: SWglSetting): FWglContext {
-      RAssert.debugNotNull(hCanvas);
-      RAssert.debugNotNull(hCanvas.getContext);
+      AssertUtil.debugNotNull(hCanvas);
+      AssertUtil.debugNotNull(hCanvas.getContext);
       // 设置参数
       if (!setting) {
          setting = new SWglSetting();

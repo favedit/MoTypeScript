@@ -1,5 +1,5 @@
 import {SListenerContext} from './SListenerContext'
-import {RMemory} from '../RMemory'
+import {MemoryUtil} from '../MemoryUtil'
 
 //==========================================================
 // <T>监听器的工具类。</T>
@@ -19,6 +19,6 @@ export class ListenerUtil {
    //==========================================================
    public static process(context: SListenerContext) {
       context.process();
-      RMemory.free(context);
+      MemoryUtil.free(context);
    }
 }

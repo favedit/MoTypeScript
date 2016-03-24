@@ -1,9 +1,9 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataContentEnum} from '../../common/lang/DataContentEnum';
-import {FDictionary} from '../../common/lang/FDictionary';
+import {Dictionary} from '../../common/lang/Dictionary';
 // import {FError} from '../../common/lang/FError';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-// import {RString} from '../../common/lang/RString';
+// import {RString} from '../../common/lang/StringUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FListenerThread} from '../console/FListenerThread';
@@ -33,7 +33,7 @@ export class FResourceConsole extends FConsole {
    // protected _factory = null;
    // protected _types = null;
    // 资源包集合
-   protected _packages: FDictionary<FResourcePackage> = null;
+   protected _packages: Dictionary<FResourcePackage> = null;
    // protected _resources = null;
    // // @attribute
    // protected _loadResources = null;
@@ -64,7 +64,7 @@ export class FResourceConsole extends FConsole {
       this._scopeCd = ScopeEnum.Global;
       //_factory = RClass.create(MO.FClassFactory);
       //_types = new common.lang.FDictionary();
-      this._packages = new FDictionary<FResourcePackage>();
+      this._packages = new Dictionary<FResourcePackage>();
       //_resources = new common.lang.FDictionary();
       //_loadResources = new common.lang.FObjects();
       //_loadingResources = new common.lang.FObjects();
@@ -277,7 +277,7 @@ export class FResourceConsole extends FConsole {
    //==========================================================
    public loadPackageByUrl(uri): FResourcePackage {
       // 查找资源包
-      var resourcePackages: FDictionary<FResourcePackage> = this._packages;
+      var resourcePackages: Dictionary<FResourcePackage> = this._packages;
       var resourcePackage: FResourcePackage = resourcePackages.get(uri);
       if (!resourcePackage) {
          // 解析地址

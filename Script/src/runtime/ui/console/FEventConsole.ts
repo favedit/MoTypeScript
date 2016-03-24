@@ -1,14 +1,14 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {FError} from '../../common/lang/FError';
 // import {SListenerContext} from '../../common/lang/SListenerContext';
-// import {FListener} from '../../common/lang/FListener';
+// import {FListener} from '../../common/lang/Listener';
 // import {FObjects} from '../../common/lang/Objects';
 // import {RObject} from '../../common/lang/ObjectUtil';
 // import {RListener} from '../../common/lang/ListenerUtil';
-// import {RLogger} from '../../common/lang/RLogger';
+// import {RLogger} from '../../common/lang/LoggerUtil';
 // import {ALinker} from '../../common/reflect/ALinker';
 // import {RClass} from '../../common/reflect/RClass';
-// import {RMemory} from '../../common/RMemory';
+// import {RMemory} from '../../common/MemoryUtil';
 import {FConsole} from '../../core/FConsole';
 import {EEvent} from '../EEvent';
 import {SMouseEvent} from '../event/SMouseEvent';

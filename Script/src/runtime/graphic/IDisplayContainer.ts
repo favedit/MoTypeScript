@@ -1,6 +1,6 @@
 import {Objects} from '../common/lang/Objects'
 import {ObjectUtil} from '../common/lang/ObjectUtil'
-import {RAssert} from '../common/RAssert'
+import {AssertUtil} from '../common/AssertUtil'
 import {IDisplay} from './IDisplay';
 //import {FRegion} from './FRegion';
 

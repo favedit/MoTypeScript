@@ -1,5 +1,5 @@
 import {DataContentEnum} from '../../../runtime/common/lang/DataContentEnum';
-import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {FError} from '../../../runtime/common/lang/FError';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FDataStream} from '../../../runtime/common/io/FDataStream';
@@ -26,7 +26,7 @@ export class FResource extends FBaseResource {
    // 数据准备
    public dataReady: boolean;
    // @attribute
-   public loadListeners: FListeners;
+   public loadListeners: Listeners;
 
    //    // @attribute
    //    o._dataLoad      = false;
@@ -44,7 +44,7 @@ export class FResource extends FBaseResource {
       super();
       // 设置属性
       this.dataReady = false;
-      this.loadListeners = new FListeners(this);
+      this.loadListeners = new Listeners(this);
    }
 
    // //==========================================================

@@ -1,9 +1,9 @@
 import {ObjectBase} from '../lang/ObjectBase';
-import {FAttributes} from '../lang/FAttributes';
+import {Attributes} from '../lang/Attributes';
 import {FString} from '../lang/FString';
 import {BooleanUtil} from '../lang/BooleanUtil';
 import {ObjectUtil} from '../lang/ObjectUtil';
-import {RString} from '../lang/RString';
+import {StringUtil} from '../lang/StringUtil';
 
 //==========================================================
 // <T>标签环境类。</T>
@@ -16,7 +16,7 @@ export class FTagContext extends ObjectBase {
    public code: string;
    public trimLeft: boolean;
    public trimRight: boolean;
-   public _attributes: FAttributes;
+   public _attributes: Attributes;
    public _source: FString;
 
    //==========================================================
@@ -28,7 +28,7 @@ export class FTagContext extends ObjectBase {
       super();
       this.trimLeft = false;
       this.trimRight = false;
-      this._attributes = new FAttributes();
+      this._attributes = new Attributes();
       this._source = new FString();
    }
 
@@ -92,7 +92,7 @@ export class FTagContext extends ObjectBase {
    // @param String 文本
    //==========================================================
    public write(source) {
-      if (!RString.isEmpty(source)) {
+      if (!StringUtil.isEmpty(source)) {
          this._source.append(source);
       }
    }

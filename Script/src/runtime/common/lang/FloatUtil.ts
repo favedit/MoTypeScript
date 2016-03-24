@@ -1,5 +1,5 @@
 import {FString} from './FString';
-import {RString} from './RString';
+import {StringUtil} from './StringUtil';
 
 //==========================================================
 // <T>浮点数管理类。</T>
@@ -23,7 +23,7 @@ export class FloatUtil {
    // @return 是否为浮点数
    //===========================================================
    public static isFloat(p) {
-      return RString.isPattern(p, 'n');
+      return StringUtil.isPattern(p, 'n');
    }
 
    //===========================================================
@@ -42,7 +42,7 @@ export class FloatUtil {
          return 0;
       }
       // 去掉开始0字符
-      var value = RString.trim(source.toString());
+      var value = StringUtil.trim(source.toString());
       if (value == null) {
          return 0;
       }
@@ -55,7 +55,7 @@ export class FloatUtil {
       // 获得内容
       var result = (value.length > 0) ? parseFloat(value) : 0;
       // 百分比处理
-      if (RString.findChars(result, '%') != -1) {
+      if (StringUtil.findChars(result, '%') != -1) {
          result = result / 100;
       }
       // 返回内容
@@ -100,8 +100,8 @@ export class FloatUtil {
          leftSource = text.substring(0, index);
          rightSource = text.substring(index + 1, index + rightLength + 1);
       }
-      var left = RString.lpad(leftSource, leftLength, leftPad);
-      var right = RString.rpad(rightSource, rightLength, rightPad);
+      var left = StringUtil.lpad(leftSource, leftLength, leftPad);
+      var right = StringUtil.rpad(rightSource, rightLength, rightPad);
       return left + '.' + right;
    }
 
@@ -195,7 +195,7 @@ export class FloatUtil {
          var sl = s.substring(0, f);
          sr = s.substring(f + 1, f + r + 1);
       }
-      var fl = RString.lpad(sl, l, lp);
+      var fl = StringUtil.lpad(sl, l, lp);
       var flc: FString = new FString();
       //插入逗号
       for (var i = 1; i - 1 < fl.length; i++) {
@@ -204,7 +204,7 @@ export class FloatUtil {
             flc.append(',');
          }
       }
-      var fr = RString.rpad(sr, r, rp);
+      var fr = StringUtil.rpad(sr, r, rp);
       return flc + '.' + fr + unit;
    }
 

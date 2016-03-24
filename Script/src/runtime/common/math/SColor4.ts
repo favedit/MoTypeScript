@@ -1,6 +1,6 @@
 import {FError} from '../lang/FError';
 import {HexUtil} from '../lang/HexUtil'
-import {FloatUtil} from '../lang/RFloat';
+import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
 // <T>颜色。</T>

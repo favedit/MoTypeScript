@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
-import {FListeners} from '../../../../runtime/common/lang/FListeners';
+import {Listeners} from '../../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {FCamera} from '../../../runtime/graphic/camera/FCamera';
 import {FGraphicContext} from '../../graphic/FGraphicContext';
@@ -29,9 +29,9 @@ export abstract class FPipeline extends FContent {
    // 激活状态
    public statusActive: boolean;
    // 进入帧监听器
-   public enterFrameListeners: FListeners;
+   public enterFrameListeners: Listeners;
    // 离开帧监听器
-   public leaveFrameListeners: FListeners;
+   public leaveFrameListeners: Listeners;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -39,8 +39,8 @@ export abstract class FPipeline extends FContent {
    public constructor() {
       super();
       // 设置属性
-      this.enterFrameListeners = new FListeners(this);
-      this.leaveFrameListeners = new FListeners(this);
+      this.enterFrameListeners = new Listeners(this);
+      this.leaveFrameListeners = new Listeners(this);
    }
 
    //==========================================================

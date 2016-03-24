@@ -2,7 +2,7 @@ import {ResultEnum} from '../lang/ResultEnum';
 import {ObjectBase} from '../lang/ObjectBase';
 import {Objects} from '../lang/Objects';
 import {FString} from '../lang/FString';
-import {RString} from '../lang/RString';
+import {StringUtil} from '../lang/StringUtil';
 import {FError} from '../lang/FError';
 import {RClass} from '../reflect/RClass';
 
@@ -132,7 +132,7 @@ export class FTag extends ObjectBase {
       ps.append(RClass.dump(pt));
       // 追加属性
       var s = pt.toString();
-      if (!RString.isEmpty(s)) {
+      if (!StringUtil.isEmpty(s)) {
          ps.append(' [', s, ']');
       }
       // 追加子标签

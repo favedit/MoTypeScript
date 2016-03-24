@@ -1,6 +1,6 @@
 import {SEvent} from '../../../../runtime/common/lang/SEvent';
 import {Objects} from '../../../../runtime/common/lang/Objects';
-import {LoggerUtil} from '../../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../../runtime/common/lang/LoggerUtil';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {FError} from '../../../../runtime/common/lang/FError';
 import {RClass} from '../../../../runtime/common/reflect/RClass';

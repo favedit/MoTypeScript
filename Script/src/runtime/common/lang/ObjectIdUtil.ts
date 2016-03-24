@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141229
 //==========================================================
-export class RObjectId {
+export class ObjectIdUtil {
    // 哈希值
    private static _hash: number = 1;
 

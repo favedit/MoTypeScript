@@ -1,4 +1,4 @@
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SColor4} from '../../../runtime/common/math/SColor4';
 import {FMaterial} from './FMaterial';

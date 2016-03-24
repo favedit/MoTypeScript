@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../common/lang/ObjectBase';
-import {FDictionary} from '../../common/lang/FDictionary';
+import {Dictionary} from '../../common/lang/Dictionary';
 
 //==========================================================
 // <T>环境信息。</T>

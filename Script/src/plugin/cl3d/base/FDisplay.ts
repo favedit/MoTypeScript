@@ -4,7 +4,7 @@ import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SPoint3} from '../../../runtime/common/math/SPoint3';
 import {SVector3} from '../../../runtime/common/math/SVector3';
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IDisplay} from '../../../runtime/graphic/IDisplay';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 import {FDrawable} from './FDrawable';

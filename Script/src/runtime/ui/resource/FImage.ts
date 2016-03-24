@@ -1,8 +1,8 @@
 import {SEvent} from '../../common/lang/SEvent';
 import {ObjectBase} from '../../common/lang/ObjectBase';
-import {FListeners} from '../../common/lang/FListeners';
+import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {LoggerUtil} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {SSize2} from '../../common/math/SSize2';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
@@ -25,7 +25,7 @@ export class FImage extends ObjectBase {
    // 句柄
    protected _handle;
    // 句柄
-   protected _loadListeners: FListeners;
+   protected _loadListeners: Listeners;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -35,7 +35,7 @@ export class FImage extends ObjectBase {
       // 设置属性
       this._ready = false;
       this._size = new SSize2();
-      this._loadListeners = new FListeners(this);
+      this._loadListeners = new Listeners(this);
    }
 
    //==========================================================
@@ -61,7 +61,7 @@ export class FImage extends ObjectBase {
    //
    // @return 加载监听器
    //==========================================================
-   public get loadListeners(): FListeners {
+   public get loadListeners(): Listeners {
       return this._loadListeners;
    }
 

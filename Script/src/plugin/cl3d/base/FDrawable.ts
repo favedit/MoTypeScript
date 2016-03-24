@@ -1,5 +1,5 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {RObjectId} from '../../../runtime/common/lang/RObjectId';
+import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {RMath} from '../../../runtime/common/math/RMath';
 import {IDrawable} from '../../../runtime/graphic/IDrawable';

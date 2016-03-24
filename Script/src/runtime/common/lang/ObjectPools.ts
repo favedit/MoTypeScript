@@ -1,5 +1,5 @@
 ﻿import {ObjectBase} from './ObjectBase'
-import {FDictionary} from './FDictionary'
+import {Dictionary} from './Dictionary'
 import {ObjectPool} from './ObjectPool'
 import {RClass} from '../reflect/RClass'
 
@@ -12,7 +12,7 @@ import {RClass} from '../reflect/RClass'
 //==========================================================
 export class ObjectPools extends ObjectBase {
    // 缓冲字典
-   public _pools: FDictionary<any> = null;
+   public _pools: Dictionary<any> = null;
 
    //==========================================================
    // <T>构建当前对象的实例。</T>
@@ -21,7 +21,7 @@ export class ObjectPools extends ObjectBase {
    //==========================================================
    public constructor() {
       super();
-      this._pools = new FDictionary<any>();
+      this._pools = new Dictionary<any>();
    }
 
    //==========================================================

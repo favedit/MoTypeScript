@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FDictionary} from '../../common/lang/FDictionary';
+import {Dictionary} from '../../common/lang/Dictionary';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {RClass} from '../../common/reflect/RClass';
@@ -17,7 +17,7 @@ import {FImage} from './FImage';
 //==========================================================
 export class FImageConsole extends FConsole {
    // 图像集合
-   protected _images: FDictionary<FImage>;
+   protected _images: Dictionary<FImage>;
    // 环境控制台
    @ALinker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole;
@@ -31,7 +31,7 @@ export class FImageConsole extends FConsole {
       super();
       // 设置变量
       this._scopeCd = ScopeEnum.Global;
-      this._images = new FDictionary<FImage>();
+      this._images = new Dictionary<FImage>();
    }
 
    //==========================================================

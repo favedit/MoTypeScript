@@ -1,4 +1,4 @@
-import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ALinker} from '../../../runtime/common/reflect/ALinker';
 import {FActor} from '../base/FActor';

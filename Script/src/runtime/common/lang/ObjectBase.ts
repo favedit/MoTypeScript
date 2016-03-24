@@ -1,4 +1,4 @@
-import {RObjectId} from './RObjectId';
+import {ObjectIdUtil} from './ObjectIdUtil';
 import {RClass} from '../reflect/RClass';
 
 //==========================================================
@@ -36,7 +36,7 @@ export class ObjectBase {
    public get hashCode(): number {
       var hashCode: number = this.__hashCode;
       if (hashCode == 0) {
-         hashCode = this.__hashCode = RObjectId.nextHash();
+         hashCode = this.__hashCode = ObjectIdUtil.nextHash();
       }
       return hashCode;
    }

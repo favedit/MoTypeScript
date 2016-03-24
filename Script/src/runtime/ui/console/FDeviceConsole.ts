@@ -1,10 +1,10 @@
-import {EPlatform} from '../../common/EPlatform';
-import {FListeners} from '../../common/lang/FListeners';
-import {FAttributes} from '../../common/lang/FAttributes';
+import {PlatformEnum} from '../../common/PlatformEnum';
+import {Listeners} from '../../common/lang/Listeners';
+import {Attributes} from '../../common/lang/Attributes';
 import {FError} from '../../common/lang/FError';
 import {SEvent} from '../../common/lang/SEvent';
-import {RString} from '../../common/lang/RString';
-import {LoggerUtil} from '../../common/lang/RLogger';
+import {StringUtil} from '../../common/lang/StringUtil';
+import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {EnumUtil} from '../../common/lang/EnumUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
@@ -37,7 +37,7 @@ export class FDeviceConsole extends FConsole {
    protected _defineEvents = null;
    protected _defineMethods = null;
    // @attribute
-   protected _platformCd = EPlatform.Unknown;
+   protected _platformCd = PlatformEnum.Unknown;
    protected _deviceCd = EDevice.Unknown;
    protected _softwareCd = ESoftware.Unknown;
    protected _typeCd = EBrowser.Unknown;
@@ -51,20 +51,20 @@ export class FDeviceConsole extends FConsole {
    protected _requestAnimationFrame = null;
    protected _cancelAnimationFrame = null;
    // @attribute
-   protected _cookies = new FAttributes();
+   protected _cookies = new Attributes();
    protected _localStorage = null;
    protected _sessionStorage = null;
    // 环境控制台
    @ALinker(FEnvironmentConsole)
    protected _environmentConsole: FEnvironmentConsole = null;
    // 监听器集合
-   public loadListeners = new FListeners();
-   public loadedListeners = new FListeners();
-   public unloadListeners = new FListeners();
-   public resizeListeners = new FListeners();
-   public visibilityListeners = new FListeners();
-   public orientationListeners = new FListeners();
-   public deviceErrorListeners = new FListeners();
+   public loadListeners = new Listeners();
+   public loadedListeners = new Listeners();
+   public unloadListeners = new Listeners();
+   public resizeListeners = new Listeners();
+   public visibilityListeners = new Listeners();
+   public orientationListeners = new Listeners();
+   public deviceErrorListeners = new Listeners();
 
    //==========================================================
    // <T>构造处理。</T>
@@ -327,22 +327,22 @@ export class FDeviceConsole extends FConsole {
          return;
       }
       // 是否移动或PC模式
-      var platformCd = EPlatform.Mobile;
-      if (RString.contains(agent, 'android', 'ipad', 'iphone', 'midp', 'rv:1.2.3.4', 'windows ce', 'windows mobile')) {
-         platformCd = EPlatform.Mobile;
+      var platformCd = PlatformEnum.Mobile;
+      if (StringUtil.contains(agent, 'android', 'ipad', 'iphone', 'midp', 'rv:1.2.3.4', 'windows ce', 'windows mobile')) {
+         platformCd = PlatformEnum.Mobile;
          // this._environmentConsole.registerValue(EConstant.DeviceType, 'mb');
       } else {
-         platformCd = EPlatform.Pc;
+         platformCd = PlatformEnum.Pc;
          // this._environmentConsole.registerValue(EConstant.DeviceType, 'pc');
       }
       this._platformCd = platformCd;
       // RRuntime.setPlatformCd(platformCd);
       // 判断浏览器是否需要声音确认
-      if (RString.contains(agent, 'android 5.1', 'iphone', 'ipad')) {
+      if (StringUtil.contains(agent, 'android 5.1', 'iphone', 'ipad')) {
          capability.soundConfirm = true;
       }
       // 判断浏览器是否支持画面缩放
-      if (RString.contains(agent, 'mqqbrowser')) {
+      if (StringUtil.contains(agent, 'mqqbrowser')) {
          capability.canvasScale = false;
       }
       // 注册输出接口
@@ -350,7 +350,7 @@ export class FDeviceConsole extends FConsole {
          // RLogger.lsnsOutput.register(this, this.onLog);
       }
       // 输出日志
-      LoggerUtil.debug(this, 'Parse browser agent. (platform_cd={1}, type_cd={2})', EnumUtil.decode(EPlatform, platformCd), EnumUtil.decode(EBrowser, this._typeCd));
+      LoggerUtil.debug(this, 'Parse browser agent. (platform_cd={1}, type_cd={2})', EnumUtil.decode(PlatformEnum, platformCd), EnumUtil.decode(EBrowser, this._typeCd));
       // 是否支持HTML5
       if (hWindow.applicationCache) {
          this._supportHtml5 = true;
@@ -372,7 +372,7 @@ export class FDeviceConsole extends FConsole {
       // 设置浏览器能力
       var pixelRatio = hWindow.devicePixelRatio;
       if (pixelRatio) {
-         if (platformCd == EPlatform.Mobile) {
+         if (platformCd == PlatformEnum.Mobile) {
             // 强制不要超过3倍
             capability.pixelRatio = Math.min(pixelRatio, 3);
             LoggerUtil.debug(this, 'Parse browser agent. (pixel_ratio={1}, capability_ratio={2})', pixelRatio, capability.pixelRatio);
@@ -535,7 +535,7 @@ export class FDeviceConsole extends FConsole {
    // @param value:String 标题
    //==========================================================
    public setCaption(value) {
-      top.document.title = RString.nvl(value);
+      top.document.title = StringUtil.nvl(value);
    }
 
    //==========================================================
@@ -545,7 +545,7 @@ export class FDeviceConsole extends FConsole {
    // @param value:String 状态
    //==========================================================
    public setStatus(value) {
-      window.status = RString.nvl(value);
+      window.status = StringUtil.nvl(value);
    }
 
    //==========================================================

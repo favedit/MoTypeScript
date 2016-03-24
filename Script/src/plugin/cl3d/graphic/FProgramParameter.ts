@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {FError} from '../../../runtime/common/lang/FError';
-import {FloatUtil} from '../../../runtime/common/lang/RFloat';
+import {FloatUtil} from '../../../runtime/common/lang/FloatUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {EParameterFormat} from './EParameterFormat';

@@ -2,7 +2,7 @@ import {FError} from '../../../runtime/common/lang/FError'
 import {Objects} from '../../../runtime/common/lang/Objects'
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
 import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
-import {RAssert} from '../../../runtime/common/RAssert'
+import {AssertUtil} from '../../../runtime/common/AssertUtil'
 import {IDisplayContainer} from '../../../runtime/graphic/IDisplayContainer';
 import {FRenderable} from './FRenderable';
 import {FDisplay} from './FDisplay';
@@ -130,7 +130,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    // @param display 显示对象
    //==========================================================
    public pushDisplay(display: FDisplay): void {
-      RAssert.debugNotNull(display);
+      AssertUtil.debugNotNull(display);
       // 获得显示集合
       var displays: Objects<FDisplay> = this._displays;
       if (!displays) {
@@ -147,7 +147,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    // @param display 显示对象
    //==========================================================
    public removeDisplay(display: FDisplay): void {
-      RAssert.debugNotNull(display);
+      AssertUtil.debugNotNull(display);
       // 获得显示集合
       var displays: Objects<FDisplay> = this._displays;
       if (displays) {

@@ -1,5 +1,5 @@
 import {ResultEnum} from '../lang/ResultEnum';
-import {RString} from '../lang/RString';
+import {StringUtil} from '../lang/StringUtil';
 import {FTagContext} from './FTagContext';
 import {FTag} from './FTag';
 
@@ -23,18 +23,18 @@ export class FTagText extends FTag {
    public onBegin(context: FTagContext): ResultEnum {
       var text = this.text;
       if (context.trimLeft) {
-         if (RString.startsWith(text, '\r')) {
+         if (StringUtil.startsWith(text, '\r')) {
             text = text.substring(1);
          }
-         if (RString.startsWith(text, '\n')) {
+         if (StringUtil.startsWith(text, '\n')) {
             text = text.substring(1);
          }
       }
       if (context.trimRight) {
-         if (RString.endsWith(text, '\r')) {
+         if (StringUtil.endsWith(text, '\r')) {
             text = text.substring(0, text.length - 1);
          }
-         if (RString.endsWith(text, '\n')) {
+         if (StringUtil.endsWith(text, '\n')) {
             text = text.substring(0, text.length - 1);
          }
       }

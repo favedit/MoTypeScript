@@ -1,6 +1,6 @@
 import {RClass} from '../reflect/RClass';
 import {IntegerUtil} from '../lang/IntegerUtil';
-import {RString} from '../lang/RString';
+import {StringUtil} from '../lang/StringUtil';
 
 //==========================================================
 // <T>矩形结构。</T>
@@ -176,7 +176,7 @@ export class SSquare {
    // @method
    //============================================================
    public dump(d) {
-      d = RString.nvlString(d);
+      d = StringUtil.nvlString(d);
       d.append(RClass.shortName(this));
       d.append(' [', this.left, ',', this.top, '-', this.right, ',', this.bottom, '] ');
       d.append('(', this.width(), '-', this.height(), ')');

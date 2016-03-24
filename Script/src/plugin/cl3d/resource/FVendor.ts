@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
-import {FAttributes} from '../../runtime/common/lang/FAttributes';
+import {Attributes} from '../../runtime/common/lang/Attributes';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RRuntime} from '../../runtime/common/RRuntime';
 
@@ -14,7 +14,7 @@ export class FVendor extends ObjectBase {
    // 内容地址
    public _contentUrl: string = null;
    // 参数集合
-   public _parameters: FAttributes = null;
+   public _parameters: Attributes = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -22,7 +22,7 @@ export class FVendor extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._parameters = new FAttributes();
+      this._parameters = new Attributes();
    }
 
    //==========================================================
@@ -30,7 +30,7 @@ export class FVendor extends ObjectBase {
    //
    // @return 参数集合
    //==========================================================
-   public get parameters(): FAttributes {
+   public get parameters(): Attributes {
       return this._parameters;
    }
 

@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {RObjectId} from '../../../runtime/common/lang/RObjectId';
-import {FListeners} from '../../../runtime/common/lang/FListeners';
+import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
+import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {FNode} from '../../../runtime/framework/FNode';
 //import {EntityFlagEnum} from './EntityFlagEnum';
 //import {EntityEventEnum} from "./EntityEventEnum";
@@ -39,7 +39,7 @@ export class FEntity extends FNode {
    //==========================================================
    public constructor() {
       super();
-      this.entityId = RObjectId.nextId('entity');
+      this.entityId = ObjectIdUtil.nextId('entity');
       //this.listenersDirty = new FListeners(this);
       //this.children = new FObjects<FEntity>();
       //core.Id(this);

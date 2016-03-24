@@ -1,6 +1,6 @@
 import {ScopeEnum} from '../../../../runtime/common/lang/ScopeEnum';
 import {Objects} from '../../../../runtime/common/lang/Objects';
-import {RAssert} from '../../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {ALinker} from '../../../../runtime/common/reflect/ALinker';
 import {RClass} from '../../../../runtime/common/reflect/RClass';
 import {FConsole} from '../../../../runtime/core/FConsole';
@@ -44,7 +44,7 @@ export class FPipelineConsole extends FConsole {
    // <T>收集一个渲染管道。</T>
    //==========================================================
    public alloc(context: FGraphicContext, clazz: Function = FForwardPipeline): FPipeline {
-      RAssert.debugNotNull(context);
+      AssertUtil.debugNotNull(context);
       var pipeline: FPipeline = RClass.create(clazz);
       pipeline.linkGraphicContext(context);
       pipeline.setup();

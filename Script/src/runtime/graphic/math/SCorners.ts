@@ -1,4 +1,4 @@
-import {FloatUtil} from '../../common/lang/RFloat';
+import {FloatUtil} from '../../common/lang/FloatUtil';
 
 //==========================================================
 // <T>颜色。</T>

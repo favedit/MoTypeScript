@@ -5,7 +5,7 @@
 // @enum
 // @version 141226
 //==========================================================
-export enum ELogger {
+export enum LoggerEnum {
    // @member 未知
    Unknown = 0,
    // @member 调试模式

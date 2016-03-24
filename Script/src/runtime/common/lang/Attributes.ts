@@ -1,6 +1,6 @@
-import {FDictionary} from './FDictionary'
+import {Dictionary} from './Dictionary'
 import {FString} from './FString'
-import {RString} from './RString'
+import {StringUtil} from './StringUtil'
 import {RRuntime} from '../RRuntime'
 
 //==========================================================
@@ -10,7 +10,7 @@ import {RRuntime} from '../RRuntime'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FAttributes extends FDictionary<string> {
+export class Attributes extends Dictionary<string> {
    //==========================================================
    // <T>将内部所有内容目关联成一个字符串。</T>
    //
@@ -75,9 +75,9 @@ export class FAttributes extends FDictionary<string> {
          if (item.length) {
             var codes = item.split(name);
             if (codes.length == 2) {
-               o.set(RString.trim(codes[0]), RString.trim(codes[1]));
+               o.set(StringUtil.trim(codes[0]), StringUtil.trim(codes[1]));
             } else {
-               o.set(RString.trim(item), '');
+               o.set(StringUtil.trim(item), '');
             }
          }
       }

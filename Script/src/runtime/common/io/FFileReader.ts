@@ -1,6 +1,6 @@
 import {SEvent} from '../lang/SEvent';
 import {ObjectBase} from '../lang/ObjectBase';
-import {LoggerUtil} from '../lang/RLogger';
+import {LoggerUtil} from '../lang/LoggerUtil';
 
 //==========================================================
 // <T>文件读取器。</T>

@@ -1,7 +1,7 @@
 import {ObjectBase} from './ObjectBase'
 import {Objects} from './Objects'
 import {ObjectUtil} from './ObjectUtil'
-import {RAssert} from '../RAssert'
+import {AssertUtil} from '../AssertUtil'
 
 //==========================================================
 // <T>对象池。</T>
@@ -61,7 +61,7 @@ export class ObjectPool extends ObjectBase {
    // @param item:FObject 对象
    //==========================================================
    public free(item: any): void {
-      RAssert.debugNotNull(item);
+      AssertUtil.debugNotNull(item);
       this.frees.push(item);
       this._freeCount++;
    }
@@ -73,7 +73,7 @@ export class ObjectPool extends ObjectBase {
    // @param FObject 对象
    //==========================================================
    public push(item: any): void {
-      RAssert.debugNotNull(item);
+      AssertUtil.debugNotNull(item);
       this.items.push(item);
       this.frees.push(item);
    }

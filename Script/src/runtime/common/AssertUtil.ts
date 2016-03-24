@@ -1,4 +1,4 @@
-import {RSingleton} from './lang/RSingleton';
+import {SingletonObject} from './lang/SingletonObject';
 
 //==========================================================
 // <T>检查结果。</T>
@@ -10,7 +10,7 @@ import {RSingleton} from './lang/RSingleton';
 // @author maocy
 // @version 150319
 //==========================================================
-export class RAssert extends RSingleton {
+export class AssertUtil extends SingletonObject {
    //==========================================================
    // <T>调试开始。</T>
    //

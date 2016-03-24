@@ -2,7 +2,7 @@ import {ObjectBase} from './ObjectBase'
 import {Objects} from './Objects'
 import {ObjectUtil} from './ObjectUtil'
 import {FString} from './FString'
-import {FListener} from './FListener'
+import {Listener} from './Listener'
 import {FError} from './FError'
 import {RClass} from '../reflect/RClass'
 import {RRuntime} from './RRuntime'
@@ -14,11 +14,11 @@ import {RRuntime} from './RRuntime'
 // @author maocy
 // @version 141229
 //==========================================================
-export class FListeners extends ObjectBase {
+export class Listeners extends ObjectBase {
    // 发送者
    public sender = null;
    // 监听集合
-   public listeners: Objects<FListener> = null;
+   public listeners: Objects<Listener> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -36,7 +36,7 @@ export class FListeners extends ObjectBase {
    // @return  是否为空
    //==========================================================
    public isEmpty() {
-      var listeners: Objects<FListener> = this.listeners;
+      var listeners: Objects<Listener> = this.listeners;
       if (listeners) {
          return listeners.isEmpty();
       }
@@ -51,12 +51,12 @@ export class FListeners extends ObjectBase {
    // @param callback:Function 处理函数
    // @return TListener 监听器
    //==========================================================
-   public find(owner: any, callback: Function): FListener {
-      var listeners: Objects<FListener> = this.listeners;
+   public find(owner: any, callback: Function): Listener {
+      var listeners: Objects<Listener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
-            var listener: FListener = listeners.at(n);
+            var listener: Listener = listeners.at(n);
             if ((listener.owner === owner) && (listener.callback === callback)) {
                return listener;
             }
@@ -73,14 +73,14 @@ export class FListeners extends ObjectBase {
    // @param callback:Function 处理函数
    // @return TListener 监听器
    //==========================================================
-   public register(owner: any, callback: Function, ...attributes: Array<any>): FListener {
+   public register(owner: any, callback: Function, ...attributes: Array<any>): Listener {
       // 检查是否已经注册
-      var listener: FListener = this.find(owner, callback);
+      var listener: Listener = this.find(owner, callback);
       if (listener) {
          throw new FError(this, 'Listener is already register. (owner={1}, process={2})', owner, callback);
       }
       // 注册监听器
-      listener = new FListener();
+      listener = new Listener();
       listener.owner = owner;
       listener.attributes = attributes;
       listener.callback = callback;
@@ -98,7 +98,7 @@ export class FListeners extends ObjectBase {
    //==========================================================
    public unregister(owner: any, callback: Function): void {
       // 检查是否已经注册
-      var listener: FListener = this.find(owner, callback);
+      var listener: Listener = this.find(owner, callback);
       if (!listener) {
          throw new FError(this, 'Listener is not register. (owner={1}, process={2})', owner, callback);
       }
@@ -114,7 +114,7 @@ export class FListeners extends ObjectBase {
    // @method
    // @param listener:TListener 监听器对象
    //==========================================================
-   public push(listener: FListener) {
+   public push(listener: Listener) {
       // 检查参数
       if (!listener) {
          throw new FError(this, 'Listener is null.');
@@ -123,9 +123,9 @@ export class FListeners extends ObjectBase {
          throw new FError(this, 'Listener process is null.');
       }
       // 增加监听器
-      var listeners: Objects<FListener> = this.listeners;
+      var listeners: Objects<Listener> = this.listeners;
       if (!listeners) {
-         listeners = this.listeners = new Objects<FListener>();
+         listeners = this.listeners = new Objects<Listener>();
       }
       listeners.push(listener);
    }
@@ -153,11 +153,11 @@ export class FListeners extends ObjectBase {
    // @param parameters 参数集合
    //==========================================================
    public process(...parameters: Array<any>) {
-      var listeners: Objects<FListener> = this.listeners;
+      var listeners: Objects<Listener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
-            var listener: FListener = listeners.at(n);
+            var listener: Listener = listeners.at(n);
             listener.process(this.sender, parameters);
          }
       }
@@ -167,7 +167,7 @@ export class FListeners extends ObjectBase {
    // <T>清空处理。</T>
    //==========================================================
    public clear() {
-      var listeners: Objects<FListener> = this.listeners;
+      var listeners: Objects<Listener> = this.listeners;
       if (listeners) {
          listeners.clear();
       }
@@ -179,11 +179,11 @@ export class FListeners extends ObjectBase {
    // @method
    //============================================================
    public dispose() {
-      var listeners: Objects<FListener> = this.listeners;
+      var listeners: Objects<Listener> = this.listeners;
       if (listeners) {
          var count: number = listeners.count();
          for (var n: number = 0; n < count; n++) {
-            var listener: FListener = listeners.at(n);
+            var listener: Listener = listeners.at(n);
             listener.dispose();
          }
          this.listeners = ObjectUtil.dispose(listeners);
@@ -200,7 +200,7 @@ export class FListeners extends ObjectBase {
    public dump() {
       var result = new FString();
       result.append(RClass.shortName(this));
-      var listeners: Objects<FListener> = this.listeners;
+      var listeners: Objects<Listener> = this.listeners;
       var count: number = listeners.count();
       for (var n: number = 0; n < count; n++) {
          result.append('\n   ' + listeners.at(n));

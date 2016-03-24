@@ -1,5 +1,5 @@
 import {FString} from '../../common/lang/FString';
-import {FloatUtil} from '../../common/lang/RFloat';
+import {FloatUtil} from '../../common/lang/FloatUtil';
 import {SPoint3} from '../../common/math/SPoint3';
 import {RMath} from '../../common/math/RMath';
 

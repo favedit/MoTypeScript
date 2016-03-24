@@ -1,6 +1,6 @@
 import {IntegerUtil} from './IntegerUtil';
 import {FDate} from './FDate';
-import {RString} from './RString';
+import {StringUtil} from './StringUtil';
 
 //===========================================================
 // <T>日期时间的操作类。</T>
@@ -387,7 +387,7 @@ export class DateUtil {
       items['hour'] = 0;
       items['minute'] = 0;
       items['second'] = 0;
-      value = RString.trim(value);
+      value = StringUtil.trim(value);
       if (value.indexOf(' ') == -1) {
          o.splitDate(items, value);
       } else {

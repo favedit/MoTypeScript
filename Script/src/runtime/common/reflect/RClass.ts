@@ -1,4 +1,4 @@
-import {RAssert} from '../RAssert'
+import {AssertUtil} from '../AssertUtil'
 import {FError} from '../lang/FError'
 import {FAnnotation} from './FAnnotation'
 import {FClass} from './FClass'
@@ -273,7 +273,7 @@ export class RClass {
    // @return 类对象
    //==========================================================
    public static get(typeClass: Function): FClass {
-      RAssert.debugNotNull(typeClass);
+      AssertUtil.debugNotNull(typeClass);
       var clazz: FClass = typeClass.prototype.__clazz;
       if (clazz) {
          if (clazz.linker === typeClass) {

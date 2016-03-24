@@ -1,5 +1,5 @@
 ﻿import {ObjectBase} from './ObjectBase'
-import {LoggerUtil} from './RLogger'
+import {LoggerUtil} from './LoggerUtil'
 
 //==========================================================
 // <T>测速工具类。</T>

@@ -1,5 +1,5 @@
-import {RString} from '../../../runtime/common/lang/RString';
-import {RAssert} from '../../../runtime/common/RAssert';
+import {StringUtil} from '../../../runtime/common/lang/StringUtil';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {RConsole} from '../../../runtime/core/RConsole';
 import {FRenderable} from '../base/FRenderable';
 import {FRenderModelConsole} from '../shape/render/FRenderModelConsole';
@@ -115,7 +115,7 @@ export class FTemplateRenderable extends FRenderable {
       // 设置资源
       //var materialGuid = resource.materialGuid();
       var materialUrl = resource.materialUrl;
-      if (!RString.isEmpty(materialUrl)) {
+      if (!StringUtil.isEmpty(materialUrl)) {
          //var material = this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
          //this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
          this.materialLoader = RConsole.find(FE3rMaterialConsole).loadLoaderByUrl(this, materialUrl);
@@ -196,7 +196,7 @@ export class FTemplateRenderable extends FRenderable {
       var meshCode = resource.meshCode;
       //var mesh = model.findMeshByCode(meshCode);
       var mesh = model.meshes.first();
-      RAssert.debugNotNull(mesh);
+      AssertUtil.debugNotNull(mesh);
       this.vertexBuffers = mesh.vertexBuffers;
       this.indexBuffers = mesh.indexBuffers;
       this.material = this.materialLoader.material;

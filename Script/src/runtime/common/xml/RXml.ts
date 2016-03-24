@@ -1,8 +1,8 @@
 import {RClass} from '../reflect/RClass';
 import {FString} from '../lang/FString';
 import {FError} from '../lang/FError';
-import {FAttributes} from '../lang/FAttributes';
-import {RString} from '../lang/RString';
+import {Attributes} from '../lang/Attributes';
+import {StringUtil} from '../lang/StringUtil';
 import {RMethod} from '../reflect/RMethod';
 import {ENodeType} from './ENodeType';
 import {FNode} from './FNode';
@@ -209,7 +209,7 @@ export class RXml {
       if (eas) {
          var eac = eas.length;
          if (eac > 0) {
-            xas = new FAttributes();
+            xas = new Attributes();
             for (var n = 0; n < eac; n++) {
                var ea = eas[n];
                if (ea.nodeName) {
@@ -235,7 +235,7 @@ export class RXml {
          }
       }
       // 创建节点
-      var xc = pd.create(pe.nodeName, xas, RString.trim(xt.toString()));
+      var xc = pd.create(pe.nodeName, xas, StringUtil.trim(xt.toString()));
       if (pn) {
          pn.push(xc);
       } else {
@@ -305,13 +305,13 @@ export class RXml {
    //==========================================================
    public static unpack(s, n) {
       var o = this;
-      if (RString.isEmpty(s)) {
+      if (StringUtil.isEmpty(s)) {
          return null;
       }
       if (!n) {
          n = new FNode();
       }
-      var np = new FAttributes();
+      var np = new Attributes();
       np.unpack(s);
       n.name = np.get('name');
       n.value = np.get('value');

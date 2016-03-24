@@ -1,4 +1,4 @@
-import {FDictionary} from '../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {RClass} from '../../runtime/common/reflect/RClass';
 import {FConsole} from '../../runtime/core/FConsole';
@@ -12,14 +12,14 @@ import {FTextureResource} from './FTextureResource';
 //==========================================================
 export class FTextureResourceConsole extends FConsole {
    // 纹理集合
-   public textures: FDictionary<FTextureResource> = null;
+   public textures: Dictionary<FTextureResource> = null;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
-      this.textures = new FDictionary<FTextureResource>();
+      this.textures = new Dictionary<FTextureResource>();
    }
 
    // //==========================================================

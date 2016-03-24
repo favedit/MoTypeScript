@@ -1,5 +1,5 @@
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
-import {FListeners} from '../../common/lang/FListeners';
+import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ALinker} from '../../common/reflect/ALinker';
 import {FConsole} from '../../core/FConsole';
@@ -19,21 +19,21 @@ export class FMouseConsole extends FConsole {
    // 鼠标事件
    protected _eventMouse: SMouseEvent;
    // 鼠标单击监听器
-   protected _clickListeners: FListeners;
+   protected _clickListeners: Listeners;
    // 鼠标双击监听器
-   protected _doubleClickListeners: FListeners;
+   protected _doubleClickListeners: Listeners;
    // 鼠标落下监听器
-   protected _mouseDownListeners: FListeners;
+   protected _mouseDownListeners: Listeners;
    // 鼠标移动监听器
-   protected _mouseMoveListeners: FListeners;
+   protected _mouseMoveListeners: Listeners;
    // 鼠标抬起监听器
-   protected _mouseUpListeners: FListeners;
+   protected _mouseUpListeners: Listeners;
    // 鼠标进入监听器
-   protected _mouseEnterListeners: FListeners;
+   protected _mouseEnterListeners: Listeners;
    // 鼠标离开监听器
-   protected _mouseLeaveListeners: FListeners;
+   protected _mouseLeaveListeners: Listeners;
    // 鼠标滚动监听器
-   protected _mouseWheelListeners: FListeners;
+   protected _mouseWheelListeners: Listeners;
    // 设备控制台
    @ALinker(FDeviceConsole)
    protected _deviceConsole: FDeviceConsole;
@@ -49,14 +49,14 @@ export class FMouseConsole extends FConsole {
       this.scopeCd = ScopeEnum.Local;
       // 设置属性
       this._eventMouse = new SMouseEvent();
-      this._clickListeners = new FListeners();
-      this._doubleClickListeners = new FListeners();
-      this._mouseDownListeners = new FListeners();
-      this._mouseMoveListeners = new FListeners();
-      this._mouseUpListeners = new FListeners();
-      this._mouseEnterListeners = new FListeners();
-      this._mouseLeaveListeners = new FListeners();
-      this._mouseWheelListeners = new FListeners();
+      this._clickListeners = new Listeners();
+      this._doubleClickListeners = new Listeners();
+      this._mouseDownListeners = new Listeners();
+      this._mouseMoveListeners = new Listeners();
+      this._mouseUpListeners = new Listeners();
+      this._mouseEnterListeners = new Listeners();
+      this._mouseLeaveListeners = new Listeners();
+      this._mouseWheelListeners = new Listeners();
       //o._captures = new TObjects();
       // 注册事件
       //RWindow.lsnsMouseDown.register(o, o.onMouseDown);
@@ -69,7 +69,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get clickListeners(): FListeners {
+   public get clickListeners(): Listeners {
       return this._clickListeners;
    }
 
@@ -78,7 +78,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get doubleClickListeners(): FListeners {
+   public get doubleClickListeners(): Listeners {
       return this._doubleClickListeners;
    }
 
@@ -87,7 +87,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get mouseDownListeners(): FListeners {
+   public get mouseDownListeners(): Listeners {
       return this._mouseDownListeners;
    }
 
@@ -96,7 +96,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get mouseMoveListeners(): FListeners {
+   public get mouseMoveListeners(): Listeners {
       return this._mouseMoveListeners;
    }
 
@@ -105,7 +105,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get mouseUpListeners(): FListeners {
+   public get mouseUpListeners(): Listeners {
       return this._mouseUpListeners;
    }
 
@@ -114,7 +114,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get mouseEnterListeners(): FListeners {
+   public get mouseEnterListeners(): Listeners {
       return this._mouseEnterListeners;
    }
 
@@ -123,7 +123,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get mouseLeaveListeners(): FListeners {
+   public get mouseLeaveListeners(): Listeners {
       return this._mouseLeaveListeners;
    }
 
@@ -132,7 +132,7 @@ export class FMouseConsole extends FConsole {
    //
    // @return 监听器
    //===========================================================
-   public get mouseWheelListeners(): FListeners {
+   public get mouseWheelListeners(): Listeners {
       return this._mouseWheelListeners;
    }
 

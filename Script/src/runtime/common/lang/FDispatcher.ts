@@ -1,7 +1,7 @@
 import {ObjectBase} from './ObjectBase';
-import {FDictionary} from './FDictionary';
-import {FListener} from './FListener';
-import {FListeners} from './FListeners';
+import {Dictionary} from './Dictionary';
+import {Listener} from './Listener';
+import {Listeners} from './Listeners';
 import {ObjectUtil} from './ObjectUtil';
 
 //==========================================================
@@ -9,7 +9,7 @@ import {ObjectUtil} from './ObjectUtil';
 //==========================================================
 export class FDispatcher extends ObjectBase {
    // 监听器集合字典
-   public _listenerss: FDictionary<FListeners> = null;
+   public _listenerss: Dictionary<Listeners> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -17,7 +17,7 @@ export class FDispatcher extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._listenerss = new FDictionary<FListeners>();
+      this._listenerss = new Dictionary<Listeners>();
    }
 
    //==========================================================
@@ -28,16 +28,16 @@ export class FDispatcher extends ObjectBase {
    // @param method 函数
    // @return 监听器
    //==========================================================
-   public addListener(code, owner, method): FListener {
+   public addListener(code, owner, method): Listener {
       // 获得监听器集合对象
       var listenerss = this._listenerss;
       if (!listenerss) {
-         listenerss = this._listenerss = new FDictionary<FListeners>();
+         listenerss = this._listenerss = new Dictionary<Listeners>();
       }
       // 获得监听器集合
       var listeners = listenerss.get(code);
       if (!listeners) {
-         listeners = new FListeners(this);
+         listeners = new Listeners(this);
          listenerss.set(code, listeners);
       }
       // 检查重复
@@ -56,7 +56,7 @@ export class FDispatcher extends ObjectBase {
    // @param method 函数
    // @return 监听器
    //==========================================================
-   public setListener(code, owner, method): FListener {
+   public setListener(code, owner, method): Listener {
       var listenerss = this._listenerss;
       if (listenerss) {
          var listeners = listenerss.get(code);

@@ -1,6 +1,6 @@
 ﻿import {ScopeEnum} from '../../../runtime/common/lang/ScopeEnum';
 import {FError} from '../../../runtime/common/lang/FError';
-import {FDictionary} from '../../../runtime/common/lang/FDictionary';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {RClass} from '../../../runtime/common/reflect/RClass';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FTechnique} from './FTechnique';
@@ -13,7 +13,7 @@ import {FTechnique} from './FTechnique';
 //==========================================================
 export class FTechniqueConsole extends FConsole {
    // 技术集合
-   protected _techniques: FDictionary<FTechnique> = null;
+   protected _techniques: Dictionary<FTechnique> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -21,7 +21,7 @@ export class FTechniqueConsole extends FConsole {
    public constructor() {
       super();
       this._scopeCd = ScopeEnum.Local;
-      this._techniques = new FDictionary<FTechnique>();
+      this._techniques = new Dictionary<FTechnique>();
    }
 
    //==========================================================

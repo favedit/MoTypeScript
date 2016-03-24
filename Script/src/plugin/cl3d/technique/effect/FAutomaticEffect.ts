@@ -1,6 +1,6 @@
 ﻿import {FError} from '../../../../runtime/common/lang/FError';
 import {FString} from '../../../../runtime/common/lang/FString';
-import {RAssert} from '../../../../runtime/common/RAssert';
+import {AssertUtil} from '../../../../runtime/common/AssertUtil';
 import {FEffect} from '../../graphic/FEffect';
 import {FRegion} from '../../base/FRegion';
 import {FRenderable} from '../../base/FRenderable';
@@ -460,7 +460,7 @@ export class FAutomaticEffect extends FEffect {
    // @param renderable 渲染对象
    //==========================================================
    public bindSamplers(renderable: FRenderable) {
-      RAssert.debugNotNull(renderable);
+      AssertUtil.debugNotNull(renderable);
       var program = this.program;
       // 绑定特定取样器
       //if (this._supportMaterialMap) {
@@ -491,8 +491,8 @@ export class FAutomaticEffect extends FEffect {
    // @param material 渲染材质
    //==========================================================
    public bindMaterialSamplers(renderable: FRenderable, material: FMaterial) {
-      RAssert.debugNotNull(renderable);
-      RAssert.debugNotNull(material);
+      AssertUtil.debugNotNull(renderable);
+      AssertUtil.debugNotNull(material);
       var program = this.program;
       // 绑定取样器集合
       if (program.hasSampler()) {
@@ -515,7 +515,7 @@ export class FAutomaticEffect extends FEffect {
    // @param material 材质
    //==========================================================
    public bindMaterial(material: FMaterial) {
-      RAssert.debugNotNull(material);
+      AssertUtil.debugNotNull(material);
       var context = this.graphicContext;
       // 设置深度
       if (material.optionDepth) {

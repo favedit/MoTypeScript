@@ -2,7 +2,7 @@ import {AccessEnum} from '../lang/AccessEnum';
 import {DataTypeEnum} from '../lang/DataTypeEnum';
 import {SAccessEvent} from '../lang/SAccessEvent';
 import {FPropertyAnnotation} from './FPropertyAnnotation';
-import {RMemory} from '../RMemory';
+import {MemoryUtil} from '../MemoryUtil';
 import {RClass} from './RClass';
 
 //==========================================================
@@ -36,14 +36,14 @@ export function AProperty(
          var oldValue: any = this[propertyName];
          if (dataChanged) {
             // 执行注册函数
-            var event: SAccessEvent = RMemory.alloc(SAccessEvent);
+            var event: SAccessEvent = MemoryUtil.alloc(SAccessEvent);
             event.oldValue = oldValue;
             event.value = value;
             event.result = true;
             this[dataChanged].call(this, this, event);
             result = event.result;
             resultValue = event.value;
-            RMemory.free(event);
+            MemoryUtil.free(event);
          }
          if (result) {
             if (oldValue !== resultValue) {

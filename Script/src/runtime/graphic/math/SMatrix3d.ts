@@ -1,5 +1,5 @@
 import {SMatrix4x4} from './SMatrix4x4';
-import {FloatUtil} from '../../common/lang/RFloat';
+import {FloatUtil} from '../../common/lang/FloatUtil';
 
 //==========================================================
 // <T>三维矩阵。</T>

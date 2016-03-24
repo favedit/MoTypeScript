@@ -1,5 +1,5 @@
 import {SVector3} from './SVector3';
-import {FloatUtil} from '../lang/RFloat';
+import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
 // <T>四元数。</T>

@@ -3,7 +3,7 @@ import {AProperty} from '../../common/reflect/AProperty';
 import {ScopeEnum} from '../../common/lang/ScopeEnum';
 import {DataTypeEnum} from '../../common/lang/DataTypeEnum';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {LoggerUtil} from '../../common/lang/RLogger';
+import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {RClass} from '../../common/reflect/RClass';
 import {FBufferedSocket} from '../../common/net/FBufferedSocket';
 import {FEnvironmentConsole} from './FEnvironmentConsole';

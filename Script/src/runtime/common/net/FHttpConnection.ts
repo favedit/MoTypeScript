@@ -1,10 +1,10 @@
-import {FAttributes} from '../lang/FAttributes';
+import {Attributes} from '../lang/Attributes';
 import {SEvent} from '../lang/SEvent';
 import {ObjectBase} from '../lang/ObjectBase';
-import {FListeners} from '../lang/FListeners';
+import {Listeners} from '../lang/Listeners';
 import {FError} from '../lang/FError';
 import {ObjectUtil} from '../lang/ObjectUtil';
-import {LoggerUtil} from '../lang/RLogger';
+import {LoggerUtil} from '../lang/LoggerUtil';
 import {RNet} from '../net/RNet';
 import {EHttpMethod} from './EHttpMethod';
 import {EHttpContent} from './EHttpContent';
@@ -37,8 +37,8 @@ export class FHttpConnection extends ObjectBase {
    protected _statusFree = true;
    protected _event = null;
    // @attribute
-   public loadListeners: FListeners = null;
-   public completeListeners: FListeners = null;
+   public loadListeners: Listeners = null;
+   public completeListeners: Listeners = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -48,11 +48,11 @@ export class FHttpConnection extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._heads = new FAttributes();
-      this._attributes = new FAttributes();
+      this._heads = new Attributes();
+      this._attributes = new Attributes();
       this._event = new SEvent(this);
-      this.loadListeners = new FListeners();
-      this.completeListeners = new FListeners();
+      this.loadListeners = new Listeners();
+      this.completeListeners = new Listeners();
       // 创建链接
       var handle = this._handle = RNet.createConnection();
       handle._linker = this;

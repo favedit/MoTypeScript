@@ -1,4 +1,4 @@
-import {RAssert} from '../RAssert';
+import {AssertUtil} from '../AssertUtil';
 import {RRuntime} from '../RRuntime';
 import {FString} from './FString'
 import {ObjectBase} from './ObjectBase';
@@ -242,7 +242,7 @@ export class FMap<N, V> extends ObjectBase {
    // @return Object 内容
    //==========================================================
    public set(name: N, value: V): void {
-      RAssert.debugNotNull(name);
+      AssertUtil.debugNotNull(name);
       var nameString: any = name.toString();
       var code: any = nameString.toLowerCase();
       var index = this._table[code];

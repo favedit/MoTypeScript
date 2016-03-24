@@ -1,5 +1,5 @@
 ﻿import {IntegerUtil} from '../../common/lang/IntegerUtil';
-import {RString} from '../../common/lang/RString';
+import {StringUtil} from '../../common/lang/StringUtil';
 
 //==========================================================
 // <T>页面构建类。</T>
@@ -46,7 +46,7 @@ export class RBuilder {
    // @return HtmlImgTag 页面图标对象
    //==========================================================
    public static createIcon(hDocument, style, uri, width, height) {
-      var hImage = this.create(hDocument, 'IMG', RString.nvl(style, 'Tag_Icon'));
+      var hImage = this.create(hDocument, 'IMG', StringUtil.nvl(style, 'Tag_Icon'));
       hImage.align = 'absmiddle';
       if (uri) {
          // hImage.src = RResource.iconPath(uri);

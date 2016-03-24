@@ -1,5 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {LoggerUtil} from '../../../runtime/common/lang/RLogger';
+import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {FConsole} from '../../../runtime/core/FConsole';
 import {FCommand} from '../command/FCommand';
 import {FSession} from './FSession';
