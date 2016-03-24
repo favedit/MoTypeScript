@@ -1,5 +1,5 @@
 import {FPhongMaterial} from '../../../runtime/graphic/material/FPhongMaterial'
-import {FRenderable} from '../base/FRenderable';
+import {Renderable} from '../base/Renderable';
 
 //==========================================================
 // <T>网格渲染对象。</T>
@@ -7,7 +7,7 @@ import {FRenderable} from '../base/FRenderable';
 // @author maocy
 // @history 150202
 //==========================================================
-export class FMeshRenderable extends FRenderable {
+export class FMeshRenderable extends Renderable {
    //    // @attribute
    public _renderable = null;
    //    o._activeTrack     = null;

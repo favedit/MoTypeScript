@@ -1,6 +1,6 @@
 import {FTexture} from '../../../runtime/graphic/material/FTexture';
 import {TechniquePass} from './TechniquePass';
-import {FRegion} from '../base/FRegion';
+import {Region} from '../base/Region';
 
 //==========================================================
 // <T>通用颜色渲染过程。</T>
@@ -30,7 +30,7 @@ export class DeferredMergePass extends TechniquePass {
    // @method
    // @param region:FG3dRetion 区域
    //==========================================================
-   public drawRegion(region: FRegion) {
+   public drawRegion(region: Region) {
       // 设置渲染目标
       var context = this._graphicContext;
       context.setRenderTarget(null);

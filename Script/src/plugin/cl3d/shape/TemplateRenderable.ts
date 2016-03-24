@@ -1,7 +1,7 @@
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FRenderable} from '../base/FRenderable';
+import {Renderable} from '../base/Renderable';
 import {FRenderModelConsole} from '../shape/render/FRenderModelConsole';
 import {FE3rMaterialConsole} from '../shape/render/FE3rMaterialConsole';
 import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
@@ -12,7 +12,7 @@ import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
 // @author maocy
 // @history 141231
 //==========================================================
-export class TemplateRenderable extends FRenderable {
+export class TemplateRenderable extends Renderable {
    //    // @attribute
    protected _ready = false;
    protected _dataReady = false;

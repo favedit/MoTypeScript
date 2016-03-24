@@ -43,5 +43,5 @@ template.matrix.addRotationY(Math.PI);
 scene.contentLayer.push(template);
 //............................................................
 // 启动绘制
-(<ForwardPipeline>canvas.pipeline).optionShadow = true;
+//(<ForwardPipeline>canvas.pipeline).optionShadow = true;
 canvas.start();

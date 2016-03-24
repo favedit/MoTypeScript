@@ -1,5 +1,5 @@
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FRegion} from '../../base/FRegion';
+import {Region} from '../../base/Region';
 import {DeferredTechnique} from '../DeferredTechnique';
 import {SelectTechnique} from '../SelectTechnique';
 import {TechniqueService} from '../TechniqueService';
@@ -27,7 +27,7 @@ export class DeferredPipeline extends Pipeline{
    public setup() {
       super.setup();
       // 设置渲染区域
-      this.region = new FRegion();
+      this.region = new Region();
       // 设置渲染技术
       var techniqueConsole: TechniqueService = ServiceUtil.find(TechniqueService);
       this.drawTechnique = techniqueConsole.find(this._graphicContext, DeferredTechnique);
@@ -52,7 +52,7 @@ export class DeferredPipeline extends Pipeline{
       if (!technique) {
          return false;
       }
-      var region: FRegion = this.region;
+      var region: Region = this.region;
       region.camera = this.camera;
       region.backgroundColor = stage.backgroundColor;
       // 统计处理

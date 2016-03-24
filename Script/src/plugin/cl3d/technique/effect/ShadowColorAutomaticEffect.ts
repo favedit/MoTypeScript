@@ -1,6 +1,6 @@
-﻿import {ERegionParameter} from '../../base/ERegionParameter';
-import {FRenderable} from '../../base/FRenderable';
-import {FRegion} from '../../base/FRegion';
+﻿import {RegionParameterEnum} from '../../base/RegionParameterEnum';
+import {Renderable} from '../../base/Renderable';
+import {Region} from '../../base/Region';
 import {AutomaticEffect} from './AutomaticEffect';
 
 //==========================================================
@@ -24,16 +24,16 @@ export class ShadowColorAutomaticEffect extends AutomaticEffect {
    // @param region 渲染区域
    // @param renderable 渲染对象
    //==========================================================
-   public drawRenderable(region: FRegion, renderable: FRenderable) {
+   public drawRenderable(region: Region, renderable: Renderable) {
       var context = this._graphicContext;
       var program = this.program;
       // 获得参数
-      var vcp = region.calculate(ERegionParameter.CameraPosition);
-      var vcvpm = region.calculate(ERegionParameter.CameraViewProjectionMatrix);
-      var vld = region.calculate(ERegionParameter.LightDirection);
-      var vlvm = region.calculate(ERegionParameter.LightViewMatrix);
-      var vlvpm = region.calculate(ERegionParameter.LightViewProjectionMatrix);
-      var vlci = region.calculate(ERegionParameter.LightInfo);
+      var vcp = region.calculate(RegionParameterEnum.CameraPosition);
+      var vcvpm = region.calculate(RegionParameterEnum.CameraViewProjectionMatrix);
+      var vld = region.calculate(RegionParameterEnum.LightDirection);
+      var vlvm = region.calculate(RegionParameterEnum.LightViewMatrix);
+      var vlvpm = region.calculate(RegionParameterEnum.LightViewProjectionMatrix);
+      var vlci = region.calculate(RegionParameterEnum.LightInfo);
       var tp = region.techniquePass;
       // 绑定材质
       var material = renderable.material;

@@ -1,5 +1,5 @@
-import {FWglContext} from '../../../../plugin/cl3d/graphic/wgl/FWglContext';
-import {RWglContext} from '../../../../plugin/cl3d/graphic/wgl/RWglContext';
+import {WglContext} from '../../../../plugin/cl3d/graphic/wgl/WglContext';
+import {WglContextUtil} from '../../../../plugin/cl3d/graphic/wgl/WglContextUtil';
 import {EEvent} from '../../../../runtime/ui/EEvent';
 import {FCanvas as FBaseCanvas} from '../base/FCanvas';
 
@@ -9,7 +9,7 @@ import {FCanvas as FBaseCanvas} from '../base/FCanvas';
 //==========================================================
 export class FCanvas extends FBaseCanvas {
 
-   public context: FWglContext;
+   public context: WglContext;
 
    public constructor() {
       super();
@@ -35,7 +35,7 @@ export class FCanvas extends FBaseCanvas {
       hCanvas.height = size.height;
       hPanel.appendChild(hCanvas);
       // 创建环境
-      var context = this.context = RWglContext.create(hCanvas);
+      var context = this.context = WglContextUtil.create(hCanvas);
       // 设置事件
       this.attachEvent(hCanvas, EEvent.MouseMove, this.onMouseMove);
    }

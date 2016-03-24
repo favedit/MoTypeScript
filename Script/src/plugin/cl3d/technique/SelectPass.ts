@@ -1,13 +1,13 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {Point2} from '../../../runtime/common/math/Point2';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FEffectConsole} from '../graphic/FEffectConsole';
-import {ESamplerFilter} from '../graphic/ESamplerFilter';
+import {EffectConsole} from '../graphic/EffectConsole';
+import {SamplerFilterEnum} from '../graphic/SamplerFilterEnum';
 import {TechniquePass} from './TechniquePass';
-import {FRenderTarget} from '../graphic/FRenderTarget';
-import {FFlatTexture} from '../graphic/FFlatTexture';
-import {FRenderable} from '../base/FRenderable';
-import {FRegion} from '../base/FRegion';
+import {RenderTarget} from '../graphic/RenderTarget';
+import {FlatTexture} from '../graphic/FlatTexture';
+import {Renderable} from '../base/Renderable';
+import {Region} from '../base/Region';
 
 //==========================================================
 // <T>阴影深度渲染过程。</T>
@@ -18,11 +18,11 @@ import {FRegion} from '../base/FRegion';
 // export class FG3dSelectPass{
 export class SelectPass extends TechniquePass {
    // @attribute
-   protected _texture: FFlatTexture;
-   protected _renderTarget: FRenderTarget;
+   protected _texture: FlatTexture;
+   protected _renderTarget: RenderTarget;
    protected _position: Point2 = new Point2();
    protected _data = new Uint8Array(4);
-   public selectRenderable: FRenderable;
+   public selectRenderable: Renderable;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -35,8 +35,8 @@ export class SelectPass extends TechniquePass {
       var context = this._graphicContext;
       // 创建平面
       var texture = this._texture = context.createFlatTexture();
-      texture.setFilterCd(ESamplerFilter.Nearest, ESamplerFilter.Nearest);
-      texture.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      texture.setFilterCd(SamplerFilterEnum.Nearest, SamplerFilterEnum.Nearest);
+      texture.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       // 创建渲染目标
       var renderTarget = this._renderTarget = context.createRenderTarget();
       renderTarget.size.set(1, 1);
@@ -50,16 +50,16 @@ export class SelectPass extends TechniquePass {
    // @param region 区域
    // @param renderables 渲染集合
    //==========================================================
-   public activeEffects(region: FRegion, renderables: Objects<FRenderable>) {
+   public activeEffects(region: Region, renderables: Objects<Renderable>) {
       var spaceName = region.spaceName;
       // 关联渲染器
       var count = renderables.count();
       for (var i = 0; i < count; i++) {
-         var renderable: FRenderable = renderables.at(i);
+         var renderable: Renderable = renderables.at(i);
          if (renderable.optionSelect) {
             var info = renderable.selectInfo(spaceName);
             if (!info.effect) {
-               info.effect = ServiceUtil.find(FEffectConsole).find(this._graphicContext, region, renderable);
+               info.effect = ServiceUtil.find(EffectConsole).find(this._graphicContext, region, renderable);
             }
          }
       }
@@ -71,7 +71,7 @@ export class SelectPass extends TechniquePass {
    // @method
    // @param region:FG3dRetion 区域
    //==========================================================
-   public drawRegion(region: FRegion) {
+   public drawRegion(region: Region) {
       var context = this._graphicContext;
       var handle = context.handle;
       // 设置渲染目标

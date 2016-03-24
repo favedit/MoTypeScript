@@ -1,7 +1,7 @@
 ﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {Technique} from './Technique';
-import {FRenderable} from '../base/FRenderable';
-import {FRegion} from '../base/FRegion';
+import {Renderable} from '../base/Renderable';
+import {Region} from '../base/Region';
 import {TechniqueModeEnum} from './TechniqueModeEnum'
 import {SelectPass} from './SelectPass';
 
@@ -46,7 +46,7 @@ export class SelectTechnique extends Technique {
    //
    // @param region 渲染区域
    //==========================================================
-   public test(region: FRegion, x: number, y: number) {
+   public test(region: Region, x: number, y: number) {
       // 设置区域属性
       region.selectPosition.set(x, y);
       // 绘制所有过程

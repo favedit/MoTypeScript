@@ -1,14 +1,14 @@
 import {DataArray} from '../../../runtime/common/lang/DataArray';
 import {Outline3} from '../../../runtime/common/math/Outline3';
 import {MathUtil} from '../../../runtime/common/math/MathUtil';
-import {EDrawMode} from '../graphic/EDrawMode';
-import {EAttributeFormat} from '../graphic/EAttributeFormat'
-import {EIndexStride} from '../graphic/EIndexStride'
-import {FVertexBuffer} from '../graphic/FVertexBuffer'
-import {FIndexBuffer} from '../graphic/FIndexBuffer'
+import {DrawModeEnum} from '../graphic/DrawModeEnum';
+import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum'
+import {IndexStrideEnum} from '../graphic/IndexStrideEnum'
+import {VertexBuffer} from '../graphic/VertexBuffer'
+import {IndexBuffer} from '../graphic/IndexBuffer'
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial'
-import {FGraphicContext} from '../graphic/FGraphicContext'
-import {FRenderable} from '../base/FRenderable';
+import {GraphicContext} from '../graphic/GraphicContext'
+import {Renderable} from '../base/Renderable';
 // import {EAttributeFormat} from '../../graphic/EAttributeFormat'
 
 //==========================================================
@@ -18,16 +18,16 @@ import {FRenderable} from '../base/FRenderable';
 // @author maocy
 // @history 150207
 //==========================================================
-export class FSphere extends FRenderable {
-   public vertexPositionBuffer: FVertexBuffer = null;
-   public vertexNormalBuffer: FVertexBuffer = null;
-   public vertexColorBuffer: FVertexBuffer = null;
-   public vertexCoordBuffer: FVertexBuffer = null;
-   public indexBuffer: FIndexBuffer = null;
+export class FSphere extends Renderable {
+   public vertexPositionBuffer: VertexBuffer = null;
+   public vertexNormalBuffer: VertexBuffer = null;
+   public vertexColorBuffer: VertexBuffer = null;
+   public vertexCoordBuffer: VertexBuffer = null;
+   public indexBuffer: IndexBuffer = null;
    //    //..........................................................
    //    // @attribute
    public outline = null;
-   public drawModeCd = EDrawMode.Triangles;
+   public drawModeCd = DrawModeEnum.Triangles;
    public splitCount = 8;
 
    //==========================================================
@@ -47,7 +47,7 @@ export class FSphere extends FRenderable {
    //
    // @method
    //==========================================================
-   public setup(context: FGraphicContext) {
+   public setup(context: GraphicContext) {
       // 计算坐标
       var countAngle = this.splitCount * 2;
       var countZ = this.splitCount;
@@ -78,21 +78,21 @@ export class FSphere extends FRenderable {
          }
       }
       // 创建顶点位置缓冲
-      var vertexPositionBuffer: FVertexBuffer = this.vertexPositionBuffer = context.createVertexBuffer();
+      var vertexPositionBuffer: VertexBuffer = this.vertexPositionBuffer = context.createVertexBuffer();
       vertexPositionBuffer.code = 'position';
-      vertexPositionBuffer.formatCd = EAttributeFormat.Float3;
+      vertexPositionBuffer.formatCd = AttributeFormatEnum.Float3;
       vertexPositionBuffer.upload(positionData, 4 * 3, vertexCount);
       this.pushVertexBuffer(vertexPositionBuffer);
       // 创建顶点颜色缓冲
-      var vertexNormalBuffer: FVertexBuffer = this.vertexNormalBuffer = context.createVertexBuffer();
+      var vertexNormalBuffer: VertexBuffer = this.vertexNormalBuffer = context.createVertexBuffer();
       vertexNormalBuffer.code = 'normal';
-      vertexNormalBuffer.formatCd = EAttributeFormat.Float3;
+      vertexNormalBuffer.formatCd = AttributeFormatEnum.Float3;
       vertexNormalBuffer.upload(normalData, 4 * 3, vertexCount);
       this.pushVertexBuffer(vertexNormalBuffer);
       // 创建顶点纹理缓冲
-      var vertexCoordBuffer: FVertexBuffer = this.vertexCoordBuffer = context.createVertexBuffer();
+      var vertexCoordBuffer: VertexBuffer = this.vertexCoordBuffer = context.createVertexBuffer();
       vertexCoordBuffer.code = 'coord';
-      vertexCoordBuffer.formatCd = EAttributeFormat.Float2;
+      vertexCoordBuffer.formatCd = AttributeFormatEnum.Float2;
       vertexCoordBuffer.upload(coordData, 4 * 2, vertexCount);
       this.pushVertexBuffer(vertexCoordBuffer);
       //..........................................................
@@ -104,7 +104,7 @@ export class FSphere extends FRenderable {
             var i = (countAngle + 1) * rz;
             var ci = i + r;
             var ni = i + r + (countAngle + 1);
-            if (drawModeCd == EDrawMode.Lines) {
+            if (drawModeCd == DrawModeEnum.Lines) {
                indexes.push(ci, ni, ni, ci + 1, ci + 1, ci);
                indexes.push(ni, ni + 1, ni + 1, ci + 1, ci + 1, ni);
             } else {
@@ -114,12 +114,12 @@ export class FSphere extends FRenderable {
          }
       }
       // 创建索引缓冲
-      var buffer: FIndexBuffer = this.indexBuffer = context.createIndexBuffer();
+      var buffer: IndexBuffer = this.indexBuffer = context.createIndexBuffer();
       buffer.drawModeCd = drawModeCd;
       var indexLength = indexes.length();
       var indexMemory = indexes.memory();
       if (indexLength > 65535) {
-         buffer.strideCd = EIndexStride.Uint32;
+         buffer.strideCd = IndexStrideEnum.Uint32;
          buffer.upload(new Uint32Array(indexMemory), indexLength);
       } else {
          buffer.upload(new Uint16Array(indexMemory), indexLength);

@@ -2,12 +2,12 @@ import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {Listeners} from '../../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {Camera} from '../../../runtime/graphic/camera/Camera';
-import {FGraphicContext} from '../../graphic/FGraphicContext';
-import {FContent} from '../../graphic/FContent';
+import {GraphicContext} from '../../graphic/GraphicContext';
+import {Content} from '../../graphic/Content';
 import {Technique} from '../Technique';
 import {SelectTechnique} from '../SelectTechnique';
-import {FScene} from '../../base/FScene';
-import {FRegion} from '../../base/FRegion';
+import {Scene} from '../../base/Scene';
+import {Region} from '../../base/Region';
 
 //==========================================================
 // <T>立方渲染纹理。</T>
@@ -15,15 +15,15 @@ import {FRegion} from '../../base/FRegion';
 // @author maocy
 // @history 141231
 //==========================================================
-export abstract class Pipeline extends FContent {
+export abstract class Pipeline extends Content {
    // 场景
-   public scene: FScene;
+   public scene: Scene;
    // 绘制技术
    public drawTechnique: Technique;
    // 选择技术
    public selectTechnique: SelectTechnique;
    // 舞台
-   public region: FRegion;
+   public region: Region;
    // 相机
    public camera: Camera;
    // 激活状态

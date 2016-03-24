@@ -1,5 +1,5 @@
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FRegion} from '../../base/FRegion';
+import {Region} from '../../base/Region';
 import {TechniqueService} from '../TechniqueService';
 import {GeneralTechnique} from '../GeneralTechnique';
 import {ShadowTechnique} from '../ShadowTechnique';
@@ -30,7 +30,7 @@ export class ForwardPipeline extends Pipeline {
    public setup() {
       super.setup();
       // 设置渲染区域
-      this.region = new FRegion();
+      this.region = new Region();
       this.optionShadow = false;
       // 设置渲染技术
       var techniqueConsole: TechniqueService = ServiceUtil.find(TechniqueService);
@@ -73,7 +73,7 @@ export class ForwardPipeline extends Pipeline {
       if (!technique) {
          return false;
       }
-      var region: FRegion = this.region;
+      var region: Region = this.region;
       region.camera = this.camera;
       region.backgroundColor = stage.backgroundColor;
       // 统计处理

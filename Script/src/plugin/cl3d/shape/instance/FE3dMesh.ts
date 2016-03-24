@@ -1,4 +1,4 @@
-//import {FRenderable} from '../FRenderable';
+//import {FRenderable} from '../Renderable';
 
  //==========================================================
 // <T>渲染模型。</T>

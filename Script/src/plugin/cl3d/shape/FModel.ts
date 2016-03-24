@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {FRenderModel} from 'render/FRenderModel';
 import {FRenderModelMesh} from 'render/FRenderModelMesh';
-import {FActor} from '../base/FActor';
+import {Actor} from '../base/Actor';
 import {FMeshRenderable} from './FMeshRenderable';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {FMeshRenderable} from './FMeshRenderable';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FModel extends FActor {
+export class FModel extends Actor {
    // @attribute
    public _dataReady = false;
    public renderable = null;

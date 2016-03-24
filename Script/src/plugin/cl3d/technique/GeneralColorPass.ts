@@ -1,4 +1,4 @@
-﻿import {FRegion} from '../base/FRegion';
+﻿import {Region} from '../base/Region';
 import {TechniquePass} from './TechniquePass';
 
 //==========================================================
@@ -21,7 +21,7 @@ export class GeneralColorPass extends TechniquePass {
    //
    // @param region 区域
    //==========================================================
-   public drawRegion(region: FRegion) {
+   public drawRegion(region: Region) {
       // 设置渲染目标
       var context = this._graphicContext;
       context.setRenderTarget(null);

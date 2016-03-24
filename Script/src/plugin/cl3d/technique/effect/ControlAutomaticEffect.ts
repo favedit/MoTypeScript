@@ -1,4 +1,4 @@
-﻿import {ERegionParameter} from '../../base/ERegionParameter';
+﻿import {RegionParameterEnum} from '../../base/RegionParameterEnum';
 import {AutomaticEffect} from './AutomaticEffect';
 
 //==========================================================
@@ -27,7 +27,7 @@ export class ControlAutomaticEffect extends AutomaticEffect {
       var context = this.graphicContext;
       var program = this.program;
       var matrix = renderable.currentMatrix();
-      var cameraVpMatrix = region.calculate(ERegionParameter.CameraViewProjectionMatrix);
+      var cameraVpMatrix = region.calculate(RegionParameterEnum.CameraViewProjectionMatrix);
       // 绑定材质
       var material = renderable.material();
       var info = material.info();

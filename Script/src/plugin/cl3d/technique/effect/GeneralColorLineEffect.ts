@@ -2,7 +2,7 @@
 import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {FFloatStream} from '../../base/util/FFloatStream';
-import {ERegionParameter} from '../../base/ERegionParameter';
+import {RegionParameterEnum} from '../../base/RegionParameterEnum';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
 import {FLineMaterial} from '../../../../runtime/graphic/material/FLineMaterial';
 import {AutomaticEffect} from './AutomaticEffect';
@@ -88,9 +88,9 @@ export class GeneralColorLineEffect extends AutomaticEffect {
    public drawRenderable(region, renderable) {
       var program = this.program;
       // 获得参数
-      var cameraPosition = region.calculate(ERegionParameter.CameraPosition);
-      var lightDirection = region.calculate(ERegionParameter.LightDirection);
-      var vpMatrix = region.calculate(ERegionParameter.CameraViewProjectionMatrix)
+      var cameraPosition = region.calculate(RegionParameterEnum.CameraPosition);
+      var lightDirection = region.calculate(RegionParameterEnum.LightDirection);
+      var vpMatrix = region.calculate(RegionParameterEnum.CameraViewProjectionMatrix)
       // 绑定材质
       var material = renderable.material;
       this.bindMaterial(material);

@@ -1,5 +1,5 @@
-import {FDisplayLayer} from '../base/FDisplayLayer';
-import {FScene} from '../base/FScene';
+import {DisplayLayer} from '../base/DisplayLayer';
+import {Scene} from '../base/Scene';
 
 //==========================================================
 // <T>舞台对象。</T>
@@ -8,7 +8,7 @@ import {FScene} from '../base/FScene';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FSimpleScene extends FScene {
+export class FSimpleScene extends Scene {
    //    // @attribute
    //    o._visible              = MO.Class.register(o, new MO.AGetSet('_visible'), true);
    //    o._code                 = MO.Class.register(o, new MO.AGetSet('_code'));
@@ -18,8 +18,8 @@ export class FSimpleScene extends FScene {
    //    // @attribute
    //    o._statusSetup          = false;
    //    o._statusActive         = false;
-   public backgroundLayer: FDisplayLayer;
-   public contentLayer: FDisplayLayer;
+   public backgroundLayer: DisplayLayer;
+   public contentLayer: DisplayLayer;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -36,10 +36,10 @@ export class FSimpleScene extends FScene {
    public setup() {
       this.backgroundColor.set(1, 1, 1, 1);
       // 创建背景层
-      var layer = this.backgroundLayer = new FDisplayLayer();
+      var layer = this.backgroundLayer = new DisplayLayer();
       this.registerLayer('background', layer);
       // 创建内容层
-      var layer = this.contentLayer = new FDisplayLayer();
+      var layer = this.contentLayer = new DisplayLayer();
       this.registerLayer('content', layer);
    }
 

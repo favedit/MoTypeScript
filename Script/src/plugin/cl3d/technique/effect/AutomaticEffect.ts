@@ -1,14 +1,14 @@
 ﻿import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {StringBuffer} from '../../../../runtime/common/lang/StringBuffer';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
-import {FEffect} from '../../graphic/FEffect';
-import {FRegion} from '../../base/FRegion';
-import {FRenderable} from '../../base/FRenderable';
-import {FProgramAttribute} from '../../graphic/FProgramAttribute';
-import {FProgramSampler} from '../../graphic/FProgramSampler';
-import {FVertexBuffer} from '../../graphic/FVertexBuffer';
+import {Effect} from '../../graphic/Effect';
+import {Region} from '../../base/Region';
+import {Renderable} from '../../base/Renderable';
+import {ProgramAttribute} from '../../graphic/ProgramAttribute';
+import {ProgramSampler} from '../../graphic/ProgramSampler';
+import {VertexBuffer} from '../../graphic/VertexBuffer';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
-import {SEffectInfo} from '../graphic/SEffectInfo';
+import {EffectInfo} from '../graphic/EffectInfo';
 import {AttributeEnum} from './AttributeEnum';
 import {SamplerEnum} from './SamplerEnum';
 
@@ -18,7 +18,7 @@ import {SamplerEnum} from './SamplerEnum';
 // @author maocy
 // @history 150114
 //==========================================================
-export class AutomaticEffect extends FEffect {
+export class AutomaticEffect extends Effect {
    // @attribute
    protected _optionMerge = false;
    protected _optionBlendMode = true;
@@ -94,7 +94,7 @@ export class AutomaticEffect extends FEffect {
    // @param tagContext:FTagContext 模板环境
    // @param info:SG3dEffectInfo 渲染信息
    //==========================================================
-   public buildInfo(tagContext, info: SEffectInfo) {
+   public buildInfo(tagContext, info: EffectInfo) {
       var context = this.graphicContext;
       var capability = context.capability;
       // 获得参数
@@ -437,15 +437,15 @@ export class AutomaticEffect extends FEffect {
    // @method
    // @param renderable 渲染对象
    //==========================================================
-   public bindAttributes(renderable: FRenderable) {
+   public bindAttributes(renderable: Renderable) {
       var program = this.program;
       if (program.hasAttribute()) {
          var attributes = program.attributes();
          var count = attributes.count();
          for (var n = 0; n < count; n++) {
-            var attribute: FProgramAttribute = attributes.at(n);
+            var attribute: ProgramAttribute = attributes.at(n);
             if (attribute.statusUsed) {
-               var buffer: FVertexBuffer = renderable.findVertexBuffer(attribute.linker);
+               var buffer: VertexBuffer = renderable.findVertexBuffer(attribute.linker);
                program.setAttribute(attribute.name, buffer, buffer.formatCd);
             }
          }
@@ -459,7 +459,7 @@ export class AutomaticEffect extends FEffect {
    // @param region 渲染区域
    // @param renderable 渲染对象
    //==========================================================
-   public bindSamplers(renderable: FRenderable) {
+   public bindSamplers(renderable: Renderable) {
       AssertUtil.debugNotNull(renderable);
       var program = this.program;
       // 绑定特定取样器
@@ -472,7 +472,7 @@ export class AutomaticEffect extends FEffect {
          var samplers = program.samplers();
          var count = samplers.count();
          for (var n = 0; n < count; n++) {
-            var sampler: FProgramSampler = samplers.at(n);
+            var sampler: ProgramSampler = samplers.at(n);
             if (sampler.bind && sampler.statusUsed) {
                var name = sampler.name;
                var linker = sampler.linker;
@@ -490,7 +490,7 @@ export class AutomaticEffect extends FEffect {
    // @param renderable 渲染对象
    // @param material 渲染材质
    //==========================================================
-   public bindMaterialSamplers(renderable: FRenderable, material: FMaterial) {
+   public bindMaterialSamplers(renderable: Renderable, material: FMaterial) {
       AssertUtil.debugNotNull(renderable);
       AssertUtil.debugNotNull(material);
       var program = this.program;
@@ -499,7 +499,7 @@ export class AutomaticEffect extends FEffect {
          var samplers = program.samplers();
          var count = samplers.count();
          for (var n = 0; n < count; n++) {
-            var sampler: FProgramSampler = samplers.at(n);
+            var sampler: ProgramSampler = samplers.at(n);
             if (sampler.bind && sampler.statusUsed) {
                var linker = sampler.linker;
                var texture = material.findTexture(linker);
@@ -546,7 +546,7 @@ export class AutomaticEffect extends FEffect {
    // @param region 渲染区域
    // @param renderable  渲染对象
    //==========================================================
-   public drawRenderable(region: FRegion, renderable: FRenderable, index: number = 0) {
+   public drawRenderable(region: Region, renderable: Renderable, index: number = 0) {
       var context = this.graphicContext;
       var program = this.program;
       // 绘制准备

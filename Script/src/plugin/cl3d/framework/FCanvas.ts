@@ -2,16 +2,17 @@ import {Linker} from '../../runtime/common/reflect/Linker';
 import {Size2} from './../../runtime/common/math/Size2';
 import {FGraphicObject} from './../../runtime/graphic/core/FGraphicObject';
 import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
-import {FScene} from '../../plugin/cl3d/base/FScene';
+import {Scene} from '../../plugin/cl3d/base/Scene';
 import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';
 import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
+import {DeferredPipeline} from '../../plugin/cl3d/technique/pipeline/DeferredPipeline';
 import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
 import {EEvent} from '../../../runtime/ui/EEvent';
 import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FControl} from './../../runtime/ui/FControl';
 import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
-import {FWglContext} from '../graphic/wgl/FWglContext';
-import {RWglContext} from '../graphic/wgl/RWglContext';
+import {WglContext} from '../graphic/wgl/WglContext';
+import {WglContextUtil} from '../graphic/wgl/WglContextUtil';
 
 //==========================================================
 // <T>模板画板。</T>
@@ -38,7 +39,7 @@ export class FCanvas extends FControl {
    // 渲染管道
    public pipeline: Pipeline;
    // 场景
-   public scene: FScene;
+   public scene: Scene;
    // 按键管理器
    @Linker(FKeyboardConsole)
    public _keyboardConsole: FKeyboardConsole = null;
@@ -112,7 +113,7 @@ export class FCanvas extends FControl {
       hCanvas.height = size.height;
       hPanel.appendChild(hCanvas);
       // 创建环境
-      this._graphicContext = RWglContext.create(hCanvas);
+      this._graphicContext = WglContextUtil.create(hCanvas);
       // 创建相机
       var camera = this._camera = new PerspectiveCamera();
       camera.projection.size.assign(size);
@@ -121,7 +122,8 @@ export class FCanvas extends FControl {
       camera.lookAt(0, 0, 0);
       camera.update();
       // 设置渲染管道
-      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, ForwardPipeline);
+      //var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, ForwardPipeline);
+      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, DeferredPipeline);
       pipeline.scene = this.scene;
       pipeline.camera = this.camera;
       pipeline.enterFrameListeners.register(this, this.onProcess);

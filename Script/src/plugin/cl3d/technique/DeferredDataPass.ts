@@ -1,8 +1,8 @@
 import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
 import {FTexture} from '../../../runtime/graphic/material/FTexture';
-import {FRenderTarget} from '../graphic/FRenderTarget';
+import {RenderTarget} from '../graphic/RenderTarget';
 import {TechniquePass} from './TechniquePass';
-import {FRegion} from '../base/FRegion';
+import {Region} from '../base/Region';
 
 //==========================================================
 // <T>延迟数据渲染过程。</T>
@@ -18,7 +18,7 @@ export class DeferredDataPass extends TechniquePass {
    // 颜色纹理
    public textureColor: FTexture;
    // 渲染目标
-   public renderTarget: FRenderTarget;
+   public renderTarget: RenderTarget;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -64,7 +64,7 @@ export class DeferredDataPass extends TechniquePass {
    // @method
    // @param region:FG3dRetion 区域
    //==========================================================
-   public drawRegion(region: FRegion) {
+   public drawRegion(region: Region) {
       // 设置渲染目标
       var context = this._graphicContext;
       context.setRenderTarget(this.renderTarget);

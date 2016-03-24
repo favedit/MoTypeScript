@@ -4,7 +4,7 @@ import {EnvironmentService} from '../../runtime/core/service/EnvironmentService'
 import {FDeviceConsole} from '../../runtime/ui/console/FDeviceConsole';
 import {FSimpleScene} from '../../plugin/cl3d/framework/FSimpleScene';
 import {FPath3} from '../../runtime/graphic/shape/brep/FPath3';
-import {FCurve3Renderable} from '../../plugin/cl3d/shape/FCurve3Renderable';
+import {Curve3Renderable} from '../../plugin/cl3d/shape/Curve3Renderable';
 import {FCanvas} from '../../plugin/cl3d/framework/FCanvas';
 
 // 初始化空间
@@ -39,7 +39,7 @@ path3.moveTo(0, 0, 0);
 path3.lineTo(1, 1, 0);
 path3.lineTo(2, 2, 1);
 path3.lineTo(2, 2, 2);
-var renderable = new FCurve3Renderable(path3);
+var renderable = new Curve3Renderable(path3);
 renderable.setup(context);
 scene.contentLayer.push(renderable);
 //............................................................

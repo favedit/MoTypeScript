@@ -1,5 +1,5 @@
 import {DataStream} from '../../runtime/common/io/DataStream';
-import {EAttributeFormat} from '../graphic/EAttributeFormat';
+import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum';
 import {FResourceObject} from './FResourceObject';
 
 //==========================================================
@@ -17,7 +17,7 @@ export class FStreamResource extends FResourceObject {
    public dataCount: number = 0;
    public dataLength: number = 0;
    public data: any = null;
-   public formatCd: number = EAttributeFormat.Unknown;
+   public formatCd: number = AttributeFormatEnum.Unknown;
 
    //==========================================================
    // <T>从输入流里反序列化信息内容</T>

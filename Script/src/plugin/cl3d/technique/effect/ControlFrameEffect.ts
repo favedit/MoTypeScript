@@ -1,4 +1,4 @@
-﻿import {ERegionParameter} from '../../base/ERegionParameter';
+﻿import {RegionParameterEnum} from '../../base/RegionParameterEnum';
 import {AutomaticEffect} from './AutomaticEffect';
 
 //==========================================================
@@ -27,15 +27,15 @@ export class ControlFrameEffect extends AutomaticEffect {
       var context = this.graphicContext;
       var program = this.program;
       // 获得参数
-      var vcp = region.calculate(ERegionParameter.CameraPosition);
-      var vld = region.calculate(ERegionParameter.LightDirection);
+      var vcp = region.calculate(RegionParameterEnum.CameraPosition);
+      var vld = region.calculate(RegionParameterEnum.LightDirection);
       // 绑定材质
       var material = renderable.material();
       var materialInfo = material.info();
       this.bindMaterial(material);
       // 绑定所有属性流
       program.setParameter('vc_model_matrix', renderable.currentMatrix());
-      program.setParameter('vc_vp_matrix', region.calculate(ERegionParameter.CameraViewProjectionMatrix));
+      program.setParameter('vc_vp_matrix', region.calculate(RegionParameterEnum.CameraViewProjectionMatrix));
       program.setParameter('vc_camera_position', vcp);
       program.setParameter('vc_light_direction', vld);
       program.setParameter('fc_camera_position', vcp);

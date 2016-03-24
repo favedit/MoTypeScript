@@ -2,7 +2,7 @@ import {Objects} from '../common/lang/Objects'
 import {ObjectUtil} from '../common/lang/ObjectUtil'
 import {AssertUtil} from '../common/AssertUtil'
 import {IDisplay} from './IDisplay';
-//import {FRegion} from './FRegion';
+//import {FRegion} from './Region';
 
 //==========================================================
 // <T>显示对象集合。</T>

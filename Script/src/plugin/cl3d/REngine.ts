@@ -6,7 +6,7 @@ import {ShadowDepthAutomaticEffect} from './technique/effect/ShadowDepthAutomati
 import {ShadowColorAutomaticEffect} from './technique/effect/ShadowColorAutomaticEffect';
 import {DeferredDataPhongAutomaticEffect} from './technique/effect/DeferredDataPhongAutomaticEffect';
 import {DeferredMergePhongAutomaticEffect} from './technique/effect/DeferredMergePhongAutomaticEffect';
-import {FEffectConsole} from './graphic/FEffectConsole';
+import {EffectConsole} from './graphic/EffectConsole';
 
 //==========================================================
 // <T>三维渲染引擎。</T>
@@ -28,7 +28,7 @@ export class REngine {
    //==========================================================
    //public onSetup() {
    public static staticConstructor() {
-      var effectConsole = ServiceUtil.find(FEffectConsole);
+      var effectConsole = ServiceUtil.find(EffectConsole);
       // 选择效果器
       effectConsole.register('select.select.line.automatic', SelectAutomaticEffect);
       effectConsole.register('select.select.phong.automatic', SelectAutomaticEffect);

@@ -3,7 +3,7 @@ import {Point3} from '../common/math/Point3';
 import {Vector3} from '../common/math/Vector3';
 import {IDrawable} from './IDrawable';
 import {IRenderable} from './IRenderable';
-//import {FRegion} from './FRegion';
+//import {FRegion} from './Region';
 
 //==========================================================
 // <T>显示对象。</T>

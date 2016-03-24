@@ -1,7 +1,7 @@
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Linker} from '../../../runtime/common/reflect/Linker';
-import {FActor} from '../base/FActor';
+import {Actor} from '../base/Actor';
 import {TemplateResource} from '../resource/TemplateResource';
 import {FModelResource} from '../resource/FModelResource';
 import {FModelResourceConsole} from '../resource/FModelResourceConsole';
@@ -15,7 +15,7 @@ import {TemplateRenderable} from './TemplateRenderable';
 // @author maocy
 // @history 150106
 //==========================================================
-export class Template extends FActor {
+export class Template extends Actor {
    // @attribute
    public _dataReady: boolean;
    public _ready: boolean;

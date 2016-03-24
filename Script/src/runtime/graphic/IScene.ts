@@ -5,7 +5,7 @@ import {Listeners} from '../common/lang/Listeners';
 import {Color4} from '../common/math/Color4';
 // import {RAssert} from '../common/AssertUtil';
 import {IDisplayLayer} from './IDisplayLayer';
-//import {FRegion} from './FRegion';
+//import {FRegion} from './Region';
 
 //==========================================================
 // <T>舞台对象。</T>

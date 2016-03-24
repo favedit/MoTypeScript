@@ -1,6 +1,6 @@
 ﻿import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
 import {TechniquePass} from './TechniquePass';
-import {FRegion} from '../base/FRegion';
+import {Region} from '../base/Region';
 
 //==========================================================
 // <T>阴影深度渲染过程。</T>
@@ -54,7 +54,7 @@ export class ShadowDepthPass extends TechniquePass {
    // @method
    // @param region 区域
    //==========================================================
-   public drawRegion(region: FRegion) {
+   public drawRegion(region: Region) {
       var context = this._graphicContext;
       // 设置渲染目标
       if (this.finish) {

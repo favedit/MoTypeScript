@@ -3,9 +3,9 @@ import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
 import {FPhongMaterial} from '../../../../runtime/graphic/material/FPhongMaterial';
-import {ERegionParameter} from '../../base/ERegionParameter';
-import {FRenderable} from '../../base/FRenderable';
-import {FRegion} from '../../base/FRegion';
+import {RegionParameterEnum} from '../../base/RegionParameterEnum';
+import {Renderable} from '../../base/Renderable';
+import {Region} from '../../base/Region';
 import {FFloatStream} from '../../base/util/FFloatStream';
 import {AutomaticEffect} from './AutomaticEffect';
 
@@ -85,12 +85,12 @@ export class GeneralColorAutomaticEffect extends AutomaticEffect {
    // @param region 渲染区域
    // @param renderable 渲染对象
    //==========================================================
-   public drawRenderable(region: FRegion, renderable: FRenderable) {
+   public drawRenderable(region: Region, renderable: Renderable) {
       var program = this.program;
       // 获得参数
-      var cameraPosition = region.calculate(ERegionParameter.CameraPosition);
-      var lightDirection = region.calculate(ERegionParameter.LightDirection);
-      var vpMatrix = region.calculate(ERegionParameter.CameraViewProjectionMatrix)
+      var cameraPosition = region.calculate(RegionParameterEnum.CameraPosition);
+      var lightDirection = region.calculate(RegionParameterEnum.LightDirection);
+      var vpMatrix = region.calculate(RegionParameterEnum.CameraViewProjectionMatrix)
       // 绑定材质
       var material = renderable.material;
       // var materialInfo = material.info;

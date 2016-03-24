@@ -1,6 +1,6 @@
-﻿import {FRegion} from '../../base/FRegion';
-import {ERegionParameter} from '../../base/ERegionParameter';
-import {FRenderable} from '../../base/FRenderable';
+﻿import {Region} from '../../base/Region';
+import {RegionParameterEnum} from '../../base/RegionParameterEnum';
+import {Renderable} from '../../base/Renderable';
 import {AutomaticEffect} from './AutomaticEffect';
 
 //==========================================================
@@ -26,7 +26,7 @@ export class SelectAutomaticEffect extends AutomaticEffect {
    // @param renderable 渲染对象
    // @param index 索引位置
    //==========================================================
-   public drawRenderable(region: FRegion, renderable: FRenderable, index: number) {
+   public drawRenderable(region: Region, renderable: Renderable, index: number) {
       var context = this._graphicContext;
       var size = context.size;
       var program = this.program;
@@ -37,7 +37,7 @@ export class SelectAutomaticEffect extends AutomaticEffect {
       this.bindMaterial(material);
       // 绑定所有属性流
       program.setParameter('vc_model_matrix', renderable.currentMatrix);
-      program.setParameter('vc_vp_matrix', region.calculate(ERegionParameter.CameraViewProjectionMatrix));
+      program.setParameter('vc_vp_matrix', region.calculate(RegionParameterEnum.CameraViewProjectionMatrix));
       program.setParameter4('vc_offset', size.width, size.height, 1 - (selectPosition.x / size.width) * 2, (selectPosition.y / size.height) * 2 - 1);
       // 设置材质
       var i:number = index + 1;

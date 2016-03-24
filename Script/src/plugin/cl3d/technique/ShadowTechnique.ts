@@ -1,5 +1,5 @@
 ﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil'
-import {FRegion} from '../base/FRegion';
+import {Region} from '../base/Region';
 import {TechniqueModeEnum} from './TechniqueModeEnum'
 import {Technique} from './Technique';
 import {ShadowDepthPass} from './ShadowDepthPass';

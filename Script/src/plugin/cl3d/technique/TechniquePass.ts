@@ -1,6 +1,6 @@
 ﻿import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FContent} from '../graphic/FContent';
-import {FEffectConsole} from '../graphic/FEffectConsole';
+import {Content} from '../graphic/Content';
+import {EffectConsole} from '../graphic/EffectConsole';
 
 //==========================================================
 // <T>渲染过程。</T>
@@ -8,7 +8,7 @@ import {FEffectConsole} from '../graphic/FEffectConsole';
 // @author maocy
 // @history 141230
 //==========================================================
-export class TechniquePass extends FContent {
+export class TechniquePass extends Content {
    // @attribute
    public technique;
    public fullCode: string;
@@ -96,7 +96,7 @@ export class TechniquePass extends FContent {
    //==========================================================
    public activeEffects(region, renderables) {
       var spaceName = region.spaceName;
-      var effectConsole = ServiceUtil.find(FEffectConsole);
+      var effectConsole = ServiceUtil.find(EffectConsole);
       // 关联渲染器
       var count = renderables.count();
       for (var i = 0; i < count; i++) {

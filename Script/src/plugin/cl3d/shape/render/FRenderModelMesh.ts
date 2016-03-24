@@ -3,11 +3,11 @@ import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {EIndexStride} from '../../graphic/EIndexStride';
-import {EAttributeFormat} from '../../graphic/EAttributeFormat';
+import {IndexStrideEnum} from '../../graphic/IndexStrideEnum';
+import {AttributeFormatEnum} from '../../graphic/AttributeFormatEnum';
 import {FStreamResource} from '../resource/FStreamResource';
 import {FMeshResource} from '../resource/FMeshResource';
-import {FRenderable} from '../../base/FRenderable';
+import {Renderable} from '../../base/Renderable';
 import {FE3rVertexBuffer} from './FE3rVertexBuffer';
 import {FE3rIndexBuffer} from './FE3rIndexBuffer';
 
@@ -17,7 +17,7 @@ import {FE3rIndexBuffer} from './FE3rIndexBuffer';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FRenderModelMesh extends FRenderable {
+export class FRenderModelMesh extends Renderable {
    public ready = false;
    public vertexCount = 0;
    //public vertexBuffers: FDictionary<FE3rVertexBuffer> = null;
@@ -77,22 +77,22 @@ export class FRenderModelMesh extends FRenderable {
          switch (code) {
             case "position":
                pixels = new Float32Array(data);
-               vertexBuffer.formatCd = EAttributeFormat.Float3;
+               vertexBuffer.formatCd = AttributeFormatEnum.Float3;
                this.vertexCount = dataCount;
                break;
             case "coord":
                pixels = new Float32Array(data);
-               vertexBuffer.formatCd = EAttributeFormat.Float2;
+               vertexBuffer.formatCd = AttributeFormatEnum.Float2;
                break;
             case "color":
                pixels = new Uint8Array(data);
-               vertexBuffer.formatCd = EAttributeFormat.Byte4Normal;
+               vertexBuffer.formatCd = AttributeFormatEnum.Byte4Normal;
                break;
             case "normal":
             case "binormal":
             case "tangent":
                pixels = new Uint8Array(data);
-               vertexBuffer.formatCd = EAttributeFormat.Byte4Normal;
+               vertexBuffer.formatCd = AttributeFormatEnum.Byte4Normal;
                break;
             default:
                throw new Fatal(this, "Unknown code");
@@ -113,9 +113,9 @@ export class FRenderModelMesh extends FRenderable {
          indexBuffer.resource = streamResource;
          var dataCd = streamResource.elementDataCd;
          if (dataCd == DataTypeEnum.Uint16) {
-            indexBuffer.strideCd = EIndexStride.Uint16;
+            indexBuffer.strideCd = IndexStrideEnum.Uint16;
          } else if (dataCd == DataTypeEnum.Uint32) {
-            indexBuffer.strideCd = EIndexStride.Uint32;
+            indexBuffer.strideCd = IndexStrideEnum.Uint32;
          } else {
             throw new Fatal(this, "Unknown data type.");
          }

@@ -1,4 +1,4 @@
-import {FWglVertexBuffer} from '../../graphic/wgl/FWglVertexBuffer';
+import {WglVertexBuffer} from '../../graphic/wgl/WglVertexBuffer';
 
 //==========================================================
 // <T>渲染顶点缓冲。</T>
@@ -7,7 +7,7 @@ import {FWglVertexBuffer} from '../../graphic/wgl/FWglVertexBuffer';
 // @author maocy
 // @history 150512
 //==========================================================
-export class FE3rVertexBuffer extends FWglVertexBuffer {
+export class FE3rVertexBuffer extends WglVertexBuffer {
    // 资源对象
    public resource: any = null;
 

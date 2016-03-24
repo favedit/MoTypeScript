@@ -1,9 +1,9 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
-import {FScene} from '../base/FScene';
-import {FRegion} from '../base/FRegion';
-import {FContent} from '../graphic/FContent';
+import {Scene} from '../base/Scene';
+import {Region} from '../base/Region';
+import {Content} from '../graphic/Content';
 import {TechniqueMode} from './TechniqueMode';
 import {TechniquePass} from './TechniquePass';
 
@@ -13,7 +13,7 @@ import {TechniquePass} from './TechniquePass';
 // @author maocy
 // @history 141230
 //==========================================================
-export class Technique extends FContent {
+export class Technique extends Content {
    // @attribute
    public code = null;
    public activeMode = null;
@@ -107,7 +107,7 @@ export class Technique extends FContent {
    // @method
    // @param region 区域
    //==========================================================
-   public drawRegion(region: FRegion) {
+   public drawRegion(region: Region) {
       // 设置区域属性
       region.technique = this;
       // 绘制所有过程
@@ -126,7 +126,7 @@ export class Technique extends FContent {
    // @method
    // @param region:FG3dRetion 区域
    //==========================================================
-   public drawStage(stage: FScene, region: FRegion) {
+   public drawStage(stage: Scene, region: Region) {
       var layers = stage.layers;
       var layerCount = layers.count();
       // 设置区域属性

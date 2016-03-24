@@ -4,14 +4,14 @@ import {View} from '../../runtime/framework/view/View';
 import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
 import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
-import {FScene} from '../../plugin/cl3d/base/FScene';
-import {FDisplayLayer} from '../../plugin/cl3d/base/FDisplayLayer';
+import {Scene} from '../../plugin/cl3d/base/Scene';
+import {DisplayLayer} from '../../plugin/cl3d/base/DisplayLayer';
 import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
 import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';
 import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
 import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
 import {FModelConsole} from '../../plugin/cl3d/shape/FModelConsole';
-import {FCube} from '../../plugin/cl3d/shape/FCube';
+import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
 import {SSettings} from '../application/SSettings';
 import {EEvent} from '../../runtime/ui/EEvent';
 import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
@@ -25,11 +25,11 @@ export class FCanvasView extends View {
    // 画板
    public canvas: FCanvas;
    // 场景
-   public scene: FScene;
+   public scene: Scene;
    // 背景层
-   public backgroundLayer: FDisplayLayer;
+   public backgroundLayer: DisplayLayer;
    // 内容层
-   public contentLayer: FDisplayLayer;
+   public contentLayer: DisplayLayer;
    // 内容层
    public camera: PerspectiveCamera;
    // 内容层
@@ -56,11 +56,11 @@ export class FCanvasView extends View {
       var hCanvas = canvas.hCanvas;
       var context = canvas.context;
       // 创建场景
-      var scene: FScene = this.scene = new FScene();
+      var scene: Scene = this.scene = new Scene();
       scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
-      var layer = this.backgroundLayer = new FDisplayLayer();
+      var layer = this.backgroundLayer = new DisplayLayer();
       scene.registerLayer('background', layer);
-      var layer = this.contentLayer = new FDisplayLayer();
+      var layer = this.contentLayer = new DisplayLayer();
       scene.registerLayer('content', layer);
       // 创建相机
       var camera = this.camera = new PerspectiveCamera();
@@ -70,7 +70,7 @@ export class FCanvasView extends View {
       camera.projection.size.set(hCanvas.offsetWidth, hCanvas.offsetHeight);
       camera.projection.update();
       // 创建物件
-      var cube = new FCube();
+      var cube = new CubeRenderable();
       cube.setup(context);
       this.contentLayer.pushRenderable(cube);
       // 设置渲染管道

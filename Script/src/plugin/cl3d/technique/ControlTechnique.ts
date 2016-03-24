@@ -1,6 +1,6 @@
 ﻿import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil'
 import {Technique} from './Technique';
-import {FRegion} from '../base/FRegion';
+import {Region} from '../base/Region';
 import {TechniqueModeEnum} from './TechniqueModeEnum'
 import {ControlPass} from './ControlPass'
 

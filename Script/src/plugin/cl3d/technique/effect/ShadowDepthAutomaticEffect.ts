@@ -1,6 +1,6 @@
-﻿import {ERegionParameter} from '../../base/ERegionParameter';
-import {FRenderable} from '../../base/FRenderable';
-import {FRegion} from '../../base/FRegion';
+﻿import {RegionParameterEnum} from '../../base/RegionParameterEnum';
+import {Renderable} from '../../base/Renderable';
+import {Region} from '../../base/Region';
 import {AutomaticEffect} from './AutomaticEffect';
 
 //==========================================================
@@ -24,13 +24,13 @@ export class ShadowDepthAutomaticEffect extends AutomaticEffect {
    // @param region 渲染区域
    // @param renderable 渲染对象
    //==========================================================
-   public drawRenderable(region: FRegion, renderable: FRenderable) {
+   public drawRenderable(region: Region, renderable: Renderable) {
       var context = this._graphicContext;
       var program = this.program;
       // 获得参数
-      var lvm = region.calculate(ERegionParameter.LightViewMatrix);
-      var lvpm = region.calculate(ERegionParameter.LightViewProjectionMatrix);
-      var lci = region.calculate(ERegionParameter.LightInfo);
+      var lvm = region.calculate(RegionParameterEnum.LightViewMatrix);
+      var lvpm = region.calculate(RegionParameterEnum.LightViewProjectionMatrix);
+      var lci = region.calculate(RegionParameterEnum.LightInfo);
       // 关闭混合选项
       context.setBlendFactors(false);
       // 绑定所有属性流
