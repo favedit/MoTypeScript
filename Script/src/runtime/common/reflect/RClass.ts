@@ -1,3 +1,4 @@
+import {RAssert} from '../RAssert'
 import {FError} from '../lang/FError'
 import {FAnnotation} from './FAnnotation'
 import {FClass} from './FClass'
@@ -13,7 +14,7 @@ import {RMethod} from './RMethod'
 export class RClass {
    // 类对象集合
    private static _classes: any = new Object();
-   
+
    // 实例集合
    private static _instances: any = new Array();
 
@@ -140,7 +141,7 @@ export class RClass {
       }
       return false;*/
    }
-   
+
    //==========================================================
    // <T>获得对象实例的类短名称。</T>
    //
@@ -272,17 +273,24 @@ export class RClass {
    // @return 类对象
    //==========================================================
    public static get(typeClass: Function): FClass {
-      var findClass = typeClass;
-      if (typeClass.constructor != Function) {
-         findClass = typeClass.constructor;
-      }
-      var className: string = this.shortName(findClass);
-      var clazz: FClass = this._classes[className];
+      RAssert.debugNotNull(typeClass);
+      var clazz = typeClass.prototype.__clazz;
       if (clazz == null) {
-         clazz = this._classes[className] = new FClass();
-         clazz.build(findClass);
+         clazz = typeClass.prototype.__clazz = new FClass();
+         clazz.build(typeClass);
       }
       return clazz;
+      // var findClass = typeClass.prototype;
+      // if (typeClass.constructor != Function) {
+      //    findClass = typeClass.constructor;
+      // }
+      // var className: string = this.shortName(findClass);
+      // var clazz: FClass = this._classes[className];
+      // if (clazz == null) {
+      //    clazz = this._classes[className] = new FClass();
+      //    clazz.build(findClass);
+      // }
+      // return clazz;
    }
 
    //==========================================================

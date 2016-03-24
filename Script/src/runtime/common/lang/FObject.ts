@@ -47,6 +47,16 @@ export class FObject {
    // @method
    // @return String 信息字符串
    //==========================================================
+   //public getClass(): FClass {
+   // return this.__class;
+   //}
+
+   //==========================================================
+   // <T>获取当前实例的信息。</T>
+   //
+   // @method
+   // @return String 信息字符串
+   //==========================================================
    //public toString(): string {
    //return RClass.dump(this);
    //}

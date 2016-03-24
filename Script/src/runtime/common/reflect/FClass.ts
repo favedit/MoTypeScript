@@ -12,8 +12,6 @@ import {RClass} from './RClass'
 //import {FMemoryPool} from '../lang/FMemoryPool'
 //import {RMethod} from './RMethod'
 
-export type FAnnotationDictionary = FDictionary<FAnnotation>;
-
 //==========================================================
 // <T>对象类的描述信息。</T>
 //
@@ -23,17 +21,17 @@ export type FAnnotationDictionary = FDictionary<FAnnotation>;
 //==========================================================
 export class FClass extends FObject {
    // 短名称
-   protected _shortName = null;
+   public shortName: string;
    // 全名称
-   protected _fullName = null;
-   // 类对象
-   protected _class = null;
+   public fullName: string;
+   // 构造函数
+   protected _constructor: any;
    // 唯一实例对象
-   protected _instance = null;
+   protected _instance: any;
    // 描述器集合
-   protected _annotations: FDictionary<FAnnotationDictionary> = null;
+   protected _annotations: FDictionary<FDictionary<FAnnotation>>;
    // 属性集合
-   protected _attributes: FDictionary<FAnnotation> = null;
+   protected _attributes: FDictionary<FAnnotation>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -46,42 +44,6 @@ export class FClass extends FObject {
    }
 
    //==========================================================
-   // <T>获得短名称</T>
-   //
-   // @return 短名称
-   //==========================================================
-   public get shortName(): string {
-      return this._shortName;
-   }
-
-   //==========================================================
-   // <T>设置短名称</T>
-   //
-   // @param shortName 短名称
-   //==========================================================
-   public set shortName(shortName: string) {
-      this._shortName = shortName;
-   }
-
-   //==========================================================
-   // <T>获得长名称</T>
-   //
-   // @return 长名称
-   //==========================================================
-   public get fullName(): string {
-      return this._fullName;
-   }
-
-   //==========================================================
-   // <T>设置长名称</T>
-   //
-   // @param fullName 长名称
-   //==========================================================
-   public set fullName(fullName: string) {
-      this._fullName = fullName;
-   }
-
-   //==========================================================
    // <T>获得实例</T>
    //
    // @return 实例
@@ -89,13 +51,16 @@ export class FClass extends FObject {
    public get instance(): any {
       var instance = this._instance;
       if (!instance) {
-         var clazz:any = this._class;
-         if(clazz.instance){
+         // 创建实例
+         var clazz: any = this._constructor;
+         if (clazz.instance) {
             instance = this._instance = clazz.instance();
-         }else{
+         } else {
             instance = this._instance = new clazz();
          }
-         if (instance.initialize){
+         instance.__class = this;
+         // 初始化
+         if (instance.initialize) {
             instance.initialize();
          }
       }
@@ -120,7 +85,7 @@ export class FClass extends FObject {
       // 设置属性
       annotation.clazz = this;
       // 检查类型和名称的合法性
-      var annotationCd:any = annotation.annotationCd;
+      var annotationCd: any = annotation.annotationCd;
       var ordered = annotation.isOrdered();
       var name = annotation.name;
       var code = annotation.code;
@@ -149,26 +114,24 @@ export class FClass extends FObject {
    //==========================================================
    // <T>查找一个描述类型的描述对象集合。</T>
    //
-   // @method
    // @param annotationCd 描述类型
    // @return 描述对象集合
    //==========================================================
-   public findAnnotations(annotationCd: EAnnotation): FAnnotationDictionary {
-      var annotations: FAnnotationDictionary = this._annotations.get(annotationCd as any);
+   public findAnnotations(annotationCd: EAnnotation): FDictionary<FAnnotation> {
+      var annotations: FDictionary<FAnnotation> = this._annotations.get(annotationCd as any);
       return annotations;
    }
 
    //==========================================================
    // <T>获得一个描述类型的描述对象集合。</T>
    //
-   // @method
    // @param annotationCd 描述类型
    // @return 描述对象集合
    //==========================================================
-   public getAnnotations(annotationCd: EAnnotation): FAnnotationDictionary {
-      var annotations: FAnnotationDictionary = this.findAnnotations(annotationCd);
+   public getAnnotations(annotationCd: EAnnotation): FDictionary<FAnnotation> {
+      var annotations: FDictionary<FAnnotation> = this.findAnnotations(annotationCd);
       if (!annotations) {
-         RLogger.fatal(this, null, "Can't find annotations. (class={1}, annotation_cd={2})", this._shortName, annotationCd);
+         RLogger.fatal(this, null, "Can't find annotations. (class={1}, annotation_cd={2})", this.shortName, annotationCd);
       }
       return annotations;
    }
@@ -176,14 +139,13 @@ export class FClass extends FObject {
    //==========================================================
    // <T>查找一个描述类型下的一个描述对象。</T>
    //
-   // @method
    // @param annotationCd 描述类型
    // @param code 代码
    // @return 描述对象
    //==========================================================
    public findAnnotation(annotationCd: EAnnotation, code: string): FAnnotation {
       var annotation: FAnnotation = null;
-      var annotations: FAnnotationDictionary = this._annotations.get(annotationCd as any);
+      var annotations: FDictionary<FAnnotation> = this._annotations.get(annotationCd as any);
       if (annotations) {
          annotation = annotations.get(code);
       }
@@ -193,7 +155,6 @@ export class FClass extends FObject {
    //==========================================================
    // <T>获得一个描述类型下的一个描述对象。</T>
    //
-   // @method
    // @param annotationCd 描述类型
    // @param code 代码
    // @return 描述对象
@@ -201,7 +162,7 @@ export class FClass extends FObject {
    public getAnnotation(annotationCd: EAnnotation, code: string): FAnnotation {
       var annotation: FAnnotation = this.findAnnotation(annotationCd, code);
       if (!annotation) {
-         RLogger.fatal(this, null, "Can't find annotation. (class={1}, annotation_cd={2}, code={3},)", this._shortName, annotationCd, code);
+         RLogger.fatal(this, null, "Can't find annotation. (class={1}, annotation_cd={2}, code={3},)", this.shortName, annotationCd, code);
       }
       return annotation;
    }
@@ -209,7 +170,6 @@ export class FClass extends FObject {
    //==========================================================
    // <T>根据属性查找描述器。</T>
    //
-   // @method
    // @param name 名称
    // @return 描述对象
    //==========================================================
@@ -221,14 +181,13 @@ export class FClass extends FObject {
    //==========================================================
    // <T>根据属性获得描述器。</T>
    //
-   // @method
    // @param name 名称
    // @return 描述对象
    //==========================================================
    public getAttribute(code: string): FAnnotation {
       var attribute = this.findAttribute(code);
       if (!attribute) {
-         RLogger.fatal(this, null, "Can't find attribute. (class={1}, code={2},)", this._shortName, code);
+         RLogger.fatal(this, null, "Can't find attribute. (class={1}, code={2},)", this.shortName, code);
       }
       return attribute;
    }
@@ -239,7 +198,7 @@ export class FClass extends FObject {
    // @param clazz 类对象
    //==========================================================
    public build(clazz: Function): void {
-      this._class = clazz;
+      this._constructor = clazz;
    }
 
    //==========================================================
@@ -248,7 +207,9 @@ export class FClass extends FObject {
    // @return 对象实例
    //==========================================================
    public newInstance(): any {
-      return new this._class();
+      var instance = new this._constructor();
+      instance.__class = this;
+      return instance;
    }
 
    //==========================================================
