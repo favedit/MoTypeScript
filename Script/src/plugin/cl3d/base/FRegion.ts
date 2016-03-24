@@ -2,11 +2,11 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SPoint2} from '../../../runtime/common/math/SPoint2';
-import {SPoint3} from '../../../runtime/common/math/SPoint3';
-import {SVector3} from '../../../runtime/common/math/SVector3';
-import {SVector4} from '../../../runtime/common/math/SVector4';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Point2} from '../../../runtime/common/math/Point2';
+import {Point3} from '../../../runtime/common/math/Point3';
+import {Vector3} from '../../../runtime/common/math/Vector3';
+import {Vector4} from '../../../runtime/common/math/Vector4';
+import {Color4} from '../../../runtime/common/math/Color4';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {FTechniquePass} from '../technique/FTechniquePass';
@@ -28,7 +28,7 @@ export class FRegion extends ObjectBase implements IProcessContext {
    // 命名空间
    public spaceName: string;
    // 背景色
-   public backgroundColor: SColor4;
+   public backgroundColor: Color4;
    // 当前技术
    public technique: FTechnique;
    // 当前过程
@@ -44,9 +44,9 @@ export class FRegion extends ObjectBase implements IProcessContext {
    // 所有渲染集合
    public allRenderables: Objects<FRenderable>;
    // 相机位置
-   public cameraPosition: SPoint3;
+   public cameraPosition: Point3;
    // 相机方向
-   public cameraDirection: SVector3;
+   public cameraDirection: Vector3;
    // 相机视角矩阵
    public cameraViewMatrix: SMatrix3d;
    // 相机投影矩阵
@@ -54,9 +54,9 @@ export class FRegion extends ObjectBase implements IProcessContext {
    // 相机视角投影矩阵
    public cameraViewProjectionMatrix: SMatrix3d;
    // 光源位置
-   public lightPosition: SPoint3;
+   public lightPosition: Point3;
    // 光源方向
-   public lightDirection: SVector3;
+   public lightDirection: Vector3;
    // 光源视角矩阵
    public lightViewMatrix: SMatrix3d;
    // 光源投影矩阵
@@ -64,7 +64,7 @@ export class FRegion extends ObjectBase implements IProcessContext {
    // 光源视角投影位置
    public lightViewProjectionMatrix: SMatrix3d;
    // 选择位置
-   public selectPosition: SPoint2;
+   public selectPosition: Point2;
    // 最后帧
    public finish: boolean;
    // 主方向光源
@@ -87,20 +87,20 @@ export class FRegion extends ObjectBase implements IProcessContext {
       this.displays = new Objects<FDisplay>();
       this.renderables = new Objects<FRenderable>();
       this.allRenderables = new Objects<FRenderable>();
-      this.cameraPosition = new SPoint3();
-      this.cameraDirection = new SVector3();
+      this.cameraPosition = new Point3();
+      this.cameraDirection = new Vector3();
       this.cameraViewMatrix = new SMatrix3d();
       this.cameraProjectionMatrix = new SMatrix3d();
       this.cameraViewProjectionMatrix = new SMatrix3d();
-      this.lightPosition = new SPoint3();
-      this.lightDirection = new SVector3();
+      this.lightPosition = new Point3();
+      this.lightDirection = new Vector3();
       this.lightViewMatrix = new SMatrix3d();
       this.lightProjectionMatrix = new SMatrix3d();
       this.lightViewProjectionMatrix = new SMatrix3d();
-      this.selectPosition = new SPoint2();
+      this.selectPosition = new Point2();
       this.finish = false;
       //this.ratioMatrix = new SMatrix3d();
-      this.lightInfo = new SVector4();
+      this.lightInfo = new Vector4();
       //this.lights = new FObjects<FLight>();
       //o._materialMap = RClass.create(FG3dMaterialMap);
    }

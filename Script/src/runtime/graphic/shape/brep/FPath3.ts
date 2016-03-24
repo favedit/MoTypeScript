@@ -1,6 +1,6 @@
 import {Objects} from '../../common/lang/Objects';
-import {SPoint3} from '../../common/math/SPoint3';
-import {SColor4} from '../../common/math/SColor4';
+import {Point3} from '../../common/math/Point3';
+import {Color4} from '../../common/math/Color4';
 import {SVertex} from './SVertex';
 import {FCurve3} from './FCurve3';
 
@@ -20,7 +20,7 @@ export class FPath3 extends FCurve3 {
    }
 
    public moveTo(x: number, y: number, z: number, r: number = 1, g: number = 1, b: number = 1, a: number = 1): void {
-      var vertex = new SVertex(new SPoint3(x, y, z), new SColor4(r, g, b, a));
+      var vertex = new SVertex(new Point3(x, y, z), new Color4(r, g, b, a));
       this.moveToVertex(vertex);
    }
 
@@ -29,7 +29,7 @@ export class FPath3 extends FCurve3 {
    }
 
    public lineTo(x: number, y: number, z: number, r: number = 1, g: number = 1, b: number = 1, a: number = 1): void {
-      var vertex = new SVertex(new SPoint3(x, y, z), new SColor4(r, g, b, a));
+      var vertex = new SVertex(new Point3(x, y, z), new Color4(r, g, b, a));
       this.lineToVertex(vertex);
    }
 

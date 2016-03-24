@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Color4} from '../../../runtime/common/math/Color4';
 import {FMaterial} from './FMaterial';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {FMaterial} from './FMaterial';
 //==========================================================
 export class FLineMaterial extends FMaterial {
    // 线颜色
-   public lineColor: SColor4;
+   public lineColor: Color4;
    // 线宽度
    public lineWidth: number;
 
@@ -25,7 +25,7 @@ export class FLineMaterial extends FMaterial {
       // 设置属性
       this.code = "line";
       this.effectCode = 'line.automatic';
-      this.lineColor = new SColor4(1, 1, 1, 1);
+      this.lineColor = new Color4(1, 1, 1, 1);
       this.lineWidth = 1;
    }
 

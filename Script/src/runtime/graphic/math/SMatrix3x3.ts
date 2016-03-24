@@ -1,7 +1,7 @@
 import {StringBuffer} from '../../common/lang/StringBuffer';
 import {FloatUtil} from '../../common/lang/FloatUtil';
-import {SPoint3} from '../../common/math/SPoint3';
-import {RMath} from '../../common/math/RMath';
+import {Point3} from '../../common/math/Point3';
+import {MathUtil} from '../../common/math/MathUtil';
 
 //==========================================================
 // <T>三维矩阵。</T>
@@ -123,7 +123,7 @@ export class SMatrix3x3 {
       var rs = Math.sin(p);
       var rc = Math.cos(p);
       // 追加内容
-      var v = RMath.value9;
+      var v = MathUtil.value9;
       v[0] = 1;
       v[1] = 0;
       v[2] = 0;
@@ -151,7 +151,7 @@ export class SMatrix3x3 {
       var rs = Math.sin(p);
       var rc = Math.cos(p);
       // 追加内容
-      var v = RMath.value9;
+      var v = MathUtil.value9;
       v[0] = rc;
       v[1] = 0;
       v[2] = rs;
@@ -179,7 +179,7 @@ export class SMatrix3x3 {
       var rs = Math.sin(p);
       var rc = Math.cos(p);
       // 追加内容
-      var v = RMath.value9;
+      var v = MathUtil.value9;
       v[0] = rc;
       v[1] = rs;
       v[2] = 0;
@@ -213,7 +213,7 @@ export class SMatrix3x3 {
       var rsz = Math.sin(z);
       var rcz = Math.cos(z);
       // 追加内容
-      var v = RMath.value9;
+      var v = MathUtil.value9;
       v[0] = rcy * rcz;
       v[1] = rcy * rsz;
       v[2] = -rsy;
@@ -235,7 +235,7 @@ export class SMatrix3x3 {
    public invert() {
       var o = this;
       var d = o._data;
-      var v = RMath.value9;
+      var v = MathUtil.value9;
       // 计算矩阵
       v[0] = (d[4] * d[8]) - (d[5] * d[7]);
       v[1] = (d[2] * d[7]) - (d[1] * d[8]);
@@ -295,7 +295,7 @@ export class SMatrix3x3 {
       if (outputPoint) {
          value = outputPoint;
       } else {
-         value = new SPoint3();
+         value = new Point3();
       }
       value.set(x, y, z);
       return value;

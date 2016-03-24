@@ -1,5 +1,5 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
-import {SPoint2} from '../../../runtime/common/math/SPoint2';
+import {Point2} from '../../../runtime/common/math/Point2';
 import {RConsole} from '../../../runtime/core/RConsole';
 import {FEffectConsole} from '../graphic/FEffectConsole';
 import {ESamplerFilter} from '../graphic/ESamplerFilter';
@@ -20,7 +20,7 @@ export class FSelectPass extends FTechniquePass {
    // @attribute
    protected _texture: FFlatTexture;
    protected _renderTarget: FRenderTarget;
-   protected _position: SPoint2 = new SPoint2();
+   protected _position: Point2 = new Point2();
    protected _data = new Uint8Array(4);
    public selectRenderable: FRenderable;
 

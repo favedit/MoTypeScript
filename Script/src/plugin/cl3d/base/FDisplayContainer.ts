@@ -1,7 +1,7 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal'
 import {Objects} from '../../../runtime/common/lang/Objects'
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
-import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
+import {Outline3d} from '../../../runtime/common/math/Outline3d';
 import {AssertUtil} from '../../../runtime/common/AssertUtil'
 import {IDisplayContainer} from '../../../runtime/graphic/IDisplayContainer';
 import {FRenderable} from './FRenderable';
@@ -30,7 +30,7 @@ export class FDisplayContainer extends FDisplay implements IDisplayContainer {
    //
    // @return 轮廓
    //==========================================================
-   public calculateOutline(): SOutline3d {
+   public calculateOutline(): Outline3d {
       var outline = this.outline;
       if (outline.isEmpty()) {
          outline.setMin();

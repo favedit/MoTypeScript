@@ -3,11 +3,11 @@ import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {TypeArrayUtil} from '../../../runtime/common/lang/TypeArrayUtil';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
-import {SPoint3} from '../../../runtime/common/math/SPoint3';
-import {SPoint4} from '../../../runtime/common/math/SPoint4';
-import {SVector3} from '../../../runtime/common/math/SVector3';
-import {SVector4} from '../../../runtime/common/math/SVector4';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Point3} from '../../../runtime/common/math/Point3';
+import {Point4} from '../../../runtime/common/math/Point4';
+import {Vector3} from '../../../runtime/common/math/Vector3';
+import {Vector4} from '../../../runtime/common/math/Vector4';
+import {Color4} from '../../../runtime/common/math/Color4';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
@@ -219,18 +219,18 @@ export abstract class FProgram extends FContent {
       var clazz = value.constructor;
       if ((clazz == Float32Array) || (clazz == SMatrix3d)) {// || (t == sk.common.math.SPerspectiveMatrix3d)) {
          data = value;
-      } else if (clazz == SColor4) {
+      } else if (clazz == Color4) {
          data = TypeArrayUtil.float4();
          data[0] = value.red;
          data[1] = value.green;
          data[2] = value.blue;
          data[3] = value.alpha;
-      } else if ((clazz == SPoint3) || (clazz == SVector3)) {
+      } else if ((clazz == Point3) || (clazz == Vector3)) {
          data = TypeArrayUtil.float3();
          data[0] = value.x;
          data[1] = value.y;
          data[2] = value.z;
-      } else if ((clazz == SPoint4) || (clazz == SVector4)) {
+      } else if ((clazz == Point4) || (clazz == Vector4)) {
          data = TypeArrayUtil.float4();
          data[0] = value.x;
          data[1] = value.y;

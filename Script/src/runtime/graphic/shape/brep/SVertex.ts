@@ -1,21 +1,21 @@
-import {SPoint3} from '../../common/math/SPoint3';
-import {SColor4} from '../../common/math/SColor4';
+import {Point3} from '../../common/math/Point3';
+import {Color4} from '../../common/math/Color4';
 
 //==========================================================
 // <T>点。</T>
 //==========================================================
 export class SVertex {
    // 默认颜色
-   public static DefaultColor = new SColor4(1, 1, 1, 1);
+   public static DefaultColor = new Color4(1, 1, 1, 1);
    // 位置
-   public position: SPoint3;
+   public position: Point3;
    // 颜色
-   public color: SColor4;
+   public color: Color4;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
-   public constructor(position: SPoint3, color?: SColor4) {
+   public constructor(position: Point3, color?: Color4) {
       this.position = position;
       this.color = color || SVertex.DefaultColor;
    }

@@ -1,4 +1,4 @@
-import {SVector3} from './SVector3';
+import {Vector3} from './Vector3';
 import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
@@ -8,12 +8,12 @@ import {FloatUtil} from '../lang/FloatUtil';
 // @author maocy
 // @version 150109
 //==========================================================
-export class SQuaternion {
+export class Quaternion {
    // @attribute
-   x = 0;
-   y = 0;
-   z = 0;
-   w = 1;
+   public x:number;
+   public y:number;
+   public z:number;
+   public w:number;
 
    //============================================================
    // <T>构造处理。</T>
@@ -24,7 +24,7 @@ export class SQuaternion {
    // @param r:deep:Number 深度
    // @param b:deep:Number 深度
    //============================================================
-   constructor(x: number = 0, y: number = 0, z: number = 0, w: number = 0) {
+   constructor(x: number = 0, y: number = 0, z: number = 0, w: number = 1) {
       // Attribute
       this.x = x;
       this.y = y;
@@ -110,13 +110,13 @@ export class SQuaternion {
    // @param value:SQuaternion 四元数
    // @return SQuaternion 四元数
    //============================================================
-   public conjugate(value: SQuaternion = null) {
+   public conjugate(value: Quaternion = null) {
       var o = this;
       var result = null;
       if (value) {
          result = value;
       } else {
-         result = new SQuaternion();
+         result = new Quaternion();
       }
       result.x = -o.x;
       result.y = -o.y;
@@ -167,7 +167,7 @@ export class SQuaternion {
    //============================================================
    public translate(input, output) {
       // 计算内容
-      var q1 = new SQuaternion();
+      var q1 = new Quaternion();
       q1.set(input.x, input.y, input.z, 0);
       q1.normalize();
       var q2 = this.conjugate();
@@ -179,7 +179,7 @@ export class SQuaternion {
       if (output) {
          result = output;
       } else {
-         result = new SVector3();
+         result = new Vector3();
       }
       result.set(q.x, q.y, q.z);
       return result;
@@ -275,7 +275,7 @@ export class SQuaternion {
       if (p) {
          r = p;
       } else {
-         r = new SVector3();
+         r = new Vector3();
       }
       r.x = Math.asin(FloatUtil.toRange((o.w * o.x - o.y * o.z) * 2, -1, 1));
       r.y = Math.atan2(2 * (o.w * o.y + o.z * o.x), 1 - 2 * (x2 + y2));
@@ -319,7 +319,7 @@ export class SQuaternion {
    //============================================================
    public clone() {
       var o = this;
-      var result = new SQuaternion();
+      var result = new Quaternion();
       result.x = o.x;
       result.y = o.y;
       result.z = o.z;

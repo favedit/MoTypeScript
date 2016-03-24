@@ -1,7 +1,7 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
-import {RMath} from '../../../runtime/common/math/RMath';
+import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {IDrawable} from '../../../runtime/graphic/IDrawable';
 import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
 import {FRegion} from './FRegion';
@@ -40,7 +40,7 @@ export class FDrawable extends FGraphicObject implements IDrawable {
    public constructor() {
       super();
       // 设置属性
-      this.guid = RMath.makeGuid();
+      this.guid = MathUtil.makeGuid();
       this.visible = true;
       this.dirty = true;
       this.matrix = new SMatrix3d();

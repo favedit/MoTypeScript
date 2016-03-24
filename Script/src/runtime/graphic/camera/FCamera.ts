@@ -2,13 +2,13 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {SPoint3} from '../../../runtime/common/math/SPoint3';
-import {SVector3} from '../../../runtime/common/math/SVector3';
+import {Point3} from '../../../runtime/common/math/Point3';
+import {Vector3} from '../../../runtime/common/math/Vector3';
 import {SFrustum} from '../../../runtime/graphic/math/SFrustum';
 import {RConst} from '../../../runtime/graphic/math/RConst';
 import {SFrustumPlanes} from '../../../runtime/graphic/math/SFrustumPlanes';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
-import {RMath} from '../../../runtime/common/math/RMath';
+import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {FViewport} from './FViewport';
 
 //==========================================================
@@ -21,11 +21,11 @@ export class FCamera extends ObjectBase {
    // @attribute 变换矩阵
    public matrix: SMatrix3d;
    // @attribute 相机位置
-   public position: SPoint3;
-   public target: SPoint3;
+   public position: Point3;
+   public target: Point3;
    // @attribute 相机方向
-   public direction: SVector3;
-   public directionTarget: SVector3;
+   public direction: Vector3;
+   public directionTarget: Vector3;
    // @attribute 中心位置
    public centerFront = 0.6;
    public centerBack = 1.0;
@@ -37,10 +37,10 @@ export class FCamera extends ObjectBase {
    public planes: SFrustumPlanes;
    public viewport: FViewport;
    // @attribute 轴线
-   protected _axisUp: SVector3;
-   protected _axisX: SVector3;
-   protected _axisY: SVector3;
-   protected _axisZ: SVector3;
+   protected _axisUp: Vector3;
+   protected _axisX: Vector3;
+   protected _axisY: Vector3;
+   protected _axisZ: Vector3;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -51,19 +51,19 @@ export class FCamera extends ObjectBase {
       super()
       // 初始化变量
       this.matrix = new SMatrix3d();
-      this.position = new SPoint3();
-      this.target = new SPoint3();
-      this.direction = new SVector3();
-      this.directionTarget = new SVector3();
+      this.position = new Point3();
+      this.target = new Point3();
+      this.direction = new Vector3();
+      this.directionTarget = new Vector3();
       // 初始化变量
       this.frustum = new SFrustum();
       this.planes = new SFrustumPlanes();
       this.viewport = ClassUtil.create(FViewport);
       // 初始化变量
-      this._axisUp = new SVector3(0, 1, 0);
-      this._axisX = new SVector3();
-      this._axisY = new SVector3();
-      this._axisZ = new SVector3();
+      this._axisUp = new Vector3(0, 1, 0);
+      this._axisX = new Vector3();
+      this._axisY = new Vector3();
+      this._axisZ = new Vector3();
    }
 
    //==========================================================

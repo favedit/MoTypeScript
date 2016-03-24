@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
-import {SSize2} from '../../../runtime/common/math/SSize2';
+import {Size2} from '../../../runtime/common/math/Size2';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {RBuilder} from '../../../runtime/ui/utility/RBuilder';
 import {FContent} from '../graphic/FContent';
@@ -19,7 +19,7 @@ export class FCanvas extends FContent {
    // 画布元素
    protected _hCanvas = null;
    // 尺寸
-   protected _size: SSize2 = null;
+   protected _size: Size2 = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -29,7 +29,7 @@ export class FCanvas extends FContent {
    public constructor() {
       super();
       // 设置属性
-      this._size = new SSize2(1280, 720);
+      this._size = new Size2(1280, 720);
    }
 
    //==========================================================
@@ -46,7 +46,7 @@ export class FCanvas extends FContent {
    //
    // @return 尺寸
    //==========================================================
-   public get size(): SSize2 {
+   public get size(): Size2 {
       return this._size;
    }
 
@@ -75,7 +75,7 @@ export class FCanvas extends FContent {
    //==========================================================
    public build(hDocument) {
       // 获得大小
-      var size: SSize2 = this._size;
+      var size: Size2 = this._size;
       var width = size.width;
       var height = size.height;
       // 创建画板

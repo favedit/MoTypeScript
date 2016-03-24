@@ -1,5 +1,5 @@
 import {Objects} from '../../common/lang/Objects';
-import {SPoint3} from '../../common/math/SPoint3';
+import {Point3} from '../../common/math/Point3';
 import {FCurve} from './FCurve';
 import {LineCurve} from '../curves/LineCurve';
 import {FGeometry} from './FGeometry';

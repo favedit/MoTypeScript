@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase'
 import {Objects} from '../../../runtime/common/lang/Objects'
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil'
-import {SSize2} from '../../../runtime/common/math/SSize2'
+import {Size2} from '../../../runtime/common/math/Size2'
 import {AssertUtil} from '../../../runtime/common/AssertUtil'
 
 //==========================================================
@@ -18,23 +18,23 @@ export class FDesktop extends ObjectBase {
     //o._visible         = MO.Class.register(o, new MO.AGetSet('_visible'));
     protected _visible = null;
     //o._size            = MO.Class.register(o, new MO.AGetter('_size'));
-    protected _size: SSize2 = null;
+    protected _size: Size2 = null;
     //o._sizeRate        = MO.Class.register(o, new MO.AGetter('_sizeRate'), 1);
     protected _sizeRate = null;
     //o._sizeScale       = MO.Class.register(o, new MO.AGetter('_sizeScale'), 1);
     protected _sizeScale = null;
     //o._calculateSize   = MO.Class.register(o, new MO.AGetter('_calculateSize'));
-    protected _calculateSize: SSize2 = null;
+    protected _calculateSize: Size2 = null;
     //o._calculateRate   = MO.Class.register(o, new MO.AGetter('_calculateRate'));
-    protected _calculateRate: SSize2 = null;
+    protected _calculateRate: Size2 = null;
     //o._logicSize       = MO.Class.register(o, new MO.AGetter('_logicSize'));
-    protected _logicSize: SSize2 = null;
+    protected _logicSize: Size2 = null;
     //o._logicRate       = MO.Class.register(o, new MO.AGetter('_logicRate'));
-    protected _logicRate: SSize2 = null;
+    protected _logicRate: Size2 = null;
     //o._screenSize      = MO.Class.register(o, new MO.AGetter('_screenSize'));
-    protected _screenSize: SSize2 = null;
+    protected _screenSize: Size2 = null;
     //o._virtualSize     = MO.Class.register(o, new MO.AGetter('_virtualSize'));
-    protected _virtualSize: SSize2 = null;
+    protected _virtualSize: Size2 = null;
     //o._guiBufferScale  = MO.Class.register(o, new MO.AGetSet('_guiBufferScale'), 1);
     protected _guiBufferScale = null;
     // @attribute
@@ -64,13 +64,13 @@ export class FDesktop extends ObjectBase {
     public constructor() {
         super();
         // 设置属性
-        this._size = new SSize2(1280, 720);
-        this._calculateSize = new SSize2(1280, 720);
-        this._calculateRate = new SSize2(1, 1);
-        this._logicSize = new SSize2(1280, 720);
-        this._logicRate = new SSize2(1, 1);
-        this._screenSize = new SSize2(1280, 720);
-        this._virtualSize = new SSize2(1280, 720);
+        this._size = new Size2(1280, 720);
+        this._calculateSize = new Size2(1280, 720);
+        this._calculateRate = new Size2(1, 1);
+        this._logicSize = new Size2(1280, 720);
+        this._logicRate = new Size2(1, 1);
+        this._screenSize = new Size2(1280, 720);
+        this._virtualSize = new Size2(1280, 720);
         this._canvases = new Objects();
     }
 

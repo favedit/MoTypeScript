@@ -1,5 +1,5 @@
-import {SPoint2} from '../../common/math/SPoint2';
-import {RMath} from '../../common/math/RMath';
+import {Point2} from '../../common/math/Point2';
+import {MathUtil} from '../../common/math/MathUtil';
 import {LineCurve} from '../curves/LineCurve';
 import {QuadraticBezierCurve} from '../curves/QuadraticBezierCurve';
 import {CubicBezierCurve} from '../curves/CubicBezierCurve';
@@ -43,7 +43,7 @@ export class FPath extends FCurvePath {
       var lastargs = this.actions[this.actions.length - 1].args;
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
-      var curve = new LineCurve(new SPoint2(x0, y0), new SPoint2(x, y));
+      var curve = new LineCurve(new Point2(x0, y0), new Point2(x, y));
       this.curves.push(curve);
       this.actions.push({ action: 'lineTo', args: [x, y] });
    }
@@ -53,9 +53,9 @@ export class FPath extends FCurvePath {
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
       var curve = new QuadraticBezierCurve(
-         new SPoint2(x0, y0),
-         new SPoint2(aCPx, aCPy),
-         new SPoint2(aX, aY)
+         new Point2(x0, y0),
+         new Point2(aCPx, aCPy),
+         new Point2(aX, aY)
       );
       this.curves.push(curve);
       this.actions.push({ action: 'quadraticCurveTo', args: [aCPx, aCPy, aX, aY] });
@@ -66,10 +66,10 @@ export class FPath extends FCurvePath {
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
       var curve = new CubicBezierCurve(
-         new SPoint2(x0, y0),
-         new SPoint2(aCP1x, aCP1y),
-         new SPoint2(aCP2x, aCP2y),
-         new SPoint2(aX, aY)
+         new Point2(x0, y0),
+         new Point2(aCP1x, aCP1y),
+         new Point2(aCP2x, aCP2y),
+         new Point2(aX, aY)
       );
       this.curves.push(curve);
       this.actions.push({ action: 'bezierCurveTo', args: [aCP1x, aCP1y, aCP2x, aCP2y, aX, aY] });
@@ -80,7 +80,7 @@ export class FPath extends FCurvePath {
       var lastargs = this.actions[this.actions.length - 1].args;
       var x0 = lastargs[lastargs.length - 2];
       var y0 = lastargs[lastargs.length - 1];
-      var npts = [new SPoint2(x0, y0)];
+      var npts = [new Point2(x0, y0)];
       Array.prototype.push.apply(npts, pts);
       var curve = new SplineCurve(npts);
       this.curves.push(curve);
@@ -145,10 +145,10 @@ export class FPath extends FCurvePath {
          var args = item.args;
          switch (action) {
             case 'moveTo':
-               points.push(new SPoint2(args[0], args[1]));
+               points.push(new Point2(args[0], args[1]));
                break;
             case 'lineTo':
-               points.push(new SPoint2(args[0], args[1]));
+               points.push(new Point2(args[0], args[1]));
                break;
             case 'quadraticCurveTo':
                cpx = args[2];
@@ -168,7 +168,7 @@ export class FPath extends FCurvePath {
                   var t = j / divisions;
                   tx = RShape.b2(t, cpx0, cpx1, cpx);
                   ty = RShape.b2(t, cpy0, cpy1, cpy);
-                  points.push(new SPoint2(tx, ty));
+                  points.push(new Point2(tx, ty));
                }
                break;
             case 'bezierCurveTo':
@@ -191,12 +191,12 @@ export class FPath extends FCurvePath {
                   var t = j / divisions;
                   tx = RShape.b3(t, cpx0, cpx1, cpx2, cpx);
                   ty = RShape.b3(t, cpy0, cpy1, cpy2, cpy);
-                  points.push(new SPoint2(tx, ty));
+                  points.push(new Point2(tx, ty));
                }
                break;
             case 'splineThru':
                laste = this.actions[i - 1].args;
-               var last = new SPoint2(laste[laste.length - 2], laste[laste.length - 1]);
+               var last = new Point2(laste[laste.length - 2], laste[laste.length - 1]);
                var spts = [last];
                var n = divisions * args[0].length;
                spts = spts.concat(args[0]);
@@ -221,7 +221,7 @@ export class FPath extends FCurvePath {
                   angle = aStartAngle + t * deltaAngle;
                   tx = aX + aRadius * Math.cos(angle);
                   ty = aY + aRadius * Math.sin(angle);
-                  points.push(new SPoint2(tx, ty));
+                  points.push(new Point2(tx, ty));
                }
                break;
             case 'ellipse':
@@ -253,15 +253,15 @@ export class FPath extends FCurvePath {
                      tx = (x - aX) * cos - (y - aY) * sin + aX;
                      ty = (x - aX) * sin + (y - aY) * cos + aY;
                   }
-                  points.push(new SPoint2(tx, ty));
+                  points.push(new Point2(tx, ty));
                }
                break;
          }
       }
       // Normalize to remove the closing point by default.
       var lastPoint = points[points.length - 1];
-      if (Math.abs(lastPoint.x - points[0].x) < RMath.EPSILON &&
-         Math.abs(lastPoint.y - points[0].y) < RMath.EPSILON)
+      if (Math.abs(lastPoint.x - points[0].x) < MathUtil.EPSILON &&
+         Math.abs(lastPoint.y - points[0].y) < MathUtil.EPSILON)
          points.splice(points.length - 1, 1);
       if (this.autoClose) {
          points.push(points[0]);
@@ -327,7 +327,7 @@ export class FPath extends FCurvePath {
             var edgeHighPt = inPolygon[q];
             var edgeDx = edgeHighPt.x - edgeLowPt.x;
             var edgeDy = edgeHighPt.y - edgeLowPt.y;
-            if (Math.abs(edgeDy) > RMath.EPSILON) {
+            if (Math.abs(edgeDy) > MathUtil.EPSILON) {
                // not parallel
                if (edgeDy < 0) {
                   edgeLowPt = inPolygon[q]; edgeDx = - edgeDx;

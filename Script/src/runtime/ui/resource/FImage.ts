@@ -3,7 +3,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
-import {SSize2} from '../../common/math/SSize2';
+import {Size2} from '../../common/math/Size2';
 import {FEnvironmentConsole} from '../../core/console/FEnvironmentConsole';
 import {RConsole} from '../../core/RConsole';
 import {RHtml} from '../utility/RHtml';
@@ -19,7 +19,7 @@ export class FImage extends ObjectBase {
    // 准备好
    protected _ready;
    // 尺寸
-   protected _size: SSize2;
+   protected _size: Size2;
    // 地址
    protected _url: string;
    // 句柄
@@ -34,7 +34,7 @@ export class FImage extends ObjectBase {
       super();
       // 设置属性
       this._ready = false;
-      this._size = new SSize2();
+      this._size = new Size2();
       this._loadListeners = new Listeners(this);
    }
 
@@ -43,7 +43,7 @@ export class FImage extends ObjectBase {
    //
    // @return 大小
    //==========================================================
-   public get size(): SSize2 {
+   public get size(): Size2 {
       return this._size;
    }
 

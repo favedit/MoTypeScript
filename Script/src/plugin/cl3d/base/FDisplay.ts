@@ -1,9 +1,9 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SPoint3} from '../../../runtime/common/math/SPoint3';
-import {SVector3} from '../../../runtime/common/math/SVector3';
-import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
+import {Point3} from '../../../runtime/common/math/Point3';
+import {Vector3} from '../../../runtime/common/math/Vector3';
+import {Outline3d} from '../../../runtime/common/math/Outline3d';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IDisplay} from '../../../runtime/graphic/IDisplay';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
@@ -20,13 +20,13 @@ import {FRegion} from './FRegion';
 //==========================================================
 export class FDisplay extends FDrawable implements IDisplay {
    // 位置
-   public position: SPoint3;
+   public position: Point3;
    // 旋转
-   public rotation: SVector3;
+   public rotation: Vector3;
    // 缩放
-   public scale: SVector3;
+   public scale: Vector3;
    // 轮廓
-   public outline: SOutline3d;
+   public outline: Outline3d;
    // 渲染集合
    public renderables: Objects<FRenderable>;
 
@@ -38,10 +38,10 @@ export class FDisplay extends FDrawable implements IDisplay {
    public constructor() {
       super();
       // 设置属性
-      this.position = new SPoint3();
-      this.rotation = new SVector3();
-      this.scale = new SVector3(1, 1, 1);
-      this.outline = new SOutline3d();
+      this.position = new Point3();
+      this.rotation = new Vector3();
+      this.scale = new Vector3(1, 1, 1);
+      this.outline = new Outline3d();
    }
 
    //==========================================================
@@ -49,7 +49,7 @@ export class FDisplay extends FDrawable implements IDisplay {
    //
    // @return 轮廓
    //==========================================================
-   public calculateOutline(): SOutline3d {
+   public calculateOutline(): Outline3d {
       return this.outline;
    }
    //==========================================================

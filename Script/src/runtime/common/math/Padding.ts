@@ -12,7 +12,7 @@ import {ClassUtil} from '../reflect/ClassUtil';
 // @author maocy
 // @version 150101
 //==========================================================
-export class SPadding {
+export class Padding {
    //..........................................................
    // @attribute
    protected left: number = 0;

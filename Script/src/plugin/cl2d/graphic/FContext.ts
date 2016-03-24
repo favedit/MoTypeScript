@@ -1,5 +1,5 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
-import {SSize2} from '../../../runtime/common/math/SSize2';
+import {Size2} from '../../../runtime/common/math/Size2';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 
@@ -13,8 +13,8 @@ import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 export class FContext extends FGraphicContext {
    // @attribute
    protected _handle = null;
-   protected _globalScale: SSize2 = null;
-   protected _scale: SSize2 = null;
+   protected _globalScale: Size2 = null;
+   protected _scale: Size2 = null;
    // @attribute
    protected _gridSourceX = new Array(3);
    protected _gridSourceY = new Array(3);
@@ -33,8 +33,8 @@ export class FContext extends FGraphicContext {
    public constructor() {
       super();
       // 设置属性
-      this._globalScale = new SSize2(1, 1);
-      this._scale = new SSize2(1, 1);
+      this._globalScale = new Size2(1, 1);
+      this._scale = new Size2(1, 1);
    }
 
    //==========================================================

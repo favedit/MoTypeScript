@@ -1,6 +1,6 @@
 import {DataArray} from '../../../runtime/common/lang/DataArray';
-import {SOutline3} from '../../../runtime/common/math/SOutline3';
-import {RMath} from '../../../runtime/common/math/RMath';
+import {Outline3} from '../../../runtime/common/math/Outline3';
+import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {EDrawMode} from '../graphic/EDrawMode';
 import {EAttributeFormat} from '../graphic/EAttributeFormat'
 import {EIndexStride} from '../graphic/EIndexStride'
@@ -63,7 +63,7 @@ export class FSphere extends FRenderable {
       for (var rz = 0; rz <= countZ; rz++) {
          for (var r = 0; r <= countAngle; r++) {
             var radius = stepAngle * r - Math.PI;
-            var radiusZ = stepZ * rz - RMath.PI_2;
+            var radiusZ = stepZ * rz - MathUtil.PI_2;
             var x = Math.sin(radius) * Math.cos(radiusZ);
             var y = Math.sin(radiusZ);
             var z = -Math.cos(radius) * Math.cos(radiusZ);

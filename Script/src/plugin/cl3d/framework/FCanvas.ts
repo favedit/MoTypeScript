@@ -1,5 +1,5 @@
 import {Linker} from '../../runtime/common/reflect/Linker';
-import {SSize2} from './../../runtime/common/math/SSize2';
+import {Size2} from './../../runtime/common/math/Size2';
 import {FGraphicObject} from './../../runtime/graphic/core/FGraphicObject';
 import {FPerspectiveCamera} from '../../runtime/graphic/camera/FPerspectiveCamera';
 import {FScene} from '../../plugin/cl3d/base/FScene';
@@ -29,7 +29,7 @@ export class FCanvas extends FControl {
    //    // @attribute
    //    o._listenerLoad       = MO.Class.register(o, new MO.AListener('_listenerLoad', MO.EEvent.Load));
    protected _hCanvas: HTMLCanvasElement;
-   protected _size: SSize2;
+   protected _size: Size2;
    protected _graphicContext: any;
    protected _camera: FPerspectiveCamera;
    protected _cameraMoveRate = 0.4;
@@ -68,7 +68,7 @@ export class FCanvas extends FControl {
    public constructor() {
       super();
       // 设置变量
-      this._size = new SSize2(1280, 720);
+      this._size = new Size2(1280, 720);
       //this._logicSize = new MO.SSize2(1280, 720);
       //this._screenSize = new MO.SSize2(1280, 720);
    }
@@ -78,7 +78,7 @@ export class FCanvas extends FControl {
    //
    // @return 尺寸
    //==========================================================
-   public get size(): SSize2 {
+   public get size(): Size2 {
       return this._size;
    }
 

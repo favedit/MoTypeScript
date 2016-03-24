@@ -1,6 +1,6 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SSize2} from '../../../runtime/common/math/SSize2';
+import {Size2} from '../../../runtime/common/math/Size2';
 
 //==========================================================
 // <T>渲染环境。</T>
@@ -12,7 +12,7 @@ export class FGraphicContext extends ObjectBase {
    // 画板
    protected _hCanvas: HTMLCanvasElement = null;
    // 尺寸
-   protected _size: SSize2 = null;
+   protected _size: Size2 = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -22,7 +22,7 @@ export class FGraphicContext extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._size = new SSize2(1280, 720);
+      this._size = new Size2(1280, 720);
    }
 
    //==========================================================
@@ -39,7 +39,7 @@ export class FGraphicContext extends ObjectBase {
    //
    // @return 尺寸
    //==========================================================
-   public get size(): SSize2 {
+   public get size(): Size2 {
       return this._size;
    }
 

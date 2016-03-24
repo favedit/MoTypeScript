@@ -1,4 +1,4 @@
-import {SVector2} from '../../../common/math/SVector2';
+import {Vector2} from '../../../common/math/Vector2';
 import {FCurve} from '../brep/FCurve';
 
 export class EllipseCurve extends FCurve {
@@ -43,6 +43,6 @@ export class EllipseCurve extends FCurve {
          x = (tx - this.aX) * cos - (ty - this.aY) * sin + this.aX;
          y = (tx - this.aX) * sin + (ty - this.aY) * cos + this.aY;
       }
-      return new SVector2(x, y);
+      return new Vector2(x, y);
    }
 }

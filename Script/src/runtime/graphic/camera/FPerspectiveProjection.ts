@@ -1,5 +1,5 @@
 import {RMatrix} from '../../../runtime/graphic/math/RMatrix';
-import {RMath} from '../../../runtime/common/math/RMath';
+import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {FProjection} from './FProjection';
 
 //==========================================================
@@ -16,7 +16,7 @@ export class FPerspectiveProjection extends FProjection {
    //============================================================
    public update() {
       var size = this.size;
-      this.fieldOfView = RMath.DEGREE_RATE * this.angle;
+      this.fieldOfView = MathUtil.DEGREE_RATE * this.angle;
       RMatrix.perspectiveFieldOfViewLH(this.matrix, this.fieldOfView, size.width / size.height, this.znear, this.zfar);
    }
 

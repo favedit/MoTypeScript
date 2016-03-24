@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150523
 //==========================================================
-export class RRandom {
+export class RandomUtil {
    //..........................................................
    private static _seed: number = (new Date()).getTime();
 

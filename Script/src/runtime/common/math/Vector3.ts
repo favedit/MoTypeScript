@@ -1,4 +1,4 @@
-import {SValue3} from './SValue3';
+import {Value3} from './Value3';
 
 //==========================================================
 // <T>三维向量。</T>
@@ -10,14 +10,14 @@ import {SValue3} from './SValue3';
 // @author maocy
 // @version 141231
 //==========================================================
-export class SVector3 extends SValue3 {
+export class Vector3 extends Value3 {
    //==========================================================
    // <T>计算开始到结束的方向</T>
    //
    // @param start 开始
    // @param end 结束
    //==========================================================
-   public direction(start: SValue3, end: SValue3) {
+   public direction(start: Value3, end: Value3) {
       this.x = end.x - start.x;
       this.y = end.y - start.y;
       this.z = end.z - start.z;
@@ -31,11 +31,11 @@ export class SVector3 extends SValue3 {
    // @return 反方向
    //============================================================
    public conjugate(value) {
-      var instance: SVector3 = null;
+      var instance: Vector3 = null;
       if (value) {
          instance = value;
       } else {
-         instance = new SVector3();
+         instance = new Vector3();
       }
       instance.x = -this.x;
       instance.y = -this.y;
@@ -97,7 +97,7 @@ export class SVector3 extends SValue3 {
    // @return 克隆对象
    //==========================================================
    public clone() {
-      var instance = new SVector3();
+      var instance = new Vector3();
       instance.x = this.x;
       instance.y = this.y;
       instance.z = this.z;

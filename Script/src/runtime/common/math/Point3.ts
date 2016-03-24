@@ -1,4 +1,4 @@
-import {SValue3} from './SValue3';
+import {Value3} from './Value3';
 
 //==========================================================
 // <T>三维坐标。</T>
@@ -10,7 +10,7 @@ import {SValue3} from './SValue3';
 // @author maocy
 // @version 141230
 //==========================================================
-export class SPoint3 extends SValue3 {
+export class Point3 extends Value3 {
    //============================================================
    // <T>获得反方向。</T>
    //
@@ -24,7 +24,7 @@ export class SPoint3 extends SValue3 {
       if (p) {
          r = p;
       } else {
-         r = new SPoint3();
+         r = new Point3();
       }
       r.x = -o.x;
       r.y = -o.y;

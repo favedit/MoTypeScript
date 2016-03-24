@@ -1,5 +1,5 @@
 import {FloatUtil} from '../../../runtime/common/lang/FloatUtil';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Color4} from '../../../runtime/common/math/Color4';
 
 //==========================================================
 // <T>材质信息。</T>
@@ -58,22 +58,22 @@ export class SMaterialInfo {
    //..........................................................
    // @attribute 设置光信息
    public optionVertex = null;
-   public vertexColor = new SColor4();
+   public vertexColor = new Color4();
    // @attribute 设置光信息
    public optionAmbient = null;
-   public ambientColor = new SColor4();
+   public ambientColor = new Color4();
    public ambientShadow = 1.0;
    // @attribute 散射光信息
    public optionDiffuse = null;
-   public diffuseColor = new SColor4();
+   public diffuseColor = new Color4();
    public diffuseShadow = 1.0;
    // @attribute 散射光视角信息
    public optionDiffuseView = null;
-   public diffuseViewColor = new SColor4();
+   public diffuseViewColor = new Color4();
    public diffuseViewShadow = 1.0;
    // @attribute 高光信息
    public optionSpecular = null;
-   public specularColor = new SColor4();
+   public specularColor = new Color4();
    public specularBase = 1.0;
    public specularLevel = 1.0;
    public specularAverage = 1.0;
@@ -81,7 +81,7 @@ export class SMaterialInfo {
    public specularInfo = null;
    // @attribute 高光视角信息
    public optionSpecularView = null;
-   public specularViewColor = new SColor4();
+   public specularViewColor = new Color4();
    public specularViewBase = 1.0;
    public specularViewRate = 1.0;
    public specularViewAverage = 1.0;
@@ -89,23 +89,23 @@ export class SMaterialInfo {
    public specularViewInfo = null;
    // @attribute 反射信息
    public optionReflect = null;
-   public reflectColor = new SColor4();
+   public reflectColor = new Color4();
    public reflectMerge = 1.0;
    public reflectShadow = 1.0;
    // @attribute 折射信息
    public optionRefract = null;
-   public refractFrontColor = new SColor4();
-   public refractBackColor = new SColor4();
+   public refractFrontColor = new Color4();
+   public refractBackColor = new Color4();
    // @attribute 不透明信息
    public optionOpacity = null;
-   public opacityColor = new SColor4();
+   public opacityColor = new Color4();
    public opacityRate = 1.0;
    public opacityAlpha = 1.0;
    public opacityDepth = 1.0;
    public opacityTransmittance = 1.0;
    // @attribute 发光信息
    public optionEmissive = null;
-   public emissiveColor = new SColor4();
+   public emissiveColor = new Color4();
 
    //==========================================================
    // <T>接收数据信息。</T>

@@ -1,5 +1,5 @@
-import {SVector3} from './SVector3'
-import {SRectangle} from './SRectangle';
+import {Vector3} from './Vector3'
+import {Rectangle} from './Rectangle';
 
 //==========================================================
 // <T>数学函数管理类</T>
@@ -8,7 +8,7 @@ import {SRectangle} from './SRectangle';
 // @author maocy
 // @version 141231
 //==========================================================
-export class RMath {
+export class MathUtil {
    // 唯一编号
    private static _guidChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
    private static _guidBuffer = new Array(36);
@@ -58,15 +58,15 @@ export class RMath {
    // TODO： 未来由描述器来写 @AInitialize
    public static staticConstructor() {
       // 初始化属性
-      this.vectorAxisX = new SVector3(1, 0, 0);
-      this.vectorAxisY = new SVector3(0, 1, 0);
-      this.vectorAxisZ = new SVector3(0, 0, 1);
-      this.vectorScale = new SVector3(1, 1, 1);
-      this.vectorForward = new SVector3(0, 0, 1);
-      this.vectorBackward = new SVector3(0, 0, -1);
+      this.vectorAxisX = new Vector3(1, 0, 0);
+      this.vectorAxisY = new Vector3(0, 1, 0);
+      this.vectorAxisZ = new Vector3(0, 0, 1);
+      this.vectorScale = new Vector3(1, 1, 1);
+      this.vectorForward = new Vector3(0, 0, 1);
+      this.vectorBackward = new Vector3(0, 0, -1);
       // 初始化属性
-      this.vector3 = new SVector3();
-      this.rectangle = new SRectangle();
+      this.vector3 = new Vector3();
+      this.rectangle = new Rectangle();
    }
 
    //==========================================================

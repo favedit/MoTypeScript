@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SSize2} from '../../../runtime/common/math/SSize2';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Size2} from '../../../runtime/common/math/Size2';
+import {Color4} from '../../../runtime/common/math/Color4';
 import {FContent} from './FContent';
 
 //==========================================================
@@ -12,8 +12,8 @@ import {FContent} from './FContent';
 //==========================================================
 export class FRenderTarget extends FContent {
    // @attribute
-   public size: SSize2 = new SSize2();
-   public color: SColor4 = new SColor4(0, 0, 0, 1);
+   public size: Size2 = new Size2();
+   public color: Color4 = new Color4(0, 0, 0, 1);
    protected _textures: Objects<any> = new Objects();
 
    //==========================================================
@@ -23,8 +23,8 @@ export class FRenderTarget extends FContent {
    //==========================================================
    public constructor() {
       super();
-      this.size = new SSize2();
-      this.color = new SColor4(0, 0, 0, 1);
+      this.size = new Size2();
+      this.color = new Color4(0, 0, 0, 1);
       this._textures = new Objects();
    }
 

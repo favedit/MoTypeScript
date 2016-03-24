@@ -1,4 +1,4 @@
-import {SPoint2} from '../../../runtime/common/math/SPoint2';
+import {Point2} from '../../../runtime/common/math/Point2';
 import {FCurve} from '../brep/FCurve';
 
 export class LineCurve extends FCurve {

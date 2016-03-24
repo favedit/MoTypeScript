@@ -1,7 +1,7 @@
 import {StringBuffer} from '../../common/lang/StringBuffer';
 import {FloatUtil} from '../../common/lang/FloatUtil';
-import {SPoint3} from '../../common/math/SPoint3';
-import {RMath} from '../../common/math/RMath';
+import {Point3} from '../../common/math/Point3';
+import {MathUtil} from '../../common/math/MathUtil';
 
 //==========================================================
 // <T>四维矩阵。</T>
@@ -32,7 +32,7 @@ export class SMatrix4x4 {
    //============================================================
    public isIdentityData() {
       var data = this._data;
-      var v = RMath.identity4x4;
+      var v = MathUtil.identity4x4;
       for (var i = 0; i < 16; i++) {
          if (data[i] != v[i]) {
             return false;
@@ -48,7 +48,7 @@ export class SMatrix4x4 {
    //============================================================
    public identityData() {
       var d = this._data;
-      var v = RMath.identity4x4;
+      var v = MathUtil.identity4x4;
       for (var i = 0; i < 16; i++) {
          d[i] = v[i];
       }
@@ -160,7 +160,7 @@ export class SMatrix4x4 {
    // @param z:Float Z坐标
    //============================================================
    public addTranslate(x, y, z) {
-      var value = RMath.value16;
+      var value = MathUtil.value16;
       value[0] = 1;
       value[1] = 0;
       value[2] = 0;
@@ -195,7 +195,7 @@ export class SMatrix4x4 {
       var rs = Math.sin(p);
       var rc = Math.cos(p);
       // 追加内容
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       v[0] = 1;
       v[1] = 0;
       v[2] = 0;
@@ -230,7 +230,7 @@ export class SMatrix4x4 {
       var rs = Math.sin(p);
       var rc = Math.cos(p);
       // 追加内容
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       v[0] = rc;
       v[1] = 0;
       v[2] = rs;
@@ -265,7 +265,7 @@ export class SMatrix4x4 {
       var rs = Math.sin(p);
       var rc = Math.cos(p);
       // 追加内容
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       v[0] = rc;
       v[1] = rs;
       v[2] = 0;
@@ -306,7 +306,7 @@ export class SMatrix4x4 {
       var rsz = Math.sin(z);
       var rcz = Math.cos(z);
       // 追加内容
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       v[0] = rcy * rcz;
       v[1] = rcy * rsz;
       v[2] = -rsy;
@@ -344,7 +344,7 @@ export class SMatrix4x4 {
       var tx = t * x;
       var ty = t * y;
       // 追加内容
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       v[0] = tx * x + c;
       v[1] = tx * y - s * z;
       v[2] = tx * z + s * y;
@@ -373,7 +373,7 @@ export class SMatrix4x4 {
    // @param z:Float Z比例
    //============================================================
    public addScale(x, y, z) {
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       v[0] = x;
       v[1] = 0;
       v[2] = 0;
@@ -425,7 +425,7 @@ export class SMatrix4x4 {
    public invert() {
       var o = this;
       var d = o._data;
-      var v = RMath.value16;
+      var v = MathUtil.value16;
       // 计算矩阵
       v[0] = (d[5] * d[10] * d[15]) - (d[5] * d[11] * d[14]) - (d[9] * d[6] * d[15]) + (d[9] * d[7] * d[14]) + (d[13] * d[6] * d[11]) - (d[13] * d[7] * d[10]);
       v[4] = -(d[4] * d[10] * d[15]) + (d[4] * d[11] * d[14]) + (d[8] * d[6] * d[15]) - (d[8] * d[7] * d[14]) - (d[12] * d[6] * d[11]) + (d[12] * d[7] * d[10]);
@@ -496,7 +496,7 @@ export class SMatrix4x4 {
       if (output) {
          result = output;
       } else {
-         result = new SPoint3();
+         result = new Point3();
       }
       result.set(x, y, z);
       return result;
@@ -522,7 +522,7 @@ export class SMatrix4x4 {
       if (output) {
          result = output;
       } else {
-         result = new SPoint3();
+         result = new Point3();
       }
       result.set(rx, ry, rz);
       return result;

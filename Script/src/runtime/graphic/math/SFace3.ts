@@ -1,6 +1,6 @@
 import {Objects} from '../../common/lang/Objects';
-import {SVector3} from '../../common/math/SVector3';
-import {SColor4} from '../../common/math/SColor4';
+import {Vector3} from '../../common/math/Vector3';
+import {Color4} from '../../common/math/Color4';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 
 //==========================================================
@@ -14,10 +14,10 @@ export class SFace3 {
    public b: number;
    public c: number;
    public materialIndex: number;
-   public normal: SVector3;
-   public color: SColor4;
-   public vertexNormals: Array<SVector3>;
-   public vertexColors: Array<SColor4>;
+   public normal: Vector3;
+   public color: Color4;
+   public vertexNormals: Array<Vector3>;
+   public vertexColors: Array<Color4>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -26,10 +26,10 @@ export class SFace3 {
       this.a = a;
       this.b = b;
       this.c = c;
-      this.normal = new SVector3();
-      this.vertexNormals = new Array<SVector3>();
-      this.color = new SColor4();
-      this.vertexColors = new Array<SColor4>();
+      this.normal = new Vector3();
+      this.vertexNormals = new Array<Vector3>();
+      this.color = new Color4();
+      this.vertexColors = new Array<Color4>();
       this.materialIndex = materialIndex;
    }
 

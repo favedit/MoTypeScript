@@ -3,27 +3,31 @@ import {Fatal} from '../lang/Fatal';
 import {FloatUtil} from '../lang/FloatUtil';
 
 //==========================================================
-// <T>二维数据。</T>
+// <T>三维数据。</T>
 //
 // @struct
 // @author maocy
-// @version 150912
+// @version 150208
 //==========================================================
-export class SValue2 {
-   // X参数
+export class Value3 {
+   // X分量
    public x: number;
-   // Y参数
+   // Y分量
    public y: number;
+   // Z分量
+   public z: number;
 
    //============================================================
    // <T>构造处理。</T>
    //
    // @param x X分量
    // @param y Y分量
+   // @param z Z分量
    //============================================================
-   public constructor(x: number = 0, y: number = 0) {
+   public constructor(x: number = 0, y: number = 0, z: number = 0) {
       this.x = x;
       this.y = y;
+      this.z = z;
    }
 
    //============================================================
@@ -32,7 +36,7 @@ export class SValue2 {
    // @return 是否为空
    //============================================================
    public isEmpty() {
-      return (this.x == 0) && (this.y == 0);
+      return (this.x == 0) && (this.y == 0) && (this.z == 0);
    }
 
    //============================================================
@@ -41,7 +45,7 @@ export class SValue2 {
    // @return 是否相等
    //============================================================
    public equals(value) {
-      return (this.x == value.x) && (this.y == value.y);
+      return (this.x == value.x) && (this.y == value.y) && (this.z == value.z);
    }
 
    //============================================================
@@ -49,34 +53,33 @@ export class SValue2 {
    //
    // @return 是否相等
    //============================================================
-   public equalsData(x, y) {
-      return (this.x == x) && (this.y == y);
+   public equalsData(x, y, z) {
+      return (this.x == x) && (this.y == y) && (this.z == z);
    }
 
    //==========================================================
    // <T>接收数据内容。</T>
    //
-   // @param value 二维数据
+   // @param value 三维数据
    //==========================================================
    public assign(value) {
       this.x = value.x;
       this.y = value.y;
+      this.z = value.z;
    }
 
    //==========================================================
    // <T>设置最小数据。</T>
    //==========================================================
    public setMin() {
-      this.x = Number.MIN_VALUE;
-      this.y = Number.MIN_VALUE;
+      this.x = this.y = this.z = Number.MIN_VALUE;
    }
 
    //==========================================================
    // <T>设置最大数据。</T>
    //==========================================================
    public setMax() {
-      this.x = Number.MAX_VALUE;
-      this.y = Number.MAX_VALUE;
+      this.x = this.y = this.z = Number.MAX_VALUE;
    }
 
    //==========================================================
@@ -84,10 +87,18 @@ export class SValue2 {
    //
    // @param x X分量
    // @param y Y分量
+   // @param z Z分量
    //==========================================================
-   public set(x, y) {
-      this.x = x;
-      this.y = y;
+   public set(x, y, z) {
+      if (x != null) {
+         this.x = x;
+      }
+      if (y != null) {
+         this.y = y;
+      }
+      if (z != null) {
+         this.z = z;
+      }
    }
 
    //==========================================================
@@ -96,8 +107,11 @@ export class SValue2 {
    // @param value 内容
    //==========================================================
    public setAll(value) {
-      this.x = value;
-      this.y = value;
+      if (value != null) {
+         this.x = value;
+         this.y = value;
+         this.z = value;
+      }
    }
 
    //==========================================================
@@ -105,10 +119,23 @@ export class SValue2 {
    //
    // @param x X分量
    // @param y Y分量
+   // @param z Z分量
    //==========================================================
-   public add(x, y) {
+   public add(x: number, y: number, z: number) {
       this.x += x;
       this.y += y;
+      this.z += z;
+   }
+
+   //==========================================================
+   // <T>增加数据内容。</T>
+   //
+   // @param value 内容
+   //==========================================================
+   public addValue3(value: Value3) {
+      this.x += value.x;
+      this.y += value.y;
+      this.z += value.z;
    }
 
    //==========================================================
@@ -116,10 +143,25 @@ export class SValue2 {
    //
    // @param x X分量
    // @param y Y分量
+   // @param z Z分量
    //==========================================================
-   public mul(x, y) {
+   public mul(x, y, z) {
       this.x *= x;
       this.y *= y;
+      this.z *= z;
+   }
+
+   //==========================================================
+   // <T>乘以数据内容。</T>
+   //
+   // @param x X分量
+   // @param y Y分量
+   // @param z Z分量
+   //==========================================================
+   public mulAll(value) {
+      this.x *= value;
+      this.y *= value;
+      this.z *= value;
    }
 
    //==========================================================
@@ -131,98 +173,52 @@ export class SValue2 {
          var rate = 1 / value;
          this.x *= rate;
          this.y *= rate;
+         this.z *= rate;
       }
-      return this;
-   }
-
-   //============================================================
-   // <T>合并最小值。</T>
-   //
-   // @param value 二维数据
-   //============================================================
-   public mergeMin(value) {
-      this.x = Math.min(this.x, value.x);
-      this.y = Math.min(this.y, value.y);
-   }
-
-   //============================================================
-   // <T>合并最小值。</T>
-   //
-   // @param x X坐标
-   // @param y Y坐标
-   //============================================================
-   public mergeMin2(x, y) {
-      this.x = Math.min(this.x, x);
-      this.y = Math.min(this.y, y);
-   }
-
-   //============================================================
-   // <T>合并最大值。</T>
-   //
-   // @method
-   // @param value:SValue2 二维数据
-   //============================================================
-   public mergeMax(value) {
-      this.x = Math.max(this.x, value.x);
-      this.y = Math.max(this.y, value.y);
-   }
-
-   //============================================================
-   // <T>合并最大值。</T>
-   //
-   // @method
-   // @param x:Number X坐标
-   // @param y:Number Y坐标
-   //============================================================
-   public mergeMax2(x, y) {
-      this.x = Math.max(this.x, x);
-      this.y = Math.max(this.y, y);
    }
 
    //==========================================================
    // <T>获得长度。</T>
    //
-   // @method
-   // @return Number 长度
+   // @return 绝对值
    //==========================================================
-   public length(value) {
-      var cx = this.x - value.x;
-      var cy = this.y - value.y;
-      return Math.sqrt(cx * cx + cy * cy);
-   }
-
-   //==========================================================
-   // <T>获得长度。</T>
-   //
-   // @method
-   // @return Number 长度
-   //==========================================================
-   public length2(x, y) {
+   public lengthTo(x, y, z) {
       var cx = this.x - x;
       var cy = this.y - y;
-      return Math.sqrt(cx * cx + cy * cy);
+      var cz = this.z - z;
+      return Math.sqrt((cx * cx) + (cy * cy) + (cz * cz));
+   }
+
+   //==========================================================
+   // <T>获得长度。</T>
+   //
+   // @return 绝对值
+   //==========================================================
+   public lengthTo2(value) {
+      var cx = this.x - value.x;
+      var cy = this.y - value.y;
+      var cz = this.z - value.z;
+      return Math.sqrt((cx * cx) + (cy * cy) + (cz * cz));
    }
 
    //==========================================================
    // <T>获得绝对值。</T>
    //
-   // @method
-   // @return Number 绝对值
+   // @return 绝对值
    //==========================================================
    public absolute() {
-      return Math.sqrt((this.x * this.x) + (this.y * this.y));
+      return Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
    }
 
    //============================================================
    // <T>获得负数据内容。</T>
    //
-   // @method
-   // @param value:SValue2 数据内容
-   // @return SValue2 数据内容
+   // @param value 数据内容
+   // @return SValue3 数据内容
    //============================================================
    public negative(value) {
       // 生成内容
-      var result: SValue2 = null;
+      var result = null;
       if (value) {
          result = value;
       } else {
@@ -231,62 +227,38 @@ export class SValue2 {
       // 设置内容
       result.x = -this.x;
       result.y = -this.y;
+      result.z = -this.z;
       return result;
    }
 
-   //============================================================
-   // <T>解析字符串。</T>
+   //==========================================================
+   // <T>序列化数据到输出流里。</T>
    //
-   // @method
-   // @param value:String 字符串
-   //============================================================
-   public parse(value) {
-      var items = value.split(',')
-      if (items.length == 2) {
-         this.x = parseFloat(items[0]);
-         this.y = parseFloat(items[1]);
-      } else {
-         throw new Fatal(this, "Parse value failure. (value={1})", value);
-      }
-   }
-
+   // @param output 数据流
    //==========================================================
-   // <T>获得显示内容。</T>
-   //
-   // @return String 字符串
-   //==========================================================
-   public toDisplay() {
-      var x = FloatUtil.format(this.x);
-      var y = FloatUtil.format(this.y);
-      return x + ',' + y;
-   }
-
-   //==========================================================
-   // <T>获得字符串。</T>
-   //
-   // @return String 字符串
-   //==========================================================
-   public toString() {
-      return this.x + ',' + this.y;
-   }
-
-   //==========================================================
-   // <T>释放处理。</T>
-   //
-   // @method
-   //==========================================================
-   public dispose() {
-      this.x = null;
-      this.y = null;
+   public serialize(output) {
+      output.writeFloat(this.x);
+      output.writeFloat(this.y);
+      output.writeFloat(this.z);
    }
 
    //==========================================================
    // <T>从输入流里反序列化数据。</T>
    //
-   // @method
-   // @param input:FByteStream 数据流
+   // @param input 数据流
    //==========================================================
-   public unserialize(input, dataCd) {
+   public unserialize(input) {
+      this.x = input.readFloat();
+      this.y = input.readFloat();
+      this.y = input.readFloat();
+   }
+
+   //==========================================================
+   // <T>从输入流里反序列化数据。</T>
+   //
+   // @param input 数据流
+   //==========================================================
+   public unserialize2(input, dataCd) {
       switch (dataCd) {
          case DataTypeEnum.Int32:
             this.x = input.readInt32();
@@ -300,6 +272,79 @@ export class SValue2 {
             this.x = input.readDouble();
             this.y = input.readDouble();
             break;
+         default:
+            break;
       }
+   }
+
+   //==========================================================
+   // <T>从输入流里反序列化数据。</T>
+   //
+   // @param input 数据流
+   //==========================================================
+   public unserialize3(input, dataCd) {
+      switch (dataCd) {
+         case DataTypeEnum.Int32:
+            this.x = input.readInt32();
+            this.y = input.readInt32();
+            this.z = input.readInt32();
+            break;
+         case DataTypeEnum.Float32:
+            this.x = input.readFloat();
+            this.y = input.readFloat();
+            this.z = input.readFloat();
+            break;
+         case DataTypeEnum.Float64:
+            this.x = input.readDouble();
+            this.y = input.readDouble();
+            this.z = input.readDouble();
+            break;
+      }
+   }
+
+   //============================================================
+   // <T>解析字符串。</T>
+   //
+   // @param value 字符串
+   //============================================================
+   public parse(value) {
+      var items = value.split(',')
+      if (items.length == 3) {
+         this.x = parseFloat(items[0]);
+         this.y = parseFloat(items[1]);
+         this.z = parseFloat(items[2]);
+      } else {
+         throw new Fatal(this, "Parse value failure. (value={1})", value);
+      }
+   }
+
+   //==========================================================
+   // <T>获得显示内容。</T>
+   //
+   // @return 字符串
+   //==========================================================
+   public toDisplay() {
+      var x = FloatUtil.format(this.x);
+      var y = FloatUtil.format(this.y);
+      var z = FloatUtil.format(this.z);
+      return x + ',' + y + ',' + z;
+   }
+
+   //==========================================================
+   // <T>获得字符串。</T>
+   //
+   // @return 字符串
+   //==========================================================
+   public toString() {
+      return this.x + ',' + this.y + ',' + this.z;
+   }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      this.x = null;
+      this.y = null;
+      this.z = null;
    }
 }

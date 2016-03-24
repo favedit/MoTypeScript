@@ -1,4 +1,4 @@
-import {SPoint2} from '../../../common/math/SPoint2';
+import {Point2} from '../../../common/math/Point2';
 import {FCurve} from '../brep/FCurve';
 import {RCurve} from '../RCurve';
 import {RShape} from '../RShape';
@@ -18,14 +18,14 @@ export class CubicBezierCurve extends FCurve {
    }
 
    public getPoint(t) {
-      return new SPoint2(
+      return new Point2(
          RShape.b3(t, this.v0.x, this.v1.x, this.v2.x, this.v3.x),
          RShape.b3(t, this.v0.y, this.v1.y, this.v2.y, this.v3.y)
       )
    }
 
    public getTangent(t) {
-      return new SPoint2(
+      return new Point2(
          RCurve.tangentCubicBezier(t, this.v0.x, this.v1.x, this.v2.x, this.v3.x),
          RCurve.tangentCubicBezier(t, this.v0.y, this.v1.y, this.v2.y, this.v3.y)
       ).normalize();

@@ -2,7 +2,7 @@
 import {Dictionary} from '../common/lang/Dictionary';
 import {Listeners} from '../common/lang/Listeners';
 // import {RObject} from '../common/lang/ObjectUtil';
-import {SColor4} from '../common/math/SColor4';
+import {Color4} from '../common/math/Color4';
 // import {RAssert} from '../common/AssertUtil';
 import {IDisplayLayer} from './IDisplayLayer';
 //import {FRegion} from './FRegion';
@@ -20,7 +20,7 @@ export interface IScene {
    // 激活状态
    statusActive: boolean;
    // 背景颜色
-   backgroundColor: SColor4;
+   backgroundColor: Color4;
    // 显示层集合
    layers: Dictionary<IDisplayLayer>;
    // 进入帧监听器集合

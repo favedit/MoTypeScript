@@ -1,5 +1,5 @@
-import {SPoint3} from './SPoint3';
-import {SOutline3} from './SOutline3';
+import {Point3} from './Point3';
+import {Outline3} from './Outline3';
 
 //==========================================================
 // <T>三维轮廓。</T>
@@ -14,11 +14,11 @@ import {SOutline3} from './SOutline3';
 // @author maocy
 // @version 141231
 //==========================================================
-export class SOutline3d extends SOutline3 {
+export class Outline3d extends Outline3 {
    //..........................................................
    // @attribute 中心点
-   public center: SPoint3 = new SPoint3();
-   public distance: SPoint3 = new SPoint3();
+   public center: Point3 = new Point3();
+   public distance: Point3 = new Point3();
    // @attribute 半径
    public radius = 0;
    // @attribute 顶点集合

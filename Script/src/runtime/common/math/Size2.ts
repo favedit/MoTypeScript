@@ -11,7 +11,7 @@ import {ClassUtil} from '../reflect/ClassUtil';
 // @author maocy
 // @version 150101
 //==========================================================
-export class SSize2 {
+export class Size2 {
    //..........................................................
    // @attribute
    public width: number = 0;

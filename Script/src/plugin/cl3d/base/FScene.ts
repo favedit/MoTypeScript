@@ -3,7 +3,7 @@ import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Color4} from '../../../runtime/common/math/Color4';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IScene} from '../../../runtime/graphic/IScene';
 import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
@@ -23,7 +23,7 @@ export class FScene extends FGraphicObject implements IScene {
    // 激活状态
    public statusActive: boolean;
    // 背景颜色
-   public backgroundColor: SColor4;
+   public backgroundColor: Color4;
    // 显示层集合
    public layers: Dictionary<FDisplayLayer>;
    // 统计器
@@ -53,7 +53,7 @@ export class FScene extends FGraphicObject implements IScene {
       //this._size = new SSize2(1920, 1080);
       //this._timer = RClass.create(MO.FTimer);
       this.statusActive = false;
-      this.backgroundColor = new SColor4(0.5, 0.5, 0.5, 1.0);
+      this.backgroundColor = new Color4(0.5, 0.5, 0.5, 1.0);
       this.layers = new Dictionary<FDisplayLayer>();
       this._statistics = ClassUtil.create(FSceneStatistics);
       this._allDisplays = new Objects<FDisplay>();

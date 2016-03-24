@@ -1,4 +1,4 @@
-import {SValue2} from './SValue2';
+import {Value2} from './Value2';
 
 //==========================================================
 // <T>三维向量。</T>
@@ -10,7 +10,7 @@ import {SValue2} from './SValue2';
 // @author maocy
 // @version 141231
 //==========================================================
-export class SVector2 extends SValue2 {
+export class Vector2 extends Value2 {
 
    //==========================================================
    // <T>计算2个点的方向</T>
@@ -37,7 +37,7 @@ export class SVector2 extends SValue2 {
       if (p) {
          r = p;
       } else {
-         r = new SVector2();
+         r = new Vector2();
       }
       r.x = -o.x;
       r.y = -o.y;
@@ -105,7 +105,7 @@ export class SVector2 extends SValue2 {
    // @return SVector2 克隆对象
    //==========================================================
    public clone() {
-      var r = new SVector2();
+      var r = new Vector2();
       r.x = this.x;
       r.y = this.y;
       return r;

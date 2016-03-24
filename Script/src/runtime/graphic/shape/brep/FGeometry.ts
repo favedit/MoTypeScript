@@ -1,8 +1,8 @@
 import {Objects} from '../../common/lang/Objects';
-import {SPoint3} from '../../common/math/SPoint3';
-import {SVector3} from '../../common/math/SVector3';
-import {SColor4} from '../../common/math/SColor4';
-import {RMath} from '../../common/math/RMath';
+import {Point3} from '../../common/math/Point3';
+import {Vector3} from '../../common/math/Vector3';
+import {Color4} from '../../common/math/Color4';
+import {MathUtil} from '../../common/math/MathUtil';
 import {SFace3} from '../math/SFace3';
 
 //==========================================================
@@ -18,9 +18,9 @@ export class FGeometry {
    public uuid: string;
    public name: string;
    public type: string;
-   public _vertices: Array<SPoint3>;
+   public _vertices: Array<Point3>;
    public _faces: Array<SFace3>;
-   public _colors: Array<SColor4>;
+   public _colors: Array<Color4>;
 
    public faceVertexUvs: Array<any>;
    public morphTargets: Array<any>;
@@ -42,11 +42,11 @@ export class FGeometry {
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
-      this.uuid = RMath.makeGuid();
+      this.uuid = MathUtil.makeGuid();
       this.name = '';
       this.type = 'Geometry';
-      this._vertices = new Array<SPoint3>();
-      this._colors = new Array<SColor4>();
+      this._vertices = new Array<Point3>();
+      this._colors = new Array<Color4>();
       this._faces = new Array<SFace3>();
 
       this.faceVertexUvs = [[]];
@@ -76,14 +76,14 @@ export class FGeometry {
    //==========================================================
    // <T>获得顶点集合。</T>
    //==========================================================
-   public get vertices(): Array<SPoint3> {
+   public get vertices(): Array<Point3> {
       return this._vertices;
    }
 
    //==========================================================
    // <T>获得颜色集合。</T>
    //==========================================================
-   public get colors(): Array<SColor4> {
+   public get colors(): Array<Color4> {
       return this._colors;
    }
 
@@ -298,14 +298,14 @@ export class FGeometry {
       var vertexCount = this._vertices.length;
       var faceCount = this._faces.length;
       // 创建集合
-      var vertices = new Objects<SVector3>();
+      var vertices = new Objects<Vector3>();
       for (let i: number = 0; i < vertexCount; i++) {
-         vertices[i] = new SVector3();
+         vertices[i] = new Vector3();
       }
       // 区域权重
       if (areaWeighted) {
-         var cb = new SVector3();
-         var ab = new SVector3();
+         var cb = new Vector3();
+         var ab = new Vector3();
          for (let i: number = 0; i < faceCount; i++) {
             var face = this._faces[i];
             var vA = this._vertices[face.a];

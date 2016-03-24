@@ -1,13 +1,13 @@
-import {SValue4} from './SValue4';
+import {Value4} from './Value4';
 
 //==========================================================
-// <T>四维向量。</T>
+// <T>四维坐标。</T>
 //
 // @struct
 // @author maocy
 // @version 150119
 //==========================================================
-export class SVector4 extends SValue4 {
+export class Point4 extends Value4 {
    //==========================================================
    // <T>序列化数据到输出流里。</T>
    //

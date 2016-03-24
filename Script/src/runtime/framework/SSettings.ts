@@ -1,4 +1,4 @@
-import {SSize2} from '../common/math/SSize2';
+import {Size2} from '../common/math/Size2';
 
 //==========================================================
 // <T>设置信息。</T>
@@ -11,5 +11,5 @@ export class SSettings {
    // 面板
    public hPanel;
    // 尺寸
-   public size: SSize2 = new SSize2();
+   public size: Size2 = new Size2();
 }

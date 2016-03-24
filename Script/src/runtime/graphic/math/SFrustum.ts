@@ -1,5 +1,5 @@
-import {SPoint3} from '../../common/math/SPoint3';
-import {RMath} from '../../common/math/RMath';
+import {Point3} from '../../common/math/Point3';
+import {MathUtil} from '../../common/math/MathUtil';
 import {RConst} from './RConst';
 
 //==========================================================
@@ -12,7 +12,7 @@ import {RConst} from './RConst';
 export class SFrustum {
    //..........................................................
    // 中心点
-   public center = new SPoint3();
+   public center = new Point3();
    // 半径
    public radius = null;
    // 最小X坐标
@@ -95,7 +95,7 @@ export class SFrustum {
       var znear = pvn;
       //var zfar = pvf * pfr;
       var zfar = pvf;
-      var fov = Math.tan(RMath.DEGREE_RATE * pva * 0.5);
+      var fov = Math.tan(MathUtil.DEGREE_RATE * pva * 0.5);
       var nearY = znear * fov;
       var nearX = nearY * aspect;
       var farY = zfar * fov;
@@ -154,7 +154,7 @@ export class SFrustum {
       //var znear = pvn;
       var zfar = pvf * pfr;
       //var zfar = pvf;
-      var fov = Math.tan(RMath.DEGREE_RATE * pva * 0.5);
+      var fov = Math.tan(MathUtil.DEGREE_RATE * pva * 0.5);
       var nearY = znear * fov;
       var nearX = nearY * aspect;
       var farY = zfar * fov;

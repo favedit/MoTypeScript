@@ -1,35 +1,33 @@
-import {SPoint2} from './SPoint2';
+import {Point3} from './Point3';
 
 //==========================================================
-// <T>二维轮廓。</T>
+// <T>三维轮廓。</T>
 //
 // @struct
 // @author maocy
-// @version 150912
+// @version 141231
 //==========================================================
-export class SOutline2 {
-   //..........................................................
-   // @attribute
-   public min: SPoint2 = new SPoint2();
-   public max: SPoint2 = new SPoint2();
+export class Outline3 {
+   // 最小点
+   public min: Point3 = new Point3();
+   // 最大点
+   public max: Point3 = new Point3();
 
    //============================================================
    // <T>判断是否为空。</T>
    //
-   // @method
-   // @return Boolean 是否为空
+   // @return  是否为空
    //============================================================
-   public isEmpty(p) {
+   public isEmpty(): boolean {
       return this.min.isEmpty() && this.max.isEmpty();
    }
 
    //============================================================
    // <T>接收一个三维轮廓。</T>
    //
-   // @method
-   // @param value:SOutline2 三维轮廓
+   // @param value 三维轮廓
    //============================================================
-   public assign(value) {
+   public assign(value: Outline3) {
       this.min.assign(value.min);
       this.max.assign(value.max);
    }
@@ -60,46 +58,36 @@ export class SOutline2 {
    // @method
    // @param ix:minX:Number 最小X坐标
    // @param iy:minY:Number 最小Y坐标
+   // @param iz:minZ:Number 最小Z坐标
    // @param ax:maxX:Number 最大X坐标
    // @param ay:maxY:Number 最大Y坐标
+   // @param az:maxZ:Number 最大Z坐标
    //==========================================================
-   public set(minX, minY, maxX, maxY) {
-      this.min.set(minX, minY);
-      this.max.set(maxX, maxY);
+   public set(minX, minY, minZ, maxX, maxY, maxZ) {
+      this.min.set(minX, minY, minZ);
+      this.max.set(maxX, maxY, maxZ);
    }
 
    //==========================================================
    // <T>合并最小轮廓。</T>
    //
    // @method
-   // @param p:outline:SOutline 轮廓
+   // @param outline  轮廓
    //==========================================================
-   public mergeMin(p) {
-      this.min.mergeMax(p.min);
-      this.max.mergeMin(p.max);
+   public mergeMin(outline) {
+      this.min.mergeMax(outline.min);
+      this.max.mergeMin(outline.max);
    }
 
    //==========================================================
    // <T>合并最大轮廓。</T>
    //
    // @method
-   // @param p:outline:SOutline 轮廓
+   // @param outline 轮廓
    //==========================================================
-   public mergeMax(p) {
-      this.min.mergeMin(p.min);
-      this.max.mergeMax(p.max);
-   }
-
-   //==========================================================
-   // <T>合并最大轮廓。</T>
-   //
-   // @method
-   // @param x:Number 横坐标
-   // @param y:Number 纵坐标
-   //==========================================================
-   public mergeMax2(x, y) {
-      this.min.mergeMin2(x, y);
-      this.max.mergeMax2(x, y);
+   public mergeMax(outline) {
+      this.min.mergeMin(outline.min);
+      this.max.mergeMax(outline.max);
    }
 
    //==========================================================
@@ -111,36 +99,36 @@ export class SOutline2 {
    // @param z:Number Z坐标
    //==========================================================
    public mergePoint(x, y, z) {
-      //this.min.mergeMin3(x, y, z);
-      //this.max.mergeMax3(x, y, z);
+      this.min.mergeMin3(x, y, z);
+      this.max.mergeMax3(x, y, z);
    }
 
    //==========================================================
    // <T>序列化数据到输出流里。</T>
    //
    // @method
-   // @param p:input:FByteStream 数据流
+   // @param output 数据流
    //==========================================================
-   public serialize(p) {
-      this.min.serialize(p);
-      this.max.serialize(p);
+   public serialize(output) {
+      this.min.serialize(output);
+      this.max.serialize(output);
    }
 
    //==========================================================
    // <T>从输入流里反序列化数据。</T>
    //
    // @method
-   // @param p:input:FByteStream 数据流
+   // @param input  数据流
    //==========================================================
-   public unserialize(p) {
-      this.min.unserialize(p);
-      this.max.unserialize(p);
+   public unserialize(input) {
+      this.min.unserialize(input);
+      this.max.unserialize(input);
    }
 
    //============================================================
    // <T>获得字符串。</T>
    //
-   // @return String 字符串
+   // @return 字符串
    //============================================================
    public toString() {
       return '(' + this.min + ')-(' + this.max + ')';

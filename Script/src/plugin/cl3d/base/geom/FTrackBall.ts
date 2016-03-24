@@ -1,8 +1,8 @@
 import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
 import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
-import {SQuaternion} from '../../../../runtime/common/math/SQuaternion';
-import {SVector3} from '../../../../runtime/common/math/SVector3';
-import {SPoint3} from '../../../../runtime/common/math/SPoint3';
+import {Quaternion} from '../../../../runtime/common/math/Quaternion';
+import {Vector3} from '../../../../runtime/common/math/Vector3';
+import {Point3} from '../../../../runtime/common/math/Point3';
 import {SMatrix3d} from '../../../../runtime/graphic/math/SMatrix3d';
 
 //==========================================================
@@ -17,13 +17,13 @@ export class FTrackBall extends ObjectBase {
    _matrix = new SMatrix3d();
    // @attribute
    //_rotation = MO.Class.register(o, new MO.AGetter('_rotation'));
-   _rotation = new SQuaternion();
+   _rotation = new Quaternion();
    //_axis = MO.Class.register(o, new MO.AGetter('_axis'));
-   _axis = new SVector3();
+   _axis = new Vector3();
    // @attribute
    //_angularVelocity = MO.Class.register(o, new MO.AGetter('_angularVelocity'));
    _angularVelocity = null;
-   _lastPosition = new SPoint3();
+   _lastPosition = new Point3();
 
    //==========================================================
    // <T>设置位置。</T>

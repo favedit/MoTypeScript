@@ -1,6 +1,6 @@
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SColor4} from '../../../runtime/common/math/SColor4';
+import {Color4} from '../../../runtime/common/math/Color4';
 import {FMaterial} from './FMaterial';
 import {FTexture} from './FTexture';
 
@@ -16,9 +16,9 @@ export class FPhongMaterial extends FMaterial {
    // 透明比率
    public alphaRate: number;
    // 环境光颜色
-   public ambientColor: SColor4;
+   public ambientColor: Color4;
    // 散射光颜色
-   public diffuseColor: SColor4;
+   public diffuseColor: Color4;
    // 高光级别
    public specularPower: number;
 
@@ -34,8 +34,8 @@ export class FPhongMaterial extends FMaterial {
       this.effectCode = 'phong.automatic';
       this.alphaBase = 0.1;
       this.alphaRate = 1;
-      this.ambientColor = new SColor4(0.4, 0.4, 0.4, 0.7);
-      this.diffuseColor = new SColor4(0.6, 0.6, 0.6, 0.6);
+      this.ambientColor = new Color4(0.4, 0.4, 0.4, 0.7);
+      this.diffuseColor = new Color4(0.6, 0.6, 0.6, 0.6);
       this.specularPower = 32;
    }
 

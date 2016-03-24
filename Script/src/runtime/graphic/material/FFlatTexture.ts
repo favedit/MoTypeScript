@@ -1,5 +1,5 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SSize2} from '../../../runtime/common/math/SSize2';
+import {Size2} from '../../../runtime/common/math/Size2';
 import {ETexture} from './ETexture';
 import {FTexture} from './FTexture';
 
@@ -13,7 +13,7 @@ export class FFlatTexture extends FTexture {
    // 纵向翻转
    public optionFlipY = false;
    // 大小
-   public size: SSize2 = null;
+   public size: Size2 = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -24,7 +24,7 @@ export class FFlatTexture extends FTexture {
       super();
       // 设置属性
       this.textureCd = ETexture.Flat2d;
-      this.size = new SSize2();
+      this.size = new Size2();
    }
 
    //o.uploadData   = MO.Method.virtual(o, 'uploadData');

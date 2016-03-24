@@ -2,7 +2,7 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
-import {SOutline3d} from '../../../runtime/common/math/SOutline3d';
+import {Outline3d} from '../../../runtime/common/math/Outline3d';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
@@ -25,7 +25,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    // 选取设置
    public optionSelect: boolean;
    // 外轮廓
-   public outline: SOutline3d;
+   public outline: Outline3d;
    // 未定材质
    public peddingMaterial: FMaterial;
    // 材质
@@ -70,7 +70,7 @@ export class FRenderable extends FDrawable implements IRenderable {
       // 构造变量
       this.id = ObjectIdUtil.nextId('renderable');
       this.optionSelect = true;
-      this.outline = new SOutline3d();
+      this.outline = new Outline3d();
       this.calculateMatrix = new SMatrix3d();
       this.vertexCount = 0;
       this.materialReference = this;
@@ -205,7 +205,7 @@ export class FRenderable extends FDrawable implements IRenderable {
    //
    // @return 轮廓
    //==========================================================
-   public calculateOutline(): SOutline3d {
+   public calculateOutline(): Outline3d {
       var outline = this.outline;
       // TODO:
       return outline;

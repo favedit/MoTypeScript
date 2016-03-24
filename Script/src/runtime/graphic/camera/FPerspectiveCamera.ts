@@ -1,8 +1,8 @@
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
-import {SVector3} from '../../runtime/common/math/SVector3';
-import {SQuaternion} from '../../runtime/common/math/SQuaternion';
+import {Vector3} from '../../runtime/common/math/Vector3';
+import {Quaternion} from '../../runtime/common/math/Quaternion';
 import {SMatrix3x3} from '../../runtime/graphic/math/SMatrix3x3';
-import {RMath} from '../../runtime/common/math/RMath';
+import {MathUtil} from '../../runtime/common/math/MathUtil';
 import {FCamera} from './FCamera';
 import {FProjection} from './FProjection';
 import {FPerspectiveProjection} from './FPerspectiveProjection';
@@ -17,12 +17,12 @@ export class FPerspectiveCamera extends FCamera {
    // 投影
    public projection: FProjection;
    // 四元数
-   public rotation: SVector3;
+   public rotation: Vector3;
    public rotationMatrix: SMatrix3x3;
-   public quaternion: SQuaternion;
-   public quaternionX: SQuaternion;
-   public quaternionY: SQuaternion;
-   public quaternionZ: SQuaternion;
+   public quaternion: Quaternion;
+   public quaternionX: Quaternion;
+   public quaternionY: Quaternion;
+   public quaternionZ: Quaternion;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -33,12 +33,12 @@ export class FPerspectiveCamera extends FCamera {
       super();
       // 初始化变量
       this.projection = new FPerspectiveProjection();
-      this.rotation = new SVector3();
+      this.rotation = new Vector3();
       this.rotationMatrix = new SMatrix3x3();
-      this.quaternion = new SQuaternion();
-      this.quaternionX = new SQuaternion();
-      this.quaternionY = new SQuaternion();
-      this.quaternionZ = new SQuaternion();
+      this.quaternion = new Quaternion();
+      this.quaternionX = new Quaternion();
+      this.quaternionY = new Quaternion();
+      this.quaternionZ = new Quaternion();
    }
 
    //==========================================================
@@ -154,9 +154,9 @@ export class FPerspectiveCamera extends FCamera {
    public update() {
       // 计算旋转分量
       var rotation = this.rotation;
-      this.quaternionX.fromAxisAngle(RMath.vectorAxisX, rotation.x);
-      this.quaternionY.fromAxisAngle(RMath.vectorAxisY, rotation.y);
-      this.quaternionZ.fromAxisAngle(RMath.vectorAxisZ, rotation.z);
+      this.quaternionX.fromAxisAngle(MathUtil.vectorAxisX, rotation.x);
+      this.quaternionY.fromAxisAngle(MathUtil.vectorAxisY, rotation.y);
+      this.quaternionZ.fromAxisAngle(MathUtil.vectorAxisZ, rotation.z);
       // 计算旋转
       var quaternion = this.quaternion.identity();
       quaternion.mul(this.quaternionX);

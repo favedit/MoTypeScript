@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150130
 //==========================================================
-export class SRectangle {
+export class Rectangle {
    //..........................................................
    // @attribute
    protected left: number = 0;

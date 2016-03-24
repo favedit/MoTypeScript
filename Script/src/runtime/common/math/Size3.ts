@@ -11,7 +11,7 @@ import {ClassUtil} from '../reflect/ClassUtil';
 // @author maocy
 // @version 150101
 //==========================================================
-export class SSize3 {
+export class Size3 {
    // @attribute
    protected width: number = 0;
    protected height: number = 0;

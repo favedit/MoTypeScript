@@ -1,6 +1,6 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
-import {SSize2} from '../../../runtime/common/math/SSize2';
+import {Size2} from '../../../runtime/common/math/Size2';
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 
 //==========================================================
@@ -13,7 +13,7 @@ export class FProjection extends ObjectBase {
    // 矩阵
    public matrix: SMatrix3d;
    // 尺寸
-   public size: SSize2;
+   public size: Size2;
    // 角度
    public angle: number;
    // 夹角
@@ -33,7 +33,7 @@ export class FProjection extends ObjectBase {
    public constructor() {
       super();
       this.matrix = new SMatrix3d();
-      this.size = new SSize2();
+      this.size = new Size2();
       this.angle = 60;
       this.fieldOfView = 0;
       this.znear = 0.1;

@@ -1,4 +1,4 @@
-import {SPoint3} from '../../common/math/SPoint3';
+import {Point3} from '../../common/math/Point3';
 import {FCurve} from '../brep/FCurve';
 import {RShape} from '../RShape';
 
@@ -16,7 +16,7 @@ export class QuadraticBezierCurve3 extends FCurve {
    }
 
    public getPoint(t): any {
-      return new SPoint3(
+      return new Point3(
          RShape.b2(t, this.v0.x, this.v1.x, this.v2.x),
          RShape.b2(t, this.v0.y, this.v1.y, this.v2.y),
          RShape.b2(t, this.v0.z, this.v1.z, this.v2.z)

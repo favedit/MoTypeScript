@@ -1,6 +1,6 @@
-import {SPoint3} from '../../../common/math/SPoint3';
-import {SPoint2} from '../../../common/math/SPoint2';
-import {SVector3} from '../../../common/math/SVector3';
+import {Point3} from '../../../common/math/Point3';
+import {Point2} from '../../../common/math/Point2';
+import {Vector3} from '../../../common/math/Vector3';
 import {SFace3} from '../../math/SFace3';
 import {FGeometry} from '../brep/FGeometry';
 
@@ -74,12 +74,12 @@ export class BoxGeometry extends FGeometry {
       var gridY1 = gridY + 1;
       var segmentWidth = width / gridX;
       var segmentHeight = height / gridY;
-      var normal = new SVector3();
+      var normal = new Vector3();
       normal[w] = depth > 0 ? 1 : - 1;
       // 建立顶点
       for (var iy = 0; iy < gridY1; iy++) {
          for (var ix = 0; ix < gridX1; ix++) {
-            var vector = new SPoint3();
+            var vector = new Point3();
             vector[u] = (ix * segmentWidth - widthHalf) * udir;
             vector[v] = (iy * segmentHeight - heightHalf) * vdir;
             vector[w] = depth;
@@ -93,10 +93,10 @@ export class BoxGeometry extends FGeometry {
             var b = ix + gridX1 * (iy + 1);
             var c = (ix + 1) + gridX1 * (iy + 1);
             var d = (ix + 1) + gridX1 * iy;
-            var uva = new SPoint2(ix / gridX, 1 - iy / gridY);
-            var uvb = new SPoint2(ix / gridX, 1 - (iy + 1) / gridY);
-            var uvc = new SPoint2((ix + 1) / gridX, 1 - (iy + 1) / gridY);
-            var uvd = new SPoint2((ix + 1) / gridX, 1 - iy / gridY);
+            var uva = new Point2(ix / gridX, 1 - iy / gridY);
+            var uvb = new Point2(ix / gridX, 1 - (iy + 1) / gridY);
+            var uvc = new Point2((ix + 1) / gridX, 1 - (iy + 1) / gridY);
+            var uvd = new Point2((ix + 1) / gridX, 1 - iy / gridY);
             var face = new SFace3(a + offset, b + offset, d + offset);
             face.normal.assign(normal);
             face.vertexNormals.push(normal.clone(), normal.clone(), normal.clone());

@@ -1,4 +1,4 @@
-import {SVector3} from '../../common/math/SVector3';
+import {Vector3} from '../../common/math/Vector3';
 
 export class SEuler {
 
@@ -191,7 +191,7 @@ export class SEuler {
       if (optionalResult) {
          return optionalResult.set(this._x, this._y, this._z);
       } else {
-         return new SVector3(this._x, this._y, this._z);
+         return new Vector3(this._x, this._y, this._z);
       }
    }
 

@@ -1,5 +1,5 @@
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
-import {SVector3} from '../../common/math/SVector3';
+import {Vector3} from '../../common/math/Vector3';
 import {FLight} from './FLight';
 
 export class FDirectionalLight extends FLight {
@@ -9,7 +9,7 @@ export class FDirectionalLight extends FLight {
    //_viewport    = MO.Class.register(o, new MO.AGetter('_viewport'));
    protected _viewport = null;
    //_direction   = MO.Class.register(o, new MO.AGetter('_direction'));
-   protected _direction: SVector3 = new SVector3();
+   protected _direction: Vector3 = new Vector3();
    // @attribute
    //protected _classCamera = FG3dCamera;
 

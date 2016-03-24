@@ -12,7 +12,7 @@ import {FloatUtil} from '../lang/FloatUtil';
 // @author maocy
 // @version 150208
 //==========================================================
-export class SValue4 {
+export class Value4 {
    //..........................................................
    // @attribute
    x: number = 0;

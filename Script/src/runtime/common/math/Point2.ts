@@ -1,5 +1,5 @@
 import {Fatal} from '../lang/Fatal';
-import {SValue2} from './SValue2';
+import {Value2} from './Value2';
 
 //============================================================
 // <T>二维坐标结构。</T>
@@ -8,7 +8,7 @@ import {SValue2} from './SValue2';
 // @author maochunyang
 // @version 141230
 //============================================================
-export class SPoint2 extends SValue2 {
+export class Point2 extends Value2 {
    //==========================================================
    // <T>序列化数据到输出流里。</T>
    //
@@ -71,7 +71,7 @@ export class SPoint2 extends SValue2 {
    // @return 克隆对象
    //==========================================================
    public clone() {
-      var instance = new SPoint2();
+      var instance = new Point2();
       instance.x = this.x;
       instance.y = this.y;
       return instance;

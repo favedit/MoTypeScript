@@ -1,6 +1,6 @@
 import {Objects} from '../common/lang/Objects';
-import {SPoint3} from '../common/math/SPoint3';
-import {SVector3} from '../common/math/SVector3';
+import {Point3} from '../common/math/Point3';
+import {Vector3} from '../common/math/Vector3';
 import {IDrawable} from './IDrawable';
 import {IRenderable} from './IRenderable';
 //import {FRegion} from './FRegion';
@@ -13,11 +13,11 @@ import {IRenderable} from './IRenderable';
 //==========================================================
 export interface IDisplay extends IDrawable {
    // 位置
-   position: SPoint3;
+   position: Point3;
    // 旋转
-   rotation: SVector3;
+   rotation: Vector3;
    // 缩放
-   scale: SVector3;
+   scale: Vector3;
    // 渲染集合
    renderables: Objects<IRenderable>;
 

@@ -1,24 +1,20 @@
-import {ClassUtil} from '../reflect/ClassUtil';
 import {IntegerUtil} from '../lang/IntegerUtil';
 import {StringUtil} from '../lang/StringUtil';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
-// <T>矩形结构。</T>
+// <T>范围结构。</T>
 //
 // @struct
-// @param l:width:Number 宽度
-// @param t:height:Number 高度
-// @param r:deep:Number 深度
-// @param b:deep:Number 深度
 // @author maocy
 // @version 141230
 //==========================================================
-export class SSquare {
-   // @attribute
-   protected left: number = 0;
-   protected top: number = 0;
-   protected right: number = 0;
-   protected bottom: number = 0;
+export class Range {
+   // Attribute
+   left: number = 0;
+   top: number = 0;
+   right: number = 0;
+   bottom: number = 0;
 
    //============================================================
    // <T>构造处理。</T>
@@ -30,6 +26,7 @@ export class SSquare {
    // @param b:deep:Number 深度
    //============================================================
    constructor(left: number = 0, top: number = 0, right: number = 0, bottom: number = 0) {
+      // Attribute
       this.left = left;
       this.top = top;
       this.right = right;
@@ -40,7 +37,6 @@ export class SSquare {
    // <T>重置数据。</T>
    //
    // @method
-   // @param rect:rectangle:rectangle 矩形对象
    //============================================================
    public reset() {
       var o = this;
@@ -51,30 +47,28 @@ export class SSquare {
    }
 
    //============================================================
-   // <T>接受数据。</T>
+   // 指定矩形坐标类
    //
    // @method
-   // @param value:SRectangle 矩形对象
+   // @param rect:rectangle:rectangle 矩形对象
    //============================================================
-   public assign(value) {
-      var o = this;
-      o.left = value.left;
-      o.top = value.top;
-      o.right = value.right;
-      o.bottom = value.bottom;
+   public assign(rect) {
+      this.left = rect.left;
+      this.top = rect.top;
+      this.right = rect.right;
+      this.bottom = rect.bottom;
    }
 
    //============================================================
-   // <T>设置数据。</T>
+   // 指定当前矩形的四个坐标
    //
    // @method
    //============================================================
    public set(left, top, right, bottom) {
-      var o = this;
-      o.left = left;
-      o.top = top;
-      o.right = right;
-      o.bottom = bottom;
+      this.left = left;
+      this.top = top;
+      this.right = right;
+      this.bottom = bottom;
    }
 
    //============================================================
@@ -171,7 +165,7 @@ export class SSquare {
    }
 
    //============================================================
-   // <T>获得运行数据。</T>
+   // <T>获得调试信息。</T>
    //
    // @method
    //============================================================
@@ -179,7 +173,6 @@ export class SSquare {
       d = StringUtil.nvlString(d);
       d.append(ClassUtil.shortName(this));
       d.append(' [', this.left, ',', this.top, '-', this.right, ',', this.bottom, '] ');
-      d.append('(', this.width(), '-', this.height(), ')');
       return d;
    }
 }

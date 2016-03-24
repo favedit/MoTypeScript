@@ -9,7 +9,7 @@ import {FloatUtil} from '../lang/FloatUtil';
 // @author maocy
 // @version 141231
 //==========================================================
-export class SColor4 {
+export class Color4 {
    //..........................................................
    // @attribute
    public red: number = 0;

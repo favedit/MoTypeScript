@@ -1,4 +1,4 @@
-import {RMath} from '../../common/math/RMath';
+import {MathUtil} from '../../common/math/MathUtil';
 
 export class RShape {
 
@@ -22,7 +22,7 @@ export class RShape {
       by = contour[verts[v]].y;
       cx = contour[verts[w]].x;
       cy = contour[verts[w]].y;
-      if (RMath.EPSILON > (((bx - ax) * (cy - ay)) - ((by - ay) * (cx - ax)))) return false;
+      if (MathUtil.EPSILON > (((bx - ax) * (cy - ay)) - ((by - ay) * (cx - ax)))) return false;
       var aX, aY, bX, bY, cX, cY;
       var apx, apy, bpx, bpy, cpx, cpy;
       var cCROSSap, bCROSScp, aCROSSbp;
@@ -42,7 +42,7 @@ export class RShape {
          aCROSSbp = aX * bpy - aY * bpx;
          cCROSSap = cX * apy - cY * apx;
          bCROSScp = bX * cpy - bY * cpx;
-         if ((aCROSSbp >= - RMath.EPSILON) && (bCROSScp >= - RMath.EPSILON) && (cCROSSap >= - RMath.EPSILON)) return false;
+         if ((aCROSSbp >= - MathUtil.EPSILON) && (bCROSScp >= - MathUtil.EPSILON) && (cCROSSap >= - MathUtil.EPSILON)) return false;
       }
       return true;
    }
@@ -122,7 +122,7 @@ export class RShape {
    		var seg1seg2dy = inSeg1Pt1.y - inSeg2Pt1.y;
    		var limit		= seg1dy * seg2dx - seg1dx * seg2dy;
    		var perpSeg1	= seg1dy * seg1seg2dx - seg1dx * seg1seg2dy;
-   		if ( Math.abs( limit ) > RMath.EPSILON ) {
+   		if ( Math.abs( limit ) > MathUtil.EPSILON ) {
    			var perpSeg2;
    			if ( limit > 0 ) {
    				if ( ( perpSeg1 < 0 ) || ( perpSeg1 > limit ) ) 		return [];
@@ -240,7 +240,7 @@ export class RShape {
    		// main angle >0: < 180 deg.; 0: 180 deg.; <0: > 180 deg.
    		var from2toAngle	= legFromPtX * legToPtY - legFromPtY * legToPtX;
    		var from2otherAngle	= legFromPtX * otherPtY - legFromPtY * otherPtX;
-   		if ( Math.abs( from2toAngle ) > RMath.EPSILON ) {
+   		if ( Math.abs( from2toAngle ) > MathUtil.EPSILON ) {
    			// angle != 180 deg.
    			var other2toAngle		= otherPtX * legToPtY - otherPtY * legToPtX;
    			// console.log( "from2to: " + from2toAngle + ", from2other: " + from2otherAngle + ", other2to: " + other2toAngle );
