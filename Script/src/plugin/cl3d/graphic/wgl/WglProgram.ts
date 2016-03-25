@@ -107,7 +107,7 @@ export class WglProgram extends Program {
          var attributes = this.attributes();
          var attributeCount = attributes.count();
          for (var n: number = 0; n < attributeCount; n++) {
-            var attribute:ProgramAttribute = attributes.at(n);
+            var attribute: ProgramAttribute = attributes.at(n);
             var attributeName = attribute.name;
             graphic.bindAttribLocation(handle, n, attributeName);
             result = context.checkError("bindAttribLocation", "Bind attribute location. (program_id=%d, slot=%d, name=%s)", handle, n, attributeName);
@@ -133,8 +133,8 @@ export class WglProgram extends Program {
       // 获得结果
       var pr = graphic.getProgramParameter(handle, graphic.LINK_STATUS);
       if (!pr) {
-         var pi = graphic.getProgramInfoLog(handle);
-         LoggerUtil.fatal(this, null, "Link program failure. (status={1}, reason={2})", pr, pi);
+         var info: string = graphic.getProgramInfoLog(handle);
+         LoggerUtil.fatal(this, "Link program failure. (status={1}, reason={2})", pr, info);
          // 释放程序
          graphic.deleteProgram(this.handle);
          this.handle = null;
@@ -146,12 +146,12 @@ export class WglProgram extends Program {
       // 获得结果
       var pr = graphic.getProgramParameter(handle, graphic.VALIDATE_STATUS);
       if (!pr) {
-         var pi = graphic.getProgramInfoLog(handle);
-         //MO.Logger.fatal(this, null, "Validate program failure. (reason={1})", pi);
+         var info: string = graphic.getProgramInfoLog(handle);
+         LoggerUtil.fatal(this, null, "Validate program failure. (status={1}, reason={2})", pr, info);
          // 释放程序
-         //g.deleteProgram(o._handle);
-         //o._handle = null;
-         //return false;
+         graphic.deleteProgram(this.handle);
+         this.handle = null;
+         return false;
       }
       //............................................................
       // 结束处理

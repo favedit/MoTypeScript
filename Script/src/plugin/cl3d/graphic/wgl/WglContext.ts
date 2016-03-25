@@ -608,6 +608,7 @@ export class WglContext extends GraphicContext {
       } else {
          // 绑定渲染目标
          graphic.bindFramebuffer(graphic.FRAMEBUFFER, renderTarget.handle);
+         graphic.drawBuffers([graphic.COLOR_ATTACHMENT0, graphic.COLOR_ATTACHMENT1, graphic.COLOR_ATTACHMENT2]);
          result = this.checkError("bindFramebuffer", "Bind frame buffer. (frame_buffer={1})", renderTarget.handle);
          if (!result) {
             return result;

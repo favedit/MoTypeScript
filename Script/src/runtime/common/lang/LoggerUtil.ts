@@ -255,9 +255,9 @@ export class LoggerUtil {
       var text = result.flush();
       //o.output(owner, text);
       // 显示信息
-      if (RuntimeUtil.isPlatformPc() && !RuntimeUtil.isRelease()) {
-         throw new Error(text);
-      }
+      //if (RuntimeUtil.isPlatformPc() && !RuntimeUtil.isRelease()) {
+      throw new Error(text);
+      //}
    }
 
    //==========================================================

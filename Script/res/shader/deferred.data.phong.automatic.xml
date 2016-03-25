@@ -47,6 +47,7 @@
    <Sampler name='fs_environment' linker='environment'/>
    <!--=====================================================-->
    <Source name='vertex'><![CDATA[
+      #version 300 es
       //..........................................................
       // 变换矩阵声明
       <shader:true source='option.instance'>
@@ -61,36 +62,36 @@
       //..........................................................
       // 属性流声明
       <shader:true source='option.instance'>
-         attribute float va_instance;
+         in float va_instance;
       </shader:true>
-      attribute vec3 va_position;
+      in vec3 va_position;
       <shader:true source='vertex.attribute.color'>
-         attribute vec4 va_color;
+         in vec4 va_color;
       </shader:true>
       <shader:true source='vertex.attribute.coord'>
-         attribute vec2 va_coord;
+         in vec2 va_coord;
       </shader:true>
       <shader:true source='vertex.attribute.normal'>
-         attribute vec3 va_normal;
+         in vec3 va_normal;
          <shader:true source='vertex.attribute.normal.full'>
-            attribute vec3 va_binormal;
-            attribute vec3 va_tangent;
+            in vec3 va_binormal;
+            in vec3 va_tangent;
          </shader:true>
       </shader:true>
       //..........................................................
       // 属性流声明
-      varying vec4 v_model_position;
+      out vec4 v_model_position;
       <shader:true source='vertex.attribute.color'>
-      varying vec4 v_color;
+      out vec4 v_color;
       </shader:true>
       <shader:true source='vertex.attribute.coord'>
-      varying vec2 v_coord;
+      out vec2 v_coord;
       </shader:true>
       <shader:true source='vertex.attribute.normal'>
-      varying vec3 v_normal;
+      out vec3 v_normal;
       <shader:true source='support.dump'>
-      varying vec3 v_camera_ts;
-      varying vec3 v_light_ts;
+      out vec3 v_camera_ts;
+      out vec3 v_light_ts;
       </shader:true>
       </shader:true>
       //..........................................................
@@ -145,7 +146,7 @@
    ]]></Source>
    <Source name='fragment'><![CDATA[
       // 声明环境
-      //#extension GL_EXT_draw_buffers : require
+      #version 300 es
       #ifdef GL_ES
       precision highp float;
       #endif
@@ -181,19 +182,19 @@
       </shader:true>
       //..........................................................
       // 声明插值器
-      varying vec4 v_model_position;
-      varying vec4 v_position;
+      in vec4 v_model_position;
+      in vec4 v_position;
       <shader:true source='vertex.attribute.color'>
-      varying vec4 v_color;
+      in vec4 v_color;
       </shader:true>
       <shader:true source='vertex.attribute.coord'>
-      varying vec2 v_coord;
+      in vec2 v_coord;
       </shader:true>
       <shader:true source='vertex.attribute.normal'>
-      varying vec3 v_normal;
+      in vec3 v_normal;
       <shader:true source='support.diffuse.dump'>
-      varying vec3 v_camera_ts;
-      varying vec3 v_light_ts;
+      in vec3 v_camera_ts;
+      in vec3 v_light_ts;
       </shader:true>
       </shader:true>
       //..........................................................
@@ -216,6 +217,10 @@
       <shader:true source='support.environment'>
       uniform samplerCube fs_environment;
       </shader:true>
+      //..........................................................
+      layout(location=0) out vec4 output_depth;
+      layout(location=1) out vec4 output_normal;
+      layout(location=2) out vec4 output_color;
       //..........................................................
       // 处理
       void main(void){
@@ -337,14 +342,9 @@
          </shader:true>
          //............................................................
          //result = texture2D(fs_diffuse, v_coord);
-         //gl_FragColor = vec4(fc_ambient_color.xyz, 1.0);
-         //gl_FragColor = vec4(-fc_light_direction.xyz, 1.0);
-         //gl_FragColor = vec4(specularFactor, specularFactor, specularFactor, 1.0);
-         //gl_FragColor = result;
-         gl_FragData[0] = result;
-         gl_FragData[1] = result;
-         //gl_FragData[0] = vec4(result.xyz, 1.0);
-         //gl_FragData[0] = vec4(result.xyz, 1.0);
+         output_depth = vec4(specularFactor, specularFactor, specularFactor, 1.0);
+         output_normal = vec4(specularFactor, specularFactor, specularFactor, 1.0);
+         output_color = result;
       }
    ]]></Source>
 </Configuration>
