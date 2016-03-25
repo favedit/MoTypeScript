@@ -1,5 +1,6 @@
 import {FCommand} from './FCommand';
 
+
 export class FCompositeCommand extends FCommand{
    // hsw.cmd.CompositeCommand = function(dataAndEvents) {
    //    hsw.cmd.Command.call(this);

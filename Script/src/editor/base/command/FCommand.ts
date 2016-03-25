@@ -1,5 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
-
+import { ECommandState } from './ECommandState';
+import {Linker} from '../../../runtime/common/reflect/Linker';
+import { FCommandConsole } from './FCommandConsole';
 //==========================================================
 // <T>命令控制台。</T>
 //
@@ -9,8 +11,15 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 export class FCommand extends ObjectBase {
    // 代码
    public code: string = null;
+   // 状态
+   public state: ECommandState = ECommandState.Created;
    // 描述
    public description: string = null;
+   // 控制器
+   @Linker(FCommandConsole)
+   public console:FCommandConsole;
+   // 保存数据
+   public saveData:ObjectBase;
 
    //==========================================================
    // <T>是否可挂起。</T>
@@ -111,7 +120,7 @@ export class FCommand extends ObjectBase {
    public commit() {
    }
 
-   public cancel(event) {
+   public cancel(event?) {
       this.onCleanup(event);
       if (this.canUndoRedo()) {
          this.onUndo();
