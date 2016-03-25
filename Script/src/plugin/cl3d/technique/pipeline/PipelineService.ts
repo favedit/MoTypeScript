@@ -6,7 +6,7 @@ import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {Service} from '../../../../runtime/core/Service';
 import {ListenerThread} from '../../../../runtime/core/service/ListenerThread';
 import {ThreadService} from '../../../../runtime/core/service/ThreadService';
-import {FGraphicContext} from '../../../../runtime/graphic/core/FGraphicContext';
+import {GraphicContext} from '../../../../runtime/graphic/core/GraphicContext';
 import {Pipeline} from './Pipeline';
 import {ForwardPipeline} from './ForwardPipeline';
 
@@ -43,7 +43,7 @@ export class PipelineService extends Service {
    //==========================================================
    // <T>收集一个渲染管道。</T>
    //==========================================================
-   public alloc(context: FGraphicContext, clazz: Function = ForwardPipeline): Pipeline {
+   public alloc(context: GraphicContext, clazz: Function = ForwardPipeline): Pipeline {
       AssertUtil.debugNotNull(context);
       var pipeline: Pipeline = ClassUtil.create(clazz);
       pipeline.linkGraphicContext(context);

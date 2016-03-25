@@ -6,7 +6,7 @@ import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {Color4} from '../../../runtime/common/math/Color4';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IScene} from '../../../runtime/graphic/IScene';
-import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
+import {GraphicObject} from '../../../runtime/graphic/core/GraphicObject';
 import {Display} from './Display';
 import {DisplayLayer} from './DisplayLayer';
 import {Region} from './Region';
@@ -19,7 +19,7 @@ import {SceneStatistics} from './SceneStatistics';
 // @author maocy
 // @history 150106
 //==========================================================
-export class Scene extends FGraphicObject implements IScene {
+export class Scene extends GraphicObject implements IScene {
    // 激活状态
    public statusActive: boolean;
    // 背景颜色

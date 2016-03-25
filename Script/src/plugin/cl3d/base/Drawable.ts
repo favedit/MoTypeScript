@@ -3,7 +3,7 @@ import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {IDrawable} from '../../../runtime/graphic/IDrawable';
-import {FGraphicObject} from '../../../runtime/graphic/core/FGraphicObject';
+import {GraphicObject} from '../../../runtime/graphic/core/GraphicObject';
 import {Region} from './Region';
 
 //==========================================================
@@ -12,7 +12,7 @@ import {Region} from './Region';
 // @author maocy
 // @history 160305
 //==========================================================
-export class Drawable extends FGraphicObject implements IDrawable {
+export class Drawable extends GraphicObject implements IDrawable {
    // 唯一编码
    public guid: string;
    // 编号

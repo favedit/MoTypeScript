@@ -19,6 +19,8 @@ export class WglContext1 extends WglContext {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this.version = 1;
    }
 
    //==========================================================

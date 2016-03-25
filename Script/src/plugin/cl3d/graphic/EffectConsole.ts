@@ -11,7 +11,7 @@ import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {EnvironmentService} from '../../../runtime/core/service/EnvironmentService';
 import {Service} from '../../../runtime/core/Service';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
+import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
 import {Renderable} from '../base/Renderable';
 import {Region} from '../base/Region';
@@ -221,7 +221,7 @@ export class EffectConsole extends Service {
       if (context.graphicContext) {
          context = context.graphicContext;
       }
-      AssertUtil.debugTrue(context instanceof FGraphicContext);
+      AssertUtil.debugTrue(context instanceof GraphicContext);
       // 获得效果名称
       var effectCode = renderable.material.effectCode;
       var effectFlag = region.spaceName + '.' + effectCode;
@@ -254,16 +254,17 @@ export class EffectConsole extends Service {
    //==========================================================
    // <T>加载配置文件。</T>
    //
+   // @param context 环境
    // @param name 路径
    // @return 节点
    //==========================================================
-   public loadConfig(name) {
+   public loadConfig(context, name: string) {
       // 查找配置
       var xconfig = this._configs.get(name);
       if (!xconfig) {
          // 生成地址
-         var uri = "${resource}/shader/" + name + ".xml";
-         var url = ServiceUtil.find(EnvironmentService).parseUrl(uri);
+         var uri: string = "${resource}/shader" + context.version + "/" + name + ".xml";
+         var url: string = ServiceUtil.find(EnvironmentService).parseUrl(uri);
          // 获得网络数据
          xconfig = ClassUtil.create(XmlConnection).send(url);
          // 加载配置信息

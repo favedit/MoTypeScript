@@ -2,7 +2,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FGraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/FGraphicContext';
+import {GraphicContext as FBaseGraphicContext} from '../../runtime/graphic/core/GraphicContext';
 import {FillModeEnum} from './FillModeEnum';
 import {ContextCapability} from './ContextCapability';
 import {ContextStatistics} from './ContextStatistics';
@@ -19,6 +19,7 @@ export abstract class GraphicContext extends FBaseGraphicContext {
    //..........................................................
    // @attribute
    public hCanvas: HTMLCanvasElement;
+   public version: number;
    // @attribute
    protected _optionAlpha = true;
    protected _optionAntialias = false;

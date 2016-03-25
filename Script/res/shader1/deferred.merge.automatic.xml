@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+   <!--=====================================================-->
+   <State name='fill_mode'   value='Face'/>
+   <State name='cull_mode'   value='Front'/>
+   <State name='depth_mode'  value='LessEqual'/>
+   <State name='depth_write' value='Y'/>
+   <State name='blend_mode'  value='N'/>
+   <State name='alpha_test'  value='N'/>
+   <!--=====================================================-->
+   <Option name='shadow'   value='N'/>
+   <Option name='lightmap' value='N'/>
+   <Option name='fog'      value='N'/>
+   <!--=====================================================-->
+   <Attribute name='va_position'  linker='position' format='Float4'/>
+   <Attribute name='va_coord'     linker='coord'    format='Float2'/>
+   <!--=====================================================-->
+   <Sampler name='fs_depth'  linker='depth'/>
+   <Sampler name='fs_normal' linker='normal'/>
+   <Sampler name='fs_color'  linker='color'/>
+   <!--=====================================================-->
+   <Source name='vertex'><![CDATA[
+      //..........................................................
+      // 属性流声明
+      attribute vec3 va_position;
+      attribute vec2 va_coord;
+      //..........................................................
+      // 属性流声明
+      varying vec2 v_coord;
+      //..........................................................
+      // 处理
+      void main(){
+         // 计算最终坐标
+         gl_Position = vec4(va_position.xy, 0.0, 1.0);
+         // 设置纹理
+         v_coord = va_coord;
+      }
+   ]]></Source>
+   <Source name='fragment'><![CDATA[
+      // 声明环境
+      #ifdef GL_ES
+      precision highp float;
+      #endif
+      //..........................................................
+      // 声明插值器
+      varying vec2 v_coord;
+      //..........................................................
+      // 声明取样器
+      uniform sampler2D fs_depth;
+      uniform sampler2D fs_normal;
+      uniform sampler2D fs_color;
+      //..........................................................
+      // 处理
+      void main(void){
+         // 获得颜色
+         vec4 depth = texture2D(fs_depth, v_coord);
+         vec4 normal = texture2D(fs_normal, v_coord);
+         vec4 color = texture2D(fs_color, v_coord);
+         vec4 result = color + depth + color;
+         //............................................................
+         // 设置输出
+         gl_FragColor = vec4(result.rgb, 1.0);
+      }
+   ]]></Source>
+</Configuration>

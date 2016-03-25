@@ -6,7 +6,7 @@ import {Vector3} from '../../../runtime/common/math/Vector3';
 import {Outline3d} from '../../../runtime/common/math/Outline3d';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {IDisplay} from '../../../runtime/graphic/IDisplay';
-import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
+import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 import {Drawable} from './Drawable';
 import {Renderable} from './Renderable';
 import {DisplayContainer} from './DisplayContainer';

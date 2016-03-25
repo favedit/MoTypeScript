@@ -1,6 +1,6 @@
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {Size2} from './../../runtime/common/math/Size2';
-import {FGraphicObject} from './../../runtime/graphic/core/FGraphicObject';
+import {GraphicObject} from './../../runtime/graphic/core/GraphicObject';
 import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera';
 import {Scene} from '../../plugin/cl3d/base/Scene';
 import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';

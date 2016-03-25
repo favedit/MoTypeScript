@@ -1,2 +1,2 @@
-export * from './FGraphicContext';
-export * from './FGraphicObject';
+export * from './GraphicContext';
+export * from './GraphicObject';

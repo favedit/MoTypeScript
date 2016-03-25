@@ -8,7 +8,7 @@ import {Size2} from '../../../runtime/common/math/Size2';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FGraphicContext extends ObjectBase {
+export class GraphicContext extends ObjectBase {
    // 画板
    protected _hCanvas: HTMLCanvasElement = null;
    // 尺寸

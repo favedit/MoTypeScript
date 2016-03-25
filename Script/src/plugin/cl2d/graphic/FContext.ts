@@ -1,7 +1,7 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
+import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 
 //==========================================================
 // <T>WebGL渲染环境。</T>
@@ -10,7 +10,7 @@ import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
 // @refer https://www.khronos.org/registry/webgl
 // @history 141230
 //==========================================================
-export class FContext extends FGraphicContext {
+export class FContext extends GraphicContext {
    // @attribute
    protected _handle = null;
    protected _globalScale: Size2 = null;

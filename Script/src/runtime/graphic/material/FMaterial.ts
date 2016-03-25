@@ -1,7 +1,7 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
-import {FGraphicObject} from '../core/FGraphicObject';
+import {GraphicObject} from '../core/GraphicObject';
 import {FTexture} from './FTexture';
 
 //==========================================================
@@ -10,7 +10,7 @@ import {FTexture} from './FTexture';
 // @author maocy
 // @history 150107
 //==========================================================
-export class FMaterial extends FGraphicObject {
+export class FMaterial extends GraphicObject {
    // 代码
    public code: string;
    // 名称

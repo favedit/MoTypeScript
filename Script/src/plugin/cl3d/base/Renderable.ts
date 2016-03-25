@@ -6,7 +6,7 @@ import {Outline3d} from '../../../runtime/common/math/Outline3d';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
-import {FGraphicContext} from '../../../runtime/graphic/core/FGraphicContext';
+import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
 import {IndexBuffer} from '../graphic/IndexBuffer';
 import {VertexBuffer} from '../graphic/VertexBuffer';

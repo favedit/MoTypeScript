@@ -1,5 +1,5 @@
 import {ESamplerFilter} from '../base/ESamplerFilter';
-import {FGraphicObject} from '../core/FGraphicObject';
+import {GraphicObject} from '../core/GraphicObject';
 import {ETexture} from './ETexture';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {ETexture} from './ETexture';
 // @author maocy
 // @history 141230
 //==========================================================
-export class FTexture extends FGraphicObject {
+export class FTexture extends GraphicObject {
    // 代码
    public code = null;
    // 纹理类型

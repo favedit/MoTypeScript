@@ -55,8 +55,7 @@ export class DeferredDataPass extends TechniquePass {
       // 创建渲染目标
       var renderTarget: RenderTarget = this._renderTarget = context.createRenderTarget();
       renderTarget.optionDepth = true;
-      //renderTarget.size.set(2048, 2048);
-      renderTarget.size.set(512, 512);
+      renderTarget.size.set(1024, 1024);
       renderTarget.pushTexture(textureDepth);
       renderTarget.pushTexture(textureNormal);
       renderTarget.pushTexture(textureColor);

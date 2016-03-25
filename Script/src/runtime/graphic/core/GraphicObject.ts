@@ -1,7 +1,7 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
-import {FGraphicContext} from './FGraphicContext';
+import {GraphicContext} from './GraphicContext';
 
 //==========================================================
 // <T>图形对象。</T>
@@ -10,7 +10,7 @@ import {FGraphicContext} from './FGraphicContext';
 // @author maocy
 // @history 150206
 //==========================================================
-export class FGraphicObject extends ObjectBase {
+export class GraphicObject extends ObjectBase {
    // 图形环境
    public _graphicContext: any;
 
@@ -30,10 +30,10 @@ export class FGraphicObject extends ObjectBase {
    //==========================================================
    public linkGraphicContext(context) {
       AssertUtil.debugNotNull(context);
-      if (context instanceof FGraphicContext) {
+      if (context instanceof GraphicContext) {
          this._graphicContext = context;
-      } else if (context instanceof FGraphicObject) {
-         this._graphicContext = (context as FGraphicObject).graphicContext;
+      } else if (context instanceof GraphicObject) {
+         this._graphicContext = (context as GraphicObject).graphicContext;
       } else {
          throw new Fatal(this, 'Link graphic context failure. (context={1})', context);
       }
