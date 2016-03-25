@@ -55,12 +55,14 @@ export class ProcessLoadService extends Service {
          // 开始处理
          if (!item.statusLoading) {
             item.processLoadBegin();
+            item.statusLoading = true;
          }
          // 逻辑处理
          if (item.processLoad()) {
             looper.removeCurrent();
             // 处理完成
             item.processLoadEnd();
+            item.statusLoading = false;
          }
       }
    }

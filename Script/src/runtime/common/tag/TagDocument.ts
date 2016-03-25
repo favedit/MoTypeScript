@@ -133,9 +133,11 @@ export class TagDocument extends ObjectBase {
       var value = '<source>' + source + '</source>'
       value = value.replace(new RegExp('<' + this.space + ':', 'g'), '<' + this.space + '_');
       value = value.replace(new RegExp('</' + this.space + ':', 'g'), '</' + this.space + '_');
-      value = value.replace(new RegExp(' & ', 'g'), ' &amp; ');
+      value = value.replace(new RegExp('&', 'g'), '&amp;');
       value = value.replace(new RegExp(' < ', 'g'), ' &lt; ');
+      value = value.replace(new RegExp(' <= ', 'g'), ' &lt;= ');
       value = value.replace(new RegExp(' > ', 'g'), ' &gt; ');
+      value = value.replace(new RegExp(' >= ', 'g'), ' &gt;= ');
       // 解析内容
       var xnode = XmlUtil.makeString(value);
       this.loadNode(null, xnode.firstChild);

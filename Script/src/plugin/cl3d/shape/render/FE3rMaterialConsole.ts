@@ -1,13 +1,14 @@
-import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum'
-import {Dictionary} from '../../runtime/common/lang/Dictionary'
-import {Linker} from '../../runtime/common/reflect/Linker'
-import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
-import {Fatal} from '../../runtime/common/lang/Fatal'
-import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil'
-import {Service} from '../../runtime/core/Service'
-import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
-import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole'
-import {FE3rMaterial} from './FE3rMaterial'
+import {ScopeEnum} from '../../runtime/common/lang/ScopeEnum';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
+import {Linker} from '../../runtime/common/reflect/Linker';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
+import {Fatal} from '../../runtime/common/lang/Fatal';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
+import {AssertUtil} from '../../runtime/common/AssertUtil';
+import {Service} from '../../runtime/core/Service';
+import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
+import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole';
+import {FE3rMaterial} from './FE3rMaterial';
 import {FMaterialLoader} from './loader/FMaterialLoader';
 
 //==========================================================
@@ -19,12 +20,12 @@ import {FMaterialLoader} from './loader/FMaterialLoader';
 //==========================================================
 export class FE3rMaterialConsole extends Service {
    // 材质集合
-   protected _materials = null;
+   protected _materials;
    @Linker(FMaterialResourceConsole)
    protected _materialResourceConsole: FMaterialResourceConsole;
    // 处理加载控制台
    @Linker(ProcessLoadService)
-   protected _processLoadConsole: ProcessLoadService = null;
+   protected _processLoadConsole: ProcessLoadService;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,6 +35,15 @@ export class FE3rMaterialConsole extends Service {
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
       this._materials = new Dictionary();
+   }
+
+   //==========================================================
+   // <T>获得材质集合。</T>
+   //
+   // @return 材质集合
+   //==========================================================
+   public get materials() {
+      return this._materials;
    }
 
    //==========================================================
@@ -62,21 +72,15 @@ export class FE3rMaterialConsole extends Service {
    // }
 
    //==========================================================
-   // <T>加载一个渲染模型。</T>
+   // <T>加载一个渲染材质。</T>
    //
-   // @method
-   // @param context:FG3dContext 环境
-   // @param guid:String 唯一编号
-   // @return FRenderModel 渲染模型
+   // @param context 渲染环境
+   // @param url 网络地址
+   // @return 渲染材质
    //==========================================================
    public loadByUrl(context, url) {
-      // 检查参数
-      if (!context) {
-         throw new Fatal(this, 'Graphics context is empty');
-      }
-      if (!url) {
-         throw new Fatal(this, 'Material guid is empty');
-      }
+      AssertUtil.debugNotNull(context);
+      AssertUtil.debugNotEmpty(url);
       // 查找材质
       var material: FE3rMaterial = this._materials.get(url);
       if (material) {

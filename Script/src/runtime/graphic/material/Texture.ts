@@ -12,6 +12,8 @@ import {TextureFormatEnum} from './TextureFormatEnum';
 export class Texture extends GraphicObject {
    // 代码
    public code: string;
+   // 准备好
+   public ready: boolean;
    // 纹理类型
    public textureCd: TextureEnum;
    // MIN取样
@@ -47,6 +49,21 @@ export class Texture extends GraphicObject {
    }
 
    //==========================================================
+   // <T>配置处理。</T>
+   //==========================================================
+   public setup() {
+   }
+
+   //==========================================================
+   // <T>测试是否准备好。</T>
+   //
+   // @return 准备好
+   //==========================================================
+   public testReady(): boolean {
+      return this.ready;
+   }
+
+   //==========================================================
    // <T>判断是否有效</T>
    //
    // @return 是否有效
@@ -62,7 +79,7 @@ export class Texture extends GraphicObject {
    // @param minCd MIN取样
    // @param magCd MAG取样
    //==========================================================
-   public setFilterCd(minCd:SamplerFilterEnum, magCd:SamplerFilterEnum) {
+   public setFilterCd(minCd: SamplerFilterEnum, magCd: SamplerFilterEnum) {
       this.filterMinCd = minCd;
       this.filterMagCd = magCd;
    }
@@ -74,7 +91,7 @@ export class Texture extends GraphicObject {
    // @param wrapS S缠绕
    // @param wrapT T缠绕
    //==========================================================
-   public setWrapCd(wrapS:SamplerFilterEnum, wrapT:SamplerFilterEnum) {
+   public setWrapCd(wrapS: SamplerFilterEnum, wrapT: SamplerFilterEnum) {
       this.wrapS = wrapS;
       this.wrapT = wrapT;
    }

@@ -18,6 +18,9 @@ export {material as material};
 import * as particle from './particle/index';
 export {particle as particle};
 
+import * as renderable from './renderable/index';
+export {renderable as renderable};
+
 import * as resource from './resource/index';
 export {resource as resource};
 

@@ -42,6 +42,8 @@ template.matrix.updateForce();
 template.matrix.addRotationX(-Math.PI / 2);
 template.matrix.addRotationY(Math.PI);
 scene.contentLayer.push(template);
+// 设置显示
+canvas.activeDisplay = template;
 //............................................................
 // 启动绘制
 //(<ForwardPipeline>canvas.pipeline).optionShadow = true;

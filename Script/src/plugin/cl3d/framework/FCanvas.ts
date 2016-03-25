@@ -36,6 +36,7 @@ export class FCanvas extends FControl {
    protected _cameraMoveRate = 0.4;
    protected _cameraKeyRotation = 0.03;
    protected _cameraMouseRotation = 0.005;
+   public activeDisplay;
    // 渲染管道
    public pipeline: Pipeline;
    // 场景
@@ -170,6 +171,17 @@ export class FCanvas extends FControl {
          camera.doFly(distance);
       } else if (!keyUp && keyDown) {
          camera.doFly(-distance);
+      }
+      // 左右旋转
+      var display = this.activeDisplay;
+      if (display) {
+         var keyL = keyboardConsole.isKeyPress(EKeyCode.Left)
+         var keyR = keyboardConsole.isKeyPress(EKeyCode.Right)
+         if (keyL && !keyR) {
+            display.matrix.addRotationY(0.01);
+         } else if (!keyL && keyR) {
+            display.matrix.addRotationY(-0.01);
+         }
       }
       camera.update();
    }
