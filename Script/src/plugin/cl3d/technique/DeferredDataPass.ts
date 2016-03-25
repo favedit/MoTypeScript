@@ -1,4 +1,5 @@
 import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
+import {TextureFormatEnum} from '../../../runtime/graphic/material/TextureFormatEnum';
 import {FTexture} from '../../../runtime/graphic/material/FTexture';
 import {RenderTarget} from '../graphic/RenderTarget';
 import {TechniquePass} from './TechniquePass';
@@ -38,17 +39,18 @@ export class DeferredDataPass extends TechniquePass {
       super.setup();
       var context = this._graphicContext;
       // 创建深度纹理
-      var textureDepth = this.textureDepth = context.createFlatTexture();
+      var textureDepth:FTexture = this.textureDepth = context.createFlatTexture();
       textureDepth.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
       textureDepth.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      textureDepth.formatCd = TextureFormatEnum.Float;
       textureDepth.update();
       // 创建法线纹理
-      var textureNormal = this.textureNormal = context.createFlatTexture();
+      var textureNormal:FTexture = this.textureNormal = context.createFlatTexture();
       textureNormal.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
       textureNormal.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
       textureNormal.update();
       // 创建颜色纹理
-      var textureColor = this.textureColor = context.createFlatTexture();
+      var textureColor:FTexture = this.textureColor = context.createFlatTexture();
       textureColor.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
       textureColor.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
       textureColor.update();
@@ -63,17 +65,16 @@ export class DeferredDataPass extends TechniquePass {
    }
 
    //==========================================================
-   // <T>绘制区域处理。</T>
+   // <T>开始绘制处理。</T>
    //
-   // @method
-   // @param region:FG3dRetion 区域
+   // @param region 区域
    //==========================================================
-   public drawRegion(region: Region) {
+   public drawBegin(region: Region): boolean {
+      super.drawBegin(region);
       // 设置渲染目标
       var context = this._graphicContext;
       context.setRenderTarget(this._renderTarget);
-      context.clearColor(region.backgroundColor);
-      // 绘制处理
-      super.drawRegion(region);
+      context.clearColorDepth(region.backgroundColor);
+      return true;
    }
 }

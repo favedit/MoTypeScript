@@ -584,7 +584,6 @@ export class RHtml {
    //         p.x += h.offsetLeft - h.scrollLeft;
    //         p.y += h.offsetTop - h.scrollTop;
    //         if('absolute' != RHtml.currentStyle(h).position){
-   //            //debugger;
    //            //break;
    //         }
    //         p.x += h.clientLeft;

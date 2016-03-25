@@ -4,13 +4,13 @@
         "target": "es5",
         "module": "amd",
         "noImplicitAny": false,
-        "removeComments": false,
+        "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "sourceMap": false,
+        "sourceMap": true,
         "outFile": "../build/mo.js"
     },
     "formatCodeOptions": {
@@ -30,13 +30,8 @@
     "compileOnSave": true,
     "buildOnSave": false,
     "filesGlob": [
-        "./runtime/**/*.ts",
-        "./plugin/**/*.ts"
+        "./**/*.ts"
     ],
-    "exclude": [
-        "./data",
-        "./editor"
-   ],
     "atom": {
         "rewriteTsconfig": false,
         "formatOnSave": true

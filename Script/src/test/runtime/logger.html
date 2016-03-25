@@ -17,14 +17,12 @@ function test(value){
    my_logger(1);
 }
 require(['package'], function ($) {
-   //debugger
    var loggerConsole1 = new sk.runtime.core.console.FLoggerConsole();
    var loggerConsole2 = new sk.runtime.core.console.FLoggerConsole();
    console.log(loggerConsole1._environmentConsole.toString());
    console.log(loggerConsole2._environmentConsole.toString());
    var rclass = sk.runtime.common.reflect.RClass;
    var ccc = rclass._classes;
-   debugger
    loggerConsole1.connect('test');
    //test(1);
    //var loggerConsole = sk.runtime.core.RConsole.find(sk.runtime.core.console.FLoggerConsole);
@@ -35,7 +33,6 @@ require(['package'], function ($) {
 //   console.log(sk);
 });
 function onLoad(){
-   //debugger
    //var instance = sk.runtime.common.reflect.RClass.create(sk.runtime.common.lang.FObject);
    //console.log(instance);
 }

@@ -98,7 +98,7 @@ export abstract class Pipeline extends Content {
       // 绘制舞台
       //statistics._frameDraw.begin();
       if (region.isChanged()) {
-         technique.drawStage(scene, region);
+         technique.draw(scene, region);
       }
       //statistics._frameDraw.end();
       //..........................................................

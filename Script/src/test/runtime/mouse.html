@@ -35,7 +35,6 @@ console.log(a.constructor === b.constructor);
 
 function A(){
    A.prototype.test = function(){
-      debugger
       console.log('test' + this);
    };
    return this;
@@ -52,6 +51,6 @@ A.prototype.test.call(a);
 
 <div name='outer' style='left:100px;top:100px;width:400px;height:100px;background-color:red' onmousemove='_mouse_move()' onmouseover='_mouse_over()' onmouseout='_mouse_out()' onmouseenter='_mouse_enter()' onmouseleave='_mouse_leave()'>
    <div name='inner' style='left:120px;top:120px;width:200px;height:50px;background-color:blue' onmousemove='_mouse_move()' onmouseover='_mouse_over()' onmouseout='_mouse_out()' onmouseenter='_mouse_enter()' onmouseleave='_mouse_leave()'>
-      getXmlSource
+      Source
    </div>
 </div>

@@ -885,13 +885,13 @@ export class WglContext extends GraphicContext {
    //==========================================================
    // <T>清空内容。</T>
    //
-   // @param red:Float 红色
-   // @param green:Float 绿色
-   // @param blue:Float 蓝色
-   // @param alpha:Float 透明
-   // @param depth:Float 深度
+   // @param red 红色
+   // @param green 绿色
+   // @param blue 蓝色
+   // @param alpha 透明
+   // @param depth 深度
    //==========================================================
-   public clear(red, green, blue, alpha, depth) {
+   public clear(red: number, green: number, blue: number, alpha: number, depth: number = 1) {
       var graphic = this.handle;
       graphic.clearColor(red, green, blue, alpha);
       graphic.clearDepth(depth);
@@ -902,12 +902,12 @@ export class WglContext extends GraphicContext {
    //==========================================================
    // <T>清空颜色内容。</T>
    //
-   // @param red:Float 红色
-   // @param green:Float 绿色
-   // @param blue:Float 蓝色
-   // @param alpha:Float 透明
+   // @param red 红色
+   // @param green 绿色
+   // @param blue 蓝色
+   // @param alpha 透明
    //==========================================================
-   public clearColor(red, green, blue, alpha) {
+   public clearColor(red: number, green: number, blue: number, alpha: number) {
       var graphic = this.handle;
       graphic.clearColor(red, green, blue, alpha);
       graphic.clear(graphic.COLOR_BUFFER_BIT);
@@ -917,12 +917,26 @@ export class WglContext extends GraphicContext {
    //==========================================================
    // <T>清空深度内容。</T>
    //
-   // @param depth:Float 深度
+   // @param depth 深度
    //==========================================================
-   public clearDepth(depth) {
+   public clearDepth(depth: number = 1) {
       var graphic = this.handle;
       graphic.clearDepth(depth);
       graphic.clear(graphic.DEPTH_BUFFER_BIT);
+      this._statistics.frameClearCount++;
+   }
+
+   //==========================================================
+   // <T>清空内容。</T>
+   //
+   // @param color 颜色
+   // @param depth 深度
+   //==========================================================
+   public clearColorDepth(color, depth: number = 1) {
+      var graphic = this.handle;
+      graphic.clearColor(color.red, color.green, color.blue, color.alpha);
+      graphic.clearDepth(depth);
+      graphic.clear(graphic.COLOR_BUFFER_BIT | graphic.DEPTH_BUFFER_BIT);
       this._statistics.frameClearCount++;
    }
 

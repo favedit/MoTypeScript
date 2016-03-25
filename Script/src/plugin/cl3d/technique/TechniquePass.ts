@@ -2,6 +2,7 @@
 import {Region} from '../base/Region';
 import {Content} from '../graphic/Content';
 import {EffectConsole} from '../graphic/EffectConsole';
+import {Technique} from './Technique';
 
 //==========================================================
 // <T>渲染过程。</T>
@@ -11,7 +12,7 @@ import {EffectConsole} from '../graphic/EffectConsole';
 //==========================================================
 export class TechniquePass extends Content {
    // @attribute
-   public technique;
+   public technique: Technique;
    public fullCode: string;
    public code: string;
    public index: number;
@@ -25,6 +26,7 @@ export class TechniquePass extends Content {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this._first = true;
       this.finish = false;
    }
@@ -124,12 +126,12 @@ export class TechniquePass extends Content {
    //
    // @param region 区域
    //==========================================================
-   public drawBegin(region: Region) {
+   public drawBegin(region: Region): boolean {
       if (this._first) {
          this.drawFirst(region);
          this._first = false;
       }
-      this.technique.clear(region.backgroundColor);
+      return true;
    }
 
    //==========================================================

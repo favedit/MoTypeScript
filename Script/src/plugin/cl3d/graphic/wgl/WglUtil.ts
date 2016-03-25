@@ -1,4 +1,5 @@
 import {Fatal} from '../../../../runtime/common/lang/Fatal';
+import {TextureFormatEnum} from '../../../../runtime/graphic/material/TextureFormatEnum';
 import {FillModeEnum} from '../FillModeEnum';
 import {DrawModeEnum} from '../DrawModeEnum';
 import {CullModeEnum} from '../CullModeEnum';
@@ -17,10 +18,9 @@ export class WglUtil {
    //==========================================================
    // <T>转换填充模式类型。</T>
    //
-   // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param fillCd:Integer 填充模式
-   // @return Integer 渲染填充模式
+   // @param graphic 渲染环境
+   // @param fillCd 填充模式
+   // @return 渲染数据
    //==========================================================
    public static convertFillMode(graphic, fillCd) {
       switch (fillCd) {
@@ -37,10 +37,9 @@ export class WglUtil {
    //==========================================================
    // <T>转换绘制模式类型。</T>
    //
-   // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param drawCd:Integer 填充模式
-   // @return Integer 渲染填充模式
+   // @param graphic 渲染环境
+   // @param drawCd 填充模式
+   // @return 渲染数据
    //==========================================================
    public static convertDrawMode(graphic, drawCd) {
       switch (drawCd) {
@@ -69,10 +68,9 @@ export class WglUtil {
    //==========================================================
    // <T>转换剔除模式类型。</T>
    //
-   // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param cullCd:Integer 剔除模式
-   // @return Integer 渲染剔除模式
+   // @param graphic 渲染环境
+   // @param cullCd 剔除模式
+   // @return 渲染数据
    //==========================================================
    public static convertCullMode(graphic, cullCd) {
       switch (cullCd) {
@@ -89,10 +87,9 @@ export class WglUtil {
    //==========================================================
    // <T>转换深度模式类型。</T>
    //
-   // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param depthCd:Integer 深度模式
-   // @return Integer 渲染深度模式
+   // @param graphic 渲染环境
+   // @param depthCd 深度模式
+   // @return 渲染数据
    //==========================================================
    public static convertDepthMode(graphic, depthCd) {
       switch (depthCd) {
@@ -117,10 +114,9 @@ export class WglUtil {
    //==========================================================
    // <T>转换融合模式类型。</T>
    //
-   // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param blendCd:Integer 融合模式
-   // @return Integer 渲染融合模式
+   // @param graphic 渲染环境
+   // @param blendCd 融合模式
+   // @return 渲染数据
    //==========================================================
    public static convertBlendFactors(graphic, blendCd) {
       switch (blendCd) {
@@ -153,10 +149,9 @@ export class WglUtil {
    //==========================================================
    // <T>转换索引宽度类型。</T>
    //
-   // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param strideCd:Integer 索引宽度
-   // @return Integer 渲染索引宽度
+   // @param graphic 渲染环境
+   // @param strideCd 索引宽度
+   // @return 渲染数据
    //==========================================================
    public static convertIndexStride(graphic, strideCd) {
       switch (strideCd) {
@@ -172,9 +167,9 @@ export class WglUtil {
    // <T>转换采样过滤类型。</T>
    //
    // @method
-   // @param graphic:WebGLObject 渲染环境
-   // @param filterCd:Integer 采样过滤
-   // @return Integer 渲染索引宽度
+   // @param graphic 渲染环境
+   // @param filterCd 采样过滤
+   // @return 渲染数据
    //==========================================================
    public static convertSamplerFilter(graphic, filterCd) {
       switch (filterCd) {
@@ -192,5 +187,22 @@ export class WglUtil {
             return graphic.CLAMP_TO_BORDER;
       }
       throw new Fatal(this, "Convert sampler filter failure. (filter_cd={1})", filterCd);
+   }
+
+   //==========================================================
+   // <T>转换纹理格式。</T>
+   //
+   // @param graphic 渲染环境
+   // @param formatCd 格式类型
+   // @return 渲染数据
+   //==========================================================
+   public static convertTextureFormat(graphic, formatCd: TextureFormatEnum) {
+      switch (formatCd) {
+         case TextureFormatEnum.UnsignedByte:
+            return graphic.NEAREST;
+         case TextureFormatEnum.Float:
+            return graphic.LINEAR;
+      }
+      throw new Fatal(this, "Convert texture format failure. (format_cd={1})", formatCd);
    }
 }

@@ -14,11 +14,14 @@ import {TechniquePass} from './TechniquePass';
 // @history 141230
 //==========================================================
 export class Technique extends Content {
-   // @attribute
-   public code = null;
-   public activeMode = null;
-   public modes: Objects<TechniqueMode> = null;
-   public passes: Objects<TechniquePass> = null;
+   // 代码
+   public code: string;
+   // 激活模式
+   public activeMode: TechniqueMode;
+   // 模式集合
+   public modes: Objects<TechniqueMode>;
+   // 过程集合
+   public passes: Objects<TechniquePass>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -67,30 +70,29 @@ export class Technique extends Content {
       this.passes.push(pass);
    }
 
-   //==========================================================
-   // <T>清除绘制区。</T>
-   //
-   // @method
-   // @param color:SColor4 颜色
-   //==========================================================
-   public clear(color): void {
-      var context = this._graphicContext;
-      // 设置渲染目标
-      context.setRenderTarget(null);
-      // 清除颜色
-      context.clear(color.red, color.green, color.blue, color.alpha, 1);
-   }
+   // //==========================================================
+   // // <T>清除绘制区。</T>
+   // //
+   // // @method
+   // // @param color:SColor4 颜色
+   // //==========================================================
+   // public clear(color): void {
+   //    var context = this._graphicContext;
+   //    // 设置渲染目标
+   //    context.setRenderTarget(null);
+   //    // 清除颜色
+   //    context.clear(color.red, color.green, color.blue, color.alpha, 1);
+   // }
 
-   //==========================================================
-   // <T>清除绘制区。</T>
-   //
-   // @method
-   // @param depth 深度
-   //==========================================================
-   public clearDepth(depth: number = 1): void {
-      var context = this._graphicContext;
-      context.clearDepth(depth);
-   }
+   // //==========================================================
+   // // <T>清除绘制区。</T>
+   // //
+   // // @method
+   // // @param depth 深度
+   // //==========================================================
+   // public clearDepth(depth: number = 1): void {
+   //    this._graphicContext.clearDepth(depth);
+   // }
 
    //==========================================================
    // <T>排序渲染对象处理。</T>
@@ -98,8 +100,8 @@ export class Technique extends Content {
    // @method
    // @param p:region:FG3dRetion 区域
    //==========================================================
-   public sortRenderables(a, b) {
-   }
+   // public sortRenderables(a, b) {
+   // }
 
    //==========================================================
    // <T>绘制区域处理。</T>
@@ -126,8 +128,9 @@ export class Technique extends Content {
    // @method
    // @param region:FG3dRetion 区域
    //==========================================================
-   public drawStage(stage: Scene, region: Region) {
-      var layers = stage.layers;
+   public draw(scene: Scene, region: Region) {
+      var context = this._graphicContext;
+      var layers = scene.layers;
       var layerCount = layers.count();
       // 设置区域属性
       region.technique = this;
@@ -138,22 +141,23 @@ export class Technique extends Content {
          var pass = passes.at(passIndex);
          region.setTechniquePass(pass, (passIndex == count - 1));
          // 开始过程绘制
-         pass.drawBegin(region);
-         // 绘制舞台层
-         for (var layerIndex = 0; layerIndex < layerCount; layerIndex++) {
-            var layer = layers.at(layerIndex);
-            // 清空深度
-            if (layer.optionClearDepth) {
-               this.clearDepth();
+         if (pass.drawBegin(region)) {
+            // 绘制舞台层
+            for (var layerIndex = 0; layerIndex < layerCount; layerIndex++) {
+               var layer = layers.at(layerIndex);
+               // 清空深度
+               if (layer.optionClearDepth) {
+                  context.clearDepth(1);
+               }
+               // 渲染单个层
+               region.reset();
+               region.renderables.assign(layer.visibleRenderables);
+               // 绘制过程
+               pass.drawRegion(region);
             }
-            // 渲染单个层
-            region.reset();
-            region.renderables.assign(layer.visibleRenderables);
-            // 绘制过程
-            pass.drawRegion(region);
+            // 结束过程绘制
+            pass.drawEnd(region);
          }
-         // 结束过程绘制
-         pass.drawEnd(region);
       }
       // 绘制处理
       this.present(region);

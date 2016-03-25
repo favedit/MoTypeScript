@@ -64,18 +64,20 @@ export class DeferredMergePass extends TechniquePass {
    }
 
    //==========================================================
-   // <T>绘制区域处理。</T>
+   // <T>开始绘制处理。</T>
    //
    // @param region 区域
    //==========================================================
-   public drawRegion(region: Region) {
-      var context = this._graphicContext;
-      var renderable = this._renderable;
-      var effect = this._renderableEffect;
+   public drawBegin(region: Region): boolean {
+      super.drawBegin(region);
       // 设置渲染目标
+      var context = this._graphicContext;
       context.setRenderTarget(null);
+      context.clearColorDepth(region.backgroundColor);
       // 绘制处理
+      var effect = this._renderableEffect;
       context.setProgram(effect.program);
-      effect.drawRenderable(region, renderable);
+      effect.drawRenderable(region, this._renderable);
+      return false;
    }
 }

@@ -8,7 +8,6 @@ import {FPath3} from '../src/runtime/graphic/shape/brep/FPath3';
 // path.lineTo(20, 20);
 // var points = path.getPoints();
 // console.log(points)
-debugger
 // var path3 = new Path3();
 // path3.moveTo(0, 0, 0);
 // path3.lineTo(10, 10, 1);

@@ -1,4 +1,3 @@
-export * from './main';
 
 import * as data from './data/index';
 export {data as data};

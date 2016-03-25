@@ -90,7 +90,7 @@
          //vec4 result = color + depth + color;
          //............................................................
          // 设置输出
-         //gl_FragColor = vec4(depth.rgb, 1.0);
+         //gl_FragColor = vec4(color.rgb, 1.0);
          gl_FragColor = vec4(edge, edge, edge, 1.0);
       }
    ]]></Source>

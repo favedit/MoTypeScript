@@ -17,7 +17,6 @@ function test(value){
    my_logger(1);
 }
 require(['package'], function ($) {
-   //debugger
    var loggerConsole1 = new sk.runtime.core.console.FLoggerConsole();
    var loggerConsole2 = new sk.runtime.core.console.FLoggerConsole();
    console.log(loggerConsole1._environmentConsole.toString());
@@ -34,7 +33,6 @@ require(['package'], function ($) {
 //   console.log(sk);
 });
 function onLoad(){
-   //debugger
    //var instance = sk.runtime.common.reflect.RClass.create(sk.runtime.common.lang.FObject);
    //console.log(instance);
 }

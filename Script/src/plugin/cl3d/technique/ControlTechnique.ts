@@ -47,13 +47,13 @@ export class ControlTechnique extends Technique {
    // @method
    // @param p:region:FG3dRegion 区域
    //==========================================================
-   public drawRegion(region) {
-      if (region.renderables().isEmpty()) {
-         return;
-      }
-      // 清空深度
-      this._graphicContext.clearDepth(1);
-      // 绘制区域
-      super.drawRegion.call(this, region);
-   }
+   // public drawRegion(region) {
+   //    if (region.renderables().isEmpty()) {
+   //       return;
+   //    }
+   //    // 清空深度
+   //    this._graphicContext.clearDepth(1);
+   //    // 绘制区域
+   //    super.drawRegion.call(this, region);
+   // }
 }
