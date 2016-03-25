@@ -49,18 +49,18 @@ export class FileViewer extends ObjectBase {
    // @method
    //==========================================================
    public ohLoadEnd() {
-      var o = this.__linker;
-      var reader = o._reader;
-      o._statusFree = true;
+      var linker = this.__linker;
+      var reader = linker._reader;
+      linker._statusFree = true;
       if (reader.error) {
-         LoggerUtil.error(o, 'Load file failure. (error={1])', reader.error);
+         LoggerUtil.error(linker, 'Load file failure. (error={1])', reader.error);
       } else {
          // 设置属性
-         o._length = reader.result.byteLength;
-         o._data = reader.result;
+         linker._length = reader.result.byteLength;
+         linker._data = reader.result;
          // 完成处理
-         var event = new Event(o);
-         o.processLoadListener(event);
+         var event = new Event(linker);
+         linker.processLoadListener(event);
          event.dispose();
       }
    }

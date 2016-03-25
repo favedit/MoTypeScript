@@ -8,31 +8,33 @@ import {Struct} from './Struct';
 // @version 150113
 //==========================================================
 export class Event extends Struct {
+   // 代码
+   public code: string;
+   // 发送者
+   public sender: any;
    //..........................................................
    // @attribute
-   public code = null;
-   // @attribute
-   public annotation = null;
-   // @attribute
-   public listener = null;
-   public sender = null;
-   public source = null;
-   // @attribute
-   public hEvent = null;
-   public hSender = null;
-   public hSource = null;
-   // @attribute
-   public result: boolean = false;
-   //..........................................................
-   // @method
-   public ohProcess = null;
-   public onProcess = null;
-   // @method
-   public process = null;
+   // // @attribute
+   // public annotation = null;
+   // // @attribute
+   // public listener = null;
+   // public source = null;
+   // // @attribute
+   // public hEvent = null;
+   // public hSender = null;
+   // public hSource = null;
+   // // @attribute
+   // public result: boolean = false;
+   // //..........................................................
+   // // @method
+   // public ohProcess = null;
+   // public onProcess = null;
+   // // @method
+   // public process = null;
 
-   // @method
-   public constructor(sender: any = null) {
+   public constructor(sender?: any) {
       super();
+      // 构造处理
       this.sender = sender;
    }
 }

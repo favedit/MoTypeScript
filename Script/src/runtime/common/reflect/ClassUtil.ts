@@ -283,17 +283,6 @@ export class ClassUtil {
       clazz = typeClass.prototype.__clazz = new Class();
       clazz.build(typeClass);
       return clazz;
-      // var findClass = typeClass.prototype;
-      // if (typeClass.constructor != Function) {
-      //    findClass = typeClass.constructor;
-      // }
-      // var className: string = this.shortName(findClass);
-      // var clazz: FClass = this._classes[className];
-      // if (clazz == null) {
-      //    clazz = this._classes[className] = new FClass();
-      //    clazz.build(findClass);
-      // }
-      // return clazz;
    }
 
    //==========================================================
@@ -334,6 +323,8 @@ export class ClassUtil {
    // @param instanceClass 实例类型
    //==========================================================
    public static registerClass(typeClass: Function, instanceClass: Function): void {
+      AssertUtil.debugNotNull(typeClass);
+      AssertUtil.debugNotNull(instanceClass);
       var clazz: Class = this.get(typeClass);
       clazz.build(instanceClass);
    }
@@ -345,6 +336,8 @@ export class ClassUtil {
    // @param instance 实例
    //==========================================================
    public static registerInstance(typeClass: Function, instance: any): void {
+      AssertUtil.debugNotNull(typeClass);
+      AssertUtil.debugNotNull(instance);
       var clazz: Class = this.get(typeClass);
       clazz.instance = instance;
    }
@@ -356,6 +349,8 @@ export class ClassUtil {
    // @param instance 实例
    //==========================================================
    public static registerAnnotation(typeClass: Function, annotation: Annotation): void {
+      AssertUtil.debugNotNull(typeClass);
+      AssertUtil.debugNotNull(annotation);
       var clazz: Class = this.get(typeClass);
       clazz.register(annotation);
    }

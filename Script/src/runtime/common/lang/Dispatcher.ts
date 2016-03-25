@@ -9,7 +9,7 @@ import {ObjectUtil} from './ObjectUtil';
 //==========================================================
 export class Dispatcher extends ObjectBase {
    // 监听器集合字典
-   public _listenerss: Dictionary<Listeners> = null;
+   public _listenerss: Dictionary<Listeners>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -135,14 +135,7 @@ export class Dispatcher extends ObjectBase {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      var listenerss = this._listenerss;
-      if (listenerss) {
-         for (var n = listenerss.count() - 1; n >= 0; n--) {
-            var listeners = listenerss.at(n);
-            listeners.dispose();
-         }
-         this._listenerss = ObjectUtil.dispose(listenerss);
-      }
+      this._listenerss = ObjectUtil.dispose(this._listenerss, true);
       super.dispose();
    }
 }

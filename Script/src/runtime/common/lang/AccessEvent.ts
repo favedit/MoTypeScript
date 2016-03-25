@@ -9,6 +9,8 @@ import {Event} from './Event';
 //==========================================================
 export class AccessEvent extends Event {
 
+   public field: string;
+
    public oldValue: any;
 
    public value: any;

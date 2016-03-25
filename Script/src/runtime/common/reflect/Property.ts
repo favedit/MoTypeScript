@@ -21,7 +21,7 @@ export function Property(
    return function(target: any, name: string): void {
       // 注册描述器
       var annotation: PropertyAnnotation = new PropertyAnnotation(name, dataName, dataCd, dataClass, dataDefault);
-      ClassUtil.registerAnnotation(target, annotation);
+      ClassUtil.registerAnnotation(target.constructor, annotation);
       // 设置属性
       var propertyName: string = '__' + name;
       var descriptor: any = new Object();
@@ -37,6 +37,7 @@ export function Property(
          if (dataChanged) {
             // 执行注册函数
             var event: AccessEvent = MemoryUtil.alloc(AccessEvent);
+            event.field = name;
             event.oldValue = oldValue;
             event.value = value;
             event.result = true;
