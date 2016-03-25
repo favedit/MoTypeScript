@@ -218,7 +218,7 @@
       uniform samplerCube fs_environment;
       </shader:true>
       //..........................................................
-      layout(location=0) out vec4 output_depth;
+      layout(location=0) out float output_depth;
       layout(location=1) out vec4 output_normal;
       layout(location=2) out vec4 output_color;
       //..........................................................
@@ -343,7 +343,7 @@
          </shader:true>
          //............................................................
          float depth = gl_FragCoord.z * gl_FragCoord.w;
-         output_depth = vec4(depth, depth, depth, 1.0);
+         output_depth = depth;
          output_normal = vec4(normal.xyz, 1.0);
          output_color = result;
       }

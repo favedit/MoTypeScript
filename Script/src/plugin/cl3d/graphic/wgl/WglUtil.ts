@@ -198,10 +198,24 @@ export class WglUtil {
    //==========================================================
    public static convertTextureFormat(graphic, formatCd: TextureFormatEnum) {
       switch (formatCd) {
+         case TextureFormatEnum.R32F:
+            return graphic.R32F;
+         case TextureFormatEnum.RED:
+            return graphic.RED;
+         case TextureFormatEnum.RGB:
+            return graphic.RGB;
+         case TextureFormatEnum.RGBA:
+            return graphic.RGBA;
+         case TextureFormatEnum.RGBA16F:
+            return graphic.RGBA16F;
+         case TextureFormatEnum.RGBA32F:
+            return graphic.RGBA32F;
          case TextureFormatEnum.UnsignedByte:
-            return graphic.NEAREST;
+            return graphic.UNSIGNED_BYTE;
+         case TextureFormatEnum.HalfFloat:
+            return graphic.HALF_FLOAT;
          case TextureFormatEnum.Float:
-            return graphic.LINEAR;
+            return graphic.FLOAT;
       }
       throw new Fatal(this, "Convert texture format failure. (format_cd={1})", formatCd);
    }

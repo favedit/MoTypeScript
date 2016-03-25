@@ -8,8 +8,17 @@
 export enum TextureFormatEnum {
    // 未知
    Unknown,
-   // 无符号字节
+   // 类型
    UnsignedByte,
-   // 无符号字节
+   HalfFloat,
    Float,
+   // R通道
+   R32F,
+   RED,
+   // RBG通道
+   RGB,
+   // RBGA通道
+   RGBA,
+   RGBA16F,
+   RGBA32F,
 }

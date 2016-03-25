@@ -1,6 +1,6 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {Size2} from '../../../runtime/common/math/Size2';
-import {FFlatTexture as FBaseFlatTexture} from '../../../runtime/graphic/material/FFlatTexture';
+import {FlatTexture as BaseFlatTexture} from '../../../runtime/graphic/material/FlatTexture';
 
 //==========================================================
 // <T>平面渲染纹理。</T>
@@ -8,7 +8,7 @@ import {FFlatTexture as FBaseFlatTexture} from '../../../runtime/graphic/materia
 // @author maocy
 // @history 141231
 //==========================================================
-export class FlatTexture extends FBaseFlatTexture {
+export class FlatTexture extends BaseFlatTexture {
    // // 纵向翻转
    // public optionFlipY = false;
    // // 大小

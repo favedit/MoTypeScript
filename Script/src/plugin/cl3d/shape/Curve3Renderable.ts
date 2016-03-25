@@ -4,8 +4,8 @@ import {GraphicContext} from '../graphic/GraphicContext';
 import {DrawModeEnum} from '../graphic/DrawModeEnum';
 import {VertexBuffer} from '../graphic/VertexBuffer';
 import {IndexBuffer} from '../graphic/IndexBuffer';
-import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
-import {FLineMaterial} from '../../../runtime/graphic/material/FLineMaterial';
+import {Material} from '../../../runtime/graphic/material/Material';
+import {LineMaterial} from '../../../runtime/graphic/material/LineMaterial';
 import {FCurve3} from '../../../runtime/graphic/shape/brep/FCurve3';
 
 //==========================================================
@@ -30,7 +30,7 @@ export class Curve3Renderable extends Renderable {
    // @param curve 线段
    // @param material 材质
    //==========================================================
-   public constructor(curve?: FCurve3, material?: FMaterial) {
+   public constructor(curve?: FCurve3, material?: Material) {
       super();
       this.curve = curve;
       this.material = material;
@@ -85,7 +85,7 @@ export class Curve3Renderable extends Renderable {
       //..........................................................
       // 设置材质
       if (!this.material) {
-         this.material = new FLineMaterial();
+         this.material = new LineMaterial();
       }
       // info.effectCode = 'control';
       // info.effectCode = 'automatic';

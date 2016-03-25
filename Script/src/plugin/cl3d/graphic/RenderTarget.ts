@@ -2,7 +2,7 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {Color4} from '../../../runtime/common/math/Color4';
-import {FTexture} from '../../../runtime/graphic/material/FTexture';
+import {Texture} from '../../../runtime/graphic/material/Texture';
 import {Content} from './Content';
 
 //==========================================================
@@ -16,7 +16,7 @@ export class RenderTarget extends Content {
    public optionDepth: boolean;
    public size: Size2;
    public color: Color4;
-   protected _textures: Objects<FTexture>;
+   protected _textures: Objects<Texture>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -28,7 +28,7 @@ export class RenderTarget extends Content {
       // 设置属性
       this.size = new Size2();
       this.color = new Color4(0, 0, 0, 1);
-      this._textures = new Objects<FTexture>();
+      this._textures = new Objects<Texture>();
    }
 
    //==========================================================
@@ -81,10 +81,10 @@ export class RenderTarget extends Content {
    //
    // @param texture 纹理
    //==========================================================
-   public pushTexture(texture: FTexture) {
+   public pushTexture(texture: Texture) {
       var textures = this._textures;
       if (!textures) {
-         textures = this._textures = new Objects<FTexture>();
+         textures = this._textures = new Objects<Texture>();
       }
       textures.push(texture);
    }

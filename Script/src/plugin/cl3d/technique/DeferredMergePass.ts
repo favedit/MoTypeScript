@@ -1,5 +1,5 @@
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FTexture} from '../../../runtime/graphic/material/FTexture';
+import {Texture} from '../../../runtime/graphic/material/Texture';
 import {EffectConsole} from '../graphic/EffectConsole';
 import {PlaneRenderable} from '../shape/PlaneRenderable';
 import {DeferredMergeAutomaticEffect} from './effect/DeferredMergeAutomaticEffect';
@@ -18,11 +18,11 @@ export class DeferredMergePass extends TechniquePass {
    // 渲染效果
    protected _renderableEffect: DeferredMergeAutomaticEffect;
    // 深度纹理
-   public textureDepth: FTexture;
+   public textureDepth: Texture;
    // 法线纹理
-   public textureNormal: FTexture;
+   public textureNormal: Texture;
    // 颜色纹理
-   public textureColor: FTexture;
+   public textureColor: Texture;
 
    //==========================================================
    // <T>构造处理。</T>

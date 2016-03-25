@@ -1,4 +1,4 @@
-import {FCubeTexture as FBaseCubeTexture} from '../../../runtime/graphic/material/FCubeTexture';
+import {CubeTexture as BaseCubeTexture} from '../../../runtime/graphic/material/CubeTexture';
 
 //==========================================================
 // <T>立方渲染纹理。</T>
@@ -6,7 +6,7 @@ import {FCubeTexture as FBaseCubeTexture} from '../../../runtime/graphic/materia
 // @author maocy
 // @history 141231
 //==========================================================
-export class CubeTexture extends FBaseCubeTexture {
+export class CubeTexture extends BaseCubeTexture {
    // // 大小
    // public size: number = 0;
 

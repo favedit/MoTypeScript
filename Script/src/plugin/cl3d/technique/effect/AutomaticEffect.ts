@@ -7,7 +7,7 @@ import {Renderable} from '../../base/Renderable';
 import {ProgramAttribute} from '../../graphic/ProgramAttribute';
 import {ProgramSampler} from '../../graphic/ProgramSampler';
 import {VertexBuffer} from '../../graphic/VertexBuffer';
-import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
+import {Material} from '../../../../runtime/graphic/material/Material';
 import {EffectInfo} from '../graphic/EffectInfo';
 import {AttributeEnum} from './AttributeEnum';
 import {SamplerEnum} from './SamplerEnum';
@@ -490,7 +490,7 @@ export class AutomaticEffect extends Effect {
    // @param renderable 渲染对象
    // @param material 渲染材质
    //==========================================================
-   public bindMaterialSamplers(renderable: Renderable, material: FMaterial) {
+   public bindMaterialSamplers(renderable: Renderable, material: Material) {
       AssertUtil.debugNotNull(renderable);
       AssertUtil.debugNotNull(material);
       var program = this.program;
@@ -514,7 +514,7 @@ export class AutomaticEffect extends Effect {
    //
    // @param material 材质
    //==========================================================
-   public bindMaterial(material: FMaterial) {
+   public bindMaterial(material: Material) {
       AssertUtil.debugNotNull(material);
       var context = this.graphicContext;
       // 设置深度

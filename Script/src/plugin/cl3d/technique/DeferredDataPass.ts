@@ -1,6 +1,6 @@
-import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
+import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
 import {TextureFormatEnum} from '../../../runtime/graphic/material/TextureFormatEnum';
-import {FTexture} from '../../../runtime/graphic/material/FTexture';
+import {Texture} from '../../../runtime/graphic/material/Texture';
 import {RenderTarget} from '../graphic/RenderTarget';
 import {TechniquePass} from './TechniquePass';
 import {Region} from '../base/Region';
@@ -15,11 +15,11 @@ export class DeferredDataPass extends TechniquePass {
    // 渲染目标
    protected _renderTarget: RenderTarget;
    // 深度纹理
-   public textureDepth: FTexture;
+   public textureDepth: Texture;
    // 法线纹理
-   public textureNormal: FTexture;
+   public textureNormal: Texture;
    // 颜色纹理
-   public textureColor: FTexture;
+   public textureColor: Texture;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -39,20 +39,22 @@ export class DeferredDataPass extends TechniquePass {
       super.setup();
       var context = this._graphicContext;
       // 创建深度纹理
-      var textureDepth:FTexture = this.textureDepth = context.createFlatTexture();
-      textureDepth.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
-      textureDepth.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
-      textureDepth.formatCd = TextureFormatEnum.Float;
+      var textureDepth: Texture = this.textureDepth = context.createFlatTexture();
+      textureDepth.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
+      textureDepth.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
+      textureDepth.formatInternalCd = TextureFormatEnum.R32F;
+      textureDepth.formatCd = TextureFormatEnum.RED;
+      textureDepth.formatTypeCd = TextureFormatEnum.Float;
       textureDepth.update();
       // 创建法线纹理
-      var textureNormal:FTexture = this.textureNormal = context.createFlatTexture();
-      textureNormal.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
-      textureNormal.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      var textureNormal: Texture = this.textureNormal = context.createFlatTexture();
+      textureNormal.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
+      textureNormal.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       textureNormal.update();
       // 创建颜色纹理
-      var textureColor:FTexture = this.textureColor = context.createFlatTexture();
-      textureColor.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
-      textureColor.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      var textureColor: Texture = this.textureColor = context.createFlatTexture();
+      textureColor.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
+      textureColor.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       textureColor.update();
       // 创建渲染目标
       var renderTarget: RenderTarget = this._renderTarget = context.createRenderTarget();

@@ -7,7 +7,7 @@ import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
 import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
-import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
+import {Material} from '../../../runtime/graphic/material/Material';
 import {IndexBuffer} from '../graphic/IndexBuffer';
 import {VertexBuffer} from '../graphic/VertexBuffer';
 import {RenderableInfo} from './RenderableInfo';
@@ -27,9 +27,9 @@ export class Renderable extends Drawable implements IRenderable {
    // 外轮廓
    public outline: Outline3d;
    // 未定材质
-   public peddingMaterial: FMaterial;
+   public peddingMaterial: Material;
    // 材质
-   public material: FMaterial;
+   public material: Material;
    // 参考材质
    public materialReference: any;
    // 资源

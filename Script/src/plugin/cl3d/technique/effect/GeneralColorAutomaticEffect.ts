@@ -1,8 +1,8 @@
 ﻿import {DataTypeEnum} from '../../../../runtime/common/lang/DataTypeEnum';
 import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
-import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
-import {FPhongMaterial} from '../../../../runtime/graphic/material/FPhongMaterial';
+import {Material} from '../../../../runtime/graphic/material/Material';
+import {PhongMaterial} from '../../../../runtime/graphic/material/PhongMaterial';
 import {RegionParameterEnum} from '../../base/RegionParameterEnum';
 import {Renderable} from '../../base/Renderable';
 import {Region} from '../../base/Region';
@@ -32,7 +32,7 @@ export class GeneralColorAutomaticEffect extends AutomaticEffect {
    // @param renderable:FG3dRenderable 渲染对象
    //==========================================================
    public buildMaterial(effectInfo, renderable) {
-      var material: FMaterial = renderable.material;
+      var material: Material = renderable.material;
       // 建立容器
       var data = effectInfo.material;
       if (!data) {
@@ -43,7 +43,7 @@ export class GeneralColorAutomaticEffect extends AutomaticEffect {
       // 建立数据
       if (material.dirty) {
          data.reset();
-         var phongMaterial = <FPhongMaterial>material;
+         var phongMaterial = <PhongMaterial>material;
          // 颜色透明（索引0）
          if (material.optionAlpha) {
             data.writeFloat4(phongMaterial.alphaBase, phongMaterial.alphaRate, 0, 0);

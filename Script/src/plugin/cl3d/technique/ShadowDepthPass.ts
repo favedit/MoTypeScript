@@ -1,4 +1,4 @@
-﻿import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
+﻿import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
 import {TechniquePass} from './TechniquePass';
 import {Region} from '../base/Region';
 
@@ -33,12 +33,12 @@ export class ShadowDepthPass extends TechniquePass {
       context.enableDrawBuffers();
       // 创建平面
       var texture = this.textureDepth = context.createFlatTexture();
-      texture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
-      texture.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      texture.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
+      texture.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       // 创建平面
       var texture = this.textureColor = context.createFlatTexture();
-      texture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
-      texture.setWrapCd(ESamplerFilter.ClampToEdge, ESamplerFilter.ClampToEdge);
+      texture.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
+      texture.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       // 创建渲染目标
       var renderTarget = this.renderTarget = context.createRenderTarget();
       renderTarget.optionDepth = true;

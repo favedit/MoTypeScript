@@ -1,7 +1,7 @@
 import {RuntimeUtil} from '../../runtime/common/RuntimeUtil';
 import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {EnvironmentService} from '../../runtime/core/service/EnvironmentService';
-import {FDeviceConsole} from '../../runtime/ui/console/FDeviceConsole';
+import {DeviceService} from '../../runtime/ui/service/DeviceService';
 import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
 import {FSimpleScene} from '../../plugin/cl3d/framework/FSimpleScene';
 import {TemplateService} from '../../plugin/cl3d/shape/TemplateService';
@@ -12,8 +12,8 @@ import * as mo from '../../index';
 RuntimeUtil.namespace(mo, 'mo');
 //............................................................
 // 设置环境
-var deviceConsole = ServiceUtil.find(FDeviceConsole);
-deviceConsole.setup(window);
+var deviceService = ServiceUtil.find(DeviceService);
+deviceService.setup(window);
 var environmentConsole = ServiceUtil.find(EnvironmentService);
 environmentConsole.registerValue('resource', '/sk/res');
 //............................................................

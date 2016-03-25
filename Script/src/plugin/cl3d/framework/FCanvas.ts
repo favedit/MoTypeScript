@@ -10,7 +10,7 @@ import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineServ
 import {EEvent} from '../../../runtime/ui/EEvent';
 import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FControl} from './../../runtime/ui/FControl';
-import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
+import {KeyboardService} from '../../runtime/ui/service/KeyboardService';
 import {WglContext} from '../graphic/wgl/WglContext';
 import {WglContextUtil} from '../graphic/wgl/WglContextUtil';
 
@@ -41,11 +41,11 @@ export class FCanvas extends FControl {
    // 场景
    public scene: Scene;
    // 按键管理器
-   @Linker(FKeyboardConsole)
-   public _keyboardConsole: FKeyboardConsole = null;
+   @Linker(KeyboardService)
+   public _keyboardService: KeyboardService;
    // 管道管理器
    @Linker(PipelineService)
-   public _pipelineConsole: PipelineService = null;
+   public _pipelineConsole: PipelineService;
    //    o._logicSize          = MO.Class.register(o, new MO.AGetter('_logicSize'));
    //    o._screenSize         = MO.Class.register(o, new MO.AGetter('_screenSize'));
    //    o._interval           = 10;
@@ -143,7 +143,7 @@ export class FCanvas extends FControl {
    public onProcess() {
       // 按键处理
       var camera = this.camera;
-      var keyboardConsole = this._keyboardConsole;
+      var keyboardConsole = this._keyboardService;
       // 前后处理
       var distance = this._cameraMoveRate;
       var keyForward = keyboardConsole.isKeyPress(EKeyCode.W)

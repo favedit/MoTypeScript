@@ -1,6 +1,6 @@
 import {Fatal} from '../../../../runtime/common/lang/Fatal';
 import {AssertUtil} from '../../../../runtime/common/AssertUtil';
-import {FTexture} from '../../../../runtime/graphic/material/FTexture';
+import {Texture} from '../../../../runtime/graphic/material/Texture';
 import {RenderTarget} from '../RenderTarget';
 import {WglUtil} from './WglUtil';
 
@@ -94,8 +94,10 @@ export class WglRenderTarget extends RenderTarget {
          handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MAG_FILTER, handle.LINEAR);
          handle.texParameteri(handle.TEXTURE_2D, handle.TEXTURE_MIN_FILTER, handle.LINEAR);
          // 设置存储
+         var formatInternalCd = WglUtil.convertTextureFormat(handle, texture.formatInternalCd);
          var formatCd = WglUtil.convertTextureFormat(handle, texture.formatCd);
-         handle.texImage2D(handle.TEXTURE_2D, 0, handle.RGBA, size.width, size.height, 0, handle.RGBA, formatCd, null);
+         var formatTypeCd = WglUtil.convertTextureFormat(handle, texture.formatTypeCd);
+         handle.texImage2D(handle.TEXTURE_2D, 0, formatInternalCd, size.width, size.height, 0, formatCd, formatTypeCd, null);
          var result = context.checkError('texImage2D', "Alloc texture storage. (texture_id, size=%dx%d)", texture.handle, size.width, size.height);
          if (!result) {
             return result;

@@ -2,7 +2,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
-import {FDeviceConsole} from '../console/FDeviceConsole';
+import {DeviceService} from '../service/DeviceService';
 import {RHtml} from '../utility/RHtml';
 
 //==========================================================
@@ -136,8 +136,8 @@ export class FAudio extends ObjectBase {
          hAudio.loop = false;
       }
       // 不支持声音完成检测
-      var deviceConsole: FDeviceConsole = ServiceUtil.find(FDeviceConsole);
-      if (!deviceConsole.capability.soundFinish) {
+      var deviceService: DeviceService = ServiceUtil.find(DeviceService);
+      if (!deviceService.capability.soundFinish) {
          //this._ready = true;
          //this._loaded = true;
          //this._finish = true;

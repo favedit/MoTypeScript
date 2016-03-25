@@ -1,4 +1,4 @@
-import {FMaterial} from '../../runtime/graphic/material/FMaterial';
+import {Material} from '../../runtime/graphic/material/Material';
 import {Renderable} from '../base/Renderable';
 import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum';
 import {VertexBuffer} from '../graphic/VertexBuffer';
@@ -53,7 +53,7 @@ export class PlaneRenderable extends Renderable {
       indexBuffer.upload(indexData, 6);
       this.pushIndexBuffer(indexBuffer);
       // 设置纹理集合
-      this.material = new FMaterial();
+      this.material = new Material();
       //this._textures = new MO.TDictionary();
       //this._material.info().optionDouble = true;
    }

@@ -31,9 +31,6 @@ export * from './EUiWrap';
 export * from './FComponent';
 export * from './FControl';
 
-import * as console from './console/index';
-export {console as console};
-
 import * as control from './control/index';
 export {control as control};
 
@@ -45,6 +42,9 @@ export {event as event};
 
 import * as resource from './resource/index';
 export {resource as resource};
+
+import * as service from './service/index';
+export {service as service};
 
 import * as toolbar from './toolbar/index';
 export {toolbar as toolbar};

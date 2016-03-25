@@ -1,1 +1,1 @@
-export * from './ESamplerFilter';
+export * from './SamplerFilterEnum';

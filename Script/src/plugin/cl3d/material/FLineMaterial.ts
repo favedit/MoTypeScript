@@ -1,5 +1,5 @@
-import {ESamplerFilter} from '../../../runtime/graphic/base/ESamplerFilter';
-import {FLineMaterial as FBaseLineMaterial} from '../../../runtime/graphic/material/FLineMaterial';
+import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
+import {LineMaterial as FBaseLineMaterial} from '../../../runtime/graphic/material/LineMaterial';
 
 //==========================================================
 // <T>材质。</T>
@@ -34,8 +34,8 @@ export class FLineMaterial extends FBaseLineMaterial {
          var texture = textures.at(i);
          var textureResource = texture.textureResource;
          var rtexture = context.createFlatTexture();
-         rtexture.setFilterCd(ESamplerFilter.Linear, ESamplerFilter.Linear);
-         rtexture.setWrapCd(ESamplerFilter.Repeat, ESamplerFilter.Repeat);
+         rtexture.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
+         rtexture.setWrapCd(SamplerFilterEnum.Repeat, SamplerFilterEnum.Repeat);
          rtexture.upload(textureResource.image);
          this.textures.set(texture.code, rtexture);
       }

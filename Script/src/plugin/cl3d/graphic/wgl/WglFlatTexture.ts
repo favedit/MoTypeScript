@@ -20,7 +20,7 @@ export class WglFlatTexture extends FlatTexture {
    //==========================================================
    public setup() {
       //super.setup();
-      var graphic = this.graphicContext.handle;
+      var graphic = this._graphicContext.handle;
       this.handle = graphic.createTexture();
    }
 
@@ -31,7 +31,7 @@ export class WglFlatTexture extends FlatTexture {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var graphic = this.graphicContext.handle;
+      var graphic = this._graphicContext.handle;
       return graphic.isTexture(this.handle);
    }
 
@@ -50,7 +50,7 @@ export class WglFlatTexture extends FlatTexture {
    // @method
    //==========================================================
    public makeMipmap() {
-      var graphic = this.graphicContext.handle;
+      var graphic = this._graphicContext.handle;
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 生成MIP
@@ -66,7 +66,7 @@ export class WglFlatTexture extends FlatTexture {
    // @param height:Integer 高度
    //==========================================================
    public uploadData(content, width, height) {
-      var context = this.graphicContext;
+      var context = this._graphicContext;
       var graphic = context.handle;
       // 检查参数
       var data = null;
@@ -168,7 +168,7 @@ export class WglFlatTexture extends FlatTexture {
    // @param element:Object 内容
    //==========================================================
    public uploadElement(element) {
-      var graphic = this.graphicContext.handle;
+      var graphic = this._graphicContext.handle;
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 上传内容
@@ -188,7 +188,7 @@ export class WglFlatTexture extends FlatTexture {
    public update() {
       //super.setup();
       // 绑定数据
-      var graphic = this.graphicContext.handle;
+      var graphic = this._graphicContext.handle;
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 设置过滤器
       var code = WglUtil.convertSamplerFilter(graphic, this.filterMinCd);
@@ -215,7 +215,7 @@ export class WglFlatTexture extends FlatTexture {
    // @method
    //==========================================================
    public dispose() {
-      var graphic = this.graphicContext;
+      var graphic = this._graphicContext;
       // 释放对象
       var handle = this.handle;
       if (handle) {

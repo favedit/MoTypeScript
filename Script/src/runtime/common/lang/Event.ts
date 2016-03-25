@@ -12,29 +12,13 @@ export class Event extends Struct {
    public code: string;
    // 发送者
    public sender: any;
-   //..........................................................
-   // @attribute
-   // // @attribute
-   // public annotation = null;
-   // // @attribute
-   // public listener = null;
-   // public source = null;
-   // // @attribute
-   // public hEvent = null;
-   // public hSender = null;
-   // public hSource = null;
-   // // @attribute
-   // public result: boolean = false;
-   // //..........................................................
-   // // @method
-   // public ohProcess = null;
-   // public onProcess = null;
-   // // @method
-   // public process = null;
+   // 结果
+   public result: boolean;
 
    public constructor(sender?: any) {
       super();
       // 构造处理
       this.sender = sender;
+      this.result = true;
    }
 }

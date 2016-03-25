@@ -6,7 +6,7 @@ import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum'
 import {IndexStrideEnum} from '../graphic/IndexStrideEnum'
 import {VertexBuffer} from '../graphic/VertexBuffer'
 import {IndexBuffer} from '../graphic/IndexBuffer'
-import {FMaterial} from '../../../runtime/graphic/material/FMaterial'
+import {Material} from '../../../runtime/graphic/material/Material'
 import {GraphicContext} from '../graphic/GraphicContext'
 import {Renderable} from '../base/Renderable';
 // import {EAttributeFormat} from '../../graphic/EAttributeFormat'
@@ -130,7 +130,7 @@ export class FSphere extends Renderable {
       //this.update();
       //..........................................................
       // 设置材质
-      var material: FMaterial = this.material = new FMaterial();
+      var material: Material = this.material = new Material();
       //var info = material.info;
       //info.effectCode = 'control';
       //info.optionDouble = true;

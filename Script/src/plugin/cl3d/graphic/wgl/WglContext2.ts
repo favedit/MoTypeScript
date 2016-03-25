@@ -10,6 +10,10 @@ import {WglContext} from './WglContext';
 //==========================================================
 export class WglContext2 extends WglContext {
 
+   public extensionColorBufferFloat: any;
+   public extensionTextureFloatLiner: any;
+   public extensionTextureFilterAnisotropic: any;
+
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
@@ -33,10 +37,11 @@ export class WglContext2 extends WglContext {
       capability.optionDepth24 = true;
       capability.optionIndex32 = true;
       capability.optionDrawBuffers = true;
-      // "EXT_color_buffer_float",
+      // 获得扩展
+      this.extensionColorBufferFloat = handle.getExtension('EXT_color_buffer_float');
+      this.extensionTextureFloatLiner = handle.getExtension('OES_texture_float_linear');
+      this.extensionTextureFilterAnisotropic = handle.getExtension('EXT_texture_filter_anisotropic');
       // "EXT_disjoint_timer_query",
-      // "EXT_texture_filter_anisotropic",
-      // "OES_texture_float_linear",
       // "WEBGL_compressed_texture_etc1",
       // "WEBGL_compressed_texture_s3tc",
       // "WEBGL_debug_renderer_info",

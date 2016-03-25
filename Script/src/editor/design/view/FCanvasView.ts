@@ -1,7 +1,9 @@
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {View} from '../../runtime/framework/view/View';
-import {FKeyboardConsole} from '../../runtime/ui/console/FKeyboardConsole';
+import {EEvent} from '../../runtime/ui/EEvent';
+import {MouseEvent} from '../../runtime/ui/event/MouseEvent';
+import {KeyboardService} from '../../runtime/ui/service/KeyboardService';
 import {EKeyCode} from '../../runtime/ui/EKeyCode';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
 import {Scene} from '../../plugin/cl3d/base/Scene';
@@ -13,8 +15,6 @@ import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineServ
 import {FModelConsole} from '../../plugin/cl3d/shape/FModelConsole';
 import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
 import {SSettings} from '../application/SSettings';
-import {EEvent} from '../../runtime/ui/EEvent';
-import {SMouseEvent} from '../../runtime/ui/event/SMouseEvent';
 
 declare var id_info;
 
@@ -39,8 +39,8 @@ export class FCanvasView extends View {
    _cameraKeyRotation = 0.03;
    _cameraMouseRotation = 0.005;
    // 按键管理器
-   @Linker(FKeyboardConsole)
-   public _keyboardConsole: FKeyboardConsole = null;
+   @Linker(KeyboardService)
+   public _keyboardConsole: KeyboardService = null;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -115,7 +115,7 @@ export class FCanvasView extends View {
    //==========================================================
    // <T>逻辑处理。</T>
    //==========================================================
-   public onMouseMove(sender, event: SMouseEvent) {
+   public onMouseMove(sender, event: MouseEvent) {
       //var renderable = this.pipeline.selectTest(event.offsetX, event.offsetY);
       //id_info.innerHTML = renderable + ' ' + event.offsetX + '-' + event.offsetY
       //console.log(renderable, event.x, event.y);

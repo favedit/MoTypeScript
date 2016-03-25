@@ -3,8 +3,8 @@ import {TypeArrayUtil} from '../../../../runtime/common/lang/TypeArrayUtil';
 import {ClassUtil} from '../../../../runtime/common/reflect/ClassUtil';
 import {FFloatStream} from '../../base/util/FFloatStream';
 import {RegionParameterEnum} from '../../base/RegionParameterEnum';
-import {FMaterial} from '../../../../runtime/graphic/material/FMaterial';
-import {FLineMaterial} from '../../../../runtime/graphic/material/FLineMaterial';
+import {Material} from '../../../../runtime/graphic/material/Material';
+import {LineMaterial} from '../../../../runtime/graphic/material/LineMaterial';
 import {AutomaticEffect} from './AutomaticEffect';
 
 //==========================================================
@@ -30,7 +30,7 @@ export class GeneralColorLineEffect extends AutomaticEffect {
    // @param renderable:FG3dRenderable 渲染对象
    //==========================================================
    public buildMaterial(effectInfo, renderable) {
-      var material: FMaterial = renderable.material;
+      var material: Material = renderable.material;
       // 建立容器
       var data = effectInfo.material;
       if (!data) {
@@ -41,7 +41,7 @@ export class GeneralColorLineEffect extends AutomaticEffect {
       // 建立数据
       if (material.dirty) {
          data.reset();
-         var lineMaterial = <FLineMaterial>material;
+         var lineMaterial = <LineMaterial>material;
          // 颜色透明（索引0）
          // if (material.optionAlpha) {
          //    data.writeFloat4(lineMaterial.alphaBase, lineMaterial.alphaRate, 0, 0);

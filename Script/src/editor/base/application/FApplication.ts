@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Linker} from '../../../runtime/common/reflect/Linker';
 import {Application as BaseApplication} from '../../../runtime/framework/Application';
-import {FDeviceConsole} from '../../../runtime/ui/console/FDeviceConsole';
+import {DeviceService} from '../../../runtime/ui/service/DeviceService';
 import {FTransactionConsole} from '../transaction/FTransactionConsole';
 import {FCommandConsole} from '../command/FCommandConsole';
 import {FSelectionConsole} from '../selection/FSelectionConsole';
@@ -12,8 +12,8 @@ import {SSettings} from './SSettings';
 //==========================================================
 export class FApplication extends BaseApplication {
    // 设备管理器
-   @Linker(FDeviceConsole)
-   protected _deviceConsole: FDeviceConsole;
+   @Linker(DeviceService)
+   protected _deviceService: DeviceService;
    // 命令管理器
    @Linker(FCommandConsole)
    protected _commandConsole: FCommandConsole;
@@ -37,7 +37,7 @@ export class FApplication extends BaseApplication {
    public setup(settings: SSettings) {
       super.setup(settings);
       // 设置环境
-      this._deviceConsole.setup(settings.hWindow);
+      this._deviceService.setup(settings.hWindow);
    }
 
    //==========================================================

@@ -12,7 +12,7 @@ import {EnvironmentService} from '../../../runtime/core/service/EnvironmentServi
 import {Service} from '../../../runtime/core/Service';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
-import {FMaterial} from '../../../runtime/graphic/material/FMaterial';
+import {Material} from '../../../runtime/graphic/material/Material';
 import {Renderable} from '../base/Renderable';
 import {Region} from '../base/Region';
 import {EffectInfo} from './EffectInfo';
@@ -162,7 +162,7 @@ export class EffectConsole extends Service {
          effectInfo.attributes.push(vertexCode);
       }
       // 设置纹理信息
-      var material: FMaterial = renderable.material;
+      var material: Material = renderable.material;
       AssertUtil.debugNotNull(material);
       var textures = material.textures;
       if (textures) {

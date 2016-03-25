@@ -1,4 +1,4 @@
-import {FPhongMaterial} from '../../../runtime/graphic/material/FPhongMaterial'
+import {PhongMaterial} from '../../../runtime/graphic/material/PhongMaterial'
 import {Renderable} from '../base/Renderable';
 
 //==========================================================
@@ -105,7 +105,7 @@ export class FMeshRenderable extends Renderable {
       this.indexBuffers = renderable.indexBuffers;
       //..........................................................
       // 设置材质
-      var material = this.material = new FPhongMaterial();
+      var material = this.material = new PhongMaterial();
       //var info = material.info;
       //info.effectCode = 'automatic';
       //info.ambientColor.set(1, 1, 1, 1);

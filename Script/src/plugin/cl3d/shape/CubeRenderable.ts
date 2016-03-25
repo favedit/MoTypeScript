@@ -3,7 +3,7 @@ import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum'
 import {GraphicContext} from '../graphic/GraphicContext'
 import {VertexBuffer} from '../graphic/VertexBuffer'
 import {IndexBuffer} from '../graphic/IndexBuffer'
-import {FPhongMaterial} from '../../../runtime/graphic/material/FPhongMaterial'
+import {PhongMaterial} from '../../../runtime/graphic/material/PhongMaterial'
 
 //==========================================================
 // <T>渲染立方体。</T>
@@ -78,7 +78,7 @@ export class CubeRenderable extends Renderable {
       this.pushIndexBuffer(indexBuffer);
       //..........................................................
       // 设置材质
-      var material = this.material = new FPhongMaterial();
+      var material = this.material = new PhongMaterial();
       // info.effectCode = 'control';
       // info.effectCode = 'automatic';
       // material.ambientColor.set(1, 1, 1, 1);
