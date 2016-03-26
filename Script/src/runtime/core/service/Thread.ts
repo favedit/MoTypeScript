@@ -11,13 +11,13 @@ import {ThreadStatusEnum} from './ThreadStatusEnum';
 //==========================================================
 export abstract class Thread extends ObjectBase {
    // 名称
-   public name: string = null;
+   public name: string;
    // 延时
-   public delay: number = 0;
+   public delay: number;
    // 间隔
-   public interval: number = 100;
+   public interval: number;
    // 状态
-   public statusCd: ThreadStatusEnum = ThreadStatusEnum.Sleep;
+   public statusCd: ThreadStatusEnum;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -26,6 +26,10 @@ export abstract class Thread extends ObjectBase {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this.delay = 0;
+      this.interval = 100;
+      this.statusCd = ThreadStatusEnum.Sleep;
    }
 
    //==========================================================
@@ -51,7 +55,7 @@ export abstract class Thread extends ObjectBase {
    //
    // @return 处理结果
    //==========================================================
-   public abstract onProcess():ResultEnum;
+   public abstract onProcess(): ResultEnum;
 
    //==========================================================
    // <T>调用处理。</T>

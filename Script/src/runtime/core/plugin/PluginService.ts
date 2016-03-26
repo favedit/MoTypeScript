@@ -1,8 +1,16 @@
 import {Objects} from '../../common/lang/Objects';
+import {Dictionary} from '../../common/lang/Dictionary';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Listeners} from '../../common/lang/Listeners';
+import {AnnotationEnum} from '../../common/reflect/AnnotationEnum';
+import {Annotation} from '../../common/reflect/Annotation';
+import {Class} from '../../common/reflect/Class';
+import {ClassUtil} from '../../common/reflect/ClassUtil';
+import {AssertUtil} from '../../common/AssertUtil';
 import {Service} from '../Service';
 import {PluginFace} from './PluginFace';
+import {PluginAnnotation} from './PluginAnnotation';
+import {PluginContext} from './PluginContext';
 
 //==========================================================
 // <T>插件管理器。</T>
@@ -11,13 +19,13 @@ import {PluginFace} from './PluginFace';
 // @author maocy
 // @version 160309
 //==========================================================
-export class PluginConsole extends Service {
+export class PluginService extends Service {
    // 环境
    public context = null;
    // 插件集合
+   public pluginAnnotations: Objects<PluginAnnotation> = null;
+   // 插件集合
    public plugins: Objects<PluginFace> = null;
-   // 加载集合
-   public loadingPlugins: Objects<PluginFace> = null;
    // 激活监听器
    public activedListeners: Listeners = null;
    // 取消激活监听器
@@ -30,11 +38,19 @@ export class PluginConsole extends Service {
       super();
       // 设置属性
       this.context = { app: AppView };
-      this.plugins = new Objects<PluginFace>();;
-      this.loadingPlugins = new Objects<PluginFace>();
+      this.pluginAnnotations = new Objects<PluginAnnotation>();
+      this.plugins = new Objects<PluginFace>();
       this.activedListeners = new Listeners(this);
       this.deactivedListeners = new Listeners(this);
-   };
+   }
+
+   /**
+    * @param {?} plugin
+    * @return {undefined}
+    */
+   public registerAnnotation(annotation: PluginAnnotation) {
+      this.pluginAnnotations.push(annotation);
+   }
 
    /**
     * @param {?} plugin
@@ -72,57 +88,52 @@ export class PluginConsole extends Service {
    //
    // @param plugin 插件
    //==========================================================
-   public load(plugin) {
-      var context = this.context;
-      //assert(options && "string" === typeof options, "Invalid type of plugin type.");
-      if (this.loadingPlugins.contains(plugin)) {
-         //assert(false, "loading plugin for another time: " + options + ". is there a circular reference between plugins?");
-         //assert(false, "current loading plugins: [" + this._loadingPlugins.join(", ") + "]");
-      } else {
-         if (null !== this.plugins[plugin]) {
-            return this.plugins[plugin];
-         }
-         this.loadingPlugins.push(plugin);
-         var result: PluginFace = new (eval(plugin));
-         //assert(result instanceof hsw.plugin.IPlugin, 'all plugins should derived from "hsw.plugin.IPlugin" interface');
-         /** @type {string} */
-         result.type = plugin;
-         this.plugins[plugin] = result;
-         result.onCreate(context);
-         if (result.enable) {
-            var udataCur = {};
-            var dependencies = result.dependencies;
-            var count = dependencies.count();
-            for (var n = 0; n < count; n++) {
-               var dependencyPlugin: PluginFace = dependencies.at(n);
-               var dependencyName = dependencyPlugin.name;
-               udataCur[dependencyName] = this.load(dependencyPlugin);
-            }
-            result.onActive(context, udataCur);
-            this.activedListeners.process(plugin);
-         }
-         //this._loadingPlugins.xRemove(options);
-         return result;
+   public loadAnnotation(context: PluginContext, annotation: PluginAnnotation) {
+      // 检查是否已经激活
+      if (annotation.actived) {
+         return;
       }
-   };
+      // 加载依赖库
+      var dependencies = annotation.dependencies;
+      if (dependencies) {
+         var count: number = dependencies.length;
+         for (var n = 0; n < count; n++) {
+            var dependency = dependencies[n];
+            var dependencyClass: Class = ClassUtil.get(dependency);
+            var dependencyAnnotations: Dictionary<Annotation> = dependencyClass.findAnnotations(AnnotationEnum.Plugin);
+            var annotationCount = dependencyAnnotations.count();
+            for (var i = 0; i < annotationCount; i++) {
+               var dependencyAnnotation = dependencyAnnotations.at(i);
+               if (dependencyAnnotation instanceof PluginAnnotation) {
+                  this.loadAnnotation(context, <PluginAnnotation>dependencyAnnotation);
+               }
+            }
+         }
+      }
+      // 激活插件
+      var instance: PluginFace = annotation.clazz.instance;
+      instance.active(context);
+      annotation.actived = true;
+      this.plugins.push(instance);
+   }
 
    //==========================================================
    // <T>卸载插件。</T>
    //
    // @param plugin 插件
    //==========================================================
-   public unload(data?) {
+   public unloadPlugin(plugin: PluginFace) {
    }
 
    //==========================================================
    // <T>加载全部插件。</T>
    //==========================================================
-   public loadAll() {
-      var plugins: Objects<PluginFace> = this.plugins;
-      var count: number = plugins.count();
+   public loadAll(context: PluginContext) {
+      var annotations: Objects<PluginAnnotation> = this.pluginAnnotations;
+      var count: number = annotations.count();
       for (var n: number = 0; n < count; n++) {
-         var plugin: PluginFace = plugins.get(n);
-         this.load(plugin);
+         var annotation: PluginAnnotation = annotations.get(n);
+         this.loadAnnotation(context, annotation);
       }
    }
 
@@ -134,7 +145,7 @@ export class PluginConsole extends Service {
       var count: number = plugins.count();
       for (var n: number = 0; n < count; n++) {
          var plugin: PluginFace = plugins.get(n);
-         this.unload(plugin);
+         this.unloadPlugin(plugin);
       }
    }
 
@@ -146,7 +157,6 @@ export class PluginConsole extends Service {
    public dispose(flag: boolean = false): void {
       this.context = ObjectUtil.dispose(this.context);
       this.plugins = ObjectUtil.dispose(this.plugins);
-      this.loadingPlugins = ObjectUtil.dispose(this.loadingPlugins);
       this.activedListeners = ObjectUtil.dispose(this.activedListeners);
       this.deactivedListeners = ObjectUtil.dispose(this.deactivedListeners);
       super.dispose();

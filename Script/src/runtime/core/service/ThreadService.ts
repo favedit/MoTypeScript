@@ -14,16 +14,14 @@ import {Thread} from './Thread';
 // @version 150105
 //==========================================================
 export class ThreadService extends Service {
-   // @attribute 范围标志
-   protected _scopeCd = ScopeEnum.Global;
-   // @attribute 激活标志
+   // 激活标志
    protected _active: boolean = true;
-   // @attribute 激活标志
+   // 执行间隔
    protected _interval: number = 5;
-   protected _threads: Objects<Thread> = null;
-   //..........................................................
-   // @html
-   protected _hIntervalId = null;
+   // 线程集合
+   protected _threads: Objects<Thread>;
+   // 句柄
+   protected _hHandle;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -32,12 +30,13 @@ export class ThreadService extends Service {
    //==========================================================
    public constructor() {
       super();
+      this._scopeCd = ScopeEnum.Global;
       this._threads = new Objects<Thread>();
       // 设置回调
       //var flag = o._requestFlag = MO.Window.requestAnimationFrame(o.ohInterval);
       //if(!flag){
       //o._hIntervalId = MO.Window.htmlWindow().setInterval(o.ohInterval, o._interval);
-      this._hIntervalId = window.setInterval(this.ohInterval, this._interval);
+      this._hHandle = window.setInterval(this.ohInterval, this._interval);
       //}
    }
 
@@ -90,7 +89,7 @@ export class ThreadService extends Service {
    // @method
    // @param thread 线程
    //==========================================================
-   public process(thread:Thread) {
+   public process(thread: Thread) {
       if (thread) {
          var statusCd = thread.statusCd;
          switch (statusCd) {
@@ -115,11 +114,11 @@ export class ThreadService extends Service {
    public processAll() {
       // 激活处理
       if (this._active) {
-         var threads:Objects<Thread> = this._threads;
-         var count:number = threads.count();
+         var threads: Objects<Thread> = this._threads;
+         var count: number = threads.count();
          //try{
-         for (var n:number = 0; n < count; n++) {
-            var thread:Thread = threads.at(n);
+         for (var n: number = 0; n < count; n++) {
+            var thread: Thread = threads.at(n);
             this.process(thread);
          }
          //}catch(error){

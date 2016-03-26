@@ -12,13 +12,25 @@ import {ObjectBase} from './ObjectBase';
 //==========================================================
 export class HashMap<N, V> extends ObjectBase {
    // 总数
-   protected _count: number = 0;
+   protected _count: number;
    // 对照表
-   protected _table: any = new ObjectBase();
+   protected _table: any;
    // 名称集合
-   protected _names: Array<N> = new Array<N>();
+   protected _names: Array<N>;
    // 内容集合
-   protected _values: Array<V> = new Array<V>();
+   protected _values: Array<V>;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._count = 0;
+      this._table = new Object();
+      this._names = new Array<N>();
+      this._values = new Array<V>();
+   }
 
    //==========================================================
    // <T>判断是否为空。</T>
@@ -407,13 +419,12 @@ export class HashMap<N, V> extends ObjectBase {
    //==========================================================
    // <T>调用函数处理。</T>
    //
-   // @method
-   // @param methodName:String 函数名称
-   // @param parameter1:Object 参数1
-   // @param parameter2:Object 参数2
-   // @param parameter3:Object 参数3
-   // @param parameter4:Object 参数4
-   // @param parameter5:Object 参数5
+   // @param methodName 函数名称
+   // @param parameter1 参数1
+   // @param parameter2 参数2
+   // @param parameter3 参数3
+   // @param parameter4 参数4
+   // @param parameter5 参数5
    //==========================================================
    public invoke(methodName, parameter1, parameter2, parameter3, parameter4, parameter5): void {
       var count = this._count;

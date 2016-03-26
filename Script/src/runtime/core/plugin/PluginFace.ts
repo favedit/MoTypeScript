@@ -1,4 +1,4 @@
-import {Objects} from '../../common/lang/Objects';
+import {PluginContext} from './PluginContext';
 
 //==========================================================
 // <T>插件接口。</T>
@@ -16,26 +16,24 @@ export interface PluginFace {
    enable: boolean;
    // 描述
    description: string;
-   // 依赖
-   dependencies: Objects<PluginFace>;
 
    //==========================================================
    // <T>创建处理。</T>
    //==========================================================
-   onCreate(context);
+   create(context: PluginContext);
 
    //==========================================================
    // <T>激活处理。</T>
    //==========================================================
-   onActive(element, value);
+   active(context: PluginContext);
 
    //==========================================================
    // <T>取消激活处理。</T>
    //==========================================================
-   onDeactive(dataAndEvents);
+   deactive(context: PluginContext);
 
    //==========================================================
    // <T>销毁处理。</T>
    //==========================================================
-   onDestroy(up);
+   destroy(context: PluginContext);
 }

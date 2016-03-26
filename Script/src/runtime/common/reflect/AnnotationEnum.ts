@@ -16,6 +16,8 @@ export class AnnotationEnum {
    public static Property = 'property';
    // @attribute 日志
    public static Logger = 'logger';
+   // @attribute 插件
+   public static Plugin = 'plugin';
    // @attribute 持久化属性
    public static Persistence = 'persistence';
    // @attribute 枚举v

@@ -11,7 +11,7 @@ import {Class} from './Class'
 //============================================================
 export class Annotation {
    // 类对象
-   protected _clazz: Class;
+   public clazz: Class;
 
    // 描述器类型
    protected _annotationCd: AnnotationEnum;
@@ -23,13 +23,13 @@ export class Annotation {
    protected _value: any;
 
    // 可继承
-   protected _inherit = false;
+   protected _inherit: boolean;
 
    // 可重复
-   protected _duplicate = false;
+   protected _duplicate: boolean;
 
    // 可有序
-   protected _ordered = false;
+   protected _ordered: boolean;
 
    //============================================================
    // <T>构造处理。</T>
@@ -39,31 +39,13 @@ export class Annotation {
    public constructor(name: string) {
       this._name = name;
    }
-   
-   //============================================================
-   // <T>获得类对象。</T>
-   //
-   // @return 类对象
-   //============================================================
-   public get clazz(): Class {
-      return this._clazz;
-   }
-   
-   //============================================================
-   // <T>设置类对象。</T>
-   //
-   // @param clazz 类对象
-   //============================================================
-   public set clazz(clazz: Class) {
-      this._clazz = clazz;
-   }
 
    //============================================================
    // <T>获得描述类型。</T>
    //
    // @return 描述类型
    //============================================================
-   public get annotationCd():AnnotationEnum {
+   public get annotationCd(): AnnotationEnum {
       return this._annotationCd;
    }
 
@@ -84,7 +66,7 @@ export class Annotation {
    public get code() {
       return this._name;
    }
-   
+
    //==========================================================
    // <T>获得内容。</T>
    //

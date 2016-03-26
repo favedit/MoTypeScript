@@ -1,6 +1,4 @@
 import {ResultEnum} from '../../common/lang/ResultEnum';
-import {Listeners} from '../../common/lang/Listeners';
-import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Thread} from './Thread';
 
 //==========================================================
@@ -10,18 +8,25 @@ import {Thread} from './Thread';
 // @author maocy
 // @version 160306
 //==========================================================
-export class ListenerThread extends Thread {
-   // 处理监听集合
-   public processListeners: Listeners;
+export class InvokeThread extends Thread {
+   // 拥有着
+   public owner: any;
+   // 回调处理
+   public callback: Function;
 
    //==========================================================
    // <T>构造处理。</T>
    //
-   // @method
+   // @param owner 调用者
+   // @param callback 回调处理
    //==========================================================
-   public constructor() {
+   public constructor(owner: any, callback: Function, interval?: number) {
       super();
-      this.processListeners = new Listeners(this);
+      this.owner = owner;
+      this.callback = callback;
+      if (interval != null) {
+         this.interval = interval;
+      }
    }
 
    //==========================================================
@@ -30,7 +35,7 @@ export class ListenerThread extends Thread {
    // @return 处理结果
    //==========================================================
    public onProcess(): ResultEnum {
-      this.processListeners.process();
+      this.callback.call(this.owner);
       return ResultEnum.Success;
    }
 
@@ -39,7 +44,8 @@ export class ListenerThread extends Thread {
    //==========================================================
    public dispose(): void {
       // 释放处理
-      this.processListeners = ObjectUtil.dispose(this.processListeners);
+      this.owner = null;
+      this.callback = null;
       // 父处理
       super.dispose();
    }
