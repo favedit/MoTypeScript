@@ -1,4 +1,5 @@
 ﻿import {Objects} from '../../../runtime/common/lang/Objects';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {Scene} from '../base/Scene';
@@ -66,6 +67,19 @@ export class Technique extends Content {
    //==========================================================
    public pushPass(pass: TechniquePass): void {
       AssertUtil.debugNotNull(pass);
+      // 处理输出纹理
+      var count = this.passes.count();
+      for (var n = 0; n < count; n++) {
+         var techniquePass: TechniquePass = this.passes.at(n);
+         var outputTextures = techniquePass.outputTextures;
+         var textureCount = outputTextures.count();
+         for (var i = 0; i < textureCount; i++) {
+            var name = outputTextures.name(i);
+            var texture = outputTextures.value(i);
+            pass.inputTextures.set(name, texture);
+         }
+      }
+      // 放入尾部
       pass.technique = this;
       this.passes.push(pass);
    }
@@ -171,5 +185,17 @@ export class Technique extends Content {
    //==========================================================
    public present(p) {
       this.graphicContext.present();
+   }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 释放属性
+      this.activeMode = null;
+      this.modes = ObjectUtil.dispose(this.modes);
+      this.passes = ObjectUtil.dispose(this.passes);
+      // 父处理
+      super.dispose();
    }
 }

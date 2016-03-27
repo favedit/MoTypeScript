@@ -127,13 +127,13 @@ export class FResource extends FBaseResource {
    //
    // @param config 配置
    //==========================================================
-   public loadMeta(jconfig: any): void {
-      this.className = jconfig.class_name;
-      this.version = jconfig.version;
-      this.guid = jconfig.guid;
-      this.code = jconfig.code;
-      this.label = jconfig.label;
-   }
+   // public loadMeta(jconfig: any): void {
+   //    this.className = jconfig.class_name;
+   //    this.version = jconfig.version;
+   //    this.guid = jconfig.guid;
+   //    this.code = jconfig.code;
+   //    this.label = jconfig.label;
+   // }
 
    //==========================================================
    // <T>从配置里加载信息内容</T>
@@ -141,7 +141,12 @@ export class FResource extends FBaseResource {
    // @param config 配置
    //==========================================================
    public loadConfig(jconfig: any): void {
-      this.loadMeta(jconfig.meta);
+      this.className = jconfig.class;
+      this.version = jconfig.version;
+      this.guid = jconfig.guid;
+      this.code = jconfig.code;
+      this.label = jconfig.label;
+      //this.loadMeta(jconfig.meta);
    }
 
    //==========================================================

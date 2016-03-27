@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+   <!--=====================================================-->
+   <State name='fill_mode'   value='Face'/>
+   <State name='cull_mode'   value='Front'/>
+   <State name='depth_mode'  value='LessEqual'/>
+   <State name='depth_write' value='Y'/>
+   <State name='blend_mode'  value='N'/>
+   <State name='alpha_test'  value='N'/>
+   <!--=====================================================-->
+   <Option name='shadow'   value='N'/>
+   <Option name='lightmap' value='N'/>
+   <Option name='fog'      value='N'/>
+   <!--=====================================================-->
+   <Attribute name='va_position'  linker='position' format='Float4'/>
+   <Attribute name='va_coord'     linker='coord'    format='Float2'/>
+   <!--=====================================================-->
+   <Sampler name='fs_depth'   linker='depth'/>
+   <Sampler name='fs_normal'  linker='normal'/>
+   <Sampler name='fs_color'   linker='color'/>
+   <Sampler name='fs_sketch1' linker='sketch1'/>
+   <Sampler name='fs_sketch2' linker='sketch2'/>
+   <Sampler name='fs_sketch3' linker='sketch3'/>
+   <!--=====================================================-->
+   <Source name='vertex'><![CDATA[
+      //..........................................................
+      // 属性流声明
+      attribute vec3 va_position;
+      attribute vec2 va_coord;
+      //..........................................................
+      // 属性流声明
+      varying vec2 v_coord;
+      //..........................................................
+      // 处理
+      void main(){
+         // 计算最终坐标
+         gl_Position = vec4(va_position.xy, 0.0, 1.0);
+         // 设置纹理
+         v_coord = va_coord;
+      }
+   ]]></Source>
+   <Source name='fragment'><![CDATA[
+      // 声明环境
+      #ifdef GL_ES
+      precision highp float;
+      #endif
+      //..........................................................
+      // 声明插值器
+      varying vec2 v_coord;
+      //..........................................................
+      // 声明取样器
+      uniform sampler2D fs_depth;
+      uniform sampler2D fs_normal;
+      uniform sampler2D fs_color;
+      uniform sampler2D fs_sketch1;
+      uniform sampler2D fs_sketch2;
+      uniform sampler2D fs_sketch3;
+      //..........................................................
+      float planeDistance(const in vec3 positionA, const in vec3 normalA, const in vec3 positionB, const in vec3 normalB){
+         vec3 positionDelta = positionB - positionA;
+         float planeDistanceDelta = max(abs(dot(positionDelta, normalA)), abs(dot(positionDelta, normalB)));
+         return planeDistanceDelta;
+      }
+      //..........................................................
+      float shade(const in float shading, const in vec2 uv) {
+         float stepSize = 1.0 / 3.0;
+         float alpha = 0.0;
+         float scaleWhite = 0.0;
+         float scaleHatch0 = 0.0;
+         float scaleHatch1 = 0.0;
+         float scaleHatch2 = 0.0;
+         if (shading <= stepSize) {
+            alpha = 3.0 * shading;
+            scaleHatch1 = alpha;
+            scaleHatch2 = 1.0 - alpha;
+         }else if (shading > stepSize && shading <= 2.0 * stepSize) {
+            alpha = 3.0 * (shading - stepSize);
+            scaleHatch0 = alpha;
+            scaleHatch1 = 1.0 - alpha;
+         }else if (shading > 2.0 * stepSize) {
+            alpha = 3.0 * (shading - stepSize * 2.0);
+            scaleWhite = alpha;
+            scaleHatch0 = 1.0 - alpha;
+         }
+         float shadingFactor = scaleWhite +  scaleHatch0 * texture2D(fs_sketch1, uv).r + scaleHatch1 * texture2D(fs_sketch2, uv).r + scaleHatch2 * texture2D(fs_sketch3, uv).r;
+         return shadingFactor;
+      }
+      //..........................................................
+      // 处理
+      void main(void){
+         // 获得颜色
+         //vec4 depth = texture2D(fs_depth, v_coord);
+         //vec4 normal = texture2D(fs_normal, v_coord);
+         vec4 color = texture2D(fs_color, v_coord);
+         //..........................................................
+         float depthCenter = texture2D(fs_depth, v_coord).r;
+         float px = 1.0 / 800.0;
+         vec3 leftpos  = vec3(v_coord.s - px, v_coord.t, 1.0 - texture2D(fs_depth, vec2(v_coord.s - px, v_coord.t)).r);
+         vec3 rightpos = vec3(v_coord.s + px, v_coord.t, 1.0 - texture2D(fs_depth, vec2(v_coord.s + px, v_coord.t)).r);
+         vec3 uppos    = vec3(v_coord.s, v_coord.t - px, 1.0 - texture2D(fs_depth, vec2(v_coord.s, v_coord.t - px)).r);
+         vec3 downpos  = vec3(v_coord.s, v_coord.t + px, 1.0 - texture2D(fs_depth, vec2(v_coord.s, v_coord.t + px)).r);
+
+         vec3 leftnor  = texture2D(fs_normal, vec2(v_coord.s - px, v_coord.t)).xyz;
+         vec3 rightnor = texture2D(fs_normal, vec2(v_coord.s + px, v_coord.t)).xyz;
+         vec3 upnor    = texture2D(fs_normal, vec2(v_coord.s, v_coord.t - px)).xyz;
+         vec3 downnor  = texture2D(fs_normal, vec2(v_coord.s, v_coord.t + px)).xyz;
+
+         vec2 planeDist = vec2(planeDistance(leftpos, leftnor, rightpos, rightnor), planeDistance(uppos, upnor, downpos, downnor));
+
+         float planeEdge = 2.5 * length(planeDist);
+         planeEdge = 1.0 - 0.5 * smoothstep(0.0, depthCenter, planeEdge);
+         float normEdge = max(length(leftnor - rightnor), length(upnor - downnor));
+         normEdge = 1.0 - 0.5 * smoothstep(0.0, 0.5, normEdge); 
+         float edge = planeEdge * normEdge;
+
+         vec2 uv1 = v_coord.xy * 14.0;
+         vec2 uv2 = v_coord.yx * 8.0;
+         float shading = texture2D(fs_depth, v_coord).r * 0.7 + 0.2;
+         float crossedShading = shade(shading, uv1) * shade(shading, uv2) * 0.2 + 0.8;
+
+         float rate = edge * crossedShading;
+         vec4 result = vec4(rate, rate, rate, 1.0);
+         //vec4 result = color * edge * crossedShading;
+         //vec4 result = vec4(crossedShading, crossedShading, crossedShading, 1.0);
+         //............................................................
+         // 设置输出
+         gl_FragColor = vec4(result.rgb, 1.0);
+      }
+   ]]></Source>
+</Configuration>

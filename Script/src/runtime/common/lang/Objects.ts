@@ -5,7 +5,6 @@ import {RuntimeUtil} from '../RuntimeUtil';
 // =========================================================
 // <T>对象集合。</T>
 //
-// @tool
 // @author maocy
 // @version 141230
 // =========================================================
@@ -18,8 +17,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>判断集合是否为空。</T>
    //
-   // @method
-   // @return Boolean 是否为空
+   // @return 是否为空
    //===========================================================
    public isEmpty(): boolean {
       return (this._count == 0);
@@ -28,8 +26,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>获得总数。</T>
    //
-   // @method
-   // @return Integer 总数
+   // @return 总数
    //===========================================================
    public count(): number {
       return this._count;
@@ -38,8 +35,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>获得数据。</T>
    //
-   // @method
-   // @return Array 数据
+   // @return 数据
    //===========================================================
    public items(): Array<T> {
       return this._items;
@@ -48,9 +44,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>判断集合是否含有指定的对象。</T>
    //
-   // @method
-   // @param value:Object 对象
-   // @return Boolean 是否含有
+   // @param value 对象
+   // @return 是否含有
    //===========================================================
    public contains(value: T): boolean {
       return this.indexOf(value) != -1;
@@ -59,9 +54,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>查找指定对象在集合中的索引位置，不存在则返回-1。</T>
    //
-   // @method
-   // @param value:Object 对象
-   // @return Integer 索引位置
+   // @param value 对象
+   // @return 索引位置
    //===========================================================
    public indexOf(value: T): number {
       var count = this._count;
@@ -77,7 +71,6 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>获得集合中第一个对象。</T>
    //
-   // @method
    // @return 第一个对象
    //===========================================================
    public first(): T {
@@ -87,7 +80,6 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>获得集合中最后一个对象。</T>
    //
-   // @method
    // @return 最后一个对象
    //===========================================================
    public last(): T {
@@ -97,8 +89,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>取得指定索引对应的对象。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
+   // @param index 索引位置
    // @return 当前位置上的对象
    //===========================================================
    public at(index: number): T {
@@ -108,8 +99,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>取得指定索引对应的对象。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
+   // @param index 索引位置
    // @return 当前位置上的对象
    //===========================================================
    public getAt(index: number): T {
@@ -119,8 +109,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>取得指定索引对应的对象。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
+   // @param index 索引位置
    // @return 当前位置上的对象
    //===========================================================
    public get(index: number): T {
@@ -130,9 +119,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>把对象存储在指定的索引处。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
-   // @param value:Object 对象
+   // @param index 索引位置
+   // @param value 对象
    //===========================================================
    public setAt(index: number, value: T): void {
       this._items[index] = value;
@@ -141,9 +129,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>把对象存储在指定的索引处。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
-   // @param value:Object 对象
+   // @param index 索引位置
+   // @param value 对象
    //===========================================================
    public set(index: number, value: T): void {
       var items = this._items;
@@ -155,9 +142,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>搜索属性内容相等的对象。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param value:String 内容
+   // @param name 名称
+   // @param value 内容
    // @return 对象
    //===========================================================
    public search(name: string, value: T): T {
@@ -176,8 +162,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>接收集合全部内容。</T>
    //
-   // @method
-   // @param values:TObjects 集合
+   // @param values 集合
    //===========================================================
    public assign(values: Objects<T>): void {
       var items = this._items;
@@ -191,8 +176,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>追加集合全部内容。</T>
    //
-   // @method
-   // @param values:TObjects 集合
+   // @param values 集合
    //===========================================================
    public append(values: Objects<T>): void {
       var count = values.count();
@@ -204,9 +188,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    //<T>把对象插入在指定的索引处。</T>
    //
-   //@method
-   //@param index:Integer 索引位置
-   //@param value:Object 对象
+   // @param index 索引位置
+   // @param value 对象
    //===========================================================
    public insert(index: number, value: T): void {
       var count = this._count;
@@ -223,8 +206,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>弹出首对象。</T>
    //
-   // @method
-   // @return Object 对象
+   // @return 对象
    //===========================================================
    public shift(): T {
       return this.erase(0);
@@ -233,8 +215,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>压入首对象。</T>
    //
-   // @method
-   // @param value:Object 对象
+   // @param value 对象
    //===========================================================
    public unshift(value: T): void {
       return this.insert(0, value);
@@ -243,8 +224,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>将最后一个对象弹出集合。</T>
    //
-   // @method
-   // @return Object 对象
+   // @return 对象
    //===========================================================
    public pop(): T {
       var value = null;
@@ -257,9 +237,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>把对象追加到集合的最后位置。</T>
    //
-   // @method
-   // @param value:Object 对象
-   // @return Integer 索引值
+   // @param value 对象
+   // @return 索引值
    //===========================================================
    public push(value: T): number {
       var index = this._count++;
@@ -270,9 +249,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>把唯一对象追加到集合的最后位置。</T>
    //
-   // @method
-   // @param value:Object 对象
-   // @return Integer 索引值
+   // @param value 对象
+   // @return 索引值
    //===========================================================
    public pushUnique(value: T): void {
       var index = this.indexOf(value);
@@ -284,9 +262,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>在集合中交换两个索引对应的对象。</T>
    //
-   // @method
-   // @param left:Integer 第一个对象的索引值
-   // @param right:Integer 第二个对象的索引值
+   // @param left 第一个对象的索引值
+   // @param right 第二个对象的索引值
    //===========================================================
    public swap(left: number, right: number): void {
       var count = this._count;
@@ -301,8 +278,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>对集合内容进行排序。</T>
    //
-   // @method
-   // @param callback:Function 排序函数
+   // @param callback 排序函数
    //===========================================================
    public sort(callback: any): void {
       var items = this._items;
@@ -316,9 +292,8 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>移除指定索引的存储对象。</T>
    //
-   // @method
-   // @param index:Integer 索引位置
-   // @return Object 被删除的对象
+   // @param index 索引位置
+   // @return 被删除的对象
    //===========================================================
    public erase(index: number): T {
       var value = null;
@@ -337,8 +312,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>移除所有指定对象。</T>
    //
-   // @method
-   // @param value:Object 指定对象
+   // @param value 指定对象
    //===========================================================
    public remove(value: T): void {
       var count = this._count;
@@ -363,13 +337,12 @@ export class Objects<T> extends ObjectBase {
    //==========================================================
    // <T>调用函数处理。</T>
    //
-   // @method
-   // @param methodName:String 函数名称
-   // @param parameter1:Object 参数1
-   // @param parameter2:Object 参数2
-   // @param parameter3:Object 参数3
-   // @param parameter4:Object 参数4
-   // @param parameter5:Object 参数5
+   // @param methodName 函数名称
+   // @param parameter1 参数1
+   // @param parameter2 参数2
+   // @param parameter3 参数3
+   // @param parameter4 参数4
+   // @param parameter5 参数5
    //==========================================================
    public invoke(methodName: string, parameter1: any, parameter2: any, parameter3: any, parameter4: any, parameter5: any): void {
       var count = this._count;
@@ -383,8 +356,6 @@ export class Objects<T> extends ObjectBase {
 
    //===========================================================
    // <T>清除所有内容。</T>
-   //
-   // @method
    //===========================================================
    public clear(): void {
       this._count = 0;
@@ -392,8 +363,6 @@ export class Objects<T> extends ObjectBase {
 
    //===========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //===========================================================
    public dispose(): void {
       var items = this._items;
@@ -407,8 +376,7 @@ export class Objects<T> extends ObjectBase {
    //===========================================================
    // <T>获得运行时信息。</T>
    //
-   // @method
-   // @return String 运行字符串
+   // @return 运行字符串
    //===========================================================
    public dump(): string {
       var count: number = this._count;

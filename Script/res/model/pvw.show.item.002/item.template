@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "version": 1,
+    "guid": "XXXX",
+    "code": "xiong",
+    "label": "灰熊"
+  },
+  "content": [
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_001_001",
+      "material_url": "${resource}/model/pvw.show.item.002/1.material"
+    },
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_001_002",
+      "material_url": "${resource}/model/pvw.show.item.002/1.material"
+    },
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_001_003",
+      "material_url": "${resource}/model/pvw.show.item.002/1.material"
+    },
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_001_004",
+      "material_url": "${resource}/model/pvw.show.item.002/1.material"
+    },
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_001_005",
+      "material_url": "${resource}/model/pvw.show.item.002/1.material"
+    },
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_001_006",
+      "material_url": "${resource}/model/pvw.show.item.002/1.material"
+    },
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.002/item.model",
+      "mesh_code": "ms_002",
+      "material_url": "${resource}/model/pvw.show.item.002/2.material"
+    }
+  ]
+}

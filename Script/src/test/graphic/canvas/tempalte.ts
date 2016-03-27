@@ -15,7 +15,8 @@ RuntimeUtil.namespace(mo, 'mo');
 var deviceService = ServiceUtil.find(DeviceService);
 deviceService.setup(window);
 var environmentConsole = ServiceUtil.find(EnvironmentService);
-environmentConsole.registerValue('resource', '/sk/res');
+//environmentConsole.registerValue('resource', '/sk/res');
+environmentConsole.registerValue('resource', '/asset/demo');
 //............................................................
 // 创建画板
 var canvas = new FCanvas();
@@ -36,11 +37,15 @@ camera.update();
 //............................................................
 // 创建模板
 var templateService: TemplateService = ServiceUtil.find(TemplateService);
-var template = templateService.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
-template.matrix.setScaleAll(0.05);
+//var template = templateService.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
+//template.matrix.setScaleAll(0.05);
+//var template = templateService.allocByUrl(context, '/sk/res/model/pvw.show.item.001/item.template');
+//var template = templateService.allocByUrl(context, '/sk/res/model/pvw.show.item.002/item.template');
+var template = templateService.allocByUrl(context, '${resource}/template/pvw.sc.car.01.001.template');
+template.matrix.setScaleAll(0.01);
 template.matrix.updateForce();
 template.matrix.addRotationX(-Math.PI / 2);
-template.matrix.addRotationY(Math.PI);
+//template.matrix.addRotationY(Math.PI);
 scene.contentLayer.push(template);
 // 设置显示
 canvas.activeDisplay = template;

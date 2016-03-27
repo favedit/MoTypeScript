@@ -1,4 +1,4 @@
-export * from './REngine';
+export * from './EngineUtil';
 
 import * as base from './base/index';
 export {base as base};

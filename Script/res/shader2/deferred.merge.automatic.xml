@@ -18,9 +18,6 @@
    <Sampler name='fs_depth'   linker='depth'/>
    <Sampler name='fs_normal'  linker='normal'/>
    <Sampler name='fs_color'   linker='color'/>
-   <Sampler name='fs_sketch1' linker='sketch1'/>
-   <Sampler name='fs_sketch2' linker='sketch2'/>
-   <Sampler name='fs_sketch3' linker='sketch3'/>
    <!--=====================================================-->
    <Source name='vertex'><![CDATA[
       //..........................................................
@@ -62,35 +59,11 @@
          return planeDistanceDelta;
       }
       //..........................................................
-      float shade(const in float shading, const in vec2 uv) {
-         float stepSize = 1.0 / 3.0;
-         float alpha = 0.0;
-         float scaleWhite = 0.0;
-         float scaleHatch0 = 0.0;
-         float scaleHatch1 = 0.0;
-         float scaleHatch2 = 0.0;
-         if (shading <= stepSize) {
-            alpha = 3.0 * shading;
-            scaleHatch1 = alpha;
-            scaleHatch2 = 1.0 - alpha;
-         }else if (shading > stepSize && shading <= 2.0 * stepSize) {
-            alpha = 3.0 * (shading - stepSize);
-            scaleHatch0 = alpha;
-            scaleHatch1 = 1.0 - alpha;
-         }else if (shading > 2.0 * stepSize) {
-            alpha = 3.0 * (shading - stepSize * 2.0);
-            scaleWhite = alpha;
-            scaleHatch0 = 1.0 - alpha;
-         }
-         float shadingFactor = scaleWhite +  scaleHatch0 * texture2D(fs_sketch1, uv).r + scaleHatch1 * texture2D(fs_sketch2, uv).r + scaleHatch2 * texture2D(fs_sketch3, uv).r;
-         return shadingFactor;
-      }
-      //..........................................................
       // 处理
       void main(void){
          // 获得颜色
-         //vec4 depth = texture2D(fs_depth, v_coord);
-         //vec4 normal = texture2D(fs_normal, v_coord);
+         vec4 depth = texture2D(fs_depth, v_coord);
+         vec4 normal = texture2D(fs_normal, v_coord);
          vec4 color = texture2D(fs_color, v_coord);
          //..........................................................
          float depthCenter = texture2D(fs_depth, v_coord).r;
@@ -113,15 +86,10 @@
          normEdge = 1.0 - 0.5 * smoothstep(0.0, 0.5, normEdge); 
          float edge = planeEdge * normEdge;
 
-         vec2 uv1 = v_coord.xy * 14.0;
-         vec2 uv2 = v_coord.yx * 8.0;
-         float shading = texture2D(fs_depth, v_coord).r * 0.7 + 0.2;
-         float crossedShading = shade(shading, uv1) * shade(shading, uv2) * 0.2 + 0.8;
-
-         float rate = edge * crossedShading;
-         vec4 result = vec4(rate, rate, rate, 1.0);
-         //vec4 result = color * edge * crossedShading;
-         //vec4 result = vec4(crossedShading, crossedShading, crossedShading, 1.0);
+         //vec4 result = color * edge;
+         vec4 result = color;
+         //vec4 result = vec4(edge, edge, edge, 1.0);
+         //vec4 result = vec4(depth.x, depth.x, depth.x, 1.0);
          //............................................................
          // 设置输出
          gl_FragColor = vec4(result.rgb, 1.0);

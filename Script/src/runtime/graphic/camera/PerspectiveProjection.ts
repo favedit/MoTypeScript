@@ -18,6 +18,7 @@ export class PerspectiveProjection extends Projection {
       var size = this.size;
       this.fieldOfView = MathUtil.DEGREE_RATE * this.angle;
       RMatrix.perspectiveFieldOfViewLH(this.matrix, this.fieldOfView, size.width / size.height, this.znear, this.zfar);
+      //RMatrix.perspectiveFieldOfViewRH(this.matrix, this.fieldOfView, size.width / size.height, this.znear, this.zfar);
    }
 
    //============================================================

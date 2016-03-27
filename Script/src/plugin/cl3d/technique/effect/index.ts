@@ -4,6 +4,7 @@ export * from './ControlAutomaticEffect';
 export * from './ControlFrameEffect';
 export * from './DeferredDataPhongAutomaticEffect';
 export * from './DeferredMergeAutomaticEffect';
+export * from './DeferredSketchAutomaticEffect';
 export * from './GeneralColorAutomaticEffect';
 export * from './GeneralColorFillEffect';
 export * from './GeneralColorFlatEffect';

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model guid="61922A75EDB5482895EFE6ADB03B5B58">
+   <Asset>
+      <Cameras/>
+      <Lights/>
+      <Bitmaps/>
+      <Materials/>
+      <Displays>
+         <Entity guid="62BD43A0779D40298AF0840C0B0D6A1C" model_guid="61922A75EDB5482895EFE6ADB03B5B58" model_code="">
+            <Renderables>
+               <Renderable guid="8A652B9249B644F69DA43DF356797340" code="ms_001_002" mesh_guid="4406778244E145FF849E25817B322693" material_guid="744A8C45A4CD444F8243512F4B8C7509"/>
+               <Renderable guid="AD1BD64BD054499285AA20AF858DFBCF" code="ms_002" mesh_guid="06E9E93C89BE4F139AA2A663B041FF9B" material_guid="3B694B21D53E4C2E8E6E6AC65D3586B0"/>
+               <Renderable guid="24FEEDBFB489447B9936C86CD19B173C" code="ms_001_001" mesh_guid="CF7B78819C7E4A4A9A9D37FD970C9D92" material_guid="11BB52275C484503A5362FB01A0CCE00"/>
+               <Renderable guid="FFB30853930A48B5AD2559C63059DF25" code="ms_001_005" mesh_guid="927FBC58DE8B4C9196C59343D24C5CF0" material_guid="2EFBDB97B0754C09B362CEC841389FF6"/>
+               <Renderable guid="647F00CEAA5C47298E6D0AC49804EEE0" code="ms_001_006" mesh_guid="32C1FFD1F40848569F62D9C764EDABAB" material_guid="4923F4D0191C427794B1B377180068BB"/>
+               <Renderable guid="A0EE29D3C79B45D5BB406CF3E7A44016" code="ms_001_003" mesh_guid="FF8B068B0C6A47339B912271A646748C" material_guid="5D07E16499794043B4C7CA3B9EFD23C1"/>
+               <Renderable guid="CFDA459B2D384B46974EC63BCAA62E7D" code="ms_001_004" mesh_guid="738A79B779A0481F8B510D7AD1ABC077" material_guid="7A521F50B91E4C388C645D3F871E76C3"/>
+            </Renderables>
+         </Entity>
+      </Displays>
+   </Asset>
+   <Stage active_chapter="default">
+      <Scenes>
+         <Scene code="default" active_region="default">
+            <Regions>
+               <Region code="default">
+                  <Technique/>
+                  <Viewports/>
+                  <DirectionalLight/>
+                  <Lights/>
+               </Region>
+            </Regions>
+            <Layers>
+               <Layer>
+                  <Sprite guid="678D7EEE80784DA3A4FC7D8CD428D1AC" template_guid="62BD43A0779D40298AF0840C0B0D6A1C"/>
+               </Layer>
+            </Layers>
+         </Scene>
+      </Scenes>
+   </Stage>
+</Model>

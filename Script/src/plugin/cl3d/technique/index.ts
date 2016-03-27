@@ -2,6 +2,7 @@ export * from './ControlPass';
 export * from './ControlTechnique';
 export * from './DeferredDataPass';
 export * from './DeferredMergePass';
+export * from './DeferredSketchPass';
 export * from './DeferredTechnique';
 export * from './GeneralColorPass';
 export * from './GeneralTechnique';

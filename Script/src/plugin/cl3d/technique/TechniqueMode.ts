@@ -8,5 +8,5 @@
 //==========================================================
 export class TechniqueMode extends ObjectBase {
    // 代码
-   public code: string = null;
+   public code: string;
 }

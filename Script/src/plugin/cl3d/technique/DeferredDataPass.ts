@@ -46,16 +46,19 @@ export class DeferredDataPass extends TechniquePass {
       textureDepth.formatCd = TextureFormatEnum.RED;
       textureDepth.formatTypeCd = TextureFormatEnum.Float;
       textureDepth.update();
+      this.outputTextures.set('depth', textureDepth);
       // 创建法线纹理
       var textureNormal: Texture = this.textureNormal = context.createFlatTexture();
       textureNormal.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
       textureNormal.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       textureNormal.update();
+      this.outputTextures.set('normal', textureNormal);
       // 创建颜色纹理
       var textureColor: Texture = this.textureColor = context.createFlatTexture();
       textureColor.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
       textureColor.setWrapCd(SamplerFilterEnum.ClampToEdge, SamplerFilterEnum.ClampToEdge);
       textureColor.update();
+      this.outputTextures.set('color', textureColor);
       // 创建渲染目标
       var renderTarget: RenderTarget = this._renderTarget = context.createRenderTarget();
       renderTarget.optionDepth = true;

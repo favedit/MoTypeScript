@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model guid="6CC64B421AFA43C8B1EED95AB08EE119">
+   <Asset>
+      <Cameras/>
+      <Lights/>
+      <Bitmaps/>
+      <Materials/>
+      <Displays>
+         <Entity guid="6588B7EA201049FBA035D3A6DB8BC143" model_guid="6CC64B421AFA43C8B1EED95AB08EE119" model_code="">
+            <Renderables>
+               <Renderable guid="653CFA4BAD3347209A0A1CBE0CB06C9C" mesh_guid="505BAFF344D04DD4AE7A0B33D5C69215" material_guid="3C5F1975A9B24DD39B2F473E3E721EAD"/>
+            </Renderables>
+         </Entity>
+      </Displays>
+   </Asset>
+   <Stage active_chapter="default">
+      <Scenes>
+         <Scene code="default" active_region="default">
+            <Regions>
+               <Region code="default">
+                  <Technique/>
+                  <Viewports/>
+                  <DirectionalLight/>
+                  <Lights/>
+               </Region>
+            </Regions>
+            <Layers>
+               <Layer>
+                  <Sprite guid="FCB81C402E34478184BDD577850E75FD" template_guid="6588B7EA201049FBA035D3A6DB8BC143"/>
+               </Layer>
+            </Layers>
+         </Scene>
+      </Scenes>
+   </Stage>
+</Model>

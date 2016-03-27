@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "class_name": "phong",
+    "guid": "XXXX",
+    "id": "1",
+    "version": 1,
+    "code": "xiong",
+    "label": "灰熊"
+  },
+  "effect": {
+    "code": "automatic",
+    "render": "automatic",
+    "option": {
+      "depth_write": true,
+      "depth_compare": "less",
+      "double": true
+    }
+  },
+  "properties": {
+    "alpha": {
+      "enable": true,
+      "clip": "0.1",
+      "rate": "0.8"
+    },
+    "ambient": {
+      "color": "0.5,0.5,0.5"
+    },
+    "diffuse": {
+      "color": "0.5,0.5,0.5"
+    },
+    "specular": {
+      "color": "0.5,0.5,0.5",
+      "power": 4
+    }
+  },
+  "textures": [
+      {
+         "code": "diffuse",
+         "wrap": "repeat",
+         "src": "${resource}/model/pvw.show.item.002/m002/diffuse.jpg",
+         "coord": "0,0",
+         "rate": "1,1"
+       },
+       {
+         "code":"normal",
+         "wrap": "repeat",
+         "src": "${resource}/model/pvw.show.item.002/m002/normal.jpg",
+         "coord": "0,0",
+         "rate": "1,1"
+       }
+   ]
+}

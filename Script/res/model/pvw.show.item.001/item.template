@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "version": 1,
+    "guid": "XXXX",
+    "code": "xiong",
+    "label": "灰熊"
+  },
+  "content": [
+    {
+      "class_name": "TemplateRenderable",
+      "model_url": "${resource}/model/pvw.show.item.001/item.model",
+      "mesh_code": "001",
+      "material_url": "${resource}/model/pvw.show.item.001/item.material"
+    }
+  ]
+}
