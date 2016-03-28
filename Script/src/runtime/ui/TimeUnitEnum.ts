@@ -5,7 +5,7 @@
 // @author sunpeng
 // @version 150618
 //==========================================================
-export enum EUiTimeUnit {
+export enum TimeUnitEnum {
    Second,
    Minute,
    Hour,

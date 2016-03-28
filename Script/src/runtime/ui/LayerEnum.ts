@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150224
 //==========================================================
-export class EUiLayer {
+export class LayerEnum {
    public static Default = 20000;
    public static Shadow = 6000;
    public static Disable = 5000;

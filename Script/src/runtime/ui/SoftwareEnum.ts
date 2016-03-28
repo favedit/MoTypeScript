@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150213
 //==========================================================
-export class ESoftware {
+export class SoftwareEnum {
    // @member
    public static Unknown: string = 'unknown';
    // @member

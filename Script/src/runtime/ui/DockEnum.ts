@@ -1,18 +1,20 @@
 //==========================================================
-// <T>界面位置枚举。</T>
+// <T>界面位置方式枚举。</T>
 //
 // @enum
 // @author maocy
-// @version 150228
+// @version 150506
 //==========================================================
-export enum EUiPosition {
+export enum DockEnum {
+   None,
+   LeftTop,
    Left,
-   Right,
+   LeftBottom,
    Top,
+   RightTop,
+   Right,
+   RightBottom,
    Bottom,
    Center,
-   Before,
-   After,
-   LineBefore,
-   LineAfter,
+   Fill,
 }

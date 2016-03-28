@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150822
 //==========================================================
-export class EUiMode {
+export class ModeEnum {
    public static View = 'V';
    public static Insert = 'I';
    public static Update = 'U';

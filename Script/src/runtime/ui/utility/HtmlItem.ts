@@ -5,9 +5,9 @@
 // @author maocy
 // @version 150101
 //==========================================================
-export class SHtmlItem {
+export class HtmlItem {
    // 关联对象
-   protected _link: any = null;
+   protected _link: any;
    // 关联集合
    protected _links: any = new Object();
 

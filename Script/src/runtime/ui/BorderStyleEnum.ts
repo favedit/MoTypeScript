@@ -4,7 +4,7 @@
 // @enum
 // @history 091105 创建
 //==========================================================
-export enum EUiBorderStyle {
+export enum BorderStyleEnum {
    Unknown,
    Readonly,
    Edit,

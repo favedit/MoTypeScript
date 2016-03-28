@@ -4,7 +4,7 @@
 // @enum
 // @history 091125 MAOCY 创建
 //==========================================================
-export class EUiCursor {
+export class CursorEnum {
    public static Default = 'default';
    public static Auto = 'auto';
    public static NorthWest = 'NW';

@@ -6,7 +6,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {Size2} from '../../common/math/Size2';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {ServiceUtil} from '../../core/ServiceUtil';
-import {RHtml} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/RHtml';
 
 //==========================================================
 // <T>图片。</T>
@@ -126,7 +126,7 @@ export class FImage extends ObjectBase {
       // 清空属性
       this._size = ObjectUtil.dispose(this._size);
       this._loadListeners = ObjectUtil.dispose(this._loadListeners);
-      this._handle = RHtml.free(this._handle);
+      this._handle = HtmlUtil.free(this._handle);
       // 父处理
       super.dispose();
    }

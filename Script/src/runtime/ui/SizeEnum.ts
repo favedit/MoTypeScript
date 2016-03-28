@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150101
 //==========================================================
-export enum EUiSize {
+export enum SizeEnum {
    // @attribute 普通
    Normal,
    // @attribute 横向自动

@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150101
 //==========================================================
-export class EUiLayout {
+export class LayoutEnum {
    // @member 显示
    public static Display = 'P';
    // @member 搜索

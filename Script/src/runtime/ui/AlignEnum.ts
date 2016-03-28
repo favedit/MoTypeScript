@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141231
 //==========================================================
-export enum EUiAlign {
+export enum AlignEnum {
    Unknown,
    Left,
    LeftPadding,

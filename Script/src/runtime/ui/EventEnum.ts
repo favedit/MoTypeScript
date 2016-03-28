@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150130
 //==========================================================
-export class EEvent {
+export class EventEnum {
    // @attribute 未知
    public static Unknown = 'Unknown';
    // @attribute 加载

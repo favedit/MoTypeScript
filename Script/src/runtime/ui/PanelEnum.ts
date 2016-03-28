@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150101
 //==========================================================
-export enum EPanel {
+export enum PanelEnum {
    // @attribute
    Container,
    Parent,

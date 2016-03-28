@@ -1,4 +1,4 @@
-import {RHtml} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/RHtml';
 import {EMouseButton} from './EMouseButton';
 import {Event} from './Event';
 

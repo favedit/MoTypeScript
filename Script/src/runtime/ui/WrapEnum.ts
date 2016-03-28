@@ -1,10 +1,11 @@
 //==========================================================
-// <T>事件枚举。</T>
+// <T>界面对齐方式枚举。</T>
 //
-// @enum(Integer)
+// @enum
 // @author maocy
-// @version 150130
+// @version 141231
 //==========================================================
-export class FControl {
+export enum WrapEnum {
+   NextLine,
+   SameLine,
 }
-

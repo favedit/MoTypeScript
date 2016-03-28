@@ -8,7 +8,7 @@ import {StringUtil} from '../../common/lang/StringUtil';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RBuilder {
+export class BuilderUtil {
    //==========================================================
    // <T>创建一个页面对象。</T>
    //

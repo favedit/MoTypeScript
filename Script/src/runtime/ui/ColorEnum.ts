@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150123
 //==========================================================
-export class EUiColor {
+export class ColorEnum {
    // @attribute
    public static Text = '#0099FF';
    public static TextHover = '#000000';

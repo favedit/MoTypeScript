@@ -4,7 +4,7 @@
 // @enum
 // @history 091105 创建
 //==========================================================
-export enum EUiBorder {
+export enum BorderEnum {
    None,
    Square,
    Round,

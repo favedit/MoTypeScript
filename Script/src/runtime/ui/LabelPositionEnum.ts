@@ -1,20 +1,13 @@
 //==========================================================
-// <T>界面位置方式枚举。</T>
+// <T>标签位置枚举。</T>
 //
 // @enum
 // @author maocy
-// @version 150506
+// @version 150102
 //==========================================================
-export enum EUiDock {
-   None,
-   LeftTop,
+export enum LabelPositionEnum {
    Left,
-   LeftBottom,
-   Top,
-   RightTop,
    Right,
-   RightBottom,
+   Top,
    Bottom,
-   Center,
-   Fill,
 }

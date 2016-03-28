@@ -1,6 +1,6 @@
 ﻿import {BooleanUtil} from '../../common/lang/BooleanUtil';
 import {ObjectIdUtil} from '../../common/lang/ObjectIdUtil';
-import {SHtmlItem} from './SHtmlItem';
+import {HtmlItem} from './HtmlItem';
 
 //==========================================================
 // <T>页面对象的管理类。</T>
@@ -9,7 +9,7 @@ import {SHtmlItem} from './SHtmlItem';
 // @author maocy
 // @version 141229
 //==========================================================
-export class RHtml {
+export class HtmlUtil {
    //..........................................................
    // @attribute
    public static _links: any = new Object();
@@ -29,6 +29,41 @@ export class RHtml {
          uuid = value.__puuid = ObjectIdUtil.nextId('html');
       }
       return uuid;
+   }
+
+   //==========================================================
+   // <T>获得可见性。</T>
+   //
+   // @method
+   // @param hTag 页面对象
+   // @return 可见性
+   //==========================================================
+   public static visibleGet(hTag): boolean {
+      var result = null;
+      var text = hTag.style.display;
+      //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
+      result = (text == 'block');
+      //} else {
+      //   result = (text != 'none');
+      //}
+      return result;
+   }
+
+   //==========================================================
+   // <T>设置可见性。</T>
+   //
+   // @method
+   // @param hTag 页面对象
+   // @param visible 可见性
+   //==========================================================
+   public static visibleSet(hTag, visible: boolean) {
+      var text = null;
+      //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
+      text = visible ? '' : 'none';
+      //} else {
+      //   text = visible ? null : 'none';
+      //}
+      hTag.style.display = text;
    }
 
    // //==========================================================
@@ -60,41 +95,6 @@ export class RHtml {
    //    var text = null;
    //    if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
    //       text = visible ? 'inline' : 'none';
-   //    } else {
-   //       text = visible ? null : 'none';
-   //    }
-   //    hTag.style.display = text;
-   // }
-
-   // //==========================================================
-   // // <T>获得可见性。</T>
-   // //
-   // // @method
-   // // @param hTag:HtmlTag 页面对象
-   // // @return Boolean 可见性
-   // //==========================================================
-   // public static visibleGet(hTag) {
-   //    var result = null;
-   //    var text = hTag.style.display;
-   //    if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
-   //       result = (text == 'block');
-   //    } else {
-   //       result = (text != 'none');
-   //    }
-   //    return result;
-   // }
-
-   // //==========================================================
-   // // <T>设置可见性。</T>
-   // //
-   // // @method
-   // // @param hTag:HtmlTag 页面对象
-   // // @param visible:Boolean 可见性
-   // //==========================================================
-   // public static visibleSet(hTag, visible) {
-   //    var text = null;
-   //    if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
-   //       text = visible ? '' : 'none';
    //    } else {
    //       text = visible ? null : 'none';
    //    }
@@ -228,7 +228,7 @@ export class RHtml {
       var uid = this.uid(hTag);
       var item = links[uid];
       if (!item) {
-         item = links[uid] = new SHtmlItem();
+         item = links[uid] = new HtmlItem();
          item._link = hTag;
       }
       item.set(name, value);

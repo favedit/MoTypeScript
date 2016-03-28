@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150701
 //==========================================================
-export enum EUiAnchor {
+export enum AnchorEnum {
    None = 0,
    Left = 1,
    Top = 2,

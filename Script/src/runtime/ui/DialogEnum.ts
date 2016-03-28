@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150409
 //==========================================================
-export enum EUiDialog {
+export enum DialogEnum {
    // @attribute 确认
    Confirm,
    // @attribute 信息

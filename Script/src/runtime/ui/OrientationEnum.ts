@@ -1,11 +1,13 @@
 //==========================================================
-// <T>界面方向枚举。</T>
+// <T>设备类型枚举。</T>
 //
 // @enum
 // @author maocy
-// @version 150120
+// @version 150213
 //==========================================================
-export class EUiDirection {
+export class OrientationEnum {
+   // @member
+   public static Unknown = 0;
    // @member 横向
    public static Horizontal = 'H';
    // @member 纵向

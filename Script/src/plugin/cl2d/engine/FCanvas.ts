@@ -3,7 +3,7 @@ import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {RBuilder} from '../../../runtime/ui/utility/RBuilder';
+import {BuilderUtil} from '../../../runtime/ui/utility/RBuilder';
 import {FContent} from '../graphic/FContent';
 import {FContext} from '../graphic/FContext';
 
@@ -79,7 +79,7 @@ export class FCanvas extends FContent {
       var width = size.width;
       var height = size.height;
       // 创建画板
-      var hCanvas = this._hCanvas = RBuilder.create(hDocument, 'CANVAS');
+      var hCanvas = this._hCanvas = BuilderUtil.create(hDocument, 'CANVAS');
       hCanvas.__linker = this;
       var hStyle = hCanvas.style;
       hStyle.left = '0px';

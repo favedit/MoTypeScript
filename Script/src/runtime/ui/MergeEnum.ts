@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150228
 //==========================================================
-export class EUiMerge {
+export class MergeEnum {
    // @attribute
    public static Append = 'append';
    public static Override = 'override';

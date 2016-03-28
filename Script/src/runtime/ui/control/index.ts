@@ -1,1 +1,1 @@
-export * from './FControl';
+export * from './Control';

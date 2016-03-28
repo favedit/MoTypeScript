@@ -1,13 +1,18 @@
 //==========================================================
-// <T>标签位置枚举。</T>
+// <T>界面位置枚举。</T>
 //
 // @enum
 // @author maocy
-// @version 150102
+// @version 150228
 //==========================================================
-export enum EUiLabelPosition {
+export enum PositionEnum {
    Left,
    Right,
    Top,
    Bottom,
+   Center,
+   Before,
+   After,
+   LineBefore,
+   LineAfter,
 }

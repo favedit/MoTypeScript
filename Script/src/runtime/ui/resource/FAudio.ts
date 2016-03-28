@@ -3,7 +3,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {DeviceService} from '../service/DeviceService';
-import {RHtml} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/RHtml';
 
 //==========================================================
 // <T>声音。</T>
@@ -164,7 +164,7 @@ export class FAudio extends ObjectBase {
    //==========================================================
    public dispose() {
       // 清空属性
-      this._hAudio = RHtml.free(this._hAudio);
+      this._hAudio = HtmlUtil.free(this._hAudio);
       super.dispose();
    }
 }

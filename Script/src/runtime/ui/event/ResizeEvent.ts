@@ -1,4 +1,4 @@
-import {RHtml} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/RHtml';
 import {Event} from './Event';
 
 //==========================================================
@@ -20,7 +20,7 @@ export class ResizeEvent extends Event {
    // @param p:event:HtmlEvent 页面事件
    //==========================================================
    public attachEvent(p) {
-      var hs = this.hSource = RHtml.eventSource(p);
+      var hs = this.hSource = HtmlUtil.eventSource(p);
       if(hs){
         this.source = hs.__linker;
       }

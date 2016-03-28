@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150120
 //==========================================================
-export class EUiScroll {
+export class ScrollEnum {
    // @member 没有
    public static None = 'N';
    // @member 横向滚动

@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141231
 //==========================================================
-export class EUiDataAction {
+export class DataActionEnum {
    // @member
    public static First = 'first';
    public static Prior = 'prior';

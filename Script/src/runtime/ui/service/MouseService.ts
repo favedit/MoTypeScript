@@ -3,7 +3,7 @@ import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {Service} from '../../core/Service';
-import {RHtml} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/RHtml';
 import {DeviceService} from './DeviceService';
 import {EEvent} from '../EEvent';
 import {MouseEvent} from '../event/MouseEvent';

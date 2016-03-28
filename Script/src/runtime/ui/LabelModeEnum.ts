@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150102
 //==========================================================
-export class EUiLabelMode {
+export class LabelModeEnum {
    // @attribute String 显示所有
    public static All = 'A';
    // @attribute String 显示标签
