@@ -3,7 +3,7 @@ import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {BuilderUtil} from '../../../runtime/ui/utility/RBuilder';
+import {BuilderUtil} from '../../../runtime/ui/utility/BuilderUtil';
 import {FContent} from '../graphic/FContent';
 import {FContext} from '../graphic/FContext';
 

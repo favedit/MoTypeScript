@@ -3,7 +3,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {DeviceService} from '../service/DeviceService';
-import {HtmlUtil} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/HtmlUtil';
 
 //==========================================================
 // <T>声音。</T>

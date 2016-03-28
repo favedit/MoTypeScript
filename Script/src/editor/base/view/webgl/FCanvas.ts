@@ -1,8 +1,7 @@
 import {WglContext} from '../../../../plugin/cl3d/graphic/wgl/WglContext';
 import {WglContextUtil} from '../../../../plugin/cl3d/graphic/wgl/WglContextUtil';
-import {EEvent} from '../../../../runtime/ui/EEvent';
+import {EventEnum} from '../../../../runtime/ui/EventEnum';
 import {FCanvas as FBaseCanvas} from '../base/FCanvas';
-
 
 //==========================================================
 // <T>画板。</T>
@@ -37,7 +36,7 @@ export class FCanvas extends FBaseCanvas {
       // 创建环境
       var context = this.context = WglContextUtil.create(hCanvas);
       // 设置事件
-      this.attachEvent(hCanvas, EEvent.MouseMove, this.onMouseMove);
+      this.attachEvent(hCanvas, EventEnum.MouseMove, this.onMouseMove);
    }
 
    //==========================================================

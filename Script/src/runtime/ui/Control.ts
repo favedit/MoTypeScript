@@ -1,11 +1,11 @@
-import {Fatal} from '../../common/lang/Fatal';
-import {AssertUtil} from '../../common/AssertUtil';
-import {ServiceUtil} from '../../core/ServiceUtil';
-import {EventService} from '../service/EventService';
+import {Fatal} from '../common/lang/Fatal';
+import {AssertUtil} from '../common/AssertUtil';
+import {ServiceUtil} from '../core/ServiceUtil';
+import {EventService} from './service/EventService';
 import {Component} from './Component';
-import {HtmlUtil} from '../utility/HtmlUtil';
-import {BuilderUtil} from '../utility/BuilderUtil';
-import {Event} from '../event/Event';
+import {HtmlUtil} from './utility/HtmlUtil';
+import {BuilderUtil} from './utility/BuilderUtil';
+import {Event} from './event/Event';
 
 //==========================================================
 // <T>控件的基类。</T>

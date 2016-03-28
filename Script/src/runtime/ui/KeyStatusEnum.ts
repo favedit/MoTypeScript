@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150203
 //===========================================================
-export class EKeyStatus {
+export class KeyStatusEnum {
    // @attribute 普通
    public static Normal = 0;
    // @attribute 按下

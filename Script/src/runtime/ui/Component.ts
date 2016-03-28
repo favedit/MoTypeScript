@@ -1,4 +1,4 @@
-import {ObjectBase} from '../../common/lang/ObjectBase';
+import {Dispatcher} from '../common/lang/Dispatcher';
 
 //==========================================================
 // <T>所有组件的基类</T>
@@ -13,7 +13,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 // @author maocy
 // @version 141231
 //==========================================================
-export class Component extends ObjectBase {
+export class Component extends Dispatcher {
    //==========================================================
    // <T>释放处理。</T>
    //==========================================================

@@ -6,7 +6,7 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {Size2} from '../../common/math/Size2';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {ServiceUtil} from '../../core/ServiceUtil';
-import {HtmlUtil} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/HtmlUtil';
 
 //==========================================================
 // <T>图片。</T>

@@ -1,10 +1,10 @@
 import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
-import {FControl} from '../../../../runtime/ui/FControl';
+import {Control} from '../../../../runtime/ui/Control';
 
 //==========================================================
 // <T>画板基类。</T>
 //==========================================================
-export class FCanvas extends FControl {
+export class FCanvas extends Control {
 
    public hDocument: HTMLDocument;
 

@@ -7,9 +7,9 @@ import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';
 import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
 import {DeferredPipeline} from '../../plugin/cl3d/technique/pipeline/DeferredPipeline';
 import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
-import {EEvent} from '../../../runtime/ui/EEvent';
-import {EKeyCode} from '../../runtime/ui/EKeyCode';
-import {FControl} from './../../runtime/ui/FControl';
+import {EventEnum} from '../../../runtime/ui/EventEnum';
+import {KeyCodeEnum} from '../../runtime/ui/KeyCodeEnum';
+import {Control} from './../../runtime/ui/Control';
 import {KeyboardService} from '../../runtime/ui/service/KeyboardService';
 import {WglContext} from '../graphic/wgl/WglContext';
 import {WglContextUtil} from '../graphic/wgl/WglContextUtil';
@@ -20,7 +20,7 @@ import {WglContextUtil} from '../graphic/wgl/WglContextUtil';
 // @author maocy
 // @history 150130
 //==========================================================
-export class FCanvas extends FControl {
+export class FCanvas extends Control {
    //    // @attribute
    //    o._optionAlpha        = true;
    //    o._optionAntialias    = true;
@@ -129,7 +129,7 @@ export class FCanvas extends FControl {
       pipeline.camera = this.camera;
       pipeline.enterFrameListeners.register(this, this.onProcess);
       // 设置事件
-      this.attachEvent(hCanvas, EEvent.MouseMove, this.onMouseMove);
+      this.attachEvent(hCanvas, EventEnum.MouseMove, this.onMouseMove);
    }
 
    //==========================================================
@@ -147,8 +147,8 @@ export class FCanvas extends FControl {
       var keyboardConsole = this._keyboardService;
       // 前后处理
       var distance = this._cameraMoveRate;
-      var keyForward = keyboardConsole.isKeyPress(EKeyCode.W)
-      var keyBack = keyboardConsole.isKeyPress(EKeyCode.S)
+      var keyForward = keyboardConsole.isKeyPress(KeyCodeEnum.W)
+      var keyBack = keyboardConsole.isKeyPress(KeyCodeEnum.S)
       if (keyForward && !keyBack) {
          camera.doWalk(distance);
       } else if (!keyForward && keyBack) {
@@ -156,8 +156,8 @@ export class FCanvas extends FControl {
       }
       // 左右处理
       var rotation = this._cameraKeyRotation;
-      var keyLeft = keyboardConsole.isKeyPress(EKeyCode.A)
-      var keyRight = keyboardConsole.isKeyPress(EKeyCode.D)
+      var keyLeft = keyboardConsole.isKeyPress(KeyCodeEnum.A)
+      var keyRight = keyboardConsole.isKeyPress(KeyCodeEnum.D)
       if (keyLeft && !keyRight) {
          camera.doYaw(rotation);
       } else if (!keyLeft && keyRight) {
@@ -165,8 +165,8 @@ export class FCanvas extends FControl {
       }
       // 上下处理
       var distance = this._cameraMoveRate;
-      var keyUp = keyboardConsole.isKeyPress(EKeyCode.Q)
-      var keyDown = keyboardConsole.isKeyPress(EKeyCode.E)
+      var keyUp = keyboardConsole.isKeyPress(KeyCodeEnum.Q)
+      var keyDown = keyboardConsole.isKeyPress(KeyCodeEnum.E)
       if (keyUp && !keyDown) {
          camera.doFly(distance);
       } else if (!keyUp && keyDown) {
@@ -175,8 +175,8 @@ export class FCanvas extends FControl {
       // 左右旋转
       var display = this.activeDisplay;
       if (display) {
-         var keyL = keyboardConsole.isKeyPress(EKeyCode.Left)
-         var keyR = keyboardConsole.isKeyPress(EKeyCode.Right)
+         var keyL = keyboardConsole.isKeyPress(KeyCodeEnum.Left)
+         var keyR = keyboardConsole.isKeyPress(KeyCodeEnum.Right)
          if (keyL && !keyR) {
             display.matrix.addRotationY(0.01);
          } else if (!keyL && keyR) {

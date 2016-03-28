@@ -9,12 +9,12 @@ import {EnumUtil} from '../../common/lang/EnumUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {Service} from '../../core/Service';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
-import {EEvent} from '../EEvent';
+import {EventEnum} from '../EventEnum';
 import {ResizeEvent} from '../event/ResizeEvent';
-import {EDevice} from '../EDevice';
-import {ESoftware} from '../ESoftware';
-import {EBrowser} from '../EBrowser';
-import {EOrientation} from '../EOrientation';
+import {DeviceEnum} from '../DeviceEnum';
+import {SoftwareEnum} from '../SoftwareEnum';
+import {BrowserEnum} from '../BrowserEnum';
+import {OrientationEnum} from '../OrientationEnum';
 import {BrowserCapability} from './BrowserCapability';
 
 //==========================================================
@@ -36,10 +36,10 @@ export class DeviceService extends Service {
    protected _defineMethods = null;
    // @attribute
    protected _platformCd = PlatformEnum.Unknown;
-   protected _deviceCd = EDevice.Unknown;
-   protected _softwareCd = ESoftware.Unknown;
-   protected _typeCd = EBrowser.Unknown;
-   protected _orientationCd = EOrientation.Horizontal;
+   protected _deviceCd = DeviceEnum.Unknown;
+   protected _softwareCd = SoftwareEnum.Unknown;
+   protected _typeCd = BrowserEnum.Unknown;
+   protected _orientationCd = OrientationEnum.Horizontal;
    protected _supportHtml5 = false;
    // @html
    protected _hWindow = null;
@@ -70,8 +70,8 @@ export class DeviceService extends Service {
    public constructor() {
       super();
       // 设置属性
-      this._eventVisibility.code = EEvent.Visibility;
-      this._eventOrientation.code = EEvent.Orientation;
+      this._eventVisibility.code = EventEnum.Visibility;
+      this._eventOrientation.code = EventEnum.Orientation;
    }
 
    //==========================================================
@@ -149,7 +149,7 @@ export class DeviceService extends Service {
    //==========================================================
    public set optionSelect(select) {
       this._optionSelect = select;
-      if (this.isBrowser(EBrowser.FireFox)) {
+      if (this.isBrowser(BrowserEnum.FireFox)) {
          this._hContainer.style.MozUserSelect = select ? '' : 'none';
       }
    }
@@ -191,7 +191,7 @@ export class DeviceService extends Service {
    // @return 是否横屏
    //===========================================================
    public isOrientationHorizontal() {
-      return this._orientationCd == EOrientation.Horizontal;
+      return this._orientationCd == OrientationEnum.Horizontal;
    }
 
    //===========================================================
@@ -201,7 +201,7 @@ export class DeviceService extends Service {
    // @return 是否垂直
    //===========================================================
    public isOrientationVertical() {
-      return this._orientationCd == EOrientation.Vertical;
+      return this._orientationCd == OrientationEnum.Vertical;
    }
 
    //===========================================================
@@ -308,18 +308,18 @@ export class DeviceService extends Service {
       var capability = this._capability = new BrowserCapability();
       // 判断设备类型
       if (agent.indexOf("android") != -1) {
-         this._typeCd = EDevice.Mobile;
-         this._softwareCd = ESoftware.Android;
+         this._typeCd = DeviceEnum.Mobile;
+         this._softwareCd = SoftwareEnum.Android;
       }
       // 判断浏览器类型
       if (agent.indexOf("chrome") != -1) {
-         this._typeCd = EBrowser.Chrome;
+         this._typeCd = BrowserEnum.Chrome;
       } else if (agent.indexOf("firefox") != -1) {
-         this._typeCd = EBrowser.FireFox;
+         this._typeCd = BrowserEnum.FireFox;
       } else if ((agent.indexOf("msie") != -1) || (agent.indexOf("windows") != -1)) {
-         this._typeCd = EBrowser.Explorer;
+         this._typeCd = BrowserEnum.Explorer;
       } else if ((agent.indexOf("safari") != -1) || (agent.indexOf("applewebkit") != -1)) {
-         this._typeCd = EBrowser.Safari;
+         this._typeCd = BrowserEnum.Safari;
       } else {
          alert('Unknown browser.\n' + agent);
          return;
@@ -344,11 +344,11 @@ export class DeviceService extends Service {
          capability.canvasScale = false;
       }
       // 注册输出接口
-      if (this._typeCd == EBrowser.Chrome) {
+      if (this._typeCd == BrowserEnum.Chrome) {
          // RLogger.lsnsOutput.register(this, this.onLog);
       }
       // 输出日志
-      LoggerUtil.debug(this, 'Parse browser agent. (platform_cd={1}, type_cd={2})', EnumUtil.decode(PlatformEnum, platformCd), EnumUtil.decode(EBrowser, this._typeCd));
+      LoggerUtil.debug(this, 'Parse browser agent. (platform_cd={1}, type_cd={2})', EnumUtil.decode(PlatformEnum, platformCd), EnumUtil.decode(BrowserEnum, this._typeCd));
       // 是否支持HTML5
       if (hWindow.applicationCache) {
          this._supportHtml5 = true;
@@ -441,7 +441,7 @@ export class DeviceService extends Service {
       }
       // 接收事件
       var event = linker._eventResize;
-      event.code = EEvent.Resize;
+      event.code = EventEnum.Resize;
       event.attachEvent(hEvent);
       linker.resizeListeners.process(event);
       // var h = linker._hDisablePanel;
@@ -590,9 +590,9 @@ export class DeviceService extends Service {
       var orientation = hWindow.orientation;
       if (orientation != null) {
          if ((orientation == 180) || (orientation == 0)) {
-            this._orientationCd = EOrientation.Vertical;
+            this._orientationCd = OrientationEnum.Vertical;
          } else if ((orientation == 90) || (orientation == -90)) {
-            this._orientationCd = EOrientation.Horizontal;
+            this._orientationCd = OrientationEnum.Horizontal;
          } else {
             throw new Fatal(this, 'Unknown orientation mode.');
          }

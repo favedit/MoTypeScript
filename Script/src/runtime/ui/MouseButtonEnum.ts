@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150121
 //==========================================================
-export enum EMouseButton {
+export enum MouseButtonEnum {
    // @member 左键
    Left = 0,
    // @member 右键

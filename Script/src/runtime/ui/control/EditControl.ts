@@ -1,4 +1,4 @@
-import {Control} from './Control';
+import {Control} from '../Control';
 
 //==========================================================
 // <T>数据控件的基类。</T>
@@ -226,8 +226,8 @@ export class EditControl extends Control {
    //    //hccc.appendChild(hCk1);
    //    //hccc.appendChild(hCk2);
    //    //hCk2.style.padding = 10;
-   //    //hCk1.style.display = 'none'; 
-   //    //hCk2.style.display = 'none'; 
+   //    //hCk1.style.display = 'none';
+   //    //hCk2.style.display = 'none';
    //    //}
    //    /*
    //    // 设置编辑框的信息
@@ -243,7 +243,7 @@ export class EditControl extends Control {
    //       o.linkEvent(o, 'onDataDoubleClick', he);
    //       o.linkEvent(o, 'onDataKeyDown', he);
    //       o.linkEvent(o, 'onDataChange', he);
-         
+
    //    }
    //    // 建立提示区
    //    if(o.hint){

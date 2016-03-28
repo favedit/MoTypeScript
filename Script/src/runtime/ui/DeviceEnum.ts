@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150213
 //==========================================================
-export class EDevice {
+export class DeviceEnum {
    // @member
    public static Unknown: string = 'unknown';
    // @member

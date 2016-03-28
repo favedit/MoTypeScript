@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141229
 //==========================================================
-export class EBrowser {
+export class BrowserEnum {
    // @member
    public static Unknown: string = 'unknown';
    // @member Microsoft InternetExploer

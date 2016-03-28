@@ -1,10 +1,10 @@
 import {Linker} from '../../runtime/common/reflect/Linker';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {View} from '../../runtime/framework/view/View';
-import {EEvent} from '../../runtime/ui/EEvent';
+import {EventEnum} from '../../runtime/ui/EventEnum';
 import {MouseEvent} from '../../runtime/ui/event/MouseEvent';
 import {KeyboardService} from '../../runtime/ui/service/KeyboardService';
-import {EKeyCode} from '../../runtime/ui/EKeyCode';
+import {KeyCodeEnum} from '../../runtime/ui/KeyCodeEnum';
 import {FCanvas} from '../../base/view/webgl/FCanvas';
 import {Scene} from '../../plugin/cl3d/base/Scene';
 import {DisplayLayer} from '../../plugin/cl3d/base/DisplayLayer';
@@ -16,7 +16,7 @@ import {FModelConsole} from '../../plugin/cl3d/shape/FModelConsole';
 import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
 import {SSettings} from '../application/SSettings';
 
-declare var id_info;
+// declare var id_info;
 
 //==========================================================
 // <T>画板视图。</T>
@@ -52,7 +52,7 @@ export class FCanvasView extends View {
       var settings: SSettings = this.application.settings;
       var canvas = this.canvas = new FCanvas();
       canvas.setup(settings);
-      canvas.addListener(EEvent.MouseMove, this, this.onMouseMove);
+      canvas.addListener(EventEnum.MouseMove, this, this.onMouseMove);
       var hCanvas = canvas.hCanvas;
       var context = canvas.context;
       // 创建场景
@@ -90,8 +90,8 @@ export class FCanvasView extends View {
       var keyboardConsole = this._keyboardConsole;
       // 上下处理
       var distance = this._cameraMoveRate;
-      var keyUp = keyboardConsole.isKeyPress(EKeyCode.W)
-      var keyDown = keyboardConsole.isKeyPress(EKeyCode.S)
+      var keyUp = keyboardConsole.isKeyPress(KeyCodeEnum.W)
+      var keyDown = keyboardConsole.isKeyPress(KeyCodeEnum.S)
       if (keyUp && !keyDown) {
          camera.doWalk(distance);
       } else if (!keyUp && keyDown) {
@@ -99,8 +99,8 @@ export class FCanvasView extends View {
       }
       // 左右处理
       var rotation = this._cameraKeyRotation;
-      var keyLeft = keyboardConsole.isKeyPress(EKeyCode.A)
-      var keyRight = keyboardConsole.isKeyPress(EKeyCode.D)
+      var keyLeft = keyboardConsole.isKeyPress(KeyCodeEnum.A)
+      var keyRight = keyboardConsole.isKeyPress(KeyCodeEnum.D)
       if (keyLeft && !keyRight) {
          camera.doYaw(rotation);
       } else if (!keyLeft && keyRight) {

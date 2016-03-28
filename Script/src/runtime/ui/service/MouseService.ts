@@ -3,9 +3,9 @@ import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {Service} from '../../core/Service';
-import {HtmlUtil} from '../utility/RHtml';
+import {HtmlUtil} from '../utility/HtmlUtil';
 import {DeviceService} from './DeviceService';
-import {EEvent} from '../EEvent';
+import {EventEnum} from '../EventEnum';
 import {MouseEvent} from '../event/MouseEvent';
 
 //==========================================================
@@ -182,7 +182,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.Click;
+      event.code = EventEnum.Click;
       event.attachEvent(hEvent);
       linker.onClick(linker, event);
    }
@@ -203,7 +203,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.DoubleClick;
+      event.code = EventEnum.DoubleClick;
       event.attachEvent(hEvent);
       linker.onDoubleClick(linker, event);
    }
@@ -224,7 +224,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.MouseDown;
+      event.code = EventEnum.MouseDown;
       event.attachEvent(hEvent);
       linker.onMouseDown(linker, event);
    }
@@ -245,7 +245,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.MouseMove;
+      event.code = EventEnum.MouseMove;
       event.attachEvent(hEvent);
       linker.onMouseMove(linker, event);
    }
@@ -266,7 +266,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.MouseUp;
+      event.code = EventEnum.MouseUp;
       event.attachEvent(hEvent);
       linker.onMouseUp(linker, event);
    }
@@ -287,7 +287,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.MouseEnter;
+      event.code = EventEnum.MouseEnter;
       event.attachEvent(hEvent);
       linker.onMouseEnter(linker, event);
    }
@@ -308,7 +308,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.MouseLeave;
+      event.code = EventEnum.MouseLeave;
       event.attachEvent(hEvent);
       linker.onMouseLeave(linker, event);
    }
@@ -329,7 +329,7 @@ export class MouseService extends Service {
       }
       // 事件处理
       var event = linker._eventMouse;
-      event.code = EEvent.MouseWheel;
+      event.code = EventEnum.MouseWheel;
       event.attachEvent(hEvent);
       linker.onMouseWheel(linker, event);
    }

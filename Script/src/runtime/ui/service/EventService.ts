@@ -10,7 +10,7 @@ import {Fatal} from '../../common/lang/Fatal';
 // import {RClass} from '../../common/reflect/ClassUtil';
 // import {RMemory} from '../../common/MemoryUtil';
 import {Service} from '../../core/Service';
-import {EEvent} from '../EEvent';
+import {EventEnum} from '../EventEnum';
 import {MouseEvent} from '../event/MouseEvent';
 //import {FListenerThread} from './FListenerThread';
 //import {FThreadConsole} from './FThreadConsole';
@@ -82,11 +82,11 @@ export class EventService extends Service {
    //==========================================================
    public alloc(eventCd: String): any {
       switch (eventCd) {
-         case EEvent.MouseDown:
+         case EventEnum.MouseDown:
             return new MouseEvent();
-         case EEvent.MouseMove:
+         case EventEnum.MouseMove:
             return new MouseEvent();
-         case EEvent.MouseUp:
+         case EventEnum.MouseUp:
             return new MouseEvent();
          default:
             throw new Fatal(this, 'Unknown event.');

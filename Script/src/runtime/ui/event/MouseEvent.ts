@@ -1,5 +1,5 @@
-import {HtmlUtil} from '../utility/RHtml';
-import {EMouseButton} from './EMouseButton';
+import {HtmlUtil} from '../utility/HtmlUtil';
+import {MouseButtonEnum} from './MouseButtonEnum';
 import {Event} from './Event';
 
 //==========================================================
@@ -43,9 +43,9 @@ export class MouseEvent extends Event {
          //this.source = hEvent.__linker;
       //}
       this.button = hEvent.button;
-      this.mouseLeft = (hEvent.button == EMouseButton.Left);
-      this.mouseMiddle = (hEvent.button == EMouseButton.Middle);
-      this.mouseRight = (hEvent.button == EMouseButton.Right);
+      this.mouseLeft = (hEvent.button == MouseButtonEnum.Left);
+      this.mouseMiddle = (hEvent.button == MouseButtonEnum.Middle);
+      this.mouseRight = (hEvent.button == MouseButtonEnum.Right);
       this.altKey = hEvent.altKey;
       this.ctrlKey = hEvent.ctrlKey;
       //if (MO.RBrowser.isBrowser(MO.EBrowser.FireFox)) {

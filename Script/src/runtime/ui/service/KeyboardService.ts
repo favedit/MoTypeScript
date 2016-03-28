@@ -3,10 +3,10 @@ import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {Linker} from '../../common/reflect/Linker';
 import {Service} from '../../core/Service';
-import {EKeyStatus} from '../EKeyStatus';
-import {EKeyCode} from '../EKeyCode';
+import {KeyStatusEnum} from '../KeyStatusEnum';
+import {KeyCodeEnum} from '../KeyCodeEnum';
 import {DeviceService} from './DeviceService';
-import {EEvent} from '../EEvent';
+import {EventEnum} from '../EventEnum';
 import {KeyboardEvent} from '../event/KeyboardEvent';
 
 //===========================================================
@@ -14,7 +14,7 @@ import {KeyboardEvent} from '../event/KeyboardEvent';
 //===========================================================
 export class KeyboardService extends Service {
    // 状态集合
-   protected _status: Array<EKeyStatus>;
+   protected _status: Array<KeyStatusEnum>;
    // 监听器集合
    protected _eventKey: KeyboardEvent;
    protected _keyDownListeners: Listeners;
@@ -34,7 +34,7 @@ export class KeyboardService extends Service {
    public constructor() {
       super();
       // 设置属性
-      this._status = new Array<EKeyStatus>();
+      this._status = new Array<KeyStatusEnum>();
       this._eventKey = new KeyboardEvent();
       this._keyDownListeners = new Listeners();
       this._keyUpListeners = new Listeners();
@@ -42,7 +42,7 @@ export class KeyboardService extends Service {
       // 设置状态
       var status = this._status = new Array();
       for (var i: number = 0; i < 256; i++) {
-         status[i] = EKeyStatus.Normal;
+         status[i] = KeyStatusEnum.Normal;
       }
    }
 
@@ -109,7 +109,7 @@ export class KeyboardService extends Service {
       }
       // 事件处理
       var event = linker._eventKey;
-      event.code = EEvent.KeyDown;
+      event.code = EventEnum.KeyDown;
       event.attachEvent(hEvent);
       linker.onKeyDown(linker, event);
    }
@@ -130,7 +130,7 @@ export class KeyboardService extends Service {
       }
       // 事件处理
       var event = linker._eventKey;
-      event.code = EEvent.KeyUp;
+      event.code = EventEnum.KeyUp;
       event.attachEvent(hEvent);
       linker.onKeyUp(linker, event);
    }
@@ -151,7 +151,7 @@ export class KeyboardService extends Service {
       }
       // 事件处理
       var event = linker._eventKey;
-      event.code = EEvent.KeyPress;
+      event.code = EventEnum.KeyPress;
       event.attachEvent(hEvent);
       linker.onKeyPress(linker, event);
    }
@@ -164,7 +164,7 @@ export class KeyboardService extends Service {
    public onKeyDown(sender, event) {
       // 设置状态
       var keyCode = event.keyCode;
-      this._status[keyCode] = EKeyStatus.Press;
+      this._status[keyCode] = KeyStatusEnum.Press;
       // 处理事件
       this._keyDownListeners.process(event);
    }
@@ -177,7 +177,7 @@ export class KeyboardService extends Service {
    public onKeyUp(sender, event) {
       // 设置状态
       var keyCode = event.keyCode;
-      this._status[keyCode] = EKeyStatus.Normal;
+      this._status[keyCode] = KeyStatusEnum.Normal;
       // 处理事件
       this._keyUpListeners.process(event);
    }
@@ -201,7 +201,7 @@ export class KeyboardService extends Service {
    //===========================================================
    public isKeyPress(keyCode:number): boolean {
       var status = this._status[keyCode];
-      return status == EKeyStatus.Press;
+      return status == KeyStatusEnum.Press;
    }
 
    // //===========================================================

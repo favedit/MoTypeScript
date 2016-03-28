@@ -1,18 +1,17 @@
-import {ObjectBase} from '../../common/lang/ObjectBase';
+import {Dispatcher} from '../../common/lang/Dispatcher';
 import {IView} from '../IView';
 import {Application} from '../Application';
 
 //==========================================================
 // <T>视窗。</T>
 //==========================================================
-export class View extends ObjectBase implements IView {
+export class View extends Dispatcher implements IView {
    // 应用
    public application: Application = null;
    // 激活状态
    public statusSetup: boolean = false;
    // 激活状态
    public statusActive: boolean = false;
-
    // 可见状态
    public statusVisible: boolean = false;
 

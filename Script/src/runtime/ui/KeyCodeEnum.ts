@@ -5,7 +5,7 @@
 // @author maocy
 // @version 141230
 //===========================================================
-export class EKeyCode {
+export class KeyCodeEnum {
    // @attribute Integer
    public static None = 0;
    // @attribute Integer 定义Esc按键
