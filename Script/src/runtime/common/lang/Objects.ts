@@ -146,7 +146,7 @@ export class Objects<T> extends ObjectBase {
    // @param value 内容
    // @return 对象
    //===========================================================
-   public search(name: string, value: T): T {
+   public search(name: string, value: any): T {
       var items = this._items;
       var count = this._count;
       for (var i = 0; i < count; i++) {

@@ -56,7 +56,7 @@ export class LoggerUtil {
                value = parameter.toString();
             }
          }
-         formatMessage = formatMessage.replace('{' + (n - 1) + '}', value);
+         formatMessage = formatMessage.replace('{' + (n + 1) + '}', value);
       }
       result.append(formatMessage);
       var outputMessage = result.flush();

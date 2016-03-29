@@ -286,6 +286,16 @@ export class DeviceService extends Service {
    }
 
    //==========================================================
+   // <T>日志输出信息。</T>
+   //
+   // @param sender 发送者
+   // @param event 事件
+   //==========================================================
+   public onLogger(sender, event) {
+      console.log(event.message);
+   }
+
+   //==========================================================
    // <T>关联当前窗口。</T>
    // <P>接管当前窗口对象的各种加载，鼠标，键盘的处理事件。</P>
    //
@@ -299,6 +309,9 @@ export class DeviceService extends Service {
       hDocument.__linker = this;
       var hContainer = this._hContainer = hDocument.body;
       hContainer.__linker = this;
+      //..........................................................
+      // 设置日志
+      LoggerUtil.outputListeners.register(this, this.onLogger);
       //..........................................................
       var code = this._agent = window.navigator.userAgent.toString();
       var agent = code.toLowerCase();

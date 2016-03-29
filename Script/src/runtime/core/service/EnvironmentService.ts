@@ -37,8 +37,8 @@ export class EnvironmentService extends Service {
    // @method
    // @param environment:FEnvironment 环境
    //==========================================================
-   public register(environment) {
-      var name = environment.name();
+   public register(environment:Environment) {
+      var name = environment.name;
       AssertUtil.debugNotEmpty(name);
       this._environments.set(name, environment);
    }
@@ -51,7 +51,7 @@ export class EnvironmentService extends Service {
    // @param value:String 内容
    // @return FEnvironment 环境
    //==========================================================
-   public registerValue(name, value) {
+   public registerValue(name:string, value:any) {
       AssertUtil.debugNotEmpty(name);
       var environment = ClassUtil.create(Environment);
       environment.set(name, value);

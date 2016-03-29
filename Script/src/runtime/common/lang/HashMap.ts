@@ -235,7 +235,7 @@ export class HashMap<N, V> extends ObjectBase {
    // @param defaultValue:Object 默认内容
    // @return Object 内容
    //==========================================================
-   public get(name: N, defaultValue: V = null): V {
+   public get(name: any, defaultValue: V = null): V {
       if (name != null) {
          var index = this._table[name.toString().toLowerCase()];
          if (index != null) {
@@ -253,7 +253,7 @@ export class HashMap<N, V> extends ObjectBase {
    // @param value:Object 默认内容
    // @return Object 内容
    //==========================================================
-   public set(name: N, value: V): void {
+   public set(name: any, value: V): void {
       AssertUtil.debugNotNull(name);
       var nameString: any = name.toString();
       var code: any = nameString.toLowerCase();
