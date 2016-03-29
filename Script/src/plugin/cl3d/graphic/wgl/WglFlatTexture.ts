@@ -1,5 +1,5 @@
 import {Fatal} from '../../../../runtime/common/lang/Fatal';
-import {FImage} from '../../../../runtime/ui/resource/FImage';
+import {ImageResource} from '../../../../runtime/ui/resource/ImageResource';
 import {FlatTexture} from '../FlatTexture';
 import {WglUtil} from './WglUtil';
 
@@ -127,7 +127,7 @@ export class WglFlatTexture extends FlatTexture {
          data = content;
       } else if (content.constructor == Uint8ClampedArray) {
          data = new Uint8Array(content);
-      } else if (content instanceof FImage) {
+      } else if (content instanceof ImageResource) {
          data = content.handle;
          //if(image.optionAlpha()){
          //   format = capability.samplerCompressRgba;

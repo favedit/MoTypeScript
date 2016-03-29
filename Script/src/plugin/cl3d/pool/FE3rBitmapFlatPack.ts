@@ -1,6 +1,6 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FImage} from '../../../runtime/ui/resource/FImage';
+import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
 
 //==========================================================
@@ -11,7 +11,7 @@ import {FE3rBitmapPack} from './FE3rBitmapPack';
 //==========================================================
 export class FE3rBitmapFlatPack extends FE3rBitmapPack {
    // 图像
-   protected _image: FImage = null;
+   protected _image: ImageResource = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -41,7 +41,7 @@ export class FE3rBitmapFlatPack extends FE3rBitmapPack {
    //==========================================================
    public loadUrl(url) {
       var o = this;
-      var image = o._image = ClassUtil.create(FImage);
+      var image = o._image = ClassUtil.create(ImageResource);
       image.addLoadListener(o, o.onLoad);
       image.loadUrl(url);
    }

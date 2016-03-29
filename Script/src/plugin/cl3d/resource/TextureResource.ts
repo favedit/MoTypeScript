@@ -1,6 +1,6 @@
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
-import {FImage} from '../../../runtime/ui/resource/FImage';
-import {FImageConsole} from '../../../runtime/ui/resource/FImageConsole';
+import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
+import {ImageResourceService} from '../../../runtime/ui/resource/ImageResourceService';
 import {FResource} from './FResource';
 
 //==========================================================
@@ -17,7 +17,7 @@ export class TextureResource extends FResource {
    //_bitmaps = MO.Class.register(o, new MO.AGetter('_bitmaps'));
    //_bitmapPacks = MO.Class.register(o, new MO.AGetter('_bitmapPacks'));
    public url: string;
-   public image: FImage;
+   public image: ImageResource;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -44,7 +44,7 @@ export class TextureResource extends FResource {
    // @return 处理结果
    //==========================================================
    public load() {
-      var imageConsole: FImageConsole = ServiceUtil.find(FImageConsole);
+      var imageConsole: ImageResourceService = ServiceUtil.find(ImageResourceService);
       this.image = imageConsole.load(this.url);
    }
 

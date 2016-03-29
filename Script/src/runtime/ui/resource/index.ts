@@ -3,5 +3,5 @@ export * from './FAudioBuffer';
 export * from './FAudioConsole';
 export * from './FAudioContext';
 export * from './FAudioContextConsole';
-export * from './FImage';
-export * from './FImageConsole';
+export * from './ImageResource';
+export * from './ImageResourceService';

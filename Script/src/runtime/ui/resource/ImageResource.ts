@@ -3,6 +3,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
+import {AssertUtil} from '../../common/AssertUtil';
 import {Size2} from '../../common/math/Size2';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {ServiceUtil} from '../../core/ServiceUtil';
@@ -15,7 +16,7 @@ import {HtmlUtil} from '../utility/HtmlUtil';
 // @author maocy
 // @history 150105
 //==========================================================
-export class FImage extends ObjectBase {
+export class ImageResource extends ObjectBase {
    // 准备好
    protected _ready;
    // 尺寸
@@ -78,7 +79,7 @@ export class FImage extends ObjectBase {
    // <T>加载完成处理。</T>
    //==========================================================
    public ohLoad() {
-      var image: FImage = (this as any).__linker;
+      var image: ImageResource = (this as any).__linker;
       var hImage = image._handle;
       image._size.set(hImage.naturalWidth, hImage.naturalHeight);
       image._ready = true;
@@ -98,6 +99,7 @@ export class FImage extends ObjectBase {
       var url = image._url;
       //console.log('Load image failure. (url={1})', image._url);
       LoggerUtil.error(image, 'Load image failure. (url={1})', url);
+      debugger
    }
 
    //==========================================================
@@ -106,6 +108,7 @@ export class FImage extends ObjectBase {
    // @param uri 网络地址
    //==========================================================
    public loadUrl(uri) {
+      AssertUtil.debugNotEmpty(uri);
       var url = this._url = ServiceUtil.find(EnvironmentService).parseUrl(uri);
       // 创建图片
       var hImage = this._handle;

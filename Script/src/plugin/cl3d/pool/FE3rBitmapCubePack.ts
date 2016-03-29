@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FImage} from '../../../runtime/ui/resource/FImage';
+import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
 
 //==========================================================
@@ -12,7 +12,7 @@ import {FE3rBitmapPack} from './FE3rBitmapPack';
 //==========================================================
 export class FE3rBitmapCubePack extends FE3rBitmapPack {
    // 图形集合
-   protected _images: Objects<FImage> = null;
+   protected _images: Objects<ImageResource> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,9 +34,9 @@ export class FE3rBitmapCubePack extends FE3rBitmapPack {
       // 加载二进制数据
       //var d = p.data();
       //var t = p._formatName;
-      var images = this._images = new Objects<FImage>();
+      var images = this._images = new Objects<ImageResource>();
       for (var i: number = 0; i < 6; i++) {
-         var image: FImage = ClassUtil.create(FImage);
+         var image: ImageResource = ClassUtil.create(ImageResource);
          // image._index = i;
          // image.setOptionAlpha(false);
          //if(capability.blobCreate){

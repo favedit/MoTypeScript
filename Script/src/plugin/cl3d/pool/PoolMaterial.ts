@@ -1,4 +1,5 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
+import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
 import {PoolComponent} from './PoolComponent';
 
@@ -110,6 +111,7 @@ export class PoolMaterial extends PoolComponent {
       //this._resource = resource;
       //this._info.calculate(resource.info());
       //this._dirty = true;
+      LoggerUtil.debug(this, 'Load pool material success. (code={1})', this.code);
       this.ready = true;
    }
 

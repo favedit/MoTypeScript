@@ -6,7 +6,7 @@ import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {Service} from '../../core/Service';
 import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
-import {FImage} from './FImage';
+import {ImageResource} from './ImageResource';
 
 //==========================================================
 // <T>图片资源控制台。</T>
@@ -15,9 +15,9 @@ import {FImage} from './FImage';
 // @author maocy
 // @version 150707
 //==========================================================
-export class FImageConsole extends Service {
+export class ImageResourceService extends Service {
    // 图像集合
-   protected _images: Dictionary<FImage>;
+   protected _images: Dictionary<ImageResource>;
    // 环境控制台
    @Linker(EnvironmentService)
    protected _environmentConsole: EnvironmentService;
@@ -31,7 +31,7 @@ export class FImageConsole extends Service {
       super();
       // 设置变量
       this._scopeCd = ScopeEnum.Global;
-      this._images = new Dictionary<FImage>();
+      this._images = new Dictionary<ImageResource>();
    }
 
    //==========================================================
@@ -42,7 +42,7 @@ export class FImageConsole extends Service {
    //==========================================================
    public create(url: string) {
       // 加载地址
-      var image = ClassUtil.create(FImage);
+      var image = ClassUtil.create(ImageResource);
       image.loadUrl(url);
       return image;
    }

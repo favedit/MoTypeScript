@@ -1,6 +1,6 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
-import {FImage} from '../../../runtime/ui/resource/FImage';
+import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
 import {FPhongMaterial} from '../../material/FPhongMaterial';
 
 //==========================================================
@@ -24,7 +24,7 @@ export class PoolTextureLoader extends ProcessLoader {
    //==========================================================
    public processLoadBegin(): boolean {
       var result = super.processLoadBegin();
-      var image: FImage = this.image = new FImage();
+      var image: ImageResource = this.image = new ImageResource();
       image.loadListeners.register(this, this.onImageLoad);
       image.loadUrl(this.url);
       return result;
