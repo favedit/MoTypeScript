@@ -1,4 +1,4 @@
-import {WglIndexBuffer} from '../../graphic/wgl/WglIndexBuffer';
+import {WglIndexBuffer} from '../graphic/wgl/WglIndexBuffer';
 
 //==========================================================
 // <T>渲染顶点缓冲。</T>
@@ -7,7 +7,7 @@ import {WglIndexBuffer} from '../../graphic/wgl/WglIndexBuffer';
 // @author maocy
 // @history 150512
 //==========================================================
-export class FE3rIndexBuffer extends WglIndexBuffer {
+export class PoolIndexBuffer extends WglIndexBuffer {
    // 资源对象
    public resource: any = null;
 

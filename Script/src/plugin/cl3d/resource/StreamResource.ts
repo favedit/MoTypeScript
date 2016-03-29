@@ -1,6 +1,6 @@
 import {DataStream} from '../../runtime/common/io/DataStream';
 import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum';
-import {FResourceObject} from './FResourceObject';
+import {ResourceObject} from './ResourceObject';
 
 //==========================================================
 // <T>数据流。</T>
@@ -8,7 +8,7 @@ import {FResourceObject} from './FResourceObject';
 // @author maocy
 // @history 150128
 //==========================================================
-export class FStreamResource extends FResourceObject {
+export class StreamResource extends ResourceObject {
    public code: string = null;
    public elementDataCd: number = 0;
    public elementCount: number = 0;

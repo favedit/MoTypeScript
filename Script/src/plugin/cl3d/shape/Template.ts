@@ -3,10 +3,10 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {Linker} from '../../../runtime/common/reflect/Linker';
 import {Actor} from '../base/Actor';
 import {TemplateResource} from '../resource/TemplateResource';
-import {FModelResource} from '../resource/FModelResource';
-import {FModelResourceConsole} from '../resource/FModelResourceConsole';
-import {FMaterialResource} from '../resource/FMaterialResource';
-import {FMaterialResourceConsole} from '../resource/FMaterialResourceConsole';
+import {ModelResource} from '../resource/ModelResource';
+import {ModelResourceConsole} from '../resource/ModelResourceConsole';
+import {MaterialResource} from '../resource/MaterialResource';
+import {MaterialResourceConsole} from '../resource/MaterialResourceConsole';
 import {TemplateRenderable} from './TemplateRenderable';
 
 //==========================================================
@@ -27,11 +27,11 @@ export class Template extends Actor {
    //    o._skeletons       = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations      = MO.Class.register(o, new MO.AGetter('_animations'));
    // 材质管理器
-   @Linker(FMaterialResourceConsole)
-   protected _materialResourceConsole: FMaterialResourceConsole = null;
+   @Linker(MaterialResourceConsole)
+   protected _materialResourceConsole: MaterialResourceConsole = null;
    // 模型管理器
-   @Linker(FModelResourceConsole)
-   protected _modelResourceConsole: FModelResourceConsole = null;
+   @Linker(ModelResourceConsole)
+   protected _modelResourceConsole: ModelResourceConsole = null;
 
    //==========================================================
    // <T>构造处理。</T>

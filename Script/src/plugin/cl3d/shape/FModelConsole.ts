@@ -10,7 +10,7 @@ import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {Service} from '../../runtime/core/Service'
 import {ServiceUtil} from '../../runtime/core/ServiceUtil'
 import {SLoadArgs} from '../resource/SLoadArgs'
-import {FRenderModelConsole} from './render/FRenderModelConsole'
+import {PoolModelConsole} from '../pool/PoolModelConsole'
 import {FModel} from './FModel'
 
 //==========================================================
@@ -27,8 +27,8 @@ export class FModelConsole extends Service {
    @Linker(ProcessLoadService)
    protected _processLoadConsole: ProcessLoadService;
    // 渲染模型管理器
-   @Linker(FRenderModelConsole)
-   protected _renderModelConsole: FRenderModelConsole;
+   @Linker(PoolModelConsole)
+   protected _renderModelConsole: PoolModelConsole;
 
    //==========================================================
    // <T>构造处理。</T>

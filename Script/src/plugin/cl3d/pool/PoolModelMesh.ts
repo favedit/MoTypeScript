@@ -3,13 +3,13 @@ import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {IndexStrideEnum} from '../../graphic/IndexStrideEnum';
-import {AttributeFormatEnum} from '../../graphic/AttributeFormatEnum';
-import {FStreamResource} from '../resource/FStreamResource';
-import {FMeshResource} from '../resource/FMeshResource';
-import {Renderable} from '../../base/Renderable';
-import {FE3rVertexBuffer} from './FE3rVertexBuffer';
-import {FE3rIndexBuffer} from './FE3rIndexBuffer';
+import {IndexStrideEnum} from '../graphic/IndexStrideEnum';
+import {AttributeFormatEnum} from '../graphic/AttributeFormatEnum';
+import {StreamResource} from '../resource/StreamResource';
+import {MeshResource} from '../resource/MeshResource';
+import {Renderable} from '../base/Renderable';
+import {PoolVertexBuffer} from './PoolVertexBuffer';
+import {PoolIndexBuffer} from './PoolIndexBuffer';
 
 //==========================================================
 // <T>渲染模型网格。</T>
@@ -17,7 +17,7 @@ import {FE3rIndexBuffer} from './FE3rIndexBuffer';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FRenderModelMesh extends Renderable {
+export class PoolModelMesh extends Renderable {
    public ready = false;
    public vertexCount = 0;
    //public vertexBuffers: FDictionary<FE3rVertexBuffer> = null;
@@ -53,7 +53,7 @@ export class FRenderModelMesh extends Renderable {
    //
    // @param resource 资源
    //==========================================================
-   public loadResource(resource: FMeshResource) {
+   public loadResource(resource: MeshResource) {
       var context = this.graphicContext;
       // 设置属性
       this.code = resource.code;
@@ -64,12 +64,12 @@ export class FRenderModelMesh extends Renderable {
       var streamResources = resource.vertexStreams;
       var streamCount = streamResources.count();
       for (var i = 0; i < streamCount; i++) {
-         var streamResource: FStreamResource = streamResources.at(i);
+         var streamResource: StreamResource = streamResources.at(i);
          var code = streamResource.code;
          var dataCount = streamResource.dataCount;
          var data = streamResource.data;
          // 创建顶点缓冲
-         var vertexBuffer: FE3rVertexBuffer = context.createVertexBuffer(FE3rVertexBuffer);
+         var vertexBuffer: PoolVertexBuffer = context.createVertexBuffer(PoolVertexBuffer);
          vertexBuffer.code = code;
          vertexBuffer.resource = streamResource;
          // vertexBuffer.vertexCount = dataCount;
@@ -104,12 +104,12 @@ export class FRenderModelMesh extends Renderable {
       var streamResources = resource.indexStreams;
       var streamCount = streamResources.count();
       for (var i = 0; i < streamCount; i++) {
-         var streamResource: FStreamResource = streamResources.at(i);
+         var streamResource: StreamResource = streamResources.at(i);
          var code = streamResource.code;
          var dataCount = streamResource.dataCount;
          var data = streamResource.data;
          // 创建索引缓冲
-         var indexBuffer: FE3rIndexBuffer = context.createIndexBuffer(FE3rIndexBuffer);
+         var indexBuffer: PoolIndexBuffer = context.createIndexBuffer(PoolIndexBuffer);
          indexBuffer.resource = streamResource;
          var dataCd = streamResource.elementDataCd;
          if (dataCd == DataTypeEnum.Uint16) {

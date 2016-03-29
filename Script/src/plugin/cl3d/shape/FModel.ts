@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
-import {FRenderModel} from 'render/FRenderModel';
-import {FRenderModelMesh} from 'render/FRenderModelMesh';
+import {PoolModelMesh} from '../pool/PoolModelMesh';
+import {PoolModel} from '../pool/PoolModel';
 import {Actor} from '../base/Actor';
 import {FMeshRenderable} from './FMeshRenderable';
 
@@ -49,12 +49,12 @@ export class FModel extends Actor {
    //
    // @param renderable 渲染对象
    //==========================================================
-   public loadRenderable(modelRenderable: FRenderModel) {
+   public loadRenderable(modelRenderable: PoolModel) {
       this.renderable = modelRenderable;
-      var meshes: Objects<FRenderModelMesh> = modelRenderable.meshes;
+      var meshes: Objects<PoolModelMesh> = modelRenderable.meshes;
       var count: number = meshes.count();
       for (var n: number = 0; n < count; n++) {
-         var meshRenderable: FRenderModelMesh = meshes.at(n);
+         var meshRenderable: PoolModelMesh = meshes.at(n);
          var renderable: FMeshRenderable = new FMeshRenderable();
          renderable.loadRenderable(meshRenderable);
          this.pushRenderable(renderable);

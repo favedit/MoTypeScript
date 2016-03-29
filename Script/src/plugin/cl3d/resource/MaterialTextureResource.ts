@@ -1,8 +1,8 @@
 import {ServiceUtil} from '../../runtime/core/ServiceUtil';
-import {FTextureResource} from './FTextureResource';
-import {FTextureResourceConsole} from './FTextureResourceConsole';
+import {TextureResource} from './TextureResource';
+import {TextureResourceConsole} from './TextureResourceConsole';
 
-export class FMaterialTextureResource {
+export class MaterialTextureResource {
 
    public code: string;
    public type: string;
@@ -10,7 +10,7 @@ export class FMaterialTextureResource {
    public coord: string;
    public rate: string;
 
-   public textureResource:FTextureResource;
+   public textureResource:TextureResource;
 
    //==========================================================
    // <T>测试是否准备好。</T>
@@ -34,7 +34,7 @@ export class FMaterialTextureResource {
       this.coord = jconfig.coord;
       this.rate = jconfig.rate;
       // 加载纹理
-      var textureResourceConsole: FTextureResourceConsole = ServiceUtil.find(FTextureResourceConsole);
+      var textureResourceConsole: TextureResourceConsole = ServiceUtil.find(TextureResourceConsole);
       this.textureResource = textureResourceConsole.loadByUrl(this.src);
    }
 }

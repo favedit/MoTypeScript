@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
-import {FE3rComponent} from './FE3rComponent';
+import {PoolComponent} from './PoolComponent';
 
 //==========================================================
 // <T>材质。</T>
@@ -9,7 +9,7 @@ import {FE3rComponent} from './FE3rComponent';
 // @author maocy
 // @history 150417
 //==========================================================
-export class FE3rMaterial extends FE3rComponent {
+export class PoolMaterial extends PoolComponent {
    public dataReady = false;
    public ready = false;
    // @method

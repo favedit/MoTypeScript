@@ -2,7 +2,7 @@ import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {Service} from '../../runtime/core/Service';
-import {FTextureResource} from './FTextureResource';
+import {TextureResource} from './TextureResource';
 
 //==========================================================
 // <T>资源纹理管理器。</T>
@@ -10,16 +10,16 @@ import {FTextureResource} from './FTextureResource';
 // @author maocy
 // @history 150108
 //==========================================================
-export class FTextureResourceConsole extends Service {
+export class TextureResourceConsole extends Service {
    // 纹理集合
-   public textures: Dictionary<FTextureResource> = null;
+   public textures: Dictionary<TextureResource> = null;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
-      this.textures = new Dictionary<FTextureResource>();
+      this.textures = new Dictionary<TextureResource>();
    }
 
    // //==========================================================
@@ -46,10 +46,10 @@ export class FTextureResourceConsole extends Service {
    // @param code:String 代码
    // @return 处理结果
    //==========================================================
-   public load(p) {
+   public load(url) {
       // 获取纹理
       var textures = this.textures;
-      var texture: FTextureResource = textures.get(p);
+      var texture: TextureResource = textures.get(url);
       if (texture) {
          return texture;
       }
@@ -63,7 +63,7 @@ export class FTextureResourceConsole extends Service {
       //texture.setVendor(v);
       //texture.setSourceUrl(u);
       // RConsole.find(FResourceConsole).load(texture);
-      textures.set(p, texture);
+      textures.set(url, texture);
       return texture;
    }
 
@@ -73,10 +73,10 @@ export class FTextureResourceConsole extends Service {
    // @param code:String 代码
    // @return 处理结果
    //==========================================================
-   public loadByUrl(url:string) {
+   public loadByUrl(url: string) {
       // 获取纹理
       var textures = this.textures;
-      var texture: FTextureResource = textures.get(url);
+      var texture = textures.get(url);
       if (texture) {
          return texture;
       }
@@ -85,7 +85,7 @@ export class FTextureResourceConsole extends Service {
       // var v = MO.Console.find(MO.FE3sVendorConsole).find('texture');
       // var u = v.makeUrl(p);
       // 创建纹理资源
-      texture = ClassUtil.create(FTextureResource);
+      texture = ClassUtil.create(TextureResource);
       texture.guid = url;
       texture.url = url;
       texture.load();

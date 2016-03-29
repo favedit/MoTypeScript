@@ -8,7 +8,7 @@ import {FPhongMaterial} from '../../material/FPhongMaterial';
 // @author maocy
 // @history 160323
 //==========================================================
-export class FMaterialLoader extends ProcessLoader {
+export class PoolMaterialLoader extends ProcessLoader {
    // 图形环境
    public graphicContext;
    // 资源

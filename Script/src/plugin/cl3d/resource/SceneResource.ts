@@ -3,7 +3,7 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
 import {FResource} from './FResource';
-import {FMeshResource} from './FMeshResource';
+import {MeshResource} from './MeshResource';
 
 //==========================================================
 // <T>模型资源。</T>

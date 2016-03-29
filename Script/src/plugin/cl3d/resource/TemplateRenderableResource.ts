@@ -1,10 +1,10 @@
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Linker} from '../../../runtime/common/reflect/Linker';
-import {FResourceObject} from './FResourceObject';
-import {FModelResource} from './FModelResource';
-import {FModelResourceConsole} from './FModelResourceConsole';
-import {FMaterialResource} from './FMaterialResource';
-import {FMaterialResourceConsole} from './FMaterialResourceConsole';
+import {ResourceObject} from './ResourceObject';
+import {ModelResource} from './ModelResource';
+import {ModelResourceConsole} from './ModelResourceConsole';
+import {MaterialResource} from './MaterialResource';
+import {MaterialResourceConsole} from './MaterialResourceConsole';
 
 //==========================================================
 // <T>资源模板。</T>
@@ -12,19 +12,19 @@ import {FMaterialResourceConsole} from './FMaterialResourceConsole';
 // @author maocy
 // @history 150108
 //==========================================================
-export class TemplateRenderableResource extends FResourceObject {
+export class TemplateRenderableResource extends ResourceObject {
    public ready: boolean;
-   public model: FModelResource;
+   public model: ModelResource;
    public modelUrl: string;
    public meshCode: string;
-   public material: FMaterialResource;
+   public material: MaterialResource;
    public materialUrl: string;
    // 材质管理器
-   @Linker(FMaterialResourceConsole)
-   protected _materialResourceConsole: FMaterialResourceConsole;
+   @Linker(MaterialResourceConsole)
+   protected _materialResourceConsole: MaterialResourceConsole;
    // 模型管理器
-   @Linker(FModelResourceConsole)
-   protected _modelResourceConsole: FModelResourceConsole;
+   @Linker(ModelResourceConsole)
+   protected _modelResourceConsole: ModelResourceConsole;
 
    //==========================================================
    // <T>构造处理。</T>

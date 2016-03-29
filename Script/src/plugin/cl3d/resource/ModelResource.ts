@@ -3,7 +3,7 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
 import {FResource} from './FResource';
-import {FMeshResource} from './FMeshResource';
+import {MeshResource} from './MeshResource';
 
 //==========================================================
 // <T>模型资源。</T>
@@ -11,14 +11,14 @@ import {FMeshResource} from './FMeshResource';
 // @author maocy
 // @history 150128
 //==========================================================
-export class FModelResource extends FResource {
+export class ModelResource extends FResource {
    //    o = MO.Class.inherits(this, o, MO.FE3sSpace);
    //    //..........................................................
    //    // @attribute
    //    o._dataCompress  = true;
    //    o._dataBlock     = true;
    //    // @attribute
-   public meshes: Dictionary<FMeshResource> = null;
+   public meshes: Dictionary<MeshResource> = null;
    //    o._skeletons     = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations    = MO.Class.register(o, new MO.AGetter('_animations'));
    //    o._display       = MO.Class.register(o, new MO.AGetter('_display'));
@@ -41,7 +41,7 @@ export class FModelResource extends FResource {
       super();
       // 设置属性
       this.typeCode = 'Model';
-      this.meshes = new Dictionary<FMeshResource>();
+      this.meshes = new Dictionary<MeshResource>();
       //var display = this._display = MO.Class.create(MO.FE3sModelDisplay);
       //display._model = this;
    }
@@ -80,12 +80,12 @@ export class FModelResource extends FResource {
       // 读取几何体集合
       var meshCount: number = input.readInt32();
       if (meshCount > 0) {
-         var meshes = this.meshes = new Dictionary<FMeshResource>();
+         var meshes = this.meshes = new Dictionary<MeshResource>();
          for (var n: number = 0; n < meshCount; n++) {
             //var mesh = modelConsole.unserialMesh(input)
             //var meshGuid = mesh.guid();
             //meshes.set(meshGuid, mesh);
-            var mesh = new FMeshResource();
+            var mesh = new MeshResource();
             mesh.unserialize(input);
             this.meshes.set(mesh.code, mesh);
          }
@@ -126,8 +126,7 @@ export class FModelResource extends FResource {
       //    }
       // }
       //..........................................................
-      //RLogger.info(this, "Unserialize model success. (guid={1}, code={2})", this._guid, this._code);
-      LoggerUtil.info(this, "Unserialize model success. (guid={1}, code={2})");
+      LoggerUtil.info(this, "Unserialize model success. (guid={1}, code={2}, mesh_count={3})", this.guid, this.code, meshCount);
    }
 
    // //==========================================================

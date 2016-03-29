@@ -7,7 +7,7 @@ import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
 import {Service} from '../../runtime/core/Service';
 import {SLoadArgs} from './SLoadArgs';
-import {FModelResource} from './FModelResource';
+import {ModelResource} from './ModelResource';
 
 //==========================================================
 // <T>资源模型管理器。</T>
@@ -16,9 +16,9 @@ import {FModelResource} from './FModelResource';
 // @author maocy
 // @history 150128
 //==========================================================
-export class FModelResourceConsole extends Service {
+export class ModelResourceConsole extends Service {
    // 模型集合
-   protected models: Dictionary<FModelResource> = null;
+   protected models: Dictionary<ModelResource> = null;
    // 资源控制台
    @Linker(ResourceConsole)
    protected _resourceConsole: ResourceConsole = null;
@@ -34,7 +34,7 @@ export class FModelResourceConsole extends Service {
    public constructor() {
       super();
       // 设置变量
-      this.models = new Dictionary<FModelResource>();
+      this.models = new Dictionary<ModelResource>();
       // this._meshs = new MO.TDictionary();
       // this._skeletons = new MO.TDictionary();
       // this._animations = new MO.TDictionary();
@@ -168,12 +168,12 @@ export class FModelResourceConsole extends Service {
       var identity = url;
       // 查找模型
       var models = this.models;
-      var model: FModelResource = models.get(identity);
+      var model: ModelResource = models.get(identity);
       if (model) {
          return model;
       }
       // 创建模型资源
-      model = ClassUtil.create(FModelResource);
+      model = ClassUtil.create(ModelResource);
       //model.setGuid(identity);
       //model.setVendor(vendor);
       //model.setSourceUrl(url);
@@ -190,7 +190,7 @@ export class FModelResourceConsole extends Service {
    // @param guid 唯一编号
    // @return 模型资源
    //==========================================================
-   public loadByGuid(guid: string): FModelResource {
+   public loadByGuid(guid: string): ModelResource {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.guid = guid;
       var model = this.load(args);
@@ -204,7 +204,7 @@ export class FModelResourceConsole extends Service {
    // @param code 代码
    // @return 模型资源
    //==========================================================
-   public loadByCode(code: string): FModelResource {
+   public loadByCode(code: string): ModelResource {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.code = code;
       var model = this.load(args);
@@ -218,7 +218,7 @@ export class FModelResourceConsole extends Service {
    // @param url 网络地址
    // @return 模型资源
    //==========================================================
-   public loadByUrl(url: string): FModelResource {
+   public loadByUrl(url: string): ModelResource {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.url = url;
       var model = this.load(args);

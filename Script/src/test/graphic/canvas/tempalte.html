@@ -6,8 +6,19 @@
 <SCRIPT type="text/javascript" src="../../../../library/require.js"></script>
 <SCRIPT type="text/javascript" src="../../../../build/mo.js"></script>
 <SCRIPT>
-require(['test/graphic/canvas/tempalte'], function ($){
-   console.log('Success.');
+require(['test/graphic/canvas/tempalte'], function (space){
+   //............................................................
+   // 创建测试
+   var test = new space.TemplateTest();
+   test.setup(window);
+   test.setEnvironment('resource', '/asset/demo');
+   // 加载模板
+   var template = test.load('${resource}/template/pvw.show.item.002.template');
+   template.matrix.setScaleAll(0.01);
+   template.matrix.updateForce();
+   template.matrix.addRotationX(-Math.PI / 2);
+   // 运行测试
+   test.start();
 });
 </SCRIPT>
 </HEAD>

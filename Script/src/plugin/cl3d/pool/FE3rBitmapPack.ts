@@ -1,4 +1,4 @@
-import {FE3rObject} from './FE3rObject';
+import {PoolObject} from './PoolObject';
 
 //==========================================================
 // <T>渲染几何体。</T>
@@ -6,7 +6,7 @@ import {FE3rObject} from './FE3rObject';
 // @author maocy
 // @history 150106
 //==========================================================
-export abstract class FE3rBitmapPack extends FE3rObject {
+export abstract class FE3rBitmapPack extends PoolObject {
    // 纹理
    protected _texture = null;
    // 数据准备好

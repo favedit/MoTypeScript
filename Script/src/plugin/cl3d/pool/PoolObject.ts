@@ -1,4 +1,4 @@
-import {Content} from '../../graphic/Content'
+import {Content} from '../graphic/Content'
 
 //==========================================================
 // <T>渲染3D对象。</T>
@@ -7,7 +7,7 @@ import {Content} from '../../graphic/Content'
 // @author maocy
 // @history 150206
 //==========================================================
-export class FE3rObject extends Content {
+export class PoolObject extends Content {
    // 唯一码
    public guid: string ;
    // 代码

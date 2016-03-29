@@ -43,6 +43,3 @@ export * from './TemplateService';
 
 import * as instance from './instance/index';
 export {instance as instance};
-
-import * as render from './render/index';
-export {render as render};

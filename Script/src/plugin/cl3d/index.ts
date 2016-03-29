@@ -18,8 +18,8 @@ export {material as material};
 import * as particle from './particle/index';
 export {particle as particle};
 
-import * as renderable from './renderable/index';
-export {renderable as renderable};
+import * as pool from './pool/index';
+export {pool as pool};
 
 import * as resource from './resource/index';
 export {resource as resource};

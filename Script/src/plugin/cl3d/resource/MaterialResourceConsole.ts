@@ -7,7 +7,7 @@ import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
 import {Service} from '../../runtime/core/Service';
 import {SLoadArgs} from './SLoadArgs';
-import {FMaterialResource} from './FMaterialResource';
+import {MaterialResource} from './MaterialResource';
 
 //==========================================================
 // <T>资源材质管理器。</T>
@@ -16,9 +16,9 @@ import {FMaterialResource} from './FMaterialResource';
 // @author maocy
 // @history 150130
 //==========================================================
-export class FMaterialResourceConsole extends Service {
+export class MaterialResourceConsole extends Service {
    // 模板集合
-   public _materials: Dictionary<FMaterialResource> = null;
+   public _materials: Dictionary<MaterialResource> = null;
    // 资源控制台
    @Linker(ResourceConsole)
    protected _resourceConsole: ResourceConsole = null;
@@ -31,7 +31,7 @@ export class FMaterialResourceConsole extends Service {
    public constructor() {
       super();
       // 设置属性
-      this._materials = new Dictionary<FMaterialResource>();
+      this._materials = new Dictionary<MaterialResource>();
    }
 
    //==========================================================
@@ -39,7 +39,7 @@ export class FMaterialResourceConsole extends Service {
    //
    // @return 材质集合
    //==========================================================
-   public get materials(): Dictionary<FMaterialResource> {
+   public get materials(): Dictionary<MaterialResource> {
       return this._materials;
    }
 
@@ -129,12 +129,12 @@ export class FMaterialResourceConsole extends Service {
       var identity:string = url;
       // 查找模板
       var materials = this._materials;
-      var material: FMaterialResource = materials.get(identity);
+      var material: MaterialResource = materials.get(identity);
       if (material) {
          return material;
       }
       // 创建模板
-      material = ClassUtil.create(FMaterialResource);
+      material = ClassUtil.create(MaterialResource);
       material.guid = identity;
       //template.setVendor(vendor);
       // 创建加载器
@@ -149,7 +149,7 @@ export class FMaterialResourceConsole extends Service {
    // @param guid 唯一编号
    // @return 材质资源
    //==========================================================
-   public loadByGuid(guid): FMaterialResource {
+   public loadByGuid(guid): MaterialResource {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.guid = guid;
       var material = this.load(args);
@@ -163,7 +163,7 @@ export class FMaterialResourceConsole extends Service {
    // @param code 代码
    // @return 材质资源
    //==========================================================
-   public loadByCode(code): FMaterialResource {
+   public loadByCode(code): MaterialResource {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.code = code;
       var material = this.load(args);
@@ -177,7 +177,7 @@ export class FMaterialResourceConsole extends Service {
    // @param url 网络地址
    // @return 材质资源
    //==========================================================
-   public loadByUrl(url: string): FMaterialResource {
+   public loadByUrl(url: string): MaterialResource {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.url = url;
       var material = this.load(args);

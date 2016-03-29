@@ -6,7 +6,7 @@ import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
 import {Service} from '../../runtime/core/Service';
 import {Texture} from '../../runtime/graphic/material/Texture';
-import {TextureLoader} from './loader/TextureLoader';
+import {PoolTextureLoader} from './loader/PoolTextureLoader';
 
 //==========================================================
 // <T>纹理控制台。</T>
@@ -68,7 +68,7 @@ export class TextureService extends Service {
       texture.setup();
       this._textures.set(url, texture);
       // 创建加载器
-      var loader: TextureLoader = ClassUtil.create(TextureLoader);
+      var loader: PoolTextureLoader = ClassUtil.create(PoolTextureLoader);
       loader.texture = texture;
       loader.url = url;
       this._processLoadConsole.push(loader);

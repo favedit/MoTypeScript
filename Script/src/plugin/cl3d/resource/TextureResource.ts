@@ -10,7 +10,7 @@ import {FResource} from './FResource';
 // @author maocy
 // @history 150302
 //==========================================================
-export class FTextureResource extends FResource {
+export class TextureResource extends FResource {
    // @attribute
    //_dataCompress = true;
    // @attribute

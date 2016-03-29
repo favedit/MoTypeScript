@@ -9,7 +9,7 @@ import {FPhongMaterial} from '../../material/FPhongMaterial';
 // @author maocy
 // @history 160323
 //==========================================================
-export class TextureLoader extends ProcessLoader {
+export class PoolTextureLoader extends ProcessLoader {
    // 地址
    public url;
    // 图片

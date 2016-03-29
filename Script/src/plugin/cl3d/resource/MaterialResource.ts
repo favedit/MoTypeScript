@@ -1,7 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {FResource} from './FResource';
-import {FMaterialTextureResource} from './FMaterialTextureResource';
+import {MaterialTextureResource} from './MaterialTextureResource';
 
 //==========================================================
 // <T>材质资源。</T>
@@ -10,10 +10,10 @@ import {FMaterialTextureResource} from './FMaterialTextureResource';
 // @author maocy
 // @history 150428
 //==========================================================
-export class FMaterialResource extends FResource {
+export class MaterialResource extends FResource {
    //    // @attribute
    //    o._material     = MO.Class.register(o, new MO.AGetter('_material'));
-   public textures: Objects<FMaterialTextureResource>;
+   public textures: Objects<MaterialTextureResource>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -69,14 +69,14 @@ export class FMaterialResource extends FResource {
    //==========================================================
    public loadConfig(jconfig: any) {
       super.loadConfig(jconfig);
-      // 加载纹理集合 
+      // 加载纹理集合
       var jtextures = jconfig.textures;
       if (jtextures) {
          var count: number = jtextures.length;
-         var textures = this.textures = new Objects<FMaterialTextureResource>();
+         var textures = this.textures = new Objects<MaterialTextureResource>();
          for (var n: number = 0; n < count; n++) {
             var jtexture = jtextures[n];
-            var renderable = ClassUtil.create(FMaterialTextureResource);
+            var renderable = ClassUtil.create(MaterialTextureResource);
             renderable.loadConfig(jtexture);
             textures.push(renderable);
          }

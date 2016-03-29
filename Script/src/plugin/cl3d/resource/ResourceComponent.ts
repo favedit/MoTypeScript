@@ -1,5 +1,5 @@
 import {DataStream} from '../../runtime/common/io/DataStream'
-import {FResourceObject} from './FResourceObject'
+import {ResourceObject} from './ResourceObject'
 
 //==========================================================
 // <T>资源对象。</T>
@@ -7,7 +7,7 @@ import {FResourceObject} from './FResourceObject'
 // @author maocy
 // @history 160307
 //==========================================================
-export class FResourceComponent extends FResourceObject {
+export class ResourceComponent extends ResourceObject {
    // 唯一编号
    public guid: string = null;
    // 代码

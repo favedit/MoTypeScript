@@ -5,7 +5,7 @@ import {PlaneRenderable} from '../shape/PlaneRenderable';
 import {DeferredMergeAutomaticEffect} from './effect/DeferredMergeAutomaticEffect';
 import {TechniquePass} from './TechniquePass';
 import {Region} from '../base/Region';
-import {TextureService} from '../renderable/TextureService';
+import {TextureService} from '../pool/TextureService';
 import {WglFlatTexture} from '../graphic/wgl/WglFlatTexture';
 
 //==========================================================

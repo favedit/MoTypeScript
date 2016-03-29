@@ -7,7 +7,7 @@ import {DataStream} from '../../runtime/common/io/DataStream'
 // @author maocy
 // @history 160307
 //==========================================================
-export class FResourceObject extends ObjectBase {
+export class ResourceObject extends ObjectBase {
    // 类型名称
    public typeName: string = null;
    // 版本

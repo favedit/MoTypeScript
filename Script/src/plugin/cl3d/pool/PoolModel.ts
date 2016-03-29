@@ -1,9 +1,10 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
+import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FModelResource} from '../../resource/FModelResource';
-import {FE3rComponent} from './FE3rComponent';
-import {FRenderModelMesh} from './FRenderModelMesh';
+import {ModelResource} from '../resource/ModelResource';
+import {PoolComponent} from './PoolComponent';
+import {PoolModelMesh} from './PoolModelMesh';
 
 //==========================================================
 // <T>渲染模型。</T>
@@ -11,12 +12,12 @@ import {FRenderModelMesh} from './FRenderModelMesh';
 // @author maocy
 // @history 150130
 //==========================================================
-export class FRenderModel extends FE3rComponent {
+export class PoolModel extends PoolComponent {
    public dataReady = false;
    //    // @attribute
-   public resource: FModelResource;
+   public resource: ModelResource;
    //    // @attribute
-   public meshes: Objects<FRenderModelMesh>;
+   public meshes: Objects<PoolModelMesh>;
    //    o._skeletons           = MO.Class.register(o, new MO.AGetter('_skeletons'));
 
    //==========================================================
@@ -81,17 +82,17 @@ export class FRenderModel extends FE3rComponent {
    // @method
    // @param resource:FE3sModel 模型资源
    //==========================================================
-   public loadResource(resource: FModelResource) {
+   public loadResource(resource: ModelResource) {
       //var modelConsole = MO.Console.find(MO.FE3rModelConsole);
       // 读取网格集合
       var meshResources = resource.meshes;
       if (meshResources) {
-         var meshes = this.meshes = new Objects<FRenderModelMesh>();
+         var meshes = this.meshes = new Objects<PoolModelMesh>();
          var meshCount = meshResources.count();
          for (var i = 0; i < meshCount; i++) {
             var meshResource = meshResources.at(i);
             // 创建渲染网格
-            var mesh = ClassUtil.create(FRenderModelMesh);
+            var mesh = ClassUtil.create(PoolModelMesh);
             mesh.linkGraphicContext(this.graphicContext);
             mesh.loadResource(meshResource);
             meshes.push(mesh);
@@ -125,6 +126,7 @@ export class FRenderModel extends FE3rComponent {
       }
       // 加载资源
       this.loadResource(this.resource);
+      LoggerUtil.debug(this, 'Load render model success. (code={1})', this.code);
       return true;
    }
 

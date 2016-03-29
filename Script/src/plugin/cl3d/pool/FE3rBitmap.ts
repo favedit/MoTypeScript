@@ -1,4 +1,4 @@
-import {FE3rObject} from './FE3rObject';
+import {PoolObject} from './PoolObject';
 import {FE3rBitmapPack} from './FE3rBitmapPack';
 
 //==========================================================
@@ -7,7 +7,7 @@ import {FE3rBitmapPack} from './FE3rBitmapPack';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FE3rBitmap extends FE3rObject {
+export class FE3rBitmap extends PoolObject {
    // @attribute
    protected _pack:FE3rBitmapPack = null;
 

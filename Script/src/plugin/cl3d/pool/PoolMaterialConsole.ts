@@ -7,9 +7,9 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {Service} from '../../runtime/core/Service';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
-import {FMaterialResourceConsole} from '../../resource/FMaterialResourceConsole';
-import {FE3rMaterial} from './FE3rMaterial';
-import {FMaterialLoader} from './loader/FMaterialLoader';
+import {MaterialResourceConsole} from '../resource/MaterialResourceConsole';
+import {PoolMaterial} from './PoolMaterial';
+import {PoolMaterialLoader} from './loader/PoolMaterialLoader';
 
 //==========================================================
 // <T>渲染材质控制台。</T>
@@ -18,11 +18,11 @@ import {FMaterialLoader} from './loader/FMaterialLoader';
 // @author maocy
 // @version 150106
 //==========================================================
-export class FE3rMaterialConsole extends Service {
+export class PoolMaterialConsole extends Service {
    // 材质集合
    protected _materials;
-   @Linker(FMaterialResourceConsole)
-   protected _materialResourceConsole: FMaterialResourceConsole;
+   @Linker(MaterialResourceConsole)
+   protected _materialResourceConsole: MaterialResourceConsole;
    // 处理加载控制台
    @Linker(ProcessLoadService)
    protected _processLoadConsole: ProcessLoadService;
@@ -82,14 +82,14 @@ export class FE3rMaterialConsole extends Service {
       AssertUtil.debugNotNull(context);
       AssertUtil.debugNotEmpty(url);
       // 查找材质
-      var material: FE3rMaterial = this._materials.get(url);
+      var material: PoolMaterial = this._materials.get(url);
       if (material) {
          return material;
       }
       // 获得路径
       var resource = this._materialResourceConsole.loadByUrl(url);
       // 创建材质
-      material = ClassUtil.create(FE3rMaterial);
+      material = ClassUtil.create(PoolMaterial);
       material.linkGraphicContext(context);
       material.resource = resource;
       this._materials.set(url, material);
@@ -115,14 +115,14 @@ export class FE3rMaterialConsole extends Service {
          throw new Fatal(this, 'Material guid is empty');
       }
       // 查找材质
-      var loader: FMaterialLoader = this._materials.get(url);
+      var loader: PoolMaterialLoader = this._materials.get(url);
       if (loader) {
          return loader;
       }
       // 获得路径
       var resource = this._materialResourceConsole.loadByUrl(url);
       // 创建材质
-      loader = ClassUtil.create(FMaterialLoader);
+      loader = ClassUtil.create(PoolMaterialLoader);
       loader.graphicContext = context;
       loader.resource = resource;
       this._materials.set(url, loader);

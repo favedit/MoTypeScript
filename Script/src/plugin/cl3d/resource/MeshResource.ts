@@ -2,8 +2,8 @@ import {Objects} from '../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
-import {FResourceComponent} from './FResourceComponent';
-import {FStreamResource} from './FStreamResource';
+import {ResourceComponent} from './ResourceComponent';
+import {StreamResource} from './StreamResource';
 
 //==========================================================
 // <T>渲染对象。</T>
@@ -11,9 +11,9 @@ import {FStreamResource} from './FStreamResource';
 // @author maocy
 // @history 150128
 //==========================================================
-export class FMeshResource extends FResourceComponent {
-   public vertexStreams: Objects<FStreamResource> = null;
-   public indexStreams: Objects<FStreamResource> = null;
+export class MeshResource extends ResourceComponent {
+   public vertexStreams: Objects<StreamResource> = null;
+   public indexStreams: Objects<StreamResource> = null;
    //    // @attribute
    //    o._dataCompress = true;
    //    o._typeName     = 'Mesh';
@@ -45,9 +45,9 @@ export class FMeshResource extends FResourceComponent {
       // 读取数据流集合
       var streamCount: number = input.readInt32();
       if (streamCount > 0) {
-         var streams: Objects<FStreamResource> = this.vertexStreams = new Objects<FStreamResource>();
+         var streams: Objects<StreamResource> = this.vertexStreams = new Objects<StreamResource>();
          for (var n: number = 0; n < streamCount; n++) {
-            var stream: FStreamResource = ClassUtil.create(FStreamResource);
+            var stream: StreamResource = ClassUtil.create(StreamResource);
             stream.unserialize(input)
             streams.push(stream);
          }
@@ -55,9 +55,9 @@ export class FMeshResource extends FResourceComponent {
       // 读取数据流集合
       var streamCount: number = input.readInt32();
       if (streamCount > 0) {
-         var streams: Objects<FStreamResource> = this.indexStreams = new Objects<FStreamResource>();
+         var streams: Objects<StreamResource> = this.indexStreams = new Objects<StreamResource>();
          for (var n: number = 0; n < streamCount; n++) {
-            var stream: FStreamResource = ClassUtil.create(FStreamResource);
+            var stream: StreamResource = ClassUtil.create(StreamResource);
             stream.unserialize(input)
             streams.push(stream);
          }

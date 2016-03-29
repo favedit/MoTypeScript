@@ -10,9 +10,9 @@ import {Service} from '../../runtime/core/Service'
 import {ServiceUtil} from '../../runtime/core/ServiceUtil'
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
 import {SLoadArgs} from '../resource/SLoadArgs'
-import {FModelResourceConsole} from '../resource/FModelResourceConsole'
-import {FRenderModel} from './FRenderModel'
-import {FRenderModelMesh} from './FRenderModelMesh'
+import {ModelResourceConsole} from '../resource/ModelResourceConsole'
+import {PoolModelMesh} from './PoolModelMesh'
+import {PoolModel} from './PoolModel'
 
 //==========================================================
 // <T>渲染模型控制台。</T>
@@ -21,14 +21,14 @@ import {FRenderModelMesh} from './FRenderModelMesh'
 // @author maocy
 // @version 150106
 //==========================================================
-export class FRenderModelConsole extends Service {
+export class PoolModelConsole extends Service {
    // 模型集合
-   protected _models: Dictionary<FRenderModel>;
-   protected _meshs: Dictionary<FRenderModelMesh>;
-   protected _dynamicMeshs: Dictionary<FRenderModelMesh>;
+   protected _models: Dictionary<PoolModel>;
+   protected _meshs: Dictionary<PoolModelMesh>;
+   protected _dynamicMeshs: Dictionary<PoolModelMesh>;
    // 模型资源控制台
-   @Linker(FModelResourceConsole)
-   protected _modelResourceConsole: FModelResourceConsole = null;
+   @Linker(ModelResourceConsole)
+   protected _modelResourceConsole: ModelResourceConsole = null;
    // 处理加载控制台
    @Linker(ProcessLoadService)
    protected _processLoadConsole: ProcessLoadService = null;
@@ -40,9 +40,9 @@ export class FRenderModelConsole extends Service {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Local;
-      this._models = new Dictionary<FRenderModel>();
-      this._meshs = new Dictionary<FRenderModelMesh>();
-      this._dynamicMeshs = new Dictionary<FRenderModelMesh>();
+      this._models = new Dictionary<PoolModel>();
+      this._meshs = new Dictionary<PoolModelMesh>();
+      this._dynamicMeshs = new Dictionary<PoolModelMesh>();
    }
 
    // //==========================================================
@@ -121,12 +121,12 @@ export class FRenderModelConsole extends Service {
       AssertUtil.debugNotEmpty(identity);
       // 查找模型
       var models = this._models;
-      var model: FRenderModel = models.get(identity);
+      var model: PoolModel = models.get(identity);
       if (!model) {
          // 获得路径
          var resource = this._modelResourceConsole.load(args);
          // 加载模型
-         model = ClassUtil.create(FRenderModel);
+         model = ClassUtil.create(PoolModel);
          model.linkGraphicContext(context);
          model.code = identity;
          model.resource = resource;
