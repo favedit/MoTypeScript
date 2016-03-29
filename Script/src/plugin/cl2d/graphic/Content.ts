@@ -1,4 +1,5 @@
 import {GraphicObject} from '../../../runtime/graphic/core/GraphicObject';
+import {Context} from './Context';
 
 //==========================================================
 // <T>渲染对象。</T>
@@ -6,7 +7,9 @@ import {GraphicObject} from '../../../runtime/graphic/core/GraphicObject';
 // @author maocy
 // @history 150212
 //==========================================================
-export class FContent extends GraphicObject {
+export class Content extends GraphicObject {
+   // 图形环境
+   public graphicContext: Context;
 
    //==========================================================
    // <T>配置处理。</T>

@@ -1,11 +1,12 @@
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
-import {Size2} from '../../../runtime/common/math/Size2';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
+import {Size2} from '../../../runtime/common/math/Size2';
 import {BuilderUtil} from '../../../runtime/ui/utility/BuilderUtil';
-import {FContent} from '../graphic/FContent';
-import {FContext} from '../graphic/FContext';
+import {HtmlUtil} from '../../../runtime/ui/utility/HtmlUtil';
+import {Content} from '../graphic/Content';
+import {Context} from '../graphic/Context';
 
 //==========================================================
 // <T>模板画板。</T>
@@ -13,13 +14,13 @@ import {FContext} from '../graphic/FContext';
 // @author maocy
 // @history 150130
 //==========================================================
-export class FCanvas extends FContent {
+export class Canvas extends Content {
    // 面板元素
-   protected _hPanel = null;
+   protected _hPanel;
    // 画布元素
-   protected _hCanvas = null;
+   protected _hCanvas;
    // 尺寸
-   protected _size: Size2 = null;
+   protected _size: Size2;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -64,7 +65,7 @@ export class FCanvas extends FContent {
    // @return FG2dCanvasContext 绘制环境
    //==========================================================
    public createContext() {
-      return ClassUtil.create(FContext);
+      return ClassUtil.create(Context);
    }
 
    //==========================================================
@@ -87,7 +88,7 @@ export class FCanvas extends FContent {
       hStyle.width = '100%';
       hStyle.height = '100%';
       // 创建渲染环境
-      var context = this.graphicContext = this.createContext();
+      var context = this._graphicContext = this.createContext();
       context.linkCanvas(hCanvas);
       // 设置大小
       this.resize(width, height);
@@ -110,25 +111,22 @@ export class FCanvas extends FContent {
    //==========================================================
    // <T>改变大小。</T>
    //
-   // @method
-   // @param width:Integer 宽度
-   // @param height:Integer 高度
+   // @param width 宽度
+   // @param height 高度
    //==========================================================
-   public resize(width, height) {
+   public resize(width: number, height: number) {
       // 设置画板
       var hCanvas = this._hCanvas;
       hCanvas.width = width;
       hCanvas.height = height;
       // 设置尺寸
       this._size.set(width, height);
-      this.graphicContext.size().set(width, height);
+      this._graphicContext.size.set(width, height);
       LoggerUtil.debug(this, 'Canvas2d resize. (size={1}x{2}, html={3})', width, height, hCanvas.outerHTML);
    }
 
    //==========================================================
    // <T>可见处理。</T>
-   //
-   // @method
    //==========================================================
    public show() {
       this.setVisible(true);
@@ -136,8 +134,6 @@ export class FCanvas extends FContent {
 
    //==========================================================
    // <T>隐藏处理。</T>
-   //
-   // @method
    //==========================================================
    public hide() {
       this.setVisible(false);
@@ -146,17 +142,14 @@ export class FCanvas extends FContent {
    //==========================================================
    // <T>设置可见处理。</T>
    //
-   // @method
-   // @param visible:Boolean 可见性
+   // @param visible 可见性
    //==========================================================
-   public setVisible(visible) {
-      //RHtml.visibleSet(this._hCanvas, visible);
+   public setVisible(visible: boolean) {
+      HtmlUtil.visibleSet(this._hCanvas, visible);
    }
 
    //==========================================================
    // <T>重置处理。</T>
-   //
-   // @method
    //==========================================================
    public reset() {
       this.graphicContext.clear();
@@ -164,8 +157,6 @@ export class FCanvas extends FContent {
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
       // 释放属性

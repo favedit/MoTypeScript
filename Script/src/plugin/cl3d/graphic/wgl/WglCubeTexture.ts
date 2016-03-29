@@ -1,3 +1,6 @@
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
+import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
+import {CanvasService} from '../../../cl2d/engine/CanvasService';
 import {CubeTexture} from '../CubeTexture';
 import {WglUtil} from './WglUtil';
 
@@ -9,7 +12,7 @@ import {WglUtil} from './WglUtil';
 //==========================================================
 export class WglCubeTexture extends CubeTexture {
    // 句柄
-   public handle: any = null;
+   public handle: any;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -17,7 +20,7 @@ export class WglCubeTexture extends CubeTexture {
    // @method
    //==========================================================
    public setup() {
-      //super.setup();
+      super.setup();
       var graphic = this._graphicContext.handle;
       this.handle = graphic.createTexture();
    }
@@ -52,7 +55,44 @@ export class WglCubeTexture extends CubeTexture {
    // @method
    // @param p:image:HtmlImgTag 图片
    //==========================================================
+   public uploadSingle(image: ImageResource) {
+      var context = this._graphicContext;
+      var graphic = context.handle;
+      // 设置面
+      var faces = [graphic.TEXTURE_CUBE_MAP_POSITIVE_X, graphic.TEXTURE_CUBE_MAP_NEGATIVE_X, graphic.TEXTURE_CUBE_MAP_POSITIVE_Y,
+         graphic.TEXTURE_CUBE_MAP_NEGATIVE_Y, graphic.TEXTURE_CUBE_MAP_POSITIVE_Z, graphic.TEXTURE_CUBE_MAP_NEGATIVE_Z];
+      // 绑定数据
+      graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
+      // 上传纹理
+      var size = image.size;
+      var length = size.width;
+      var canvasService: CanvasService = ServiceUtil.find(CanvasService);
+      var canvas2d = canvasService.allocBySize(length, length);
+      var context2d = canvas2d.graphicContext;
+      for (var n: number = 0; n < 6; n++) {
+         context2d.clear();
+         context2d.drawImage(image.handle, 0, length * n, length, length, 0, 0, length, length);
+         graphic.texImage2D(faces[n], 0, graphic.RGB, graphic.RGB, graphic.UNSIGNED_BYTE, canvas2d.htmlCanvas());
+      }
+      canvasService.free(canvas2d);
+      // 检查结果
+      this.statusLoad = context.checkError("texImage2D", "Upload cube image failure.");
+      // 更新处理
+      this.update();
+   }
+
+   //==========================================================
+   // <T>上传图片内容。</T>
+   //
+   // @method
+   // @param p:image:HtmlImgTag 图片
+   //==========================================================
    public upload(x1, x2, y1, y2, z1, z2) {
+      // 上传一个图片
+      if (x1 != null && x2 == null) {
+         return this.uploadSingle(x1);
+      }
+      // 上传全部图片
       var context = this._graphicContext;
       var graphic = context.handle;
       // 绑定数据

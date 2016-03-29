@@ -1,7 +1,7 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
 import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
-import {FPhongMaterial} from '../../material/FPhongMaterial';
+import {PhongMaterial} from '../../material/PhongMaterial';
 
 //==========================================================
 // <T>材质加载器。</T>

@@ -78,7 +78,7 @@ export class KeyboardService extends Service {
    //==========================================================
    public initialize() {
       var deviceConsole = this._deviceConsole;
-      var hContainer = deviceConsole.htmlContainer();
+      var hContainer = deviceConsole.htmlContainer;
       hContainer._keyboardConsole = this;
       // 关联键盘事件
       var supportHtml5 = deviceConsole.supportHtml5();
@@ -103,7 +103,7 @@ export class KeyboardService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -124,7 +124,7 @@ export class KeyboardService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -145,7 +145,7 @@ export class KeyboardService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }

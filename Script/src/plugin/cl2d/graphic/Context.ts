@@ -2,6 +2,7 @@ import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
+import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
 
 //==========================================================
 // <T>WebGL渲染环境。</T>
@@ -10,20 +11,20 @@ import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 // @refer https://www.khronos.org/registry/webgl
 // @history 141230
 //==========================================================
-export class FContext extends GraphicContext {
+export class Context extends GraphicContext {
    // @attribute
-   protected _handle = null;
-   protected _globalScale: Size2 = null;
-   protected _scale: Size2 = null;
+   protected _handle: CanvasRenderingContext2D;
+   protected _globalScale: Size2;
+   protected _scale: Size2;
    // @attribute
-   protected _gridSourceX = new Array(3);
-   protected _gridSourceY = new Array(3);
-   protected _gridSourceWidth = new Array(3);
-   protected _gridSourceHeight = new Array(3);
-   protected _gridDrawX = new Array(3);
-   protected _gridDrawY = new Array(3);
-   protected _gridDrawWidth = new Array(3);
-   protected _gridDrawHeight = new Array(3);
+   protected _gridSourceX;
+   protected _gridSourceY;
+   protected _gridSourceWidth;
+   protected _gridSourceHeight;
+   protected _gridDrawX;
+   protected _gridDrawY;
+   protected _gridDrawWidth;
+   protected _gridDrawHeight;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -35,6 +36,14 @@ export class FContext extends GraphicContext {
       // 设置属性
       this._globalScale = new Size2(1, 1);
       this._scale = new Size2(1, 1);
+      this._gridSourceX = new Array(3);
+      this._gridSourceY = new Array(3);
+      this._gridSourceWidth = new Array(3);
+      this._gridSourceHeight = new Array(3);
+      this._gridDrawX = new Array(3);
+      this._gridDrawY = new Array(3);
+      this._gridDrawWidth = new Array(3);
+      this._gridDrawHeight = new Array(3);
    }
 
    //==========================================================
@@ -76,13 +85,12 @@ export class FContext extends GraphicContext {
    // @param height:Number 纵向缩放
    //==========================================================
    public setScale(width, height) {
-      var o = this;
       if ((width == 1) && (height == 1)) {
          return;
       }
       //if(!o._scale.equalsData(width, height)){
-      o._handle.scale(width, height);
-      o._scale.set(width, height);
+      this._handle.scale(width, height);
+      this._scale.set(width, height);
       //}
    }
 
@@ -93,7 +101,6 @@ export class FContext extends GraphicContext {
    // @param alpha:Number 透明
    //==========================================================
    public setAlpha(alpha) {
-      var o = this;
       this._handle.globalAlpha = alpha;
    }
 
@@ -127,10 +134,10 @@ export class FContext extends GraphicContext {
    // @param font:String 字体
    //==========================================================
    public clearShadow() {
-      this._handle.shadowOffsetX = "0";
-      this._handle.shadowOffsetY = "0";
-      this._handle.shadowBlur = "0";
-      this._handle.shadowColor = "0";
+      //this._handle.shadowOffsetX = "0";
+      //this._handle.shadowOffsetY = "0";
+      //this._handle.shadowBlur = "0";
+      //this._handle.shadowColor = "0";
    }
 
    //==========================================================
@@ -154,15 +161,13 @@ export class FContext extends GraphicContext {
    //==========================================================
    // <T>准备内容。</T>
    //
-   // @method
-   // @param clearFlag:Boolean 是否清空
+   // @param clearFlag 是否清空
    //==========================================================
    public prepare(clearFlag) {
-      var o = this;
-      var handle = o._handle;
-      var scale = o._globalScale;
+      var handle = this._handle;
+      var scale = this._globalScale;
       if (clearFlag) {
-         var size = o._size;
+         var size = this._size;
          handle.setTransform(1, 0, 0, 1, 0, 0);
          //handle.clearRect(0, 0, size.width, size.height);
       }
@@ -171,13 +176,10 @@ export class FContext extends GraphicContext {
 
    //==========================================================
    // <T>清空内容。</T>
-   //
-   // @method
    //==========================================================
    public clear() {
-      var o = this;
-      var size = o._size;
-      var handle = o._handle;
+      var size = this._size;
+      var handle = this._handle;
       var hCanvas = handle.canvas;
       handle.save();
       handle.setTransform(1, 0, 0, 1, 0, 0);
@@ -204,8 +206,7 @@ export class FContext extends GraphicContext {
    // @param height:Integer 高度
    //==========================================================
    public clip(left, top, width, height) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       //handle.strokeStyle = '#FFFFFF';
       //handle.lineWidth = 1;
       //handle.strokeRect(left, top, width, height);
@@ -234,8 +235,7 @@ export class FContext extends GraphicContext {
    // @return gradient 渐变
    //==========================================================
    public createLinearGradient(x1, y1, x2, y2) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       return handle.createLinearGradient(x1, y1, x2, y2);
    }
 
@@ -291,8 +291,7 @@ export class FContext extends GraphicContext {
    // @param lineWidth:Integer 线宽
    //==========================================================
    public drawLine(x1, y1, x2, y2, color, lineWidth) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.strokeStyle = color;
       handle.lineWidth = lineWidth;
       handle.beginPath();
@@ -314,8 +313,7 @@ export class FContext extends GraphicContext {
    // @param lineWidth:Integer 线宽
    //==========================================================
    public drawRectangle(x, y, width, height, color, lineWidth) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.strokeStyle = color;
       handle.lineWidth = lineWidth;
       handle.strokeRect(x, y, width, height);
@@ -331,8 +329,7 @@ export class FContext extends GraphicContext {
    // @param color:String 颜色
    //==========================================================
    public drawText(text, x, y, color) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.fillStyle = color;
       handle.fillText(text, x, y);
    }
@@ -349,8 +346,7 @@ export class FContext extends GraphicContext {
    // @param color:String 颜色
    //==========================================================
    public drawTextRectangle(text, x, y, width, height, lineWidth, color) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.fillStyle = color;
       // handle.fillText(text, x, y);
       var drawX = x;
@@ -459,8 +455,7 @@ export class FContext extends GraphicContext {
    // @param font:SUiFont 字体
    //==========================================================
    public drawTextVertical(text, x, y, font) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.font = font.toString();
       handle.fillStyle = font.color;
       for (var i = 0; i < text.length; i++) {
@@ -479,30 +474,29 @@ export class FContext extends GraphicContext {
    // @param width:Integer 宽度
    // @param height:Integer 高度
    //==========================================================
-   public drawImage(content, x, y, width, height) {
-      var o = this;
-      var handle = o._handle;
-      var size = o._size;
+   public drawImage(content, x, y, width, height, targetX?:any, targetY?:any, targetWidth?:any, targetHeight?:any) {
+      var handle = this._handle;
+      var size = this._size;
       // 获得数据
       var data = null
       if (content.tagName == 'IMG') {
          data = content;
-         //} else if (MO.Class.isClass(content, MO.FImage)) {
+      } else if (content instanceof ImageResource) {
          if (!content.testReady()) {
             return;
          }
-         data = content.image();
+         data = content.handle;
          if (width == null) {
             width = data.width;
          }
          if (height == null) {
             height = data.height;
          }
-         //} else {
-         throw new Fatal(o, 'Unknown content type');
+      } else {
+         throw new Fatal(this, 'Unknown content type');
       }
       // 绘制位图
-      //handle.drawImage(data, x, y, width, height);
+      handle.drawImage(data, x, y, width, height, targetX, targetY, targetWidth, targetHeight);
    }
 
    //==========================================================
@@ -603,8 +597,7 @@ export class FContext extends GraphicContext {
    // @param border:SBorder 边框
    //==========================================================
    public drawBorderLine(x1, y1, x2, y2, borderLine) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.strokeStyle = borderLine.color;
       handle.lineWidth = borderLine.width;
       handle.beginPath();
@@ -623,17 +616,16 @@ export class FContext extends GraphicContext {
    // @param border:SBorder 边框
    //==========================================================
    public drawBorder(rectangle, border) {
-      var o = this;
       // 计算位置
       var left = rectangle.left;
       var top = rectangle.top;
       var right = rectangle.left + rectangle.width - 1;
       var bottom = rectangle.top + rectangle.height - 1;
       // 绘制边框
-      o.drawBorderLine(left, bottom, left, top, border.left);
-      o.drawBorderLine(left - 0.5, top, right + 0.5, top, border.top);
-      o.drawBorderLine(right, top, right, bottom, border.right);
-      o.drawBorderLine(left - 0.5, bottom, right + 0.5, bottom, border.bottom);
+      this.drawBorderLine(left, bottom, left, top, border.left);
+      this.drawBorderLine(left - 0.5, top, right + 0.5, top, border.top);
+      this.drawBorderLine(right, top, right, bottom, border.right);
+      this.drawBorderLine(left - 0.5, bottom, right + 0.5, bottom, border.bottom);
    }
 
    //==========================================================
@@ -646,8 +638,7 @@ export class FContext extends GraphicContext {
    // @param fillColor:String 填充色
    //==========================================================
    public drawQuadrilateral(x1, y1, x2, y2, x3, y3, x4, y4, lineWidth, strokeColor, fillColor) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.beginPath();
       handle.lineWidth = lineWidth;
       handle.strokeStyle = strokeColor;
@@ -674,8 +665,7 @@ export class FContext extends GraphicContext {
    // @param color:String 颜色
    //==========================================================
    public drawShape(lineWidth, color) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.lineWidth = lineWidth;
       handle.strokeStyle = color;
       handle.stroke();
@@ -691,8 +681,7 @@ export class FContext extends GraphicContext {
    // @param fillColor:String 填充色
    //==========================================================
    public drawTriangle(x1, y1, x2, y2, x3, y3, lineWidth, strokeColor, fillColor) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.lineWidth = lineWidth;
       handle.strokeStyle = strokeColor;
       handle.fillStyle = fillColor;
@@ -717,8 +706,7 @@ export class FContext extends GraphicContext {
    // @param lineWidth:Integer 线宽
    //==========================================================
    public fillRectangle(x, y, width, height, color) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.fillStyle = color;
       handle.beginPath();
       handle.fillRect(x, y, width, height);
@@ -732,8 +720,7 @@ export class FContext extends GraphicContext {
    // @param style:连接类型（"bevel", "round", "miter"）；
    //==========================================================
    public setLineJoin(style) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.lineJoin = style;
    }
 
@@ -745,8 +732,7 @@ export class FContext extends GraphicContext {
    // @param color:String 颜色
    //==========================================================
    public fillShape(lineWidth, color) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.lineWidth = lineWidth;
       handle.fillStyle = color;
       handle.fill();
@@ -763,8 +749,7 @@ export class FContext extends GraphicContext {
    // @param fillColor:String 填充色
    //==========================================================
    public drawCircle(x, y, radius, lineWidth, strokeColor, fillColor) {
-      var o = this;
-      var handle = o._handle;
+      var handle = this._handle;
       handle.lineWidth = lineWidth;
       handle.strokeStyle = strokeColor;
       handle.fillStyle = fillColor;
@@ -787,7 +772,7 @@ export class FContext extends GraphicContext {
    //==========================================================
    public toBytes() {
       var size = this._size;
-      //return o._handle.getImageData(0, 0, size.width, size.height);
+      return this._handle.getImageData(0, 0, size.width, size.height);
    }
 
    //==========================================================

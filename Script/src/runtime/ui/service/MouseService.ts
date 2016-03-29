@@ -46,7 +46,7 @@ export class MouseService extends Service {
    //==========================================================
    public constructor() {
       super();
-      this.scopeCd = ScopeEnum.Local;
+      this._scopeCd = ScopeEnum.Local;
       // 设置属性
       this._eventMouse = new MouseEvent();
       this._clickListeners = new Listeners();
@@ -176,7 +176,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -197,7 +197,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -218,7 +218,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -239,7 +239,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -260,7 +260,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -281,7 +281,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -302,7 +302,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }
@@ -323,7 +323,7 @@ export class MouseService extends Service {
       // 获得事件
       var hFindEvent = null;
       if (!hEvent) {
-         hFindEvent = linker._deviceConsole.htmlEvent(hEvent);
+         hFindEvent = linker._deviceConsole.findEvent(hEvent);
       } else {
          hFindEvent = hEvent;
       }

@@ -69,7 +69,7 @@ export class DeferredDataPhongAutomaticEffect extends AutomaticEffect {
          data.writeFloat4(1, 1, 1, 1);
          // 反射参数（索引8）
          //data.writeFloat4(0, 0, 1 - phongMaterial.reflectMerge, phongMaterial.reflectMerge);
-         data.writeFloat4(1, 1, 1, 1);
+         data.writeFloat4(0, 0, 1, 1);
          // 发光颜色（索引9）
          //data.writeColor4(phongMaterial.emissiveColor);
          data.writeFloat4(1, 1, 1, 1);

@@ -29,6 +29,8 @@ export class ResourceObject extends ObjectBase {
    // @param config 配置
    //==========================================================
    public loadConfig(config) {
+      this.typeName = config.class;
+      this.version = config.version;
    }
 
    //==========================================================
@@ -38,6 +40,8 @@ export class ResourceObject extends ObjectBase {
    // @param xconfig:TXmlNode 配置节点
    //==========================================================
    public saveConfig(config) {
+      config.class = this.typeName;
+      config.version = this.version;
       // // 设置类型
       // if(!MO.Lang.String.isEmpty(this._typeName)){
       //    xconfig.setName(this._typeName);

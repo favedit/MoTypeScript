@@ -1,2 +1,2 @@
-export * from './FDisplay';
-export * from './FDrawable';
+export * from './Display';
+export * from './Drawable';

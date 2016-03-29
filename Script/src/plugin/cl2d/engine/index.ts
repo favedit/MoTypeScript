@@ -1,2 +1,2 @@
-export * from './FCanvas';
-export * from './FCanvasConsole';
+export * from './Canvas';
+export * from './CanvasService';

@@ -1,2 +1,2 @@
-export * from './FLineMaterial';
-export * from './FPhongMaterial';
+export * from './LineMaterial';
+export * from './PhongMaterial';

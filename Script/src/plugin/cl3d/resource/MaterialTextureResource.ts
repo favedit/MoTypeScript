@@ -1,16 +1,16 @@
 import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {TextureResource} from './TextureResource';
 import {TextureResourceConsole} from './TextureResourceConsole';
+import {ResourceObject} from './ResourceObject';
 
-export class MaterialTextureResource {
-
+export class MaterialTextureResource extends ResourceObject {
+   // 类名称
    public code: string;
    public type: string;
    public src: string;
    public coord: string;
    public rate: string;
-
-   public textureResource:TextureResource;
+   public textureResource: TextureResource;
 
    //==========================================================
    // <T>测试是否准备好。</T>
@@ -24,15 +24,16 @@ export class MaterialTextureResource {
    //==========================================================
    // <T>从配置里加载信息内容</T>
    //
-   // @param jconfig 配置
+   // @param config 配置
    //==========================================================
-   public loadConfig(jconfig: any) {
+   public loadConfig(config: any) {
+      super.loadConfig(config);
       // 加载设置
-      this.code = jconfig.code;
-      this.type = jconfig.type;
-      this.src = jconfig.src;
-      this.coord = jconfig.coord;
-      this.rate = jconfig.rate;
+      this.code = config.code;
+      this.type = config.type;
+      this.src = config.src;
+      this.coord = config.coord;
+      this.rate = config.rate;
       // 加载纹理
       var textureResourceConsole: TextureResourceConsole = ServiceUtil.find(TextureResourceConsole);
       this.textureResource = textureResourceConsole.loadByUrl(this.src);

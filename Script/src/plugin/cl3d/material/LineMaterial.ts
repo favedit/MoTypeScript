@@ -1,5 +1,5 @@
 import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
-import {PhongMaterial as FBasePhongMaterial} from '../../../runtime/graphic/material/PhongMaterial';
+import {LineMaterial as BaseLineMaterial} from '../../../runtime/graphic/material/LineMaterial';
 
 //==========================================================
 // <T>材质。</T>
@@ -8,7 +8,7 @@ import {PhongMaterial as FBasePhongMaterial} from '../../../runtime/graphic/mate
 // @author maocy
 // @history 150417
 //==========================================================
-export class FPhongMaterial extends FBasePhongMaterial {
+export class LineMaterial extends BaseLineMaterial {
    public ready = false;
 
    //==========================================================

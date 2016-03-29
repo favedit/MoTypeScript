@@ -6,5 +6,5 @@ import {Node} from '../../../runtime/framework/Node';
 // @author maocy
 // @history 150228
 //==========================================================
-export class FDrawable extends Node {
+export class Drawable extends Node {
 }

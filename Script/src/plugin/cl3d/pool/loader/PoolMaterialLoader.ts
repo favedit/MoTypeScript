@@ -1,6 +1,7 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
-import {FPhongMaterial} from '../../material/FPhongMaterial';
+import {PhongMaterial} from '../../material/PhongMaterial';
+import {MaterialResource} from '../../resource/MaterialResource';
 
 //==========================================================
 // <T>材质加载器。</T>
@@ -12,7 +13,7 @@ export class PoolMaterialLoader extends ProcessLoader {
    // 图形环境
    public graphicContext;
    // 资源
-   public resource;
+   public resource:MaterialResource;
    // 材质
    public material;
 
@@ -28,8 +29,8 @@ export class PoolMaterialLoader extends ProcessLoader {
          if (resource.testReady()) {
             // 创建材质
             var material = null;
-            if (resource.className == 'phong') {
-               material = new FPhongMaterial();
+            if (resource.className == 'PhongMaterial') {
+               material = new PhongMaterial();
             } else {
                throw new Fatal(this, 'Unknown material.');
             }

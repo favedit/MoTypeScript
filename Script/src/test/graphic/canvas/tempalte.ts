@@ -36,8 +36,8 @@ export class TemplateTest {
       var scene = this.scene = canvas.scene = new FSimpleScene();
       scene.linkGraphicContext(context);
       scene.setup();
-      scene.backgroundColor.set(1, 1, 1, 1);
-      //scene.backgroundColor.set(0, 0, 0, 1);
+      // scene.backgroundColor.set(1, 1, 1, 1);
+      scene.backgroundColor.set(0, 0, 0, 1);
       // 创建相机
       var camera = canvas.camera;
       camera.position.set(0, 0, -20);
