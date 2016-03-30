@@ -28,10 +28,10 @@ export class Template extends Actor {
    //    o._animations      = MO.Class.register(o, new MO.AGetter('_animations'));
    // 材质管理器
    @Linker(MaterialResourceConsole)
-   protected _materialResourceConsole: MaterialResourceConsole = null;
+   protected _materialResourceConsole: MaterialResourceConsole;
    // 模型管理器
    @Linker(ModelResourceConsole)
-   protected _modelResourceConsole: ModelResourceConsole = null;
+   protected _modelResourceConsole: ModelResourceConsole;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -246,6 +246,7 @@ export class Template extends Actor {
       var count = renderableResources.count();
       for (var i = 0; i < count; i++) {
          var renderableResource = renderableResources.at(i);
+         // 加载资源
          var renderable = new TemplateRenderable();
          renderable.linkGraphicContext(this._graphicContext);
          renderable.loadResource(renderableResource);

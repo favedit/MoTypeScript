@@ -12,7 +12,7 @@ import {PerspectiveCamera} from '../../runtime/graphic/camera/PerspectiveCamera'
 import {Pipeline} from '../../plugin/cl3d/technique/pipeline/Pipeline';
 import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipeline';
 import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
-import {FModelConsole} from '../../plugin/cl3d/shape/FModelConsole';
+import {ModelService} from '../../plugin/cl3d/shape/ModelService';
 import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
 import {SSettings} from '../application/SSettings';
 

@@ -7,10 +7,12 @@ import {Struct} from '../../runtime/common/lang/Struct'
 // @history 151225
 //==========================================================
 export class SLoadArgs extends Struct {
+   // 环境
+   public context: any;
    // 唯一编号
-   public guid: string = null;
+   public guid: string;
    // 代码
-   public code: string = null;
+   public code: string;
    // 网络地址
-   public url: string = null;
+   public url: string;
 }

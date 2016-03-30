@@ -17,6 +17,19 @@ export class GeneralColorPass extends TechniquePass {
    }
 
    //==========================================================
+   // <T>开始绘制处理。</T>
+   //
+   // @param region 区域
+   //==========================================================
+   public drawBegin(region: Region): boolean {
+      super.drawBegin(region);
+      // 设置渲染目标
+      var context = this._graphicContext;
+      context.clearColorDepth(region.backgroundColor);
+      return true;
+   }
+
+   //==========================================================
    // <T>绘制区域处理。</T>
    //
    // @param region 区域

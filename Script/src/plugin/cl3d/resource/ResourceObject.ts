@@ -9,9 +9,18 @@ import {DataStream} from '../../runtime/common/io/DataStream'
 //==========================================================
 export class ResourceObject extends ObjectBase {
    // 类型名称
-   public typeName: string = null;
+   public typeName: string;
    // 版本
-   public version: number = 0;
+   public version: number;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this.version = 1;
+   }
 
    //==========================================================
    // <T>从输入流里反序列化信息内容</T>

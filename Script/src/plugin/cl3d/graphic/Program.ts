@@ -27,14 +27,16 @@ import {Content} from './Content';
 // @history 141230
 //==========================================================
 export abstract class Program extends Content {
-   //..........................................................
-   // @attribute
-   public _parameters: Dictionary<ProgramParameter> = null;
-   public _attributes: Dictionary<ProgramAttribute> = null;
-   public _samplers: Dictionary<ProgramSampler> = null;
-   // @attribute
-   public _vertexShader: VertexShader = null;
-   public _fragmentShader: FragmentShader = null;
+   // 参数集合
+   public _parameters: Dictionary<ProgramParameter>;
+   // 属性集合
+   public _attributes: Dictionary<ProgramAttribute>;
+   // 取样器集合
+   public _samplers: Dictionary<ProgramSampler>;
+   // 顶点渲染器
+   public _vertexShader: VertexShader;
+   // 像素渲染器
+   public _fragmentShader: FragmentShader;
 
    //==========================================================
    // <T>判断是否含有参数。</T>
@@ -210,7 +212,7 @@ export abstract class Program extends Content {
    // @param value 数据
    // @param count 个数
    //==========================================================
-   public setParameter(name, value, count?:any) {
+   public setParameter(name, value, count?: any) {
       // 获得定义
       var parameter: ProgramParameter = this.findParameter(name);
       AssertUtil.debugNotNull(parameter);
@@ -240,10 +242,10 @@ export abstract class Program extends Content {
          throw new Fatal(this, 'Bind invalid parameter type. (name={1}, type={2})', name, clazz);
       }
       // 检查数据变更
-      if (parameter.attachData(data)) {
-         // 设置内容
-         this._graphicContext.bindConst(null, parameter.slot, parameter.formatCd, data, count);
-      }
+      //if (parameter.attachData(data)) {
+      // 设置内容
+      this._graphicContext.bindConst(null, parameter.slot, parameter.formatCd, data, count);
+      //}
    }
 
    //==========================================================
@@ -273,12 +275,8 @@ export abstract class Program extends Content {
    // @param texture:FTexture 纹理
    //==========================================================
    public setSampler(name, texture) {
-      // 获得定义
       var sampler = this.findSampler(name);
-      if (!sampler) {
-         throw new Fatal(this, 'Bind invalid sampler. (name={1})', name);
-      }
-      // 设置内容
+      AssertUtil.debugNotNull(sampler);
       this._graphicContext.bindTexture(sampler.slot, sampler.index, texture);
    }
 

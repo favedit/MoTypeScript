@@ -12,8 +12,8 @@ import {StreamResource} from './StreamResource';
 // @history 150128
 //==========================================================
 export class MeshResource extends ResourceComponent {
-   public vertexStreams: Objects<StreamResource> = null;
-   public indexStreams: Objects<StreamResource> = null;
+   public vertexStreams: Objects<StreamResource>;
+   public indexStreams: Objects<StreamResource>;
    //    // @attribute
    //    o._dataCompress = true;
    //    o._typeName     = 'Mesh';

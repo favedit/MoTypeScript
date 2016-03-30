@@ -1,5 +1,6 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
+import {Material} from '../../../runtime/graphic/material/Material';
 import {PhongMaterial} from '../../material/PhongMaterial';
 import {MaterialResource} from '../../resource/MaterialResource';
 
@@ -15,7 +16,14 @@ export class PoolMaterialLoader extends ProcessLoader {
    // 资源
    public resource:MaterialResource;
    // 材质
-   public material;
+   public material:Material;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+   }
 
    //==========================================================
    // <T>处理加载</T>

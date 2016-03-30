@@ -12,7 +12,7 @@ import {HtmlUtil} from '../utility/HtmlUtil';
 // @author maocy
 // @history 150526
 //==========================================================
-export class FAudio extends ObjectBase {
+export class Audio extends ObjectBase {
    // 地址
    protected _url: string = null;
    // 句柄

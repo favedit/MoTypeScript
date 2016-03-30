@@ -9,13 +9,13 @@ import {DataStream} from '../../runtime/common/io/DataStream';
 // @author maocy
 // @history 150110
 //==========================================================
-export class FBoneResource extends ObjectBase {
+export class BoneResource extends ObjectBase {
    // 索引
-   public index: number = null;
+   public index: number;
    // 跟踪
-   public track: any = null;
+   public track: any;
    // 骨头集合
-   public bones: Objects<FBoneResource> = null;
+   public bones: Objects<BoneResource>;
 
    //==========================================================
    // <T>从输入流里反序列化信息内容</T>
@@ -29,9 +29,9 @@ export class FBoneResource extends ObjectBase {
       // 读取所有子骨头
       var count: number = input.readUint8();
       if (count > 0) {
-         var bones = this.bones = new Objects<FBoneResource>();
+         var bones = this.bones = new Objects<BoneResource>();
          for (var n: number = 0; n < count; n++) {
-            var bone = ClassUtil.create(FBoneResource);
+            var bone = ClassUtil.create(BoneResource);
             bone.unserialize(input);
             bones.push(bone);
          }

@@ -123,8 +123,8 @@ export class FCanvas extends Control {
       camera.lookAt(0, 0, 0);
       camera.update();
       // 设置渲染管道
-      //var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, ForwardPipeline);
-      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, DeferredPipeline);
+      var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, ForwardPipeline);
+      // var pipeline = this.pipeline = this._pipelineConsole.alloc(this._graphicContext, DeferredPipeline);
       pipeline.scene = this.scene;
       pipeline.camera = this.camera;
       pipeline.enterFrameListeners.register(this, this.onProcess);

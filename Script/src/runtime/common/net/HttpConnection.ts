@@ -19,26 +19,26 @@ import {HttpStatusEnum} from './HttpStatusEnum';
 //==========================================================
 export class HttpConnection extends ObjectBase {
    // @attribute
-   protected _asynchronous: boolean = false;
+   protected _asynchronous: boolean;
    protected _methodCd = HttpMethodEnum.Get;
-   protected _contentCd = HttpContentEnum.Binary;
-   protected _url = null;
+   protected _contentCd: HttpContentEnum;
+   protected _url: string;
    // @attribute
-   protected _linker = null;
-   protected _heads = null;
-   protected _attributes = null;
-   protected _input = null;
-   protected _inputData = null;
-   protected _output = null;
-   protected _outputData = null;
+   protected _linker;
+   protected _heads;
+   protected _attributes;
+   protected _input;
+   protected _inputData;
+   protected _output;
+   protected _outputData;
    // @attribute
-   protected _handle = null;
-   protected _contentLength = 0;
-   protected _statusFree = true;
-   protected _event = null;
+   protected _handle;
+   protected _contentLength: number;
+   protected _statusFree: boolean;
+   protected _event;
    // @attribute
-   public loadListeners: Listeners = null;
-   public completeListeners: Listeners = null;
+   public loadListeners: Listeners;
+   public completeListeners: Listeners;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -48,9 +48,13 @@ export class HttpConnection extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
+      this._methodCd = HttpMethodEnum.Get;
+      this._contentCd = HttpContentEnum.Binary;
       this._heads = new Attributes();
       this._attributes = new Attributes();
       this._event = new Event(this);
+      this._contentLength = 0;
+      this._statusFree = true;
       this.loadListeners = new Listeners();
       this.completeListeners = new Listeners();
       // 创建链接

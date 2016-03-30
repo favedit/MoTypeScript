@@ -28,11 +28,11 @@ export class LoaderService extends Service {
    // 加载中集合
    protected _processLoaders: Objects<Loader>;
    // 加载上限
-   protected _processLimit = 8;
+   protected _processLimit: number;
    // 线程
    protected _thread: ListenerThread;
    // 间隔
-   protected _interval = 150;
+   protected _interval: number;
    // 线程控制台
    @Linker(ThreadService)
    protected _threadConsole: ThreadService;
@@ -50,6 +50,8 @@ export class LoaderService extends Service {
       super();
       // 设置属性
       this._scopeCd = ScopeEnum.Global;
+      this._processLimit = 8;
+      this._interval = 150;
       this._loaders = new Objects<Loader>();
       this._processLoaders = new Objects<Loader>();
       // 创建线程
@@ -110,9 +112,9 @@ export class LoaderService extends Service {
       // storage.load(data);
       // // 加载资源存储块集合
       // RConsole.find(FResourceDataConsole).load(storage);
-      // // 移除加载中
-      // this._loadingResources.remove(resource);
-      // this._processStorages.push(storage);
+      // 移除加载中
+      //this._loadingResources.remove(resource);
+      this._processLoaders.remove(loader);
    }
 
    //==========================================================

@@ -5,8 +5,8 @@ import {LoggerUtil} from '../../common/lang/LoggerUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
 import {ServiceUtil} from '../../core/ServiceUtil';
-import {FAudio} from './FAudio';
-import {FAudioBuffer} from './FAudioBuffer';
+import {Audio} from './Audio';
+import {AudioBuffer} from './AudioBuffer';
 
 //==========================================================
 // <T>音频环境。</T>
@@ -14,7 +14,7 @@ import {FAudioBuffer} from './FAudioBuffer';
 // @author sunpeng
 // @history 150714
 //==========================================================
-export class FAudioContext extends ObjectBase {
+export class AudioContext extends ObjectBase {
    //..........................................................
    // @attribute
    //o._handle = MO.Class.register(o, new MO.AGetter('_handle'));
@@ -72,10 +72,10 @@ export class FAudioContext extends ObjectBase {
       var buffer = null;
       o._handle = null;
       if (o._handle) {
-         buffer = ClassUtil.create(FAudioBuffer);
+         buffer = ClassUtil.create(AudioBuffer);
          buffer.setContext(o);
       } else {
-         buffer = ClassUtil.create(FAudio);
+         buffer = ClassUtil.create(Audio);
       }
       buffer.loadUrl(url);
       return buffer;

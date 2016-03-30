@@ -3,7 +3,7 @@ import {Objects} from '../../common/lang/Objects';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {Service} from '../../core/Service';
-import {FAudioContext} from './FAudioContext';
+import {AudioContext} from './AudioContext';
 
 //==========================================================
 // <T>音频环境。</T>
@@ -11,7 +11,7 @@ import {FAudioContext} from './FAudioContext';
 // @author sunpeng
 // @history 150714
 //==========================================================
-export class FAudioContextConsole extends Service {
+export class AudioContextConsole extends Service {
    // @attribute
    protected _scopeCd = ScopeEnum.Global;
    // @attribute
@@ -37,7 +37,7 @@ export class FAudioContextConsole extends Service {
    //==========================================================
    public create(uri) {
       var o = this;
-      var context = ClassUtil.create(FAudioContext);
+      var context = ClassUtil.create(AudioContext);
       context.setup();
       o._contexts.push(context);
       return context;

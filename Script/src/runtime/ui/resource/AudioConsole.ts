@@ -5,7 +5,7 @@ import {ClassUtil} from '../../common/reflect/ClassUtil';
 import {Service} from '../../core/Service';
 import {ServiceUtil} from '../../core/ServiceUtil';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
-import {FAudio} from './FAudio';
+import {Audio} from './Audio';
 
 //==========================================================
 // <T>音乐资源控制台。</T>
@@ -14,9 +14,9 @@ import {FAudio} from './FAudio';
 // @author maocy
 // @version 150707
 //==========================================================
-export class FAudioConsole extends Service {
+export class AudioConsole extends Service {
    // 声音集合
-   protected _audios: Dictionary<FAudio> = null;
+   protected _audios: Dictionary<Audio> = null;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -27,7 +27,7 @@ export class FAudioConsole extends Service {
       super();
       // 设置变量
       this.scopeCd = ScopeEnum.Global;
-      this._audios = new Dictionary<FAudio>();
+      this._audios = new Dictionary<Audio>();
    }
 
    //==========================================================
@@ -38,7 +38,7 @@ export class FAudioConsole extends Service {
    //==========================================================
    public create(uri) {
       var url = ServiceUtil.find(EnvironmentService).parse(uri);
-      var audio: FAudio = ClassUtil.create(FAudio);
+      var audio: Audio = ClassUtil.create(Audio);
       audio.loadUrl(url);
       return audio;
    }

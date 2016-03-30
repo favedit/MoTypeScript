@@ -84,7 +84,7 @@ export class AutomaticEffect extends Effect {
    public setup() {
       var context = this.graphicContext;
       var capability = context.capability;
-      this._supportLayout = capability.optionLayout;
+      //this._supportLayout = capability.optionLayout;
    }
 
    //==========================================================

@@ -1,9 +1,12 @@
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
+import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
 import {FResource} from './FResource';
 import {MeshResource} from './MeshResource';
+import {SceneLayerResource} from './SceneLayerResource';
 
 //==========================================================
 // <T>模型资源。</T>
@@ -13,18 +16,44 @@ import {MeshResource} from './MeshResource';
 //==========================================================
 export class SceneResource extends FResource {
    //    // @attribute
-   //    o._typeName     = 'Scene';
    //    o._dataCompress = true;
    //    // @attribute
    //    o._templates    = null;
+   protected _layers: Dictionary<SceneLayerResource>;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this.typeCode = 'Scene';
+      this._layers = new Dictionary<SceneLayerResource>();
+   }
+
+   //==========================================================
+   // <T>获得显示层集合。</T>
+   //
+   // @return 显示层集合
+   //==========================================================
+   public layers(): Dictionary<SceneLayerResource> {
+      return this._layers;
+   }
+
+   //==========================================================
+   // <T>从配置里加载信息内容</T>
+   //
+   // @param jconfig 配置
+   //==========================================================
+   public loadContent(jconfig: any) {
+      // 加载纹理集合
+      var count = jconfig.length;
+      for (var n: number = 0; n < count; n++) {
+         var jlayer = jconfig[n];
+         var layer: SceneLayerResource = ClassUtil.create(SceneLayerResource);
+         layer.loadConfig(jlayer);
+         this._layers.set(layer.code, layer);
+      }
    }
 
    //==========================================================
@@ -34,6 +63,9 @@ export class SceneResource extends FResource {
    //==========================================================
    public loadConfig(jconfig: any) {
       super.loadConfig(jconfig);
+      // 加载内容
+      AssertUtil.debugNotNull(jconfig.content);
+      this.loadContent(jconfig.content);
       // 加载纹理集合
       // var jtextures = jconfig.textures;
       // if (jtextures) {

@@ -4,7 +4,7 @@
 // @author maocy
 // @history 150115
 //==========================================================
-export class FE3dSceneDisplay{
+export class SceneDisplay{
 //    o = MO.Class.inherits(this, o, MO.FE3dSprite, MO.MListenerLoad);
 //    //..........................................................
 //    // @attribute

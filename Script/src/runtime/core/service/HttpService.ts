@@ -16,10 +16,10 @@ import {EnvironmentService} from './EnvironmentService';
 //==========================================================
 export class HttpService extends Service {
    // 缓冲池
-   public _pool: ObjectPool = null;
+   public _pool: ObjectPool;
    // 环境控制台
    @Linker(EnvironmentService)
-   protected _environmentService: EnvironmentService = null;
+   protected _environmentService: EnvironmentService;
 
    //==========================================================
    // <T>构造处理。</T>

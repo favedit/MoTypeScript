@@ -5,7 +5,7 @@
 // @author maocy
 // @version 150415
 //==========================================================
-export enum EResource {
+export enum ResourceEnum {
    Unknown,
    Bitmap,
    Material,

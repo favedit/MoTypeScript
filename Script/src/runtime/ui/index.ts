@@ -31,11 +31,23 @@ export * from './SoftwareEnum';
 export * from './TimeUnitEnum';
 export * from './WrapEnum';
 
+import * as control from './control/index';
+export {control as control};
+
+import * as device from './device/index';
+export {device as device};
+
 import * as event from './event/index';
 export {event as event};
 
+import * as resource from './resource/index';
+export {resource as resource};
+
 import * as service from './service/index';
 export {service as service};
+
+import * as toolbar from './toolbar/index';
+export {toolbar as toolbar};
 
 import * as utility from './utility/index';
 export {utility as utility};

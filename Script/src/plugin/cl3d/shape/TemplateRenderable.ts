@@ -1,10 +1,12 @@
 import {StringUtil} from '../../../runtime/common/lang/StringUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
+import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {Renderable} from '../base/Renderable';
-import {PoolModelConsole} from '../pool/PoolModelConsole';
 import {PoolMaterialConsole} from '../pool/PoolMaterialConsole';
-import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
+import {PoolModelMesh} from '../pool/PoolModelMesh';
+import {PoolModel} from '../pool/PoolModel';
+import {PoolModelConsole} from '../pool/PoolModelConsole';
 
 //==========================================================
 // <T>渲染几何体。</T>
@@ -21,7 +23,7 @@ export class TemplateRenderable extends Renderable {
    //    o._materialCode     = null;
    //    o._materialResource = null;
    public _resource;
-   public _model;
+   public _model: PoolModel;
    public materialLoader;
    // public _material;
 
@@ -194,8 +196,7 @@ export class TemplateRenderable extends Renderable {
       //var meshGuid = resource.meshGuid();
       var model = this._model;
       var meshCode = resource.meshCode;
-      //var mesh = model.findMeshByCode(meshCode);
-      var mesh = model.meshes.first();
+      var mesh = model.findMeshByCode(meshCode);
       AssertUtil.debugNotNull(mesh);
       this.vertexBuffers = mesh.vertexBuffers;
       this.indexBuffers = mesh.indexBuffers;

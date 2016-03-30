@@ -2,7 +2,7 @@ import {Objects} from '../../../runtime/common/lang/Objects';
 import {PoolModelMesh} from '../pool/PoolModelMesh';
 import {PoolModel} from '../pool/PoolModel';
 import {Actor} from '../base/Actor';
-import {FMeshRenderable} from './FMeshRenderable';
+import {MeshRenderable} from './MeshRenderable';
 
 //==========================================================
 // <T>渲染模型。</T>
@@ -10,7 +10,7 @@ import {FMeshRenderable} from './FMeshRenderable';
 // @author maocy
 // @history 150106
 //==========================================================
-export class FModel extends Actor {
+export class Model extends Actor {
    // @attribute
    public _dataReady = false;
    public renderable = null;
@@ -51,11 +51,11 @@ export class FModel extends Actor {
    //==========================================================
    public loadRenderable(modelRenderable: PoolModel) {
       this.renderable = modelRenderable;
-      var meshes: Objects<PoolModelMesh> = modelRenderable.meshes;
+      var meshes = modelRenderable.mesheCodes;
       var count: number = meshes.count();
       for (var n: number = 0; n < count; n++) {
          var meshRenderable: PoolModelMesh = meshes.at(n);
-         var renderable: FMeshRenderable = new FMeshRenderable();
+         var renderable: MeshRenderable = new MeshRenderable();
          renderable.loadRenderable(meshRenderable);
          this.pushRenderable(renderable);
       }

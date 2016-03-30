@@ -6,9 +6,9 @@ import {ObjectBase} from '../../runtime/common/lang/ObjectBase';
 // @author maocy
 // @history 150109
 //==========================================================
-export class FFrameResource extends ObjectBase {
-   public tick = null;
-   public translation = null;
-   public quaternion = null;
-   public scale = null;
+export class FrameResource extends ObjectBase {
+   public tick;
+   public translation;
+   public quaternion;
+   public scale;
 }

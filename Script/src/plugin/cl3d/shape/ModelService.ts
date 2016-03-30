@@ -11,7 +11,7 @@ import {Service} from '../../runtime/core/Service'
 import {ServiceUtil} from '../../runtime/core/ServiceUtil'
 import {SLoadArgs} from '../resource/SLoadArgs'
 import {PoolModelConsole} from '../pool/PoolModelConsole'
-import {FModel} from './FModel'
+import {Model} from './Model'
 
 //==========================================================
 // <T>渲染模型控制台。</T>
@@ -20,7 +20,7 @@ import {FModel} from './FModel'
 // @author maocy
 // @version 150106
 //==========================================================
-export class FModelConsole extends Service {
+export class ModelService extends Service {
    // 缓冲集合
    protected _pools: ObjectPools;
    // 加载管理器
@@ -69,13 +69,13 @@ export class FModelConsole extends Service {
       }
       AssertUtil.debugNotEmpty(identity);
       // 尝试从缓冲池中取出
-      var model: FModel = this._pools.alloc(identity);
+      var model: Model = this._pools.alloc(identity);
       if (!model) {
          // 加载渲染对象
          var renderable = this._renderModelConsole.load(args);
          AssertUtil.debugNotNull(renderable);
          // 加载模型
-         model = ClassUtil.create(FModel);
+         model = ClassUtil.create(Model);
          model.linkGraphicContext(context);
          //model.setPoolCode(identity);
          model.renderable = renderable;

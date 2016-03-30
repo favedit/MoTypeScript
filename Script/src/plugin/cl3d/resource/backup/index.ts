@@ -21,8 +21,6 @@ export * from './FE3sRegion';
 export * from './FE3sRenderable';
 export * from './FE3sResourceConsole';
 export * from './FE3sSceneAnimation';
-export * from './FE3sSceneDisplay';
-export * from './FE3sSceneLayer';
 export * from './FE3sSceneRenderable';
 export * from './FE3sShape';
 export * from './FE3sSkeleton';

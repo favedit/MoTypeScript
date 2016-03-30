@@ -7,7 +7,6 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {Service} from '../../runtime/core/Service';
-import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
 import {SLoadArgs} from '../resource/SLoadArgs';
 import {TemplateResource} from '../resource/TemplateResource';
@@ -50,7 +49,7 @@ export class TemplateService extends Service {
    // @param args 加载参数
    // @return 渲染模板
    //==========================================================
-   public alloc(args) {
+   public alloc(args: SLoadArgs): Template {
       // 获得环境
       var context = args.context;
       AssertUtil.debugNotNull(context);
@@ -90,12 +89,11 @@ export class TemplateService extends Service {
    //==========================================================
    // <T>根据唯一编号收集一个渲染模板。</T>
    //
-   // @method
-   // @param context:FGraphicContext 渲染环境
-   // @param guid:String 唯一编号
-   // @return FE3dTemplate 渲染模板
+   // @param context 渲染环境
+   // @param guid 唯一编号
+   // @return 渲染模板
    //==========================================================
-   public allocByGuid(context, guid) {
+   public allocByGuid(context, guid): Template {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.guid = guid;
@@ -107,12 +105,11 @@ export class TemplateService extends Service {
    //==========================================================
    // <T>根据代码收集一个渲染模板。</T>
    //
-   // @method
-   // @param context:FGraphicContext 渲染环境
-   // @param code:String 唯一编号
-   // @return FE3dTemplate 渲染模板
+   // @param context 渲染环境
+   // @param code 唯一编号
+   // @return 渲染模板
    //==========================================================
-   public allocByCode(context, code) {
+   public allocByCode(context, code): Template {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.code = code;
@@ -124,12 +121,11 @@ export class TemplateService extends Service {
    //==========================================================
    // <T>根据代码收集一个渲染模板。</T>
    //
-   // @method
-   // @param context:FGraphicContext 渲染环境
-   // @param url:String 唯一编号
-   // @return FE3dTemplate 渲染模板
+   // @param context 渲染环境
+   // @param url 网络地址
+   // @return 渲染模板
    //==========================================================
-   public allocByUrl(context, url: string) {
+   public allocByUrl(context, url: string): Template {
       var args = MemoryUtil.alloc(SLoadArgs);
       args.context = context;
       args.url = url;
@@ -152,12 +148,10 @@ export class TemplateService extends Service {
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
       // 释放属性
-      //this._pools = RObject.dispose(this._pools);
+      this._pools = ObjectUtil.dispose(this._pools);
       // 父处理
       super.dispose();
    }

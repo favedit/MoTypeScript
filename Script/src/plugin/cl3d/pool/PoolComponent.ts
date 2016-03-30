@@ -10,7 +10,9 @@ import {PoolObject} from './PoolObject';
 //==========================================================
 export class PoolComponent extends PoolObject implements ProcessLoadable {
    // 加载状态
-   public statusLoading: boolean = false;
+   public statusLoading: boolean;
+   // 准备标志
+   public ready: boolean;
 
    //==========================================================
    // <T>构造处理。</T>

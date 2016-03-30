@@ -4,7 +4,7 @@
 // @author maocy
 // @history 150109
 //==========================================================
-export class FAnimationResource{
+export class AnimationResource{
 //    o = MO.Class.inherits(this, o, MO.FE3sObject);
 //    //..........................................................
 //    // @attribute

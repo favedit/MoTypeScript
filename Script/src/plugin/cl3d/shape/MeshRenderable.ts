@@ -7,7 +7,7 @@ import {Renderable} from '../base/Renderable';
 // @author maocy
 // @history 150202
 //==========================================================
-export class FMeshRenderable extends Renderable {
+export class MeshRenderable extends Renderable {
    //    // @attribute
    public _renderable = null;
    //    o._activeTrack     = null;

@@ -9,9 +9,9 @@ import {Content} from '../graphic/Content'
 //==========================================================
 export class PoolObject extends Content {
    // 唯一码
-   public guid: string ;
+   public guid: string;
    // 代码
-   public code: string ;
+   public code: string;
    // 资源
-   public resource ;
+   public resource: any;
 }

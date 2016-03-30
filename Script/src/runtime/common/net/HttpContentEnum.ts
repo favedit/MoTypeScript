@@ -5,9 +5,9 @@
 // @author maocy
 // @version 150104
 //==========================================================
-export class HttpContentEnum {
-   // @member 二进制
-   public static Binary = 1;
-   // @member 文本
-   public static Text = 2;
+export enum HttpContentEnum {
+   // 二进制
+   Binary = 1,
+   // 文本
+   Text = 2
 }

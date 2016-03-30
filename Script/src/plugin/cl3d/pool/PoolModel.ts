@@ -1,4 +1,4 @@
-import {Objects} from '../../../runtime/common/lang/Objects';
+import {Dictionary} from '../../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
@@ -13,12 +13,21 @@ import {PoolModelMesh} from './PoolModelMesh';
 // @history 150130
 //==========================================================
 export class PoolModel extends PoolComponent {
-   public dataReady = false;
-   //    // @attribute
+   // 模型资源
    public resource: ModelResource;
-   //    // @attribute
-   public meshes: Objects<PoolModelMesh>;
-   //    o._skeletons           = MO.Class.register(o, new MO.AGetter('_skeletons'));
+   // 网格唯一编号字典
+   public mesheGuids: Dictionary<PoolModelMesh>;
+   // 网格代码字典
+   public mesheCodes: Dictionary<PoolModelMesh>;
+   // 骨骼集合
+   public skeletons: any;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+   }
 
    //==========================================================
    // <T>测试是否准备好。</T>
@@ -26,27 +35,37 @@ export class PoolModel extends PoolComponent {
    // @return 是否准备好
    //==========================================================
    public testReady() {
-      return this.dataReady;
+      return this.ready;
    }
-
-   // //==========================================================
-   // // <T>根据唯一编号查找网格。</T>
-   // //
-   // // @param p:name:String 名称
-   // //==========================================================
-   // MO.FE3rModel_findMeshByGuid = function FE3rModel_findMeshByGuid(guid){
-   //    var o = this;
-   //    var mesh = o._meshes.search('_guid', guid);
-   //    return null;
-   // }
 
    //==========================================================
    // <T>根据唯一编号查找网格。</T>
    //
-   // @param p:name:String 名称
+   // @param guid 唯一编号
+   // @return 网格
    //==========================================================
-   public findMeshByCode(code) {
-      return this.meshes.search('code', code);
+   public findMeshByGuid(guid: string): PoolModelMesh {
+      var mesh = null;
+      var meshs = this.mesheGuids;
+      if (meshs) {
+         mesh = meshs.get(guid);
+      }
+      return mesh;
+   }
+
+   //==========================================================
+   // <T>根据代码查找网格。</T>
+   //
+   // @param code 代码
+   // @return 网格
+   //==========================================================
+   public findMeshByCode(code: string): PoolModelMesh {
+      var mesh = null;
+      var meshs = this.mesheCodes;
+      if (meshs) {
+         mesh = meshs.get(code);;
+      }
+      return mesh;
    }
 
    // //==========================================================
@@ -55,7 +74,7 @@ export class PoolModel extends PoolComponent {
    // // @method
    // // @param resource:FE3sSkeleton 骨骼资源
    // //==========================================================
-   // MO.FE3rModel_loadSkeletonResource = function FE3rModel_loadSkeletonResource(resource){
+   // public loadSkeletonResource(resource){
    //    var o = this;
    //    var modelConsole = MO.Console.find(MO.FE3rModelConsole);
    //    // 加载骨骼皮肤
@@ -87,15 +106,18 @@ export class PoolModel extends PoolComponent {
       // 读取网格集合
       var meshResources = resource.meshes;
       if (meshResources) {
-         var meshes = this.meshes = new Objects<PoolModelMesh>();
+         var mesheGuids = this.mesheGuids = new Dictionary<PoolModelMesh>();
+         var mesheCodes = this.mesheCodes = new Dictionary<PoolModelMesh>();
+         // 加载网格
          var meshCount = meshResources.count();
          for (var i = 0; i < meshCount; i++) {
             var meshResource = meshResources.at(i);
             // 创建渲染网格
-            var mesh = ClassUtil.create(PoolModelMesh);
+            var mesh: PoolModelMesh = ClassUtil.create(PoolModelMesh);
             mesh.linkGraphicContext(this.graphicContext);
             mesh.loadResource(meshResource);
-            meshes.push(mesh);
+            mesheGuids.set(mesh.guid, mesh);
+            mesheCodes.set(mesh.code, mesh);
             //modelConsole.registerMesh(mesh.guid(), mesh);
          }
       }
@@ -109,7 +131,7 @@ export class PoolModel extends PoolComponent {
       //    }
       // }
       // 加载完成
-      this.dataReady = true;
+      this.ready = true;
    }
 
    //==========================================================
@@ -117,7 +139,7 @@ export class PoolModel extends PoolComponent {
    //==========================================================
    public processLoad() {
       // 检查数据已加载
-      if (this.dataReady) {
+      if (this.ready) {
          return true;
       }
       // 检查资源是否准备好
@@ -136,8 +158,9 @@ export class PoolModel extends PoolComponent {
    public dispose() {
       //this._ready = false;
       this.resource = null;
-      this.meshes = ObjectUtil.dispose(this.meshes);
-      //this._skeletons = RObject.dispose(this._skeletons);
+      this.mesheGuids = ObjectUtil.dispose(this.mesheGuids);
+      this.mesheCodes = ObjectUtil.dispose(this.mesheCodes);
+      this.skeletons = ObjectUtil.dispose(this.skeletons);
       super.dispose();
    }
 }

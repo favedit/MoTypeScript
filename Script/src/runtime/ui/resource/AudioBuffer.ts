@@ -6,7 +6,7 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 // @author sunpeng
 // @history 150717
 //==========================================================
-export class FAudioBuffer extends ObjectBase {
+export class AudioBuffer extends ObjectBase {
    //o = MO.Class.inherits(this, o, MO.FObject, MO.MAudio);
    //..........................................................
    // @attribute

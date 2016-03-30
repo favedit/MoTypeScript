@@ -17,7 +17,7 @@ import {SceneResource} from './SceneResource';
 //==========================================================
 export class SceneResourceConsole extends Service {
    // 场景集合
-   public _scenes: Dictionary<SceneResource>;
+   protected _scenes: Dictionary<SceneResource>;
    // 资源控制台
    @Linker(ResourceConsole)
    protected _resourceConsole: ResourceConsole;
