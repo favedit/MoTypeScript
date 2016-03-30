@@ -13,47 +13,46 @@ import {ArrayUtil} from './ArrayUtil'
 // @version 150101
 //==========================================================
 export class Fatal {
-   public constructor(po: any, pm: string, ...pp: Array<any>) {
+   public constructor(owner: any, message: string, ...parameters: Array<any>) {
+      // 建立描述参数信息
+      var count = parameters.length;
+      for (var n = 0; n < count; n++) {
+         var parameter = parameters[n];
+         var value = null;
+         if (typeof parameter == 'function') {
+            value = MethodUtil.shortName(parameter);
+         } else {
+            value = parameter;
+         }
+         message = message.replace('{' + (n + 1) + '}', value);
+      }
       //..........................................................
       // @construct
-      var r: StringBuffer = new StringBuffer();
+      var info: StringBuffer = new StringBuffer();
       // 建立函数调用信息
       var f = Fatal.caller;
-      var s = new StringBuffer();
-      var t = new Array();
+      var head = new StringBuffer();
+      var stack = new Array();
       while (f) {
-         if (ArrayUtil.contains(t, f)) {
+         if (ArrayUtil.contains(stack, f)) {
             break;
          }
-         t.push(f);
+         stack.push(f);
          f = f.caller;
       }
-      var c = t.length;
-      for (var n = 0; n < c; n++) {
-         f = t[n];
+      var count = stack.length;
+      for (var n = 0; n < count; n++) {
+         f = stack[n];
          if (n > 0) {
-            s.appendLine();
+            head.appendLine();
          }
-         s.append('   ' + (c - n) + ': ' + MethodUtil.shortName(f));
+         head.append('   ' + (count - n) + ': ' + MethodUtil.shortName(f));
       }
-      // 建立描述参数信息
-      var a = arguments;
-      var c = a.length;
-      for (var n = 2; n < c; n++) {
-         var v = a[n];
-         var vs = null;
-         if (typeof (v) == 'function') {
-            vs = MethodUtil.shortName(v);
-         } else {
-            vs = v;
-         }
-         pm = pm.replace('{' + (n - 1) + '}', vs);
-      }
-      r.appendLine(pm);
-      r.appendLine('------------------------------------------------------------');
-      r.append(s);
-      var info = r.flush();
-      alert(info);
+      info.appendLine(message);
+      info.appendLine('------------------------------------------------------------');
+      info.append(head);
+      var result = info.flush();
+      alert(result);
       //throw new Error(info);
    }
 }

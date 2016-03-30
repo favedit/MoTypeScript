@@ -2,6 +2,7 @@ import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
 import {Material} from '../../../runtime/graphic/material/Material';
 import {PhongMaterial} from '../../material/PhongMaterial';
+import {ParallaxMaterial} from '../../material/ParallaxMaterial';
 import {MaterialResource} from '../../resource/MaterialResource';
 
 //==========================================================
@@ -14,9 +15,9 @@ export class PoolMaterialLoader extends ProcessLoader {
    // 图形环境
    public graphicContext;
    // 资源
-   public resource:MaterialResource;
+   public resource: MaterialResource;
    // 材质
-   public material:Material;
+   public material: Material;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -39,6 +40,8 @@ export class PoolMaterialLoader extends ProcessLoader {
             var material = null;
             if (resource.className == 'PhongMaterial') {
                material = new PhongMaterial();
+            } else if (resource.className == 'ParallaxMaterial') {
+               material = new ParallaxMaterial();
             } else {
                throw new Fatal(this, 'Unknown material.');
             }

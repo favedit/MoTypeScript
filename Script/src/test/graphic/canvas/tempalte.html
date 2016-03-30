@@ -22,9 +22,9 @@ require(['test/graphic/canvas/tempalte'], function (space){
    //var info = ['pvw.show.item.012', 0.001];
    //var info = ['pvw.sc.car.01.001', 0.005];
    //var info = ['pvw.sc.car.01.002', 0.15];
-   var info = ['pvw.sc.car.01.003', 0.05];
+   //var info = ['pvw.sc.car.01.003', 0.05];
+   var info = ['pvw.show.parallax.001', 0.8];
    //var info = ['lgt.item.001', 0.1];
-   //var templateCode = 'pvw.sc.car.01.001';
    //............................................................
    // 创建测试
    var test = new space.TemplateTest();
@@ -33,6 +33,7 @@ require(['test/graphic/canvas/tempalte'], function (space){
    // 加载模板
    var template = test.load('${resource}/template/' + info[0] + '.template');
    template.matrix.setScaleAll(info[1]);
+   template.matrix.tz = -8;
    template.matrix.updateForce();
    template.matrix.addRotationX(-Math.PI / 2);
    // 运行测试

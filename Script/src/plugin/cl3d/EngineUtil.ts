@@ -1,5 +1,6 @@
 import {ServiceUtil} from '../../runtime/core/ServiceUtil';
 import {GeneralColorAutomaticEffect} from './technique/effect/GeneralColorAutomaticEffect';
+import {GeneralColorParallaxEffect} from './technique/effect/GeneralColorParallaxEffect';
 import {GeneralColorLineEffect} from './technique/effect/GeneralColorLineEffect';
 import {SelectAutomaticEffect} from './technique/effect/SelectAutomaticEffect';
 import {ShadowDepthAutomaticEffect} from './technique/effect/ShadowDepthAutomaticEffect';
@@ -36,6 +37,7 @@ export class EngineUtil {
       // 通用效果器
       effectConsole.register('general.color.line.automatic', GeneralColorLineEffect);
       effectConsole.register('general.color.phong.automatic', GeneralColorAutomaticEffect);
+      effectConsole.register('general.color.parallax.automatic', GeneralColorParallaxEffect);
       // 阴影效果器
       effectConsole.register('shadow.depth.line.automatic', ShadowDepthAutomaticEffect);
       effectConsole.register('shadow.depth.phong.automatic', ShadowDepthAutomaticEffect);

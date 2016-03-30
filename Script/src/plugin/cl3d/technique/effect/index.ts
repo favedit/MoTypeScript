@@ -9,6 +9,7 @@ export * from './GeneralColorAutomaticEffect';
 export * from './GeneralColorFillEffect';
 export * from './GeneralColorFlatEffect';
 export * from './GeneralColorLineEffect';
+export * from './GeneralColorParallaxEffect';
 export * from './GeneralColorSkeletonEffect';
 export * from './GeneralColorVideoEffect';
 export * from './GeneralColorVideoMaskEffect';
