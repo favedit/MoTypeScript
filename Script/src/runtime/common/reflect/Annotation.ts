@@ -1,3 +1,4 @@
+import {Base} from '../lang/Base'
 import {AnnotationEnum} from './AnnotationEnum'
 import {Class} from './Class'
 
@@ -9,7 +10,7 @@ import {Class} from './Class'
 // @author maocy
 // @version 150104
 //============================================================
-export class Annotation {
+export class Annotation extends Base {
    // 类对象
    public clazz: Class;
 
@@ -37,6 +38,7 @@ export class Annotation {
    // @param name 名称
    //============================================================
    public constructor(name: string) {
+      super();
       this._name = name;
    }
 

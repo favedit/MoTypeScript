@@ -7,10 +7,10 @@
 //==========================================================
 export class ObjectIdUtil {
    // 哈希值
-   private static _hash: number = 1;
+   protected static _hash: number = 1;
 
    // 编号集合
-   private static _ids: any = new Object();
+   protected static _ids: any = new Object();
 
    //==========================================================
    // <T>获得下一个编号。</T>

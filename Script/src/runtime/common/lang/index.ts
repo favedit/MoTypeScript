@@ -2,6 +2,7 @@ export * from './AccessEnum';
 export * from './AccessEvent';
 export * from './ArrayUtil';
 export * from './Attributes';
+export * from './Base';
 export * from './BlobUtil';
 export * from './BooleanEnum';
 export * from './BooleanUtil';

@@ -10,9 +10,19 @@ import {RuntimeUtil} from '../RuntimeUtil';
 // =========================================================
 export class Objects<T> extends ObjectBase {
    // 项目个数
-   protected _count: number = 0;
+   protected _count: number;
    // 项目集合
-   protected _items: Array<T> = new Array<T>();
+   protected _items: Array<T>;
+
+   //==========================================================
+   // <T>构建当前对象的实例。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._count = 0;
+      this._items = new Array<T>();
+   }
 
    //===========================================================
    // <T>判断集合是否为空。</T>

@@ -1,4 +1,4 @@
-import {ObjectBase} from './ObjectBase'
+import {Base} from './Base'
 
 //==========================================================
 // <T>字符串操作的工具类</T>
@@ -7,11 +7,22 @@ import {ObjectBase} from './ObjectBase'
 // @author maocy
 // @version 141226
 //==========================================================
-export class StringBuffer extends ObjectBase {
-   //..........................................................
-   // @attribute
-   protected _count: number = 0;
-   protected _memory: Array<string> = new Array<string>();
+export class StringBuffer extends Base {
+   // 个数
+   protected _count: number;
+   // 内存 
+   protected _memory: Array<string>;
+
+   //==========================================================
+   // <T>构建当前对象的实例。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._count = 0;
+      // 内存 
+      this._memory = new Array<string>();
+   }
 
    //==========================================================
    // <T>判断字符串内容是否为空。</T>
@@ -137,8 +148,6 @@ export class StringBuffer extends ObjectBase {
    // @method
    //==========================================================
    public dispose(flag: boolean = false): void {
-      // 清空属性
-      this._count = 0;
       // 清空内存
       var memory: Array<string> = this._memory;
       if (memory) {
@@ -148,5 +157,9 @@ export class StringBuffer extends ObjectBase {
          }
          this._memory = null;
       }
+      // 清空属性
+      this._count = 0;
+      // 父处理
+      super.dispose(flag);
    }
 }

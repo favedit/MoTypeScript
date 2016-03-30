@@ -238,7 +238,7 @@ export class MethodUtil {
    //==========================================================
    public static structFree() {
       for (var name in this) {
-         if(name.indexOf('__') == 0){
+         if (name.indexOf('__') == 0) {
             continue;
          }
          var value: any = this[name];

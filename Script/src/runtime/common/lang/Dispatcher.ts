@@ -112,6 +112,20 @@ export class Dispatcher extends ObjectBase {
    }
 
    //==========================================================
+   // <T>分发处理。</T>
+   //
+   // @param code 代码
+   // @param p1:parameter1 参数1
+   // @param p2:parameter2 参数2
+   // @param p3:parameter3 参数3
+   // @param p4:parameter4 参数4
+   // @param p5:parameter5 参数5
+   //==========================================================
+   public dispatch(code: any, p1?: any, p2?: any, p3?: any, p4?: any, p5?: any):boolean {
+      return true;
+   }
+
+   //==========================================================
    // <T>监听处理。</T>
    //
    // @param code 代码
@@ -121,12 +135,17 @@ export class Dispatcher extends ObjectBase {
    // @param p4:parameter4 参数4
    // @param p5:parameter5 参数5
    //==========================================================
-   public processListener(code, p1?, p2?, p3?, p4?, p5?) {
-      var listenerss = this._listenerss;
-      if (listenerss) {
-         var listeners = listenerss.get(code);
-         if (listeners) {
-            listeners.process(p1, p2, p3, p4, p5);
+   public processListener(code: any, p1?: any, p2?: any, p3?: any, p4?: any, p5?: any) {
+      // 分发处理
+      var result = this.dispatch(code, p1, p2, p3, p4, p5);
+      // 监听处理
+      if (result) {
+         var listenerss = this._listenerss;
+         if (listenerss) {
+            var listeners = listenerss.get(code);
+            if (listeners) {
+               listeners.process(p1, p2, p3, p4, p5);
+            }
          }
       }
    }

@@ -1,6 +1,6 @@
-import {SingletonObject} from './lang/SingletonObject';
 import {ProcessEnum} from './ProcessEnum';
 import {PlatformEnum} from './PlatformEnum';
+import {SingletonObject} from './lang/SingletonObject';
 
 //==========================================================
 // <T>运行库。</T>
@@ -12,11 +12,13 @@ import {PlatformEnum} from './PlatformEnum';
 export class RuntimeUtil extends SingletonObject {
    //..........................................................
    // 版本
-   public static version: string = '1.0.0';
+   public static version: string = '1.0';
    // 模式
    public static processCd: ProcessEnum = ProcessEnum.Release;
    // 平台
    public static platformCd: PlatformEnum = PlatformEnum.Pc;
+   // 实例集合
+   protected static _instances = new Array<any>();
 
    //==========================================================
    // <T>测试是否调试模式。</T>
@@ -78,6 +80,41 @@ export class RuntimeUtil extends SingletonObject {
    }
 
    //==========================================================
+   // <T>获得对象的唯一编号。</T>
+   //
+   // @param instance 对象实例
+   // @return 索引
+   //==========================================================
+   public static codeOf(instance: any): number {
+      var instances = this._instances;
+      var count: number = instances.length;
+      for (var i: number = 0; i < count; i++) {
+         if (instances[i] === instance) {
+            return i;
+         }
+      }
+      instances[count] = instance;
+      return count;
+   }
+
+   //==========================================================
+   // <T>获得实例的唯一编号。</T>
+   //
+   // @param instance 对象实例
+   // @return 编号
+   //==========================================================
+   public static instanceCode(instance: any): number {
+      var code = null;
+      if (instance) {
+         code = instance.hashCode;
+         if (!code) {
+            code = this.codeOf(instance);
+         }
+      }
+      return code;
+   }
+
+   //==========================================================
    // <T>从字符串中截取开始字符串到结束字符串中间的部分字符串。</T>
    // <P>开始字符串不存在的话，从字符串开始位置截取。</P>
    // <P>结束字符串不存在的话，截取到字符串的最终位置。</P>
@@ -117,6 +154,58 @@ export class RuntimeUtil extends SingletonObject {
    }
 
    //==========================================================
+   // <T>安全获得对象实例的类型名称，不产生任何例外。</T>
+   //
+   // @param value 对象实例
+   // @param safe 安全名称
+   // @return 类型名称字符串
+   //==========================================================
+   public static typeOf(instance: any, safe: any = null) {
+      // 空对象的情况
+      if (instance == null) {
+         return 'Null';
+      }
+      try {
+         // 实例判断
+         if (instance.__class) {
+            return 'Instance';
+         }
+         // 普通数据类型
+         var type = instance.constructor;
+         if (type == Boolean) {
+            return 'Boolean';
+         }
+         if (type == Number) {
+            return 'Number';
+         }
+         if (type == String) {
+            return 'String';
+         }
+         if (type == Function) {
+            return 'Function';
+         }
+         if (type.constructor == Function) {
+            return 'Function';
+         }
+         if (Array.isArray(instance)) {
+            return 'Array';
+         }
+         // 页面对象的情况
+         if (instance.tagName) {
+            return 'Html';
+         }
+         // 普通对象的情况
+         for (var name in instance) {
+            return 'Object';
+         }
+      } catch (exception) {
+         return safe;
+      }
+      // 未知类型的情况
+      return 'Unknown';
+   }
+
+   //==========================================================
    // <T>获得对象实例的类名称。</T>
    //
    // @method
@@ -124,15 +213,28 @@ export class RuntimeUtil extends SingletonObject {
    // @return String 类名称
    //==========================================================
    public static className(value): string {
+      var result: string = null;
       if (value) {
          // 如果对象是函数的情况
          if (typeof value == 'function') {
+            var spaceName = value.__spaceName;
+            if (spaceName) {
+               return spaceName;
+            }
+            if (value.__className) {
+               return value.__className;
+            } else {
+               var source: string = value.toString();
+               result = value.__className = this.subString(source, 'function ', '(');
+            }
             return this.subString(value.toString(), 'function ', '(');
          }
          // 如果对象是普通对象的情况
          var clazz = value.constructor;
          if (clazz) {
-            return this.subString(clazz.toString(), 'function ', '(');
+            if (typeof clazz == 'function') {
+               return this.subString(clazz.toString(), 'function ', '(');
+            }
          }
       }
       return null;
@@ -264,15 +366,19 @@ export class RuntimeUtil extends SingletonObject {
          var value: any = item[name];
          if (value != null) {
             // 检查是否已经设置过
-            if (value.__space != null) {
+            if (value.__spaceName != null) {
                continue;
             }
             // 设置类型名称
             var typeName: string = typeof value;
             if ((typeName == 'object') || (typeName == 'function')) {
+               // 设置名称 
                var spaceName: string = space + '.' + name;
-               value.__space = spaceName;
-               this.namespace(value, spaceName);
+               value.__spaceName = spaceName;
+               // 节点处理 
+               if (typeName == 'object') {
+                  this.namespace(value, spaceName);
+               }
                // 执行处理
                if (value.staticConstructor) {
                   value.staticConstructor();
@@ -281,6 +387,47 @@ export class RuntimeUtil extends SingletonObject {
          }
       }
       return null;
+   }
+
+   //==========================================================
+   // <T>获得一个实例的调试信息。</T>
+   // <P>调试信息的格式：类型名称<辅助信息>@唯一代码:内容。</P>
+   //
+   // @method
+   // @param v:value:Object 数据内容
+   // @return String 调试信息
+   //==========================================================
+   public static dump(instance: any): string {
+      var result: string = null;
+      // 对象为空的情况
+      if (instance == null) {
+         result = '@null';
+      }
+      // 对象为一般实例的情况
+      var typeName = this.typeOf(instance);
+      switch (typeName) {
+         case 'Boolean':
+            // 数字的情况
+            return 'Boolean:' + instance;
+         case 'Number':
+            // 数字的情况
+            return 'Number:' + instance;
+         case 'String':
+            // 字符串的情况
+            return 'String<' + instance.length + '>:' + instance;
+         case 'Function':
+            // 字符串的情况
+            return 'Function<' + this.className(instance) + '>@' + this.instanceCode(instance);
+         case 'Html':
+            // HTML对象的情况
+            return 'Html<' + instance.tagName + '>@' + this.instanceCode(instance);
+         case 'Instance':
+            // HTML对象的情况
+            return this.className(instance) + '@' + this.instanceCode(instance);
+         default:
+            // 其他情况
+            return typeName + '@' + this.instanceCode(instance);
+      }
    }
 
    //==========================================================

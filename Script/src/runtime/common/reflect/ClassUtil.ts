@@ -1,4 +1,5 @@
 import {AssertUtil} from '../AssertUtil'
+import {RuntimeUtil} from '../RuntimeUtil'
 import {Fatal} from '../lang/Fatal'
 import {Annotation} from './Annotation'
 import {Class} from './Class'
@@ -13,10 +14,7 @@ import {MethodUtil} from './MethodUtil'
 //==========================================================
 export class ClassUtil {
    // 类对象集合
-   private static _classes: any = new Object();
-
-   // 实例集合
-   private static _instances: any = new Array();
+   protected static _classes: any = new Object();
 
    //==========================================================
    // <T>判断某个类型是否为基础数据类型。</T>
@@ -174,70 +172,12 @@ export class ClassUtil {
    //==========================================================
    // <T>安全获得对象实例的类型名称，不产生任何例外。</T>
    //
-   // @method
-   // @param value:Object 对象实例
-   // @param safe:safe:String 安全类型
-   // @return String 类型名称字符串
+   // @param value 对象实例
+   // @param safe 安全名称
+   // @return 类型名称字符串
    //==========================================================
-   public static typeOf(instance, safe: any = null) {
-      // 空对象的情况
-      if (instance == null) {
-         return 'Null';
-      }
-      try {
-         // 普通数据类型
-         var type = instance.constructor;
-         if (type == Boolean) {
-            return 'Boolean';
-         }
-         if (type == Number) {
-            return 'Number';
-         }
-         if (type == String) {
-            return 'String';
-         }
-         if (type == Function) {
-            return MethodUtil.shortName(type);
-         }
-         if (type.constructor == Function) {
-            return MethodUtil.shortName(type);
-         }
-         // 一般类实例对象
-         if (instance.__class) {
-            return instance.__class.shotName;
-         }
-         // 页面对象的情况
-         if (instance.tagName) {
-            return 'Html';
-         }
-         // 普通对象的情况
-         for (var name in instance) {
-            return 'Object';
-         }
-      } catch (exception) {
-         // return e.name + ' ' + e.number + ' ' + e.description + ' ' + e.message;
-      }
-      // 未知类型的情况
-      return 'Unknown';
-   }
-
-   //==========================================================
-   // <T>获得对象实例的唯一编号。</T>
-   //
-   // @method
-   // @param instance 对象实例
-   // @return 索引
-   //==========================================================
-   public static codeOf(instance: any): number {
-      var instances = this._instances;
-      var count: number = instances.length;
-      for (var i: number = 0; i < count; i++) {
-         if (instances[i] == instance) {
-            return i;
-         }
-      }
-      instances[count] = instance;
-      return count;
+   public static typeOf(instance: any, safe: any = null) {
+      return RuntimeUtil.typeOf(instance, safe);
    }
 
    //==========================================================
@@ -375,7 +315,6 @@ export class ClassUtil {
    //==========================================================
    // <T>根据一个类函数创建类的实例。</T>
    //
-   // @method
    // @param clazz  函数对象
    // @return 类对象的实例
    //==========================================================
@@ -389,43 +328,12 @@ export class ClassUtil {
    // <T>获得一个实例的调试信息。</T>
    // <P>调试信息的格式：类型名称<辅助信息>@唯一代码:内容。</P>
    //
-   // @method
-   // @param v:value:Object 数据内容
-   // @return String 调试信息
+   // @param instance 数据内容
+   // @return 调试信息
    //==========================================================
    public static dump(instance: any): string {
-      var result: string = null;
-      // 对象为空的情况
-      if (instance == null) {
-         result = '@null';
-      }
-      // 对象为一般实例的情况
-      var typeName = this.typeOf(instance);
-      switch (typeName) {
-         case 'Boolean':
-            // 数字的情况
-            return 'Boolean:' + instance;
-         case 'Number':
-            // 数字的情况
-            return 'Number:' + instance;
-         case 'String':
-            // 字符串的情况
-            return 'String<' + instance.length + '>:' + instance;
-         case 'Function':
-            // 字符串的情况
-            return 'Function<' + MethodUtil.shortName(instance) + '>@' + this.codeOf(instance);
-         case 'Html':
-            // HTML对象的情况
-            return 'Html<' + instance.tagName + '>@' + this.codeOf(instance);
-      }
-      // 获得编号
-      var code = instance.hashCode;
-      if (!code) {
-         code = this.codeOf(instance);
-      }
-      return typeName + '@' + code;
+      return RuntimeUtil.dump(instance);
    }
-
 
    /*
       //==========================================================

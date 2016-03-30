@@ -1,5 +1,5 @@
-import {Base} from './Base';
-import {Class} from '../reflect/Class';
+import {ObjectIdUtil} from './ObjectIdUtil';
+import {RuntimeUtil} from '../RuntimeUtil';
 
 //==========================================================
 // <T>所有可继承对象的基类。</T>
@@ -9,15 +9,31 @@ import {Class} from '../reflect/Class';
 // @author maocy
 // @version 141230
 //==========================================================
-export class ObjectBase extends Base {
-   // 类对象
-   protected __class: Class;
+export class Base {
+   // 哈希值
+   protected __hashCode: number;
+   // 释放标志
+   protected __dispose: boolean;
 
    //==========================================================
    // <T>构建当前对象的实例。</T>
    //==========================================================
    public constructor() {
-      super();
+      this.__hashCode = 0;
+      this.__dispose = false;
+   }
+
+   //==========================================================
+   // <T>获取哈希值。</T>
+   //
+   // @return 哈希值
+   //==========================================================
+   public get hashCode(): number {
+      var hashCode: number = this.__hashCode;
+      if (hashCode == 0) {
+         hashCode = this.__hashCode = ObjectIdUtil.nextHash();
+      }
+      return hashCode;
    }
 
    //==========================================================
@@ -25,16 +41,14 @@ export class ObjectBase extends Base {
    //
    // @return 信息字符串
    //==========================================================
-   public getClass(): Class {
-      return this.__class;
+   public toString(): string {
+      return RuntimeUtil.dump(this);
    }
 
    //==========================================================
    // <T>释放当前实例。</T>
    //==========================================================
    public dispose(flag: boolean = false): void {
-      this.__class = null;
-      // 父处理
-      super.dispose(flag);
+      this.__dispose = true;
    }
 }

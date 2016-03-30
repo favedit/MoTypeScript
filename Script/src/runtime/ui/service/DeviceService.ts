@@ -79,7 +79,7 @@ export class DeviceService extends Service {
    //
    // @return 窗口对象
    //==========================================================
-   public get htmlWindow() {
+   public htmlWindow() {
       return this._hWindow;
    }
 
@@ -88,7 +88,7 @@ export class DeviceService extends Service {
    //
    // @return 文档对象
    //==========================================================
-   public get htmlDocument() {
+   public htmlDocument() {
       return this._hDocument;
    }
 
@@ -97,8 +97,21 @@ export class DeviceService extends Service {
    //
    // @return 容器对象
    //==========================================================
-   public get htmlContainer() {
+   public htmlContainer() {
       return this._hContainer;
+   }
+
+   //==========================================================
+   // <T>获得事件对象。</T>
+   //
+   // @param hEvent 事件
+   // @return 事件
+   //==========================================================
+   public htmlEvent(hEvent) {
+      if (!hEvent) {
+         hEvent = this._hWindow.event;
+      }
+      return hEvent;
    }
 
    //==========================================================
@@ -106,7 +119,7 @@ export class DeviceService extends Service {
    //
    // @return 信息
    //==========================================================
-   public get agent() {
+   public agent() {
       return this._agent;
    }
 
@@ -270,19 +283,6 @@ export class DeviceService extends Service {
    //==========================================================
    public supportHtml5() {
       return this._supportHtml5;
-   }
-
-   //==========================================================
-   // <T>获得事件对象。</T>
-   //
-   // @param hEvent 事件
-   // @return 事件
-   //==========================================================
-   public findEvent(hEvent) {
-      if (!hEvent) {
-         hEvent = this._hWindow.event;
-      }
-      return hEvent;
    }
 
    //==========================================================

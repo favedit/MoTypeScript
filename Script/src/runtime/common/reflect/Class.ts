@@ -1,4 +1,4 @@
-import {ObjectBase} from '../lang/ObjectBase'
+import {Base} from '../lang/Base'
 import {Objects} from '../lang/Objects'
 import {Dictionary} from '../lang/Dictionary'
 import {Fatal} from '../lang/Fatal'
@@ -19,7 +19,7 @@ import {ClassUtil} from './ClassUtil'
 // @author maocy
 // @version 141226
 //==========================================================
-export class Class extends ObjectBase {
+export class Class extends Base {
    // 短名称
    public shortName: string;
    // 全名称
@@ -198,6 +198,7 @@ export class Class extends ObjectBase {
    // @param clazz 类对象
    //==========================================================
    public build(clazz: Function): void {
+      this.shortName = ClassUtil.shortName(clazz);
       this.linker = clazz;
    }
 
