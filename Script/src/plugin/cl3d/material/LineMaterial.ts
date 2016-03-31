@@ -27,7 +27,7 @@ export class LineMaterial extends BaseLineMaterial {
    // @param resource 材质资源
    //==========================================================
    public loadResource(resource) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var textures = resource.textures;
       var count = textures.count();
       for (var i = 0; i < count; i++) {

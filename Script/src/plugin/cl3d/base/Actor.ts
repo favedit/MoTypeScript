@@ -9,7 +9,7 @@ import {Display} from './Display';
 //==========================================================
 export class Actor extends Display implements ProcessLoadable {
    // 加载状态
-   public statusLoading: boolean = false;
+   public statusLoading: boolean;
 
    //==========================================================
    // <T>构造处理。</T>

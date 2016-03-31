@@ -50,7 +50,7 @@ export class TypeArrayUtil {
    // @param length:Integer 数据长度
    // @return Array 数组
    //==========================================================
-   public static createArray(typeCd, length) {
+   public static createArray(typeCd, length: number): any {
       switch (typeCd) {
          case DataTypeEnum.Boolean:
          case DataTypeEnum.Int8:

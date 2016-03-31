@@ -36,7 +36,7 @@ export class SelectTechnique extends Technique {
       //..........................................................
       // 创建选取处理过程
       var pass = this._passSelect = ClassUtil.create(SelectPass);
-      pass.linkGraphicContext(this._graphicContext);
+      pass.linkGraphicContext(this.graphicContext);
       pass.setup();
       this.pushPass(pass);
    }

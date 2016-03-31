@@ -248,7 +248,7 @@ export class Template extends Actor {
          var renderableResource = renderableResources.at(i);
          // 加载资源
          var renderable = new TemplateRenderable();
-         renderable.linkGraphicContext(this._graphicContext);
+         renderable.linkGraphicContext(this.graphicContext);
          renderable.loadResource(renderableResource);
          this._meshs.push(renderable);
       }

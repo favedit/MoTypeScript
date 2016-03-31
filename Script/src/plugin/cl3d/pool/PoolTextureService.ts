@@ -6,7 +6,7 @@ import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
 import {Service} from '../../runtime/core/Service';
 import {Texture} from '../../runtime/graphic/material/Texture';
-import {PoolTextureLoader} from './loader/PoolTextureLoader';
+import {PoolTextureLoader} from './PoolTextureLoader';
 
 //==========================================================
 // <T>纹理控制台。</T>
@@ -15,7 +15,7 @@ import {PoolTextureLoader} from './loader/PoolTextureLoader';
 // @author maocy
 // @version 150106
 //==========================================================
-export class TextureService extends Service {
+export class PoolTextureService extends Service {
    protected _textures: Dictionary<Texture>;
    // 处理加载控制台
    @Linker(ProcessLoadService)

@@ -3,10 +3,11 @@ import {ObjectBase} from '../../common/lang/ObjectBase';
 import {Listeners} from '../../common/lang/Listeners';
 import {ObjectUtil} from '../../common/lang/ObjectUtil';
 import {LoggerUtil} from '../../common/lang/LoggerUtil';
+import {Linker} from '../../common/reflect/Linker';
 import {AssertUtil} from '../../common/AssertUtil';
+import {MemoryUtil} from '../../common/MemoryUtil';
 import {Size2} from '../../common/math/Size2';
 import {EnvironmentService} from '../../core/service/EnvironmentService';
-import {ServiceUtil} from '../../core/ServiceUtil';
 import {HtmlUtil} from '../utility/HtmlUtil';
 
 //==========================================================
@@ -18,15 +19,18 @@ import {HtmlUtil} from '../utility/HtmlUtil';
 //==========================================================
 export class ImageResource extends ObjectBase {
    // 准备好
-   protected _ready;
+   public ready: boolean;
    // 尺寸
-   protected _size: Size2;
+   public size: Size2;
    // 地址
-   protected _url: string;
+   public url: string;
    // 句柄
-   protected _handle;
-   // 句柄
-   protected _loadListeners: Listeners;
+   public handle: HTMLImageElement;
+   // 加载监听器
+   public loadListeners: Listeners;
+   // 环境服务
+   @Linker(EnvironmentService)
+   public _environmentService: EnvironmentService;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -34,36 +38,8 @@ export class ImageResource extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
-      this._ready = false;
-      this._size = new Size2();
-      this._loadListeners = new Listeners(this);
-   }
-
-   //==========================================================
-   // <T>获得大小。</T>
-   //
-   // @return 大小
-   //==========================================================
-   public get size(): Size2 {
-      return this._size;
-   }
-
-   //==========================================================
-   // <T>获得句柄。</T>
-   //
-   // @return 句柄
-   //==========================================================
-   public get handle() {
-      return this._handle;
-   }
-
-   //==========================================================
-   // <T>获得加载监听器。</T>
-   //
-   // @return 加载监听器
-   //==========================================================
-   public get loadListeners(): Listeners {
-      return this._loadListeners;
+      this.size = new Size2();
+      this.loadListeners = new Listeners(this);
    }
 
    //==========================================================
@@ -72,33 +48,32 @@ export class ImageResource extends ObjectBase {
    // @return 是否准备好
    //==========================================================
    public testReady() {
-      return this._ready;
+      return this.ready;
    }
 
    //==========================================================
    // <T>加载完成处理。</T>
    //==========================================================
-   public ohLoad() {
-      var image: ImageResource = (this as any).__linker;
-      var hImage = image._handle;
-      image._size.set(hImage.naturalWidth, hImage.naturalHeight);
-      image._ready = true;
+   public ohLoad(hEvent) {
+      var self: ImageResource = (this as any).__linker;
+      var hImage = self.handle;
+      self.size.set(hImage.naturalWidth, hImage.naturalHeight);
+      self.ready = true;
       // 处理加载事件
-      var event = new Event(image);
-      image._loadListeners.process(event);
-      event.dispose();
-      //console.log('Load image success. (url={1})', image._url);
-      LoggerUtil.info(image, 'Load image success. (url={1})', image._url);
+      var event: Event = MemoryUtil.alloc(Event);
+      event.sender = self;
+      self.loadListeners.process(event);
+      MemoryUtil.free(event);
+      LoggerUtil.info(self, 'Load image success. (url={1}, size={2})', self.url, self.size);
    }
 
    //==========================================================
    // <T>加载完成处理。</T>
    //==========================================================
-   public ohError(p) {
-      var image = (this as any).__linker;
-      var url = image._url;
-      //console.log('Load image failure. (url={1})', image._url);
-      LoggerUtil.error(image, 'Load image failure. (url={1})', url);
+   public ohError(hEvent) {
+      var self = (this as any).__linker;
+      var url = self._url;
+      LoggerUtil.error(self, 'Load image failure. (url={1})', url);
       debugger
    }
 
@@ -107,14 +82,14 @@ export class ImageResource extends ObjectBase {
    //
    // @param uri 网络地址
    //==========================================================
-   public loadUrl(uri) {
+   public loadUrl(uri: string) {
       AssertUtil.debugNotEmpty(uri);
-      var url = this._url = ServiceUtil.find(EnvironmentService).parseUrl(uri);
+      var url = this.url = this._environmentService.parseUrl(uri);
       // 创建图片
-      var hImage = this._handle;
+      var hImage = this.handle;
       if (!hImage) {
-         hImage = this._handle = new Image();
-         hImage.__linker = this;
+         hImage = this.handle = new Image();
+         (hImage as any).__linker = this;
          hImage.onload = this.ohLoad;
          hImage.onerror = this.ohError;
       }
@@ -127,9 +102,9 @@ export class ImageResource extends ObjectBase {
    //==========================================================
    public dispose() {
       // 清空属性
-      this._size = ObjectUtil.dispose(this._size);
-      this._loadListeners = ObjectUtil.dispose(this._loadListeners);
-      this._handle = HtmlUtil.free(this._handle);
+      this.size = ObjectUtil.dispose(this.size);
+      this.loadListeners = ObjectUtil.dispose(this.loadListeners);
+      this.handle = HtmlUtil.free(this.handle);
       // 父处理
       super.dispose();
    }

@@ -5,7 +5,7 @@ import {PlaneRenderable} from '../shape/PlaneRenderable';
 import {DeferredMergeAutomaticEffect} from './effect/DeferredMergeAutomaticEffect';
 import {TechniquePass} from './TechniquePass';
 import {Region} from '../base/Region';
-import {TextureService} from '../pool/TextureService';
+import {PoolTextureService} from '../pool/PoolTextureService';
 import {WglFlatTexture} from '../graphic/wgl/WglFlatTexture';
 
 //==========================================================
@@ -40,7 +40,7 @@ export class DeferredMergePass extends TechniquePass {
    //==========================================================
    public setup() {
       super.setup();
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 创建平面对象
       var renderable = this._renderable = new PlaneRenderable();
       renderable.linkGraphicContext(context);
@@ -53,7 +53,7 @@ export class DeferredMergePass extends TechniquePass {
    // @param region 区域
    //==========================================================
    public drawFirst(region: Region) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var renderable = this._renderable;
       // 获得渲染器
       var effectConsole: EffectConsole = ServiceUtil.find(EffectConsole);
@@ -74,7 +74,7 @@ export class DeferredMergePass extends TechniquePass {
    public drawBegin(region: Region): boolean {
       super.drawBegin(region);
       // 设置渲染目标
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       context.setRenderTarget(null);
       context.clearColorDepth(region.backgroundColor);
       // 绘制处理

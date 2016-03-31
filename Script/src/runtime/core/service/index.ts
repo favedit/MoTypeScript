@@ -12,6 +12,7 @@ export * from './Moniter';
 export * from './MoniterService';
 export * from './ProcessLoadable';
 export * from './ProcessLoader';
+export * from './ProcessLoadHook';
 export * from './ProcessLoadService';
 export * from './Statistics';
 export * from './StatisticsService';

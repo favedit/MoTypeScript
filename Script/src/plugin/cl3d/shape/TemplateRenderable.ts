@@ -3,7 +3,7 @@ import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {Renderable} from '../base/Renderable';
-import {PoolMaterialConsole} from '../pool/PoolMaterialConsole';
+import {PoolMaterialService} from '../pool/PoolMaterialService';
 import {PoolModelMesh} from '../pool/PoolModelMesh';
 import {PoolModel} from '../pool/PoolModel';
 import {PoolModelConsole} from '../pool/PoolModelConsole';
@@ -120,7 +120,7 @@ export class TemplateRenderable extends Renderable {
       if (!StringUtil.isEmpty(materialUrl)) {
          //var material = this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
          //this.material = this.materialReference = RConsole.find(FE3rMaterialConsole).loadByUrl(this, materialUrl);
-         this.materialLoader = ServiceUtil.find(PoolMaterialConsole).loadLoaderByUrl(this, materialUrl);
+         this.materialLoader = ServiceUtil.find(PoolMaterialService).loadLoaderByUrl(this, materialUrl);
          //RConsole.find(FProcessLoadConsole).push();
          //this._materialResource = material.resource();
          //this.pushMaterial(material);

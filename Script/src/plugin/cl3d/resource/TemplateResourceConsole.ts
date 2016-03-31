@@ -5,7 +5,7 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
 import {Service} from '../../runtime/core/Service';
-import {SLoadArgs} from './SLoadArgs';
+import {LoadArgs} from './LoadArgs';
 import {TemplateResource} from './TemplateResource';
 
 //==========================================================
@@ -57,7 +57,7 @@ export class TemplateResourceConsole extends Service {
    // @param args 加载参数
    // @return 模板资源
    //==========================================================
-   public load(args: SLoadArgs) {
+   public load(args: LoadArgs) {
       // 生成地址
       // var vendor = MO.Console.find(MO.FE3sVendorConsole).find(MO.EE3sResource.Template);
       // var identity = null;
@@ -99,7 +99,7 @@ export class TemplateResourceConsole extends Service {
    // @return 模板资源
    //==========================================================
    public loadByGuid(guid): TemplateResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.guid = guid;
       var template = this.load(args);
       MemoryUtil.free(args);
@@ -113,7 +113,7 @@ export class TemplateResourceConsole extends Service {
    // @return 模板资源
    //==========================================================
    public loadByCode(code): TemplateResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.code = code;
       var template = this.load(args);
       MemoryUtil.free(args);
@@ -127,7 +127,7 @@ export class TemplateResourceConsole extends Service {
    // @return 模板资源
    //==========================================================
    public loadByUrl(url: string): TemplateResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.url = url;
       var template = this.load(args);
       MemoryUtil.free(args);

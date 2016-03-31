@@ -4,7 +4,7 @@ import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
-import {FResource} from './FResource';
+import {Resource} from './Resource';
 import {MeshResource} from './MeshResource';
 import {SceneLayerResource} from './SceneLayerResource';
 
@@ -14,12 +14,12 @@ import {SceneLayerResource} from './SceneLayerResource';
 // @author maocy
 // @history 150105
 //==========================================================
-export class SceneResource extends FResource {
+export class SceneResource extends Resource {
    //    // @attribute
    //    o._dataCompress = true;
    //    // @attribute
    //    o._templates    = null;
-   protected _layers: Dictionary<SceneLayerResource>;
+   public layers: Dictionary<SceneLayerResource>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -28,16 +28,7 @@ export class SceneResource extends FResource {
       super();
       // 设置属性
       this.typeCode = 'Scene';
-      this._layers = new Dictionary<SceneLayerResource>();
-   }
-
-   //==========================================================
-   // <T>获得显示层集合。</T>
-   //
-   // @return 显示层集合
-   //==========================================================
-   public layers(): Dictionary<SceneLayerResource> {
-      return this._layers;
+      this.layers = new Dictionary<SceneLayerResource>();
    }
 
    //==========================================================
@@ -52,7 +43,7 @@ export class SceneResource extends FResource {
          var jlayer = jconfig[n];
          var layer: SceneLayerResource = ClassUtil.create(SceneLayerResource);
          layer.loadConfig(jlayer);
-         this._layers.set(layer.code, layer);
+         this.layers.set(layer.code, layer);
       }
    }
 
@@ -80,27 +71,6 @@ export class SceneResource extends FResource {
       // }
       this.ready = true;
    }
-
-   // //==========================================================
-   // // <T>从输入流里反序列化信息内容。</T>
-   // //
-   // // @method
-   // // @param input:FByteStream 数据流
-   // //==========================================================
-   // MO.FE3sScene_unserialize = function FE3sScene_unserialize(input){
-   //    var o = this;
-   //    o.__base.FE3sSpace.unserialize.call(o, input);
-   //    // 读取模板集合
-   //    var templateCount = input.readInt16();
-   //    if(templateCount > 0){
-   //       var templateConsole = MO.Console.find(MO.FE3sTemplateConsole);
-   //       var templates = o._templates = new MO.TDictionary();
-   //       for(var i = 0; i < templateCount; i++){
-   //          var template = templateConsole.unserialize(p);
-   //          templates.set(ttemplate.guid(), template);
-   //       }
-   //    }
-   // }
 
    // //==========================================================
    // // <T>数据内容存储到配置节点中。</T>

@@ -32,7 +32,7 @@ export class PlaneRenderable extends Renderable {
    // <T>设置信息。</T>
    //==========================================================
    public setup() {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 设置顶点数据
       var vertexPositionData = [-1, 1, 1, 1, 1, -1, -1, -1];
       var vertexPositionBuffer: VertexBuffer = this._vertexPositionBuffer = context.createVertexBuffer();

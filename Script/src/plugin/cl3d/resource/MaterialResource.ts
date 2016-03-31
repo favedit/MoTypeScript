@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
-import {FResource} from './FResource';
+import {Resource} from './Resource';
 import {MaterialTextureResource} from './MaterialTextureResource';
 
 //==========================================================
@@ -10,10 +10,12 @@ import {MaterialTextureResource} from './MaterialTextureResource';
 // @author maocy
 // @history 150428
 //==========================================================
-export class MaterialResource extends FResource {
-   //    // @attribute
-   //    o._material     = MO.Class.register(o, new MO.AGetter('_material'));
+export class MaterialResource extends Resource {
+   // 数据准备好
+   public dataReady: boolean;
+   // 纹理集合
    public textures: Objects<MaterialTextureResource>;
+   //    o._material     = MO.Class.register(o, new MO.AGetter('_material'));
 
    //==========================================================
    // <T>构造处理。</T>

@@ -14,16 +14,6 @@ export class ProcessLoader extends ObjectBase implements ProcessLoadable {
    public ready: boolean;
 
    //==========================================================
-   // <T>构造处理。</T>
-   //==========================================================
-   public constructor() {
-      super();
-      // 设置属性
-      this.statusLoading = false;
-      this.ready = false;
-   }
-
-   //==========================================================
    // <T>测试是否准备好。</T>
    //
    // @param 是否准备好

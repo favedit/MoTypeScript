@@ -27,7 +27,7 @@ export class SelectAutomaticEffect extends AutomaticEffect {
    // @param index 索引位置
    //==========================================================
    public drawRenderable(region: Region, renderable: Renderable, index: number) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var size = context.size;
       var program = this.program;
       var selectPosition = region.selectPosition;

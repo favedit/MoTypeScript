@@ -19,7 +19,7 @@ export class WglLayout extends Layout {
    public setup() {
       super.setup();
       // 创建层
-      this.handle = this._graphicContext.createVertexArrayObject();
+      this.handle = this.graphicContext.createVertexArrayObject();
    }
 
    //==========================================================
@@ -28,7 +28,7 @@ export class WglLayout extends Layout {
    // @method
    //==========================================================
    public bind() {
-      this._graphicContext.bindVertexArrayObject(this.handle);
+      this.graphicContext.bindVertexArrayObject(this.handle);
    }
 
    //==========================================================
@@ -37,7 +37,7 @@ export class WglLayout extends Layout {
    // @method
    //==========================================================
    public unbind() {
-      this._graphicContext.bindVertexArrayObject(null);
+      this.graphicContext.bindVertexArrayObject(null);
    }
 
    //==========================================================
@@ -46,7 +46,7 @@ export class WglLayout extends Layout {
    // @method
    //==========================================================
    public active() {
-      this._graphicContext.bindVertexArrayObject(this.handle);
+      this.graphicContext.bindVertexArrayObject(this.handle);
    }
 
    //==========================================================
@@ -55,7 +55,7 @@ export class WglLayout extends Layout {
    // @method
    //==========================================================
    public deactive() {
-      this._graphicContext.bindVertexArrayObject(null);
+      this.graphicContext.bindVertexArrayObject(null);
    }
 
    //==========================================================
@@ -67,7 +67,7 @@ export class WglLayout extends Layout {
       // 释放对象
       var handle = this.handle;
       if (handle) {
-         this._graphicContext.deleteVertexArrayObject(handle);
+         this.graphicContext.deleteVertexArrayObject(handle);
          this.handle = null;
       }
       // 父处理

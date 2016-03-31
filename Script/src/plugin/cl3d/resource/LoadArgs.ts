@@ -6,7 +6,7 @@ import {Struct} from '../../runtime/common/lang/Struct'
 // @author maocy
 // @history 151225
 //==========================================================
-export class SLoadArgs extends Struct {
+export class LoadArgs extends Struct {
    // 环境
    public context: any;
    // 唯一编号

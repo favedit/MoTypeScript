@@ -25,7 +25,7 @@ export class ShadowColorPass extends TechniquePass {
    // @param region 区域
    //==========================================================
    public drawRegion(region: Region) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 设置渲染目标
       var color = region.backgroundColor;
       context.setRenderTarget(null);

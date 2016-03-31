@@ -320,7 +320,7 @@ export class Effect extends Content {
    // @method
    //==========================================================
    public load() {
-      var xconfig = ServiceUtil.find(EffectConsole).loadConfig(this._graphicContext, this.code);
+      var xconfig = ServiceUtil.find(EffectConsole).loadConfig(this.graphicContext, this.code);
       this.loadConfig(xconfig);
    }
 }

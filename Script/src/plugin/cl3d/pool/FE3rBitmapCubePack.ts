@@ -59,7 +59,7 @@ export class FE3rBitmapCubePack extends FE3rBitmapPack {
    // @return 是否可见
    //==========================================================
    public onLoad() {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var images = this._images;
       // 获得浏览器描述
       // var capability = MO.Window.Browser.capability();

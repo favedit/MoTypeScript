@@ -19,26 +19,9 @@ export class TextureResourceConsole extends Service {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this.textures = new Dictionary<TextureResource>();
    }
-
-   // //==========================================================
-   // // <T>反序列化一个纹理。</T>
-   // //
-   // // @method
-   // // @param p:input:FByteStream 输入流
-   // // @return FE3sTexture 纹理
-   // //==========================================================
-   // MO.FE3sTextureConsole_unserialize = function FE3sTextureConsole_unserialize(p){
-   //    var o = this;
-   //    // 创建材质组
-   //    var r = MO.Class.create(MO.FE3sTexture);
-   //    r._dataReady = true;
-   //    r.unserialize(p);
-   //    // 存储材质组
-   //    o._textures.set(r.guid(), r);
-   //    return r;
-   // }
 
    //==========================================================
    // <T>加载指定代码的纹理资源。</T>
@@ -46,7 +29,7 @@ export class TextureResourceConsole extends Service {
    // @param code:String 代码
    // @return 处理结果
    //==========================================================
-   public load(url) {
+   public load(url: string) {
       // 获取纹理
       var textures = this.textures;
       var texture: TextureResource = textures.get(url);
@@ -73,7 +56,7 @@ export class TextureResourceConsole extends Service {
    // @param code:String 代码
    // @return 处理结果
    //==========================================================
-   public loadByUrl(url: string) {
+   public loadByUrl(url: string): TextureResource {
       // 获取纹理
       var textures = this.textures;
       var texture = textures.get(url);

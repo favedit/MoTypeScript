@@ -37,7 +37,7 @@ export class DeferredDataPass extends TechniquePass {
    //==========================================================
    public setup() {
       super.setup();
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 创建深度纹理
       var textureDepth: Texture = this.textureDepth = context.createFlatTexture();
       textureDepth.setFilterCd(SamplerFilterEnum.Linear, SamplerFilterEnum.Linear);
@@ -77,7 +77,7 @@ export class DeferredDataPass extends TechniquePass {
    public drawBegin(region: Region): boolean {
       super.drawBegin(region);
       // 设置渲染目标
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       context.setRenderTarget(this._renderTarget);
       context.clearColorDepth(region.backgroundColor);
       return true;

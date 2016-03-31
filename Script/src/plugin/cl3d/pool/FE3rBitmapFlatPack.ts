@@ -25,7 +25,7 @@ export class FE3rBitmapFlatPack extends FE3rBitmapPack {
    //==========================================================
    public onLoad() {
       // 创建纹理
-      var texture = this._texture = this._graphicContext.createFlatTexture();
+      var texture = this._texture = this.graphicContext.createFlatTexture();
       texture.upload(this._image);
       texture.makeMipmap();
       // 释放位图

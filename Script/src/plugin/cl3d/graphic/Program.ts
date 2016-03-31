@@ -201,7 +201,7 @@ export abstract class Program extends Content {
       var attribute = this.findAttribute(name);
       AssertUtil.debugNotNull(attribute);
       // 设置内容
-      this._graphicContext.bindVertexBuffer(attribute.slot, buffer, 0, format);
+      this.graphicContext.bindVertexBuffer(attribute.slot, buffer, 0, format);
    }
 
    //==========================================================
@@ -244,7 +244,7 @@ export abstract class Program extends Content {
       // 检查数据变更
       //if (parameter.attachData(data)) {
       // 设置内容
-      this._graphicContext.bindConst(null, parameter.slot, parameter.formatCd, data, count);
+      this.graphicContext.bindConst(null, parameter.slot, parameter.formatCd, data, count);
       //}
    }
 
@@ -277,7 +277,7 @@ export abstract class Program extends Content {
    public setSampler(name, texture) {
       var sampler = this.findSampler(name);
       AssertUtil.debugNotNull(sampler);
-      this._graphicContext.bindTexture(sampler.slot, sampler.index, texture);
+      this.graphicContext.bindTexture(sampler.slot, sampler.index, texture);
    }
 
    //==========================================================

@@ -2,7 +2,7 @@ import {Dictionary} from '../../runtime/common/lang/Dictionary';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {LoggerUtil} from '../../runtime/common/lang/LoggerUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
-import {FResource} from './FResource';
+import {Resource} from './Resource';
 import {MeshResource} from './MeshResource';
 
 //==========================================================
@@ -11,14 +11,14 @@ import {MeshResource} from './MeshResource';
 // @author maocy
 // @history 150128
 //==========================================================
-export class ModelResource extends FResource {
+export class ModelResource extends Resource {
    //    o = MO.Class.inherits(this, o, MO.FE3sSpace);
    //    //..........................................................
    //    // @attribute
    //    o._dataCompress  = true;
    //    o._dataBlock     = true;
    //    // @attribute
-   public meshes: Dictionary<MeshResource> = null;
+   public meshes: Dictionary<MeshResource>;
    //    o._skeletons     = MO.Class.register(o, new MO.AGetter('_skeletons'));
    //    o._animations    = MO.Class.register(o, new MO.AGetter('_animations'));
    //    o._display       = MO.Class.register(o, new MO.AGetter('_display'));
