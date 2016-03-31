@@ -15,7 +15,7 @@ RuntimeUtil.namespace(mo, 'mo');
 //............................................................
 export class SceneTest {
 
-   public canvas;
+   public canvas: FCanvas;
    public context;
    public scene;
 
@@ -32,12 +32,6 @@ export class SceneTest {
       canvas.size.set(800, 400);
       canvas.setup(hWindow.document.body);
       var context = this.context = canvas.graphicContext;
-      // 创建场景
-      var scene = this.scene = canvas.scene = new FSimpleScene();
-      scene.linkGraphicContext(context);
-      scene.setup();
-      // scene.backgroundColor.set(1, 1, 1, 1);
-      scene.backgroundColor.set(0, 0, 0, 1);
       // 创建相机
       var camera = canvas.camera;
       camera.position.set(0, 0, -20);
@@ -57,15 +51,18 @@ export class SceneTest {
       //var template = templateService.allocByUrl(context, '/sk/res/model/xiong/xiong.template');
       //template.matrix.setScaleAll(0.05);
       //var template = templateService.allocByUrl(context, '/sk/res/model/pvw.show.item.001/item.template');
-      var scene = sceneService.allocByUrl(this.context, url);
+      var scene = this.scene = sceneService.allocByUrl(this.context, url);
       //var template = templateService.allocByUrl(context, '${resource}/template/pvw.sc.car.01.001.template');
       //scene.matrix.setScaleAll(0.01);
       //scene.matrix.updateForce();
       //scene.matrix.addRotationX(-Math.PI / 2);
       //template.matrix.addRotationY(Math.PI);
       //this.scene.contentLayer.push(scene);
+      // 创建场景
+      // scene.backgroundColor.set(1, 1, 1, 1);
+      scene.backgroundColor.set(0, 0, 0, 1);
       // 设置显示
-      this.canvas.activeDisplay = scene;
+      this.canvas.scene = scene;
       return scene;
    }
 

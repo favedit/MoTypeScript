@@ -126,6 +126,7 @@ export class ModelResource extends Resource {
       //    }
       // }
       //..........................................................
+      this.ready = true;
       LoggerUtil.info(this, "Unserialize model success. (guid={1}, code={2}, mesh_count={3})", this.guid, this.code, meshCount);
    }
 

@@ -144,6 +144,7 @@ export class SceneService extends Service {
          // 加载模型
          scene = ClassUtil.create(Scene);
          scene.linkGraphicContext(context);
+         scene.setup();
          scene.resource = resource;
          //scene.setPoolCode(identity);
          //scene.setResource(resource);

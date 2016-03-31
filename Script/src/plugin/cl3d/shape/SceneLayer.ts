@@ -42,6 +42,8 @@ export class SceneLayer extends DisplayLayer {
    //==========================================================
    public loadResource(resource: SceneLayerResource) {
       this.resource = resource;
+      // 设置属性
+      this.code = resource.code;
       // 加载显示集合
       var displaysResource = resource.displays;
       if (displaysResource) {
@@ -51,6 +53,7 @@ export class SceneLayer extends DisplayLayer {
             var display: SceneDisplay = ClassUtil.create(SceneDisplay);
             display.linkGraphicContext(this.graphicContext);
             display.loadResource(displayResource);
+            this.pushDisplay(display);
          }
       }
    }

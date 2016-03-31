@@ -145,7 +145,6 @@ export class Resource extends BaseResource {
       switch (loader.contentCd) {
          case DataContentEnum.Json: {
             this.loadConfig(data);
-            this.ready = true;
             break;
          }
          case DataContentEnum.Binary: {
@@ -155,7 +154,6 @@ export class Resource extends BaseResource {
             stream.link(data);
             // 反序列化数据
             this.unserialize(stream);
-            this.ready = true;
             // 释放资源
             stream.dispose();
             break;
