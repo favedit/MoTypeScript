@@ -221,12 +221,12 @@ export class RuntimeUtil extends SingletonObject {
             if (spaceName) {
                return spaceName;
             }
-            if (value.__className) {
-               return value.__className;
-            } else {
-               var source: string = value.toString();
-               result = value.__className = this.subString(source, 'function ', '(');
-            }
+            // if (value.__className) {
+            //    return value.__className;
+            // } else {
+            //    var source: string = value.toString();
+            //    result = value.__className = this.subString(source, 'function ', '(');
+            // }
             return this.subString(value.toString(), 'function ', '(');
          }
          // 如果对象是普通对象的情况

@@ -148,25 +148,7 @@ export class ClassUtil {
    // @return 类短名称
    //==========================================================
    public static shortName(instance: any): string {
-      if (instance) {
-         // 如果对象是标准类的情况
-         if (instance.__shortName) {
-            return instance.__shortName;
-         }
-         if (instance.__class) {
-            return instance.__class.shortName;
-         }
-         // 如果对象是函数的情况
-         if (typeof (instance) == 'function') {
-            return MethodUtil.shortName(instance);
-         }
-         // 如果对象是普通对象的情况
-         var clazz = instance.constructor;
-         if (clazz) {
-            return MethodUtil.shortName(clazz);
-         }
-      }
-      return null;
+      return RuntimeUtil.className(instance);
    }
 
    //==========================================================
@@ -209,19 +191,26 @@ export class ClassUtil {
    // <T>根据类名获得一个类对象。</T>
    // <P>如果类不存在，则新建一个实例。</P>
    //
-   // @param clazz 类函数
+   // @param type 类型
    // @return 类对象
    //==========================================================
-   public static get(typeClass: Function): Class {
-      AssertUtil.debugNotNull(typeClass);
-      var clazz: Class = typeClass.prototype.__clazz;
+   public static get(type: Function): Class {
+      AssertUtil.debugNotNull(type);
+      // 从原型上获得当前类对象
+      var clazz: Class = type.prototype.__clazz;
       if (clazz) {
-         if (clazz.linker === typeClass) {
+         if (clazz.type === type) {
             return clazz;
          }
       }
-      clazz = typeClass.prototype.__clazz = new Class();
-      clazz.build(typeClass);
+      // 新建类对象
+      var parentClass = null;
+      var superType = (type as any).superClass;
+      if (superType) {
+         parentClass = this.get(superType);
+      }
+      clazz = type.prototype.__clazz = new Class();
+      clazz.build(type, parentClass);
       return clazz;
    }
 
@@ -229,11 +218,11 @@ export class ClassUtil {
    // <T>根据类名获得一个类对象。</T>
    // <P>如果类不存在，则新建一个实例。</P>
    //
-   // @param clazz 类函数
+   // @param type 类型
    // @return 类对象
    //==========================================================
-   public static getInstance(typeClass: Function): any {
-      var clazz: Class = this.get(typeClass);
+   public static getInstance(type: Function): any {
+      var clazz: Class = this.get(type);
       return clazz.instance;
    }
 
@@ -266,7 +255,7 @@ export class ClassUtil {
       AssertUtil.debugNotNull(typeClass);
       AssertUtil.debugNotNull(instanceClass);
       var clazz: Class = this.get(typeClass);
-      clazz.build(instanceClass);
+      clazz.build(instanceClass, null);
    }
 
    //==========================================================

@@ -1,5 +1,6 @@
 import {Base} from './Base';
 import {Class} from '../reflect/Class';
+import {ClassUtil} from '../reflect/ClassUtil';
 
 //==========================================================
 // <T>所有可继承对象的基类。</T>
@@ -26,7 +27,11 @@ export class ObjectBase extends Base {
    // @return 信息字符串
    //==========================================================
    public getClass(): Class {
-      return this.__class;
+      var clazz = this.__class;
+      if (!clazz) {
+         clazz = this.__class = ClassUtil.get(this.constructor);
+      }
+      return clazz;
    }
 
    //==========================================================

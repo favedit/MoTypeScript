@@ -20,12 +20,14 @@ import {ClassUtil} from './ClassUtil'
 // @version 141226
 //==========================================================
 export class Class extends Base {
+   // 父类对象
+   public parentClass: Class;
    // 短名称
    public shortName: string;
    // 全名称
    public fullName: string;
    // 关联函数
-   public linker: any;
+   public type: any;
    // 唯一实例对象
    protected _instance: any;
    // 描述器集合
@@ -52,7 +54,7 @@ export class Class extends Base {
       var instance = this._instance;
       if (!instance) {
          // 创建实例
-         var clazz: any = this.linker;
+         var clazz: any = this.type;
          if (clazz.instance) {
             instance = this._instance = clazz.instance();
          } else {
@@ -193,13 +195,59 @@ export class Class extends Base {
    }
 
    //==========================================================
+   // <T>当前类接收其他类所有的描述信息。</T>
+   //
+   // @param clazz 类对象
+   //==========================================================
+   public buildParent(clazz: Class) {
+      // 复制描述器
+      var annotationsCount = clazz._annotations.count();
+      for (var j = 0; j < annotationsCount; j++) {
+         var annotationName = clazz._annotations.name(j);
+         var clazzAnnotations = clazz._annotations.at(j);
+         // 在自己当前对象内查找描述的类型容器
+         var annotations = this._annotations.get(annotationName);
+         if (!annotations) {
+            annotations = new Dictionary<Annotation>();
+            this._annotations.set(annotationName, annotations)
+         }
+         // 复制指定对象内的类型到自己对象内
+         var annotationCount = clazzAnnotations.count();
+         for (var i = 0; i < annotationCount; i++) {
+            var annotationName = clazzAnnotations.name(i);
+            var annotation = clazzAnnotations.at(i);
+            // 检查重复
+            if (!annotation.isDuplicate()) {
+               if (annotations.contains(annotationName)) {
+                  throw new Fatal(this, "Duplicate annotation. (annotation={1}, {2}.{3}={4}.{5}, source={6})",
+                     annotationName, this.shortName, name, clazz.shortName, name, annotation.toString());
+               }
+            }
+            // 复制描述器
+            if (annotation.isInherit) {
+               annotations.set(annotationName, annotation);
+            }
+         }
+      }
+      //..........................................................
+      // 复制属性集合
+      this._attributes.append(clazz._attributes);
+   }
+
+   //==========================================================
    // <T>构建一个对象。</T>
    //
    // @param clazz 类对象
    //==========================================================
-   public build(clazz: Function): void {
-      this.shortName = ClassUtil.shortName(clazz);
-      this.linker = clazz;
+   public build(type: Function, parentClass: Class): void {
+      // 设置属性
+      this.parentClass = parentClass;
+      this.shortName = ClassUtil.shortName(type);
+      this.type = type;
+      // 继承关系
+      if (parentClass) {
+         this.buildParent(parentClass);
+      }
    }
 
    //==========================================================
@@ -208,7 +256,7 @@ export class Class extends Base {
    // @return 对象实例
    //==========================================================
    public newInstance(): any {
-      var instance = new this.linker();
+      var instance = new this.type();
       instance.__class = this;
       return instance;
    }
@@ -241,51 +289,6 @@ export class Class extends Base {
       protected _parent = null;
       protected _pool = new FMemoryPool();
 
-      //==========================================================
-      // <T>当前类接收其他类所有的描述信息。</T>
-      //
-      // @method
-      // @param clazz:TClass 类对象
-      //==========================================================
-      public assign(clazz) {
-         var o = this;
-         //..........................................................
-         // 复制描述器
-         for (var annotationName in clazz._annotations) {
-            var clazzAnnotations = clazz._annotations[annotationName];
-            // 在自己当前对象内查找描述的类型容器
-            var annotations = o._annotations[annotationName];
-            if (!annotations) {
-               annotations = o._annotations[annotationName] = new clazzAnnotations.constructor();
-            }
-            // 复制指定对象内的类型到自己对象内
-            if (clazzAnnotations.constructor == FObjects) {
-               annotations.append(clazzAnnotations);
-            } else {
-               for (var name in clazzAnnotations) {
-                  var annotation = clazzAnnotations[name];
-                  // 检查重复
-                  if (!annotation.isDuplicate()) {
-                     if (annotations[name]) {
-                        throw new FError(o, "Duplicate annotation. (annotation={1}, {2}.{3}={4}.{5}, source={6})", annotationName, o._name, name, clazz.name, name, annotation.toString());
-                     }
-                  }
-                  // 复制描述器
-                  if (annotation._inherit) {
-                     annotations[name] = annotation;
-                  }
-               }
-            }
-         }
-         //..........................................................
-         // 复制属性集合
-         for (var name in clazz._attributes) {
-            var attribute = clazz._attributes[name];
-            if (attribute.construct != Function) {
-               o._attributes[name] = clazz._attributes[name];
-            }
-         }
-      }
 
       //==========================================================
       // <T>获得一个类关联的样式描述。</T>

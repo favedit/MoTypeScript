@@ -39,6 +39,7 @@ export class Annotation extends Base {
    //============================================================
    public constructor(name: string) {
       super();
+      // 设置属性
       this._name = name;
    }
 

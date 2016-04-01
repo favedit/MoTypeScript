@@ -14,7 +14,7 @@ import {Annotation} from './Annotation'
 //============================================================
 export class PropertyAnnotation extends Annotation {
    // 数据名称
-   protected _dataName: string = null;
+   public dataName: string;
 
    //============================================================
    // <T>构造处理。</T>
@@ -23,7 +23,9 @@ export class PropertyAnnotation extends Annotation {
    //============================================================
    public constructor(name: string, dataName: String = null, dataCd: DataTypeEnum = DataTypeEnum.Unknown, dataClass: any = null, dataDefault: any = null) {
       super(name);
+      // 设置属性
       this._annotationCd = AnnotationEnum.Property;
+      this._inherit = true;
       // 设置数据名称
       var code = null;
       if (dataName == null) {
@@ -36,7 +38,7 @@ export class PropertyAnnotation extends Annotation {
       } else {
          code = dataName;
       }
-      this._dataName = code;
+      this.dataName = code;
    }
 
    //============================================================
@@ -45,7 +47,7 @@ export class PropertyAnnotation extends Annotation {
    // @return String 代码
    //============================================================
    public get code(): string {
-      return this._dataName;
+      return this.dataName;
    }
 
    //============================================================
@@ -61,7 +63,7 @@ export class PropertyAnnotation extends Annotation {
    // @param config 配置
    //============================================================
    public load(value, config) {
-      value[this._name] = config.get(this._dataName);
+      value[this._name] = config.get(this.dataName);
    }
 
    //============================================================
@@ -71,7 +73,7 @@ export class PropertyAnnotation extends Annotation {
    // @param config 配置
    //============================================================
    public save(value, config) {
-      config.set(this._dataName, value[this._name]);
+      config.set(this.dataName, value[this._name]);
    }
 
    //============================================================
@@ -81,6 +83,6 @@ export class PropertyAnnotation extends Annotation {
    // @return String 字符串
    //============================================================
    public toString() {
-      return '<' + this._annotationCd + ',data_name=' + this._dataName + '>';
+      return '<' + this._annotationCd + ',data_name=' + this.dataName + '>';
    }
 }

@@ -269,10 +269,9 @@ export class HashMap<N, V> extends ObjectBase {
    //==========================================================
    // <T>根据名称设置非空内容。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param value:Object 默认内容
-   // @return Object 内容
+   // @param name 名称
+   // @param value 默认内容
+   // @return 内容
    //==========================================================
    public setNvl(name: N, value: V): void {
       if (value) {
@@ -283,8 +282,7 @@ export class HashMap<N, V> extends ObjectBase {
    //==========================================================
    // <T>将当前表内容全部置为另一个表的全部内容。</T>
    //
-   // @method
-   // @param map:TMap 表
+   // @param map 表
    //==========================================================
    public assign(map: HashMap<N, V>): void {
       this.clear();
@@ -294,15 +292,14 @@ export class HashMap<N, V> extends ObjectBase {
    //==========================================================
    // <T>在当前表中追加另一个表的全部内容。</T>
    //
-   // @method
-   // @param map:TMap 表
+   // @param map 表
    //==========================================================
    public append(map: HashMap<N, V>): void {
       if (map) {
          var count = map.count();
          for (var i = 0; i < count; i++) {
-            var name = map.nameAt(i);
-            var value = map.valueAt(i);
+            var name = map.name(i);
+            var value = map.value(i);
             this.set(name, value);
          }
       }

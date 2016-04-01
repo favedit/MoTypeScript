@@ -14,10 +14,10 @@ import {ClassUtil} from './ClassUtil';
 //==========================================================
 export function Property(
    dataName: String = null,
-   dataChanged: string = 'onFieldChanged',
    dataCd: DataTypeEnum = DataTypeEnum.Object,
+   dataDefault: any = null,
    dataClass: any = null,
-   dataDefault: any = null) {
+   dataChanged: string = 'onFieldChanged') {
    return function(target: any, name: string): void {
       // 注册描述器
       var annotation: PropertyAnnotation = new PropertyAnnotation(name, dataName, dataCd, dataClass, dataDefault);
@@ -27,7 +27,11 @@ export function Property(
       var descriptor: any = new Object();
       descriptor.get = function() {
          // 获得实例对象
-         return this[propertyName];
+         var value = this[propertyName];
+         if (value === void 0) {
+            return dataDefault;
+         }
+         return value;
       };
       descriptor.set = function(value: any) {
          // 设置实例内容
