@@ -17,10 +17,10 @@ import {TemplateRenderable} from './TemplateRenderable';
 //==========================================================
 export class Template extends Actor {
    // @attribute
-   public _dataReady: boolean;
-   public _ready: boolean;
+   public dataReady: boolean;
+   public ready: boolean;
    public resource: any;
-   public _meshs: any = new Objects<any>();
+   public meshs: Objects<TemplateRenderable>;
    // public renderables: any;
    //    // @attribute
    //    o._sprites         = MO.Class.register(o, new MO.AGetter('_sprites'));
@@ -41,8 +41,9 @@ export class Template extends Actor {
    public constructor() {
       super();
       // 设置属性
-      this._dataReady = false;
-      this._ready = false;
+      this.dataReady = false;
+      this.ready = false;
+      this.meshs = new Objects<TemplateRenderable>();
       // 创建显示层
       // var layer = this._layer = MO.Class.create(MO.FDisplayLayer);
       // this.registerLayer('Layer', layer);
@@ -56,7 +57,7 @@ export class Template extends Actor {
    // @return 是否准备好
    //==========================================================
    public testReady() {
-      return this._ready;
+      return this.ready;
    }
 
    // //==========================================================
@@ -248,9 +249,9 @@ export class Template extends Actor {
          var renderableResource = renderableResources.at(i);
          // 加载资源
          var renderable = new TemplateRenderable();
-         renderable.linkGraphicContext(this._graphicContext);
+         renderable.linkGraphicContext(this.graphicContext);
          renderable.loadResource(renderableResource);
-         this._meshs.push(renderable);
+         this.meshs.push(renderable);
       }
       // 加载技术
       //var technique = o.selectTechnique(o, MO.FE3dGeneralTechnique);
@@ -297,19 +298,19 @@ export class Template extends Actor {
    // @return 处理结果
    //==========================================================
    public processLoad(): boolean {
-      var ready = this._ready;
+      var ready = this.ready;
       if (!ready) {
          var resource = this.resource;
          // 加载资源
-         if (!this._dataReady) {
+         if (!this.dataReady) {
             if (!resource.testReady()) {
                return false;
             }
             this.loadResource(resource);
-            this._dataReady = true;
+            this.dataReady = true;
          }
          // 加载渲染集合
-         var meshs = this._meshs;
+         var meshs = this.meshs;
          if (meshs) {
             var meshCount = meshs.count();
             // 测试全部加载完成
@@ -338,7 +339,7 @@ export class Template extends Actor {
          //    }
          // }
          // 加载完成
-         ready = this._ready = true;
+         ready = this.ready = true;
          // 事件发送
          //var event = RMemory.alloc(SEvent);
          //event.sender = this;

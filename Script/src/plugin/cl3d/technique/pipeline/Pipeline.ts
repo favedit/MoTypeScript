@@ -55,7 +55,7 @@ export abstract class Pipeline extends Content {
    //==========================================================
    public onProcess(): boolean {
       // 检查参数
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       AssertUtil.debugNotNull(context);
       var scene = this.scene;
       if (!scene) {

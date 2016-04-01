@@ -88,7 +88,7 @@ export class Canvas extends Content {
       hStyle.width = '100%';
       hStyle.height = '100%';
       // 创建渲染环境
-      var context = this._graphicContext = this.createContext();
+      var context = this.graphicContext = this.createContext();
       context.linkCanvas(hCanvas);
       // 设置大小
       this.resize(width, height);
@@ -121,7 +121,7 @@ export class Canvas extends Content {
       hCanvas.height = height;
       // 设置尺寸
       this._size.set(width, height);
-      this._graphicContext.size.set(width, height);
+      this.graphicContext.size.set(width, height);
       LoggerUtil.debug(this, 'Canvas2d resize. (size={1}x{2}, html={3})', width, height, hCanvas.outerHTML);
    }
 

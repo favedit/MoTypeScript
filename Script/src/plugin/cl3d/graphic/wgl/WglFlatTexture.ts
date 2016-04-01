@@ -10,17 +10,17 @@ import {WglUtil} from './WglUtil';
 // @history 141230
 //==========================================================
 export class WglFlatTexture extends FlatTexture {
-   // 句柄
-   public handle: WebGLTexture = null;
    // 更新状态
-   public statusUpdate: boolean = false;
+   public statusUpdate: boolean;
+   // 句柄
+   public handle: WebGLTexture;
 
    //==========================================================
    // <T>配置处理。</T>
    //==========================================================
    public setup() {
-      //super.setup();
-      var graphic = this._graphicContext.handle;
+      super.setup();
+      var graphic = this.graphicContext.handle;
       this.handle = graphic.createTexture();
    }
 
@@ -31,18 +31,9 @@ export class WglFlatTexture extends FlatTexture {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       return graphic.isTexture(this.handle);
    }
-
-   //==========================================================
-   // <T>获得纹理。</T>
-   //
-   // @method
-   //==========================================================
-   // public texture() {
-   //    return this;
-   // }
 
    //==========================================================
    // <T>生成位图的缩放图片。</T>
@@ -50,7 +41,7 @@ export class WglFlatTexture extends FlatTexture {
    // @method
    //==========================================================
    public makeMipmap() {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 生成MIP
@@ -66,7 +57,7 @@ export class WglFlatTexture extends FlatTexture {
    // @param height:Integer 高度
    //==========================================================
    public uploadData(content, width, height) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var graphic = context.handle;
       // 检查参数
       var data = null;
@@ -107,14 +98,14 @@ export class WglFlatTexture extends FlatTexture {
    // <T>上传图片内容。</T>
    //
    // @method
-   // @param content:Object 内容
-   // @param left:Number 左位置
-   // @param top:Number 上位置
-   // @param width:Number 宽度
-   // @param height:Number 高度
+   // @param content 内容
+   // @param left 左位置
+   // @param top 上位置
+   // @param width 宽度
+   // @param height 高度
    //==========================================================
    public upload(content, left, top, width, height) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var capability = context.capability;
       var graphic = context.handle;
       // 检查参数
@@ -168,7 +159,7 @@ export class WglFlatTexture extends FlatTexture {
    // @param element:Object 内容
    //==========================================================
    public uploadElement(element) {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 上传内容
@@ -188,7 +179,7 @@ export class WglFlatTexture extends FlatTexture {
    public update() {
       //super.setup();
       // 绑定数据
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       graphic.bindTexture(graphic.TEXTURE_2D, this.handle);
       // 设置过滤器
       var code = WglUtil.convertSamplerFilter(graphic, this.filterMinCd);
@@ -215,7 +206,7 @@ export class WglFlatTexture extends FlatTexture {
    // @method
    //==========================================================
    public dispose() {
-      var graphic = this._graphicContext;
+      var graphic = this.graphicContext;
       // 释放对象
       var handle = this.handle;
       if (handle) {

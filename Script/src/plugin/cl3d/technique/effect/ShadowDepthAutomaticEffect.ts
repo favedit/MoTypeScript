@@ -25,7 +25,7 @@ export class ShadowDepthAutomaticEffect extends AutomaticEffect {
    // @param renderable 渲染对象
    //==========================================================
    public drawRenderable(region: Region, renderable: Renderable) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var program = this.program;
       // 获得参数
       var lvm = region.calculate(RegionParameterEnum.LightViewMatrix);

@@ -253,7 +253,7 @@ export class DataStream extends DataViewer {
       var endianCd = this.endianCd;
       // 8字节复制
       if (length % 8 == 0) {
-         var array = new Float64Array(data);
+         var array:any = new Float64Array(data);
          var count = length >> 3;
          for (var i = 0; i < count; i++) {
             array[i] = viewer.getFloat64(position, endianCd);
@@ -264,7 +264,7 @@ export class DataStream extends DataViewer {
       }
       // 4字节复制
       if (length % 4 == 0) {
-         var array = new Uint32Array(data);
+         var array:any = new Uint32Array(data);
          var count = length >> 2;
          for (var i = 0; i < count; i++) {
             array[i] = viewer.getUint32(position, endianCd);
@@ -275,7 +275,7 @@ export class DataStream extends DataViewer {
       }
       // 2字节复制
       if (length % 2 == 0) {
-         var array = new Uint16Array(data);
+         var array:any = new Uint16Array(data);
          var count = length >> 1;
          for (var i = 0; i < count; i++) {
             array[i] = viewer.getUint16(position, endianCd);
@@ -285,7 +285,7 @@ export class DataStream extends DataViewer {
          return;
       }
       // 逐字节复制
-      var array = new Uint8Array(data);
+      var array:any = new Uint8Array(data);
       for (var i = 0; i < length; i++) {
          array[i] = viewer.getUint8(position++);
       }
@@ -493,7 +493,7 @@ export class DataStream extends DataViewer {
       var endianCd = this.endianCd;
       // 8字节复制
       if (length % 8 == 0) {
-         var array = new Float64Array(data);
+         var array:any = new Float64Array(data);
          var count = length >> 3;
          for (var i = 0; i < count; i++) {
             viewer.setFloat64(position, array[i], endianCd);
@@ -504,7 +504,7 @@ export class DataStream extends DataViewer {
       }
       // 4字节复制
       if (length % 4 == 0) {
-         var array = new Uint32Array(data);
+         var array:any = new Uint32Array(data);
          var count = length >> 2;
          for (var i = 0; i < count; i++) {
             viewer.setUint32(position, array[i], endianCd);
@@ -515,7 +515,7 @@ export class DataStream extends DataViewer {
       }
       // 2字节复制
       if (length % 2 == 0) {
-         var array = new Uint16Array(data);
+         var array:any = new Uint16Array(data);
          var count = length >> 1;
          for (var i = 0; i < count; i++) {
             viewer.setUint16(position, array[i], endianCd);
@@ -525,7 +525,7 @@ export class DataStream extends DataViewer {
          return;
       }
       // 逐字节复制
-      var array = new Uint8Array(data);
+      var array:any = new Uint8Array(data);
       for (var i = 0; i < length; i++) {
          viewer.setUint8(position++, array[i]);
       }

@@ -12,16 +12,7 @@ import {GraphicContext} from './GraphicContext';
 //==========================================================
 export class GraphicObject extends ObjectBase {
    // 图形环境
-   public _graphicContext: any;
-
-   //==========================================================
-   // <T>关联图形环境。</T>
-   //
-   // @param context 图形环境
-   //==========================================================
-   public get graphicContext() {
-      return this._graphicContext;
-   }
+   public graphicContext: any;
 
    //==========================================================
    // <T>关联图形环境。</T>
@@ -31,9 +22,9 @@ export class GraphicObject extends ObjectBase {
    public linkGraphicContext(context) {
       AssertUtil.debugNotNull(context);
       if (context instanceof GraphicContext) {
-         this._graphicContext = context;
+         this.graphicContext = context;
       } else if (context instanceof GraphicObject) {
-         this._graphicContext = (context as GraphicObject).graphicContext;
+         this.graphicContext = (context as GraphicObject).graphicContext;
       } else {
          throw new Fatal(this, 'Link graphic context failure. (context={1})', context);
       }
@@ -56,7 +47,7 @@ export class GraphicObject extends ObjectBase {
    //==========================================================
    public dispose() {
       // 释放属性
-      this._graphicContext = null;
+      this.graphicContext = null;
       // 父处理
       super.dispose();
    }

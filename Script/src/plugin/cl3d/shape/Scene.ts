@@ -1,4 +1,10 @@
-import {Actor} from '../base/Actor';
+import {Dictionary} from '../../runtime/common/lang/Dictionary';
+import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
+import {AssertUtil} from '../../runtime/common/AssertUtil';
+import {ProcessLoadHook} from '../../../runtime/core/service/ProcessLoadHook';
+import {Scene as BaseScene} from '../base/Scene';
+import {SceneResource} from '../resource/SceneResource';
+import {SceneLayer} from './SceneLayer';
 
 //==========================================================
 // <T>场景。</T>
@@ -6,15 +12,13 @@ import {Actor} from '../base/Actor';
 // @author maocy
 // @history 150106
 //==========================================================
-export class Scene extends Actor {
-   public _dataReady: boolean;
-   public _ready: boolean;
-   //    //..........................................................
-   //    // @attribute
-   //    o._ready                = false;
-   //    o._dataReady            = false;
-   //    o._dirty                = false;
-
+export class Scene extends BaseScene {
+   // 准备好
+   public ready: boolean;
+   // 资源对象
+   public resource: SceneResource;
+   // 加载钩子
+   public loadHook: ProcessLoadHook;
    //==========================================================
    // <T>构造处理。</T>
    //
@@ -23,8 +27,7 @@ export class Scene extends Actor {
    public constructor() {
       super();
       // 设置属性
-      this._dataReady = false;
-      this._ready = false;
+      this.loadHook = new ProcessLoadHook(this);
       // 创建显示层
       // var layer = this._layer = MO.Class.create(MO.FDisplayLayer);
       // this.registerLayer('Layer', layer);
@@ -38,7 +41,7 @@ export class Scene extends Actor {
    // @return 是否准备好
    //==========================================================
    public testReady() {
-      return this._ready;
+      return this.ready;
    }
 
    // //==========================================================
@@ -190,22 +193,26 @@ export class Scene extends Actor {
    // @method
    // @param resource:FE3sScene 资源
    //==========================================================
-   public loadResource(resource){
+   public loadResource(resource: SceneResource) {
+      AssertUtil.debugNotNull(resource);
       // // 选择技术
       // this.selectTechnique(this, MO.FE3dGeneralTechnique);
       // // 加载技术资源
       // this.loadTechniqueResource(resource.technique());
       // // 加载区域资源
       // this.loadRegionResource(resource.region());
-      // // 加载层集合
-      // var layers = resource.layers();
-      // if(layers){
-      //    var layerCount = layers.count();
-      //    for(var i = 0; i < layerCount; i++){
-      //       var layer = layers.at(i);
-      //       this.loadLayerResource(layer);
-      //    }
-      // }
+      // 加载层集合
+      var layersResource = resource.layers;
+      if (layersResource) {
+         var layerCount = layersResource.count();
+         for (var i = 0; i < layerCount; i++) {
+            var layerResource = layersResource.at(i);
+            var layer: SceneLayer = ClassUtil.create(SceneLayer);
+            layer.linkGraphicContext(this.graphicContext);
+            layer.loadResource(layerResource);
+            this.registerLayer(layer.code, layer);
+         }
+      }
    }
 
    // //==========================================================
@@ -227,29 +234,28 @@ export class Scene extends Actor {
    //    this._dirty = true;
    // }
 
-   // //==========================================================
-   // // <T>加载处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FE3dScene_processLoad = function FE3dScene_processLoad(){
-   //    var o = this;
-   //    if(o._dataReady){
-   //       return true;
-   //    }
-   //    if(!o._resource.testReady()){
-   //       return false;
-   //    }
-   //    // 加载资源
-   //    o.loadResource(o._resource);
-   //    o._ready = true;
-   //    // 派发事件
-   //    var event = MO.Memory.alloc(MO.SEvent);
-   //    event.sender = o;
-   //    o.processLoadListener(event);
-   //    MO.Memory.free(event);
-   //    return true;
-   // }
+   //==========================================================
+   // <T>加载处理。</T>
+   //
+   // @method
+   //==========================================================
+   public processLoad() {
+      if (this.ready) {
+         return true;
+      }
+      if (!this.resource.testReady()) {
+         return false;
+      }
+      // 加载资源
+      this.loadResource(this.resource);
+      this.ready = true;
+      // 派发事件
+      // var event = MO.Memory.alloc(MO.SEvent);
+      // event.sender = this;
+      // this.processLoadListener(event);
+      // MO.Memory.free(event);
+      return true;
+   }
 
    // //==========================================================
    // // <T>释放处理。</T>

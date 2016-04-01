@@ -143,7 +143,7 @@ export class Technique extends Content {
    // @param region:FG3dRetion 区域
    //==========================================================
    public draw(scene: Scene, region: Region) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var layers = scene.layers;
       var layerCount = layers.count();
       // 设置区域属性

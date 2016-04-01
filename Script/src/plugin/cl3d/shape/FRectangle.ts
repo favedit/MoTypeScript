@@ -30,7 +30,7 @@ export class FRectangle extends Renderable {
    // <T>设置信息。</T>
    //==========================================================
    public setup() {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 设置顶点数据
       var vertexPositionData = [-1, 1, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0];
       var buffer = this._vertexPositionBuffer = context.createVertexBuffer();

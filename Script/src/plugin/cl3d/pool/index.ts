@@ -11,16 +11,15 @@ export * from './FE3rTextureBitmapPack';
 export * from './PoolComponent';
 export * from './PoolIndexBuffer';
 export * from './PoolMaterial';
-export * from './PoolMaterialConsole';
+export * from './PoolMaterialLoader';
+export * from './PoolMaterialService';
 export * from './PoolModel';
 export * from './PoolModelConsole';
 export * from './PoolModelMesh';
 export * from './PoolObject';
+export * from './PoolTextureLoader';
+export * from './PoolTextureService';
 export * from './PoolVertexBuffer';
-export * from './TextureService';
 
 import * as backup from './backup/index';
 export {backup as backup};
-
-import * as loader from './loader/index';
-export {loader as loader};

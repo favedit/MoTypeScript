@@ -32,7 +32,7 @@ export class DeferredTechnique extends Technique {
    //==========================================================
    public setup() {
       super.setup();
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       context.enableDrawBuffers();
       //..........................................................
       // 创建支持模式

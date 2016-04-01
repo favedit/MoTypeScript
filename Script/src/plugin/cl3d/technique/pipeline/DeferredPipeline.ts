@@ -30,7 +30,7 @@ export class DeferredPipeline extends Pipeline {
       this.region = new Region();
       // 设置渲染技术
       var techniqueConsole: TechniqueService = ServiceUtil.find(TechniqueService);
-      this.drawTechnique = techniqueConsole.find(this._graphicContext, DeferredTechnique);
-      this.selectTechnique = <SelectTechnique>techniqueConsole.find(this._graphicContext, SelectTechnique);
+      this.drawTechnique = techniqueConsole.find(this.graphicContext, DeferredTechnique);
+      this.selectTechnique = <SelectTechnique>techniqueConsole.find(this.graphicContext, SelectTechnique);
    }
 }

@@ -1,9 +1,10 @@
 import {Fatal} from '../../../runtime/common/lang/Fatal';
+import {Linker} from '../../../runtime/common/reflect/Linker';
 import {ProcessLoader} from '../../../runtime/core/service/ProcessLoader';
+import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {Material} from '../../../runtime/graphic/material/Material';
-import {PhongMaterial} from '../../material/PhongMaterial';
-import {ParallaxMaterial} from '../../material/ParallaxMaterial';
-import {MaterialResource} from '../../resource/MaterialResource';
+import {MaterialResource} from '../resource/MaterialResource';
+import {PoolMaterialService} from './PoolMaterialService';
 
 //==========================================================
 // <T>材质加载器。</T>
@@ -18,6 +19,9 @@ export class PoolMaterialLoader extends ProcessLoader {
    public resource: MaterialResource;
    // 材质
    public material: Material;
+   // 纹理缓冲服务
+   // @Linker(PoolMaterialService)
+   // public _materialService: PoolMaterialService;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -37,14 +41,8 @@ export class PoolMaterialLoader extends ProcessLoader {
          var resource = this.resource;
          if (resource.testReady()) {
             // 创建材质
-            var material = null;
-            if (resource.className == 'PhongMaterial') {
-               material = new PhongMaterial();
-            } else if (resource.className == 'ParallaxMaterial') {
-               material = new ParallaxMaterial();
-            } else {
-               throw new Fatal(this, 'Unknown material.');
-            }
+            //var material: any = this._materialService.create(resource.className);
+            var material: any = ServiceUtil.find(PoolMaterialService).create(resource.className);
             material.linkGraphicContext(this.graphicContext);
             material.loadResource(resource);
             // 加载完成

@@ -34,7 +34,7 @@ export class ForwardPipeline extends Pipeline {
       this.optionShadow = false;
       // 设置渲染技术
       var techniqueConsole: TechniqueService = ServiceUtil.find(TechniqueService);
-      this.selectTechnique = <SelectTechnique>techniqueConsole.find(this._graphicContext, SelectTechnique);
+      this.selectTechnique = <SelectTechnique>techniqueConsole.find(this.graphicContext, SelectTechnique);
    }
 
    //==========================================================
@@ -52,6 +52,6 @@ export class ForwardPipeline extends Pipeline {
       // 设置渲染技术
       var techniqueConsole: TechniqueService = ServiceUtil.find(TechniqueService);
       var techniqueClass = value ? ShadowTechnique : GeneralTechnique;
-      this.drawTechnique = techniqueConsole.find(this._graphicContext, techniqueClass);
+      this.drawTechnique = techniqueConsole.find(this.graphicContext, techniqueClass);
    }
 }

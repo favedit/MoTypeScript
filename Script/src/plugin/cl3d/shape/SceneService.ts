@@ -8,7 +8,7 @@ import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {Service} from '../../runtime/core/Service';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
-import {SLoadArgs} from '../resource/SLoadArgs';
+import {LoadArgs} from '../resource/LoadArgs';
 import {SceneResourceConsole} from '../resource/SceneResourceConsole';
 import {Scene} from './Scene';
 
@@ -117,18 +117,18 @@ export class SceneService extends Service {
    // @param args:SE3sLoadArgs 加载参数
    // @return FE3dScene 渲染场景
    //==========================================================
-   public alloc(args:SLoadArgs):Scene{
+   public alloc(args: LoadArgs): Scene {
       // 获得环境
       var context = args.context;
       AssertUtil.debugNotNull(context);
       // 获得标识
       var identity = null;
       var guid = args.guid;
-      if(!StringUtil.isEmpty(guid)){
+      if (!StringUtil.isEmpty(guid)) {
          identity = guid;
       }
       var code = args.code;
-      if(!StringUtil.isEmpty(code)){
+      if (!StringUtil.isEmpty(code)) {
          identity = code;
       }
       var url: string = args.url;
@@ -137,18 +137,20 @@ export class SceneService extends Service {
       }
       AssertUtil.debugNotEmpty(identity);
       // 尝试从缓冲池中取出
-      var scene:Scene = this._pools.alloc(identity);
-      if(!scene){
+      var scene: Scene = this._pools.alloc(identity);
+      if (!scene) {
          // 加载渲染对象
          var resource = this._resourceConsole.load(args);
          // 加载模型
          scene = ClassUtil.create(Scene);
          scene.linkGraphicContext(context);
+         scene.setup();
+         scene.resource = resource;
          //scene.setPoolCode(identity);
          //scene.setResource(resource);
          //scene.setup();
          // 追加到加载队列
-         this._processLoadConsole.push(scene);
+         this._processLoadConsole.push(scene.loadHook);
       }
       return scene;
    }
@@ -161,7 +163,7 @@ export class SceneService extends Service {
    // @return 渲染场景
    //==========================================================
    public allocByGuid(context, guid): Scene {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.guid = guid;
       var template = this.alloc(args);
@@ -178,7 +180,7 @@ export class SceneService extends Service {
    // @return 渲染场景
    //==========================================================
    public allocByCode(context, code): Scene {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.code = code;
       var template = this.alloc(args);
@@ -194,7 +196,7 @@ export class SceneService extends Service {
    // @return 渲染场景
    //==========================================================
    public allocByUrl(context, url: string): Scene {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.url = url;
       var template = this.alloc(args);

@@ -21,7 +21,7 @@ export class WglCubeTexture extends CubeTexture {
    //==========================================================
    public setup() {
       super.setup();
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       this.handle = graphic.createTexture();
    }
 
@@ -32,7 +32,7 @@ export class WglCubeTexture extends CubeTexture {
    // @return Boolean 是否有效
    //==========================================================
    public isValid() {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       return graphic.isTexture(this.handle);
    }
 
@@ -42,7 +42,7 @@ export class WglCubeTexture extends CubeTexture {
    // @method
    //==========================================================
    public makeMipmap() {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
       // 生成MIP
@@ -56,7 +56,7 @@ export class WglCubeTexture extends CubeTexture {
    // @param p:image:HtmlImgTag 图片
    //==========================================================
    public uploadSingle(image: ImageResource) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var graphic = context.handle;
       // 设置面
       var faces = [graphic.TEXTURE_CUBE_MAP_POSITIVE_X, graphic.TEXTURE_CUBE_MAP_NEGATIVE_X, graphic.TEXTURE_CUBE_MAP_POSITIVE_Y,
@@ -93,7 +93,7 @@ export class WglCubeTexture extends CubeTexture {
          return this.uploadSingle(x1);
       }
       // 上传全部图片
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var graphic = context.handle;
       // 绑定数据
       graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
@@ -118,7 +118,7 @@ export class WglCubeTexture extends CubeTexture {
    public update() {
       //o.__base.FG3dCubeTexture.update.call(o);
       // 绑定数据
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       graphic.bindTexture(graphic.TEXTURE_CUBE_MAP, this.handle);
       // 设置过滤器
       var c = WglUtil.convertSamplerFilter(graphic, this.filterMinCd);
@@ -145,7 +145,7 @@ export class WglCubeTexture extends CubeTexture {
    // @method
    //==========================================================
    public dispose() {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       // 释放对象
       var handle = this.handle;
       if (handle) {

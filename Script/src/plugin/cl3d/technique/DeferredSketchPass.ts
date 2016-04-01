@@ -1,3 +1,4 @@
+import {Linker} from '../../../runtime/common/reflect/Linker';
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {Texture} from '../../../runtime/graphic/material/Texture';
 import {EffectConsole} from '../graphic/EffectConsole';
@@ -5,7 +6,7 @@ import {PlaneRenderable} from '../shape/PlaneRenderable';
 import {DeferredMergeAutomaticEffect} from './effect/DeferredMergeAutomaticEffect';
 import {TechniquePass} from './TechniquePass';
 import {Region} from '../base/Region';
-import {TextureService} from '../pool/TextureService';
+import {PoolTextureService} from '../pool/PoolTextureService';
 import {WglFlatTexture} from '../graphic/wgl/WglFlatTexture';
 
 //==========================================================
@@ -30,6 +31,8 @@ export class DeferredSketchPass extends TechniquePass {
    public textureSketch1: Texture;
    public textureSketch2: Texture;
    public textureSketch3: Texture;
+   @Linker(PoolTextureService)
+   protected _textureService: PoolTextureService;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -45,15 +48,15 @@ export class DeferredSketchPass extends TechniquePass {
    //==========================================================
    public setup() {
       super.setup();
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 创建平面对象
       var renderable = this._renderable = new PlaneRenderable();
       renderable.linkGraphicContext(context);
       renderable.setup();
       // 加载纹理
-      this.textureSketch1 = ServiceUtil.find(TextureService).loadByUrl(context, WglFlatTexture, '/sk/res/style/sketch/1.jpg');
-      this.textureSketch2 = ServiceUtil.find(TextureService).loadByUrl(context, WglFlatTexture, '/sk/res/style/sketch/2.jpg');
-      this.textureSketch3 = ServiceUtil.find(TextureService).loadByUrl(context, WglFlatTexture, '/sk/res/style/sketch/3.jpg');
+      this.textureSketch1 = this._textureService.loadByUrl(context, WglFlatTexture, '/sk/res/style/sketch/1.jpg');
+      this.textureSketch2 = this._textureService.loadByUrl(context, WglFlatTexture, '/sk/res/style/sketch/2.jpg');
+      this.textureSketch3 = this._textureService.loadByUrl(context, WglFlatTexture, '/sk/res/style/sketch/3.jpg');
    }
 
    //==========================================================
@@ -62,7 +65,7 @@ export class DeferredSketchPass extends TechniquePass {
    // @param region 区域
    //==========================================================
    public drawFirst(region: Region) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var renderable = this._renderable;
       // 获得渲染器
       var effectConsole: EffectConsole = ServiceUtil.find(EffectConsole);
@@ -93,7 +96,7 @@ export class DeferredSketchPass extends TechniquePass {
          }
       }
       // 设置渲染目标
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       context.setRenderTarget(null);
       context.clearColorDepth(region.backgroundColor);
       // 绘制处理

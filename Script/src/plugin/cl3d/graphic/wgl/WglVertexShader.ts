@@ -19,7 +19,7 @@ export class WglVertexShader extends VertexShader {
    public setup() {
       super.setup();
       // 创建对象
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       this.handle = graphic.createShader(graphic.VERTEX_SHADER);
    }
 
@@ -30,7 +30,7 @@ export class WglVertexShader extends VertexShader {
    //==========================================================
    public targetSource() {
       var source = null;
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var capability = context.capability();
       if (capability.optionShaderSource) {
          source = context._handleDebugShader.getTranslatedShaderSource(this.handle);
@@ -46,7 +46,7 @@ export class WglVertexShader extends VertexShader {
    // @param source 渲染代码
    //==========================================================
    public upload(source: string): void {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       var handle = this.handle;
       // 上传代码
       graphic.shaderSource(handle, source);
@@ -66,7 +66,7 @@ export class WglVertexShader extends VertexShader {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      var graphic = this._graphicContext.handle;
+      var graphic = this.graphicContext.handle;
       // 释放对象
       var shader = this.handle;
       if (shader) {

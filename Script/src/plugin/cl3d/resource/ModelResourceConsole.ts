@@ -6,7 +6,7 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
 import {Service} from '../../runtime/core/Service';
-import {SLoadArgs} from './SLoadArgs';
+import {LoadArgs} from './LoadArgs';
 import {ModelResource} from './ModelResource';
 
 //==========================================================
@@ -148,7 +148,7 @@ export class ModelResourceConsole extends Service {
    // @param args:SE3sLoadArgs 加载参数
    // @return FE3sModel 模型资源
    //==========================================================
-   public load(args: SLoadArgs) {
+   public load(args: LoadArgs) {
       // 生成地址
       // var vendor = MO.Console.find(MO.FE3sVendorConsole).find(MO.EE3sResource.Model);
       // var identity = null;
@@ -191,7 +191,7 @@ export class ModelResourceConsole extends Service {
    // @return 模型资源
    //==========================================================
    public loadByGuid(guid: string): ModelResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.guid = guid;
       var model = this.load(args);
       MemoryUtil.free(args);
@@ -205,7 +205,7 @@ export class ModelResourceConsole extends Service {
    // @return 模型资源
    //==========================================================
    public loadByCode(code: string): ModelResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.code = code;
       var model = this.load(args);
       MemoryUtil.free(args);
@@ -219,7 +219,7 @@ export class ModelResourceConsole extends Service {
    // @return 模型资源
    //==========================================================
    public loadByUrl(url: string): ModelResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.url = url;
       var model = this.load(args);
       MemoryUtil.free(args);

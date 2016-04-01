@@ -1,6 +1,6 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {FResource} from './FResource';
+import {Resource} from './Resource';
 import {TemplateRenderableResource} from './TemplateRenderableResource';
 
 //==========================================================
@@ -9,7 +9,7 @@ import {TemplateRenderableResource} from './TemplateRenderableResource';
 // @author maocy
 // @history 150108
 //==========================================================
-export class TemplateResource extends FResource {
+export class TemplateResource extends Resource {
    // 渲染集合
    public renderables: Objects<TemplateRenderableResource> = null;
 

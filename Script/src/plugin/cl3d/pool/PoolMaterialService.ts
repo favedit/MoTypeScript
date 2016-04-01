@@ -7,9 +7,12 @@ import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {Service} from '../../runtime/core/Service';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
+import {Material} from '../../runtime/graphic/material/Material';
 import {MaterialResourceConsole} from '../resource/MaterialResourceConsole';
+import {PhongMaterial} from '../material/PhongMaterial';
+import {ParallaxMaterial} from '../material/ParallaxMaterial';
 import {PoolMaterial} from './PoolMaterial';
-import {PoolMaterialLoader} from './loader/PoolMaterialLoader';
+import {PoolMaterialLoader} from './PoolMaterialLoader';
 
 //==========================================================
 // <T>渲染材质控制台。</T>
@@ -18,7 +21,7 @@ import {PoolMaterialLoader} from './loader/PoolMaterialLoader';
 // @author maocy
 // @version 150106
 //==========================================================
-export class PoolMaterialConsole extends Service {
+export class PoolMaterialService extends Service {
    // 材质集合
    protected _materials;
    @Linker(MaterialResourceConsole)
@@ -44,6 +47,23 @@ export class PoolMaterialConsole extends Service {
    //==========================================================
    public get materials() {
       return this._materials;
+   }
+
+   //==========================================================
+   // <T>根据代码创建材质</T>
+   //
+   // @param code 代码
+   // @return 材质
+   //==========================================================
+   public create(code: string): Material {
+      switch (code) {
+         case 'PhongMaterial':
+            return new PhongMaterial();
+         case 'ParallaxMaterial':
+            return new ParallaxMaterial();
+         default:
+            throw new Fatal(this, 'Unknown material.');
+      }
    }
 
    //==========================================================

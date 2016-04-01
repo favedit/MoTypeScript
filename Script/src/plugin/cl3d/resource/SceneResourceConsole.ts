@@ -6,7 +6,7 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
 import {Service} from '../../runtime/core/Service';
-import {SLoadArgs} from './SLoadArgs';
+import {LoadArgs} from './LoadArgs';
 import {SceneResource} from './SceneResource';
 
 //==========================================================
@@ -60,7 +60,7 @@ export class SceneResourceConsole extends Service {
    // @param args 加载参数
    // @return 资源场景
    //==========================================================
-   public load(args: SLoadArgs): SceneResource {
+   public load(args: LoadArgs): SceneResource {
       // 生成地址
       // var vendor = RConsole.find(FE3sVendorConsole).find(EE3sResource.Scene);
       // var identity = null;
@@ -103,7 +103,7 @@ export class SceneResourceConsole extends Service {
    // @return 场景资源
    //==========================================================
    public loadByGuid(guid): SceneResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.guid = guid;
       var scene = this.load(args);
       MemoryUtil.free(args);
@@ -117,7 +117,7 @@ export class SceneResourceConsole extends Service {
    // @return 场景资源
    //==========================================================
    public loadByCode(code): SceneResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.code = code;
       var scene = this.load(args);
       MemoryUtil.free(args);
@@ -131,7 +131,7 @@ export class SceneResourceConsole extends Service {
    // @return 场景资源
    //==========================================================
    public loadByUrl(url: string): SceneResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.url = url;
       var model = this.load(args);
       MemoryUtil.free(args);

@@ -29,7 +29,7 @@ export class ShadowDepthPass extends TechniquePass {
    //==========================================================
    public setup() {
       super.setup();
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       context.enableDrawBuffers();
       // 创建平面
       var texture = this.textureDepth = context.createFlatTexture();
@@ -55,7 +55,7 @@ export class ShadowDepthPass extends TechniquePass {
    // @param region 区域
    //==========================================================
    public drawRegion(region: Region) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 设置渲染目标
       if (this.finish) {
          var color = region.backgroundColor;

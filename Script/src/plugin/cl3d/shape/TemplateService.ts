@@ -8,7 +8,7 @@ import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {Service} from '../../runtime/core/Service';
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService';
-import {SLoadArgs} from '../resource/SLoadArgs';
+import {LoadArgs} from '../resource/LoadArgs';
 import {TemplateResource} from '../resource/TemplateResource';
 import {TemplateResourceConsole} from '../resource/TemplateResourceConsole';
 import {Template} from './Template';
@@ -49,7 +49,7 @@ export class TemplateService extends Service {
    // @param args 加载参数
    // @return 渲染模板
    //==========================================================
-   public alloc(args: SLoadArgs): Template {
+   public alloc(args: LoadArgs): Template {
       // 获得环境
       var context = args.context;
       AssertUtil.debugNotNull(context);
@@ -94,7 +94,7 @@ export class TemplateService extends Service {
    // @return 渲染模板
    //==========================================================
    public allocByGuid(context, guid): Template {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.guid = guid;
       var template = this.alloc(args);
@@ -110,7 +110,7 @@ export class TemplateService extends Service {
    // @return 渲染模板
    //==========================================================
    public allocByCode(context, code): Template {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.code = code;
       var template = this.alloc(args);
@@ -126,7 +126,7 @@ export class TemplateService extends Service {
    // @return 渲染模板
    //==========================================================
    public allocByUrl(context, url: string): Template {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.url = url;
       var template = this.alloc(args);

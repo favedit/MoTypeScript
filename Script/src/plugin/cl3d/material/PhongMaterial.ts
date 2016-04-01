@@ -32,7 +32,7 @@ export class PhongMaterial extends BasePhongMaterial {
    //==========================================================
    public loadResource(resource: MaterialResource) {
       AssertUtil.debugNotNull(resource);
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var textures = resource.textures;
       var count = textures.count();
       for (var i = 0; i < count; i++) {

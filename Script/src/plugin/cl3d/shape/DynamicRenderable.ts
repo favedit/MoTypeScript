@@ -1,23 +1,19 @@
 //==========================================================
-// <T>全国地图实体类</T>
+// <T>动态渲染对象。</T>
 //
-// @class
-// @author sunpeng
-// @history 150606
+// @author maocy
+// @history 150715
 //==========================================================
-export class ME3dBoundaryPolygon{
+export class DynamicRenderable{
 //    o = MO.Class.inherits(this, o);
 //    //..........................................................
 //    // @attribute
-//    o._positionCount = MO.Class.register(o, new MO.AGetter('_positionCount'));
-//    o._positions     = MO.Class.register(o, new MO.AGetter('_positions'));
-//    o._indexCount    = MO.Class.register(o, new MO.AGetter('_indexCount'));
-//    o._indexes       = MO.Class.register(o, new MO.AGetter('_indexes'));
+//    o._color    = MO.Class.register(o, new MO.AGetter('_color'));
 //    //..........................................................
 //    // @method
-//    o.construct      = MO.ME3dBoundaryPolygon_construct;
+//    o.construct = MO.ME3dDynamicRenderable_construct;
 //    // @method
-//    o.dispose        = MO.ME3dBoundaryPolygon_dispose;
+//    o.dispose   = MO.ME3dDynamicRenderable_dispose;
 //    return o;
 // }
 
@@ -26,8 +22,10 @@ export class ME3dBoundaryPolygon{
 // //
 // // @method
 // //==========================================================
-// MO.ME3dBoundaryPolygon_construct = function ME3dBoundaryPolygon_construct(){
+// MO.ME3dDynamicRenderable_construct = function ME3dDynamicRenderable_construct(){
 //    var o = this;
+//    // 设置属性
+//    o._color = new MO.SColor4(1, 1, 1, 1);
 // }
 
 // //==========================================================
@@ -35,9 +33,9 @@ export class ME3dBoundaryPolygon{
 // //
 // // @method
 // //==========================================================
-// MO.ME3dBoundaryPolygon_dispose = function ME3dBoundaryPolygon_dispose(){
+// MO.ME3dDynamicRenderable_dispose = function ME3dDynamicRenderable_dispose(){
 //    var o = this;
-//    o._positions = null;
-//    o._indexes = null;
+//    // 设置属性
+//    o._color = MO.Lang.Object.dispose(o._color);
 // }
 }

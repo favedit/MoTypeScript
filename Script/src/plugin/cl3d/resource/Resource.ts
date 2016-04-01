@@ -3,7 +3,7 @@ import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {DataStream} from '../../../runtime/common/io/DataStream';
-import {Resource as FBaseResource} from '../../runtime/core/resource/Resource';
+import {Resource as BaseResource} from '../../runtime/core/resource/Resource';
 import {ResourceLoader} from '../../runtime/core/resource/ResourceLoader';
 
 //==========================================================
@@ -12,7 +12,7 @@ import {ResourceLoader} from '../../runtime/core/resource/ResourceLoader';
 // @author maocy
 // @history 150105
 //==========================================================
-export class FResource extends FBaseResource {
+export class Resource extends BaseResource {
    // 唯一编号
    public identity: string;
    // 类对象
@@ -23,9 +23,7 @@ export class FResource extends FBaseResource {
    public code: string;
    // 标签
    public label: string;
-   // 数据准备
-   public dataReady: boolean;
-   // @attribute
+   // 加载监听器
    public loadListeners: Listeners;
 
    //    // @attribute
@@ -43,7 +41,6 @@ export class FResource extends FBaseResource {
    public constructor() {
       super();
       // 设置属性
-      this.dataReady = false;
       this.loadListeners = new Listeners(this);
    }
 
@@ -100,16 +97,6 @@ export class FResource extends FBaseResource {
    // }
 
    //==========================================================
-   // <T>测试是否准备好。</T>
-   //
-   // @method
-   // @return 是否准备好
-   //==========================================================
-   public testReady() {
-      return this.dataReady;
-   }
-
-   //==========================================================
    // <T>从输入流里反序列化信息内容</T>
    //
    // @param input:FByteStream 数据流
@@ -123,22 +110,9 @@ export class FResource extends FBaseResource {
    }
 
    //==========================================================
-   // <T>从配置里加载描述内容</T>
-   //
-   // @param config 配置
-   //==========================================================
-   // public loadMeta(jconfig: any): void {
-   //    this.className = jconfig.class_name;
-   //    this.version = jconfig.version;
-   //    this.guid = jconfig.guid;
-   //    this.code = jconfig.code;
-   //    this.label = jconfig.label;
-   // }
-
-   //==========================================================
    // <T>从配置里加载信息内容</T>
    //
-   // @param config 配置
+   // @param config 配置信息
    //==========================================================
    public loadConfig(jconfig: any): void {
       this.className = jconfig.class;
@@ -146,13 +120,25 @@ export class FResource extends FBaseResource {
       this.guid = jconfig.guid;
       this.code = jconfig.code;
       this.label = jconfig.label;
-      //this.loadMeta(jconfig.meta);
+   }
+
+   //==========================================================
+   // <T>数据内容存储到配置节点中。</T>
+   //
+   // @param config 配置信息
+   //==========================================================
+   public saveConfig(jconfig) {
+      jconfig.class = this.className;
+      jconfig.version = this.version;
+      jconfig.guid = this.guid;
+      jconfig.code = this.code;
+      jconfig.label = this.label;
    }
 
    //==========================================================
    // <T>加载内容。</T>
    //
-   // @param content 内容
+   // @param loader 加载器
    //==========================================================
    public load(loader: ResourceLoader): void {
       var data: any = loader.data;
@@ -168,7 +154,6 @@ export class FResource extends FBaseResource {
             stream.link(data);
             // 反序列化数据
             this.unserialize(stream);
-            this.dataReady = true;
             // 释放资源
             stream.dispose();
             break;
@@ -177,24 +162,6 @@ export class FResource extends FBaseResource {
             throw new Fatal(this, "Content type is invalid.");
       }
    }
-
-   // //==========================================================
-   // // <T>数据内容存储到配置节点中。</T>
-   // //
-   // // @method
-   // // @param xconfig:TXmlNode 配置节点
-   // //==========================================================
-   // MO.FE3sResource_saveConfig = function FE3sResource_saveConfig(xconfig){
-   //    var o = this;
-   //    // 设置类型
-   //    if(!MO.Lang.String.isEmpty(o._typeName)){
-   //       xconfig.setName(o._typeName);
-   //    }
-   //    // 存储属性
-   //    xconfig.set('guid', o._guid);
-   //    xconfig.set('code', o._code);
-   //    xconfig.set('label', o._label);
-   // }
 
    //==========================================================
    // <T>释放处理。</T>

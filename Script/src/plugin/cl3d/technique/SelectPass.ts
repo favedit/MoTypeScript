@@ -32,7 +32,7 @@ export class SelectPass extends TechniquePass {
    public setup() {
       super.setup();
       this.code = 'select';
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 创建平面
       var texture = this._texture = context.createFlatTexture();
       texture.setFilterCd(SamplerFilterEnum.Nearest, SamplerFilterEnum.Nearest);
@@ -59,7 +59,7 @@ export class SelectPass extends TechniquePass {
          if (renderable.optionSelect) {
             var info = renderable.selectInfo(spaceName);
             if (!info.effect) {
-               info.effect = ServiceUtil.find(EffectConsole).find(this._graphicContext, region, renderable);
+               info.effect = ServiceUtil.find(EffectConsole).find(this.graphicContext, region, renderable);
             }
          }
       }
@@ -72,7 +72,7 @@ export class SelectPass extends TechniquePass {
    // @param region:FG3dRetion 区域
    //==========================================================
    public drawRegion(region: Region) {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var handle = context.handle;
       // 设置渲染目标
       context.setRenderTarget(this._renderTarget);

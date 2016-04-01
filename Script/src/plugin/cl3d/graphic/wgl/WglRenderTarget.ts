@@ -20,7 +20,7 @@ export class WglRenderTarget extends RenderTarget {
    // <T>配置处理。</T>
    //==========================================================
    public setup() {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var graphic = context.handle;
       //............................................................
       // 创建帧缓冲
@@ -33,7 +33,7 @@ export class WglRenderTarget extends RenderTarget {
    //==========================================================
    public build() {
       var size = this.size;
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       var handle = context.handle;
       //............................................................
       // 绑定帧缓冲
@@ -121,7 +121,7 @@ export class WglRenderTarget extends RenderTarget {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      var context = this._graphicContext;
+      var context = this.graphicContext;
       // 释放深度对象
       var handleDepth = this.handleDepth;
       if (handleDepth) {

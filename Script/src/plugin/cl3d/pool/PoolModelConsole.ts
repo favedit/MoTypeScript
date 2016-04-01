@@ -9,7 +9,7 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil'
 import {Service} from '../../runtime/core/Service'
 import {ServiceUtil} from '../../runtime/core/ServiceUtil'
 import {ProcessLoadService} from '../../runtime/core/service/ProcessLoadService'
-import {SLoadArgs} from '../resource/SLoadArgs'
+import {LoadArgs} from '../resource/LoadArgs'
 import {ModelResourceConsole} from '../resource/ModelResourceConsole'
 import {PoolModelMesh} from './PoolModelMesh'
 import {PoolModel} from './PoolModel'
@@ -146,7 +146,7 @@ export class PoolModelConsole extends Service {
    // @return FE3rModel 渲染模型
    //==========================================================
    public loadByGuid(context, guid) {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.guid = guid;
       var model = this.load(args);
@@ -163,7 +163,7 @@ export class PoolModelConsole extends Service {
    // @return FE3rModel 渲染模型
    //==========================================================
    public loadByCode(context, code) {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.code = code;
       var model = this.load(args);
@@ -180,7 +180,7 @@ export class PoolModelConsole extends Service {
    // @return FE3rModel 渲染模型
    //==========================================================
    public loadByUrl(context, url) {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.context = context;
       args.url = url;
       var model = this.load(args);

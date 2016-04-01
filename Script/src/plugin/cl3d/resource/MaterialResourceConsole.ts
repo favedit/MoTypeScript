@@ -6,7 +6,7 @@ import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {MemoryUtil} from '../../runtime/common/MemoryUtil';
 import {ResourceConsole} from '../../runtime/core/resource/ResourceConsole';
 import {Service} from '../../runtime/core/Service';
-import {SLoadArgs} from './SLoadArgs';
+import {LoadArgs} from './LoadArgs';
 import {MaterialResource} from './MaterialResource';
 
 //==========================================================
@@ -109,7 +109,7 @@ export class MaterialResourceConsole extends Service {
    // @param args 加载参数
    // @return 模板资源
    //==========================================================
-   public load(args: SLoadArgs) {
+   public load(args: LoadArgs) {
       // 生成地址
       // var vendor = MO.Console.find(MO.FE3sVendorConsole).find(MO.EE3sResource.Template);
       // var identity = null;
@@ -125,8 +125,8 @@ export class MaterialResourceConsole extends Service {
       // }
       // MO.Assert.debugNotEmpty(identity);
       // var url = vendor.makeUrl();
-      var url:string = args.url;
-      var identity:string = url;
+      var url: string = args.url;
+      var identity: string = url;
       // 查找模板
       var materials = this._materials;
       var material: MaterialResource = materials.get(identity);
@@ -150,7 +150,7 @@ export class MaterialResourceConsole extends Service {
    // @return 材质资源
    //==========================================================
    public loadByGuid(guid): MaterialResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.guid = guid;
       var material = this.load(args);
       MemoryUtil.free(args);
@@ -164,7 +164,7 @@ export class MaterialResourceConsole extends Service {
    // @return 材质资源
    //==========================================================
    public loadByCode(code): MaterialResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.code = code;
       var material = this.load(args);
       MemoryUtil.free(args);
@@ -178,7 +178,7 @@ export class MaterialResourceConsole extends Service {
    // @return 材质资源
    //==========================================================
    public loadByUrl(url: string): MaterialResource {
-      var args = MemoryUtil.alloc(SLoadArgs);
+      var args = MemoryUtil.alloc(LoadArgs);
       args.url = url;
       var material = this.load(args);
       MemoryUtil.free(args);

@@ -1,7 +1,8 @@
-import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
+import {Linker} from '../../../runtime/common/reflect/Linker';
+import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {ImageResource} from '../../../runtime/ui/resource/ImageResource';
 import {ImageResourceService} from '../../../runtime/ui/resource/ImageResourceService';
-import {FResource} from './FResource';
+import {Resource} from './Resource';
 
 //==========================================================
 // <T>资源主题管理器。</T>
@@ -10,23 +11,14 @@ import {FResource} from './FResource';
 // @author maocy
 // @history 150302
 //==========================================================
-export class TextureResource extends FResource {
-   // @attribute
-   //_dataCompress = true;
-   // @attribute
-   //_bitmaps = MO.Class.register(o, new MO.AGetter('_bitmaps'));
-   //_bitmapPacks = MO.Class.register(o, new MO.AGetter('_bitmapPacks'));
+export class TextureResource extends Resource {
+   // 网络地址
    public url: string;
+   // 位图
    public image: ImageResource;
-
-   //==========================================================
-   // <T>构造处理。</T>
-   //
-   // @method
-   //==========================================================
-   public constructor() {
-      super();
-   }
+   // 位图资源服务
+   @Linker(ImageResourceService)
+   protected _imageResourceService: ImageResourceService;
 
    //==========================================================
    // <T>测试是否准备好。</T>
@@ -38,55 +30,18 @@ export class TextureResource extends FResource {
    }
 
    //==========================================================
-   // <T>从输入流里反序列化信息内容</T>
-   //
-   // @param p:input:FByteStream 数据流
-   // @return 处理结果
+   // <T>加载处理。</T>
    //==========================================================
    public load() {
-      var imageConsole: ImageResourceService = ServiceUtil.find(ImageResourceService);
-      this.image = imageConsole.load(this.url);
+      AssertUtil.debugNull(this.image);
+      this.image = this._imageResourceService.load(this.url);
    }
 
    //==========================================================
-   // <T>从输入流里反序列化信息内容</T>
-   //
-   // @param p:input:FByteStream 数据流
-   // @return 处理结果
-   //==========================================================
-   // public unserialize(input) {
-   //    // super.unserialize(input);
-   //    // // 读取纹理位图集合
-   //    // var c = input.readInt16();
-   //    // if (c > 0) {
-   //    //    var s = this._bitmaps = new MO.TDictionary();
-   //    //    for (var i = 0; i < c; i++) {
-   //    //       var b = MO.Class.create(FE3sTextureBitmap);
-   //    //       b.unserialize(input);
-   //    //       s.set(b.code(), b);
-   //    //    }
-   //    // }
-   //    // // 输出纹理位图打包集合
-   //    // var c = input.readInt16();
-   //    // if (c > 0) {
-   //    //    var s = this._bitmapPacks = new MO.TDictionary();
-   //    //    for (var i = 0; i < c; i++) {
-   //    //       var b = MO.Class.create(FE3sTextureBitmapPack);
-   //    //       b._texture = this;
-   //    //       b.unserialize(input);
-   //    //       s.set(b.code(), b);
-   //    //    }
-   //    // }
-   // }
-
-   //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
-      // this._bitmaps = MO.Lang.Object.free(this._bitmaps);
-      // this._bitmapPacks = MO.Lang.Object.free(this._bitmapPacks);
+      this.image = null;
       // // 父处理
       super.dispose();
    }

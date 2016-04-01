@@ -1,4 +1,5 @@
 import {Objects} from '../../runtime/common/lang/Objects';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {ResourceObject} from './ResourceObject';
 import {SceneDisplayResource} from './SceneDisplayResource';
@@ -13,7 +14,7 @@ export class SceneLayerResource extends ResourceObject {
    // 代码
    public code: string;
    // 显示集合
-   protected _displays: Objects<SceneDisplayResource>;
+   public displays: Objects<SceneDisplayResource>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -21,16 +22,7 @@ export class SceneLayerResource extends ResourceObject {
    public constructor() {
       super();
       // 设置属性
-      this._displays = new Objects<SceneDisplayResource>();
-   }
-
-   //==========================================================
-   // <T>获得显示集合。</T>
-   //
-   // @return 显示集合
-   //==========================================================
-   public displays(): Objects<SceneDisplayResource> {
-      return this._displays;
+      this.displays = new Objects<SceneDisplayResource>();
    }
 
    //==========================================================
@@ -48,7 +40,17 @@ export class SceneLayerResource extends ResourceObject {
          var jdisplay = jdisplays[n];
          var display: SceneDisplayResource = ClassUtil.create(SceneDisplayResource);
          display.loadConfig(jdisplay);
-         this._displays.push(display);
+         this.displays.push(display);
       }
+   }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 设置属性
+      this.displays = ObjectUtil.dispose(this.displays);
+      // 父处理
+      super.dispose();
    }
 }
