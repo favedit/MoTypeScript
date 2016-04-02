@@ -11,9 +11,9 @@ import {MeshRenderable} from './MeshRenderable';
 // @history 150106
 //==========================================================
 export class Model extends Actor {
-   // @attribute
-   public _dataReady = false;
-   public renderable = null;
+   // 数据准备好
+   public dataReady: boolean;
+   public renderable;
    //    // @attribute
    //    o._display       = MO.Class.register(o, new MO.AGetter('_display'));
    //    // @attribute
@@ -41,7 +41,7 @@ export class Model extends Actor {
    // @return 是否准备好
    //==========================================================
    public testReady(): boolean {
-      return this._dataReady;
+      return this.dataReady;
    }
 
    //==========================================================
@@ -67,7 +67,7 @@ export class Model extends Actor {
       // 创建渲染对象
       // this._display.load(renderable);
       // 数据准备完成
-      this._dataReady = true;
+      this.dataReady = true;
    }
 
    //==========================================================
@@ -77,7 +77,7 @@ export class Model extends Actor {
    //==========================================================
    public processLoad(): boolean {
       // 检测数据状态
-      if (this._dataReady) {
+      if (this.dataReady) {
          return true;
       }
       // // 检测渲染对象状态

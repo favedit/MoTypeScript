@@ -1,9 +1,13 @@
 import {Objects} from '../../runtime/common/lang/Objects';
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
+import {Point3} from '../../runtime/common/math/Point3';
+import {Quaternion} from '../../runtime/common/math/Quaternion';
+import {Vector3} from '../../runtime/common/math/Vector3';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
 import {DataStream} from '../../runtime/common/io/DataStream';
 import {ResourceComponent} from './ResourceComponent';
 import {StreamResource} from './StreamResource';
+
 
 //==========================================================
 // <T>渲染对象。</T>
@@ -12,24 +16,27 @@ import {StreamResource} from './StreamResource';
 // @history 150128
 //==========================================================
 export class MeshResource extends ResourceComponent {
+   // 位置
+   public position: Point3;
+   // 方向
+   public rotation: Quaternion;
+   // 缩放
+   public scale: Vector3;
+   // 顶点缓冲集合
    public vertexStreams: Objects<StreamResource>;
+   // 索引缓冲集合
    public indexStreams: Objects<StreamResource>;
-   //    // @attribute
-   //    o._dataCompress = true;
-   //    o._typeName     = 'Mesh';
-   //    // @attribute
-   //    o._display      = null;
-   //    o._renderable   = null;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 设置属性
-      //this._display = MO.Class.create(MO.FE3sMeshDisplay);
+      this.typeName = 'Mesh';
+      this.position = new Point3();
+      this.rotation = new Quaternion();
+      this.scale = new Vector3();
    }
 
    //==========================================================
@@ -40,6 +47,9 @@ export class MeshResource extends ResourceComponent {
    public unserialize(input: DataStream): void {
       super.unserialize(input);
       // 读取属性
+      this.position.unserialize(input);
+      this.rotation.unserialize(input);
+      this.scale.unserialize(input);
       //this._outline.unserialize(input);
       //this._outline.update();
       // 读取数据流集合
@@ -62,9 +72,6 @@ export class MeshResource extends ResourceComponent {
             streams.push(stream);
          }
       }
-      // 读取渲染信息
-      //this._display.unserialize(input);
-      //this._renderable = this._display._renderable;
    }
 
    // //==========================================================

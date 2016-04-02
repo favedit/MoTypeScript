@@ -10,10 +10,10 @@ import {FloatUtil} from '../lang/FloatUtil';
 //==========================================================
 export class Quaternion {
    // @attribute
-   public x:number;
-   public y:number;
-   public z:number;
-   public w:number;
+   public x: number;
+   public y: number;
+   public z: number;
+   public w: number;
 
    //============================================================
    // <T>构造处理。</T>
@@ -25,7 +25,6 @@ export class Quaternion {
    // @param b:deep:Number 深度
    //============================================================
    constructor(x: number = 0, y: number = 0, z: number = 0, w: number = 1) {
-      // Attribute
       this.x = x;
       this.y = y;
       this.z = z;
@@ -38,10 +37,9 @@ export class Quaternion {
    // @method
    //============================================================
    public identity() {
-      var o = this;
-      o.x = o.y = o.z = 0;
-      o.w = 1;
-      return o;
+      this.x = this.y = this.z = 0;
+      this.w = 1;
+      return this;
    }
 
    //============================================================
@@ -51,11 +49,10 @@ export class Quaternion {
    // @param value:SQuaternion 四元数
    //============================================================
    public assign(value) {
-      var o = this;
-      o.x = value.x;
-      o.y = value.y;
-      o.z = value.z;
-      o.w = value.w;
+      this.x = value.x;
+      this.y = value.y;
+      this.z = value.z;
+      this.w = value.w;
    }
 
    //============================================================
@@ -68,11 +65,10 @@ export class Quaternion {
    // @param w:Number W分量
    //============================================================
    public set(x, y, z, w) {
-      var o = this;
-      o.x = x;
-      o.y = y;
-      o.z = z;
-      o.w = w;
+      this.x = x;
+      this.y = y;
+      this.z = z;
+      this.w = w;
    }
 
    //============================================================
@@ -82,8 +78,7 @@ export class Quaternion {
    // @return Number 绝对值
    //============================================================
    public absolute() {
-      var o = this;
-      return Math.sqrt((o.x * o.x) + (o.y * o.y) + (o.z * o.z) + (o.w * o.w));
+      return Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
    }
 
    //============================================================
@@ -92,14 +87,13 @@ export class Quaternion {
    // @method
    //============================================================
    public normalize() {
-      var o = this;
-      var value = o.absolute();
+      var value = this.absolute();
       if (value != 0) {
          var rate = 1 / value;
-         o.x *= rate;
-         o.y *= rate;
-         o.z *= rate;
-         o.w *= rate;
+         this.x *= rate;
+         this.y *= rate;
+         this.z *= rate;
+         this.w *= rate;
       }
    }
 
@@ -111,17 +105,16 @@ export class Quaternion {
    // @return SQuaternion 四元数
    //============================================================
    public conjugate(value: Quaternion = null) {
-      var o = this;
       var result = null;
       if (value) {
          result = value;
       } else {
          result = new Quaternion();
       }
-      result.x = -o.x;
-      result.y = -o.y;
-      result.z = -o.z;
-      result.w = o.w;
+      result.x = -this.x;
+      result.y = -this.y;
+      result.z = -this.z;
+      result.w = this.w;
       return result;
    }
 
@@ -132,15 +125,14 @@ export class Quaternion {
    // @param value:SQuaternion 四元数
    //============================================================
    public mul(value) {
-      var o = this;
-      var x = o.x;
-      var y = o.y;
-      var z = o.z;
-      var w = o.w;
-      o.x = (w * value.x) + (x * value.w) + (y * value.z) - (z * value.y);
-      o.y = (w * value.y) + (y * value.w) + (z * value.x) - (x * value.z);
-      o.z = (w * value.z) + (z * value.w) + (x * value.y) - (y * value.x);
-      o.w = (w * value.w) - (x * value.x) - (y * value.y) - (z * value.z);
+      var x = this.x;
+      var y = this.y;
+      var z = this.z;
+      var w = this.w;
+      this.x = (w * value.x) + (x * value.w) + (y * value.z) - (z * value.y);
+      this.y = (w * value.y) + (y * value.w) + (z * value.x) - (x * value.z);
+      this.z = (w * value.z) + (z * value.w) + (x * value.y) - (y * value.x);
+      this.w = (w * value.w) - (x * value.x) - (y * value.y) - (z * value.z);
    }
 
    //============================================================
@@ -151,11 +143,10 @@ export class Quaternion {
    // @param value2:SQuaternion 四元数2
    //============================================================
    public mul2(value1, value2) {
-      var o = this;
-      o.x = (value1.w * value2.x) + (value1.x * value2.w) + (value1.y * value2.z) - (value1.z * value2.y);
-      o.y = (value1.w * value2.y) + (value1.y * value2.w) + (value1.z * value2.x) - (value1.x * value2.z);
-      o.z = (value1.w * value2.z) + (value1.z * value2.w) + (value1.x * value2.y) - (value1.y * value2.x);
-      o.w = (value1.w * value2.w) - (value1.x * value2.x) - (value1.y * value2.y) - (value1.z * value2.z);
+      this.x = (value1.w * value2.x) + (value1.x * value2.w) + (value1.y * value2.z) - (value1.z * value2.y);
+      this.y = (value1.w * value2.y) + (value1.y * value2.w) + (value1.z * value2.x) - (value1.x * value2.z);
+      this.z = (value1.w * value2.z) + (value1.z * value2.w) + (value1.x * value2.y) - (value1.y * value2.x);
+      this.w = (value1.w * value2.w) - (value1.x * value2.x) - (value1.y * value2.y) - (value1.z * value2.z);
    }
 
    //============================================================
@@ -194,7 +185,6 @@ export class Quaternion {
    // @param rate:Float 比率
    //============================================================
    public slerp(value1, value2, rate) {
-      var o = this;
       var rv = (value1.x * value2.x) + (value1.y * value2.y) + (value1.z * value2.z) + (value1.w * value2.w);
       var rf = false;
       if (rv < 0) {
@@ -212,10 +202,10 @@ export class Quaternion {
          r1 = Math.sin((1 - rate) * ra) * rb;
          r2 = rf ? (-Math.sin(rate * ra) * rb) : (Math.sin(rate * ra) * rb);
       }
-      o.x = (r1 * value1.x) + (r2 * value2.x);
-      o.y = (r1 * value1.y) + (r2 * value2.y);
-      o.z = (r1 * value1.z) + (r2 * value2.z);
-      o.w = (r1 * value1.w) + (r2 * value2.w);
+      this.x = (r1 * value1.x) + (r2 * value2.x);
+      this.y = (r1 * value1.y) + (r2 * value2.y);
+      this.z = (r1 * value1.z) + (r2 * value2.z);
+      this.w = (r1 * value1.w) + (r2 * value2.w);
    }
 
    //==========================================================
@@ -226,13 +216,12 @@ export class Quaternion {
    // @param angle:Number 弧度
    //==========================================================
    public fromAxisAngle(axis, angle) {
-      var o = this;
       var r = angle * 0.5;
       var s = Math.sin(r);
-      o.x = axis.x * s;
-      o.y = axis.y * s;
-      o.z = axis.z * s;
-      o.w = Math.cos(r);
+      this.x = axis.x * s;
+      this.y = axis.y * s;
+      this.z = axis.z * s;
+      this.w = Math.cos(r);
    }
 
    //==========================================================
@@ -244,17 +233,16 @@ export class Quaternion {
    // @param r:roll:Number Z转角
    //==========================================================
    public fromEuler(p, y, r) {
-      var o = this;
       var sr = Math.sin(r * 0.5);
       var cr = Math.cos(r * 0.5);
       var sp = Math.sin(p * 0.5);
       var cp = Math.cos(p * 0.5);
       var sy = Math.sin(y * 0.5);
       var cy = Math.cos(y * 0.5);
-      o.x = cr * sp * cy + sr * cp * sy;
-      o.y = cr * cp * sy - sr * sp * cy;
-      o.z = sr * cp * cy - cr * sp * sy;
-      o.w = cr * cp * cy + sr * sp * sy;
+      this.x = cr * sp * cy + sr * cp * sy;
+      this.y = cr * cp * sy - sr * sp * cy;
+      this.z = sr * cp * cy - cr * sp * sy;
+      this.w = cr * cp * cy + sr * sp * sy;
    }
 
    //==========================================================
@@ -266,10 +254,9 @@ export class Quaternion {
    // @param r:roll:Number Z转角
    //==========================================================
    public parseEuler(p) {
-      var o = this;
-      var x2 = o.x * o.x;
-      var y2 = o.y * o.y;
-      var z2 = o.z * o.z;
+      var x2 = this.x * this.x;
+      var y2 = this.y * this.y;
+      var z2 = this.z * this.z;
       // 输出内容
       var r = null;
       if (p) {
@@ -277,38 +264,34 @@ export class Quaternion {
       } else {
          r = new Vector3();
       }
-      r.x = Math.asin(FloatUtil.toRange((o.w * o.x - o.y * o.z) * 2, -1, 1));
-      r.y = Math.atan2(2 * (o.w * o.y + o.z * o.x), 1 - 2 * (x2 + y2));
-      r.z = Math.atan2(2 * (o.w * o.z + o.x * o.y), 1 - 2 * (z2 + x2));
+      r.x = Math.asin(FloatUtil.toRange((this.w * this.x - this.y * this.z) * 2, -1, 1));
+      r.y = Math.atan2(2 * (this.w * this.y + this.z * this.x), 1 - 2 * (x2 + y2));
+      r.z = Math.atan2(2 * (this.w * this.z + this.x * this.y), 1 - 2 * (z2 + x2));
       return r;
    }
 
    //==========================================================
    // <T>序列化数据到输出流里。</T>
    //
-   // @method
-   // @param output:FByteStream 数据流
+   // @param output 数据流
    //==========================================================
    public serialize(output) {
-      var o = this;
-      output.writeFloat(o.x);
-      output.writeFloat(o.y);
-      output.writeFloat(o.z);
-      output.writeFloat(o.w);
+      output.writeFloat(this.x);
+      output.writeFloat(this.y);
+      output.writeFloat(this.z);
+      output.writeFloat(this.w);
    }
 
    //==========================================================
    // <T>从输入流里反序列化数据。</T>
    //
-   // @method
-   // @param input:FByteStream 数据流
+   // @param input 数据流
    //==========================================================
    public unserialize(input) {
-      var o = this;
-      o.x = input.readFloat();
-      o.y = input.readFloat();
-      o.z = input.readFloat();
-      o.w = input.readFloat();
+      this.x = input.readFloat();
+      this.y = input.readFloat();
+      this.z = input.readFloat();
+      this.w = input.readFloat();
    }
 
    //============================================================
@@ -318,12 +301,11 @@ export class Quaternion {
    // @return SQuaternion 克隆对象
    //============================================================
    public clone() {
-      var o = this;
       var result = new Quaternion();
-      result.x = o.x;
-      result.y = o.y;
-      result.z = o.z;
-      result.w = o.w;
+      result.x = this.x;
+      result.y = this.y;
+      result.z = this.z;
+      result.w = this.w;
       return result;
    }
 

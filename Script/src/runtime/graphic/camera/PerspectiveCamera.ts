@@ -1,7 +1,7 @@
 import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {Vector3} from '../../runtime/common/math/Vector3';
 import {Quaternion} from '../../runtime/common/math/Quaternion';
-import {SMatrix3x3} from '../../runtime/graphic/math/SMatrix3x3';
+import {Matrix3x3} from '../../runtime/graphic/math/Matrix3x3';
 import {MathUtil} from '../../runtime/common/math/MathUtil';
 import {Camera} from './Camera';
 import {Projection} from './Projection';
@@ -18,7 +18,7 @@ export class PerspectiveCamera extends Camera {
    public projection: Projection;
    // 四元数
    public rotation: Vector3;
-   public rotationMatrix: SMatrix3x3;
+   public rotationMatrix: Matrix3x3;
    public quaternion: Quaternion;
    public quaternionX: Quaternion;
    public quaternionY: Quaternion;
@@ -34,7 +34,7 @@ export class PerspectiveCamera extends Camera {
       // 初始化变量
       this.projection = new PerspectiveProjection();
       this.rotation = new Vector3();
-      this.rotationMatrix = new SMatrix3x3();
+      this.rotationMatrix = new Matrix3x3();
       this.quaternion = new Quaternion();
       this.quaternionX = new Quaternion();
       this.quaternionY = new Quaternion();

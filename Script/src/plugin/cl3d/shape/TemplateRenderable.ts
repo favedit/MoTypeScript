@@ -3,6 +3,7 @@ import {AssertUtil} from '../../../runtime/common/AssertUtil';
 import {ProcessLoadService} from '../runtime/core/service/ProcessLoadService'
 import {ServiceUtil} from '../../../runtime/core/ServiceUtil';
 import {Renderable} from '../base/Renderable';
+import {TemplateRenderableResource} from '../resource/TemplateRenderableResource';
 import {PoolMaterialService} from '../pool/PoolMaterialService';
 import {PoolModelMesh} from '../pool/PoolModelMesh';
 import {PoolModel} from '../pool/PoolModel';
@@ -15,16 +16,21 @@ import {PoolModelConsole} from '../pool/PoolModelConsole';
 // @history 141231
 //==========================================================
 export class TemplateRenderable extends Renderable {
-   //    // @attribute
-   protected _ready = false;
-   protected _dataReady = false;
-   //    // @attribute
+   // 数据准备标志
+   public dataReady: boolean;
+   // 准备标志
+   public ready: boolean;
+   // 资源对象
+   public resource: TemplateRenderableResource;
+   // 缓冲模型
+   public poolModel: PoolModel;
+   // 缓冲网格
+   public poolMesh: PoolModelMesh;
+   // 材质加载器
+   public materialLoader;
    //    o._model            = null;
    //    o._materialCode     = null;
    //    o._materialResource = null;
-   public _resource;
-   public _model: PoolModel;
-   public materialLoader;
    // public _material;
 
    //==========================================================
@@ -43,10 +49,10 @@ export class TemplateRenderable extends Renderable {
    // @return Boolean 准备好
    //==========================================================
    public testReady() {
-      if (!this._ready) {
-         if (this._dataReady) {
+      if (!this.ready) {
+         if (this.dataReady) {
             // 测试模型加载状态
-            if (!this._model.testReady()) {
+            if (!this.poolModel.testReady()) {
                return false;
             }
             // 测试材质加载状态
@@ -57,42 +63,39 @@ export class TemplateRenderable extends Renderable {
                }
             }
             // 加载完成
-            this._ready = true;
+            this.ready = true;
          }
       }
-      return this._ready;
+      return this.ready;
    }
 
-   // //==========================================================
-   // // <T>测试是否可见。</T>
-   // //
-   // // @method
-   // // @return Boolean 是否可见
-   // //==========================================================
-   // MO.FE3dTemplateRenderable_testVisible = function FE3dTemplateRenderable_testVisible(p){
-   //    var o = this;
-   //    var result = false;
-   //    if(o._ready){
-   //       result = o.__base.FE3dMeshRenderable.testVisible.call(o);
-   //    }
-   //    return result;
-   // }
+   //==========================================================
+   // <T>测试是否可见。</T>
+   //
+   // @return 是否可见
+   //==========================================================
+   public testVisible(): boolean {
+      var result: boolean = false;
+      if (this.ready) {
+         result = super.testVisible();
+      }
+      return result;
+   }
 
-   // //==========================================================
-   // // <T>计算轮廓大小。</T>
-   // //
-   // // @method
-   // // @param flag:Boolean 标志
-   // // @return SOutline3 轮廓
-   // //==========================================================
-   // MO.FE3dTemplateRenderable_calculateOutline = function FE3dTemplateRenderable_calculateOutline(flag){
-   //    var o = this;
-   //    var outline = o._outline;
+   //==========================================================
+   // <T>计算轮廓大小。</T>
+   //
+   // @method
+   // @param flag:Boolean 标志
+   // @return SOutline3 轮廓
+   //==========================================================
+   // public calculateOutline(flag){
+   //    var outline = this._outline;
    //    if(outline.isEmpty() || flag){
-   //       var resource = o._resource
+   //       var resource = this._resource
    //       var meshResource = resource.mesh();
    //       var meshOutline = meshResource.outline();
-   //       outline.calculateFrom(meshOutline, o._currentMatrix);
+   //       outline.calculateFrom(meshOutline, this._currentMatrix);
    //    }
    //    return outline;
    // }
@@ -100,20 +103,20 @@ export class TemplateRenderable extends Renderable {
    //==========================================================
    // <T>加载资源。</T>
    //
-   // @method
-   // @param resource:FE3sTemplateRenderable 资源
+   // @param resource 资源
    //==========================================================
    public loadResource(resource) {
       // 设置资源
-      this._resource = resource;
+      this.resource = resource;
       //............................................................
       // 设置数据
+      //this.matrix.build(resource.po);
       //this._matrix.assign(resource.matrix());
       // 加载模型
       //var modelGuid = resource.modelGuid();
       var modelUrl = resource.modelUrl;
       //this._model = RConsole.find(FE3rModelConsole).loadByGuid(this, modelGuid);
-      this._model = ServiceUtil.find(PoolModelConsole).loadByUrl(this, modelUrl);
+      this.poolModel = ServiceUtil.find(PoolModelConsole).loadByUrl(this, modelUrl);
       // 设置资源
       //var materialGuid = resource.materialGuid();
       var materialUrl = resource.materialUrl;
@@ -123,7 +126,6 @@ export class TemplateRenderable extends Renderable {
          this.materialLoader = ServiceUtil.find(PoolMaterialService).loadLoaderByUrl(this, materialUrl);
          //RConsole.find(FProcessLoadConsole).push();
          //this._materialResource = material.resource();
-         //this.pushMaterial(material);
       }
       //..........................................................
       // 加载材质集合
@@ -144,7 +146,7 @@ export class TemplateRenderable extends Renderable {
       // if (!this._material) {
       //    this._material = this._materialReference = RClass.create(FE3dMaterial);
       // }
-      this._dataReady = true;
+      this.dataReady = true;
    }
 
    // //==========================================================
@@ -166,8 +168,7 @@ export class TemplateRenderable extends Renderable {
    // @param p:resource:FE3sTemplateRenderable 资源
    //==========================================================
    public load() {
-      //var display = this._display;
-      var resource = this._resource;
+      var resource = this.resource;
       //var modelResource = resource.model();
       //..........................................................
       // 加载材质
@@ -191,24 +192,21 @@ export class TemplateRenderable extends Renderable {
       //    display.loadAnimations(animationResources);
       // }
       //..........................................................
-      // 设置网格
+      // 加载网格
       //var meshResource = resource.meshCode;
       //var meshGuid = resource.meshGuid();
-      var model = this._model;
+      var model = this.poolModel;
       var meshCode = resource.meshCode;
-      var mesh = model.findMeshByCode(meshCode);
+      AssertUtil.debugNotEmpty(meshCode);
+      var mesh = this.poolMesh = model.findMeshByCode(meshCode);
       AssertUtil.debugNotNull(mesh);
+      // 设置网格
+      this.matrix.assign(mesh.matrix);
       this.vertexBuffers = mesh.vertexBuffers;
       this.indexBuffers = mesh.indexBuffers;
+      //..........................................................
+      // 设置材质
       this.material = this.materialLoader.material;
-      //var renderable = this._renderable = MO.Console.find(MO.FE3rModelConsole).findMesh(meshGuid);
-      //RAssert.debugNotNull(renderable);
-      // var vertexBuffers = renderable.vertexBuffers();
-      // var vertexBufferCount = vertexBuffers.count();
-      // for (var i = 0; i < vertexBufferCount; i++) {
-      //    var vertexBuffer = vertexBuffers.at(i);
-      //    this._vertexBuffers.set(vertexBuffer.code(), vertexBuffer);
-      // }
       // 设置蒙皮
       // var skins = renderable.skins();
       // if (skins) {
@@ -240,7 +238,7 @@ export class TemplateRenderable extends Renderable {
       //    }
       // }
       // 加载完成
-      this._ready = true;
+      this.ready = true;
    }
 
    //==========================================================

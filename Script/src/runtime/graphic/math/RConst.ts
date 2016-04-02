@@ -1,4 +1,4 @@
-import {SMatrix3d} from './SMatrix3d';
+import {Matrix3d} from './Matrix3d';
 
 //==========================================================
 // <T>数学函数管理类</T>
@@ -16,6 +16,6 @@ export class RConst {
    //==========================================================
    public static staticConstructor() {
       // 初始化属性
-      this.matrix = new SMatrix3d();
+      this.matrix = new Matrix3d();
    }
 }

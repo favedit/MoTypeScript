@@ -7,10 +7,10 @@ mo.runtime.common.RuntimeUtil.namespace(mo, 'mo');
 
 export class FPropertyChanged {
 
-   @Property("set_name", 'onFieldChanged1', DataTypeEnum.Float32)
+   @Property("set_name", DataTypeEnum.Float32, null, null, 'onFieldChanged1')
    public name = null;
 
-   @Property(null, 'onFieldChanged2')
+   @Property("set_name", DataTypeEnum.Float32, null, null, 'onFieldChanged2')
    public value: string = null;
 
    public onFieldChanged1(sender, event: AccessEvent) {

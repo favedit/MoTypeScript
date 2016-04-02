@@ -18,8 +18,10 @@ import {PoolIndexBuffer} from './PoolIndexBuffer';
 // @history 150106
 //==========================================================
 export class PoolModelMesh extends Renderable {
-   public ready = false;
-   public vertexCount = 0;
+   // 准备好
+   public ready: boolean;
+   // 顶点个数
+   public vertexCount: number;
    //public vertexBuffers: FDictionary<FE3rVertexBuffer> = null;
    //public indexBuffers: FObjects<FE3rIndexBuffer> = null;
    //    o._resourceMaterial = null;
@@ -34,18 +36,33 @@ export class PoolModelMesh extends Renderable {
    public constructor() {
       super();
       // 设置属性
-      //this.vertexBuffers = new FDictionary<FE3rVertexBuffer>();
-      //this.indexBuffers = new FObjects<FE3rIndexBuffer>();
+      this.vertexCount = 0;
    }
 
-   //==========================================================
-   // <T>查找顶点缓冲。</T>
-   //
-   // @method
-   // @param code:String 代码
-   //==========================================================
-   // public findVertexBuffer(code) {
-   //    return this.vertexBuffers.get(code);
+   // //==========================================================
+   // // <T>测试是否加载完成。</T>
+   // //
+   // // @method
+   // // @return 是否完成
+   // //==========================================================
+   // MO.FE3rModelMesh_testReady = function FE3rModelMesh_testReady(){
+   //    var o = this;
+   //    if(!o._ready){
+   //       // 测试所有位图加载好
+   //       var textures = o._textures;
+   //       if(textures){
+   //          var count = textures.count();
+   //          for(var i = 0; i < count; i++){
+   //             var texture = textures.at(i);
+   //             if(!texture.testReady()){
+   //                return false;
+   //             }
+   //          }
+   //       }
+   //       // 加载完成
+   //       o._ready = true;
+   //    }
+   //    return o._ready;
    // }
 
    //==========================================================
@@ -56,23 +73,23 @@ export class PoolModelMesh extends Renderable {
    public loadResource(resource: MeshResource) {
       var context = this.graphicContext;
       // 设置属性
-      this.code = resource.code;
       this.resource = resource;
-      //this.guid = resource.guid;
-      //this.code = resource.code;
+      this.guid = resource.guid;
+      this.code = resource.code;
+      this.label = resource.label;
+      this.matrix.build(resource.position, resource.rotation, resource.scale);
       // 创建顶点缓冲集合
       var streamResources = resource.vertexStreams;
       var streamCount = streamResources.count();
       for (var i = 0; i < streamCount; i++) {
          var streamResource: StreamResource = streamResources.at(i);
          var code = streamResource.code;
-         var dataCount = streamResource.dataCount;
+         var dataCount = this.vertexCount = streamResource.dataCount;
          var data = streamResource.data;
          // 创建顶点缓冲
          var vertexBuffer: PoolVertexBuffer = context.createVertexBuffer(PoolVertexBuffer);
          vertexBuffer.code = code;
          vertexBuffer.resource = streamResource;
-         // vertexBuffer.vertexCount = dataCount;
          var pixels = null;
          switch (code) {
             case "position":
@@ -124,42 +141,6 @@ export class PoolModelMesh extends Renderable {
       }
       this.ready = true;
    }
-
-   // //==========================================================
-   // // <T>测试是否加载完成。</T>
-   // //
-   // // @method
-   // // @return 是否完成
-   // //==========================================================
-   // MO.FE3rModelMesh_testReady = function FE3rModelMesh_testReady(){
-   //    var o = this;
-   //    if(!o._ready){
-   //       // 测试所有位图加载好
-   //       var textures = o._textures;
-   //       if(textures){
-   //          var count = textures.count();
-   //          for(var i = 0; i < count; i++){
-   //             var texture = textures.at(i);
-   //             if(!texture.testReady()){
-   //                return false;
-   //             }
-   //          }
-   //       }
-   //       // 加载完成
-   //       o._ready = true;
-   //    }
-   //    return o._ready;
-   // }
-
-   // //==========================================================
-   // // <T>获得唯一编号。</T>
-   // //
-   // // @method
-   // // @return String 唯一编号
-   // //==========================================================
-   // MO.FE3rModelMesh_guid = function FE3rModelMesh_guid(){
-   //    return this._resource.guid();
-   // }
 
    // //==========================================================
    // // <T>增加一个蒙皮。</T>

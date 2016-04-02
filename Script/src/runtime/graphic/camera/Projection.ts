@@ -1,5 +1,5 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {Size2} from '../../../runtime/common/math/Size2';
 import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 
@@ -11,7 +11,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 //==========================================================
 export class Projection extends ObjectBase {
    // 矩阵
-   public matrix: SMatrix3d;
+   public matrix: Matrix3d;
    // 尺寸
    public size: Size2;
    // 角度
@@ -32,7 +32,7 @@ export class Projection extends ObjectBase {
    //==========================================================
    public constructor() {
       super();
-      this.matrix = new SMatrix3d();
+      this.matrix = new Matrix3d();
       this.size = new Size2();
       this.angle = 60;
       this.fieldOfView = 0;

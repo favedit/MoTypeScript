@@ -10,7 +10,7 @@ import {MathUtil} from '../../common/math/MathUtil';
 // @author maocy
 // @version 141231
 //==========================================================
-export class SMatrix4x4 {
+export class Matrix4x4 {
    // 数据
    protected _data: Array<number> = new Array<number>(16);
 
@@ -531,10 +531,9 @@ export class SMatrix4x4 {
    //============================================================
    // <T>构建一个矩阵。</T>
    //
-   // @method
-   // @param t:translation:SPoint3 位移
-   // @param r:quaternion:SQuaternion 旋转
-   // @param s:scale:SVector3 缩放
+   // @param translation 位移
+   // @param quaternion 旋转
+   // @param scale 缩放
    //============================================================
    public build(t, r, s) {
       var d = this._data;

@@ -1,4 +1,4 @@
-import {SMatrix4x4} from './SMatrix4x4';
+import {Matrix4x4} from './Matrix4x4';
 import {FloatUtil} from '../../common/lang/FloatUtil';
 
 //==========================================================
@@ -8,7 +8,7 @@ import {FloatUtil} from '../../common/lang/FloatUtil';
 // @author maocy
 // @version 141231
 //==========================================================
-export class SMatrix3d extends SMatrix4x4 {
+export class Matrix3d extends Matrix4x4 {
    // @attribute
    protected _dirty = false;
    // @attribute
@@ -39,17 +39,16 @@ export class SMatrix3d extends SMatrix4x4 {
    // @return 是否单位化
    //============================================================
    public isIdentity() {
-      var o = this;
-      if ((o.tx != 0) || (o.ty != 0) || (o.tz != 0)) {
+      if ((this.tx != 0) || (this.ty != 0) || (this.tz != 0)) {
          return false;
       }
-      if ((o.rx != 0) || (o.ry != 0) || (o.rz != 0)) {
+      if ((this.rx != 0) || (this.ry != 0) || (this.rz != 0)) {
          return false;
       }
-      if ((o.sx != 1) || (o.sy != 1) || (o.sz != 1)) {
+      if ((this.sx != 1) || (this.sy != 1) || (this.sz != 1)) {
          return false;
       }
-      return o.isIdentityData();
+      return this.isIdentityData();
    }
 
    //============================================================
@@ -58,11 +57,10 @@ export class SMatrix3d extends SMatrix4x4 {
    // @method
    //============================================================
    public identity() {
-      var o = this;
-      o.tx = o.ty = o.tz = 0;
-      o.rx = o.ry = o.rz = 0;
-      o.sx = o.sy = o.sz = 1;
-      return o.identityData();
+      this.tx = this.ty = this.tz = 0;
+      this.rx = this.ry = this.rz = 0;
+      this.sx = this.sy = this.sz = 1;
+      return this.identityData();
    }
 
    //============================================================
@@ -74,11 +72,10 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param z:Float Z坐标
    //============================================================
    public setTranslate(x, y, z) {
-      var o = this;
-      o.tx = x;
-      o.ty = y;
-      o.tz = z;
-      o._dirty = true;
+      this.tx = x;
+      this.ty = y;
+      this.tz = z;
+      this._dirty = true;
    }
 
    //============================================================
@@ -90,11 +87,10 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param z:Float Z旋转
    //============================================================
    public setRotation(x, y, z) {
-      var o = this;
-      o.rx = x;
-      o.ry = y;
-      o.rz = z;
-      o._dirty = true;
+      this.rx = x;
+      this.ry = y;
+      this.rz = z;
+      this._dirty = true;
    }
 
    //============================================================
@@ -106,11 +102,10 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param z:Float Z缩放
    //============================================================
    public setScale(x, y, z) {
-      var o = this;
-      o.sx = x;
-      o.sy = y;
-      o.sz = z;
-      o._dirty = true;
+      this.sx = x;
+      this.sy = y;
+      this.sz = z;
+      this._dirty = true;
    }
 
    //============================================================
@@ -120,9 +115,8 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param p:value:Float 缩放
    //============================================================
    public setScaleAll(p) {
-      var o = this;
-      o.sz = o.sy = o.sx = p;
-      o._dirty = true;
+      this.sz = this.sy = this.sx = p;
+      this._dirty = true;
    }
 
    //============================================================
@@ -134,17 +128,16 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param ps:SVector3 缩放
    //============================================================
    public set(pt, pr, ps) {
-      var o = this;
-      o.tx = pt.x;
-      o.ty = pt.y;
-      o.tz = pt.z;
-      o.rx = pr.x;
-      o.ry = pr.y;
-      o.rz = pr.z;
-      o.sx = ps.x;
-      o.sy = ps.y;
-      o.sz = ps.z;
-      o._dirty = true;
+      this.tx = pt.x;
+      this.ty = pt.y;
+      this.tz = pt.z;
+      this.rx = pr.x;
+      this.ry = pr.y;
+      this.rz = pr.z;
+      this.sx = ps.x;
+      this.sy = ps.y;
+      this.sz = ps.z;
+      this._dirty = true;
    }
 
    //============================================================
@@ -161,18 +154,17 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param psy:Float Y缩放
    // @param psz:Float Z缩放
    //============================================================
-   public setAll(ptx, pty, ptz, prx, pry, prz, psx, psy, psz) {
-      var o = this;
-      o.tx = ptx;
-      o.ty = pty;
-      o.tz = ptz;
-      o.rx = prx;
-      o.ry = pry;
-      o.rz = prz;
-      o.sx = psx;
-      o.sy = psy;
-      o.sz = psz;
-      o._dirty = true;
+   public setAll(tx, ty, tz, rx, ry, rz, sx, sy, sz) {
+      this.tx = tx;
+      this.ty = ty;
+      this.tz = tz;
+      this.rx = rx;
+      this.ry = ry;
+      this.rz = rz;
+      this.sx = sx;
+      this.sy = sy;
+      this.sz = sz;
+      this._dirty = true;
    }
 
    //============================================================
@@ -193,17 +185,16 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param p:matrix:SMatrix3d 矩阵
    //============================================================
    public assign(p) {
-      var o = this;
-      o.tx = p.tx;
-      o.ty = p.ty;
-      o.tz = p.tz;
-      o.rx = p.rx;
-      o.ry = p.ry;
-      o.rz = p.rz;
-      o.sx = p.sx;
-      o.sy = p.sy;
-      o.sz = p.sz;
-      return o.assignData(p._data);
+      this.tx = p.tx;
+      this.ty = p.ty;
+      this.tz = p.tz;
+      this.rx = p.rx;
+      this.ry = p.ry;
+      this.rz = p.rz;
+      this.sx = p.sx;
+      this.sy = p.sy;
+      this.sz = p.sz;
+      return this.assignData(p._data);
    }
 
    //============================================================
@@ -213,17 +204,16 @@ export class SMatrix3d extends SMatrix4x4 {
    // @param p:matrix:SMatrix3d 矩阵
    //============================================================
    public attach(p) {
-      var o = this;
-      o.tx = p.tx;
-      o.ty = p.ty;
-      o.tz = p.tz;
-      o.rx = p.rx;
-      o.ry = p.ry;
-      o.rz = p.rz;
-      o.sx = p.sx;
-      o.sy = p.sy;
-      o.sz = p.sz;
-      return o.attachData(p._data);
+      this.tx = p.tx;
+      this.ty = p.ty;
+      this.tz = p.tz;
+      this.rx = p.rx;
+      this.ry = p.ry;
+      this.rz = p.rz;
+      this.sx = p.sx;
+      this.sy = p.sy;
+      this.sz = p.sz;
+      return this.attachData(p._data);
    }
 
    //============================================================
@@ -242,30 +232,29 @@ export class SMatrix3d extends SMatrix4x4 {
    // @method
    //============================================================
    public updateForce() {
-      var o = this;
-      var d = o._data;
-      var rsx = Math.sin(o.rx);
-      var rcx = Math.cos(o.rx);
-      var rsy = Math.sin(o.ry);
-      var rcy = Math.cos(o.ry);
-      var rsz = Math.sin(o.rz);
-      var rcz = Math.cos(o.rz);
-      d[0] = rcy * rcz * o.sx;
-      d[1] = rcy * rsz * o.sx;
-      d[2] = -rsy * o.sx;
-      d[3] = 0;
-      d[4] = (rsx * rsy * rcz - rcx * rsz) * o.sy;
-      d[5] = (rsx * rsy * rsz + rcx * rcz) * o.sy;
-      d[6] = rsx * rcy * o.sy;
-      d[7] = 0;
-      d[8] = (rcx * rsy * rcz + rsx * rsz) * o.sz;
-      d[9] = (rcx * rsy * rsz - rsx * rcz) * o.sz;
-      d[10] = rcx * rcy * o.sz;
-      d[11] = 0;
-      d[12] = o.tx;
-      d[13] = o.ty;
-      d[14] = o.tz;
-      d[15] = 1;
+      var data = this._data;
+      var rsx = Math.sin(this.rx);
+      var rcx = Math.cos(this.rx);
+      var rsy = Math.sin(this.ry);
+      var rcy = Math.cos(this.ry);
+      var rsz = Math.sin(this.rz);
+      var rcz = Math.cos(this.rz);
+      data[0] = rcy * rcz * this.sx;
+      data[1] = rcy * rsz * this.sx;
+      data[2] = -rsy * this.sx;
+      data[3] = 0;
+      data[4] = (rsx * rsy * rcz - rcx * rsz) * this.sy;
+      data[5] = (rsx * rsy * rsz + rcx * rcz) * this.sy;
+      data[6] = rsx * rcy * this.sy;
+      data[7] = 0;
+      data[8] = (rcx * rsy * rcz + rsx * rsz) * this.sz;
+      data[9] = (rcx * rsy * rsz - rsx * rcz) * this.sz;
+      data[10] = rcx * rcy * this.sz;
+      data[11] = 0;
+      data[12] = this.tx;
+      data[13] = this.ty;
+      data[14] = this.tz;
+      data[15] = 1;
    }
 
    //============================================================
@@ -274,10 +263,9 @@ export class SMatrix3d extends SMatrix4x4 {
    // @method
    //============================================================
    public update() {
-      var o = this;
-      if (o._dirty) {
-         o.updateForce();
-         o._dirty = false;
+      if (this._dirty) {
+         this.updateForce();
+         this._dirty = false;
       }
    }
 
@@ -287,17 +275,16 @@ export class SMatrix3d extends SMatrix4x4 {
    // @method
    //============================================================
    public merge(bm, am) {
-      var o = this;
-      o.tx = bm.tx + am.tx;
-      o.ty = bm.ty + am.ty;
-      o.tz = bm.tz + am.tz;
-      o.rx = bm.rx + am.rx;
-      o.ry = bm.ry + am.ry;
-      o.rz = bm.rz + am.rz;
-      o.sx = bm.sx * am.sx;
-      o.sy = bm.sy * am.sy;
-      o.sz = bm.sz * am.sz;
-      o.updateForce();
+      this.tx = bm.tx + am.tx;
+      this.ty = bm.ty + am.ty;
+      this.tz = bm.tz + am.tz;
+      this.rx = bm.rx + am.rx;
+      this.ry = bm.ry + am.ry;
+      this.rz = bm.rz + am.rz;
+      this.sx = bm.sx * am.sx;
+      this.sy = bm.sy * am.sy;
+      this.sz = bm.sz * am.sz;
+      this.updateForce();
    }
 
    /*
@@ -647,58 +634,52 @@ public parse(translation, scale, skew, perspective, quaternion){
    //==========================================================
    // <T>序列化数据到输出流里。</T>
    //
-   // @method
-   // @param p:input:FByteStream 数据流
+   // @param output 数据流
    //==========================================================
-   public serialize(p) {
-      var o = this;
-      p.writeFloat(o.tx);
-      p.writeFloat(o.ty);
-      p.writeFloat(o.tz);
-      p.writeFloat(o.rx);
-      p.writeFloat(o.ry);
-      p.writeFloat(o.rz);
-      p.writeFloat(o.sx);
-      p.writeFloat(o.sy);
-      p.writeFloat(o.sz);
+   public serialize(output) {
+      output.writeFloat(this.tx);
+      output.writeFloat(this.ty);
+      output.writeFloat(this.tz);
+      output.writeFloat(this.rx);
+      output.writeFloat(this.ry);
+      output.writeFloat(this.rz);
+      output.writeFloat(this.sx);
+      output.writeFloat(this.sy);
+      output.writeFloat(this.sz);
    }
 
    //==========================================================
    // <T>从输入流里反序列化数据。</T>
    //
-   // @method
-   // @param p:input:FByteStream 数据流
+   // @param input 数据流
    //==========================================================
-   public unserialize(p) {
-      var o = this;
-      o.tx = p.readFloat();
-      o.ty = p.readFloat();
-      o.tz = p.readFloat();
-      o.rx = p.readFloat();
-      o.ry = p.readFloat();
-      o.rz = p.readFloat();
-      o.sx = p.readFloat();
-      o.sy = p.readFloat();
-      o.sz = p.readFloat();
-      o.updateForce();
+   public unserialize(input) {
+      this.tx = input.readFloat();
+      this.ty = input.readFloat();
+      this.tz = input.readFloat();
+      this.rx = input.readFloat();
+      this.ry = input.readFloat();
+      this.rz = input.readFloat();
+      this.sx = input.readFloat();
+      this.sy = input.readFloat();
+      this.sz = input.readFloat();
+      this.updateForce();
    }
 
    //==========================================================
    // <T>数据内容存储到配置节点中。</T>
    //
-   // @method
-   // @param p:config:TXmlNode 配置节点
+   // @param config 配置节点
    //==========================================================
-   public saveConfig(p) {
-      var o = this;
-      p.set('tx', FloatUtil.format(o.tx));
-      p.set('ty', FloatUtil.format(o.ty));
-      p.set('tz', FloatUtil.format(o.tz));
-      p.set('rx', FloatUtil.format(o.rx));
-      p.set('ry', FloatUtil.format(o.ry));
-      p.set('rz', FloatUtil.format(o.rz));
-      p.set('sx', FloatUtil.format(o.sx));
-      p.set('sy', FloatUtil.format(o.sy));
-      p.set('sz', FloatUtil.format(o.sz));
+   public saveConfig(config) {
+      config.set('tx', FloatUtil.format(this.tx));
+      config.set('ty', FloatUtil.format(this.ty));
+      config.set('tz', FloatUtil.format(this.tz));
+      config.set('rx', FloatUtil.format(this.rx));
+      config.set('ry', FloatUtil.format(this.ry));
+      config.set('rz', FloatUtil.format(this.rz));
+      config.set('sx', FloatUtil.format(this.sx));
+      config.set('sy', FloatUtil.format(this.sy));
+      config.set('sz', FloatUtil.format(this.sz));
    }
 }

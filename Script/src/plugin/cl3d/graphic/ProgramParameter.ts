@@ -2,7 +2,7 @@ import {ObjectBase} from '../../../runtime/common/lang/ObjectBase';
 import {Fatal} from '../../../runtime/common/lang/Fatal';
 import {FloatUtil} from '../../../runtime/common/lang/FloatUtil';
 import {EnumUtil} from '../../../runtime/common/lang/EnumUtil';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {ParameterFormatEnum} from './ParameterFormatEnum';
 
 //==========================================================

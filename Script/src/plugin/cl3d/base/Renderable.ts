@@ -4,7 +4,7 @@ import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
 import {Outline3d} from '../../../runtime/common/math/Outline3d';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {IRenderable} from '../../../runtime/graphic/IRenderable';
 import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 import {Material} from '../../../runtime/graphic/material/Material';
@@ -35,7 +35,7 @@ export class Renderable extends Drawable implements IRenderable {
    // 资源
    public resource: any;
    // 计算矩阵
-   public calculateMatrix: SMatrix3d;
+   public calculateMatrix: Matrix3d;
    // 顶点数量
    public vertexCount: number;
    // 顶点缓冲集合
@@ -71,7 +71,7 @@ export class Renderable extends Drawable implements IRenderable {
       this.id = ObjectIdUtil.nextId('renderable');
       this.optionSelect = true;
       this.outline = new Outline3d();
-      this.calculateMatrix = new SMatrix3d();
+      this.calculateMatrix = new Matrix3d();
       this.vertexCount = 0;
       this.materialReference = this;
       this._infos = new Dictionary<RenderableInfo>();

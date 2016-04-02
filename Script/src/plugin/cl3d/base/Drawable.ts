@@ -1,6 +1,6 @@
 import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
 import {ObjectIdUtil} from '../../../runtime/common/lang/ObjectIdUtil';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {IDrawable} from '../../../runtime/graphic/IDrawable';
 import {GraphicObject} from '../../../runtime/graphic/core/GraphicObject';
@@ -28,9 +28,9 @@ export class Drawable extends GraphicObject implements IDrawable {
    // 脏标志
    public dirty: boolean;
    // 矩阵
-   public matrix: SMatrix3d;
+   public matrix: Matrix3d;
    // 当前矩阵（空间计算后）
-   public currentMatrix: SMatrix3d;
+   public currentMatrix: Matrix3d;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -43,8 +43,8 @@ export class Drawable extends GraphicObject implements IDrawable {
       this.guid = MathUtil.makeGuid();
       this.visible = true;
       this.dirty = true;
-      this.matrix = new SMatrix3d();
-      this.currentMatrix = new SMatrix3d();
+      this.matrix = new Matrix3d();
+      this.currentMatrix = new Matrix3d();
    }
 
    //==========================================================

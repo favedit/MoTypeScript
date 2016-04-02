@@ -250,7 +250,7 @@ export class Value3 {
    public unserialize(input) {
       this.x = input.readFloat();
       this.y = input.readFloat();
-      this.y = input.readFloat();
+      this.z = input.readFloat();
    }
 
    //==========================================================

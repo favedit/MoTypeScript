@@ -9,7 +9,7 @@ import {Renderable} from '../base/Renderable';
 //==========================================================
 export class MeshRenderable extends Renderable {
    //    // @attribute
-   public _renderable = null;
+   //public _renderable = null;
    //    o._activeTrack     = null;
 
    // //==========================================================

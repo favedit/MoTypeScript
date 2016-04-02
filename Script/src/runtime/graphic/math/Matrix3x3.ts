@@ -10,7 +10,7 @@ import {MathUtil} from '../../common/math/MathUtil';
 // @author maocy
 // @version 150207
 //==========================================================
-export class SMatrix3x3 {
+export class Matrix3x3 {
    // 数据
    public _data = new Array(9);
 

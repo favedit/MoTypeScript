@@ -3,7 +3,7 @@ import {ObjectUtil} from '../../../../runtime/common/lang/ObjectUtil';
 import {Quaternion} from '../../../../runtime/common/math/Quaternion';
 import {Vector3} from '../../../../runtime/common/math/Vector3';
 import {Point3} from '../../../../runtime/common/math/Point3';
-import {SMatrix3d} from '../../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../../runtime/graphic/math/Matrix3d';
 
 //==========================================================
 // <T>渲染跟踪球。</T>
@@ -14,7 +14,7 @@ import {SMatrix3d} from '../../../../runtime/graphic/math/SMatrix3d';
 export class FTrackBall extends ObjectBase {
    // @attribute
    //_matrix = MO.Class.register(o, new MO.AGetter('_matrix'));
-   _matrix = new SMatrix3d();
+   _matrix = new Matrix3d();
    // @attribute
    //_rotation = MO.Class.register(o, new MO.AGetter('_rotation'));
    _rotation = new Quaternion();

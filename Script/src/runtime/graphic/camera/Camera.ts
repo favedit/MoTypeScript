@@ -7,7 +7,7 @@ import {Vector3} from '../../../runtime/common/math/Vector3';
 import {SFrustum} from '../../../runtime/graphic/math/SFrustum';
 import {RConst} from '../../../runtime/graphic/math/RConst';
 import {SFrustumPlanes} from '../../../runtime/graphic/math/SFrustumPlanes';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {MathUtil} from '../../../runtime/common/math/MathUtil';
 import {Viewport} from './Viewport';
 
@@ -19,7 +19,7 @@ import {Viewport} from './Viewport';
 //==========================================================
 export class Camera extends ObjectBase {
    // @attribute 变换矩阵
-   public matrix: SMatrix3d;
+   public matrix: Matrix3d;
    // @attribute 相机位置
    public position: Point3;
    public target: Point3;
@@ -50,7 +50,7 @@ export class Camera extends ObjectBase {
    public constructor() {
       super()
       // 初始化变量
-      this.matrix = new SMatrix3d();
+      this.matrix = new Matrix3d();
       this.position = new Point3();
       this.target = new Point3();
       this.direction = new Vector3();

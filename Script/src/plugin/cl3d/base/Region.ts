@@ -8,7 +8,7 @@ import {Vector3} from '../../../runtime/common/math/Vector3';
 import {Vector4} from '../../../runtime/common/math/Vector4';
 import {Color4} from '../../../runtime/common/math/Color4';
 import {IProcessContext} from '../../../runtime/graphic/IProcessContext';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {TechniquePass} from '../technique/TechniquePass';
 import {Technique} from '../technique/Technique';
 import {RegionParameterEnum} from './RegionParameterEnum';
@@ -48,21 +48,21 @@ export class Region extends ObjectBase implements IProcessContext {
    // 相机方向
    public cameraDirection: Vector3;
    // 相机视角矩阵
-   public cameraViewMatrix: SMatrix3d;
+   public cameraViewMatrix: Matrix3d;
    // 相机投影矩阵
-   public cameraProjectionMatrix: SMatrix3d;
+   public cameraProjectionMatrix: Matrix3d;
    // 相机视角投影矩阵
-   public cameraViewProjectionMatrix: SMatrix3d;
+   public cameraViewProjectionMatrix: Matrix3d;
    // 光源位置
    public lightPosition: Point3;
    // 光源方向
    public lightDirection: Vector3;
    // 光源视角矩阵
-   public lightViewMatrix: SMatrix3d;
+   public lightViewMatrix: Matrix3d;
    // 光源投影矩阵
-   public lightProjectionMatrix: SMatrix3d;
+   public lightProjectionMatrix: Matrix3d;
    // 光源视角投影位置
-   public lightViewProjectionMatrix: SMatrix3d;
+   public lightViewProjectionMatrix: Matrix3d;
    // 选择位置
    public selectPosition: Point2;
    // 最后帧
@@ -89,14 +89,14 @@ export class Region extends ObjectBase implements IProcessContext {
       this.allRenderables = new Objects<Renderable>();
       this.cameraPosition = new Point3();
       this.cameraDirection = new Vector3();
-      this.cameraViewMatrix = new SMatrix3d();
-      this.cameraProjectionMatrix = new SMatrix3d();
-      this.cameraViewProjectionMatrix = new SMatrix3d();
+      this.cameraViewMatrix = new Matrix3d();
+      this.cameraProjectionMatrix = new Matrix3d();
+      this.cameraViewProjectionMatrix = new Matrix3d();
       this.lightPosition = new Point3();
       this.lightDirection = new Vector3();
-      this.lightViewMatrix = new SMatrix3d();
-      this.lightProjectionMatrix = new SMatrix3d();
-      this.lightViewProjectionMatrix = new SMatrix3d();
+      this.lightViewMatrix = new Matrix3d();
+      this.lightProjectionMatrix = new Matrix3d();
+      this.lightViewProjectionMatrix = new Matrix3d();
       this.selectPosition = new Point2();
       this.finish = false;
       //this.ratioMatrix = new SMatrix3d();

@@ -98,8 +98,7 @@ export class PoolModel extends PoolComponent {
    //==========================================================
    // <T>加载模型资源。</T>
    //
-   // @method
-   // @param resource:FE3sModel 模型资源
+   // @param resource 模型资源
    //==========================================================
    public loadResource(resource: ModelResource) {
       //var modelConsole = MO.Console.find(MO.FE3rModelConsole);

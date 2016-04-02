@@ -10,7 +10,7 @@ import {Vector4} from '../../../runtime/common/math/Vector4';
 import {Color4} from '../../../runtime/common/math/Color4';
 import {ClassUtil} from '../../../runtime/common/reflect/ClassUtil';
 import {AssertUtil} from '../../../runtime/common/AssertUtil';
-import {SMatrix3d} from '../../../runtime/graphic/math/SMatrix3d';
+import {Matrix3d} from '../../../runtime/graphic/math/Matrix3d';
 import {ParameterFormatEnum} from './ParameterFormatEnum';
 import {ShaderEnum} from './ShaderEnum';
 import {ProgramAttribute} from './ProgramAttribute';
@@ -219,7 +219,7 @@ export abstract class Program extends Content {
       // 转换数据
       var data = null;
       var clazz = value.constructor;
-      if ((clazz == Float32Array) || (clazz == SMatrix3d)) {// || (t == sk.common.math.SPerspectiveMatrix3d)) {
+      if ((clazz == Float32Array) || (clazz == Matrix3d)) {// || (t == sk.common.math.SPerspectiveMatrix3d)) {
          data = value;
       } else if (clazz == Color4) {
          data = TypeArrayUtil.float4();
