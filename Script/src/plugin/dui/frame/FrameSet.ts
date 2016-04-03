@@ -16,6 +16,7 @@ import {FrameSpliter} from './FrameSpliter';
 export class FrameSet extends Container {
    // 方向类型
    public directionCd: DirectionEnum;
+   protected _hPanel: HTMLTableElement;
    public _hLine: HTMLTableRowElement;
 
    //==========================================================
@@ -78,14 +79,14 @@ export class FrameSet extends Container {
    // @param frame:FDuiFrame 页面
    //==========================================================
    public appendFrame(page: FramePage) {
-      var context = this.context;
+      var context = this.renderContext;
       if (this.directionCd == DirectionEnum.Horizontal) {
          // 横向排布
          var hLine = this._hLine;
          if (!hLine) {
             hLine = this._hLine = context.appendTableRow(this._hPanel);
          }
-         page.setPanel(hLine);
+         //page.setPanel(hLine);
          // 设置宽度
          //var sizeWidth = page._size.width;
          //if (sizeWidth) {
@@ -94,7 +95,7 @@ export class FrameSet extends Container {
       } else if (this.directionCd == DirectionEnum.Vertical) {
          // 纵向排布
          var hLine = context.appendTableRow(this._hPanel);
-         page.setPanel(hLine);
+         //page.setPanel(hLine);
          // 设置高度
          //var sizeHeight = page._size.height;
          //if (sizeHeight) {
@@ -113,7 +114,7 @@ export class FrameSet extends Container {
    //==========================================================
    public appendSpliter(spliter: FrameSpliter) {
       var hSpliterPanel = (spliter as any)._hPanel;
-      var context = this.context;
+      var context = this.renderContext;
       if (this.directionCd == DirectionEnum.Horizontal) {
          // 横向排布
          this._hLine.appendChild(hSpliterPanel);

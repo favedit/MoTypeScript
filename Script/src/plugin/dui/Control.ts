@@ -1,10 +1,12 @@
-// import {Fatal} from '../common/lang/Fatal';
+import {Fatal} from './runtime/common/lang/Fatal';
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {AssertUtil} from './runtime/common/AssertUtil';
 import {ServiceUtil} from './runtime/core/ServiceUtil';
 import {EventService} from './runtime/ui/service/EventService';
+import {EventEnum} from './runtime/ui/EventEnum';
 import {DockEnum} from './runtime/ui/DockEnum';
 import {AnchorEnum} from './runtime/ui/AnchorEnum';
+import {PanelEnum} from './runtime/ui/PanelEnum';
 import {BuilderUtil} from './runtime/ui/utility/BuilderUtil';
 import {RenderContext} from './RenderContext';
 import {Component} from './Component';
@@ -31,7 +33,7 @@ import {Render} from './Render';
 //==========================================================
 export class Control extends Component {
    // 渲染器
-   public context: RenderContext;
+   public renderContext: RenderContext;
    //..........................................................
    // 是否可见
    public visible: boolean;
@@ -76,9 +78,9 @@ export class Control extends Component {
    // //o._events      = null;
    //..........................................................
    // @html 父容器
-   protected _hParent;
+   protected _hParent: HTMLElement;
    // @html 面板容器
-   protected _hPanel;
+   protected _hPanel: any;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -96,13 +98,23 @@ export class Control extends Component {
    }
 
    //==========================================================
+   // <T>设置属性集合。</T>
+   //
+   // @params name 属性名称
+   // @params value 属性内容
+   //==========================================================
+   // public setAttribute(name: string, value: string) {
+   // }
+   
+   //==========================================================
    // <T>创建一个控件容器。</T>
    // <P>默认为DIV页面元素。</P>
    //
    // @param context 环境信息
    //==========================================================
    public onBuildPanel(context: RenderContext) {
-      this._hPanel = context.createDiv(this.styleName('Panel'));
+      this._hPanel = context.createFragment();
+      //this._hPanel = context.createDiv(this.styleName('Panel'));
    }
 
    //==========================================================
@@ -111,6 +123,12 @@ export class Control extends Component {
    // @param context 参数集合
    //==========================================================
    public onBuild(context: RenderContext) {
+      if(this['onclick']){
+         var parentComponent = context.parentComponent;
+         var onclick = this['onclick'];
+         var clickEvent = parentComponent[onclick];
+         //debugger;
+      }
       // 建立控件容器
       this.onBuildPanel(context);
       // // 设置可见性
@@ -118,11 +136,11 @@ export class Control extends Component {
       //    this.setVisible(this._visible);
       // }
       // // 设置容器样式
-      // var hPanel = this._hPanel;
+      var hPanel = this._hPanel;
       // HtmlUtil.linkSet(hPanel, 'control', this);
       // // 关联容器事件
-      // this.attachEvent('onEnter', hPanel);
-      // this.attachEvent('onLeave', hPanel);
+      this.attachEvent(hPanel, EventEnum.Enter, this.onEnter);
+      this.attachEvent(hPanel, EventEnum.Leave, this.onLeave);
       // this.attachEvent('onMouseOver', h);
       // this.attachEvent('onMouseOut', h);
       // this.attachEvent('onMouseDown', h);
@@ -265,14 +283,50 @@ export class Control extends Component {
    // }
 
    //==========================================================
-   // <T>设置控件的页面父容器。</T>
+   // <T>根据底板类型得到相应的页面元素。</T>
    //
+   // @param panelCd 底板类型
+   // @return 页面元素
+   //==========================================================
+   public getPanel(panelCd: PanelEnum): HTMLElement {
+      switch (panelCd) {
+         case PanelEnum.Parent:
+            return this._hParent;
+         case PanelEnum.Panel:
+         case PanelEnum.Container:
+         case PanelEnum.Size:
+            return this._hPanel;
+         default:
+            throw new Fatal(this, 'Unknown panel type.');
+      }
+   }
+
+   //==========================================================
+   // <T>根据类型设置控件的页面元素。</T>
+   //
+   // @param panelCd 底板类型
    // @param hPanel 页面元素
    //==========================================================
-   public setPanel(hPanel: HTMLElement) {
-      AssertUtil.debugNotNull(hPanel);
-      this._hParent = hPanel;
-      hPanel.appendChild(this._hPanel);
+   public setPanel(panelCd: PanelEnum, hPanel: HTMLElement) {
+      switch (panelCd) {
+         case PanelEnum.Parent:
+            this._hParent = hPanel;
+            break;
+         default:
+            throw new Fatal(this, 'Unknown panel type.');
+      }
+   }
+
+   //==========================================================
+   // <T>设置控件的父页面元素。</T>
+   //
+   // @param hParent 父页面元素
+   //==========================================================
+   public setParentPanel(hParent: HTMLElement) {
+      this._hParent = hParent;
+      if (hParent) {
+         hParent.appendChild(this._hPanel);
+      }
    }
 
    //==========================================================
@@ -294,11 +348,36 @@ export class Control extends Component {
    }
 
    //==========================================================
+   // <T>当该控件获得热点时的处理</T>
+   //
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onEnter(sender, event) {
+      // MO.Console.find(MO.FDuiFocusConsole).enter(this);
+      // if (this._hint) {
+      //    MO.RWindow.setStatus(this._hint);
+      // }
+   }
+
+   //==========================================================
+   // <T>当该控件失去热点时的处理</T>
+   //
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onLeave(sender, event) {
+      // MO.Console.find(MO.FDuiFocusConsole).leave(this);
+      // if (this._hint) {
+      //    MO.RWindow.setStatus();
+      // }
+   }
+
+   //==========================================================
    // <T>构建处理。</T>
    //
    // @param context 环境
    //==========================================================
-   public setup(context: RenderContext) {
+   public render(): any {
+      return null;
    }
 
    //==========================================================
@@ -310,36 +389,11 @@ export class Control extends Component {
       AssertUtil.debugNotNull(context);
       AssertUtil.debugFalse(this._statusBuild);
       // 构建处理
+      this.renderContext = context;
       this.onBuild(context);
       // 设置状态
       this._statusBuild = true;
    }
-
-   // //==========================================================
-   // // <T>当该控件获得热点时的处理</T>
-   // //
-   // // @method
-   // // @param e:event:TEvent 事件对象
-   // //==========================================================
-   // public onEnter(e) {
-   //    // MO.Console.find(MO.FDuiFocusConsole).enter(this);
-   //    // if (this._hint) {
-   //    //    MO.RWindow.setStatus(this._hint);
-   //    // }
-   // }
-
-   // //==========================================================
-   // // <T>当该控件失去热点时的处理</T>
-   // //
-   // // @method
-   // // @param e:event:TEvent 事件对象
-   // //==========================================================
-   // public onLeave(e) {
-   //    // MO.Console.find(MO.FDuiFocusConsole).leave(this);
-   //    // if (this._hint) {
-   //    //    MO.RWindow.setStatus();
-   //    // }
-   // }
 
    // //==========================================================
    // // <T>控件模式变更处理。</T>
@@ -381,25 +435,6 @@ export class Control extends Component {
    //       }
    //    }
    //    return r;
-   // }
-
-   // //==========================================================
-   // // <T>根据底板类型得到相应的页面元素。</T>
-   // //
-   // // @method
-   // // @param p:value:EPanel 底板类型
-   // // @return HtmlTag 页面元素
-   // //==========================================================
-   // public panel(p) {
-   //    var o = this;
-   //    switch (p) {
-   //       case MO.EPanel.Parent:
-   //          return o._hParent;
-   //       case MO.EPanel.Container:
-   //       case MO.EPanel.Size:
-   //          return o._hPanel;
-   //    }
-   //    return null;
    // }
 
    // //==========================================================

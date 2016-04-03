@@ -11,6 +11,8 @@ import {Fatal} from '../../common/lang/Fatal';
 // import {RMemory} from '../../common/MemoryUtil';
 import {Service} from '../../core/Service';
 import {EventEnum} from '../EventEnum';
+import {MouseEnterEvent} from '../event/MouseEnterEvent';
+import {MouseLeaveEvent} from '../event/MouseLeaveEvent';
 import {MouseEvent} from '../event/MouseEvent';
 //import {FListenerThread} from './FListenerThread';
 //import {FThreadConsole} from './FThreadConsole';
@@ -82,6 +84,10 @@ export class EventService extends Service {
    //==========================================================
    public alloc(eventCd: String): any {
       switch (eventCd) {
+         case EventEnum.Enter:
+            return new MouseEnterEvent();
+         case EventEnum.Leave:
+            return new MouseLeaveEvent();
          case EventEnum.MouseDown:
             return new MouseEvent();
          case EventEnum.MouseMove:
@@ -109,7 +115,12 @@ export class EventService extends Service {
    //==========================================================
    public attachEvent(control: any, hTag: any, eventCd: string, method: Function = null, capture: boolean = false) {
       var event: any = this.alloc(eventCd);
-      var eventName = 'on' + eventCd.toLowerCase();
+      var eventName = null;
+      if (event.handle) {
+         eventName = 'on' + event.handle;
+      } else {
+         eventName = 'on' + eventCd.toLowerCase();
+      }
       hTag[eventName] = (hEvent) => {
          event.attachEvent(hEvent);
          // 注册调用

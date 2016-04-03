@@ -851,27 +851,27 @@ export class StringUtil {
    //==========================================================
    // <T>替换全部指定字符。</T>
    //
-   // @method
-   // @param v:value:String 字符串
-   // @param s:sourceChar:String 源字符
-   // @param t:targetChar:String 目标字符
-   // @return String 字符串
+   // @param value 字符串
+   // @param source 源字符
+   // @param target 目标字符
+   // @return 字符串
    //==========================================================
-   public static replaceChar(v, s, t) {
-      if (v != null) {
-         var c = v.length;
-         var r = new Array();
-         for (var n = 0; n < c; n++) {
-            var a = v.charAt(n);
-            if (a == s) {
-               r[r.length] = t;
+   public static replaceChar(value, source, target) {
+      var result = null;
+      if (value != null) {
+         var count = value.length;
+         var chars = new Array();
+         for (var n = 0; n < count; n++) {
+            var char = value.charAt(n);
+            if (char == source) {
+               chars[chars.length] = target;
             } else {
-               r[r.length] = a;
+               chars[chars.length] = char;
             }
          }
-         return r.join('');
+         result = chars.join('');
       }
-      return v;
+      return result;
    }
 
    //==========================================================

@@ -3,6 +3,8 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <TITLE>Test - Graphic</TITLE>
+<LINK type="text/css" media="all" rel="stylesheet" href='../../../res/css/control.css'/>
+<LINK type="text/css" media="all" rel="stylesheet" href='../../../res/css/lang_cn.css'/>
 <SCRIPT type="text/javascript" src="../../../library/require.js"></script>
 <SCRIPT type="text/javascript" src="../../../build/mo.js"></script>
 <SCRIPT>
@@ -30,6 +32,7 @@ require(['test/ui/form'], function (space){
    var tester = new space.FormTest();
    tester.setup(window);
    tester.setEnvironment('resource', '/asset/demo');
+   tester.setEnvironment('resource.icon', '/sk/res/icon');
    // 加载模板
    //var template = test.load('${resource}/template/' + info[0] + '.template');
    //template.matrix.setScaleAll(info[1]);

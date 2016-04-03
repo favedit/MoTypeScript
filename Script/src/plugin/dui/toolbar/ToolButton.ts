@@ -29,6 +29,8 @@ export class ToolButton extends Control {
    public iconDisable: string;
    public hotkey: string
    public action: string
+   // 是否禁止
+   public disabled: boolean;
    //    //..........................................................
    //    // @style
    //    o._stylePanel = MO.Class.register(o, new MO.AStyle('_stylePanel'));
@@ -39,13 +41,11 @@ export class ToolButton extends Control {
    //    o._styleIconPanel = MO.Class.register(o, new MO.AStyle('_styleIconPanel'));
    //    o._styleSpacePanel = MO.Class.register(o, new MO.AStyle('_styleSpacePanel'));
    //    o._styleLabelPanel = MO.Class.register(o, new MO.AStyle('_styleLabelPanel'));
-   //    //..........................................................
-   //    // @attribute
-   //    o._disabled = false;
    //    // @attribute
    //    o._listenersClick = MO.Class.register(o, new MO.AListener('_listenersClick', MO.EEvent.Click));
    //    //..........................................................
    //    // @html
+   //public _hParentLine;
    public _hForm;
    public _hIconPanel;
    public _hIcon;
@@ -77,7 +77,7 @@ export class ToolButton extends Control {
       // 建立图标
       if (this.icon) {
          var hIconPanel = this._hIconPanel = context.appendTableCell(hLine, this.styleName('IconPanel'));
-         this._hIcon = context.appendIcon(null, this.icon);
+         this._hIcon = context.appendIcon(hIconPanel, null, this.icon);
       }
       // 建立分割
       if (this.icon && this.label) {
@@ -111,48 +111,47 @@ export class ToolButton extends Control {
       this.onBuildButton(context);
    }
 
-   // //==========================================================
-   // // <T>鼠标进入处理。</T>
-   // //
-   // // @method
-   // // @param event:SEvent 事件信息
-   // //==========================================================
-   // MO.FDuiToolButton_onEnter = function FDuiToolButton_onEnter(e) {
-   //    var o = this;
-   //    //if(o._hotkey || o.hint){
-   //    //   if(!o.hintBox){
-   //    //      o.hintBox = RConsole.find(FHintConsole).find();
-   //    //   }
-   //    //   o.hintBox.linkControl(o);
-   //    //   o.active = new TActive(o, o.onShowHint);
-   //    //   o.active.count = 300;
-   //    //   RConsole.find(FActiveConsole).push(o.active);
-   //    //   //o.hintBox.show();
-   //    //}
-   //    if (!o._disabled) {
-   //       // 消息提示
-   //       o._hForm.className = o.styleName('Hover');
-   //       //o._hButton.background = o.styleIconPath('ButtonHover', FDuiToolButton);
-   //    }
-   // }
+   //==========================================================
+   // <T>鼠标进入处理。</T>
+   //
+   // @param sender 发送信息
+   // @param event 事件信息
+   //==========================================================
+   public onEnter(sender, event) {
+      //if(o._hotkey || o.hint){
+      //   if(!o.hintBox){
+      //      o.hintBox = RConsole.find(FHintConsole).find();
+      //   }
+      //   o.hintBox.linkControl(o);
+      //   o.active = new TActive(o, o.onShowHint);
+      //   o.active.count = 300;
+      //   RConsole.find(FActiveConsole).push(o.active);
+      //   //o.hintBox.show();
+      //}
+      // 激活热点状态
+      if (!this.disabled) {
+         this._hForm.className = this.styleName('Hover');
+         //o._hButton.background = o.styleIconPath('ButtonHover', FDuiToolButton);
+      }
+   }
 
-   // //==========================================================
-   // // <T>鼠标离开处理。</T>
-   // //
-   // // @method
-   // // @param event:SEvent 事件信息
-   // //==========================================================
-   // MO.FDuiToolButton_onLeave = function FDuiToolButton_onLeave(e) {
-   //    var o = this;
-   //    //if(o.hintBox){
-   //    //   o.hintBox.hide();
-   //    //   o.hintBox = null;
-   //    //}
-   //    if (!o._disabled) {
-   //       o._hForm.className = o.styleName('Normal');
-   //       //o._hButton.background = o.styleIconPath('Button', FDuiToolButton);
-   //    }
-   // }
+   //==========================================================
+   // <T>鼠标离开处理。</T>
+   //
+   // @method
+   // @param event:SEvent 事件信息
+   //==========================================================
+   public onLeave(sender, event) {
+      //if(o.hintBox){
+      //   o.hintBox.hide();
+      //   o.hintBox = null;
+      //}
+      // 取消热点状态
+      if (!this.disabled) {
+         this._hForm.className = this.styleName('Normal');
+         //o._hButton.background = o.styleIconPath('Button', FDuiToolButton);
+      }
+   }
 
    // //==========================================================
    // // <T>鼠标按下处理。</T>

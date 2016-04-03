@@ -1,6 +1,9 @@
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {AlignEnum} from './runtime/ui/AlignEnum';
 import {DirectionEnum} from './runtime/ui/DirectionEnum';
+import {PanelEnum} from './runtime/ui/PanelEnum';
 import {RenderContext} from '../RenderContext';
+import {Control} from '../Control';
 import {Container} from '../Container';
 import {ToolButton} from './ToolButton';
 
@@ -30,7 +33,8 @@ export class ToolBar extends Container {
    //    o._styleButtonPanel = MO.Class.register(o, new MO.AStyle('_styleButtonPanel'));
    //    //..........................................................
    // 横向容器
-   public _hLine: HTMLTableRowElement;
+   protected _hPanel: HTMLTableElement;
+   protected _hLine: HTMLTableRowElement;
    //    //..........................................................
    //    // @event
    //    o.onBuildPanel = MO.FDuiToolBar_onBuildPanel;
@@ -47,8 +51,6 @@ export class ToolBar extends Container {
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
@@ -66,16 +68,17 @@ export class ToolBar extends Container {
    }
 
    //==========================================================
-   // <T>追加一个子控件。</T>
+   // <T>追加一个显示控件。</T>
    //
-   // @param control 子控件
+   // @param control 控件
    //==========================================================
-   public appendChild(control) {
-      var context = this.context;
+   public appendDisplay(control: Control) {
+      var context = this.renderContext;
       // 父处理
-      super.appendChild(control);
+      // super.appendDisplay(control);
       // 按键处理
       if (control instanceof ToolButton) {
+         var toolButton = <ToolButton>control;
          var hPanel = this._hPanel;
          var hLine = this._hLine;
          // 横向排布
@@ -90,40 +93,34 @@ export class ToolBar extends Container {
          }
          // 建立按键
          var hCell = context.appendTableCell(hLine, this.styleName('ButtonPanel'));
-         //hc._hParentLine = hl;
-         control._hPanelCell = hCell;
-         control.setPanel(hCell);
+         toolButton.setParentPanel(hCell);
       }
    }
 
-   // //==========================================================
-   // // <T>移除一个子控件。</T>
-   // //
-   // // @method
-   // // @param p:control:FDuiControl 子控件
-   // //==========================================================
-   // MO.FDuiToolBar_removeChild = function FDuiToolBar_removeChild(p) {
-   //    var o = this;
-   //    // 按键处理
-   //    if (MO.Class.isClass(p, MO.MUiToolButton)) {
-   //       var hp = p._hParent;
-   //       var hl = p._hParentLine;
-   //       hl.removeChild(hp);
-   //       p._hParent = null;
-   //       p._hParentLine = null;
-   //    }
-   //    // 父处理
-   //    o.__base.FDuiContainer.removeChild.call(o, p);
-   // }
+   //==========================================================
+   // <T>移除一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public removeDisplay(control: Control) {
+      // 按键处理
+      if (control instanceof ToolButton) {
+         var toolButton = <ToolButton>control;
+         var hParent = toolButton.getPanel(PanelEnum.Parent);
+         hParent.parentElement.removeChild(hParent);
+         toolButton.setParentPanel(null);
+      }
+      // 父处理
+      super.removeDisplay(control);
+   }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiToolBar_dispose = function FDuiToolBar_dispose() {
-   //    var o = this;
-   //    o._hLine = MO.Window.Html.free(o._hLine);
-   //    o.__base.FDuiContainer.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //
+   // @method
+   //==========================================================
+   public dispose() {
+      this._hLine = HtmlUtil.dispose(this._hLine);
+      super.dispose();
+   }
 }

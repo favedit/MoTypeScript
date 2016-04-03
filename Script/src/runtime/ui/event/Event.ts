@@ -8,6 +8,8 @@ import {Event as BaseEvent} from '../../common/lang/Event';
 // @version 150113
 //==========================================================
 export class Event extends BaseEvent {
+   // 句柄
+   public handle: string;
    // 来源
    public source: any;
    // 页面事件

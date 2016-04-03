@@ -40,15 +40,18 @@ export function Property(
          var oldValue: any = this[propertyName];
          if (dataChanged) {
             // 执行注册函数
-            var event: AccessEvent = MemoryUtil.alloc(AccessEvent);
-            event.field = name;
-            event.oldValue = oldValue;
-            event.value = value;
-            event.result = true;
-            this[dataChanged].call(this, this, event);
-            result = event.result;
-            resultValue = event.value;
-            MemoryUtil.free(event);
+            var invoker = this[dataChanged];
+            if (invoker) {
+               var event: AccessEvent = MemoryUtil.alloc(AccessEvent);
+               event.field = name;
+               event.oldValue = oldValue;
+               event.value = value;
+               event.result = true;
+               this[dataChanged].call(this, this, event);
+               result = event.result;
+               resultValue = event.value;
+               MemoryUtil.free(event);
+            }
          }
          if (result) {
             if (oldValue !== resultValue) {

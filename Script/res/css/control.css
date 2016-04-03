@@ -1,0 +1,1549 @@
+/* ------------------------------------------------------ */
+/* Tag_Icon                                               */
+/* ------------------------------------------------------ */
+.Tag_Icon{
+   display: block;
+   border: 0px;
+}
+
+/* ------------------------------------------------------ */
+/* MDuiEditChange                                         */
+/* ------------------------------------------------------ */
+.MDuiEditChange_ChangePanel{
+   cursor: pointer;
+   width: 6px;
+   vertical_align: top;
+}
+
+.MDuiEditChange_ChangeIcon{
+   display: none;
+}
+
+/* ------------------------------------------------------ */
+/* MDuiEditDrop                                           */
+/* ------------------------------------------------------ */
+.MDuiEditDrop_DropPanel{
+   width: 14px;
+   cursor: pointer;
+   border-left: 1px solid #CCCCCC;
+}
+
+.MDuiEditDrop_DropIcon{
+}
+
+/* ------------------------------------------------------ */
+/* DropEditor                                         */
+/* ------------------------------------------------------ */
+.DropEditor_Panel{
+   position: absolute;
+   padding:0px 2px 0px 2px;
+   border:1px solid #CCCCCC;
+   border-radius:2px;
+   background-color: #FFFFFF;
+}
+
+.DropEditor_DropForm{
+   width: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* EditControl                                        */
+/* ------------------------------------------------------ */
+.EditControl_LabelPanel{
+   color: #333333;
+}
+
+.EditControl_LabelPicker{
+   color: #333333;
+}
+
+.EditControl_EditorPanel{
+}
+
+.EditControl_ValuePanel{
+}
+
+.EditControl_ValueNormal{
+   padding:0px 3px 0px 3px;
+   border:1px solid #CCCCCC;
+   border-radius:3px;
+   background-color: #EBFFFF;
+}
+
+.EditControl_ValueHover{
+   padding:0px 3px 0px 3px;
+   border-left:1px solid #666666;
+   border-top:1px solid #666666;
+   border-right:1px solid #AAAAAA;
+   border-bottom:1px solid #AAAAAA;
+   border-radius:3px;
+   background-color: #EBFFFF;
+}
+
+.EditControl_ValueReadonly{
+   padding:0px 3px 0px 3px;
+   border:1px solid #CCCCCC;
+   border-radius:3px;
+   background-color: #FEFECB;
+}
+
+.EditControl_InputPanel{
+   padding: 1px 3px;
+}
+
+.EditControl_InputNormal{
+   width: 100%;
+   height: 14px;
+   border: 0px;
+   padding: 1px;
+   margin: 1px;
+   background-color: #EBFFFF;
+}
+
+.EditControl_InputHover{
+   width: 100%;
+   height: 14px;
+   border: 0px;
+   padding: 1px;
+   margin: 1px;
+   background-color: #EBFFFF;
+}
+
+.EditControl_InputReadonly{
+   width: 100%;
+   height: 14px;
+   border: 0px;
+   padding: 1px;
+   margin: 1px;
+   background-color: #FEFECB;
+}
+
+/* ------------------------------------------------------ */
+/* Check                                              */
+/* ------------------------------------------------------ */
+.Check_InputEdit{
+}
+
+.Check_Input{
+   width: 12px;
+   height: 12px;
+   cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* Radio                                              */
+/* ------------------------------------------------------ */
+.Radio_Input{
+   width: 12px;
+   height: 12px;
+   cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* Number                                             */
+/* ------------------------------------------------------ */
+.Number_AdjustPanel{
+   width: 12px;
+   border-left: 1px solid #666666;
+}
+
+.Number_AdjustForm{
+   width: 11px;
+   height: 14px;
+   cursor: pointer;
+}
+
+.Number_UpPanel{
+}
+
+.Number_DownPanel{
+}
+
+/* ------------------------------------------------------ */
+/* Number2                                            */
+/* ------------------------------------------------------ */
+.Number2_InputPanel{
+   padding:0px 2px 0px 2px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Number2_Input{
+   width: 100%;
+   border: 0;
+   color: #FFFFFF;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* Number3                                            */
+/* ------------------------------------------------------ */
+.Number3_ValuePanel{
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Number3_InputPanel{
+   padding:0px 2px 0px 2px;
+}
+
+.Number3_Input{
+   width: 100%;
+   border: 0;
+   text-align: right;
+   color: #FFFFFF;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* Number4                                            */
+/* ------------------------------------------------------ */
+.Number4_InputPanel{
+   padding:0px 2px 0px 2px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Number4_Input{
+   width: 100%;
+   border: 0;
+   color: #FFFFFF;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* SlideNumber                                        */
+/* ------------------------------------------------------ */
+.SlideNumber_SlidePanel{
+   border: 0;
+   padding: 0px 4px 0px 0px;
+}
+
+.SlideNumber_ValuePanel{
+   padding:0px 3px 0px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.SlideNumber_InputPanel{
+   border: 0;
+   padding: 0px 4px 0px 4px;
+   border-radius:2px;
+   background-color: #666666;
+}
+
+.SlideNumber_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   text-align: right;
+   color: #E0E0E0;
+   background-color: #666666;
+}
+
+/* ------------------------------------------------------ */
+/* Color                                              */
+/* ------------------------------------------------------ */
+.Color_InputPanel{
+   padding:0px 2px 0px 2px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Color_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   color: #FFFFFF;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* Color3                                             */
+/* ------------------------------------------------------ */
+.Color3_ValuePanel{
+   padding:0px 3px 0px 3px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Color3_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   text-align: center;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* Color4                                             */
+/* ------------------------------------------------------ */
+.Color4_InputPanel{
+   padding:0px 3px 0px 3px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Color4_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   color: #FFFFFF;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* ColorPower                                         */
+/* ------------------------------------------------------ */
+.ColorPower_ValuePanel{
+   padding:0px 3px 0px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.ColorPower_InputPanel{
+   border: 0;
+   padding: 0px 4px 0px 4px;
+   border-radius:2px;
+   background-color: #666666;
+}
+
+.ColorPower_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   text-align: right;
+   color: #E0E0E0;
+   background-color: #666666;
+}
+
+/* ------------------------------------------------------ */
+/* Edit                                               */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* Memo                                               */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* IconPicker                                         */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* File                                               */
+/* ------------------------------------------------------ */
+.File_ValuePanel{
+   padding:0px 3px 0px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.File_InputPanel{
+   position: relative;
+}
+
+.File_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+.File_File{
+   position:absolute;
+   left:0px;
+   top:0px;
+   width: 100%;
+   filter:alpha(opacity:0);
+   opacity: 0;
+}
+
+.File_Browser{
+   width: 70px;
+   height: 16px;
+   border: 0;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* SelectItem                                         */
+/* ------------------------------------------------------ */
+.SelectItem_Normal{
+   cursor: pointer;
+   background-color: #FFFFFF;
+}
+
+.SelectItem_Hover{
+   cursor: pointer;
+   background-color: #EEEEEE;
+}
+
+.SelectItem_Select{
+   cursor: pointer;
+   background-color: #CCCCCC;
+}
+
+/* ------------------------------------------------------ */
+/* Select                                             */
+/* ------------------------------------------------------ */
+.Select_ValuePanel{
+   padding:0px 3px 0px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Select_InputPanel{
+   padding:0px 2px 0px 2px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.Select_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* ListItem                                           */
+/* ------------------------------------------------------ */
+.ListItem_Normal{
+   cursor: pointer;
+   padding: 4px 2px;
+   background-color: #666666;
+}
+
+.ListItem_Hover{
+   cursor: pointer;
+   padding: 4px 2px;
+   background-color: #999999;
+}
+
+.ListItem_Select{
+   cursor: pointer;
+   padding: 4px 2px;
+   background-color: #333333;
+}
+
+.ListItem_IconPanel{
+   width: 16px;
+}
+
+.ListItem_Icon{
+   width: 16px;
+}
+
+.ListItem_Label{
+   color: #EEEEEE;
+}
+
+/* ------------------------------------------------------ */
+/* ListBox                                            */
+/* ------------------------------------------------------ */
+.ListBox_Panel{
+   width: 100%;
+   padding: 1px;
+   margin: 4px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+}
+
+/* ------------------------------------------------------ */
+/* ListViewItem                                       */
+/* ------------------------------------------------------ */
+.ListViewItem_Panel{
+   float: left;
+   padding: 6px;
+}
+
+.ListViewItem_Normal{
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   border:1px solid #CCCCCC;
+   padding: 2px;
+}
+
+.ListViewItem_Hover{
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   border:1px solid #CCCCCC;
+   box-shadow: 0px 0px 4px #000000;
+}
+
+.ListViewItem_Select{
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   border:1px solid #0066FF;
+   box-shadow: 0px 0px 4px #000000;
+}
+
+.ListViewItem_Form{
+   width: 100%;
+   height: 100%;
+}
+
+.ListViewItem_Content{
+   width: 100%;
+   height: 100%;
+   background:rgba(255, 255, 255, 0.7);
+}
+
+.ListViewItem_IconPanel{
+   padding-left:8px;
+   width: 24px;
+}
+
+.ListViewItem_Icon{
+   width: 16px;
+}
+
+.ListViewItem_Label{
+   padding: 2px 4px;
+   color: #333333;
+   text-align: right;
+   white-space:nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+/* ------------------------------------------------------ */
+/* ListView                                           */
+/* ------------------------------------------------------ */
+.ListView_Panel{
+   width: 100%;
+   height: 100%;
+   overflow-y: auto;
+}
+
+/* ------------------------------------------------------ */
+/* Button                                             */
+/* ------------------------------------------------------ */
+.Button_Panel{
+   border-radius:3px;
+   color: #333333;
+   background-color: #999999;
+   cursor: pointer;
+}
+
+.Button_Form{
+   width: 100%;
+   height: 100%;
+}
+
+.Button_Icon{
+}
+
+.Button_Label{
+   font-family: "Microsoft YaHei"; 
+   font-size: 9pt;
+}
+
+/* ------------------------------------------------------ */
+/* Canvas                                             */
+/* ------------------------------------------------------ */
+.Canvas_Canvas{
+}
+
+/* ------------------------------------------------------ */
+/* Layout                                             */
+/* ------------------------------------------------------ */
+.Layout_Form{
+   width: 100%;
+}
+
+.Layout_ControlPanel{
+   padding:1px 0px;
+}
+
+/* ------------------------------------------------------ */
+/* Panel                                              */
+/* ------------------------------------------------------ */
+.Panel_Panel{
+   padding: 3px 5px;
+}
+
+.Panel_Label{
+   font-family: "Microsoft YaHei"; 
+   cursor: pointer;
+   height: 24px;
+   color: #000000;
+   padding: 1px 6px;
+   font-weight: bold;
+   border: 1px solid #999999;
+   border-radius:2px;
+   background-color: #F7F7F7;
+}
+
+.Panel_Body{
+   border-radius:0px 0px 4px 4px;
+   padding: 4px 10px 4px 10px;
+   background-color: #FFFFFF;
+}
+
+.Panel_Form{
+}
+
+/* ------------------------------------------------------ */
+/* PageSheet                                          */
+/* ------------------------------------------------------ */
+.PageSheet_Panel{
+   width: 100%;
+   height: 100%;
+}
+
+.PageSheet_Sheet{
+   padding:10px;
+}
+
+.PageSheet_Button{
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #EEEEEE, #999999);
+   background: -moz-linear-gradient(top, #EEEEEE, #999999); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#EEEEEE), to(#999999)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#EEEEEE, endcolorstr=#999999);
+}
+
+.PageSheet_ButtonHover{
+   cursor:pointer;
+   border-top:1 solid #EEEEEE;
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
+   background: -moz-linear-gradient(top, #FFFFFF, #DDDDDD); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#DDDDDD);
+}
+
+.PageSheet_ButtonSelect{
+   cursor:pointer;
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #BBBBBB, #EEEEEE);
+   background: -moz-linear-gradient(top, #BBBBBB, #EEEEEE); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#BBBBBB), to(#EEEEEE)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#BBBBBB, endcolorstr=#EEEEEE);
+}
+
+.PageSheet_ButtonText{
+   white-space:nowrap;
+}
+
+.PageSheet_Top{
+   height:1px;
+   background-color:#CCCCCC;
+}
+
+.PageSheet_TopSelect{
+   height:1px;
+   background-color:#FFFFFF;
+}
+
+.PageSheet_Left{
+   border-top:1 solid #666666;
+   width: 1px;
+   background-color:#CCCCCC;
+}
+
+.PageSheet_LeftSelect{
+   width: 1px;
+   background-color:#FFFFFF;
+}
+
+.PageSheet_Right{
+   width:1px;
+   background-color:#CCCCCC;
+}
+
+.PageSheet_RightSelect{
+   width:1px;
+   background-color:#FFFFFF;
+}
+
+.PageSheet_Bottom{
+   height:1px;
+   background-color:#CCCCCC;
+}
+
+.PageSheet_BottomSelect{
+   height:1px;
+   background-color:#FFFFFF;
+}
+
+/* ------------------------------------------------------ */
+/* PageControl                                        */
+/* ------------------------------------------------------ */
+.PageControl_Panel{
+   width: 100%;
+}
+
+.PageControl_TitlePanel{
+   height: 1px;
+}
+
+.PageControl_TitleForm{
+   width: 100%;
+}
+
+.PageControl_SheetPanel{
+   vertical-align: top;
+   border-left: 1px solid #29BAD5;
+   border-right: 1px solid #29BAD5;
+   border-bottom: 1px solid #29BAD5;
+   padding: 6px;
+}
+
+.PageControl_Sheets{
+   border:1 solid blue;
+   width:100%; height:100;
+}
+
+.PageControl_RightP{
+   width:1px; border-top:1 solid #29BAD5;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#29bad7);
+}
+}
+
+.PageControl_SheetLeft{
+   width:1px; background-color:#29BAD5;
+}
+
+.PageControl_SheetRight{
+   width:1px; background-color:#29BAD5;
+}
+
+/* ------------------------------------------------------ */
+/* TabButton                                          */
+/* ------------------------------------------------------ */
+.TabButton_Panel{
+}
+
+.TabButton_Sheet{
+   padding:10px;
+}
+
+.TabButton_Button{
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #EEEEEE, #999999);
+   background: -moz-linear-gradient(top, #EEEEEE, #999999); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#BBBBBB), to(#CCCCCC)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#EEEEEE, endcolorstr=#999999);
+}
+
+.TabButton_ButtonHover{
+   cursor:pointer;
+   border-top:1 solid #EEEEEE;
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
+   background: -moz-linear-gradient(top, #FFFFFF, #DDDDDD); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#DDDDDD);
+}
+
+.TabButton_ButtonSelect{
+   cursor:pointer;
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #BBBBBB, #EEEEEE);
+   background: -moz-linear-gradient(top, #BBBBBB, #EEEEEE); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#EEEEEE)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#BBBBBB, endcolorstr=#EEEEEE);
+}
+
+.TabButton_ButtonText{
+   white-space:nowrap;
+}
+
+.TabButton_Top{
+   height: 2px;
+   background-color:#666666;
+}
+
+.TabButton_TopSelect{
+   height:1px;
+   background-color:#999999;
+}
+
+.TabButton_Left{
+   width: 1px;
+   background-color:#999999;
+}
+
+.TabButton_LeftSelect{
+   width: 1px;
+   background-color:#999999;
+}
+
+.TabButton_Right{
+   width:1px;
+   background-color:#CCCCCC;
+}
+
+.TabButton_RightSelect{
+   width:1px;
+   background-color:#CCCCCC;
+}
+
+.TabButton_Bottom{
+   height:1px;
+   background-color:#CCCCCC;
+}
+
+.TabButton_BottomSelect{
+   height:1px;
+   background-color:#EEEEEE;
+}
+
+/* ------------------------------------------------------ */
+/* TabBar                                             */
+/* ------------------------------------------------------ */
+.TabBar_Panel{
+   width: 100%;
+}
+
+.TabBar_TitlePanel{
+}
+
+.TabBar_TitleForm{
+   width: 100%;
+}
+
+.TabBar_SheetPanel{
+   vertical-align: top;
+   border-left:1 solid #29bad5; border-right:1 solid #29bad5; border-bottom:1 solid #29bad5;
+   padding:6;
+}
+
+.TabBar_Sheets{
+   border:1 solid blue;
+   width:100%; height:100;
+}
+
+.TabBar_RightP{
+   width:1px; border-top:1 solid #29bad5;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#29bad7);
+}
+}
+
+.TabBar_SheetLeft{
+   width:1px; background-color:#29bad5;
+}
+
+.TabBar_SheetRight{
+   width:1px; background-color:#29bad5;
+}
+
+/* ------------------------------------------------------ */
+/* Cell                                               */
+/* ------------------------------------------------------ */
+.Cell_PanelNormal{
+   padding-top: 1px;
+   padding-bottom: 1px;
+   border-bottom: 1px dotted #CCCCCC;
+   background-color: #F0F0F0;
+}
+
+.Cell_PanelHover{
+   padding-top: 1px;
+   padding-bottom: 1px;
+   border-bottom: 1px dotted #CCCCCC;
+   background-color: #E8E8FF;
+}
+
+.Cell_PanelSelect{
+   padding-top: 1px;
+   padding-bottom: 1px;
+   border-bottom: 1px dotted #CCCCCC;
+   background-color: #CDE5FF;
+}
+
+.Cell_InputNormal{
+   width: 100%;
+   border: 0px;
+   background-color: #F0F0F0;
+}
+
+.Cell_InputHover{
+   width: 100%;
+   border: 0px;
+   background-color: #E8E8FF;
+}
+
+.Cell_InputSelect{
+   width: 100%;
+   border: 0px;
+   background-color: #CDE5FF;
+}
+
+/* ------------------------------------------------------ */
+/* CellEdit                                           */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* Column                                             */
+/* ------------------------------------------------------ */
+.Column_Label{
+   border-bottom: 1px solid #999999;
+   background-color: #FFFFFF;
+}
+
+.Column_SearchPanel{
+   padding: 0px 1px;
+   background-color: #EEEEEE;
+}
+
+.Column_SearchEdit{
+   width: 100%;
+   border: 1px solid #DDDDDD;
+   background-color: #FFFFFF;
+}
+
+/* ------------------------------------------------------ */
+/* GridRowControl                                     */
+/* ------------------------------------------------------ */
+.GridRowControl_PanelNormal{
+}
+
+.GridRowControl_PanelHover{
+}
+
+.GridRowControl_PanelSelect{
+}
+
+/* ------------------------------------------------------ */
+/* GridControl                                        */
+/* ------------------------------------------------------ */
+.GridControl_Panel{
+   width:100%;
+   height:300px;
+   border-radius: 2px;
+   border: 1px solid #999999;
+}
+
+.GridControl_TitlePanel{
+   height: 24px;
+   border-bottom: 1px solid #999999;
+   background-color: #F7F7F7;
+}
+
+.GridControl_Caption{
+   color: #333333;
+   font-size: 12pt;
+   text-align: center;
+}
+
+.GridControl_TitleForm{
+   width: 100%;
+}
+
+.GridControl_ContentPanel{
+   position: relative;
+}
+
+.GridControl_HintPanel{
+   color: #333333;
+   height: 20px;
+   padding; 0px 8px 0px 8px;
+}
+
+.GridControl_HintForm{
+   width: 100%;
+}
+
+.GridControl_Hint{
+}
+
+.GridControl_Page{
+   border: 1px solid #CCCCCC;
+}
+
+.GridControl_ButtonForm{
+   cursor: pointer;
+}
+
+.GridControl_Button{
+   color: #EEEEEE;
+   white-space: nowrap;
+}
+
+/* ------------------------------------------------------ */
+/* Table                                              */
+/* ------------------------------------------------------ */
+.Table_Panel{
+   width:100%;
+}
+
+.Table_FixPanel{
+   position: absolute;
+   z-index: 2;
+   background-color:#FFFFFF;
+}
+
+.Table_FixForm{
+   table-layout:fixed;
+}
+
+.Table_HeadPanel{
+   position: absolute;
+   z-index: 1;
+   overflow-x: hidden;
+   background-color:CCCCCC;
+}
+
+.Table_HeadForm{
+   table-layout:fixed;
+}
+
+.Table_ColumnPanel{
+   position: absolute;
+   z-index: 1;
+   overflow-y: hidden;
+   background-color:CCCCCC;
+}
+
+.Table_ColumnForm{
+   table-layout:fixed;
+   border-bottom: 1 solid #BFD3EE;
+}
+
+.Table_DataPanel{
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   overflow: scroll;
+   background-color:#666666;
+}
+
+.Table_DataForm{
+   table-layout:fixed;
+   background-color:#BFD3EE;
+   border-bottom: 1 solid #BFD3EE;
+}
+
+.Row_Panel{
+}
+
+/* ------------------------------------------------------ */
+/* MenuBar                                            */
+/* ------------------------------------------------------ */
+.MenuBar_Panel{
+   padding:2px 4px 2px 4px;
+}
+
+.MenuBar_ButtonPanel{
+}
+
+/* ------------------------------------------------------ */
+/* MenuButton                                         */
+/* ------------------------------------------------------ */
+.MenuButton_Normal{
+   margin:0px 2px 0px 2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.MenuButton_Hover{
+   background-color: #FFFFFF;
+   margin:0px 2px 0px 2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.MenuButton_Press{
+   margin:0px 2px 0px 2px;
+   padding:1px 4px 1px 4px;
+   border-radius:2px;
+   cursor: pointer;
+}
+
+.MenuButton_Disable{
+   margin:0px 2px 0px 2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.MenuButton_IconPanel{
+   padding-right: 4px;
+}
+
+.MenuButton_LabelPanel{
+   color: #333333;
+   white-space: nowrap;
+}
+
+/* ------------------------------------------------------ */
+/* MenuButtonSplit                                    */
+/* ------------------------------------------------------ */
+.MenuButtonSplit_PanelHorizontal{
+   width: 100%;
+   border-top:1px solid #666666;
+   border-bottom:1px solid #CCCCCC;
+}
+
+.MenuButtonSplit_PanelVertical{
+   height: 20px;
+   border-left: 1px solid #999999;
+   border-right: 1px solid #EEEEEE;
+}
+
+/* ------------------------------------------------------ */
+/* SliderMenu                                         */
+/* ------------------------------------------------------ */
+.SliderMenu_Panel{
+   width:100%;
+}
+
+.SliderMenu_MenuPanel{
+   background-color: #394555;
+   height: 26px;
+}
+
+.SliderMenu_GroupPanel{
+}
+
+/* ------------------------------------------------------ */
+/* SliderGroup                                        */
+/* ------------------------------------------------------ */
+.SliderGroup_Panel{
+   width:100%;
+   color: #FFFFFF;
+   padding:8px 12px 8px 12px;
+   border-bottom: 1px solid #394555;
+   cursor: pointer;
+}
+
+.SliderGroup_ButtonPanel{
+}
+
+.SliderGroup_IconPanel{
+   padding-right: 4px;
+}
+
+.SliderGroup_SpacePanel{
+   width: 8px;
+}
+
+.SliderGroup_LabelPanel{
+   font-size: 16px;
+   white-space: nowrap;
+}
+
+/* ------------------------------------------------------ */
+/* SliderButton                                        */
+/* ------------------------------------------------------ */
+.SliderButton_Normal{
+   width:100%;
+   padding:3px 12px 3px 12px;
+   cursor: pointer;
+}
+
+.SliderButton_Hover{
+   width:100%;
+   background-color: #0099CC;
+   padding:3px 12px 3px 12px;
+   cursor: pointer;
+}
+
+.SliderButton_Press{
+   width:100%;
+   padding:3px 12px 3px 12px;
+   cursor: pointer;
+}
+
+.SliderButton_Disable{
+   width:100%;
+   margin:0px 2px 0px 2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.SliderButton_IconPanel{
+   padding-right: 4px;
+}
+
+.SliderButton_SpacePanel{
+   width: 8px;
+}
+
+.SliderButton_LabelPanel{
+   color: #FFFFFF;
+   font-size: 14px;
+   white-space: nowrap;
+}
+
+/* ------------------------------------------------------ */
+/* PopupMenu                                          */
+/* ------------------------------------------------------ */
+.PopupMenu_Panel{
+   position: absolute;
+}
+
+.PopupMenu_Form{
+   width: 100%;
+   border-radius:3px;
+   background:#CCCCCC;
+   box-shadow:2px 2px 5px #333333;
+   -webkit-box-shadow:2px 2px 5px #333333;
+   -moz-box-shadow:2px 2px 5px #333333;
+}
+
+.PopupMenu_Container{
+   width: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* ToolBar                                                */
+/* ------------------------------------------------------ */
+.ToolBar_Panel{
+   padding:2px 0px 2px 0px;
+}
+
+.ToolBar_ButtonPanel{
+   position: relative;
+}
+
+/* ------------------------------------------------------ */
+/* ToolButton                                             */
+/* ------------------------------------------------------ */
+.ToolButton_Normal{
+   margin:0px 1px 0px 1px;
+   padding:2px 6px 2px 6px;
+   cursor: pointer;
+   border:1px solid #999999;
+   background-color: #EAEDF2;
+}
+
+.ToolButton_Hover{
+   margin:0px 1px 0px 1px;
+   padding:2px 6px 2px 6px;
+   border:1px solid #999999;
+   background-color: #FFFFF0;
+   cursor: pointer;
+}
+
+.ToolButton_Press{
+   margin:0px 1px 0px 1px;
+   padding:2px 6px 2px 6px;
+   cursor: pointer;
+   color: #FFFFFF;
+   border:1px solid #999999;
+   background-color: #76899F;
+}
+
+.ToolButton_Disable{
+   margin:0px 1px 0px 1px;
+   padding:2px 6px 2px 6px;
+   border-radius:2px;
+   border:1px solid #CCCCCC;
+   background-color: #666666;
+   cursor: pointer;
+}
+
+.ToolButton_IconPanel{
+}
+
+.ToolButton_SpacePanel{
+   width: 4px;
+}
+
+.ToolButton_LabelPanel{
+   white-space: nowrap;
+}
+
+/* ------------------------------------------------------ */
+/* ToolButtonSplit                                        */
+/* ------------------------------------------------------ */
+.ToolButtonSplit_Panel{
+   width: 4px;
+}
+
+/* ------------------------------------------------------ */
+/* ToolButtonMenu                                         */
+/* ------------------------------------------------------ */
+.ToolButtonMenu_Panel{
+}
+
+/* ------------------------------------------------------ */
+/* HistoryBar                                             */
+/* ------------------------------------------------------ */
+.HistoryBar_Panel{
+}
+
+.HistoryBar_ButtonPanel{
+   height: 36px;
+}
+
+/* ------------------------------------------------------ */
+/* HistoryButton                                          */
+/* ------------------------------------------------------ */
+.HistoryButton_Normal{
+   margin:0px 2px;
+   padding:0px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.HistoryButton_Hover{
+   background-color: #FFFFFF;
+   margin:0px 2px;
+   padding:0px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.HistoryButton_Press{
+   margin:0px 2px;
+   padding:0px 4px;
+   border-radius:2px;
+   cursor: pointer;
+}
+
+.HistoryButton_Disable{
+   margin:0px 2px;
+   padding:0px 4px;
+   border-radius:3px;
+   cursor: pointer;
+}
+
+.HistoryButton_IconPanel{
+   padding-right: 4px;
+}
+
+.HistoryButton_LabelPanel{
+   color: #333333;
+   font-size: 22px;
+   white-space: nowrap;
+}
+
+/* ------------------------------------------------------ */
+/* TreeView                                               */
+/* ------------------------------------------------------ */
+.TreeView_Panel{
+   width: 100%;
+   height: 100%;
+}
+
+.TreeView_NodePanel{
+   width: 100%;
+   height: 100%;
+   overflow:auto;
+}
+
+.TreeView_NodeForm{
+}
+
+/* ------------------------------------------------------ */
+/* TreeNode                                           */
+/* ------------------------------------------------------ */
+.TreeNode_Panel{
+   width: 0;
+}
+
+.TreeNode_Normal{
+   cursor: pointer;
+}
+
+.TreeNode_Hover{
+   background-color: #DDDDDD;
+   cursor: pointer;
+}
+
+.TreeNode_Select{
+   background-color: #CCCCCC;
+   cursor: pointer;
+}
+
+.TreeNode_Image{
+}
+
+.TreeNode_Icon{
+}
+
+.TreeNode_IconDisable{
+}
+
+.TreeNode_Label{
+   font: icon;
+   font-size: 9pt;
+}
+
+.TreeNode_Cell{
+}
+
+/* ------------------------------------------------------ */
+/* FramePage                                          */
+/* ------------------------------------------------------ */
+.FramePage_Panel{
+}
+
+.FramePage_Container{
+   width: 100%;
+   height: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* FrameSpliter                                       */
+/* ------------------------------------------------------ */
+.FrameSpliter_Normal{
+   background-color: #C6CBD0;
+}
+
+.FrameSpliter_Hover{
+   background-color: #999999;
+}
+
+.FrameSpliter_Draging{
+   position: absolute;
+   background-color: #BBBBBB;
+}
+
+/* ------------------------------------------------------ */
+/* FrameSet                                           */
+/* ------------------------------------------------------ */
+.FrameSet_Panel{
+   width: 100%;
+   height: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* Window                                             */
+/* ------------------------------------------------------ */
+.Window_Panel{
+   position: absolute;
+   padding: 3px;
+   border-radius:4px;
+   background:rgba(90, 90, 90, 0.4);
+   box-shadow: 0px 0px 8px #000000;
+}
+
+.Window_BodyForm{
+   width:100%;
+   height:100%;
+}
+
+.Window_TitleForm{
+   width:100%;
+}
+
+.Window_TitlePanel{
+   height: 24px;
+   border-radius: 4px 4px 0px 0px;
+   background-color: #DDDDDD;
+}
+
+.Window_BodyPanel{
+   background-color: #EEEEEE;
+   border: 1px solid #333333;
+}
+
+.Window_StatusPanel{
+   height: 24px;
+   border-radius: 0px 0px 4px 4px;
+   background-color: #DDDDDD;
+}
+
+/* ------------------------------------------------------ */
+/* InfoDialog                                         */
+/* ------------------------------------------------------ */
+.InfoDialog_Text{
+   padding: 6px 12px;
+   color: #000000;
+}
+
+/* ------------------------------------------------------ */
+/* ConfirmDialog                                      */
+/* ------------------------------------------------------ */
+.ConfirmDialog_Text{
+   padding: 6px 12px;
+   color: #000000;
+}
+
+/* ------------------------------------------------------ */
+/* Workspace                                          */
+/* ------------------------------------------------------ */
+.Workspace_Panel{
+   width: 100%;
+   height: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* DesktopConsole                                     */
+/* ------------------------------------------------------ */
+.DesktopConsole_MaskPanel{
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   background-color: rgba(210, 210, 210, 0.6);
+   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20, style=0);
+}
+
+/* ------------------------------------------------------ */
+/* RWindow                                                */
+/* ------------------------------------------------------ */
+.RWindow_Disable{
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   background-color: rgba(210, 210, 210, 0.5);
+   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20, style=0);
+}
+
+.RWindow_Shadow{
+   position: absolute;
+   background-color: #666666;
+   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60, style=0);
+}

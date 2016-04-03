@@ -1,6 +1,12 @@
-import {Objects} from './runtime/common/lang/Objects';
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
 import {Fatal} from './runtime/common/lang/Fatal';
+import {Objects} from './runtime/common/lang/Objects';
+import {Attributes} from './runtime/common/lang/Attributes';
 import {Dispatcher} from './runtime/common/lang/Dispatcher';
+import {LoggerUtil} from './runtime/common/lang/LoggerUtil';
+import {Property} from './runtime/common/reflect/Property';
+import {AnnotationEnum} from './runtime/common/reflect/AnnotationEnum';
+import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {AssertUtil} from './runtime/common/AssertUtil';
 import {RenderContext} from './RenderContext';
 
@@ -18,28 +24,38 @@ import {RenderContext} from './RenderContext';
 // @version 141231
 //==========================================================
 export class Component extends Dispatcher {
+   // 有效性
    public valid: boolean;
+   // 唯一编号
    public guid: string;
-   public code: string;
+   // 名称
    public name: string;
+   // 标签
+   @Property('label', DataTypeEnum.String, null)
    public label: string;
-   public attributes: string;
+   // 属性集合
+   public attributes: Attributes;
+   // 附加数据
+   public tag: any;
    // 父组件
    public parent: Component;
    // 子组件
    public children: Objects<Component>;
 
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
    public constructor() {
       super();
       // 设置属性
       this.valid = true;
-      // //..........................................................
-      // // @property
-      // //..........................................................
-      // // @attribute TDictionary 组件字典
-      // this._components = null;
-      // // @attribute Object 附加数据
-      // this._tag = MO.Class.register(this, new MO.AGetSet('_tag'));
+      this.attributes = new Attributes();
+   }
+
+   //==========================================================
+   // <T>配置处理。</T>
+   //==========================================================
+   public setup(parameters?: any) {
    }
 
    // //==========================================================
@@ -96,27 +112,61 @@ export class Component extends Dispatcher {
    //    attributes.set(name, value);
    // }
 
-   // //==========================================================
-   // // <T>得到符合指定类的父组件。</T>
-   // // <P>如果没有指定类，则获得最顶层组件。</P>
-   // //
-   // // @method
-   // // @param clazz:Function 类函数
-   // // @return MUiComponent 组件
-   // //==========================================================
-   // MO.MUiComponent_topComponent = function MUiComponent_topComponent(clazz) {
-   //    var component = this;
-   //    if (clazz) {
-   //       while (MO.Class.isClass(component._parent, clazz)) {
-   //          component = component._parent;
-   //       }
-   //    } else {
-   //       while (component._parent) {
-   //          component = component._parent;
-   //       }
-   //    }
-   //    return component;
-   // }
+   //==========================================================
+   // <T>设置属性集合。</T>
+   //
+   // @params name 属性名称
+   // @params value 属性内容
+   //==========================================================
+   public setAttribute(name: string, value: string) {
+      this[name] = value;
+      LoggerUtil.debug(this, 'Set attribute. (name={1}, value={2})', name, value);
+   }
+
+   //==========================================================
+   // <T>设置属性集合。</T>
+   //
+   // @params attributes 属性集合
+   //==========================================================
+   public setAttributes(attributes: any) {
+      if (attributes) {
+         var clazz = ClassUtil.get(this.constructor);
+         var annotations = clazz.findAnnotations(AnnotationEnum.Property);
+         for (var name in attributes) {
+            var value = attributes[name];
+            // 设置属性
+            if (annotations) {
+               var annotation = annotations.get(name);
+               if (annotation) {
+                  this.setAttribute(name, value);
+               }
+            }
+            // 存储属性
+            this.attributes.set(name, value);
+         }
+      }
+   }
+
+   //==========================================================
+   // <T>得到符合指定类的父组件。</T>
+   // <P>如果没有指定类，则获得最顶层组件。</P>
+   //
+   // @param clazz 类函数
+   // @return 组件
+   //==========================================================
+   public topComponent(clazz: Function): Component {
+      var component = this;
+      if (clazz) {
+         while (component.parent instanceof clazz) {
+            component = component.parent as any;
+         }
+      } else {
+         while (component.parent) {
+            component = component.parent as any;
+         }
+      }
+      return component;
+   }
 
    //==========================================================
    // <T>判断是否含有子组件。</T>
@@ -196,22 +246,6 @@ export class Component extends Dispatcher {
    //    }
    // }
 
-   // //==========================================================
-   // // <T>获得组件集合。</T>
-   // //
-   // // @method
-   // // @return TDictionary 组件集合
-   // //==========================================================
-   // MO.MUiComponent_components = function MUiComponent_components() {
-   //    var o = this;
-   //    var components = o._components;
-   //    if (components == null) {
-   //       components = new MO.TDictionary();
-   //       o._components = components;
-   //    }
-   //    return components;
-   // }
-
    //==========================================================
    // <T>将子组件放入自己的哈希表中。</T>
    // <P>如果子组件的名称为空，则给当前子组件创建一个数字的索引名。</P>
@@ -226,6 +260,10 @@ export class Component extends Dispatcher {
       var children = this.children;
       if (!children) {
          children = this.children = new Objects<Component>();
+      }
+      // 检查重复
+      if (children.contains(child)) {
+         throw new Fatal(this, 'Child is already exists in this component. (name={1})', child.name);
       }
       // 设置子组件名称
       var name = child.name;
@@ -253,26 +291,15 @@ export class Component extends Dispatcher {
       children.remove(child);
    }
 
-   // //==========================================================
-   // // <T>构建处理。</T>
-   // //
-   // // @param context 环境
-   // //==========================================================
-   // public render(context: RenderContext) {
-   // }
-
-   // //==========================================================
-   // // <T>清空所有子组件。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.MUiComponent_clear = function MUiComponent_clear() {
-   //    var o = this;
-   //    var components = o._components;
-   //    if (components) {
-   //       components.clear();
-   //    }
-   // }
+   //==========================================================
+   // <T>清空所有子组件。</T>
+   //==========================================================
+   public clear() {
+      var children = this.children;
+      if (children) {
+         children.clear();
+      }
+   }
 
    // //==========================================================
    // // <T>遍历子组件进行事件处理。<T>

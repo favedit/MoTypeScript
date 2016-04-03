@@ -1,6 +1,7 @@
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {RenderContext} from './RenderContext';
 import {Control} from './Control';
+import {React} from './React';
 
 export class Render {
 
@@ -28,14 +29,16 @@ export class Render {
    public create(clazz): any {
       var context = this.context;
       var control: Control = ClassUtil.create(clazz);
-      control.context = this.context;
+      control.renderContext = this.context;
       control.setup(context);
       control.build(context);
       return control;
    }
 
-   public render(control: Control, hPanel?:any) {
-      control.setPanel(this.hPanel);
+   public render(control: Control, hPanel?: any) {
+      React.render(this.context, control, control, control);
+
+      //control.setPanel(this.hPanel);
       //control.build(this.context);
       //(component as any).setPanel(this.hPanel);
    }

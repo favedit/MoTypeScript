@@ -3,6 +3,7 @@
         "declaration": true,
         "target": "es5",
         "module": "amd",
+        "allowJs": true,
         "noImplicitAny": false,
         "removeComments": false,
         "noLib": false,
@@ -11,6 +12,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": false,
+        "jsx": "react",
         "outDir": "./build"
     },
     "formatCodeOptions": {

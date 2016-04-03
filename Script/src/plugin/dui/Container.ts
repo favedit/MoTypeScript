@@ -1,4 +1,6 @@
 import {Dictionary} from './runtime/common/lang/Dictionary';
+import {PanelEnum} from './runtime/ui/PanelEnum';
+import {RenderContext} from './RenderContext';
 import {Control} from './Control';
 
 //==========================================================
@@ -25,6 +27,16 @@ export class Container extends Control {
       // // @process
       // o.oeDesign = MO.Method.empty;
    }
+
+   // //==========================================================
+   // // <T>创建一个控件容器。</T>
+   // // <P>默认为DIV页面元素。</P>
+   // //
+   // // @param context 环境信息
+   // //==========================================================
+   // public onBuildPanel(context: RenderContext) {
+   //    this._hPanel = context.createFragment();
+   // }
 
    // //==========================================================
    // // <T>判断是否含有子控件。</T>
@@ -199,6 +211,24 @@ export class Container extends Control {
    //    // control._parent = this;
    //    // return control;
    // }
+
+   //==========================================================
+   // <T>追加一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public appendDisplay(control: Control) {
+      var hControlPanel = control.getPanel(PanelEnum.Panel);
+      this._hPanel.appendChild(hControlPanel);
+   }
+
+   //==========================================================
+   // <T>移除一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public removeDisplay(control: Control) {
+   }
 
    // //==========================================================
    // // <T>将子控件放入自己的哈希表中</T>

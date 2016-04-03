@@ -164,7 +164,7 @@ export class Audio extends ObjectBase {
    //==========================================================
    public dispose() {
       // 清空属性
-      this._hAudio = HtmlUtil.free(this._hAudio);
+      this._hAudio = HtmlUtil.dispose(this._hAudio);
       super.dispose();
    }
 }

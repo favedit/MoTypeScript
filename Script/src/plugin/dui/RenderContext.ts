@@ -1,9 +1,20 @@
 // import {IntegerUtil} from './runtime/common/lang/IntegerUtil';
 import {StringUtil} from './runtime/common/lang/StringUtil';
+import {Linker} from './runtime/common/reflect/Linker';
+import {AssertUtil} from './runtime/common/AssertUtil';
+import {EnvironmentService} from './runtime/core/service/EnvironmentService';
+import {Component} from './Component';
 
 export class RenderContext {
-
+   // 文档对象
+   public topComponent: Component;
+   // 文档对象
+   public parentComponent: Component;
+   // 文档对象
    public hDocument: HTMLDocument;
+   // 环境服务
+   @Linker(EnvironmentService)
+   protected _environmentService: EnvironmentService;
 
    //==========================================================
    // <T>创建一个页面对象。</T>
@@ -21,6 +32,16 @@ export class RenderContext {
    }
 
    //==========================================================
+   // <T>创建一个页面片段。</T>
+   //
+   // @return 页面片段
+   //==========================================================
+   public createFragment(): DocumentFragment {
+      var hFragment = this.hDocument.createDocumentFragment();
+      return hFragment;
+   }
+
+   //==========================================================
    // <T>创建一个页面图标对象。</T>
    //
    // @param styleName 样式名称
@@ -33,7 +54,9 @@ export class RenderContext {
       var hImage: HTMLImageElement = <HTMLImageElement>this.create('IMG', StringUtil.nvl(styleName, 'Tag_Icon'));
       hImage.align = 'absmiddle';
       if (code) {
-         // hImage.src = RResource.iconPath(uri);
+         var uri = '${resource.icon}/' + StringUtil.replaceChar(code, '.', '/') + '.gif';
+         var url = this._environmentService.parse(uri);
+         hImage.src = url;
       }
       if (width) {
          hImage.style.width = width + 'px';
@@ -139,20 +162,17 @@ export class RenderContext {
    //==========================================================
    // <T>追加一个页面对象，如果存在父容器就放在里面，没有就放在当前页面里。</T>
    //
-   // @method
    // @param hTag 页面标签
    // @param tagName 标签名称
    // @param styleName 样式名称
    // @return 页面对象
    //==========================================================
-   public append(hParent, tagName, styleName) {
-      var hResult = this.create(tagName, styleName);
-      if (hParent) {
-         hParent.appendChild(hResult);
-      } else {
-         //this.hDocument.body.appendChild(r);
-      }
-      return hResult;
+   public append(hParent: HTMLElement, tagName: string, styleName?: string) {
+      AssertUtil.debugNotNull(hParent);
+      AssertUtil.debugNotEmpty(tagName);
+      var hElement = this.create(tagName, styleName);
+      hParent.appendChild(hElement);
+      return hElement;
    }
 
    //==========================================================

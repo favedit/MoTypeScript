@@ -53,24 +53,25 @@ export class EditControl extends Control {
    // o._statusValueHover       = false;
    // o._progressing            = false;
    // //..........................................................
+   protected _hPanel: HTMLTableElement;
    // // @html <TD> 标签面板
-   public _hLabelPanel: HTMLTableCellElement;
+   protected _hLabelPanel: HTMLTableCellElement;
    // @html <TABLE> 标签容器
-   public _hLabelForm: HTMLTableElement;
+   protected _hLabelForm: HTMLTableElement;
    // @html <TD> 标签图标面板
-   public _hIconPanel;
+   protected _hIconPanel;
    // @html <IMG> 标签图标
-   public _hIcon;
+   protected _hIcon;
    // @html <TD> 标签文字面板
-   public _hTextPanel;
+   protected _hTextPanel;
    // @html <SPAN> 标签文字
-   public _hText;
+   protected _hText;
    // // @html <TD> 编辑面板
-   public _hEditPanel: HTMLTableCellElement;
+   protected _hEditPanel: HTMLTableCellElement;
    // @html <TABLE> 编辑容器
-   public _hEditForm: HTMLTableElement;
+   protected _hEditForm: HTMLTableElement;
    // @html <TD> 编辑内容面板
-   public _hValuePanel: HTMLTableCellElement;
+   protected _hValuePanel: HTMLTableCellElement;
    //o.hHintPanel            = null;
    //o.hHintIcon             = null;
 

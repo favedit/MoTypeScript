@@ -530,9 +530,9 @@ export class HtmlUtil {
    //==========================================================
    // <T>释放处理。</T>
    //
-   // @param hTag 页面标签
+   // @param hElement 页面标签
    //==========================================================
-   public static free(p) {
+   public static dispose(hElement) {
       return null;
    }
 

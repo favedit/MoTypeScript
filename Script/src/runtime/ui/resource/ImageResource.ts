@@ -104,7 +104,7 @@ export class ImageResource extends ObjectBase {
       // 清空属性
       this.size = ObjectUtil.dispose(this.size);
       this.loadListeners = ObjectUtil.dispose(this.loadListeners);
-      this.handle = HtmlUtil.free(this.handle);
+      this.handle = HtmlUtil.dispose(this.handle);
       // 父处理
       super.dispose();
    }

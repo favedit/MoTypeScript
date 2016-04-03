@@ -29,6 +29,7 @@ export class FrameSpliter extends Control {
    //    o._sizeMin = 40;
    //    //..........................................................
    //    // @html
+   protected _hPanel: HTMLTableCellElement;
    protected _hDrag: HTMLDivElement;
    //    o._hSize = null;
    protected _hIcon;
@@ -51,8 +52,8 @@ export class FrameSpliter extends Control {
       super.onBuild(context);
       //var fs = this._frameset;
       var hPanel = this._hPanel;
-      hPanel.style.zIndex = LayerEnum.Drap;
-      hPanel.__linker = this;
+      //hPanel.style.zIndex = LayerEnum.Drap;
+      //hPanel.__linker = this;
       // 创建拖拽对象
       var hDrag = this._hDrag = context.createDiv(this.styleName('Draging'));
       (hDrag as any).__linker = this;
@@ -61,7 +62,7 @@ export class FrameSpliter extends Control {
       hPanel.appendChild(hDrag);
       // 设置属性
       hPanel.style.cursor = 'e-resize';
-      hPanel._plinker = this;
+      //hPanel._plinker = this;
       //this.attachEvent('onMouseEnter', hPanel, this.onMouseEnter);
       //this.attachEvent('onMouseLeave', hPanel, this.onMouseLeave);
       //this.attachEvent('onDoubleClick', hPanel);
