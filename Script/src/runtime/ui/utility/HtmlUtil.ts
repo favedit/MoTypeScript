@@ -101,37 +101,37 @@ export class HtmlUtil {
    //    hTag.style.display = text;
    // }
 
-   // //==========================================================
-   // // <T>获得文本内容。</T>
-   // //
-   // // @method
-   // // @param hTag:HtmlTag 页面对象
-   // // @return String 文本内容
-   // //==========================================================
-   // public static textGet(hTag, defaultText) {
-   //    var text = null;
-   //    if (MO.Window.Browser.isBrowser(MO.EBrowser.FireFox)) {
-   //       text = hTag.textContent;
-   //    } else {
-   //       text = hTag.innerText;
-   //    }
-   //    return text;
-   // }
+   //==========================================================
+   // <T>获得文本内容。</T>
+   //
+   // @param hTag:HtmlTag 页面对象
+   // @return String 文本内容
+   //==========================================================
+   public static textGet(hTag, defaultText) {
+      var text = null;
+      text = hTag.textContent;
+      // if (MO.Window.Browser.isBrowser(MO.EBrowser.FireFox)) {
+      //    text = hTag.textContent;
+      // } else {
+      //    text = hTag.innerText;
+      // }
+      return text;
+   }
 
-   // //==========================================================
-   // // <T>设置文本内容。</T>
-   // //
-   // // @method
-   // // @param hTag:HtmlTag 页面对象
-   // // @param text:String 文本内容
-   // //==========================================================
-   // public static textSet(hTag, text) {
-   //    if (MO.Window.Browser.isBrowser(MO.EBrowser.FireFox)) {
-   //       hTag.textContent = text;
-   //    } else {
-   //       hTag.innerText = text;
-   //    }
-   // }
+   //==========================================================
+   // <T>设置文本内容。</T>
+   //
+   // @param hTag:HtmlTag 页面对象
+   // @param text:String 文本内容
+   //==========================================================
+   public static textSet(hTag, text) {
+      hTag.textContent = text;
+      // if (MO.Window.Browser.isBrowser(MO.EBrowser.FireFox)) {
+      //    hTag.textContent = text;
+      // } else {
+      //    hTag.innerText = text;
+      // }
+   }
 
    //==========================================================
    // <T>获得复选框内容。</T>

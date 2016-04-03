@@ -54,7 +54,7 @@ export class FCanvasView extends View {
       canvas.setup(settings);
       canvas.addListener(EventEnum.MouseMove, this, this.onMouseMove);
       var hCanvas = canvas.hCanvas;
-      var context = canvas.context;
+      var context = canvas.graphicContent;
       // 创建场景
       var scene: Scene = this.scene = new Scene();
       scene.backgroundColor.set(0.2, 0.2, 0.2, 1);

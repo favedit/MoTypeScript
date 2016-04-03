@@ -9,7 +9,7 @@ import {DeferredPipeline} from '../../plugin/cl3d/technique/pipeline/DeferredPip
 import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
 import {EventEnum} from '../../../runtime/ui/EventEnum';
 import {KeyCodeEnum} from '../../runtime/ui/KeyCodeEnum';
-import {Control} from './../../runtime/ui/Control';
+import {Control} from './../../plugin/dui/Control';
 import {KeyboardService} from '../../runtime/ui/service/KeyboardService';
 import {WglContext} from '../graphic/wgl/WglContext';
 import {WglContextUtil} from '../graphic/wgl/WglContextUtil';

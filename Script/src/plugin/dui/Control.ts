@@ -1,11 +1,17 @@
-import {Fatal} from '../common/lang/Fatal';
-import {AssertUtil} from '../common/AssertUtil';
-import {ServiceUtil} from '../core/ServiceUtil';
-import {EventService} from './service/EventService';
+// import {Fatal} from '../common/lang/Fatal';
+import {ClassUtil} from './runtime/common/reflect/ClassUtil';
+import {AssertUtil} from './runtime/common/AssertUtil';
+import {ServiceUtil} from './runtime/core/ServiceUtil';
+import {EventService} from './runtime/ui/service/EventService';
+import {DockEnum} from './runtime/ui/DockEnum';
+import {AnchorEnum} from './runtime/ui/AnchorEnum';
+import {BuilderUtil} from './runtime/ui/utility/BuilderUtil';
+import {RenderContext} from './RenderContext';
 import {Component} from './Component';
-import {HtmlUtil} from './utility/HtmlUtil';
-import {BuilderUtil} from './utility/BuilderUtil';
-import {Event} from './event/Event';
+import {Render} from './Render';
+
+// import {HtmlUtil} from './utility/HtmlUtil';
+// import {Event} from './event/Event';
 
 //==========================================================
 // <T>控件的基类。</T>
@@ -24,23 +30,25 @@ import {Event} from './event/Event';
 // @version 141231
 //==========================================================
 export class Control extends Component {
+   // 渲染器
+   public context: RenderContext;
    //..........................................................
-   // @property Boolean 是否可见
-   public _visible: boolean = true;
-   // @property Boolean 是否禁止
-   public _disable: boolean = false;
-   // @property EUiDock 停靠方式
-   // public _dockCd        = MO.Class.register(o, [new MO.APtyString('_dockCd'), new MO.AGetSet('_dockCd')], MO.EUiDock.LeftTop);
-   // @property EUiAnchor 锚点方式
-   // public _anchorCd      = MO.Class.register(o, [new MO.APtyString('_anchorCd'), new MO.AGetSet('_anchorCd')], MO.EUiAnchor.None);
-   // @property String 提示信息
+   // 是否可见
+   public visible: boolean;
+   // 是否禁止
+   public disable: boolean;
+   // 停靠方式
+   public dockCd: DockEnum;
+   // 锚点方式
+   public anchorCd: AnchorEnum;
+   // 提示信息
    public hint: string;
-   // // @property
-   // o._nowrap = MO.Class.register(o, [new MO.APtyBoolean('_nowrap'), new MO.AGetSet('_nowrap')]);
-   // o._foreColor = MO.Class.register(o, [new MO.APtyString('_foreColor'), new MO.AGetSet('_foreColor')]);
-   // o._foreFont = MO.Class.register(o, [new MO.APtyString('_foreFont'), new MO.AGetSet('_foreFont')]);
-   // o._backColor = MO.Class.register(o, [new MO.APtyString('_backColor'), new MO.AGetSet('_backColor')]);
-   // o._backFont = MO.Class.register(o, [new MO.APtyString('_backFont'), new MO.AGetSet('_backFont')]);
+   // 不回行
+   public nowrap: boolean;
+   public foreColor: string;
+   public foreFont: string;
+   public backColor: string;
+   public backFont: string;
    // //..........................................................
    // // @style
    // o._stylePanel = MO.Class.register(o, new MO.AStyle('_stylePanel'));
@@ -57,10 +65,13 @@ export class Control extends Component {
    // o._layoutCd = MO.EUiLayout.Display;
    // o._sizeCd = MO.EUiSize.Normal;
    // @attribute
-   protected _statusVisible = true;
-   protected _statusEnable = true;
-   protected _statusBuild = false;
-   protected _statusBuilded = false;
+   // 构建状态
+   protected _statusBuild: boolean;
+   // 可见状态
+   protected _statusVisible: boolean;
+   // 允许状态
+   protected _statusEnable: boolean;
+   // protected _statusBuilded = false;
    // o._storage = null;
    // //o._events      = null;
    //..........................................................
@@ -68,17 +79,6 @@ export class Control extends Component {
    protected _hParent;
    // @html 面板容器
    protected _hPanel;
-   // //..........................................................
-   // // @event
-   // o.onEnter = MO.Class.register(o, new MO.AEventMouseEnter('onEnter'), MO.FDuiControl_onEnter);
-   // o.onLeave = MO.Class.register(o, new MO.AEventMouseLeave('onLeave'), MO.FDuiControl_onLeave);
-   // //o.onMouseOver    = MO.Class.register(o, new MO.AEventMouseOver('onMouseOver'));
-   // //o.onMouseOut     = MO.Class.register(o, new MO.AEventMouseOut('onMouseOut'));
-   // //o.onMouseDown    = MO.Class.register(o, new MO.AEventMouseDown('onMouseDown'));
-   // //o.onMouseUp      = MO.Class.register(o, new MO.AEventMouseUp('onMouseUp'));
-   // //o.onClick        = MO.Class.register(o, new MO.AEventClick('onClick'));
-   // //o.onDoubleClick  = MO.Class.register(o, new MO.AEventDoubleClick('onDoubleClick'));
-   // //o.onResize       = MO.Class.register(o, new MO.AEventResize('onResize'));
 
    //==========================================================
    // <T>构造处理。</T>
@@ -87,185 +87,190 @@ export class Control extends Component {
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
+      this.visible = true;
+      this.dockCd = DockEnum.LeftTop;
+      this.anchorCd = AnchorEnum.None;
+      this._statusVisible = true;
+      this._statusEnable = true;
    }
 
    //==========================================================
    // <T>创建一个控件容器。</T>
    // <P>默认为DIV页面元素。</P>
    //
-   // @method
-   // @param p:event:MO.SUiDispatchEvent 事件处理
+   // @param context 环境信息
    //==========================================================
-   public onBuildPanel(p) {
-      this._hPanel = BuilderUtil.createDiv(p, this.styleName('Panel'));
+   public onBuildPanel(context: RenderContext) {
+      this._hPanel = context.createDiv(this.styleName('Panel'));
    }
 
    //==========================================================
    // <T>建立显示框架。</T>
    //
-   // @method
-   // @param argements 参数集合
+   // @param context 参数集合
    //==========================================================
-   public onBuild(p) {
+   public onBuild(context: RenderContext) {
       // 建立控件容器
-      this.onBuildPanel(p);
-      // 设置可见性
-      if (this._statusVisible != this._visible) {
-         this.setVisible(this._visible);
-      }
-      // 设置容器样式
-      var hPanel = this._hPanel;
-      HtmlUtil.linkSet(hPanel, 'control', this);
-      // 关联容器事件
-      //this.attachEvent('onEnter', hPanel);
-      //this.attachEvent('onLeave', hPanel);
-      //o.attachEvent('onMouseOver', h);
-      //o.attachEvent('onMouseOut', h);
-      //o.attachEvent('onMouseDown', h);
-      //o.attachEvent('onMouseUp', h);
-      //o.attachEvent('onClick', h);
-      //o.attachEvent('onDoubleClick', h);
-      //o.attachEvent('onKeyDown', h);
-      //o.attachEvent('onKeyPress', h);
-      //o.attachEvent('onKeyUp', h);
-      //o.attachEvent('onResize', h);
-      // 设置容器位置/大小/空白
-      //this.refreshBounds();
-      //this.refreshPadding();
-      //this.refreshMargin();
+      this.onBuildPanel(context);
+      // // 设置可见性
+      // if (this._statusVisible != this._visible) {
+      //    this.setVisible(this._visible);
+      // }
+      // // 设置容器样式
+      // var hPanel = this._hPanel;
+      // HtmlUtil.linkSet(hPanel, 'control', this);
+      // // 关联容器事件
+      // this.attachEvent('onEnter', hPanel);
+      // this.attachEvent('onLeave', hPanel);
+      // this.attachEvent('onMouseOver', h);
+      // this.attachEvent('onMouseOut', h);
+      // this.attachEvent('onMouseDown', h);
+      // this.attachEvent('onMouseUp', h);
+      // this.attachEvent('onClick', h);
+      // this.attachEvent('onDoubleClick', h);
+      // this.attachEvent('onKeyDown', h);
+      // this.attachEvent('onKeyPress', h);
+      // this.attachEvent('onKeyUp', h);
+      // this.attachEvent('onResize', h);
+      // // 设置容器位置 / 大小 / 空白
+      // this.refreshBounds();
+      // this.refreshPadding();
+      // this.refreshMargin();
       // 如果父容器是可以容纳控件的，则将自己添加到父容器
-      //if(MO.Class.isClass(o.parent, MContainer)){
-      //   o.parent.appendChild(o);
-      //}
+      // if (MO.Class.isClass(this.parent, MContainer)) {
+      //    this.parent.appendChild(this);
+      // }
    }
 
-   //==========================================================
-   // <T>判断当前控件是否显示。</T>
-   //
-   // @return 是否显示
-   //==========================================================
-   public isVisible() {
-      return this._statusVisible;
-   }
+   // //==========================================================
+   // // <T>判断当前控件是否显示。</T>
+   // //
+   // // @return 是否显示
+   // //==========================================================
+   // public isVisible() {
+   //    return this._statusVisible;
+   // }
 
-   //==========================================================
-   // <T>设置控件的隐藏和显示。</T>
-   //
-   // @param visible 是否显示
-   //==========================================================
-   public setVisible(visible: boolean) {
-      var hPanel = this._hPanel;
-      if (hPanel) {
-         HtmlUtil.visibleSet(hPanel, visible);
-      }
-      this._statusVisible = visible;
-   }
+   // //==========================================================
+   // // <T>设置控件的隐藏和显示。</T>
+   // //
+   // // @param visible 是否显示
+   // //==========================================================
+   // public setVisible(visible: boolean) {
+   //    var hPanel = this._hPanel;
+   //    if (hPanel) {
+   //       HtmlUtil.visibleSet(hPanel, visible);
+   //    }
+   //    this._statusVisible = visible;
+   // }
 
-   //==========================================================
-   // <T>显示状态切换。</T>
-   //==========================================================
-   public show() {
-      if (!this._statusVisible) {
-         this.setVisible(true);
-      }
-   }
+   // //==========================================================
+   // // <T>显示状态切换。</T>
+   // //==========================================================
+   // public show() {
+   //    if (!this._statusVisible) {
+   //       this.setVisible(true);
+   //    }
+   // }
 
-   //==========================================================
-   // <T>隐藏状态切换。</T>
-   //==========================================================
-   public hide() {
-      if (this._statusVisible) {
-         this.setVisible(false);
-      }
-   }
+   // //==========================================================
+   // // <T>隐藏状态切换。</T>
+   // //==========================================================
+   // public hide() {
+   //    if (this._statusVisible) {
+   //       this.setVisible(false);
+   //    }
+   // }
 
-   //==========================================================
-   // <T>判断当前控件是否可以操作。</T>
-   //
-   // @return 是否可以
-   //==========================================================
-   public isEnable() {
-      return this._statusEnable;
-   }
+   // //==========================================================
+   // // <T>判断当前控件是否可以操作。</T>
+   // //
+   // // @return 是否可以
+   // //==========================================================
+   // public isEnable() {
+   //    return this._statusEnable;
+   // }
 
-   //==========================================================
-   // <T>设置控件的可操作和禁止。</T>
-   //
-   // @param enable 是否可操作
-   //==========================================================
-   public setEnable(enable) {
-      var hPanel = this._hPanel;
-      if (hPanel) {
-         hPanel.style.disabled = !enable;
-      }
-      this._statusEnable = enable;
-   }
+   // //==========================================================
+   // // <T>设置控件的可操作和禁止。</T>
+   // //
+   // // @param enable 是否可操作
+   // //==========================================================
+   // public setEnable(enable) {
+   //    var hPanel = this._hPanel;
+   //    if (hPanel) {
+   //       hPanel.style.disabled = !enable;
+   //    }
+   //    this._statusEnable = enable;
+   // }
 
-   //==========================================================
-   // <T>可操作状态切换。</T>
-   //==========================================================
-   public enable() {
-      if (!this._statusEnable) {
-         this.setEnable(true);
-      }
-   }
+   // //==========================================================
+   // // <T>可操作状态切换。</T>
+   // //==========================================================
+   // public enable() {
+   //    if (!this._statusEnable) {
+   //       this.setEnable(true);
+   //    }
+   // }
 
-   //==========================================================
-   // <T>禁止状态切换。</T>
-   //==========================================================
-   public disable() {
-      if (this._statusEnable) {
-         this.setEnable(false);
-      }
-   }
+   // //==========================================================
+   // // <T>禁止状态切换。</T>
+   // //==========================================================
+   // public disable() {
+   //    if (this._statusEnable) {
+   //       this.setEnable(false);
+   //    }
+   // }
 
    //==========================================================
    // <T>获得定义的样式名称。</T>
    // <P>样式不存在的话，产生例外。</P>
    //
    // @param name 名称
-   // @param method 类对象
+   // @param clazz 类对象
    // @return String 样式名称
    //==========================================================
-   public styleName(name, method?: any) {
-      return name;
-      // var findMethod = method ? method : this;
-      // var className = ClassUtil.name(findMethod);
-      // var clazz = ClassUtil.forName(className);
-      // return clazz.style(name);
+   public styleName(name: string, clazz?: Function) {
+      var findClazz = clazz ? clazz : this;
+      var className = ClassUtil.shortName(findClazz);
+      return className + '_' + name;
+      //var clazz = ClassUtil.forName(className);
+      //return clazz.style(name);
    }
 
-   //==========================================================
-   // <T>获得定义的样式图标名称。</T>
-   //
-   // @param name:String 名称
-   // @param method:Function 类对象
-   // @return String 图标名称
-   //==========================================================
-   public styleIcon(name, method) {
-      //var className = MO.Class.name(method ? method : this, true);
-      //return className + '_' + name;
-   }
+   // //==========================================================
+   // // <T>获得定义的样式图标名称。</T>
+   // //
+   // // @param name:String 名称
+   // // @param method:Function 类对象
+   // // @return String 图标名称
+   // //==========================================================
+   // public styleIcon(name, method) {
+   //    //var className = MO.Class.name(method ? method : this, true);
+   //    //return className + '_' + name;
+   // }
 
-   //==========================================================
-   // <T>获得定义的样式图标路径。</T>
-   //
-   // @param name:String 名称
-   // @param method:Function 类对象
-   // @return String 图标路径
-   //==========================================================
-   public styleIconPath(name, method) {
-      //var className = MO.Class.name(method ? method : this, true);
-      //var iconName = className + '_' + name;
-      //return MO.RResource.iconPath(iconName);
-   }
+   // //==========================================================
+   // // <T>获得定义的样式图标路径。</T>
+   // //
+   // // @param name:String 名称
+   // // @param method:Function 类对象
+   // // @return String 图标路径
+   // //==========================================================
+   // public styleIconPath(name, method) {
+   //    //var className = MO.Class.name(method ? method : this, true);
+   //    //var iconName = className + '_' + name;
+   //    //return MO.RResource.iconPath(iconName);
+   // }
 
    //==========================================================
    // <T>设置控件的页面父容器。</T>
    //
    // @param hPanel 页面元素
    //==========================================================
-   public setPanel(hPanel) {
+   public setPanel(hPanel: HTMLElement) {
+      AssertUtil.debugNotNull(hPanel);
       this._hParent = hPanel;
       hPanel.appendChild(this._hPanel);
    }
@@ -290,30 +295,22 @@ export class Control extends Component {
 
    //==========================================================
    // <T>构建处理。</T>
-   // <P>只允许构建一次，不允许重复构建。</P>
    //
-   // @param parent 父对象
+   // @param context 环境
    //==========================================================
-   public build(parent: any) {
-      AssertUtil.debugTrue(this._statusBuild);
-      // 获得文档对象
-      var hDocument = null;
-      if (parent instanceof Control) {
-         hDocument = parent._hPanel.ownerDocument;
-      } else if (parent.createElement) {
-         hDocument = parent;
-      } else if (parent.ownerDocument && parent.ownerDocument.createElement) {
-         hDocument = parent.ownerDocument;
-      } else if (parent.hDocument) {
-         hDocument = parent.hDocument;
-      } else {
-         throw new Fatal(this, "Parent is invalid. (parent={1})", parent);
-      }
+   public setup(context: RenderContext) {
+   }
+
+   //==========================================================
+   // <T>构建处理。</T>
+   //
+   // @param context 环境
+   //==========================================================
+   public build(context: RenderContext) {
+      AssertUtil.debugNotNull(context);
+      AssertUtil.debugFalse(this._statusBuild);
       // 构建处理
-      var event: any = new Event(this);
-      event.hDocument = hDocument;
-      this.onBuild(event);
-      event.dispose();
+      this.onBuild(context);
       // 设置状态
       this._statusBuild = true;
    }

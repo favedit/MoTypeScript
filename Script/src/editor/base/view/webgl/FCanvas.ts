@@ -8,7 +8,7 @@ import {FCanvas as FBaseCanvas} from '../base/FCanvas';
 //==========================================================
 export class FCanvas extends FBaseCanvas {
 
-   public context: WglContext;
+   public graphicContent: WglContext;
 
    public constructor() {
       super();
@@ -34,7 +34,7 @@ export class FCanvas extends FBaseCanvas {
       hCanvas.height = size.height;
       hPanel.appendChild(hCanvas);
       // 创建环境
-      var context = this.context = WglContextUtil.create(hCanvas);
+      var context = this.graphicContent = WglContextUtil.create(hCanvas);
       // 设置事件
       this.attachEvent(hCanvas, EventEnum.MouseMove, this.onMouseMove);
    }

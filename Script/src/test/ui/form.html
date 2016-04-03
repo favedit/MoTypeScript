@@ -6,7 +6,7 @@
 <SCRIPT type="text/javascript" src="../../../library/require.js"></script>
 <SCRIPT type="text/javascript" src="../../../build/mo.js"></script>
 <SCRIPT>
-require(['test/graphic/tempalte'], function (space){
+require(['test/ui/form'], function (space){
    // 设置参数
    //var info = ['pvw.show.item.001', 1];
    //var info = ['pvw.show.item.002', 1];
@@ -20,24 +20,26 @@ require(['test/graphic/tempalte'], function (space){
    //var info = ['pvw.show.item.010', 0.2];
    //var info = ['pvw.show.item.011', 1];
    //var info = ['pvw.show.item.012', 0.001];
-   var info = ['pvw.sc.car.01.001', 0.005];
+   //var info = ['pvw.sc.car.01.001', 0.005];
    //var info = ['pvw.sc.car.01.002', 0.15];
    //var info = ['pvw.sc.car.01.003', 0.05];
    //var info = ['pvw.show.parallax.001', 0.8];
    //var info = ['lgt.item.001', 0.1];
    //............................................................
    // 创建测试
-   var test = new space.TemplateTest();
-   test.setup(window);
-   test.setEnvironment('resource', '/asset/demo');
+   var tester = new space.FormTest();
+   tester.setup(window);
+   tester.setEnvironment('resource', '/asset/demo');
    // 加载模板
-   var template = test.load('${resource}/template/' + info[0] + '.template');
-   template.matrix.setScaleAll(info[1]);
-   template.matrix.tz = -8;
-   template.matrix.updateForce();
-   template.matrix.addRotationX(-Math.PI / 2);
+   //var template = test.load('${resource}/template/' + info[0] + '.template');
+   //template.matrix.setScaleAll(info[1]);
+   //template.matrix.tz = -8;
+   //template.matrix.updateForce();
+   //template.matrix.addRotationX(-Math.PI / 2);
    // 运行测试
-   test.start();
+   tester.testEdit();
+   tester.testFrameSet();
+   tester.testToolBar();
 });
 </SCRIPT>
 </HEAD>

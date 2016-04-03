@@ -1,5 +1,5 @@
 import {ObjectBase} from '../../../../runtime/common/lang/ObjectBase';
-import {Control} from '../../../../runtime/ui/Control';
+import {Control} from '../../../../plugin/dui/Control';
 
 //==========================================================
 // <T>画板基类。</T>
@@ -12,13 +12,13 @@ export class FCanvas extends Control {
 
    public hCanvas: HTMLCanvasElement;
 
-   public content = null;
+   public graphicContent = null;
 
    //==========================================================
    // <T>创建环境。</T>
    //==========================================================
    public setup(parameters) {
-      this.content = this.createContext(parameters);
+      this.graphicContent = this.createContext(parameters);
    }
 
    //==========================================================

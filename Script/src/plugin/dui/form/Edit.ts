@@ -1,3 +1,4 @@
+import {RenderContext} from '../RenderContext';
 import {EditControl} from './EditControl';
 
 //==========================================================
@@ -20,15 +21,17 @@ export class Edit extends EditControl {
    // // @property
    // o._inputSize            = MO.Class.register(o, [new MO.APtySize2('_inputSize'), new MO.AGetter('_inputSize')]);
    // o._unit                 = MO.Class.register(o, [new MO.APtyString('_unit'), new MO.AGetSet('_unit')]);
+   public editLength: number;
    // //..........................................................
    // // @attribute
    // o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged'));
    // //..........................................................
-   // // @html
-   // o._hValueForm           = null;
-   // o._hValueLine           = null;
-   // o._hInputPanel          = null;
-   // o._hInput               = null;
+   // 内容表单
+   public _hValueForm: HTMLTableElement;
+   // 输入表单
+   public _hInputPanel: HTMLTableCellElement;
+   // 输入框
+   public _hInput: HTMLInputElement;
    // //..........................................................
    // // @event
    // o.onBuildEditValue      = MO.FDuiEdit_onBuildEditValue;
@@ -45,32 +48,30 @@ export class Edit extends EditControl {
       //this._inputSize = new MO.SSize2();
    }
 
-   // //==========================================================
-   // // <T>建立编辑器内容。</T>
-   // //
-   // // @method
-   // // @param event:SEvent 事件信息
-   // //==========================================================
-   // MO.FDuiEdit_onBuildEditValue = function FDuiEdit_onBuildEditValue(event) {
-   //    var o = this;
-   //    var hValuePanel = o._hValuePanel;
-   //    var hValueForm = o._hValueForm = MO.Window.Builder.appendTable(hValuePanel);
-   //    var hValueLine = o._hValueLine = MO.Window.Builder.appendTableRow(hValueForm);
-   //    MO.Window.Html.setSize(hValueForm, o._inputSize);
-   //    //..........................................................
-   //    // 建立改变栏
-   //    o._hChangePanel = MO.Window.Builder.appendTableCell(hValueLine);
-   //    o.onBuildEditChange(event);
-   //    //..........................................................
-   //    // 建立输入栏
-   //    var hInputPanel = o._hInputPanel = MO.Window.Builder.appendTableCell(hValueLine);
-   //    var hInput = o._hInput = MO.Window.Builder.appendEdit(hInputPanel);
-   //    o.attachEvent('onInputEdit', hInput, o.onInputEdit);
-   //    // 设置可以输入的最大长度
-   //    if (o._editLength) {
-   //       hInput.maxLength = o._editLength;
-   //    }
-   // }
+   //==========================================================
+   // <T>建立编辑器内容。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildEditValue(context: RenderContext) {
+      var hValuePanel = this._hValuePanel;
+      var hValueForm = this._hValueForm = context.appendTable(hValuePanel);
+      var hValueLine = context.appendTableRow(hValueForm);
+      //MO.Window.Html.setSize(hValueForm, this._inputSize);
+      //..........................................................
+      // 建立改变栏
+      //this._hChangePanel = context.appendTableCell(hValueLine);
+      //this.onBuildEditChange(event);
+      //..........................................................
+      // 建立输入栏
+      var hInputPanel = this._hInputPanel = context.appendTableCell(hValueLine);
+      var hInput = this._hInput = context.appendEdit(hInputPanel);
+      //this.attachEvent('onInputEdit', hInput, this.onInputEdit);
+      // 设置可以输入的最大长度
+      if (this.editLength) {
+         hInput.maxLength = this.editLength;
+      }
+   }
 
    // //==========================================================
    // // <T>编辑控件中数据修改处理。 </T>

@@ -4,8 +4,6 @@ export * from './BorderEnum';
 export * from './BorderStyleEnum';
 export * from './BrowserEnum';
 export * from './ColorEnum';
-export * from './Component';
-export * from './Control';
 export * from './CursorEnum';
 export * from './DataActionEnum';
 export * from './DeviceEnum';
@@ -30,9 +28,6 @@ export * from './SizeEnum';
 export * from './SoftwareEnum';
 export * from './TimeUnitEnum';
 export * from './WrapEnum';
-
-import * as control from './control/index';
-export {control as control};
 
 import * as device from './device/index';
 export {device as device};
