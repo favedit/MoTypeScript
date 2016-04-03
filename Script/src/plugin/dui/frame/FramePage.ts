@@ -27,9 +27,9 @@ export class FramePage extends Container {
    // @param context 环境信息
    //==========================================================
    public onBuildPanel(context: RenderContext) {
-      var hPanel = this._hPanel = context.createTableCell(this.styleName('Panel'));
-      hPanel.vAlign = 'top';
-      hPanel.height = '100%';
+      var hPanel = this._hPanel = context.createTableCell(this.styleClass || this.styleName('Panel'));
+      //hPanel.vAlign = 'top';
+      //hPanel.height = '100%';
       if (this.backColor) {
          hPanel.bgColor = this.backColor;
       }

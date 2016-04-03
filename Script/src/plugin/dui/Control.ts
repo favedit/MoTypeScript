@@ -1,18 +1,27 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
 import {Fatal} from './runtime/common/lang/Fatal';
+import {Listeners} from './runtime/common/lang/Listeners';
+import {StringUtil} from './runtime/common/lang/StringUtil';
+import {LoggerUtil} from './runtime/common/lang/LoggerUtil';
+import {AnnotationEnum} from './runtime/common/reflect/AnnotationEnum';
+import {Property} from './runtime/common/reflect/Property';
+import {PropertyAnnotation} from './runtime/common/reflect/PropertyAnnotation';
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
+import {Point2} from './runtime/common/math/Point2';
+import {Size2} from './runtime/common/math/Size2';
 import {AssertUtil} from './runtime/common/AssertUtil';
 import {ServiceUtil} from './runtime/core/ServiceUtil';
-import {EventService} from './runtime/ui/service/EventService';
 import {EventEnum} from './runtime/ui/EventEnum';
 import {DockEnum} from './runtime/ui/DockEnum';
 import {AnchorEnum} from './runtime/ui/AnchorEnum';
 import {PanelEnum} from './runtime/ui/PanelEnum';
+import {EventService} from './runtime/ui/service/EventService';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {BuilderUtil} from './runtime/ui/utility/BuilderUtil';
 import {RenderContext} from './RenderContext';
 import {Component} from './Component';
 import {Render} from './Render';
 
-// import {HtmlUtil} from './utility/HtmlUtil';
 // import {Event} from './event/Event';
 
 //==========================================================
@@ -40,11 +49,23 @@ export class Control extends Component {
    // 是否禁止
    public disable: boolean;
    // 停靠方式
+   @Property('dock_cd', DataTypeEnum.Enum, null, DockEnum)
    public dockCd: DockEnum;
    // 锚点方式
+   @Property('anchor_cd', DataTypeEnum.Enum, null, AnchorEnum)
    public anchorCd: AnchorEnum;
-   // 提示信息
    public hint: string;
+   // 样式
+   @Property('style_class', DataTypeEnum.String)
+   public styleClass: string;
+   // 位置
+   @Property('location', DataTypeEnum.Struct, null, Point2)
+   protected _location: Point2;
+   // 大小
+   @Property('size', DataTypeEnum.Struct, null, Size2)
+   protected _size: Size2;
+   // 提示信息
+   @Property('hint', DataTypeEnum.String)
    // 不回行
    public nowrap: boolean;
    public foreColor: string;
@@ -93,6 +114,8 @@ export class Control extends Component {
       this.visible = true;
       this.dockCd = DockEnum.LeftTop;
       this.anchorCd = AnchorEnum.None;
+      this._location = new Point2();
+      this._size = new Size2();
       this._statusVisible = true;
       this._statusEnable = true;
    }
@@ -105,7 +128,7 @@ export class Control extends Component {
    //==========================================================
    // public setAttribute(name: string, value: string) {
    // }
-   
+
    //==========================================================
    // <T>创建一个控件容器。</T>
    // <P>默认为DIV页面元素。</P>
@@ -123,7 +146,7 @@ export class Control extends Component {
    // @param context 参数集合
    //==========================================================
    public onBuild(context: RenderContext) {
-      if(this['onclick']){
+      if (this['onclick']) {
          var parentComponent = context.parentComponent;
          var onclick = this['onclick'];
          var clickEvent = parentComponent[onclick];
@@ -161,80 +184,173 @@ export class Control extends Component {
       // }
    }
 
-   // //==========================================================
-   // // <T>判断当前控件是否显示。</T>
-   // //
-   // // @return 是否显示
-   // //==========================================================
-   // public isVisible() {
-   //    return this._statusVisible;
-   // }
+   //==========================================================
+   // <T>判断当前控件是否显示。</T>
+   //
+   // @return 是否显示
+   //==========================================================
+   public isVisible() {
+      return this._statusVisible;
+   }
 
-   // //==========================================================
-   // // <T>设置控件的隐藏和显示。</T>
-   // //
-   // // @param visible 是否显示
-   // //==========================================================
-   // public setVisible(visible: boolean) {
-   //    var hPanel = this._hPanel;
-   //    if (hPanel) {
-   //       HtmlUtil.visibleSet(hPanel, visible);
-   //    }
-   //    this._statusVisible = visible;
-   // }
+   //==========================================================
+   // <T>设置控件的隐藏和显示。</T>
+   //
+   // @param visible 是否显示
+   //==========================================================
+   public setVisible(visible: boolean) {
+      var hPanel = this._hPanel;
+      if (hPanel) {
+         HtmlUtil.visibleSet(hPanel, visible);
+      }
+      this._statusVisible = visible;
+   }
 
-   // //==========================================================
-   // // <T>显示状态切换。</T>
-   // //==========================================================
-   // public show() {
-   //    if (!this._statusVisible) {
-   //       this.setVisible(true);
-   //    }
-   // }
+   //==========================================================
+   // <T>显示状态切换。</T>
+   //==========================================================
+   public show() {
+      if (!this._statusVisible) {
+         this.setVisible(true);
+      }
+   }
 
-   // //==========================================================
-   // // <T>隐藏状态切换。</T>
-   // //==========================================================
-   // public hide() {
-   //    if (this._statusVisible) {
-   //       this.setVisible(false);
-   //    }
-   // }
+   //==========================================================
+   // <T>隐藏状态切换。</T>
+   //==========================================================
+   public hide() {
+      if (this._statusVisible) {
+         this.setVisible(false);
+      }
+   }
 
-   // //==========================================================
-   // // <T>判断当前控件是否可以操作。</T>
-   // //
-   // // @return 是否可以
-   // //==========================================================
-   // public isEnable() {
-   //    return this._statusEnable;
-   // }
+   //==========================================================
+   // <T>判断当前控件是否可以操作。</T>
+   //
+   // @return 是否可以
+   //==========================================================
+   public isEnable() {
+      return this._statusEnable;
+   }
 
-   // //==========================================================
-   // // <T>设置控件的可操作和禁止。</T>
-   // //
-   // // @param enable 是否可操作
-   // //==========================================================
-   // public setEnable(enable) {
-   //    var hPanel = this._hPanel;
-   //    if (hPanel) {
-   //       hPanel.style.disabled = !enable;
-   //    }
-   //    this._statusEnable = enable;
-   // }
+   //==========================================================
+   // <T>设置控件的可操作和禁止。</T>
+   //
+   // @param enable 是否可操作
+   //==========================================================
+   public setEnable(enable) {
+      var hPanel = this._hPanel;
+      if (hPanel) {
+         hPanel.style.disabled = !enable;
+      }
+      this._statusEnable = enable;
+   }
 
-   // //==========================================================
-   // // <T>可操作状态切换。</T>
-   // //==========================================================
-   // public enable() {
-   //    if (!this._statusEnable) {
-   //       this.setEnable(true);
-   //    }
-   // }
+   //==========================================================
+   // <T>可操作状态切换。</T>
+   //==========================================================
+   public enable() {
+      if (!this._statusEnable) {
+         this.setEnable(true);
+      }
+   }
 
-   // //==========================================================
-   // // <T>禁止状态切换。</T>
-   // //==========================================================
+   //==========================================================
+   // <T>获得宽度。</T>
+   //
+   // @return 宽度
+   //==========================================================
+   public width() {
+      return this._size.width;
+   }
+
+   //==========================================================
+   // <T>设置宽度。</T>
+   //
+   // @param width 宽度
+   //==========================================================
+   public setWidth(width) {
+      this.setSize(width, null);
+   }
+
+   //==========================================================
+   // <T>获得高度。</T>
+   //
+   // @return 高度
+   //==========================================================
+   public height() {
+      return this._size.width;
+   }
+
+   //==========================================================
+   // <T>设置高度。</T>
+   //
+   // @param height 高度
+   //==========================================================
+   public setHeight(height) {
+      this.setSize(null, height);
+   }
+
+   //==========================================================
+   // <T>获得大小。</T>
+   //
+   // @method
+   // @return SSize2 大小
+   //==========================================================
+   public get size() {
+      return this._size;
+   }
+
+   //==========================================================
+   // <T>设置大小。</T>
+   //
+   // @method
+   // @param width:Number 宽度
+   // @param height:Number 高度
+   //==========================================================
+   public setSize(width, height) {
+      var hPanel = this.getPanel(PanelEnum.Size);
+      // 设置宽度
+      if (width != null) {
+         this._size.width = width;
+         //if (hPanel && !hPanel.__fragment) {
+         if (hPanel) {
+            if (hPanel.tagName == 'TD') {
+               if (width != 0) {
+                  (hPanel as any).width = width;
+               }
+            } else {
+               if (StringUtil.contains(width, '%')) {
+                  hPanel.style.width = width;
+               } else {
+                  hPanel.style.width = (width == 0) ? null : width + 'px';
+               }
+            }
+         }
+      }
+      // 设置高度
+      if (height != null) {
+         this._size.height = height;
+         //if (hPanel && !hPanel.__fragment) {
+         if (hPanel) {
+            if (hPanel.tagName == 'TD') {
+               if (height != 0) {
+                  (hPanel as any).height = height;
+               }
+            } else {
+               if (StringUtil.contains(height, '%')) {
+                  hPanel.style.height = height;
+               } else {
+                  hPanel.style.height = (height == 0) ? null : height + 'px';
+               }
+            }
+         }
+      }
+   }
+
+   //==========================================================
+   // <T>禁止状态切换。</T>
+   //==========================================================
    // public disable() {
    //    if (this._statusEnable) {
    //       this.setEnable(false);
@@ -388,15 +504,42 @@ export class Control extends Component {
    public build(context: RenderContext) {
       AssertUtil.debugNotNull(context);
       AssertUtil.debugFalse(this._statusBuild);
-      // 构建处理
       this.renderContext = context;
+      // 事件绑定处理
+      var clazz = ClassUtil.get(this.constructor);
+      var annotations = clazz.findAnnotations(AnnotationEnum.Property);
+      if (annotations) {
+         var parentComponent = context.parentComponent;
+         var count = annotations.count();
+         for (var n = 0; n < count; n++) {
+            var annotation: PropertyAnnotation = <PropertyAnnotation>annotations.at(n);
+            if (annotation.dataCd == DataTypeEnum.Listeners) {
+               // 获得监听处理
+               var dataName = annotation.dataName;
+               var dataValue = this.attributes.get(dataName);
+               var invoker = parentComponent[dataValue];
+               if (invoker) {
+                  var name = annotation.name;
+                  // 创建监听器
+                  var listeners: Listeners = this[name];
+                  if (!listeners) {
+                     listeners = this[name] = new Listeners(this);
+                  }
+                  // 注册监听器
+                  listeners.register(parentComponent, invoker);
+                  LoggerUtil.debug(this, 'Register listener. (name={1}, data_name={2}, invoker={3})', name, dataName, dataValue);
+               }
+            }
+         }
+      }
+      // 构建处理
       this.onBuild(context);
       // 设置状态
       this._statusBuild = true;
    }
 
    // //==========================================================
-   // // <T>控件模式变更处理。</T>
+   // // <T>控件模式变更处理。</T>`
    // //
    // // @method
    // // @param event:SUiDispatchEvent 事件信息
@@ -659,31 +802,25 @@ export class Control extends Component {
    //    }
    // }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // public dispose() {
-   //    var o = this;
-   //    // 释放属性
-   //    o._disable = null;
-   //    o._hint = null;
-   //    // 释放属性
-   //    o._styleContainer = null;
-   //    // 释放属性
-   //    o._statusVisible = null;
-   //    o._statusEnable = null;
-   //    o._statusBuild = null;
-   //    // 释放属性
-   //    o._hParent = null;
-   //    o._hPanel = MO.Window.Html.free(o._hPanel);
-   //    // 释放处理
-   //    o.__base.MDuiStyle.dispose.call(o);
-   //    o.__base.MUiPadding.dispose.call(o);
-   //    o.__base.MUiMargin.dispose.call(o);
-   //    o.__base.MDuiSize.dispose.call(o);
-   //    o.__base.MUiControl.dispose.call(o);
-   //    o.__base.FDuiComponent.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //
+   // @method
+   //==========================================================
+   public dispose() {
+      // 释放属性
+      // this._disable = null;
+      // this._hint = null;
+      // // 释放属性
+      // this._styleContainer = null;
+      // // 释放属性
+      // this._statusVisible = null;
+      // this._statusEnable = null;
+      // this._statusBuild = null;
+      // // 释放属性
+      // this._hParent = null;
+      // this._hPanel = MO.Window.Html.free(this._hPanel);
+      // 释放处理
+      super.dispose();
+   }
 }

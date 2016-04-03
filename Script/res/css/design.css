@@ -1,7 +1,7 @@
 /* ------------------------------------------------------ */
-/* FDsResourceSelectDialog                                */
+/* ResourceSelectDialog                                */
 /* ------------------------------------------------------ */
-.FDsResourceSelectDialog_Toolbar_Ground{
+.ResourceSelectDialog_Toolbar_Ground{
    padding-left: 4px;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -14,18 +14,18 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsResourceSelectDialog_Catalog_Content{
+.ResourceSelectDialog_Catalog_Content{
    background-color: #EEEEEE;
 }
 
-.FDsResourceSelectDialog_List_Content{
+.ResourceSelectDialog_List_Content{
    background-color: #EEEEEE;
 }
 
 /* ------------------------------------------------------ */
-/* FDsFrameSet                                            */
+/* FrameSet                                            */
 /* ------------------------------------------------------ */
-.FDsFrameSet_ToolBar_Ground{
+.FrameSet_ToolBar_Ground{
    padding-left: 4px;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -38,22 +38,33 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsFrameSet_Catalog_Content{
+.FrameSet_Catalog_Content{
    background-color: #EEEEEE;
 }
 
-.FDsFrameSet_Canvas_Content{
+.FrameSet_Canvas_Content{
    background-color: #EEEEEE;
 }
 
-.FDsFrameSet_Property_Content{
+.FrameSet_Property_Content{
    background-color: #777777;
 }
 
+.FrameSet_StatusBar_Ground{
+   background: #AEAEAE;
+   border-top: 1px solid #999999;
+   background: -ms-linear-gradient(top, #555555, #AEAEAE);
+   background: -moz-linear-gradient(top, #555555, #AEAEAE); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#EEEEEE), to(#BBBBBB)); 
+   filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#555555, endColorStr=#AEAEAE);
+}
+
+
+
 /* ------------------------------------------------------ */
-/* FDsSolutionFrameSet                                    */
+/* SolutionFrameSet                                    */
 /* ------------------------------------------------------ */
-.FDsSolutionFrameSet_Catalog_Toolbar{
+.SolutionFrameSet_Catalog_Toolbar{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -63,11 +74,11 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsSolutionFrameSet_Catalog_Ground{
+.SolutionFrameSet_Catalog_Ground{
    background: #EEEEEE;
 }
 
-.FDsSolutionFrameSet_List_Toolbar{
+.SolutionFrameSet_List_Toolbar{
    background: #AEAEAE;
    padding-top: 1px;
    padding-left: 6px;
@@ -78,11 +89,11 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsSolutionFrameSet_List_Ground{
+.SolutionFrameSet_List_Ground{
    background: #EEEEEE;
 }
 
-.FDsSolutionFrameSet_Property_Toolbar{
+.SolutionFrameSet_Property_Toolbar{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -92,23 +103,23 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsSolutionFrameSet_Property_Ground{
+.SolutionFrameSet_Property_Ground{
    background: #EEEEEE;
 }
 
 /* ------------------------------------------------------ */
-/* FDsProjectFrameSet                                   */
+/* ProjectFrameSet                                   */
 /* ------------------------------------------------------ */
-.FDsProjectFrameSet_FrameSet_Ground{
+.ProjectFrameSet_FrameSet_Ground{
    background: #EEEEEE;
 }
 
-.FDsProjectFrameSet_PageControl{
+.ProjectFrameSet_PageControl{
    width: 100%;
    height: 100%;
 }
 
-.FDsProjectFrameSet_Toolbar_Ground{
+.ProjectFrameSet_Toolbar_Ground{
    padding: 1px 4px;
    border-bottom: 1px solid #999999;
    background-color: #AEAEAE;
@@ -118,41 +129,41 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#EEEEEE, endColorStr=#BBBBBB);
 }
 
-.FDsProjectFrameSet_Catalog_Ground{
+.ProjectFrameSet_Catalog_Ground{
    padding-top: 4px;
    background-color: #CCCCCC;
 }
 
-.FDsProjectFrameSet_Catalog_Content{
+.ProjectFrameSet_Catalog_Content{
    background: #FFFFFF;
 }
 
-.FDsProjectFrameSet_Canvas_Ground{
+.ProjectFrameSet_Canvas_Ground{
    padding-top: 4px;
    background-color: #CCCCCC;
 }
 
-.FDsProjectFrameSet_Canvas_Content{
+.ProjectFrameSet_Canvas_Content{
    background: #777777;
 }
 
-.FDsProjectFrameSet_Property_Ground{
+.ProjectFrameSet_Property_Ground{
    padding-top: 4px;
    background-color: #CCCCCC;
 }
 
-.FDsProjectFrameSet_Property_Content{
+.ProjectFrameSet_Property_Content{
    background-color: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsResourceListItem                                    */
+/* ResourceListItem                                    */
 /* ------------------------------------------------------ */
-.FDsResourceListItem_TypePanel{
+.ResourceListItem_TypePanel{
    padding: 4px;
 }
 
-.FDsResourceListItem_TypePrivateLabel{
+.ResourceListItem_TypePrivateLabel{
    text-align: left;
    width: 60px;
    padding: 2px 8px 2px;
@@ -162,7 +173,7 @@
    z-index: 1;
 }
 
-.FDsResourceListItem_TypePublicLabel{
+.ResourceListItem_TypePublicLabel{
    text-align: left;
    width: 60px;
    padding: 2px 8px 2px;
@@ -173,9 +184,9 @@
 }
 
 /* ------------------------------------------------------ */
-/* FDsResourceFrameSet                                   */
+/* ResourceFrameSet                                   */
 /* ------------------------------------------------------ */
-.FDsResourceFrameSet_Toolbar_Ground{
+.ResourceFrameSet_Toolbar_Ground{
    padding-left: 4px;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -188,26 +199,26 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsResourceFrameSet_Catalog_Content{
+.ResourceFrameSet_Catalog_Content{
    background: #EEEEEE;
 }
 
-.FDsResourceFrameSet_List_Content{
+.ResourceFrameSet_List_Content{
    background: #EEEEEE;
 }
 
-.FDsResourceFrameSet_Property_Content{
+.ResourceFrameSet_Property_Content{
    background: #EEEEEE;
 }
 
 /* ------------------------------------------------------ */
-/* FDsBitmapCatalogItem                                   */
+/* BitmapCatalogItem                                   */
 /* ------------------------------------------------------ */
-.FDsBitmapCatalogItem_TypePanel{
+.BitmapCatalogItem_TypePanel{
    padding: 4px;
 }
 
-.FDsBitmapCatalogItem_TypeLabel{
+.BitmapCatalogItem_TypeLabel{
    text-align: left;
    width: 80px;
    padding: 2px 8px 2px;
@@ -218,9 +229,9 @@
 }
 
 /* ------------------------------------------------------ */
-/* FDsBitmapFrameSet                                      */
+/* BitmapFrameSet                                      */
 /* ------------------------------------------------------ */
-.FDsBitmapFrameSet_ToolBar_Ground{
+.BitmapFrameSet_ToolBar_Ground{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -230,34 +241,34 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsBitmapFrameSet_Catalog_Ground{
+.BitmapFrameSet_Catalog_Ground{
    background: #EEEEEE;
 }
 
-.FDsBitmapFrameSet_Search_Ground{
+.BitmapFrameSet_Search_Ground{
    background: #EEEEEE;
 }
 
-.FDsBitmapFrameSet_Preview_Ground{
+.BitmapFrameSet_Preview_Ground{
    background: #EEEEEE;
 }
 
-.FDsBitmapFrameSet_FrameSet_Ground{
+.BitmapFrameSet_FrameSet_Ground{
    background: #EEEEEE;
 }
 
-.FDsBitmapFrameSet_Property_Ground{;
+.BitmapFrameSet_Property_Ground{;
    background: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsMaterialCatalogItem                                   */
+/* MaterialCatalogItem                                   */
 /* ------------------------------------------------------ */
-.FDsMaterialCatalogItem_TypePanel{
+.MaterialCatalogItem_TypePanel{
    padding: 4px;
 }
 
-.FDsMaterialCatalogItem_TypeLabel{
+.MaterialCatalogItem_TypeLabel{
    text-align: left;
    width: 80px;
    padding: 2px 8px 2px;
@@ -268,9 +279,9 @@
 }
 
 /* ------------------------------------------------------ */
-/* FDsMaterialFrameSet                                      */
+/* MaterialFrameSet                                      */
 /* ------------------------------------------------------ */
-.FDsMaterialFrameSet_ToolBar_Ground{
+.MaterialFrameSet_ToolBar_Ground{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -280,22 +291,22 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsMaterialFrameSet_Catalog_Content{
+.MaterialFrameSet_Catalog_Content{
    background: #EEEEEE;
 }
 
-.FDsMaterialFrameSet_Canvas_Content{
+.MaterialFrameSet_Canvas_Content{
    background: #EEEEEE;
 }
 
-.FDsMaterialFrameSet_Property_Content{
+.MaterialFrameSet_Property_Content{
    background: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsMeshFrameSet                                   */
+/* MeshFrameSet                                   */
 /* ------------------------------------------------------ */
-.FDsMeshFrameSet_Toolbar_Ground{
+.MeshFrameSet_Toolbar_Ground{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -305,7 +316,7 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#AEAEAE, endColorStr=#999999);
 }
 
-.FDsMeshFrameSet_Statusbar_Ground{
+.MeshFrameSet_Statusbar_Ground{
    background: #AEAEAE;
    border-top: 1px solid #999999;
    background: -ms-linear-gradient(top, #555555, #AEAEAE);
@@ -314,7 +325,7 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#555555, endColorStr=#AEAEAE);
 }
 
-.FDsMeshFrameSet_Catalog_Toolbar{
+.MeshFrameSet_Catalog_Toolbar{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -324,11 +335,11 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsMeshFrameSet_Catalog_Ground{
+.MeshFrameSet_Catalog_Ground{
    background: #EEEEEE;
 }
 
-.FDsMeshFrameSet_Search_Toolbar{
+.MeshFrameSet_Search_Toolbar{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -338,11 +349,11 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsMeshFrameSet_Search_Ground{
+.MeshFrameSet_Search_Ground{
    background: #EEEEEE;
 }
 
-.FDsMeshFrameSet_Preview_Toolbar{
+.MeshFrameSet_Preview_Toolbar{
    background: #AEAEAE;
    padding-top: 1px;
    border-bottom: 1px solid #999999;
@@ -352,18 +363,18 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsMeshFrameSet_Preview_Ground{
+.MeshFrameSet_Preview_Ground{
    background: #EEEEEE;
 }
 
-.FDsMeshFrameSet_Property_Ground{;
+.MeshFrameSet_Property_Ground{;
    background: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsModelFrameSet                                       */
+/* ModelFrameSet                                       */
 /* ------------------------------------------------------ */
-.FDsModelFrameSet_Toolbar_Ground{
+.ModelFrameSet_Toolbar_Ground{
    padding-left: 4px;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -376,22 +387,22 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsModelFrameSet_Catalog_Content{
+.ModelFrameSet_Catalog_Content{
    background: #EEEEEE;
 }
 
-.FDsModelFrameSet_Canvas_Content{
+.ModelFrameSet_Canvas_Content{
    background: #EEEEEE;
 }
 
-.FDsModelFrameSet_Property_Content{
+.ModelFrameSet_Property_Content{
    background: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsTemplateFrameSet                                    */
+/* TemplateFrameSet                                    */
 /* ------------------------------------------------------ */
-.FDsTemplateFrameSet_Toolbar_Ground{
+.TemplateFrameSet_Toolbar_Ground{
    padding-left: 4px;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -404,22 +415,22 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsTemplateFrameSet_Catalog_Content{
+.TemplateFrameSet_Catalog_Content{
    background: #EEEEEE;
 }
 
-.FDsTemplateFrameSet_Canvas_Content{
+.TemplateFrameSet_Canvas_Content{
    background: #EEEEEE;
 }
 
-.FDsTemplateFrameSet_Property_Content{
+.TemplateFrameSet_Property_Content{
    background: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsSceneFrameSet                                       */
+/* SceneFrameSet                                       */
 /* ------------------------------------------------------ */
-.FDsSceneFrameSet_Toolbar_Ground{
+.SceneFrameSet_Toolbar_Ground{
    padding-left: 4px;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -432,22 +443,22 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
 }
 
-.FDsSceneFrameSet_Catalog_Content{
+.SceneFrameSet_Catalog_Content{
    background: #EEEEEE;
 }
 
-.FDsSceneFrameSet_Canvas_Content{
+.SceneFrameSet_Canvas_Content{
    background: #EEEEEE;
 }
 
-.FDsSceneFrameSet_Property_Content{
+.SceneFrameSet_Property_Content{
    background: #777777;
 }
 
 /* ------------------------------------------------------ */
-/* FDsPrivateWorkspace                                    */
+/* PrivateWorkspace                                    */
 /* ------------------------------------------------------ */
-.FDsPrivateWorkspace_MenuBar_Ground{
+.PrivateWorkspace_MenuBar_Ground{
    padding-top: 2px;
    border-top: 1px solid #DDDDDD;
    border-bottom: 1px solid #999999;
@@ -458,7 +469,7 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#EEEEEE, endColorStr=#CCCCCC);
 }
 
-.FDsPrivateWorkspace_StatusBar_Ground{
+.PrivateWorkspace_StatusBar_Ground{
    background: #AEAEAE;
    border-top: 1px solid #999999;
    background: -ms-linear-gradient(top, #555555, #AEAEAE);
@@ -468,9 +479,9 @@
 }
 
 /* ------------------------------------------------------ */
-/* FDsShareWorkspace                                      */
+/* ShareWorkspace                                      */
 /* ------------------------------------------------------ */
-.FDsShareWorkspace_Menubar_Ground{
+.ShareWorkspace_Menubar_Ground{
    padding-top: 2px;
    border-top: 1px solid #DDDDDD;
    border-bottom: 1px solid #999999;
@@ -481,7 +492,7 @@
    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#AEAEAE, endColorStr=#999999);
 }
 
-.FDsShareWorkspace_Statusbar_Ground{
+.ShareWorkspace_Statusbar_Ground{
    background: #AEAEAE;
    border-top: 1px solid #999999;
    background: -ms-linear-gradient(top, #555555, #AEAEAE);

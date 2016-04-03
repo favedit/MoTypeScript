@@ -5,6 +5,7 @@ import {Attributes} from './runtime/common/lang/Attributes';
 import {Dispatcher} from './runtime/common/lang/Dispatcher';
 import {LoggerUtil} from './runtime/common/lang/LoggerUtil';
 import {Property} from './runtime/common/reflect/Property';
+import {PropertyAnnotation} from './runtime/common/reflect/PropertyAnnotation';
 import {AnnotationEnum} from './runtime/common/reflect/AnnotationEnum';
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {AssertUtil} from './runtime/common/AssertUtil';
@@ -25,13 +26,16 @@ import {RenderContext} from './RenderContext';
 //==========================================================
 export class Component extends Dispatcher {
    // 有效性
+   @Property('valid', DataTypeEnum.Boolean, true)
    public valid: boolean;
    // 唯一编号
+   @Property('guid', DataTypeEnum.String)
    public guid: string;
    // 名称
+   @Property('name', DataTypeEnum.String)
    public name: string;
    // 标签
-   @Property('label', DataTypeEnum.String, null)
+   @Property('label', DataTypeEnum.String)
    public label: string;
    // 属性集合
    public attributes: Attributes;
@@ -48,7 +52,6 @@ export class Component extends Dispatcher {
    public constructor() {
       super();
       // 设置属性
-      this.valid = true;
       this.attributes = new Attributes();
    }
 
@@ -134,15 +137,27 @@ export class Component extends Dispatcher {
          var annotations = clazz.findAnnotations(AnnotationEnum.Property);
          for (var name in attributes) {
             var value = attributes[name];
-            // 设置属性
-            if (annotations) {
-               var annotation = annotations.get(name);
-               if (annotation) {
-                  this.setAttribute(name, value);
-               }
-            }
             // 存储属性
             this.attributes.set(name, value);
+            // 设置属性
+            if (annotations) {
+               var annotation: PropertyAnnotation = <PropertyAnnotation>annotations.get(name);
+               if (annotation) {
+                  var propertyName = annotation.name;
+                  // 不保存监听集合属性
+                  if (annotation.dataCd == DataTypeEnum.Listeners) {
+                     continue;
+                  }
+                  // 设置结构体
+                  if (annotation.dataCd == DataTypeEnum.Struct) {
+                     var struct = this[propertyName];
+                     struct.parse(value);
+                     continue;
+                  }
+                  // 设置属性
+                  this.setAttribute(propertyName, value);
+               }
+            }
          }
       }
    }

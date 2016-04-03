@@ -20,7 +20,7 @@ export function Property(
    dataChanged: string = 'onFieldChanged') {
    return function(target: any, name: string): void {
       // 注册描述器
-      var annotation: PropertyAnnotation = new PropertyAnnotation(name, dataName, dataCd, dataClass, dataDefault);
+      var annotation: PropertyAnnotation = new PropertyAnnotation(name, dataName, dataCd, dataDefault, dataClass);
       ClassUtil.registerAnnotation(target.constructor, annotation);
       // 设置属性
       var propertyName: string = '__' + name;

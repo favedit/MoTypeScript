@@ -15,13 +15,19 @@ import {Annotation} from './Annotation'
 export class PropertyAnnotation extends Annotation {
    // 数据名称
    public dataName: string;
+   // 数据类型
+   public dataCd: DataTypeEnum;
+   // 数据默认
+   public dataDefault: any;
+   // 数据对象
+   public dataClass: Function;
 
    //============================================================
    // <T>构造处理。</T>
    //
    // @param name 名称
    //============================================================
-   public constructor(name: string, dataName: String = null, dataCd: DataTypeEnum = DataTypeEnum.Unknown, dataClass: any = null, dataDefault: any = null) {
+   public constructor(name: string, dataName: String = null, dataCd: DataTypeEnum = DataTypeEnum.Unknown, dataDefault: any = null, dataClass: any = null) {
       super(name);
       // 设置属性
       this._annotationCd = AnnotationEnum.Property;
@@ -39,6 +45,9 @@ export class PropertyAnnotation extends Annotation {
          code = dataName;
       }
       this.dataName = code;
+      this.dataCd = dataCd;
+      this.dataDefault = dataDefault;
+      this.dataClass = dataClass;
    }
 
    //============================================================

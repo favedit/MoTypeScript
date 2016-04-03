@@ -36,14 +36,22 @@ export enum DataTypeEnum {
    String = 13,
    // @member 数组集合
    Array = 14,
-   // @member 结构
-   Struct = 15,
-   // @member 结构
-   Structs = 16,
-   // @member 对象
-   Object = 17,
-   // @member 对象集合
-   Objects = 18,
-   // @member 字典集合
-   Dictionary = 19,
+   // 枚举
+   Enum = 15,
+   // 集合
+   Set = 16,
+   // 结构
+   Struct = 17,
+   // 结构集合
+   Structs = 18,
+   // 对象
+   Object = 19,
+   // 对象集合
+   Objects = 20,
+   //  字典集合
+   Dictionary = 21,
+   // 监听器
+   Listener = 22,
+   // 监听器集合
+   Listeners = 23,
 }

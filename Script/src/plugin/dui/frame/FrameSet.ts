@@ -1,4 +1,6 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
 import {Fatal} from './runtime/common/lang/Fatal';
+import {Property} from './runtime/common/reflect/Property';
 import {DirectionEnum} from './runtime/ui/DirectionEnum';
 import {RenderContext} from '../RenderContext';
 import {Component} from '../Component';
@@ -15,9 +17,11 @@ import {FrameSpliter} from './FrameSpliter';
 //==========================================================
 export class FrameSet extends Container {
    // 方向类型
+   @Property('direction_cd', DataTypeEnum.Enum, DirectionEnum.Vertical, DirectionEnum)
    public directionCd: DirectionEnum;
+   // 页面元素
    protected _hPanel: HTMLTableElement;
-   public _hLine: HTMLTableRowElement;
+   protected _hLine: HTMLTableRowElement;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -73,6 +77,19 @@ export class FrameSet extends Container {
    }
 
    //==========================================================
+   // <T>建立当前控件的显示框架。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuild(context: RenderContext) {
+      super.onBuild(context);
+      // 建立面板
+      if (this.directionCd == DirectionEnum.Horizontal) {
+         this._hLine = context.appendTableRow(this._hPanel);
+      }
+   }
+
+   //==========================================================
    // <T>创建一个控件容器。</T>
    //
    // @method
@@ -82,29 +99,24 @@ export class FrameSet extends Container {
       var context = this.renderContext;
       if (this.directionCd == DirectionEnum.Horizontal) {
          // 横向排布
-         var hLine = this._hLine;
-         if (!hLine) {
-            hLine = this._hLine = context.appendTableRow(this._hPanel);
-         }
-         //page.setPanel(hLine);
+         page.setParentPanel(this._hLine);
          // 设置宽度
-         //var sizeWidth = page._size.width;
-         //if (sizeWidth) {
-         //   page._hPanel.width = sizeWidth;
-         //}
+         var sizeWidth = page.size.width;
+         if (sizeWidth) {
+            page.setWidth(sizeWidth);
+         }
       } else if (this.directionCd == DirectionEnum.Vertical) {
          // 纵向排布
          var hLine = context.appendTableRow(this._hPanel);
-         //page.setPanel(hLine);
+         page.setParentPanel(hLine);
          // 设置高度
-         //var sizeHeight = page._size.height;
-         //if (sizeHeight) {
-         //   page._hPanel.height = sizeHeight;
-         //}
+         var sizeHeight = page.size.height;
+         if (sizeHeight) {
+            page.setHeight(sizeHeight);
+         }
       } else {
          throw new Fatal(this, 'Unknown direcion type. (direction_cd={1})', this.directionCd);
       }
-      //this._frames.push(frame);
    }
 
    //==========================================================
@@ -131,20 +143,18 @@ export class FrameSet extends Container {
    }
 
    //==========================================================
-   // <T>增加一个子组件。</T>
+   // <T>追加一个显示控件。</T>
    //
-   // @param child 子组件
+   // @param control 控件
    //==========================================================
-   public appendChild(child: Component) {
+   public appendDisplay(child: Component) {
       //control._frameset = this;
       if (child instanceof FramePage) {
-         this.appendFrame(child);
-         return;
+         return this.appendFrame(child);
       } else if (child instanceof FrameSpliter) {
-         this.appendSpliter(child);
-         return;
+         return this.appendSpliter(child);
       }
-      super.appendChild(child);
+      return super.appendChild(child);
    }
 
    // //==========================================================
