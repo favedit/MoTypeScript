@@ -9,6 +9,8 @@ import {PropertyAnnotation} from './runtime/common/reflect/PropertyAnnotation';
 import {AnnotationEnum} from './runtime/common/reflect/AnnotationEnum';
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {AssertUtil} from './runtime/common/AssertUtil';
+import {EventInvokeEnum} from './runtime/ui/EventInvokeEnum';
+import {EventStatusEnum} from './runtime/ui/EventStatusEnum';
 import {RenderContext} from './RenderContext';
 
 //==========================================================
@@ -39,6 +41,8 @@ export class Component extends Dispatcher {
    public label: string;
    // 属性集合
    public attributes: Attributes;
+   // 定义属性集合
+   public properties: Attributes;
    // 附加数据
    public tag: any;
    // 父组件
@@ -52,7 +56,7 @@ export class Component extends Dispatcher {
    public constructor() {
       super();
       // 设置属性
-      this.attributes = new Attributes();
+      this.properties = new Attributes();
    }
 
    //==========================================================
@@ -61,59 +65,34 @@ export class Component extends Dispatcher {
    public setup(parameters?: any) {
    }
 
-   // //==========================================================
-   // // <T>处理初始化事件。</T>
-   // //
-   // // @method
-   // // @param e:event:SGuiDispatchEvent 事件处理
-   // // @return EEventStatus 处理状态
-   // //==========================================================
-   // MO.MUiComponent_oeInitialize = function MUiComponent_oeInitialize(e) {
-   //    return MO.EEventStatus.Continue;
-   // }
+   //==========================================================
+   // <T>获取节点属性。</T>
+   //
+   // @param name 属性名称
+   // @return 属性内容
+   //==========================================================
+   public getAttribute(name: string) {
+      var value = null;
+      var attributes = this.attributes;
+      if (attributes) {
+         value = attributes.get(name);
+      }
+      return value;
+   }
 
-   // //==========================================================
-   // // <T>处理释放事件。</T>
-   // //
-   // // @method
-   // // @param e:event:SGuiDispatchEvent 事件处理
-   // // @return EEventStatus 处理状态
-   // //==========================================================
-   // MO.MUiComponent_oeRelease = function MUiComponent_oeRelease(e) {
-   //    return MO.EEventStatus.Continue;
-   // }
-
-   // //==========================================================
-   // // <T>获取节点属性。</T>
-   // //
-   // // @method
-   // // @param name:String 属性名称
-   // // @return String 属性内容
-   // //==========================================================
-   // MO.MUiComponent_attributeGet = function MUiComponent_attributeGet(name) {
-   //    var value = null;
-   //    var attributes = this._attributes;
-   //    if (attributes) {
-   //       value = attributes.get(name);
-   //    }
-   //    return value;
-   // }
-
-   // //==========================================================
-   // // <T>设置节点属性。</T>
-   // //
-   // // @method
-   // // @param name:String 属性名称
-   // // @param value:String 属性内容
-   // //==========================================================
-   // MO.MUiComponent_attributeSet = function MUiComponent_attributeSet(name, value) {
-   //    var o = this;
-   //    var attributes = o._attributes;
-   //    if (!attributes) {
-   //       attributes = o._attributes = new MO.TAttributes();
-   //    }
-   //    attributes.set(name, value);
-   // }
+   //==========================================================
+   // <T>设置节点属性。</T>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //==========================================================
+   public setAttribute(name: string, value: string) {
+      var attributes = this.attributes;
+      if (!attributes) {
+         attributes = this.attributes = new Attributes();
+      }
+      attributes.set(name, value);
+   }
 
    //==========================================================
    // <T>设置属性集合。</T>
@@ -121,9 +100,9 @@ export class Component extends Dispatcher {
    // @params name 属性名称
    // @params value 属性内容
    //==========================================================
-   public setAttribute(name: string, value: string) {
+   public setProperty(name: string, value: string) {
       this[name] = value;
-      LoggerUtil.debug(this, 'Set attribute. (name={1}, value={2})', name, value);
+      LoggerUtil.debug(this, 'Set property. (name={1}, value={2})', name, value);
    }
 
    //==========================================================
@@ -131,14 +110,14 @@ export class Component extends Dispatcher {
    //
    // @params attributes 属性集合
    //==========================================================
-   public setAttributes(attributes: any) {
+   public setProperties(attributes: any) {
       if (attributes) {
          var clazz = ClassUtil.get(this.constructor);
          var annotations = clazz.findAnnotations(AnnotationEnum.Property);
          for (var name in attributes) {
             var value = attributes[name];
             // 存储属性
-            this.attributes.set(name, value);
+            this.properties.set(name, value);
             // 设置属性
             if (annotations) {
                var annotation: PropertyAnnotation = <PropertyAnnotation>annotations.get(name);
@@ -155,7 +134,7 @@ export class Component extends Dispatcher {
                      continue;
                   }
                   // 设置属性
-                  this.setAttribute(propertyName, value);
+                  this.setProperty(propertyName, value);
                }
             }
          }
@@ -169,16 +148,29 @@ export class Component extends Dispatcher {
    // @param clazz 类函数
    // @return 组件
    //==========================================================
-   public topComponent(clazz: Function): Component {
-      var component = this;
-      if (clazz) {
-         while (component.parent instanceof clazz) {
-            component = component.parent as any;
+   public topParent(): Component {
+      var component: Component = this;
+      while (component.parent) {
+         component = component.parent;
+      }
+      return component;
+   }
+
+   //==========================================================
+   // <T>得到符合指定类的父组件。</T>
+   // <P>如果没有指定类，则获得最顶层组件。</P>
+   //
+   // @param clazz 类函数
+   // @return 组件
+   //==========================================================
+   public findParent(clazz: Function): Component {
+      var component: Component = this;
+      while (component.parent) {
+         var parent = component.parent;
+         if (parent instanceof clazz) {
+            return parent;
          }
-      } else {
-         while (component.parent) {
-            component = component.parent as any;
-         }
+         component = parent;
       }
       return component;
    }
@@ -239,30 +231,28 @@ export class Component extends Dispatcher {
       return null;
    }
 
-   // //==========================================================
-   // // <T>根据类型搜索所有子组件。</T>
-   // //
-   // // @method
-   // // @param findComponents:TObjects 找到集合
-   // // @param clazz:Function 类型
-   // //==========================================================
-   // MO.MUiComponent_searchComponents = function MUiComponent_searchComponents(findComponents, clazz) {
-   //    var o = this;
-   //    var components = o._components;
-   //    if (components) {
-   //       var count = components.count();
-   //       for (var i = 0; i < count; i++) {
-   //          var component = components.at(i);
-   //          if (MO.Class.isClass(component, clazz)) {
-   //             findComponents.pushUnique(component);
-   //          }
-   //          component.searchComponents(findComponents, clazz);
-   //       }
-   //    }
-   // }
+   //==========================================================
+   // <T>根据类型搜索所有子组件。</T>
+   //
+   // @param findComponents 找到集合
+   // @param clazz 类型
+   //==========================================================
+   public searchChildren(findComponents: Objects<Component>, clazz: Function) {
+      var children = this.children;
+      if (children) {
+         var count = children.count();
+         for (var i = 0; i < count; i++) {
+            var child = children.at(i);
+            if (child instanceof clazz) {
+               findComponents.pushUnique(child);
+            }
+            child.searchChildren(findComponents, clazz);
+         }
+      }
+   }
 
    //==========================================================
-   // <T>将子组件放入自己的哈希表中。</T>
+   // <T>追加一个子组件。</T>
    // <P>如果子组件的名称为空，则给当前子组件创建一个数字的索引名。</P>
    // <P>保证子组件不会被其他未命名的子组件所覆盖。</P>
    //
@@ -307,6 +297,12 @@ export class Component extends Dispatcher {
    }
 
    //==========================================================
+   // <T>更新处理。</T>
+   //==========================================================
+   public update() {
+   }
+
+   //==========================================================
    // <T>清空所有子组件。</T>
    //==========================================================
    public clear() {
@@ -317,67 +313,89 @@ export class Component extends Dispatcher {
    }
 
    // //==========================================================
-   // // <T>遍历子组件进行事件处理。<T>
-   // // <P>
-   // //    <OL>
-   // //       <L>当前组件的事件前处理。
-   // //          如果返回值为停止状态，则跳过当前组件的所有子组件的处理，直接返回上一层，继续上一层中同一层的其他组件的处理。</L>
-   // //       <L>如果当前组件支持容器接口，则可以进行子组件的事件处理，否则直接返回上一层处理。
-   // //          注意：不支持容器接口的对象并不表示没有子组件</L>
-   // //       <L>子组件按照存储顺序进行事件处理。</L>
-   // //       <L>当前组件的事件后处理。</L>
-   // //    </OL>
-   // //    注意：任何事件调用返回取消状态的话，则跳过后面所有的组件处理，直接返回到最开始的调用函数。</L>
-   // // </P>
+   // // <T>处理初始化事件。</T>
    // //
-   // // @param event:SDispatchEvent 纷发事件
+   // // @method
+   // // @param e:event:SGuiDispatchEvent 事件处理
    // // @return EEventStatus 处理状态
    // //==========================================================
-   // MO.MUiComponent_process = function MUiComponent_process(event) {
-   //    var o = this;
-   //    // 获得对象是否有效
-   //    var valid = o.__base[event.clazz];
-   //    //..........................................................
-   //    // 事件前处理
-   //    if (valid) {
-   //       event.invokeCd = MO.EEventInvoke.Before;
-   //       var callback = o[event.invoke];
-   //       if (callback) {
-   //          var result = callback.call(o, event);
-   //          if ((result == MO.EEventStatus.Stop) || (result == MO.EEventStatus.Cancel)) {
-   //             return result;
-   //          }
-   //       }
-   //    }
-   //    //..........................................................
-   //    // 处理所有子对象
-   //    var components = o._components;
-   //    if (components) {
-   //       var count = components.count();
-   //       if (count) {
-   //          for (var i = 0; i < count; i++) {
-   //             var component = components.at(i);
-   //             var result = component.process(event);
-   //             if (result == MO.EEventStatus.Cancel) {
-   //                return result;
-   //             }
-   //          }
-   //       }
-   //    }
-   //    //..........................................................
-   //    // 事件后处理
-   //    if (valid) {
-   //       event.invokeCd = MO.EEventInvoke.After;
-   //       var callback = o[event.invoke];
-   //       if (callback) {
-   //          var result = callback.call(o, event);
-   //          if ((result == MO.EEventStatus.Stop) || (result == MO.EEventStatus.Cancel)) {
-   //             return result;
-   //          }
-   //       }
-   //    }
+   // MO.MUiComponent_oeInitialize = function MUiComponent_oeInitialize(e) {
    //    return MO.EEventStatus.Continue;
    // }
+
+   // //==========================================================
+   // // <T>处理释放事件。</T>
+   // //
+   // // @method
+   // // @param e:event:SGuiDispatchEvent 事件处理
+   // // @return EEventStatus 处理状态
+   // //==========================================================
+   // MO.MUiComponent_oeRelease = function MUiComponent_oeRelease(e) {
+   //    return MO.EEventStatus.Continue;
+   // }
+
+   //==========================================================
+   // <T>遍历子组件进行事件处理。<T>
+   // <P>
+   //    <OL>
+   //       <L>当前组件的事件前处理。
+   //          如果返回值为停止状态，则跳过当前组件的所有子组件的处理，直接返回上一层，继续上一层中同一层的其他组件的处理。</L>
+   //       <L>如果当前组件支持容器接口，则可以进行子组件的事件处理，否则直接返回上一层处理。
+   //          注意：不支持容器接口的对象并不表示没有子组件</L>
+   //       <L>子组件按照存储顺序进行事件处理。</L>
+   //       <L>当前组件的事件后处理。</L>
+   //    </OL>
+   //    注意：任何事件调用返回取消状态的话，则跳过后面所有的组件处理，直接返回到最开始的调用函数。</L>
+   // </P>
+   //
+   // @param event:SDispatchEvent 纷发事件
+   // @return EEventStatus 处理状态
+   //==========================================================
+   public process(event) {
+      var invokeName = event.invoke;
+      // 获得对象是否有效
+      var valid = this instanceof event.clazz;
+      //..........................................................
+      // 事件前处理
+      if (valid) {
+         event.invokeCd = EventInvokeEnum.Before;
+         var callback = this[invokeName];
+         if (callback) {
+            var result = callback.call(this, event);
+            if ((result == EventStatusEnum.Stop) || (result == EventStatusEnum.Cancel)) {
+               return result;
+            }
+         }
+      }
+      //..........................................................
+      // 处理所有子对象
+      var children = this.children;
+      if (children) {
+         var count = children.count();
+         if (count) {
+            for (var i = 0; i < count; i++) {
+               var child = children.at(i);
+               var result = child.process(event);
+               if (result == EventStatusEnum.Cancel) {
+                  return result;
+               }
+            }
+         }
+      }
+      //..........................................................
+      // 事件后处理
+      if (valid) {
+         event.invokeCd = EventInvokeEnum.After;
+         var callback = this[invokeName];
+         if (callback) {
+            var result = callback.call(this, event);
+            if ((result == EventStatusEnum.Stop) || (result == EventStatusEnum.Cancel)) {
+               return result;
+            }
+         }
+      }
+      return EventStatusEnum.Continue;
+   }
 
    // //==========================================================
    // // <T>初始化当所有组件。</T>
@@ -465,11 +483,11 @@ export class Component extends Dispatcher {
    //    return info;
    // }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //==========================================================
-   // public dispose() {
-   //    // 父处理
-   //    super.dispose();
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 父处理
+      super.dispose();
+   }
 }

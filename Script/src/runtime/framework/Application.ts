@@ -69,8 +69,6 @@ export class Application extends ObjectBase {
    // <T>注册一个视图。</T>
    //==========================================================
    public registerView(view: View) {
-      view.application = this;
-      view.setup();
       this._views.push(view);
    }
 
@@ -88,10 +86,10 @@ export class Application extends ObjectBase {
    // @param 设置内容
    //==========================================================
    public start(settings: SSettings = null) {
-      if (!this._setuped) {
-         this.setup(settings);
-         this._setuped = true;
-      }
+      // if (!this._setuped) {
+      //    this.setup(settings);
+      //    this._setuped = true;
+      // }
       this._threadConsole.start(this._thread);
    }
 

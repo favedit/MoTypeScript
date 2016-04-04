@@ -3,9 +3,20 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <TITLE>Test - Graphic</TITLE>
+<LINK type="text/css" media="all" rel="stylesheet" href='../../../res/css/control.css'/>
+<LINK type="text/css" media="all" rel="stylesheet" href='../../../res/css/lang_cn.css'/>
+<LINK type="text/css" media="all" rel="stylesheet" href='../../../res/css/design.css'/>
 <SCRIPT type="text/javascript" src="../../../library/require.js"></script>
 <SCRIPT type="text/javascript" src="../../../build/mo.js"></script>
-<SCRIPT>require(['main']);</SCRIPT>
+<SCRIPT>
+require(['editor/design/main'], function (space){
+   var design = new space.Design();
+   design.setup(window);
+   design.setEnvironment('resource', '/asset/demo');
+   design.setEnvironment('resource.icon', '/sk/res/icon');
+   design.startup();
+});
+</SCRIPT>
 </HEAD>
 <BODY></BODY>
 </HTML>

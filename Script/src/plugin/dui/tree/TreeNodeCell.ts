@@ -1,3 +1,7 @@
+import {RenderContext} from '../RenderContext';
+import {Control} from '../Control';
+import {TreeView} from './TreeView';
+
 //==========================================================
 // <T>树目录节点格子控件。</T>
 // 模板:
@@ -12,24 +16,22 @@
 // @author maocy
 // @version 150307
 //==========================================================
-export class TreeNodeCell {
-   // MO.FDuiTreeNodeCell = function FDuiTreeNodeCell(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiControl);
-   //    //..........................................................
+export class TreeNodeCell extends Control {
    //    // @style
    //    o._stylePanel = MO.Class.register(o, new MO.AStyle('_stylePanel'));
    //    o._styleCell = MO.Class.register(o, new MO.AStyle('_styleCell', 'Cell'));
-   //    //..........................................................
-   //    // @attribute
-   //    o._tree = null;
+   //..........................................................
+   // @attribute
+   public _tree: TreeView;
    //    o._column = null;
    //    o._level = 0;
    //    o._node = null;
    //    // @attribute
    //    o._listenersClick = MO.Class.register(o, new MO.AListener('_listenersClick', MO.EEvent.Click));
    //    o._listenersDoubleClick = MO.Class.register(o, new MO.AListener('_listenersDoubleClick', MO.EEvent.DoubleClick));
-   //    //..........................................................
-   //    // @html
+   //..........................................................
+   // @html
+   public _hPanel: HTMLTableCellElement;
    //    o._hImage = null;
    //    o._hIcon = null;
    //    o._hLabel = null;
@@ -50,32 +52,28 @@ export class TreeNodeCell {
    //    return o;
    // }
 
-   // //==========================================================
-   // // <T>创建一个控件容器。</T>
-   // //
-   // // @method
-   // // @param p:argements:SArgements 参数集合
-   // //==========================================================
-   // MO.FDuiTreeNodeCell_onBuildPanel = function FDuiTreeNodeCell_onBuildPanel(p) {
-   //    var o = this;
-   //    o._hPanel = MO.Window.Builder.createTableCell(p, o.styleName('Panel'));
-   // }
+   //==========================================================
+   // <T>创建一个控件容器。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildPanel(context: RenderContext) {
+      this._hPanel = context.createTableCell(this.styleName('Panel'));
+   }
 
-   // //==========================================================
-   // // <T>构建页面处理。</T>
-   // //
-   // // @method
-   // // @param p:event:TEventProcess 事件
-   // //==========================================================
-   // MO.FDuiTreeNodeCell_onBuild = function FDuiTreeNodeCell_onBuild(p) {
-   //    var o = this;
-   //    var t = o._tree;
-   //    var r = o.__base.FDuiControl.onBuild.call(o, p);
-   //    // 建立底板
-   //    var h = o._hPanel;
-   //    o.attachEvent('onClick', h);
-   //    o.attachEvent('onDoubleClick', h);
-   // }
+   //==========================================================
+   // <T>建立当前控件的显示框架。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuild(context: RenderContext) {
+      super.onBuild(context);
+      // 建立底板
+      // var t = this._tree;
+      // var h = this._hPanel;
+      // this.attachEvent('onClick', h);
+      // this.attachEvent('onDoubleClick', h);
+   }
 
    // //==========================================================
    // // <T>点击事件处理。</T>

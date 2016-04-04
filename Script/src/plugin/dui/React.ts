@@ -1,7 +1,9 @@
+import {Fatal} from './runtime/common/lang/Fatal';
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {RenderContext} from './RenderContext';
 import {Component} from './Component';
 import {Control} from './Control';
+import {Element} from './Element';
 import {Container} from './Container';
 
 export class React {
@@ -14,21 +16,33 @@ export class React {
    // @param children 子节点集合
    // @return 是否含有
    //==========================================================
-   public static createElement(type: Function, parameters: any, ...children: Array<any>) {
-      // 创建元素
-      var element = ClassUtil.create(type);
-      // 设置属性
-      element.setAttributes(parameters);
-      element.setup();
-      // 增加子节点
-      if (children) {
-         var count = children.length;
-         for (var i = 0; i < count; i++) {
-            var child = children[i];
-            element.appendChild(child);
+   public static createElement(type: string | Function, parameters: any, ...children: Array<any>) {
+      if (typeof type == 'string') {
+         // 字符串类型
+         var element: Element = ClassUtil.create(Element);
+         element.typeName = type as string;
+         element.setProperties(parameters);
+         element.setup();
+         return element;
+      } else if (typeof type == 'function') {
+         // 创建元素
+         var component: Component = ClassUtil.create(type as Function);
+         // 设置属性
+         component.setProperties(parameters);
+         component.setup();
+         // 增加子节点
+         if (children) {
+            var count = children.length;
+            for (var i = 0; i < count; i++) {
+               var child = children[i];
+               component.appendChild(child);
+            }
          }
+         return component;
+      } else {
+         // 未知类型
+         throw new Fatal(this, 'Unknown type.');
       }
-      return element;
    }
 
    //==========================================================
@@ -39,8 +53,9 @@ export class React {
    //==========================================================
    public static render(context: RenderContext, topComponent: Component, parentComponent: Component, component: Component) {
       // 构建当前控件
+      var control: Control = null;
       if (component instanceof Control) {
-         var control = <Control>component;
+         control = <Control>component;
          context.topComponent = topComponent;
          context.parentComponent = parentComponent;
          control.build(context);
@@ -49,14 +64,6 @@ export class React {
       var container: Container = null;
       if (component instanceof Container) {
          container = <Container>component;
-      }
-      // 通过渲染获得子节点
-      var renderChild = control.render();
-      if (renderChild) {
-         this.render(context, topComponent, control, renderChild);
-         if (container && renderChild instanceof Control) {
-            container.appendDisplay(renderChild as Control);
-         }
       }
       // 渲染子节点集合
       var children = component.children;
@@ -71,6 +78,21 @@ export class React {
                container.appendDisplay(child as Control);
             }
          }
+      }
+      // 通过渲染获得子节点
+      if (control) {
+         var renderChild = control.render();
+         if (renderChild) {
+            // 渲染子节点
+            this.render(context, topComponent, control, renderChild);
+            if (container && renderChild instanceof Control) {
+               container.appendDisplay(renderChild as Control);
+            }
+            // 追加子节点
+            control.appendChild(renderChild);
+         }
+         // 构建完成
+         control.builded();
       }
    }
 }

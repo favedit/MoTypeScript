@@ -9,7 +9,7 @@ import {IDisplay} from '../../../runtime/graphic/IDisplay';
 import {GraphicContext} from '../../../runtime/graphic/core/GraphicContext';
 import {Drawable} from './Drawable';
 import {Renderable} from './Renderable';
-import {DisplayContainer} from './DisplayContainer';
+//import {DisplayContainer} from './DisplayContainer';
 import {Region} from './Region';
 
 //==========================================================
@@ -117,10 +117,10 @@ export class Display extends Drawable implements IDisplay {
    //==========================================================
    public drop() {
       var parent = this.parent;
-      if (parent instanceof DisplayContainer) {
-         parent.removeDisplay(this);
-         this.parent = null;
-      }
+      // if (parent instanceof DisplayContainer) {
+      //    parent.removeDisplay(this);
+      //    this.parent = null;
+      // }
    }
 
    //==========================================================

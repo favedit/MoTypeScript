@@ -1,6 +1,7 @@
 export * from './Component';
 export * from './Container';
 export * from './Control';
+export * from './Element';
 export * from './React';
 export * from './Render';
 export * from './RenderContext';
@@ -14,5 +15,5 @@ export {frame as frame};
 import * as toolbar from './toolbar/index';
 export {toolbar as toolbar};
 
-import * as treeview from './treeview/index';
-export {treeview as treeview};
+import * as tree from './tree/index';
+export {tree as tree};

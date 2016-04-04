@@ -1379,7 +1379,6 @@
 
 .TreeView_NodePanel{
    width: 100%;
-   height: 100%;
    overflow:auto;
 }
 
@@ -1390,7 +1389,6 @@
 /* TreeNode                                           */
 /* ------------------------------------------------------ */
 .TreeNode_Panel{
-   width: 0;
 }
 
 .TreeNode_Normal{
@@ -1408,15 +1406,22 @@
 }
 
 .TreeNode_Image{
+   display:inline;
 }
 
 .TreeNode_Icon{
+   display:inline;
+}
+
+.TreeNode_Icon{
+   display:inline;
 }
 
 .TreeNode_IconDisable{
 }
 
 .TreeNode_Label{
+   white-space: nowrap;
    font: icon;
    font-size: 9pt;
 }

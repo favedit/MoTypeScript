@@ -1,4 +1,5 @@
 export * from './ClickEvent';
+export * from './DispatchEvent';
 export * from './Event';
 export * from './KeyboardEvent';
 export * from './MouseEnterEvent';

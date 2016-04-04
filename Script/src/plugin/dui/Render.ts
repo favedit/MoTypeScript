@@ -37,9 +37,6 @@ export class Render {
 
    public render(control: Control, hPanel?: any) {
       React.render(this.context, control, control, control);
-
-      //control.setPanel(this.hPanel);
-      //control.build(this.context);
-      //(component as any).setPanel(this.hPanel);
+      control.setParentPanel(hPanel);
    }
 }

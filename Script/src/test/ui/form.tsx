@@ -14,7 +14,7 @@ import {Edit} from '../../plugin/dui/form/Edit';
 import {ToolBar} from '../../plugin/dui/toolbar/ToolBar';
 import {ToolButton} from '../../plugin/dui/toolbar/ToolButton';
 
-import {SpaceUi} from '../../editor/design/SpaceUi';
+// import {SpaceUi} from '../../editor/design/SpaceUi';
 
 // 初始化空间
 import * as mo from '../../index';
@@ -91,9 +91,9 @@ export class FormTest {
    }
 
    public testToolBar(): any {
-      var spaceUi = new SpaceUi();
-      this.render.render(spaceUi, window.document.body);
-      spaceUi.setParentPanel(window.document.body);
+      // var spaceUi = new SpaceUi();
+      // this.render.render(spaceUi, window.document.body);
+      // spaceUi.setParentPanel(window.document.body);
       // var data =
       //    <ToolBar>
       //       <ToolButton icon='tools.create' label='新建' onclick='{this.onButtonCreateClick()}'></ToolButton>

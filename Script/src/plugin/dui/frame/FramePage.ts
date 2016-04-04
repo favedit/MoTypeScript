@@ -1,3 +1,5 @@
+import {ScrollEnum} from './runtime/ui/ScrollEnum';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {RenderContext} from '../RenderContext';
 import {Container} from '../Container';
 
@@ -42,13 +44,14 @@ export class FramePage extends Container {
    //==========================================================
    public onBuild(context) {
       super.onBuild(context);
+      // 设置滚动方式
       var hPanel = this._hPanel;
-      // if (this._scrollCd != MO.EUiScroll.None) {
-      //    var hc = this._hContainer = MO.Window.Builder.appendDiv(hPanel, this.styleName('Container'));
-      //    MO.Dui.Control.setStyleScroll(hc, this._scrollCd);
-      // } else {
-      //    this._hContainer = hPanel;
-      // }
+      if (this.scrollCd != ScrollEnum.None) {
+         var hContainer = this._hContainer = context.appendDiv(hPanel, this.styleName('Container'));
+         HtmlUtil.setStyleScroll(hContainer, this.scrollCd);
+      } else {
+         this._hContainer = hPanel;
+      }
    }
 
    // //==========================================================

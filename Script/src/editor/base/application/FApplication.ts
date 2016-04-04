@@ -5,12 +5,12 @@ import {DeviceService} from '../../../runtime/ui/service/DeviceService';
 import {FTransactionConsole} from '../transaction/FTransactionConsole';
 import {FCommandConsole} from '../command/FCommandConsole';
 import {FSelectionConsole} from '../selection/FSelectionConsole';
-import {SSettings} from './SSettings';
+import {Settings} from './Settings';
 
 //==========================================================
 // <T>编辑器应用程序。</T>
 //==========================================================
-export class FApplication extends BaseApplication {
+export class Application extends BaseApplication {
    // 设备管理器
    @Linker(DeviceService)
    protected _deviceService: DeviceService;
@@ -34,10 +34,23 @@ export class FApplication extends BaseApplication {
    //==========================================================
    // <T>配置处理。</T>
    //==========================================================
-   public setup(settings: SSettings) {
+   public setup(settings: Settings) {
       super.setup(settings);
       // 设置环境
       this._deviceService.setup(settings.hWindow);
+      this._deviceService.resizeListeners.register(this, this.onResize);
+   }
+
+   //==========================================================
+   // <T>改变大小事件</T>
+   //==========================================================
+   public onResize(sender, event) {
+      var views = this.views;
+      var count = views.count();
+      for(var i = 0; i < count; i++){
+         var view = views.at(i);
+         view.onResize(sender, event);
+      }
    }
 
    //==========================================================

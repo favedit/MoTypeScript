@@ -91,6 +91,7 @@ export class SceneDisplay extends Sprite {
       // var instanceConsole = MO.Console.find(MO.FE3dInstanceConsole);
       this.resource = resource;
       // 加载模板
+      this.matrix.assign(resource.matrix);
       this.templateUrl = resource.templateUrl;
       this.template = this._templateService.allocByUrl(this.graphicContext, resource.templateUrl);
       this._processLoadService.push(this.loadHook);

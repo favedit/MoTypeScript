@@ -1,3 +1,5 @@
+import {FloatUtil} from './runtime/common/lang/FloatUtil';
+import {Matrix3d} from './runtime/graphic/math/Matrix3d';
 import {ResourceObject} from './ResourceObject';
 
 //==========================================================
@@ -8,6 +10,8 @@ import {ResourceObject} from './ResourceObject';
 //==========================================================
 export class SceneDisplayResource extends ResourceObject {
    // 模板地址
+   public matrix: Matrix3d;
+   // 模板地址
    public templateUrl: string;
    //    // @attribute 属性
    //    o._templateGuid        = MO.Class.register(o, new MO.AGetter('_templateGuid'));
@@ -16,15 +20,14 @@ export class SceneDisplayResource extends ResourceObject {
    //    o._movies              = MO.Class.register(o, new MO.AGetter('_movies'));
    //    o._renderables         = MO.Class.register(o, new MO.AGetter('_renderables'));
 
-   // //==========================================================
-   // // <T>构造处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FE3sSceneDisplay_construct = function FE3sSceneDisplay_construct(){
-   //    var o = this;
-   //    o.__base.FE3sSprite.construct.call(o);
-   // }
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this.matrix = new Matrix3d();
+   }
 
    // //==========================================================
    // // <T>根据唯一编号查找一个动画集合。</T>
@@ -126,6 +129,20 @@ export class SceneDisplayResource extends ResourceObject {
    //==========================================================
    public loadConfig(jconfig: any) {
       // 设置属性
+      var matrix = jconfig.matrix
+      if (matrix) {
+         var values = matrix.split(',');
+         this.matrix.tx = FloatUtil.parse(values[0]);
+         this.matrix.ty = FloatUtil.parse(values[1]);
+         this.matrix.tz = FloatUtil.parse(values[2]);
+         this.matrix.rx = FloatUtil.parse(values[3]);
+         this.matrix.ry = FloatUtil.parse(values[4]);
+         this.matrix.rz = FloatUtil.parse(values[5]);
+         this.matrix.sx = FloatUtil.parse(values[6]);
+         this.matrix.sy = FloatUtil.parse(values[7]);
+         this.matrix.sz = FloatUtil.parse(values[8]);
+         this.matrix.updateForce();
+      }
       this.templateUrl = jconfig.template_url;
    }
 

@@ -1,4 +1,7 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
 import {Dictionary} from './runtime/common/lang/Dictionary';
+import {Property} from './runtime/common/reflect/Property';
+import {ScrollEnum} from './runtime/ui/ScrollEnum';
 import {PanelEnum} from './runtime/ui/PanelEnum';
 import {RenderContext} from './RenderContext';
 import {Control} from './Control';
@@ -10,8 +13,11 @@ import {Control} from './Control';
 // @version 141231
 //==========================================================
 export class Container extends Control {
-   // 控件集合
-   // public _controls: Dictionary<Control>;
+   // 滚动方向
+   @Property('scroll_cd', DataTypeEnum.Enum, ScrollEnum.None, ScrollEnum)
+   public scrollCd: ScrollEnum;
+   // 容器
+   protected _hContainer: HTMLElement;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -20,12 +26,6 @@ export class Container extends Control {
    //==========================================================
    public constructor() {
       super();
-      // //..........................................................
-      // // @attributes
-      // o._controls = null;
-      // //..........................................................
-      // // @process
-      // o.oeDesign = MO.Method.empty;
    }
 
    // //==========================================================
@@ -38,93 +38,24 @@ export class Container extends Control {
    //    this._hPanel = context.createFragment();
    // }
 
-   // //==========================================================
-   // // <T>判断是否含有子控件。</T>
-   // //
-   // // @return 是否含有
-   // //==========================================================
-   // public hasControl() {
-   //    var controls = this._controls;
-   //    return controls ? !controls.isEmpty() : false;
-   // }
-
-   // //==========================================================
-   // // <T>根据名称查找一个控件。</T>
-   // //
-   // // @param name 名称
-   // // @return 控件
-   // //==========================================================
-   // public findControl(name: string): Control {
-   //    var controls = this._controls;
-   //    if (controls) {
-   //       var count = controls.count();
-   //       for (var i = 0; i < count; i++) {
-   //          var control = controls.value(i);
-   //          if (control.name == name) {
-   //             return control;
-   //          }
-   //       }
-   //    }
-   //    return null;
-   // }
-
-   // //==========================================================
-   // // <T>根据名称搜索一个控件。</T>
-   // //
-   // // @param name 名称
-   // // @return 控件
-   // //==========================================================
-   // public searchControl(name: string): Control {
-   //    var controls = this._controls;
-   //    if (controls) {
-   //       var count = controls.count();
-   //       for (var i = 0; i < count; i++) {
-   //          var control = controls.value(i);
-   //          if (control.name == name) {
-   //             return control;
-   //          }
-   //          if (control instanceof Container) {
-   //             var findControl = control.searchControl(name);
-   //             if (findControl) {
-   //                return findControl;
-   //             }
-   //          }
-   //       }
-   //    }
-   //    return null;
-   // }
-
-
-   // //==========================================================
-   // // <T>获得控件集合。</T>
-   // //
-   // // @method
-   // // @return TDictionary 控件集合
-   // //==========================================================
-   // MO.FDuiContainer_controls = function FDuiContainer_controls() {
-   //    var o = this;
-   //    var r = o._controls;
-   //    if (r == null) {
-   //       r = new MO.TDictionary();
-   //       o._controls = r;
-   //    }
-   //    return r;
-   // }
-
-   // //==========================================================
-   // // <T>根据底板类型得到相应的页面元素。</T>
-   // //
-   // // @method
-   // // @param t:type:EPanel 底板类型
-   // // @return HTML 页面元素
-   // //==========================================================
-   // MO.FDuiContainer_panel = function FDuiContainer_panel(t) {
-   //    var o = this;
-   //    if (t == MO.EPanel.Container) {
-   //       return o._hPanel;
-   //    }
-   //    return o.__base.FDuiControl.panel.call(o, t);
-   // }
+   //==========================================================
+   // <T>根据底板类型得到相应的页面元素。</T>
+   //
+   // @param type 底板类型
+   // @return 页面元素
+   //==========================================================
+   public getPanel(panelCd: PanelEnum): HTMLElement {
+      // 获得容器底板
+      if (panelCd == PanelEnum.Container) {
+         var hContainer = this._hContainer
+         if (!hContainer) {
+            hContainer = this._hPanel;
+         }
+         return hContainer;
+      }
+      // 获得底板
+      return super.getPanel(panelCd);;
+   }
 
    // //==========================================================
    // // <T>设置第一个可以获得焦点的子控件获得焦点。</T>
@@ -218,8 +149,9 @@ export class Container extends Control {
    // @param control 控件
    //==========================================================
    public appendDisplay(control: Control) {
-      var hControlPanel = control.getPanel(PanelEnum.Panel);
-      this._hPanel.appendChild(hControlPanel);
+      var hContainer = this.getPanel(PanelEnum.Container);
+      var hControl = control.getPanel(PanelEnum.Panel);
+      hContainer.appendChild(hControl);
    }
 
    //==========================================================
@@ -229,47 +161,6 @@ export class Container extends Control {
    //==========================================================
    public removeDisplay(control: Control) {
    }
-
-   // //==========================================================
-   // // <T>将子控件放入自己的哈希表中</T>
-   // //
-   // // @method
-   // // @param p:component:FComponent 组件对象
-   // //==========================================================
-   // public push(p) {
-   //    // // 加载组件
-   //    // this.__base.FDuiControl.push.call(this, p);
-   //    // // 增加控件控件
-   //    // if (MO.Class.isClass(p, MO.FDuiControl)) {
-   //    //    // 存储控件
-   //    //    this.controls().set(p._name, p);
-   //    //    // 追加控件
-   //    //    this.appendChild(p);
-   //    // }
-   // }
-
-   // //==========================================================
-   // // <T>移除指定子控件。</T>
-   // //
-   // // @method
-   // // @param component:FComponent 组件对象
-   // //==========================================================
-   // public remove(component) {
-   //    // // 检查类型
-   //    // if (MO.Class.isClass(component, MO.FDuiControl)) {
-   //    //    // 检查存在
-   //    //    var controls = this._controls;
-   //    //    if (!controls.contains(component.name())) {
-   //    //       throw new MO.TError(this, 'Parameter component is not in this component. (name={1})', component.name());
-   //    //    }
-   //    //    // 移除处理
-   //    //    controls.removeValue(component);
-   //    //    // 移除控件
-   //    //    this.removeChild(component);
-   //    // }
-   //    // // 父处理
-   //    // this.__base.FDuiControl.remove.call(this, component);
-   // }
 
    // //==========================================================
    // // <T>清空所有子控件。</T>

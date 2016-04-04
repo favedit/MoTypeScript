@@ -16,6 +16,15 @@ export class RenderContext {
    @Linker(EnvironmentService)
    protected _environmentService: EnvironmentService;
 
+   public iconPath(code?: string): string {
+      if (code) {
+         var uri = '${resource.icon}/' + StringUtil.replaceChar(code, '.', '/') + '.gif';
+         var url = this._environmentService.parse(uri);
+         return url;
+      }
+      return null;
+   }
+
    //==========================================================
    // <T>创建一个页面对象。</T>
    //
@@ -54,9 +63,7 @@ export class RenderContext {
       var hImage: HTMLImageElement = <HTMLImageElement>this.create('IMG', StringUtil.nvl(styleName, 'Tag_Icon'));
       hImage.align = 'absmiddle';
       if (code) {
-         var uri = '${resource.icon}/' + StringUtil.replaceChar(code, '.', '/') + '.gif';
-         var url = this._environmentService.parse(uri);
-         hImage.src = url;
+         hImage.src = this.iconPath(code);
       }
       if (width) {
          hImage.style.width = width + 'px';
@@ -88,6 +95,57 @@ export class RenderContext {
          hImage.style.height = height + 'px';
       }
       return hImage;
+   }
+
+   //==========================================================
+   // <T>创建一个页面文本对象。</T>
+   //
+   // @param styleName 样式名称
+   // @param text 内容
+   // @return 页面文本对象
+   //==========================================================
+   public createText(styleName?: string, text?: string) {
+      var hText = this.create('SPAN', styleName);
+      if (text) {
+         hText.innerHTML = text;
+      }
+      return hText;
+   }
+
+   //==========================================================
+   // <T>创建一个页面按钮对象。</T>
+   //
+   // @param styleName 样式名称
+   // @return 页面复选框对象
+   //==========================================================
+   public createButton(styleName?: string) {
+      var hButton: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      hButton.type = 'button';
+      return hButton;
+   }
+
+   //==========================================================
+   // <T>创建一个页面复选框对象。</T>
+   //
+   // @param styleName 样式名称
+   // @return 页面复选框对象
+   //==========================================================
+   public createCheck(styleName?: string) {
+      var hCheck: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      hCheck.type = 'checkbox';
+      return hCheck;
+   }
+
+   //==========================================================
+   // <T>创建一个页面单选框对象。</T>
+   //
+   // @param styleName 样式名称
+   // @return 页面单选框对象
+   //==========================================================
+   public createRadio(styleName?: string) {
+      var hRadio: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      hRadio.type = 'radio';
+      return hRadio;
    }
 
    //==========================================================
@@ -178,15 +236,14 @@ export class RenderContext {
    //==========================================================
    // <T>追加一个页面图标对象，放在父容器里面，并返回这个对象。</T>
    //
-   // @method
-   // @param p:parent:HtmlTag 页面标签
-   // @param s:style:String 样式名称
-   // @param u:url:String 图片路径
-   // @param w:width:Integer 图片高度
-   // @param h:height:Integer 图片宽度
-   // @return HtmlImgTag 页面图标对象
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @param url 图片路径
+   // @param width 图片高度
+   // @param height 图片宽度
+   // @return 页面图标对象
    //==========================================================
-   public appendIcon(hParent, styleName?: any, code?: string, width?: any, height?: any) {
+   public appendIcon(hParent, styleName?: string, code?: string, width?: any, height?: any) {
       var hIcon = this.createIcon(styleName, code, width, height);
       hParent.appendChild(hIcon);
       return hIcon;
@@ -195,18 +252,84 @@ export class RenderContext {
    //==========================================================
    // <T>追加一个页面图片对象，放在父容器里面，并返回这个对象。</T>
    //
-   // @method
-   // @param p:parent:HtmlTag 页面标签
-   // @param s:style:String 样式名称
-   // @param u:url:String 图片路径
-   // @param w:width:Integer 图片高度
-   // @param h:height:Integer 图片宽度
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @param url 图片路径
+   // @param width 图片高度
+   // @param height 图片宽度
    // @return HtmlImgTag 页面图片对象
    //==========================================================
-   public appendImage(hParent, styleName?: any, url?: any, width?: any, height?: any) {
+   public appendImage(hParent, styleName?: string, url?: string, width?: any, height?: any) {
       var hImage = this.createImage(styleName, url, width, height);
       hParent.appendChild(hImage);
       return hImage;
+   }
+
+   //==========================================================
+   // <T>追加一个空白页面图标对象，放在父容器里面，并返回这个对象。</T>
+   //
+   // @param hParent 页面标签
+   // @param width 图片的显示宽度
+   // @param height 图片的显示宽度
+   // @return 空白页面图标对象
+   //==========================================================
+   public appendEmpty(hParent, width, height) {
+      var hResult = this.createIcon(null, 'n', width, height);
+      hParent.appendChild(hResult);
+      return hResult;
+   }
+
+   //==========================================================
+   // <T>追加一个页面文本对象，放在父容器里面，并返回这个对象。</T>
+   //
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @param text 内容
+   // @return 页面文本对象
+   //==========================================================
+   public appendText(hParent, styleName?: string, text?: string) {
+      var hResult = this.createText(styleName, text);
+      hParent.appendChild(hResult);
+      return hResult;
+   }
+
+   //==========================================================
+   // <T>追加一个页面按钮对象，放在父容器里面，并返回这个对象。</T>
+   //
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @return 页面按钮对象
+   //==========================================================
+   public appendButton(hParent, styleName?: string) {
+      var hResult = this.createButton(styleName);
+      hParent.appendChild(hResult);
+      return hResult;
+   }
+
+   //==========================================================
+   // <T>追加一个页面复选框对象，放在父容器里面，并返回这个对象。</T>
+   //
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @return 页面复选框对象
+   //==========================================================
+   public appendCheck(hParent, styleName?: string) {
+      var hResult = this.createCheck(styleName);
+      hParent.appendChild(hResult);
+      return hResult;
+   }
+
+   //==========================================================
+   // <T>追加一个页面单选框对象，放在父容器里面，并返回这个对象。</T>
+   //
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @return 页面单选框对象
+   //==========================================================
+   public appendRadio(hParent, styleName?: string) {
+      var hResult = this.createRadio(styleName);
+      hParent.appendChild(hResult);
+      return hResult;
    }
 
    //==========================================================

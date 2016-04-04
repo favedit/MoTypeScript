@@ -14,14 +14,13 @@ import {ForwardPipeline} from '../../plugin/cl3d/technique/pipeline/ForwardPipel
 import {PipelineService} from '../../plugin/cl3d/technique/pipeline/PipelineService';
 import {ModelService} from '../../plugin/cl3d/shape/ModelService';
 import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
-import {SSettings} from '../application/SSettings';
-
-// declare var id_info;
+import {SceneService} from '../../plugin/cl3d/shape/SceneService';
+import {Settings} from '../application/Settings';
 
 //==========================================================
 // <T>画板视图。</T>
 //==========================================================
-export class FCanvasView extends View {
+export class Canvas extends View {
    // 画板
    public canvas: FCanvas;
    // 场景
@@ -35,12 +34,12 @@ export class FCanvasView extends View {
    // 内容层
    public pipeline: Pipeline;
 
-   _cameraMoveRate = 0.4;
-   _cameraKeyRotation = 0.03;
-   _cameraMouseRotation = 0.005;
+   protected _cameraMoveRate = 0.4;
+   protected _cameraKeyRotation = 0.03;
+   protected _cameraMouseRotation = 0.005;
    // 按键管理器
    @Linker(KeyboardService)
-   public _keyboardConsole: KeyboardService = null;
+   public _keyboardConsole: KeyboardService;
 
    //==========================================================
    // <T>配置处理。</T>
@@ -49,19 +48,23 @@ export class FCanvasView extends View {
       super.onSetup();
       // 创建画板
       var parameters = new Object();
-      var settings: SSettings = this.application.settings;
+      var settings: Settings = <Settings>this.application.settings;
       var canvas = this.canvas = new FCanvas();
+      canvas.hCanvas = settings.htmlCanvas3d;
       canvas.setup(settings);
       canvas.addListener(EventEnum.MouseMove, this, this.onMouseMove);
       var hCanvas = canvas.hCanvas;
       var context = canvas.graphicContent;
       // 创建场景
-      var scene: Scene = this.scene = new Scene();
-      scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
-      var layer = this.backgroundLayer = new DisplayLayer();
-      scene.registerLayer('background', layer);
-      var layer = this.contentLayer = new DisplayLayer();
-      scene.registerLayer('content', layer);
+      var sceneService: SceneService = ServiceUtil.find(SceneService);
+      var scene = this.scene = sceneService.allocByUrl(context, '${resource}/scene/pvw.sc.car.01.001.scene');
+      scene.backgroundColor.set(0, 0, 0, 1);
+      // var scene: Scene = this.scene = new Scene();
+      // scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
+      // var layer = this.backgroundLayer = new DisplayLayer();
+      // scene.registerLayer('background', layer);
+      // var layer = this.contentLayer = new DisplayLayer();
+      // scene.registerLayer('content', layer);
       // 创建相机
       var camera = this.camera = new PerspectiveCamera();
       camera.position.set(0, 0, -20);
@@ -70,9 +73,9 @@ export class FCanvasView extends View {
       camera.projection.size.set(hCanvas.offsetWidth, hCanvas.offsetHeight);
       camera.projection.update();
       // 创建物件
-      var cube = new CubeRenderable();
-      cube.setup(context);
-      this.contentLayer.pushRenderable(cube);
+      // var cube = new CubeRenderable();
+      // cube.setup(context);
+      // this.contentLayer.pushRenderable(cube);
       // 设置渲染管道
       var pipelineConsole = ServiceUtil.find(PipelineService);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, ForwardPipeline);

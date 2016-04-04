@@ -210,6 +210,9 @@ export class Scene extends BaseScene {
             var layer: SceneLayer = ClassUtil.create(SceneLayer);
             layer.linkGraphicContext(this.graphicContext);
             layer.loadResource(layerResource);
+            layer.matrix.setScaleAll(0.1);
+            layer.matrix.update();
+            layer.matrix.addRotationX(-Math.PI / 2);
             this.registerLayer(layer.code, layer);
          }
       }

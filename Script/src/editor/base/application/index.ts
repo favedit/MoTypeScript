@@ -1,5 +1,5 @@
 export * from './FApplication';
-export * from './SSettings';
+export * from './Settings';
 
 import * as setting from './setting/index';
 export {setting as setting};

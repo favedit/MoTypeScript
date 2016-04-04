@@ -16,6 +16,7 @@ import {DockEnum} from './runtime/ui/DockEnum';
 import {AnchorEnum} from './runtime/ui/AnchorEnum';
 import {PanelEnum} from './runtime/ui/PanelEnum';
 import {EventService} from './runtime/ui/service/EventService';
+import {DispatchEvent} from './runtime/ui/event/DispatchEvent';
 import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {BuilderUtil} from './runtime/ui/utility/BuilderUtil';
 import {RenderContext} from './RenderContext';
@@ -135,6 +136,42 @@ export class Control extends Component {
    //
    // @param context 环境信息
    //==========================================================
+   public onBuildListeners(context: RenderContext) {
+      // 事件绑定处理
+      var clazz = ClassUtil.get(this.constructor);
+      var annotations = clazz.findAnnotations(AnnotationEnum.Property);
+      if (annotations) {
+         var parentComponent = context.parentComponent;
+         var count = annotations.count();
+         for (var n = 0; n < count; n++) {
+            var annotation: PropertyAnnotation = <PropertyAnnotation>annotations.at(n);
+            if (annotation.dataCd == DataTypeEnum.Listeners) {
+               // 获得监听处理
+               var dataName = annotation.dataName;
+               var dataValue = this.properties.get(dataName);
+               var invoker = parentComponent[dataValue];
+               if (invoker) {
+                  var name = annotation.name;
+                  // 创建监听器
+                  var listeners: Listeners = this[name];
+                  if (!listeners) {
+                     listeners = this[name] = new Listeners(this);
+                  }
+                  // 注册监听器
+                  listeners.register(parentComponent, invoker);
+                  LoggerUtil.debug(this, 'Register listener. (name={1}, data_name={2}, invoker={3})', name, dataName, dataValue);
+               }
+            }
+         }
+      }
+   }
+
+   //==========================================================
+   // <T>创建一个控件容器。</T>
+   // <P>默认为DIV页面元素。</P>
+   //
+   // @param context 环境信息
+   //==========================================================
    public onBuildPanel(context: RenderContext) {
       this._hPanel = context.createFragment();
       //this._hPanel = context.createDiv(this.styleName('Panel'));
@@ -146,12 +183,9 @@ export class Control extends Component {
    // @param context 参数集合
    //==========================================================
    public onBuild(context: RenderContext) {
-      if (this['onclick']) {
-         var parentComponent = context.parentComponent;
-         var onclick = this['onclick'];
-         var clickEvent = parentComponent[onclick];
-         //debugger;
-      }
+      this.renderContext = context;
+      // 建立事件监听
+      this.onBuildListeners(context);
       // 建立控件容器
       this.onBuildPanel(context);
       // // 设置可见性
@@ -503,39 +537,21 @@ export class Control extends Component {
    //==========================================================
    public build(context: RenderContext) {
       AssertUtil.debugNotNull(context);
-      AssertUtil.debugFalse(this._statusBuild);
-      this.renderContext = context;
-      // 事件绑定处理
-      var clazz = ClassUtil.get(this.constructor);
-      var annotations = clazz.findAnnotations(AnnotationEnum.Property);
-      if (annotations) {
-         var parentComponent = context.parentComponent;
-         var count = annotations.count();
-         for (var n = 0; n < count; n++) {
-            var annotation: PropertyAnnotation = <PropertyAnnotation>annotations.at(n);
-            if (annotation.dataCd == DataTypeEnum.Listeners) {
-               // 获得监听处理
-               var dataName = annotation.dataName;
-               var dataValue = this.attributes.get(dataName);
-               var invoker = parentComponent[dataValue];
-               if (invoker) {
-                  var name = annotation.name;
-                  // 创建监听器
-                  var listeners: Listeners = this[name];
-                  if (!listeners) {
-                     listeners = this[name] = new Listeners(this);
-                  }
-                  // 注册监听器
-                  listeners.register(parentComponent, invoker);
-                  LoggerUtil.debug(this, 'Register listener. (name={1}, data_name={2}, invoker={3})', name, dataName, dataValue);
-               }
-            }
-         }
+      if (!this._statusBuild) {
+         // 构建处理
+         this.renderContext = context;
+         this.onBuild(context);
+         // 设置状态
+         this._statusBuild = true;
       }
-      // 构建处理
-      this.onBuild(context);
-      // 设置状态
-      this._statusBuild = true;
+   }
+
+   //==========================================================
+   // <T>构建处理。</T>
+   //
+   // @param context 环境
+   //==========================================================
+   public builded() {
    }
 
    // //==========================================================
@@ -801,6 +817,90 @@ export class Control extends Component {
    //       throw new MO.TError(o, 'Current control is not build.');
    //    }
    // }
+
+   //==========================================================
+   // <T>分发改变控件可操作和禁止的事件。</T>
+   //
+   // @method
+   // @param enable:Boolean 是否允许
+   // //==========================================================
+   // public processEnable(enable) {
+   //    var o = this;
+   //    // 创建事件
+   //    var event = o._eventEnable;
+   //    if (!event) {
+   //       event = o._eventEnable = new MO.SUiDispatchEvent(o, 'oeEnable', MO.MUiControl);
+   //    }
+   //    event.enable = enable;
+   //    // 处理消息
+   //    o.process(event);
+   // }
+
+   // //==========================================================
+   // // <T>分发改变控件隐藏和显示的事件。</T>
+   // //
+   // // @method
+   // // @param visible:Boolean 是否可见
+   // //==========================================================
+   // public processVisible(visible) {
+   //    var o = this;
+   //    // 创建事件
+   //    var event = o._eventVisible;
+   //    if (!event) {
+   //       event = o._eventVisible = new MO.SUiDispatchEvent(o, 'oeVisible', MO.MUiControl);
+   //    }
+   //    event.visible = visible;
+   //    // 处理消息
+   //    o.process(event);
+   // }
+
+   //==========================================================
+   // <T>分发改变控件大小的事件。</T>
+   //
+   // @method
+   //==========================================================
+   public processResize(parameters?: any) {
+      // 创建事件
+      var event = new DispatchEvent();
+      event.invoke = 'oeResize';
+      event.clazz = Control;
+      event.owner = this;
+      event.parameters = parameters;
+      // 处理消息
+      this.process(event);
+   }
+
+   // //==========================================================
+   // // <T>分发控件刷新的事件。</T>
+   // //
+   // // @method
+   // //==========================================================
+   // public processRefresh() {
+   //    var o = this;
+   //    // 创建事件
+   //    var event = o._eventRefresh;
+   //    if (!event) {
+   //       event = o._eventRefresh = new MO.SUiDispatchEvent(o, 'oeRefresh', MO.MUiControl);
+   //    }
+   //    // 处理消息
+   //    o.process(event);
+   // }
+
+   // //==========================================================
+   // // <T>分发控件帧的事件。</T>
+   // //
+   // // @method
+   // //==========================================================
+   // public processFrame() {
+   //    // 创建事件
+   //    var event = this._eventFrame;
+   //    if (!event) {
+   //       event = this._eventFrame = new MO.SUiDispatchEvent(this, 'oeFrame', MO.MUiControl);
+   //    }
+   //    // 处理消息
+   //    this.process(event);
+   // }
+
 
    //==========================================================
    // <T>释放处理。</T>

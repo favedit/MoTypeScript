@@ -11,6 +11,8 @@ export * from './DialogEnum';
 export * from './DirectionEnum';
 export * from './DockEnum';
 export * from './EventEnum';
+export * from './EventInvokeEnum';
+export * from './EventStatusEnum';
 export * from './KeyCodeEnum';
 export * from './KeyStatusEnum';
 export * from './LabelModeEnum';
@@ -26,6 +28,7 @@ export * from './PositionEnum';
 export * from './ScrollEnum';
 export * from './SizeEnum';
 export * from './SoftwareEnum';
+export * from './Style';
 export * from './TimeUnitEnum';
 export * from './WrapEnum';
 

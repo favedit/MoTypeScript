@@ -1,5 +1,10 @@
-﻿import {BooleanUtil} from '../../common/lang/BooleanUtil';
+﻿import {Fatal} from '../../common/lang/Fatal';
+import {BooleanUtil} from '../../common/lang/BooleanUtil';
 import {ObjectIdUtil} from '../../common/lang/ObjectIdUtil';
+import {ServiceUtil} from '../../core/ServiceUtil';
+import {ScrollEnum} from '../../ui/ScrollEnum';
+import {DeviceService} from '../../ui/service/DeviceService';
+import {BrowserEnum} from '../../ui/BrowserEnum';
 import {HtmlItem} from './HtmlItem';
 
 //==========================================================
@@ -10,17 +15,16 @@ import {HtmlItem} from './HtmlItem';
 // @version 141229
 //==========================================================
 export class HtmlUtil {
-   //..........................................................
-   // @attribute
+   // 关联集合
    public static _links: any = new Object();
-   public static _clientPosition: any = null;
+   // 客户端位置
+   public static _clientPosition: any;
 
    //==========================================================
    // <T>获得对象的唯一编号。</T>
    // <P>外部会引用这个函数，不要在内部使用this对象。</P>
    //
-   // @method
-   // @param value:Object 对象
+   // @param value 对象
    // @return Integer 编号
    //==========================================================
    public static uid(value) {
@@ -34,35 +38,35 @@ export class HtmlUtil {
    //==========================================================
    // <T>获得可见性。</T>
    //
-   // @method
    // @param hTag 页面对象
    // @return 可见性
    //==========================================================
-   public static visibleGet(hTag): boolean {
+   public static visibleGet(hTag: HTMLElement): boolean {
       var result = null;
       var text = hTag.style.display;
-      //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
-      result = (text == 'block');
-      //} else {
-      //   result = (text != 'none');
-      //}
+      var deviceService: DeviceService = ServiceUtil.find(DeviceService);
+      if (deviceService.isBrowser(BrowserEnum.Explorer)) {
+         result = (text == 'block');
+      } else {
+         result = (text != 'none');
+      }
       return result;
    }
 
    //==========================================================
    // <T>设置可见性。</T>
    //
-   // @method
    // @param hTag 页面对象
    // @param visible 可见性
    //==========================================================
-   public static visibleSet(hTag, visible: boolean) {
+   public static visibleSet(hTag: HTMLElement, visible: boolean) {
       var text = null;
-      //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
-      text = visible ? '' : 'none';
-      //} else {
-      //   text = visible ? null : 'none';
-      //}
+      var deviceService: DeviceService = ServiceUtil.find(DeviceService);
+      if (deviceService.isBrowser(BrowserEnum.Explorer)) {
+         text = visible ? '' : 'none';
+      } else {
+         text = visible ? null : 'none';
+      }
       hTag.style.display = text;
    }
 
@@ -76,11 +80,11 @@ export class HtmlUtil {
    // public static displayGet(hTag) {
    //    var result = null;
    //    var text = hTag.style.display;
-   //    if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
-   //       result = (text == 'inline');
-   //    } else {
-   //       result = (text != 'none');
-   //    }
+   //    // if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
+   //    //    result = (text == 'inline');
+   //    // } else {
+   //    result = (text != 'none');
+   //    // }
    //    return result;
    // }
 
@@ -93,44 +97,46 @@ export class HtmlUtil {
    // //==========================================================
    // public static displaySet(hTag, visible) {
    //    var text = null;
-   //    if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
-   //       text = visible ? 'inline' : 'none';
-   //    } else {
-   //       text = visible ? null : 'none';
-   //    }
+   //    // if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
+   //    //    text = visible ? 'inline' : 'none';
+   //    // } else {
+   //    text = visible ? null : 'none';
+   //    // }
    //    hTag.style.display = text;
    // }
 
    //==========================================================
    // <T>获得文本内容。</T>
    //
-   // @param hTag:HtmlTag 页面对象
-   // @return String 文本内容
+   // @param hTag 页面对象
+   // @return 文本内容
    //==========================================================
-   public static textGet(hTag, defaultText) {
+   public static textGet(hTag: HTMLElement, defaultText: string): string {
       var text = null;
       text = hTag.textContent;
-      // if (MO.Window.Browser.isBrowser(MO.EBrowser.FireFox)) {
-      //    text = hTag.textContent;
-      // } else {
-      //    text = hTag.innerText;
-      // }
+      var deviceService: DeviceService = ServiceUtil.find(DeviceService);
+      if (deviceService.isBrowser(BrowserEnum.FireFox)) {
+         text = hTag.textContent;
+      } else {
+         text = hTag.innerText;
+      }
       return text;
    }
 
    //==========================================================
    // <T>设置文本内容。</T>
    //
-   // @param hTag:HtmlTag 页面对象
-   // @param text:String 文本内容
+   // @param hTag 页面对象
+   // @param text 文本内容
    //==========================================================
-   public static textSet(hTag, text) {
+   public static textSet(hTag: HTMLElement, text: string) {
       hTag.textContent = text;
-      // if (MO.Window.Browser.isBrowser(MO.EBrowser.FireFox)) {
-      //    hTag.textContent = text;
-      // } else {
-      //    hTag.innerText = text;
-      // }
+      var deviceService: DeviceService = ServiceUtil.find(DeviceService);
+      if (deviceService.isBrowser(BrowserEnum.FireFox)) {
+         hTag.textContent = text;
+      } else {
+         hTag.innerText = text;
+      }
    }
 
    //==========================================================
@@ -232,6 +238,42 @@ export class HtmlUtil {
          item._link = hTag;
       }
       item.set(name, value);
+   }
+
+   //===========================================================
+   // <T>设置页面元素滚动样式。</T>
+   //
+   // @param hElement 页面元素
+   // @param scrollCd 滚动枚举
+   //===========================================================
+   public static setStyleScroll(hElement: HTMLElement, scrollCd: ScrollEnum) {
+      var hStyle = hElement.style;
+      switch (scrollCd) {
+         case ScrollEnum.None:
+            hStyle.overflowX = '';
+            hStyle.overflowY = '';
+            break;
+         case ScrollEnum.Horizontal:
+            hStyle.overflowX = 'scroll';
+            break;
+         case ScrollEnum.HorizontalAuto:
+            hStyle.overflowX = 'auto';
+            break;
+         case ScrollEnum.Vertical:
+            hStyle.overflowY = 'scroll';
+            break;
+         case ScrollEnum.VerticalAuto:
+            hStyle.overflowY = 'auto';
+            break;
+         case ScrollEnum.Both:
+            hStyle.overflow = 'scroll';
+            break;
+         case ScrollEnum.BothAuto:
+            hStyle.overflow = 'auto';
+            break;
+         default:
+            throw new Fatal(this, 'Unknown scroll type. (scroll_cd={1})', scrollCd);
+      }
    }
 
    // //==========================================================
@@ -437,54 +479,54 @@ export class HtmlUtil {
    //    return null;
    // }
 
-   // //==========================================================
-   // // <T>移动表格中的一行。</T>
-   // //
-   // // @param ph:hTable
-   // // @param ps:sourceIndex
-   // // @param pt:targetIndex
-   // //==========================================================
-   // public static tableMoveRow(ph, ps, pt) {
-   //    // 检查参数
-   //    if (ph.tagName != 'TABLE') {
-   //       throw new MO.TError('Html table is invalid.');
-   //    }
-   //    if (ps == pt) {
-   //       return false;
-   //    }
-   //    // 移动处理
-   //    if (ph.moveRow) {
-   //       // 原始处理
-   //       ph.moveRow(ps, pt);
-   //    } else {
-   //       // 兼容处理
-   //       var hb = ph.getElementsByTagName('tbody')[0];
-   //       var sr = hb.rows[ps];
-   //       var tr = hb.rows[pt];
-   //       if ((sr == null) || (tr == null)) {
-   //          return false;
-   //       }
-   //       var nr = null;
-   //       if (ps <= pt) {
-   //          nr = tr;
-   //          while (nr = nr.nextSibling) {
-   //             if (nr.tagName == 'TR') {
-   //                break;
-   //             }
-   //          }
-   //       }
-   //       if (nr == null) {
-   //          hb.insertBefore(sr, tr);
-   //       } else {
-   //          if (nr == null) {
-   //             hb.appendChild(sr);
-   //          } else {
-   //             hb.insertBefore(sr, nr);
-   //          }
-   //       }
-   //    }
-   //    return true;
-   // }
+   //==========================================================
+   // <T>移动表格中的一行。</T>
+   //
+   // @param hTable
+   // @param sourceIndex
+   // @param targetIndex
+   //==========================================================
+   public static tableMoveRow(hTable, sourceIndex, targetIndex) {
+      // 检查参数
+      if (hTable.tagName != 'TABLE') {
+         throw new Fatal(this, 'Html table is invalid.');
+      }
+      if (sourceIndex == targetIndex) {
+         return false;
+      }
+      // 移动处理
+      if (hTable.moveRow) {
+         // 原始处理
+         hTable.moveRow(sourceIndex, targetIndex);
+      } else {
+         // 兼容处理
+         var hb = hTable.getElementsByTagName('tbody')[0];
+         var sr = hb.rows[sourceIndex];
+         var tr = hb.rows[targetIndex];
+         if ((sr == null) || (tr == null)) {
+            return false;
+         }
+         var nr = null;
+         if (sourceIndex <= targetIndex) {
+            nr = tr;
+            while (nr = nr.nextSibling) {
+               if (nr.tagName == 'TR') {
+                  break;
+               }
+            }
+         }
+         if (nr == null) {
+            hb.insertBefore(sr, tr);
+         } else {
+            if (nr == null) {
+               hb.appendChild(sr);
+            } else {
+               hb.insertBefore(sr, nr);
+            }
+         }
+      }
+      return true;
+   }
 
    // //==========================================================
    // // <T>清空处理。</T>

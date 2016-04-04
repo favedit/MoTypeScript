@@ -29,14 +29,25 @@ export class FCanvas extends FBaseCanvas {
       var hPanel = parameters.hPanel;
       var size = parameters.size;
       // 创建画板
-      var hCanvas = this.hCanvas = hDocument.createElement("CANVAS");
-      hCanvas.width = size.width;
-      hCanvas.height = size.height;
-      hPanel.appendChild(hCanvas);
+      var hCanvas = null;
+      if (this.hCanvas) {
+         hCanvas = this.hCanvas;
+      } else {
+         hCanvas = this.hCanvas = hDocument.createElement("CANVAS");
+         hPanel.appendChild(hCanvas);
+      }
+      var hParent = hCanvas.parentElement;
+      hCanvas.style.width = '100%';
+      hCanvas.style.height = '100%';
+      hCanvas.width = hParent.offsetWidth;
+      hCanvas.height = hParent.offsetHeight;
+      //hCanvas.width = size.width;
+      //hCanvas.height = size.height;
       // 创建环境
-      var context = this.graphicContent = WglContextUtil.create(hCanvas);
+      var context = WglContextUtil.create(hCanvas);
       // 设置事件
       this.attachEvent(hCanvas, EventEnum.MouseMove, this.onMouseMove);
+      return context;
    }
 
    //==========================================================

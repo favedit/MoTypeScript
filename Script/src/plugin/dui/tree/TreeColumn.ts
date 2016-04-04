@@ -1,3 +1,5 @@
+import {Control} from '../Control';
+
 //==========================================================
 // <T>树目录列组件。</T>
 //
@@ -5,13 +7,12 @@
 // @author maocy
 // @version 150119
 //==========================================================
-export class TreeColumn {
+export class TreeColumn extends Control {
+   public _icon: string;
+   public _dataName: string;
+
    public constructor() {
-      // o = MO.Class.inherits(this, o, MO.FDuiControl);
-      // //..........................................................
-      // // @property
-      // o._icon = MO.Class.register(o, new MO.APtyString('_icon'));
-      // o._dataName = MO.Class.register(o, new MO.APtyString('_dataName'));
+      super();
       // o._display = MO.Class.register(o, new MO.APtyBoolean('_display'), MO.EBoolean.False);
       // o._config = MO.Class.register(o, new MO.APtyConfig('_config'));
       // //..........................................................

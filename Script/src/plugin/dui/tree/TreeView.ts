@@ -1,3 +1,21 @@
+import {Fatal} from './runtime/common/lang/Fatal';
+import {Objects} from './runtime/common/lang/Objects';
+import {Dictionary} from './runtime/common/lang/Dictionary';
+import {ClassUtil} from './runtime/common/reflect/ClassUtil';
+import {AssertUtil} from './runtime/common/AssertUtil';
+import {EventEnum} from './runtime/ui/EventEnum';
+import {PanelEnum} from './runtime/ui/PanelEnum';
+import {DispatchEvent} from './runtime/ui/event/DispatchEvent';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
+import {RenderContext} from '../RenderContext';
+import {Component} from '../Component';
+import {Control} from '../Control';
+import {Container} from '../Container';
+import {TreeNodeType} from './TreeNodeType';
+import {TreeColumn} from './TreeColumn';
+import {TreeLevel} from './TreeLevel';
+import {TreeNode} from './TreeNode';
+
 //==========================================================
 // <T>树目录控件。</T>
 //  hPanel<TABLE>
@@ -17,13 +35,10 @@
 // @author maocy
 // @version 150119
 //==========================================================
-export class TreeView {
-   // MO.FDuiTreeView = function FDuiTreeView(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiContainer);
-   //    //..........................................................
-   //    // @property
-   //    o._optionCheck = MO.Class.register(o, new MO.APtyBoolean('_optionCheck'), false);
-   //    o._indent = MO.Class.register(o, new MO.APtyInteger('_indent'), 16);
+export class TreeView extends Container {
+   // @property
+   public optionCheck: boolean;
+   public indent: number;
    //    //..........................................................
    //    // @style
    //    o._stylePanel = MO.Class.register(o, new MO.AStyle('_stylePanel', 'Panel'));
@@ -31,134 +46,181 @@ export class TreeView {
    //    o._styleNodeForm = MO.Class.register(o, new MO.AStyle('_styleNodeForm', 'NodeForm'));
    //    //..........................................................
    //    // @attribute
-   //    o._attributes = MO.Class.register(o, new MO.AGetter('_attributes'));
-   //    o._nodeTypes = MO.Class.register(o, new MO.AGetter('_nodeTypes'));
-   //    o._nodeColumns = MO.Class.register(o, new MO.AGetter('_nodeColumns'));
-   //    o._nodeLevels = MO.Class.register(o, new MO.AGetter('_nodeLevels'));
-   //    o._nodes = MO.Class.register(o, new MO.AGetter('_nodes'));
-   //    o._allNodes = null;
-   //    // @attribute
-   //    o._defaultNodeType = null;
-   //    o._focusNode = MO.Class.register(o, new MO.AGetter('_focusNode'));
-   //    o._loadingNode = null;
-   //    o._freeNodes = null;
-   //    //..........................................................
-   //    // @icon
-   //    o._iconPlus = 'control.treeview.plus';
-   //    o._iconMinus = 'control.treeview.minus';
-   //    o._iconNode = 'control.treeview.node';
-   //    o._iconLoading = 'control.treeview.loading';
-   //    //..........................................................
-   //    // @html
-   //    o._hNodePanel = null;
-   //    o._hNodeForm = null;
-   //    o._hHeadLine = null;
-   //    o._hNodeRows = null;
+   //protected _attributes;
+   public nodeTypes: Dictionary<TreeNodeType>;
+   public nodeColumns: Dictionary<TreeColumn>;
+   public nodeLevels: Dictionary<TreeLevel>;
+   public nodes: Objects<TreeNode>;
+   public allNodes: Objects<TreeNode>;
+   protected _defaultNodeType: TreeNodeType;
+   public focusNode: TreeNode;
+   protected _loadingNode: TreeNode;
+   protected _freeNodes: Objects<TreeNode>;
+   //..........................................................
+   // @icon
+   public iconPlus = 'control.treeview.plus';
+   public iconMinus = 'control.treeview.minus';
+   public iconNode = 'control.treeview.node';
+   public iconLoading = 'control.treeview.loading';
+   //..........................................................
+   // @html
+   protected _hNodeBody: HTMLTableCellElement;
+   protected _hNodePanel: HTMLDivElement;
+   protected _hNodeForm: HTMLTableElement;
+   protected _hHeadLine: HTMLTableRowElement;
+   protected _hNodeRows;
    //    //..........................................................
    //    // @listener
    //    o._listenersNodeEnter = MO.Class.register(o, new MO.AListener('_listenersNodeEnter'));
    //    o._listenersNodeLeave = MO.Class.register(o, new MO.AListener('_listenersNodeLeave'));
    //    o._listenersNodeClick = MO.Class.register(o, new MO.AListener('_listenersNodeClick'));
-   //    //..........................................................
-   //    // @event
-   //    o.onBuildPanel = MO.FDuiTreeView_onBuildPanel;
-   //    o.onBuild = MO.FDuiTreeView_onBuild;
-   //    o.onNodeClick = MO.FDuiTreeView_onNodeClick;
-   //    o.onClick = MO.Class.register(o, new MO.AEventClick('onClick'), MO.FDuiTreeView_onClick);
-   //    o.onNodeCheckClick = MO.Class.register(o, new MO.AEventClick('onNodeCheckClick'), MO.FDuiTreeView_onNodeCheckClick);
-   //    //..........................................................
-   //    // @method
-   //    o.construct = MO.FDuiTreeView_construct;
-   //    // @method
-   //    o.hasNode = MO.FDuiTreeView_hasNode;
-   //    // @method
-   //    o.findType = MO.FDuiTreeView_findType;
-   //    o.findByName = MO.FDuiTreeView_findByName;
-   //    o.findByGuid = MO.FDuiTreeView_findByGuid;
-   //    // @method
-   //    o.createChild = MO.FDuiTreeView_createChild;
-   //    o.createNode = MO.FDuiTreeView_createNode;
-   //    o.appendChild = MO.FDuiTreeView_appendChild;
-   //    o.appendNode = MO.FDuiTreeView_appendNode;
-   //    o.appendNodes = MO.FDuiTreeView_appendNodes;
-   //    o.selectNode = MO.FDuiTreeView_selectNode;
-   //    o.push = MO.FDuiTreeView_push;
-   //    o.removeNode = MO.FDuiTreeView_removeNode;
-   //    o.removeNodes = MO.FDuiTreeView_removeNodes;
-   //    o.freeNode = MO.FDuiTreeView_freeNode;
-   //    o.clearNodes = MO.FDuiTreeView_clearNodes;
-   //    // @method
-   //    o.nodeClick = MO.FDuiTreeView_nodeClick;
-   //    // @method
-   //    o.calculateHeight = MO.FDuiTreeView_calculateHeight;
-   //    o.fetchChangedChecks = MO.FDuiTreeView_fetchChangedChecks;
-   //    o.extendAuto = MO.FDuiTreeView_extendAuto;
-   //    o.extendAll = MO.FDuiTreeView_extendAll;
-   //    // @method
-   //    o.loadNode = MO.Method.empty;
-   //    o.refresh = MO.FDuiTreeView_refresh;
-   //    o.filterNode = MO.FDuiTreeView_filterNode;
-   //    // @method
-   //    o.clearAllNodes = MO.FDuiTreeView_clearAllNodes;
-   //    o.clear = MO.FDuiTreeView_clear;
-   //    // @method
-   //    o.dispose = MO.FDuiTreeView_dispose;
-   //    return o;
-   // }
 
-   // //==========================================================
-   // // <T>创建一个控件容器。</T>
-   // //
-   // // @method
-   // // @return HtmlTag 页面元素
-   // //==========================================================
-   // MO.FDuiTreeView_onBuildPanel = function FDuiTreeView_onBuildPanel(e) {
-   //    var o = this;
-   //    o._hPanel = MO.Window.Builder.createTable(e.hDocument, o.styleName('Panel'));
-   // }
 
-   // //==========================================================
-   // // <T>构建树目录。</T>
-   // //
-   // // @method
-   // // @param event:TEventProcess 处理事件
-   // //==========================================================
-   // MO.FDuiTreeView_onBuild = function FDuiTreeView_onBuild(event) {
-   //    var o = this;
-   //    o.__base.FDuiContainer.onBuild.call(o, event);
-   //    // 关联事件
-   //    var hPanel = o._hPanel;
-   //    o.attachEvent('onClick', hPanel);
-   //    // 构建标题表格
-   //    var hr = MO.Window.Builder.appendTableRow(o._hPanel);
-   //    var hc = MO.Window.Builder.appendTableCell(hr);
-   //    // 构建节点底板
-   //    var hnp = o._hNodePanel = MO.Window.Builder.appendDiv(hc, o.styleName('NodePanel'));
-   //    // 构建节点表格
-   //    var hnf = o._hNodeForm = MO.Window.Builder.appendTable(hnp, o.styleName('NodeForm'));
-   //    hnf.width = '100%';
-   //    // 表格第一行是标题栏
-   //    o._hHeadLine = MO.Window.Builder.appendTableRow(hnf);
-   //    o._hNodeRows = hnf.children[0];
-   //    // 构建加载中节点
-   //    var node = o._loadingNode = MO.Class.create(MO.FDuiTreeNode);
-   //    node._tree = o;
-   //    node._label = MO.RContext.get('FDuiTreeView:loading');
-   //    node._icon = o._iconLoading;
-   //    node.build(event);
-   //    //o.appendNode(node);
-   //    //node.hide();
-   //    // 构建后处理
-   //    var ns = o._nodes;
-   //    if (!ns.isEmpty()) {
-   //       var nc = ns.count();
-   //       for (var i = 0; i < nc; i++) {
-   //          o.appendNode(ns.get(i));
-   //       }
-   //    }
-   //    o.extendAuto();
-   //    //RConsole.find(FKeyConsole).register(EKey.Esc, new TListener(o, o.clear));
-   // }
+   //==========================================================
+   // <T>构造处理。</T>
+   //
+   // @method
+   //==========================================================
+   public constructor() {
+      super();
+      // 初始化变量
+      this.indent = 16;
+      //this._attributes = new TAttributes();
+      this.nodeTypes = new Dictionary<TreeNodeType>();
+      this.nodeColumns = new Dictionary<TreeColumn>();
+      this.nodeLevels = new Dictionary<TreeLevel>();
+      this.nodes = new Objects<TreeNode>();
+      this.allNodes = new Objects<TreeNode>();
+      // 初始化变量
+      this._freeNodes = new Objects<TreeNode>();
+      // 创建默认类型
+      this._defaultNodeType = ClassUtil.create(TreeNodeType);
+   }
+
+   //==========================================================
+   // <T>创建一个控件容器。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildPanel(context: RenderContext) {
+      this._hPanel = context.createTable(this.styleName('Panel'));
+   }
+
+   //==========================================================
+   // <T>建立当前控件的显示框架。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuild(context: RenderContext) {
+      super.onBuild(context);
+      // 关联事件
+      var hPanel = this._hPanel;
+      //this.attachEvent(hPanel, EventEnum.Click, this.onClick);
+      // 构建标题表格
+      var hRow = context.appendTableRow(this._hPanel);
+      var hNodeBody = this._hNodeBody = context.appendTableCell(hRow);
+      //this.attachEvent(hNodeBody, EventEnum.Resize, );
+      // 构建节点底板
+      var hNodePanel = this._hNodePanel = context.appendDiv(hNodeBody, this.styleName('NodePanel'));
+      // 构建节点表格
+      var hNodeForm = this._hNodeForm = context.appendTable(hNodePanel, this.styleName('NodeForm'));
+      hNodeForm.width = '100%';
+      // 表格第一行是标题栏
+      this._hHeadLine = context.appendTableRow(hNodeForm);
+      this._hNodeRows = hNodeForm.children[0];
+      // 构建加载中节点
+      //var node = this._loadingNode = ClassUtil.create(TreeNode);
+      //node._tree = this;
+      //node._label = MO.RContext.get('FDuiTreeView:loading');
+      //node._label = "Loading";
+      //node._icon = this._iconLoading;
+      //node.build(context);
+      //o.appendNode(node);
+      //node.hide();
+      // 构建后处理
+      // var ns = this.nodes;
+      // if (!ns.isEmpty()) {
+      //    var nc = ns.count();
+      //    for (var i = 0; i < nc; i++) {
+      //       //this.appendNode(ns.get(i));
+      //    }
+      // }
+      //this.extendAuto();
+      //RConsole.find(FKeyConsole).register(EKey.Esc, new TListener(o, o.clear));
+   }
+
+   //==========================================================
+   // <T>追加一个节点到自己到自己的父节点内。</T>
+   // <P>如果父节点为空，则追加到跟节点下。</P>
+   //
+   // @param node 节点对象
+   // @param parent 父节点
+   //==========================================================
+   public appendNode(parent: TreeNode, node: TreeNode) {
+      // 检查是否已经关联
+      if (node.statusLinked) {
+         return;
+      }
+      // 放入表格中
+      var hNodeRows = this._hNodeRows;
+      if (parent) {
+         var hParentPanel: HTMLTableRowElement = <HTMLTableRowElement>parent.getPanel(PanelEnum.Panel);
+         if (!hParentPanel.parentElement) {
+            hNodeRows.appendChild(hParentPanel);
+         }
+      }
+      var hChildPanel: HTMLTableRowElement = <HTMLTableRowElement>node.getPanel(PanelEnum.Panel);
+      if (!hChildPanel.parentElement) {
+         hNodeRows.appendChild(hChildPanel);
+      }
+      // 放入指定位置
+      if (parent) {
+         // 计算最后一个已经连接节点的位置
+         var lastNode = parent.searchLast();
+         var hLastPanel = lastNode.getPanel(PanelEnum.Panel);
+         var lastIndex = hLastPanel.rowIndex;
+         // 关联节点
+         //if (hChildPanel.rowIndex > lastIndex) {
+         //   lastIndex++;
+         //}
+         HtmlUtil.tableMoveRow(this._hNodeForm, hChildPanel.rowIndex, lastIndex + 1);
+         // 设置层次
+         node.setLevel(parent.level + 1);
+      } else {
+         this._hNodeRows.appendChild(hChildPanel);
+         node.setLevel(0);
+      }
+      node.statusLinked = true;
+   }
+
+   //==========================================================
+   // <T>追加一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public appendDisplay(control: Control) {
+      var context = this.renderContext;
+      // 按键处理
+      if (control instanceof TreeNode) {
+         this.appendNode(null, control as TreeNode);
+      } else {
+         throw new Fatal(this, 'Unknown control type.');
+      }
+   }
+
+   //==========================================================
+   // <T>改变大小处理。</T>
+   //
+   // @param event 事件信息
+   //==========================================================
+   public oeResize(event: DispatchEvent) {
+      if (event.isAfter()) {
+         var hNodeBody = this._hNodeBody;
+         var hNodePanel = this._hNodePanel;
+         hNodePanel.style.width = hNodeBody.offsetWidth + 'px';
+         hNodePanel.style.height = hNodeBody.offsetHeight + 'px';
+      }
+   }
 
    // //==========================================================
    // // <T>节点点击事件处理。</T>
@@ -232,27 +294,6 @@ export class TreeView {
    // }
 
    // //==========================================================
-   // // <T>构造处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiTreeView_construct = function FDuiTreeView_construct() {
-   //    var o = this;
-   //    o.__base.FDuiContainer.construct.call(o);
-   //    // 初始化变量
-   //    o._attributes = new MO.TAttributes();
-   //    o._nodeTypes = new MO.TDictionary();
-   //    o._nodeColumns = new MO.TDictionary();
-   //    o._nodeLevels = new MO.TDictionary();
-   //    o._nodes = new MO.TObjects();
-   //    o._allNodes = new MO.TObjects();
-   //    // 初始化变量
-   //    o._freeNodes = new MO.TObjects();
-   //    // 创建默认类型
-   //    o._defaultNodeType = MO.Class.create(MO.FDuiTreeNodeType);
-   // }
-
-   // //==========================================================
    // // <T>是否含有子节点。</T>
    // //
    // // @method
@@ -262,16 +303,15 @@ export class TreeView {
    //    return this._rootNode.hasChild();
    // }
 
-   // //==========================================================
-   // // <T>根据类型名称查找类型信息。</T>
-   // //
-   // // @method
-   // // @param p:name:String 类型名称
-   // // @return FDuiTreeNodeType 类型信息
-   // //==========================================================
-   // MO.FDuiTreeView_findType = function FDuiTreeView_findType(p) {
-   //    return this._nodeTypes.get(p);
-   // }
+   //==========================================================
+   // <T>根据类型名称查找类型信息。</T>
+   //
+   // @param name 类型名称
+   // @return 类型信息
+   //==========================================================
+   public findType(name: string): TreeNodeType {
+      return this.nodeTypes.get(name);
+   }
 
    // //==========================================================
    // // <T>查询所有节点中，找到指定名称的节点。</T>
@@ -384,43 +424,6 @@ export class TreeView {
    // }
 
    // //==========================================================
-   // // <T>追加一个节点到自己到自己的父节点内。</T>
-   // // <P>如果父节点为空，则追加到跟节点下。</P>
-   // //
-   // // @method
-   // // @param node:FDuiTreeNode 节点对象
-   // // @param parent:FDuiTreeNode 父节点
-   // //==========================================================
-   // MO.FDuiTreeView_appendNode = function FDuiTreeView_appendNode(node, parent) {
-   //    var o = this;
-   //    if (node._statusLinked) {
-   //       return;
-   //    }
-   //    var hPanel = node._hPanel;
-   //    if (parent) {
-   //       // 计算最后一个已经连接节点的位置
-   //       var nl = parent.searchLast();
-   //       var nr = nl._hPanel.rowIndex;
-   //       // 关联节点
-   //       if (hPanel.parentElement) {
-   //          if (hPanel.rowIndex > nr) {
-   //             nr++;
-   //          }
-   //          MO.Window.Html.tableMoveRow(o._hNodeForm, hPanel.rowIndex, nr);
-   //       } else {
-   //          o._hNodeRows.appendChild(hPanel);
-   //          MO.Window.Html.tableMoveRow(o._hNodeForm, hPanel.rowIndex, nr + 1);
-   //       }
-   //       // 设置层次
-   //       node.setLevel(parent._level + 1);
-   //    } else {
-   //       o._hNodeRows.appendChild(hPanel);
-   //       node.setLevel(0);
-   //    }
-   //    node._statusLinked = true;
-   // }
-
-   // //==========================================================
    // // <T>把xml解析为节点，添加到一个节点下面。</T>
    // //
    // // @method
@@ -502,78 +505,104 @@ export class TreeView {
    //    }
    // }
 
-   // //==========================================================
-   // // <T>增加一个子控件。</T>
-   // //
-   // // @method
-   // // @param control:FControl 控件
-   // //==========================================================
-   // MO.FDuiTreeView_push = function FDuiTreeView_push(control) {
-   //    var o = this;
-   //    o.__base.FDuiContainer.push.call(o, control);
-   //    // 增加节点
-   //    control._tree = o;
-   //    if (MO.Class.isClass(control, MO.FDuiTreeColumn)) {
-   //       var columnName = control.name();
-   //       MO.Assert.debugNotEmpty(columnName);
-   //       o._nodeColumns.set(columnName, control);
-   //    } else if (MO.Class.isClass(control, MO.FDuiTreeLevel)) {
-   //       var levelId = control.id();
-   //       MO.Assert.debugNotEmpty(levelId);
-   //       o._nodeLevels.set(levelId, control);
-   //    } else if (MO.Class.isClass(control, MO.FDuiTreeNodeType)) {
-   //       var typeCode = control.code();
-   //       MO.Assert.debugNotEmpty(typeCode);
-   //       o._nodeTypes.set(typeCode, control);
-   //    } else if (MO.Class.isClass(control, MO.FDuiTreeNode)) {
-   //       // 追加节点
-   //       o._nodes.push(control);
-   //       o._allNodes.push(control);
-   //       // 追加节点显示
-   //       o.appendNode(control);
-   //    }
-   // }
+   //==========================================================
+   // <T>增加一个子组件。</T>
+   //
+   // @param child 子组件
+   //==========================================================
+   public appendChild(child: Component) {
+      super.appendChild(child);
+      // 增加节点
+      //child.tree = this;
+      if (child instanceof TreeColumn) {
+         var columnName = child.name;
+         AssertUtil.debugNotEmpty(columnName);
+         this.nodeColumns.set(columnName, child);
+      } else if (child instanceof TreeLevel) {
+         var levelName = child.name;
+         AssertUtil.debugNotEmpty(levelName);
+         this.nodeLevels.set(levelName, child);
+      } else if (child instanceof TreeNodeType) {
+         var typeName = child.name;
+         AssertUtil.debugNotEmpty(typeName);
+         this.nodeTypes.set(typeName, child);
+      } else if (child instanceof TreeNode) {
+         // 追加节点
+         //this._nodes.push(child);
+         //this._allNodes.push(child);
+         // 追加节点显示
+         //this.appendNode(child);
+      }
+   }
 
-   // //==========================================================
-   // // <T>移除一个树节点。</T>
-   // //
-   // // @method
-   // // @todo: 未修复
-   // // @param p:node:FTreeNode 目录节点
-   // //==========================================================
-   // MO.FDuiTreeView_removeNode = function FDuiTreeView_removeNode(oNode) {
-   //    var o = this;
-   //    if (oNode) {
-   //       var nodes = new Array();
-   //       var oLoopNode = null;
-   //       var nCount = this._allNodes.length;
-   //       for (var n = 0; n < nCount; n++) {
-   //          oLoopNode = this._allNodes[n];
-   //          if (oLoopNode != oNode) {
-   //             nodes[nodes.length] = oLoopNode;
-   //          }
-   //       }
-   //       o._allNodes = nodes;
-   //       var oParent = oNode.parent;
-   //       if (oParent) {
-   //          nodes = new Array();
-   //          nCount = oParent._nodes.length;
-   //          for (var n = 0; n < nCount; n++) {
-   //             oLoopNode = oParent._nodes[n];
-   //             if (oLoopNode != oNode) {
-   //                nodes[nodes.length] = oLoopNode;
-   //             }
-   //          }
-   //          oParent._nodes = nodes;
-   //          oNode.parent.childrenHTML.removeChild(oNode.ownerHTML);
-   //       }
-   //       if (oParent._nodes.length == 0) {
-   //          oParent.imageHTML.src = o.imgEmpty;
-   //       }
-   //       return true;
-   //    }
-   //    return false;
-   // }
+   //==========================================================
+   // <T>移除一个树节点。</T>
+   //
+   // @method
+   // @todo: 未修复
+   // @param p:node:FTreeNode 目录节点
+   //==========================================================
+   public removeNode(oNode) {
+      // if (oNode) {
+      //    var nodes = new Array();
+      //    var oLoopNode = null;
+      //    var nCount = this._allNodes.length;
+      //    for (var n = 0; n < nCount; n++) {
+      //       oLoopNode = this._allNodes[n];
+      //       if (oLoopNode != oNode) {
+      //          nodes[nodes.length] = oLoopNode;
+      //       }
+      //    }
+      //    this._allNodes = nodes;
+      //    var oParent = oNode.parent;
+      //    if (oParent) {
+      //       nodes = new Array();
+      //       nCount = oParent._nodes.length;
+      //       for (var n = 0; n < nCount; n++) {
+      //          oLoopNode = oParent._nodes[n];
+      //          if (oLoopNode != oNode) {
+      //             nodes[nodes.length] = oLoopNode;
+      //          }
+      //       }
+      //       oParent._nodes = nodes;
+      //       oNode.parent.childrenHTML.removeChild(oNode.ownerHTML);
+      //    }
+      //    if (oParent._nodes.length == 0) {
+      //       oParent.imageHTML.src = this.imgEmpty;
+      //    }
+      //    return true;
+      // }
+      // return false;
+   }
+
+   //==========================================================
+   // <T>构建处理。</T>
+   //
+   // @param context 环境
+   //==========================================================
+   public buildNodes(parent: TreeNode, children: Objects<Component>) {
+      if (children) {
+         var count = children.count();
+         for (var n = 0; n < count; n++) {
+            var child = children.at(n);
+            if (child instanceof TreeNode) {
+               var node = child as TreeNode;
+               this.appendNode(parent, node);
+               this.buildNodes(node, node.children);
+            }
+         }
+      }
+   }
+
+   //==========================================================
+   // <T>构建处理。</T>
+   //
+   // @param context 环境
+   //==========================================================
+   public builded() {
+      super.builded();
+      this.buildNodes(null, this.children);
+   }
 
    // //==========================================================
    // // <T>移除一个树节点集合。</T>
@@ -754,17 +783,16 @@ export class TreeView {
    //    }
    // }
 
-   // //==========================================================
-   // // <T>刷新处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiTreeView_refresh = function FDuiTreeView_refresh() {
-   //    var o = this;
-   //    if (o.parentObj) {
-   //       o.parentObj.style.height = o.calculateHeight();
-   //    }
-   // }
+   //==========================================================
+   // <T>刷新处理。</T>
+   //
+   // @method
+   //==========================================================
+   public refresh() {
+      // if (this.parentObj) {
+      //    this.parentObj.style.height = this.calculateHeight();
+      // }
+   }
 
    // //==========================================================
    // // <T>根据条件过滤显示节点列表。</T>

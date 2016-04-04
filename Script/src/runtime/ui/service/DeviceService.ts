@@ -456,6 +456,7 @@ export class DeviceService extends Service {
       var event = linker._eventResize;
       event.code = EventEnum.Resize;
       event.attachEvent(hEvent);
+      LoggerUtil.debug(this, 'Screen resize. (size={1}x{2})', event.width, event.height);
       linker.resizeListeners.process(event);
       // var h = linker._hDisablePanel;
       // if (h) {
