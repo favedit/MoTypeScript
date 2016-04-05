@@ -269,7 +269,7 @@ export class TreeNode extends Container {
       var typeName = this.typeName;
       var type = null;
       if (!StringUtil.isEmpty(typeName)) {
-         // type = tree.findType(typeName);
+         type = tree.findType(typeName);
       }
       return type;
    }

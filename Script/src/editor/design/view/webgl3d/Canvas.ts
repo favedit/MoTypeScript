@@ -16,11 +16,14 @@ import {ModelService} from '../../plugin/cl3d/shape/ModelService';
 import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
 import {SceneService} from '../../plugin/cl3d/shape/SceneService';
 import {Settings} from '../application/Settings';
+import {Application} from '../application/Application';
 
 //==========================================================
 // <T>画板视图。</T>
 //==========================================================
 export class Canvas extends View {
+   // 画板
+   public application: Application;
    // 画板
    public canvas: FCanvas;
    // 场景
@@ -59,6 +62,7 @@ export class Canvas extends View {
       var sceneService: SceneService = ServiceUtil.find(SceneService);
       var scene = this.scene = sceneService.allocByUrl(context, '${resource}/scene/pvw.sc.car.01.001.scene');
       scene.backgroundColor.set(0, 0, 0, 1);
+      scene.loadListeners.register(this, this.onSceneLoad);
       //scene.lo
       // var scene: Scene = this.scene = new Scene();
       // scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
@@ -82,6 +86,16 @@ export class Canvas extends View {
       var pipeline = this.pipeline = pipelineConsole.alloc(context, ForwardPipeline);
       pipeline.scene = scene;
       pipeline.camera = camera;
+   }
+
+   //==========================================================
+   // <T>逻辑处理。</T>
+   //==========================================================
+   public onSceneLoad(sender, event) {
+      var scene = event.sender;
+      var mainUi = this.application.mainUi;
+      var catalogUi = mainUi.searchChild('scene.catalog');
+      debugger;
    }
 
    //==========================================================

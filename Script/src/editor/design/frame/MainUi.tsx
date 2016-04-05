@@ -8,8 +8,10 @@ import {TreeNodeType} from './plugin/dui/tree/TreeNodeType';
 import {TreeNode} from './plugin/dui/tree/TreeNode';
 import {React} from './plugin/dui/React';
 import {ToolBarUi} from './frame/ToolBarUi';
+import {CatalogUi} from './frame/scene/CatalogUi';
 
 export class MainUi extends Container {
+
    public render() {
       return <FrameSet direction_cd={DirectionEnum.Vertical}>
          <FramePage style_class='FrameSet_ToolBar_Ground' size='0,24'>
@@ -18,16 +20,7 @@ export class MainUi extends Container {
          <FramePage>
             <FrameSet direction_cd={DirectionEnum.Horizontal}>
                <FramePage style_class='FrameSet_Catalog_Content' size='400,0'>
-                  <TreeView>
-                     <TreeNodeType name='build' icon='tools.build' label='hello1'/>
-                     <TreeNodeType name='build2' icon='tools.save' label='hello1'/>
-                     <TreeNode type_name='build' label='hello1'/>
-                     <TreeNode type_name='build' label='hello2'>
-                        <TreeNode type_name='build2' label='save1'/>
-                        <TreeNode type_name='build2' label='save2'/>
-                     </TreeNode>
-                     <TreeNode type_name='build' label='hello3'/>
-                  </TreeView>
+                  <CatalogUi/>
                </FramePage>
                <FrameSpliter></FrameSpliter>
                <FramePage style_class='FrameSet_Canvas_Content'>
