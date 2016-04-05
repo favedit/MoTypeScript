@@ -11,12 +11,10 @@ import {Texture} from './Texture';
 // @history 150107
 //==========================================================
 export class Material extends GraphicObject {
-   // 代码
-   public code: string;
    // 名称
    public name: string;
-   // 脏标志
-   public dirty: boolean;
+   // 标签
+   public label: string;
    // 效果器代码
    public effectCode: string;
    // 效果器
@@ -33,6 +31,8 @@ export class Material extends GraphicObject {
    public optionAlpha: boolean;
    // 纹理集合
    public textures: Dictionary<Texture>;
+   // 脏标志
+   public dirty: boolean;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -47,8 +47,8 @@ export class Material extends GraphicObject {
       this.optionDepthWrite = true;
       this.optionDouble = false;
       this.optionAlpha = false;
-      this.dirty = true;
       this.textures = new Dictionary<Texture>();
+      this.dirty = true;
    }
 
    //==========================================================

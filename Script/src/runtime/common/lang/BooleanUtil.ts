@@ -13,22 +13,20 @@ export class BooleanUtil {
    //==========================================================
    // <T>把布尔值转化为字符串。</T>
    //
-   // @method
-   // @param value:Boolean 布尔值
-   // @return String 字符串
+   // @param value 布尔值
+   // @return 字符串
    //==========================================================
-   public static format(value) {
+   public static format(value: boolean): string {
       return value ? BooleanEnum.True : BooleanEnum.False;
    }
 
    //==========================================================
    // <T>解析字符串为布尔值。</T>
    //
-   // @method
-   // @param value:String 字符串
-   // @return Boolean 布尔值
+   // @param value 内容
+   // @return 布尔值
    //==========================================================
-   public static parse(value) {
+   public static parse(value: any): boolean {
       if (value != null) {
          if (value.constructor == Boolean) {
             return value;
@@ -46,13 +44,12 @@ export class BooleanUtil {
    //==========================================================
    // <T>把布尔值转化为字符串。</T>
    //
-   // @method
-   // @param value:Boolean 布尔值
-   // @param valueTrue:String 真字符串
-   // @param valueFalse:String 假字符串
-   // @return String 字符串
+   // @param value 布尔值
+   // @param valueTrue 真字符串
+   // @param valueFalse 假字符串
+   // @return 字符串
    //==========================================================
-   public static toString(value, valueTrue: string = BooleanEnum.True, valueFalse: string = BooleanEnum.False) {
+   public static toString(value, valueTrue: string = BooleanEnum.True, valueFalse: string = BooleanEnum.False): string {
       return value ? valueTrue : valueFalse;
    }
 }

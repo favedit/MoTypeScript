@@ -1,8 +1,12 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {Listeners} from './runtime/common/lang/Listeners';
 import {Fatal} from './runtime/common/lang/Fatal';
 import {Objects} from './runtime/common/lang/Objects';
 import {Dictionary} from './runtime/common/lang/Dictionary';
+import {Property} from './runtime/common/reflect/Property';
 import {ClassUtil} from './runtime/common/reflect/ClassUtil';
 import {AssertUtil} from './runtime/common/AssertUtil';
+import {MemoryUtil} from './runtime/common/MemoryUtil';
 import {EventEnum} from './runtime/ui/EventEnum';
 import {PanelEnum} from './runtime/ui/PanelEnum';
 import {DispatchEvent} from './runtime/ui/event/DispatchEvent';
@@ -15,6 +19,7 @@ import {TreeNodeType} from './TreeNodeType';
 import {TreeColumn} from './TreeColumn';
 import {TreeLevel} from './TreeLevel';
 import {TreeNode} from './TreeNode';
+import {TreeEvent} from './TreeEvent';
 
 //==========================================================
 // <T>树目录控件。</T>
@@ -56,6 +61,9 @@ export class TreeView extends Container {
    public focusNode: TreeNode;
    protected _loadingNode: TreeNode;
    protected _freeNodes: Objects<TreeNode>;
+   // 节点点击事件
+   @Property('onnodeclick', DataTypeEnum.Listeners)
+   public nodeClickListeners: Listeners;
    //..........................................................
    // @icon
    public iconPlus = 'control.treeview.plus';
@@ -90,7 +98,7 @@ export class TreeView extends Container {
       this.nodeColumns = new Dictionary<TreeColumn>();
       this.nodeLevels = new Dictionary<TreeLevel>();
       this.nodes = new Objects<TreeNode>();
-      this.allNodes = new Objects<TreeNode>();
+      //this.allNodes = new Objects<TreeNode>();
       // 初始化变量
       this._freeNodes = new Objects<TreeNode>();
       // 创建默认类型
@@ -222,15 +230,13 @@ export class TreeView extends Container {
       }
    }
 
-   // //==========================================================
-   // // <T>节点点击事件处理。</T>
-   // //
-   // // @method
-   // // @param event:SEvent 事件信息
-   // //==========================================================
-   // MO.FDuiTreeView_onNodeClick = function FDuiTreeView_onNodeClick(event) {
-   //    var o = this;
-   // }
+   //==========================================================
+   // <T>节点点击事件处理。</T>
+   //
+   // @param event 事件信息
+   //==========================================================
+   public onNodeClick(event) {
+   }
 
    // //==========================================================
    // // <T>响应鼠标点击树节点复选框处理。</T>
@@ -242,10 +248,10 @@ export class TreeView extends Container {
    // MO.FDuiTreeView_onClick = function FDuiTreeView_onClick(s, e) {
    //    var o = this;
    //    if (s.hSender == o._hNodePanel) {
-   //       var node = o._focusNode;
+   //       var node = o.focusNode;
    //       if (node) {
    //          node.select(false);
-   //          o._focusNode = null;
+   //          o.focusNode = null;
    //       }
    //    }
    // }
@@ -464,54 +470,52 @@ export class TreeView extends Container {
    //    this.rootNode.extend(true);
    // }
 
-   // //==========================================================
-   // // <T>设置当前树获得焦点的节点。</T>
-   // //
-   // // @method
-   // // @param n:node:FDuiTreeNode 获得焦点的树节点
-   // // @param s:select:Boolean 是否选中
-   // //==========================================================
-   // MO.FDuiTreeView_selectNode = function FDuiTreeView_selectNode(n, s) {
-   //    var o = this;
-   //    var fn = o._focusNode;
-   //    if (s) {
-   //       // 选中节点处理
-   //       if (n) {
-   //          if (fn) {
-   //             if (fn == n) {
-   //                return;
-   //             }
-   //             // 如果选中的不是文件夹，焦点节点才会失去焦点
-   //             if (n.isFolder()) {
-   //                fn.select(true);
-   //             } else {
-   //                fn.select(false);
-   //             }
-   //          }
-   //          // 如果选中的不是文件夹，节点才可获得焦点
-   //          if (!n.isFolder()) {
-   //             n.select(true);
-   //             o._focusNode = n;
-   //          }
-   //       }
-   //    } else {
-   //       // 非选中节点处理
-   //       if (n) {
-   //          n.select(false);
-   //       }
-   //       if (fn) {
-   //          fn.select(false);
-   //       }
-   //    }
-   // }
+   //==========================================================
+   // <T>设置当前树获得焦点的节点。</T>
+   //
+   // @param node 获得焦点的树节点
+   // @param select 是否选中
+   //==========================================================
+   public selectNode(node:TreeNode, select:boolean) {
+      var focusNode = this.focusNode;
+      if (select) {
+         // 选中节点处理
+         if (node) {
+            if (focusNode) {
+               if (focusNode == node) {
+                  return;
+               }
+               // 如果选中的不是文件夹，焦点节点才会失去焦点
+               if (node.isFolder()) {
+                  focusNode.select(true);
+               } else {
+                  focusNode.select(false);
+               }
+            }
+            // 如果选中的不是文件夹，节点才可获得焦点
+            if (!node.isFolder()) {
+               node.select(true);
+               this.focusNode = node;
+            }
+         }
+      } else {
+         // 非选中节点处理
+         if (node) {
+            node.select(false);
+         }
+         if (focusNode) {
+            focusNode.select(false);
+         }
+      }
+   }
 
    //==========================================================
    // <T>增加一个子组件。</T>
    //
    // @param child 子组件
    //==========================================================
-   public appendChild(child: Component) {
-      super.appendChild(child);
+   public push(child: Component) {
+      super.push(child);
       // 增加节点
       //child.tree = this;
       if (child instanceof TreeColumn) {
@@ -528,10 +532,8 @@ export class TreeView extends Container {
          this.nodeTypes.set(typeName, child);
       } else if (child instanceof TreeNode) {
          // 追加节点
-         //this._nodes.push(child);
+         this.nodes.push(child);
          //this._allNodes.push(child);
-         // 追加节点显示
-         //this.appendNode(child);
       }
    }
 
@@ -677,23 +679,20 @@ export class TreeView extends Container {
    //    return true;
    // }
 
-   // //==========================================================
-   // // <T>点击目录节点处理。</T>
-   // //
-   // // @method
-   // // @param node:FDuiTreeNode 树节点
-   // //==========================================================
-   // MO.FDuiTreeView_nodeClick = function FDuiTreeView_nodeClick(node) {
-   //    var o = this;
-   //    //o.lsnsClick.process(o, node);
-   //    // 分发事件
-   //    var event = new MO.SEvent();
-   //    event.tree = o;
-   //    event.node = node;
-   //    o.onNodeClick(event);
-   //    o.processNodeClickListener(event);
-   //    event.dispose();
-   // }
+   //==========================================================
+   // <T>点击目录节点处理。</T>
+   //
+   // @param node 树节点
+   //==========================================================
+   public nodeClick(node: TreeNode) {
+      //o.lsnsClick.process(o, node);
+      // 分发事件
+      var event = MemoryUtil.alloc(TreeEvent);
+      event.tree = this;
+      event.node = node;
+      this.onNodeClick(event);
+      this.nodeClickListeners.process(event);
+   }
 
    // //==========================================================
    // // <T>计算当前高度。</T>
@@ -860,7 +859,7 @@ export class TreeView extends Container {
    //    }
    //    o._allNodes.clear();
    //    // 清空焦点
-   //    o._focusNode = null;
+   //    o.focusNode = null;
    // }
 
    // //==========================================================
@@ -872,6 +871,13 @@ export class TreeView extends Container {
    //    var o = this;
    //    o.clearAllNodes();
    // }
+
+   //==========================================================
+   // <T>更新处理。</T>
+   //==========================================================
+   public update() {
+      super.update();
+   }
 
    // //==========================================================
    // // <T>释放处理。</T>

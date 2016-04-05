@@ -16,8 +16,6 @@ export class SceneLayer extends DisplayLayer {
    // 资源对象
    public resource: SceneLayerResource;
 
-   public _displays: Objects<SceneDisplay>;
-
    // //==========================================================
    // // <T>生成名称。</T>
    // //
@@ -43,7 +41,7 @@ export class SceneLayer extends DisplayLayer {
    public loadResource(resource: SceneLayerResource) {
       this.resource = resource;
       // 设置属性
-      this.code = resource.code;
+      this.name = resource.code;
       // 加载显示集合
       var displaysResource = resource.displays;
       if (displaysResource) {

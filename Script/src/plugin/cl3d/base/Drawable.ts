@@ -18,19 +18,19 @@ export class Drawable extends GraphicObject implements IDrawable {
    // 编号
    public id: number;
    // 代码
-   public code: string;
+   public name: string;
    // 标签
    public label: string;
    // 父对象
    public parent: any;
    // 可见性
    public visible: boolean;
-   // 脏标志
-   public dirty: boolean;
    // 矩阵
    public matrix: Matrix3d;
    // 当前矩阵（空间计算后）
    public currentMatrix: Matrix3d;
+   // 脏标志
+   public dirty: boolean;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -42,9 +42,9 @@ export class Drawable extends GraphicObject implements IDrawable {
       // 设置属性
       this.guid = MathUtil.makeGuid();
       this.visible = true;
-      this.dirty = true;
       this.matrix = new Matrix3d();
       this.currentMatrix = new Matrix3d();
+      this.dirty = true;
    }
 
    //==========================================================

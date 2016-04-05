@@ -1,6 +1,7 @@
 import {Objects} from '../../../runtime/common/lang/Objects';
 import {LoggerUtil} from '../../../runtime/common/lang/LoggerUtil';
 import {SamplerFilterEnum} from '../../../runtime/graphic/base/SamplerFilterEnum';
+import {MaterialResource} from './resource/MaterialResource';
 import {PoolComponent} from './PoolComponent';
 
 //==========================================================
@@ -94,7 +95,7 @@ export class PoolMaterial extends PoolComponent {
    //
    // @param resource 材质资源
    //==========================================================
-   public loadResource(resource) {
+   public loadResource(resource: MaterialResource) {
       var context = this.graphicContext;
       var textures = resource.textures;
       var count = textures.count();

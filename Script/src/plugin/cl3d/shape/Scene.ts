@@ -221,7 +221,7 @@ export class Scene extends BaseScene {
             layer.matrix.setScaleAll(0.1);
             layer.matrix.update();
             layer.matrix.addRotationX(-Math.PI / 2);
-            this.registerLayer(layer.code, layer);
+            this.registerLayer(layer.name, layer);
          }
       }
    }

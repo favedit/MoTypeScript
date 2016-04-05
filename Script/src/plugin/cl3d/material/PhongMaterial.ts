@@ -14,6 +14,8 @@ import {MaterialResource} from '../resource/MaterialResource';
 export class PhongMaterial extends BasePhongMaterial {
    // 准备好
    public ready: boolean;
+   // 材质资源
+   public resource: MaterialResource;
 
    //==========================================================
    // <T>测试是否准备好。</T>
@@ -33,6 +35,11 @@ export class PhongMaterial extends BasePhongMaterial {
    public loadResource(resource: MaterialResource) {
       AssertUtil.debugNotNull(resource);
       var context = this.graphicContext;
+      // 设置属性
+      this.resource = resource;
+      this.name = resource.name;
+      this.label = resource.label;
+      // 设置纹理
       var textures = resource.textures;
       var count = textures.count();
       for (var i = 0; i < count; i++) {
@@ -52,7 +59,6 @@ export class PhongMaterial extends BasePhongMaterial {
          this.textures.set(materialTextureResource.code, texture);
       }
       //this._guid = resource.guid();
-      //this._resource = resource;
       //this._info.calculate(resource.info());
       //this._dirty = true;
       this.ready = true;

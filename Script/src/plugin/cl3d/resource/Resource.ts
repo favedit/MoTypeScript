@@ -19,8 +19,8 @@ export class Resource extends BaseResource {
    public className: string;
    // 鉴定码
    public guid: string;
-   // 代码
-   public code: string;
+   // 名称
+   public name: string;
    // 标签
    public label: string;
    // 加载监听器
@@ -105,7 +105,7 @@ export class Resource extends BaseResource {
       this.typeCode = input.readString();
       this.version = input.readInt32();
       this.guid = input.readString();
-      this.code = input.readString();
+      this.name = input.readString();
       this.label = input.readString();
    }
 
@@ -118,7 +118,7 @@ export class Resource extends BaseResource {
       this.className = jconfig.class;
       this.version = jconfig.version;
       this.guid = jconfig.guid;
-      this.code = jconfig.code;
+      this.name = jconfig.name;
       this.label = jconfig.label;
    }
 
@@ -131,7 +131,7 @@ export class Resource extends BaseResource {
       jconfig.class = this.className;
       jconfig.version = this.version;
       jconfig.guid = this.guid;
-      jconfig.code = this.code;
+      jconfig.name = this.name;
       jconfig.label = this.label;
    }
 

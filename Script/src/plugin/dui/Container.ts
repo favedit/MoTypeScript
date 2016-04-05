@@ -28,16 +28,6 @@ export class Container extends Control {
       super();
    }
 
-   // //==========================================================
-   // // <T>创建一个控件容器。</T>
-   // // <P>默认为DIV页面元素。</P>
-   // //
-   // // @param context 环境信息
-   // //==========================================================
-   // public onBuildPanel(context: RenderContext) {
-   //    this._hPanel = context.createFragment();
-   // }
-
    //==========================================================
    // <T>根据底板类型得到相应的页面元素。</T>
    //
@@ -160,41 +150,62 @@ export class Container extends Control {
    // @param control 控件
    //==========================================================
    public removeDisplay(control: Control) {
+      var hContainer = this.getPanel(PanelEnum.Container);
+      var hControl = control.getPanel(PanelEnum.Panel);
+      hContainer.removeChild(hControl);
    }
 
-   // //==========================================================
-   // // <T>清空所有子控件。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiContainer_clear = function FDuiContainer_clear() {
-   //    var o = this;
-   //    // 清空控件
-   //    var s = o._controls;
-   //    if (s) {
-   //       for (var i = s.count() - 1; i >= 0; i--) {
-   //          o.removeChild(s.at(i));
-   //       }
-   //       s.clear();
-   //    }
-   //    // 父处理
-   //    o.__base.FDuiControl.clear.call(o);
-   // }
+   //==========================================================
+   // <T>追加一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public appendChild(control: Control) {
+      // 增加处理
+      this.push(control);
+      // 构建处理
+      control.build(this.renderContext);
+      // 增加显示
+      this.appendDisplay(control);
+   }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiContainer_dispose = function FDuiContainer_dispose() {
-   //    var o = this;
-   //    // 释放控件集合
-   //    var v = o._controls;
-   //    if (v) {
-   //       v.dispose();
-   //       o._controls = null;
-   //    }
-   //    // 释放处理
-   //    o.__base.FDuiControl.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>移除一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public removeChild(control: Control) {
+      this.removeDisplay(control);
+      this.remove(control);
+   }
+
+   //==========================================================
+   // <T>清空所有子控件。</T>
+   //==========================================================
+   public clear() {
+      // 清空控件
+      var children = this.children;
+      if (children) {
+         var count = children.count();
+         for (var i = count - 1; i >= 0; i--) {
+            var child = children.at(i);
+            if (child instanceof Control) {
+               this.removeDisplay(child);
+            }
+         }
+         children.clear();
+      }
+      // 父处理
+      super.clear();
+   }
+
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 释放属性
+      this._hContainer = null;
+      // 释放处理
+      super.dispose();
+   }
 }

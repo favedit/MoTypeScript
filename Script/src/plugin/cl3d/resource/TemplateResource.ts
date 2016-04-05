@@ -63,6 +63,7 @@ export class TemplateResource extends Resource {
    //==========================================================
    public loadConfig(config) {
       super.loadConfig(config);
+      // 加载渲染集合
       var content = config.content;
       var count: number = content.length;
       if (count > 0) {
@@ -74,15 +75,6 @@ export class TemplateResource extends Resource {
             renderables.push(renderable);
          }
       }
-      // var count = 10000000000;
-      // var start = new Date().getTime();
-      // for (var n = 0; n < count; n++) {
-      //    //this.inc();
-      //    this._number++;
-      // }
-      // var tick = new Date().getTime() - start;
-      // console.log(count, tick, count / tick * 1000, this._number);
-      //this.dataReady = true;
       this.ready = true;
    }
 
@@ -90,6 +82,7 @@ export class TemplateResource extends Resource {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
+      // 释放属性
       this.renderables = ObjectUtil.dispose(this.renderables);
       // 父处理
       super.dispose();

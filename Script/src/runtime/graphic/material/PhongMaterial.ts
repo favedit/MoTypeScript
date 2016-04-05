@@ -30,7 +30,6 @@ export class PhongMaterial extends Material {
    public constructor() {
       super();
       // 设置属性
-      this.code = "phong";
       this.effectCode = 'phong.automatic';
       this.alphaBase = 0.1;
       this.alphaRate = 1;

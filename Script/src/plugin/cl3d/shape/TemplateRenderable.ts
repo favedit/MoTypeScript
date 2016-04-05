@@ -105,8 +105,9 @@ export class TemplateRenderable extends Renderable {
    //
    // @param resource 资源
    //==========================================================
-   public loadResource(resource) {
+   public loadResource(resource: TemplateRenderableResource) {
       // 设置资源
+      this.name = resource.meshCode;
       this.resource = resource;
       //............................................................
       // 设置数据

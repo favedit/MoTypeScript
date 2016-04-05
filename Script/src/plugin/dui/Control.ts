@@ -15,6 +15,8 @@ import {EventEnum} from './runtime/ui/EventEnum';
 import {DockEnum} from './runtime/ui/DockEnum';
 import {AnchorEnum} from './runtime/ui/AnchorEnum';
 import {PanelEnum} from './runtime/ui/PanelEnum';
+import {SizeEnum} from './runtime/ui/SizeEnum';
+import {LayoutEnum} from './runtime/ui/LayoutEnum';
 import {EventService} from './runtime/ui/service/EventService';
 import {DispatchEvent} from './runtime/ui/event/DispatchEvent';
 import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
@@ -86,8 +88,8 @@ export class Control extends Component {
    // //o._styleDesignMove  = MO.Class.register(o, new MO.AStyle('DesignMove'));
    // //..........................................................
    // // @attribute
-   // o._layoutCd = MO.EUiLayout.Display;
-   // o._sizeCd = MO.EUiSize.Normal;
+   protected _layoutCd: LayoutEnum;
+   protected _sizeCd: SizeEnum;
    // @attribute
    // 构建状态
    protected _statusBuild: boolean;
@@ -117,6 +119,8 @@ export class Control extends Component {
       this.anchorCd = AnchorEnum.None;
       this._location = new Point2();
       this._size = new Size2();
+      this._layoutCd = LayoutEnum.Display;
+      this._sizeCd = SizeEnum.Normal;
       this._statusVisible = true;
       this._statusEnable = true;
    }
@@ -900,7 +904,6 @@ export class Control extends Component {
    //    // 处理消息
    //    this.process(event);
    // }
-
 
    //==========================================================
    // <T>释放处理。</T>

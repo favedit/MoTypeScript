@@ -1,4 +1,5 @@
 import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {BooleanUtil} from './runtime/common/lang/BooleanUtil';
 import {Objects} from './runtime/common/lang/Objects';
 import {Dictionary} from './runtime/common/lang/Dictionary';
 import {StringUtil} from './runtime/common/lang/StringUtil';
@@ -43,6 +44,9 @@ export class TreeNode extends Container {
    // 图标
    @Property('icon', DataTypeEnum.String)
    public icon: string;
+   // 描述信息
+   @Property('description', DataTypeEnum.String)
+   public description: string;
    // 备注信息
    @Property('note', DataTypeEnum.String)
    public note: string;
@@ -74,7 +78,7 @@ export class TreeNode extends Container {
    public _extended: boolean;
    protected _nodes: Objects<TreeNode>;
    protected _cells: Dictionary<TreeNodeCell>;
-   // // @attribute
+   // @attribute
    public statusLinked: boolean;
    protected _statusDisplay: boolean;
    protected _statusHover: boolean;
@@ -83,10 +87,10 @@ export class TreeNode extends Container {
    // 页面元素
    protected _hPanel: HTMLTableRowElement;
    protected _hNodePanel: HTMLTableCellElement;
-   protected _hCheck;
-   protected _hImage;
-   protected _hIcon;
-   protected _hLabel;
+   protected _hCheck: HTMLInputElement;
+   protected _hImage: HTMLImageElement;
+   protected _hIcon: HTMLImageElement;
+   protected _hLabel: HTMLSpanElement;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -122,7 +126,7 @@ export class TreeNode extends Container {
       var hPanel = this._hPanel;
       this.attachEvent(hPanel, EventEnum.Enter, this.onNodeEnter);
       this.attachEvent(hPanel, EventEnum.Leave, this.onNodeLeave);
-      // this.attachEvent(hPanel, 'onNodeClick');
+      this.attachEvent(hPanel, EventEnum.MouseDown, this.onNodeClick);
       // 建立节点底版
       var hNodePanel = this._hNodePanel = context.appendTableCell(hPanel, this.styleName('Normal'));
       //hNodePanel.noWrap = true;
@@ -130,19 +134,19 @@ export class TreeNode extends Container {
       // 建立图片
       var hImage = this._hImage = context.appendIcon(hNodePanel, this.styleName('Image'), null, 16, 16);
       (hImage as any).__linkType = 'image';
-      this.setImage();
+      this.refreshImage();
       // 建立图标
       var hIcon = this._hIcon = context.appendIcon(hNodePanel, this.styleName('Icon'), null, 16, 16);
       (hIcon as any)._linkType = 'icon';
       this.setIcon(this.icon);
       // 建立复选框
       if (tree.optionCheck) {
-         // var hc = this._hCheck = context.appendCheck(hNodePanel);
-         // hc.width = 13;
-         // hc.height = 13;
-         // hc.style.borderWidth = 0;
-         // this.setCheck(this._checked);
-         // tree.linkEvent(this, 'onNodeCheckClick', hc);
+         var hCheck = this._hCheck = context.appendCheck(hNodePanel);
+         hCheck.width = '13px';
+         hCheck.height = '13px';
+         hCheck.style.borderWidth = '0px';
+         this.setCheck(this._checked);
+         //tree.linkEvent(this, 'onNodeCheckClick', hCheck);
       }
       // 建立显示文本
       this._hLabel = context.appendText(hNodePanel, this.styleName('Label'));
@@ -156,7 +160,7 @@ export class TreeNode extends Container {
             var nodeCell = ClassUtil.create(TreeNodeCell);
             nodeCell._column = column;
             nodeCell.build(context);
-            //this.push(nodeCell);
+            this.push(nodeCell);
          }
       }
    }
@@ -201,63 +205,61 @@ export class TreeNode extends Container {
       }
    }
 
-   // //==========================================================
-   // // <T>鼠标点击节点的事件。</T>
-   // //
-   // // @method
-   // // @param event:TEvent 事件对象
-   // //==========================================================
-   // MO.FDuiTreeNode_onNodeClick = function FDuiTreeNode_onNodeClick(event) {
-   //    var o = this;
-   //    var tree = o._tree;
-   //    var esn = event.hSender.tagName;
-   //    // 处理复选框的情况
-   //    if ('INPUT' == esn) {
-   //       return;
-   //    }
-   //    // 检查点击的是展开图标还是节点图标
-   //    var isImg = false;
-   //    if ('IMG' == esn) {
-   //       isImg = ('image' == event.hSender._linkType);
-   //    }
-   //    // 查询点击节点是否已获焦点对象的父节点
-   //    var isParent = false;
-   //    var find = tree._focusNode;
-   //    while (find) {
-   //       if (find == o) {
-   //          isParent = true;
-   //          break;
-   //       }
-   //       find = find.parent;
-   //    }
-   //    // 设置焦点节点
-   //    if (!isImg || (isImg && (isParent || !o._child))) {
-   //       tree.selectNode(o, true);
-   //    }
-   //    // 判断是否需要加载节点
-   //    if (!o._statusLoaded && o._child) {
-   //       o.extend(true);
-   //       if (!isImg) {
-   //          tree.nodeClick(o);
-   //       }
-   //    } else {
-   //       // 已经是加载过的节点
-   //       if (o._child) {
-   //          if (o.isFolder()) {
-   //             o.extend(!o._extended);
-   //          } else {
-   //             if (isImg) {
-   //                o.extend(!o._extended);
-   //             } else {
-   //                o.extend(true);
-   //             }
-   //          }
-   //       }
-   //       if ((isImg && isParent) || (isImg && !o._child) || !isImg) {
-   //          tree.nodeClick(o);
-   //       }
-   //    }
-   // }
+   //==========================================================
+   // <T>鼠标点击节点的事件。</T>
+   //
+   // @param event 事件对象
+   //==========================================================
+   public onNodeClick(sender, event) {
+      var tree = this.tree;
+      var tagName = event.targetElement.tagName;
+      // 处理复选框的情况
+      if (tagName == 'INPUT') {
+         return;
+      }
+      // 检查点击的是展开图标还是节点图标
+      var isImg = false;
+      if (tagName == 'IMG') {
+         isImg = ('image' == event.hSender._linkType);
+      }
+      // 查询点击节点是否已获焦点对象的父节点
+      var isParent = false;
+      var find: any = tree.focusNode;
+      while (find) {
+         if (find == this) {
+            isParent = true;
+            break;
+         }
+         find = find.parent;
+      }
+      // 设置焦点节点
+      if (!isImg || (isImg && (isParent || !this._child))) {
+         tree.selectNode(this, true);
+      }
+      // 判断是否需要加载节点
+      if (!this._statusLoaded && this._child) {
+         this.extend(true);
+         if (!isImg) {
+            tree.nodeClick(this);
+         }
+      } else {
+         // 已经是加载过的节点
+         if (this._child) {
+            if (this.isFolder()) {
+               this.extend(!this._extended);
+            } else {
+               if (isImg) {
+                  this.extend(!this._extended);
+               } else {
+                  this.extend(true);
+               }
+            }
+         }
+         if ((isImg && isParent) || (isImg && !this._child) || !isImg) {
+            tree.nodeClick(this);
+         }
+      }
+   }
 
    //==========================================================
    // <T>查找类型。</T>
@@ -281,24 +283,21 @@ export class TreeNode extends Container {
    //==========================================================
    public setTypeCode(value) {
       this.typeName = value;
-      //this.setIcon();
+      this.setIcon();
    }
 
    //==========================================================
-   // <T>设置标签。</T>
-   //
-   // @param label 标签
+   // <T>刷新标签内容。</T>
    //==========================================================
-   public setLabel(label) {
-      // 设置显示内容
+   public refreshLabel() {
       var hLabel = this._hLabel;
       if (hLabel) {
          var text = '';
          if (!StringUtil.isEmpty(this.label)) {
             text = '&nbsp;' + this.label;
          }
-         if (!StringUtil.isEmpty(this.tag)) {
-            text += '&nbsp;<FONT color=blue>(' + this.tag + ')</FONT>';
+         if (!StringUtil.isEmpty(this.description)) {
+            text += '&nbsp;<FONT color=blue>(' + this.description + ')</FONT>';
          }
          if (!StringUtil.isEmpty(this.note)) {
             text += '&nbsp;<FONT color=green>[ ' + this.note + ' ]</FONT>';
@@ -310,19 +309,37 @@ export class TreeNode extends Container {
    //==========================================================
    // <T>设置标签。</T>
    //
-   // @method
-   // @param p:note:String 标签
+   // @param label 标签
    //==========================================================
-   public setNote(text) {
-      this.note = StringUtil.empty(text);
-      this.setLabel(this.label);
+   public setLabel(label: string) {
+      this.label = StringUtil.empty(label);;
+      this.refreshLabel();
+   }
+
+   //==========================================================
+   // <T>设置描述。</T>
+   //
+   // @param description 描述
+   //==========================================================
+   public setDescription(description: string) {
+      this.description = StringUtil.empty(description);
+      this.refreshLabel();
+   }
+
+   //==========================================================
+   // <T>设置备注。</T>
+   //
+   // @param note 备注
+   //==========================================================
+   public setNote(note: string) {
+      this.note = StringUtil.empty(note);
+      this.refreshLabel();
    }
 
    //==========================================================
    // <T>设置层次。</T>
    //
-   // @method
-   // @param level:Integer 层次
+   // @param level 层次
    //==========================================================
    public setLevel(level) {
       // 设置属性
@@ -344,44 +361,39 @@ export class TreeNode extends Container {
       return this._cells.get(name);
    }
 
-   // //==========================================================
-   // // <T>获取节点选取。</T>
-   // //
-   // // @method
-   // // @return Boolean 是否选取
-   // //==========================================================
-   // MO.FDuiTreeNode_check = function FDuiTreeNode_check() {
-   //    return this._checked;
-   // }
-
-   // //==========================================================
-   // // <T>设置选中。</T>
-   // //
-   // // @method
-   // // @param p:check:Boolean 选中
-   // //==========================================================
-   // MO.FDuiTreeNode_setCheck = function FDuiTreeNode_setCheck(p) {
-   //    var o = this;
-   //    o._checked = p;
-   //    // 属性集合控制
-   //    var attributes = o._attributes;
-   //    if (attributes) {
-   //       var value = attributes.get('checked');
-   //       if (!MO.Lang.String.isEmpty(value)) {
-   //          o._checked = MO.Lang.Boolean.isTrue(value);
-   //          if (o._hCheck) {
-   //             o._hCheck._checked = o._checked;
-   //          }
-   //       }
-   //    }
-   // }
-
    //==========================================================
-   // <T>设置位图。</T>
+   // <T>获取节点选取。</T>
    //
-   // @method
+   // @return 是否选取
    //==========================================================
-   public setImage() {
+   public isChecked() {
+      return this._checked;
+   }
+
+   //==========================================================
+   // <T>设置选中。</T>
+   //
+   // @param flag 选中
+   //==========================================================
+   public setCheck(flag: boolean) {
+      this._checked = flag;
+      // 属性集合控制
+      var attributes = this.attributes;
+      if (attributes) {
+         var value = attributes.get('checked');
+         if (!StringUtil.isEmpty(value)) {
+            this._checked = BooleanUtil.parse(value);
+            if (this._hCheck) {
+               this._hCheck.checked = this._checked;
+            }
+         }
+      }
+   }
+
+   //==========================================================
+   // <T>刷新位图。</T>
+   //==========================================================
+   public refreshImage() {
       var tree = this.tree;
       var hImage = this._hImage;
       var icon = this._child ? tree.iconPlus : tree.iconNode;
@@ -411,7 +423,7 @@ export class TreeNode extends Container {
    //
    // @param icon 图标
    //==========================================================
-   public setIcon(icon: string) {
+   public setIcon(icon?: string) {
       // 设置属性
       this.icon = icon;
       // 设置图标
@@ -438,89 +450,80 @@ export class TreeNode extends Container {
       }
    }
 
-   // //==========================================================
-   // // <T>是否是目录。</T>
-   // //
-   // // @method
-   // // @return Boolean 是否有子节点
-   // //==========================================================
-   // MO.FDuiTreeNode_isFolder = function FDuiTreeNode_isFolder() {
-   //    var o = this;
-   //    var type = o.type();
-   //    if (type) {
-   //       var storage = type.storage()
-   //       return storage == 'collections';
-   //    }
-   //    return false;
-   // }
+   //==========================================================
+   // <T>是否是目录。</T>
+   //
+   // @method
+   // @return Boolean 是否有子节点
+   //==========================================================
+   public isFolder() {
+      var type = this.findType();
+      if (type) {
+         return type.storage == 'collections';
+      }
+      return false;
+   }
 
-   // //==========================================================
-   // // <T>是否有子节点。</T>
-   // //
-   // //
-   // // @method
-   // // @return Boolean 是否有子节点
-   // //==========================================================
-   // MO.FDuiTreeNode_hasChild = function FDuiTreeNode_hasChild() {
-   //    var o = this;
-   //    if (o._child) {
-   //       var ns = o._nodes;
-   //       if (ns) {
-   //          return !ns.isEmpty();
-   //       }
-   //    }
-   //    return false;
-   // }
+   //==========================================================
+   // <T>是否有子节点。</T>
+   //
+   // @return 是否有子节点
+   //==========================================================
+   public hasChild(): boolean {
+      if (this._child) {
+         var nodes = this._nodes;
+         if (nodes) {
+            return !nodes.isEmpty();
+         }
+      }
+      return false;
+   }
 
-   // //==========================================================
-   // // <T>查询顶层节点。</T>
-   // //
-   // // @method
-   // // @param x:config:TNode 数据节点
-   // //==========================================================
-   // MO.FDuiTreeNode_topNode = function FDuiTreeNode_topNode() {
-   //    var r = this;
-   //    while (r._parent) {
-   //       if (MO.Class.isClass(r._parent, FDuiTreeNode)) {
-   //          r = r._parent;
-   //       } else {
-   //          break;
-   //       }
-   //    }
-   //    return r;
-   // }
+   //==========================================================
+   // <T>查询顶层节点。</T>
+   //
+   // @return 顶层节点
+   //==========================================================
+   public topNode(): TreeNode {
+      var node: any = this;
+      while (node.parent) {
+         if (node.parent instanceof TreeNode) {
+            node = node.parent;
+         } else {
+            break;
+         }
+      }
+      return this;
+   }
 
-   // //==========================================================
-   // // <T>查询指定类型的顶层节点。</T>
-   // //
-   // // @method
-   // // @param t:type:String 类型名称
-   // //==========================================================
-   // MO.FDuiTreeNode_topNodeByType = function FDuiTreeNode_topNodeByType(t) {
-   //    var r = this;
-   //    while (r) {
-   //       if (r._typeCode == t) {
-   //          return r;
-   //       }
-   //       r = r._parent;
-   //    }
-   //    return null;
-   // }
+   //==========================================================
+   // <T>查询指定类型的顶层节点。</T>
+   //
+   // @param type 类型名称
+   //==========================================================
+   public topNodeByType(typeName: string): TreeNode {
+      var node: TreeNode = this;
+      while (node) {
+         if (node.typeName == typeName) {
+            return node;
+         }
+         node = node.parent as TreeNode;
+      }
+      return null;
+   }
 
-   // //==========================================================
-   // // <T>获得节点数量。</T>
-   // //
-   // // @method
-   // // @return Integer 节点数量
-   // //==========================================================
-   // MO.FDuiTreeNode_nodeCount = function FDuiTreeNode_nodeCount() {
-   //    var o = this;
-   //    var nodes = o._nodes
-   //    if (nodes) {
-   //       return nodes.count();
-   //    }
-   //    return 0;
-   // }
+   //==========================================================
+   // <T>获得节点数量。</T>
+   //
+   // @return 节点数量
+   //==========================================================
+   public nodeCount() {
+      var nodes = this._nodes
+      if (nodes) {
+         return nodes.count();
+      }
+      return 0;
+   }
 
    //==========================================================
    // <T>显示这个节点和他的子节点。</T>
@@ -575,20 +578,18 @@ export class TreeNode extends Container {
       }
    }
 
-   // //==========================================================
-   // // <T>选中当前节点。</T>
-   // //
-   // // @method
-   // // @param v:value:Boolean 是否选中
-   // //==========================================================
-   // MO.FDuiTreeNode_select = function FDuiTreeNode_select(v) {
-   //    var o = this;
-   //    o._statusSelected = v;
-   //    if (v) {
-   //       o._statusHover = false;
-   //    }
-   //    o.refreshStyle();
-   // }
+   //==========================================================
+   // <T>选中当前节点。</T>
+   //
+   // @param value 是否选中
+   //==========================================================
+   public select(flag: boolean) {
+      this._statusSelected = flag;
+      if (flag) {
+         this._statusHover = false;
+      }
+      this.refreshStyle();
+   }
 
    //==========================================================
    // <T>展开或隐藏子节点。</T>
@@ -725,7 +726,7 @@ export class TreeNode extends Container {
       var tree = this.tree;
       // 增加一个树节点
       if (control instanceof TreeNode) {
-         //tree.appendNode(this, control as TreeNode);
+         tree.appendNode(this, control as TreeNode);
          //this.appendNode(component);
          // this._statusLoaded = true;
          // // 增加子节点
@@ -756,8 +757,8 @@ export class TreeNode extends Container {
    //
    // @param child 子组件
    //==========================================================
-   public appendChild(child: Component) {
-      super.appendChild(child);
+   public push(child: Component) {
+      super.push(child);
       //var tree = this.tree;
       // 增加一个树节点
       if (child instanceof TreeNode) {
@@ -889,8 +890,6 @@ export class TreeNode extends Container {
 
    //==========================================================
    // <T>刷新节点的样式。</T>
-   //
-   // @method
    //==========================================================
    public refreshStyle() {
       var hCells = this._hPanel.cells;
@@ -907,6 +906,14 @@ export class TreeNode extends Container {
             }
          }
       }
+   }
+
+   //==========================================================
+   // <T>更新处理。</T>
+   //==========================================================
+   public update() {
+      super.update();
+      this.refreshLabel();
    }
 
    // //==========================================================
@@ -998,32 +1005,6 @@ export class TreeNode extends Container {
    //    s.append(', child=', o._child);
    //    s.append(']');
    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    // //==========================================================

@@ -12,7 +12,7 @@ import {Region} from './Region';
 //==========================================================
 export class DisplayLayer extends DisplayContainer implements IDisplayLayer {
    // 代码
-   public code: string = null;
+   public name: string = null;
    // 清空深度配置
    public optionClearDepth = false;
    // 激活状态

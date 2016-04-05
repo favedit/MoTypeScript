@@ -95,10 +95,20 @@ export class Component extends Dispatcher {
    }
 
    //==========================================================
+   // <T>根据名称获得属性。</T>
+   //
+   // @param name 属性名称
+   // @return  属性内容
+   //==========================================================
+   public getProperty(name: string) {
+      return this.properties.get(name);
+   }
+
+   //==========================================================
    // <T>设置属性集合。</T>
    //
-   // @params name 属性名称
-   // @params value 属性内容
+   // @param name 属性名称
+   // @param value 属性内容
    //==========================================================
    public setProperty(name: string, value: string) {
       this[name] = value;
@@ -108,7 +118,7 @@ export class Component extends Dispatcher {
    //==========================================================
    // <T>设置属性集合。</T>
    //
-   // @params attributes 属性集合
+   // @param attributes 属性集合
    //==========================================================
    public setProperties(attributes: any) {
       if (attributes) {
@@ -206,6 +216,36 @@ export class Component extends Dispatcher {
    }
 
    //==========================================================
+   // <T>查找第一个子组件。</T>
+   //
+   // @return 子组件
+   //==========================================================
+   public findChildFirst(): Component {
+      var children = this.children;
+      if (children) {
+         if (!children.isEmpty()) {
+            return children.first();
+         }
+      }
+      return null;
+   }
+
+   //==========================================================
+   // <T>查找最后一个子组件。</T>
+   //
+   // @return 子组件
+   //==========================================================
+   public findChildLast(): Component {
+      var children = this.children;
+      if (children) {
+         if (!children.isEmpty()) {
+            return children.last();
+         }
+      }
+      return null;
+   }
+
+   //==========================================================
    // <T>根据名称搜索子组件。</T>
    //
    // @param name 名称
@@ -255,10 +295,11 @@ export class Component extends Dispatcher {
    // <T>追加一个子组件。</T>
    // <P>如果子组件的名称为空，则给当前子组件创建一个数字的索引名。</P>
    // <P>保证子组件不会被其他未命名的子组件所覆盖。</P>
+   // <P>只增加，不加入显示列表。</P>
    //
    // @param child 子组件
    //==========================================================
-   public appendChild(child: Component) {
+   public push(child: Component) {
       AssertUtil.debugTrue(child instanceof Component);
       child.parent = this;
       // 增加组件
@@ -285,7 +326,7 @@ export class Component extends Dispatcher {
    //
    // @param child 子组件
    //==========================================================
-   public removeChild(child: Component) {
+   public remove(child: Component) {
       AssertUtil.debugTrue(child instanceof Component);
       // 检查存在
       var children = this.children;

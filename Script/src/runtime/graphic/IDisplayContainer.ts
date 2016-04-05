@@ -12,7 +12,7 @@ import {IDisplay} from './IDisplay';
 //==========================================================
 export interface IDisplayContainer extends IDisplay {
    // 显示集合
-   _displays: Objects<IDisplay>;
+   displays: Objects<IDisplay>;
 
    //==========================================================
    // <T>判断是否含有子显示对象。</T>

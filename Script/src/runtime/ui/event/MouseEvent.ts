@@ -10,14 +10,13 @@ import {Event} from './Event';
 // @version 150113
 //==========================================================
 export class MouseEvent extends Event {
-   //..........................................................
-   // @attribute
-   public button = null;
-   public mouseLeft = false;
-   public mouseMiddle = false;
-   public mouseRight = false;
-   public altKey = false;
-   public ctrlKey = false;
+   public targetElement;
+   public button;
+   public mouseLeft;
+   public mouseMiddle;
+   public mouseRight;
+   public altKey;
+   public ctrlKey;
    public x = 0;
    public y = 0;
    public offsetX = 0;
@@ -38,9 +37,10 @@ export class MouseEvent extends Event {
       if (!hEvent) {
          hEvent = window.event;
       }
+      this.targetElement = hEvent.currentTarget;
       //var hEvent = this.hSource = RHtml.eventSource(hEvent);
       //if (hEvent) {
-         //this.source = hEvent.__linker;
+      //this.source = hEvent.__linker;
       //}
       this.button = hEvent.button;
       this.mouseLeft = (hEvent.button == MouseButtonEnum.Left);

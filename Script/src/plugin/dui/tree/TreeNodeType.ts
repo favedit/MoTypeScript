@@ -10,11 +10,12 @@ import {Component} from '../Component';
 // @version 150119
 //==========================================================
 export class TreeNodeType extends Component {
+   // 图标
    @Property('icon', DataTypeEnum.String)
    public icon: string;
-   //    //..........................................................
-   //    // @oroperty
-   //    o._storage = MO.Class.register(o, [new MO.APtyString('_storage'), new MO.AGetSet('_storage')]);
+   // 存储方式
+   @Property('storage', DataTypeEnum.String)
+   public storage: string;
    //    o._service = MO.Class.register(o, [new MO.APtyString('_service'), new MO.AGetSet('_service')]);
    //    o._action = MO.Class.register(o, [new MO.APtyString('_action'), new MO.AGetSet('_action')]);
 

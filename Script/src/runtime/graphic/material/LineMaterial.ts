@@ -23,7 +23,6 @@ export class LineMaterial extends Material {
    public constructor() {
       super();
       // 设置属性
-      this.code = "line";
       this.effectCode = 'line.automatic';
       this.lineColor = new Color4(1, 1, 1, 1);
       this.lineWidth = 1;

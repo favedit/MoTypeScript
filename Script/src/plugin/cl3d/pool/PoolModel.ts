@@ -116,7 +116,7 @@ export class PoolModel extends PoolComponent {
             mesh.linkGraphicContext(this.graphicContext);
             mesh.loadResource(meshResource);
             mesheGuids.set(mesh.guid, mesh);
-            mesheCodes.set(mesh.code, mesh);
+            mesheCodes.set(mesh.name, mesh);
             //modelConsole.registerMesh(mesh.guid(), mesh);
          }
       }

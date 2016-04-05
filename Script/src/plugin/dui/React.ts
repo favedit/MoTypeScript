@@ -35,7 +35,7 @@ export class React {
             var count = children.length;
             for (var i = 0; i < count; i++) {
                var child = children[i];
-               component.appendChild(child);
+               component.push(child);
             }
          }
          return component;
@@ -89,7 +89,7 @@ export class React {
                container.appendDisplay(renderChild as Control);
             }
             // 追加子节点
-            control.appendChild(renderChild);
+            control.push(renderChild);
          }
          // 构建完成
          control.builded();

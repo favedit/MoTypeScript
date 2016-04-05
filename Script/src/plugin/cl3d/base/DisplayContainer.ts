@@ -16,7 +16,7 @@ import {Region} from './Region';
 //==========================================================
 export class DisplayContainer extends Display implements IDisplayContainer {
    // 显示集合
-   public _displays: Objects<Display> = null;
+   public displays: Objects<Display>;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -54,7 +54,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    // @return 是否含有
    //==========================================================
    public hasDisplay(): boolean {
-      var displays: Objects<Display> = this._displays;
+      var displays: Objects<Display> = this.displays;
       if (displays) {
          return !displays.isEmpty();
       }
@@ -83,12 +83,12 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    // @return 显示对象
    //==========================================================
    public findDisplay(code: string) {
-      var displays = this._displays;
+      var displays = this.displays;
       if (displays) {
          var count: number = displays.count();
          for (var i: number = 0; i < count; i++) {
             var display: Display = displays.at(i);
-            if (display.code == code) {
+            if (display.name == code) {
                return display;
             }
          }
@@ -103,13 +103,13 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    // @return 子节点
    //==========================================================
    public searchDisplay(code) {
-      var displays = this._displays;
+      var displays = this.displays;
       if (displays) {
          var count: number = displays.count();
          for (var i: number = 0; i < count; i++) {
             var display: Display = displays.at(i);
             // 判断当前节点
-            if (display.code == code) {
+            if (display.name == code) {
                return display;
             }
             // 判断子节点集合
@@ -132,9 +132,9 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    public pushDisplay(display: Display): void {
       AssertUtil.debugNotNull(display);
       // 获得显示集合
-      var displays: Objects<Display> = this._displays;
+      var displays: Objects<Display> = this.displays;
       if (!displays) {
-         displays = this._displays = new Objects<Display>();
+         displays = this.displays = new Objects<Display>();
       }
       // 设置显示对象
       display.parent = this;
@@ -149,7 +149,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    public removeDisplay(display: Display): void {
       AssertUtil.debugNotNull(display);
       // 获得显示集合
-      var displays: Objects<Display> = this._displays;
+      var displays: Objects<Display> = this.displays;
       if (displays) {
          // 移除显示对象
          displays.remove(display);
@@ -161,7 +161,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    // <T>清空渲染对象集合。</T>
    //==========================================================
    public clearDisplays(): void {
-      var displays: Objects<Display> = this._displays;
+      var displays: Objects<Display> = this.displays;
       if (displays) {
          displays.clear();
       }
@@ -177,7 +177,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
       var result: boolean = super.filterDisplays(region);
       if (result) {
          // 过滤显示集合
-         var displays: Objects<Display> = this._displays;
+         var displays: Objects<Display> = this.displays;
          if (displays) {
             var count: number = displays.count();
             for (var n: number = 0; n < count; n++) {
@@ -199,7 +199,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
       var result: boolean = super.filterRenderables(region);
       if (result) {
          // 过滤显示集合
-         var displays: Objects<Display> = this._displays;
+         var displays: Objects<Display> = this.displays;
          if (displays) {
             var count: number = displays.count();
             for (var n: number = 0; n < count; n++) {
@@ -221,7 +221,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
       var result = super.process(region);
       if (result) {
          // 处理显示集合
-         var displays = this._displays;
+         var displays = this.displays;
          if (displays) {
             var count: number = displays.count();
             for (var n: number = 0; n < count; n++) {
@@ -238,7 +238,7 @@ export class DisplayContainer extends Display implements IDisplayContainer {
    //==========================================================
    public dispose(): void {
       // 释放所有子节点
-      this._displays = ObjectUtil.dispose(this._displays);
+      this.displays = ObjectUtil.dispose(this.displays);
       // 父处理
       super.dispose();
    }

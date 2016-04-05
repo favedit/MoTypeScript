@@ -75,7 +75,7 @@ export class PoolModelMesh extends Renderable {
       // 设置属性
       this.resource = resource;
       this.guid = resource.guid;
-      this.code = resource.code;
+      this.name = resource.code;
       this.label = resource.label;
       this.matrix.build(resource.position, resource.rotation, resource.scale);
       // 创建顶点缓冲集合

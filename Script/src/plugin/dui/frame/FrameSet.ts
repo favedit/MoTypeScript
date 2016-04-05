@@ -154,7 +154,7 @@ export class FrameSet extends Container {
       } else if (child instanceof FrameSpliter) {
          return this.appendSpliter(child);
       }
-      return super.appendChild(child);
+      return super.push(child);
    }
 
    // //==========================================================

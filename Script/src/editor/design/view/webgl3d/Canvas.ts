@@ -17,6 +17,7 @@ import {CubeRenderable} from '../../plugin/cl3d/shape/CubeRenderable';
 import {SceneService} from '../../plugin/cl3d/shape/SceneService';
 import {Settings} from '../application/Settings';
 import {Application} from '../application/Application';
+import {CatalogUi} from '../../frame/scene/CatalogUi';
 
 //==========================================================
 // <T>画板视图。</T>
@@ -89,13 +90,13 @@ export class Canvas extends View {
    }
 
    //==========================================================
-   // <T>逻辑处理。</T>
+   // <T>场景加载处理。</T>
    //==========================================================
    public onSceneLoad(sender, event) {
       var scene = event.sender;
       var mainUi = this.application.mainUi;
-      var catalogUi = mainUi.searchChild('scene.catalog');
-      debugger;
+      var catalogUi: CatalogUi = <CatalogUi>mainUi.searchChild('scene.catalog');
+      catalogUi.loadScene(scene);
    }
 
    //==========================================================
