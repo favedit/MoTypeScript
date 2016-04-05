@@ -1,5 +1,8 @@
+import {Event} from '../../runtime/common/lang/Event';
 import {Listeners} from '../../../runtime/common/lang/Listeners';
 import {Objects} from '../../../runtime/common/lang/Objects';
+import {ObjectUtil} from '../../../runtime/common/lang/ObjectUtil';
+import {MemoryUtil} from '../../../runtime/common/MemoryUtil';
 import {Linker} from '../../../runtime/common/reflect/Linker';
 import {Actor} from '../base/Actor';
 import {TemplateResource} from '../resource/TemplateResource';
@@ -21,17 +24,19 @@ export class Template extends Actor {
    public ready: boolean;
    public resource: any;
    public meshs: Objects<TemplateRenderable>;
-   // public renderables: any;
-   //    // @attribute
-   //    o._sprites         = MO.Class.register(o, new MO.AGetter('_sprites'));
-   //    o._skeletons       = MO.Class.register(o, new MO.AGetter('_skeletons'));
-   //    o._animations      = MO.Class.register(o, new MO.AGetter('_animations'));
+   // 加载监听器
+   public loadListeners: Listeners;
    // 材质管理器
    @Linker(MaterialResourceConsole)
    protected _materialResourceConsole: MaterialResourceConsole;
    // 模型管理器
    @Linker(ModelResourceConsole)
    protected _modelResourceConsole: ModelResourceConsole;
+   // public renderables: any;
+   //    // @attribute
+   //    o._sprites         = MO.Class.register(o, new MO.AGetter('_sprites'));
+   //    o._skeletons       = MO.Class.register(o, new MO.AGetter('_skeletons'));
+   //    o._animations      = MO.Class.register(o, new MO.AGetter('_animations'));
 
    //==========================================================
    // <T>构造处理。</T>
@@ -44,6 +49,7 @@ export class Template extends Actor {
       this.dataReady = false;
       this.ready = false;
       this.meshs = new Objects<TemplateRenderable>();
+      this.loadListeners = new Listeners();
       // 创建显示层
       // var layer = this._layer = MO.Class.create(MO.FDisplayLayer);
       // this.registerLayer('Layer', layer);
@@ -341,10 +347,10 @@ export class Template extends Actor {
          // 加载完成
          ready = this.ready = true;
          // 事件发送
-         //var event = RMemory.alloc(SEvent);
-         //event.sender = this;
-         //this.processLoadListener(event);
-         //RMemory.free(event);
+         var event = MemoryUtil.alloc(Event);
+         event.sender = this;
+         this.loadListeners.process(event);
+         //MemoryUtil.free(event);
       }
       return ready;
    }
@@ -380,7 +386,7 @@ export class Template extends Actor {
    // <T>释放处理。</T>
    //==========================================================
    public dispose() {
-      // this._sprites = RObject.dispose(this._sprites);
+      this.loadListeners = ObjectUtil.dispose(this.loadListeners);
       super.dispose();
    }
 }

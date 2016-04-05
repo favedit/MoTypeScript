@@ -59,6 +59,7 @@ export class Canvas extends View {
       var sceneService: SceneService = ServiceUtil.find(SceneService);
       var scene = this.scene = sceneService.allocByUrl(context, '${resource}/scene/pvw.sc.car.01.001.scene');
       scene.backgroundColor.set(0, 0, 0, 1);
+      //scene.lo
       // var scene: Scene = this.scene = new Scene();
       // scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
       // var layer = this.backgroundLayer = new DisplayLayer();

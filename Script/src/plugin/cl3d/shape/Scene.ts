@@ -1,5 +1,9 @@
+import {Event} from '../../runtime/common/lang/Event';
 import {Dictionary} from '../../runtime/common/lang/Dictionary';
+import {Listeners} from '../../runtime/common/lang/Listeners';
+import {ObjectUtil} from '../../runtime/common/lang/ObjectUtil';
 import {ClassUtil} from '../../runtime/common/reflect/ClassUtil';
+import {MemoryUtil} from '../../../runtime/common/MemoryUtil';
 import {AssertUtil} from '../../runtime/common/AssertUtil';
 import {ProcessLoadHook} from '../../../runtime/core/service/ProcessLoadHook';
 import {Scene as BaseScene} from '../base/Scene';
@@ -19,6 +23,9 @@ export class Scene extends BaseScene {
    public resource: SceneResource;
    // 加载钩子
    public loadHook: ProcessLoadHook;
+   // 加载监听器
+   public loadListeners: Listeners;
+
    //==========================================================
    // <T>构造处理。</T>
    //
@@ -28,6 +35,7 @@ export class Scene extends BaseScene {
       super();
       // 设置属性
       this.loadHook = new ProcessLoadHook(this);
+      this.loadListeners = new Listeners();
       // 创建显示层
       // var layer = this._layer = MO.Class.create(MO.FDisplayLayer);
       // this.registerLayer('Layer', layer);
@@ -253,20 +261,19 @@ export class Scene extends BaseScene {
       this.loadResource(this.resource);
       this.ready = true;
       // 派发事件
-      // var event = MO.Memory.alloc(MO.SEvent);
-      // event.sender = this;
-      // this.processLoadListener(event);
-      // MO.Memory.free(event);
+      var event = MemoryUtil.alloc(Event);
+      event.sender = this;
+      this.loadListeners.process(event);
+      //MemoryUtil.free(event);
       return true;
    }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FE3dScene_dispose = function FE3dScene_dispose(){
-   //    var o = this;
-   //    o.__base.FE3dSpace.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      this.loadHook = ObjectUtil.dispose(this.loadHook);
+      this.loadListeners = ObjectUtil.dispose(this.loadListeners);
+      super.dispose();
+   }
 }
