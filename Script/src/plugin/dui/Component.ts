@@ -39,6 +39,9 @@ export class Component extends Dispatcher {
    // 标签
    @Property('label', DataTypeEnum.String)
    public label: string;
+   // 关联名称
+   @Property('linker', DataTypeEnum.String)
+   public linker: string;
    // 属性集合
    public attributes: Attributes;
    // 定义属性集合
@@ -319,6 +322,21 @@ export class Component extends Dispatcher {
       }
       // 存储子组件
       children.push(child);
+   }
+
+   //==========================================================
+   // <T>追加子节点集合。</T>
+   //
+   // @param children 子节点集合
+   //==========================================================
+   public pushChildren(children: Objects<Component>) {
+      if (children) {
+         var count = children.count();
+         for (var i = 0; i < count; i++) {
+            var child = children.at(i);
+            this.push(child);
+         }
+      }
    }
 
    //==========================================================

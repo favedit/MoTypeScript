@@ -88,10 +88,10 @@ export class EventService extends Service {
             return new MouseEnterEvent();
          case EventEnum.Leave:
             return new MouseLeaveEvent();
+         case EventEnum.Click:
+         case EventEnum.DoubleClick:
          case EventEnum.MouseDown:
-            return new MouseEvent();
          case EventEnum.MouseMove:
-            return new MouseEvent();
          case EventEnum.MouseUp:
             return new MouseEvent();
          default:

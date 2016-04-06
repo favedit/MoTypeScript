@@ -46,6 +46,7 @@ import {Render} from './Render';
 export class Control extends Component {
    // 渲染器
    public renderContext: RenderContext;
+   public renderOptionFragment: boolean;
    //..........................................................
    // 是否可见
    public visible: boolean;
@@ -64,9 +65,15 @@ export class Control extends Component {
    // 位置
    @Property('location', DataTypeEnum.Struct, null, Point2)
    protected _location: Point2;
+   // 宽度
+   @Property('width', DataTypeEnum.String)
+   public width: number;
+   // 宽度
+   @Property('height', DataTypeEnum.String)
+   public height: string;
    // 大小
-   @Property('size', DataTypeEnum.Struct, null, Size2)
-   protected _size: Size2;
+   // @Property('size', DataTypeEnum.Struct, null, Size2)
+   // protected _size: Size2;
    // 提示信息
    @Property('hint', DataTypeEnum.String)
    // 不回行
@@ -114,11 +121,12 @@ export class Control extends Component {
    public constructor() {
       super();
       // 设置属性
+      this.renderOptionFragment = true;
       this.visible = true;
       this.dockCd = DockEnum.LeftTop;
       this.anchorCd = AnchorEnum.None;
       this._location = new Point2();
-      this._size = new Size2();
+      //this._size = new Size2();
       this._layoutCd = LayoutEnum.Display;
       this._sizeCd = SizeEnum.Normal;
       this._statusVisible = true;
@@ -177,8 +185,11 @@ export class Control extends Component {
    // @param context 环境信息
    //==========================================================
    public onBuildPanel(context: RenderContext) {
-      this._hPanel = context.createFragment();
-      //this._hPanel = context.createDiv(this.styleName('Panel'));
+      if (this.renderOptionFragment) {
+         this._hPanel = context.createFragment();
+      } else {
+         this._hPanel = context.createDiv(this.styleName('Panel'));
+      }
    }
 
    //==========================================================
@@ -213,6 +224,7 @@ export class Control extends Component {
       // this.attachEvent('onKeyUp', h);
       // this.attachEvent('onResize', h);
       // // 设置容器位置 / 大小 / 空白
+      this.setSize(this.width, this.height);
       // this.refreshBounds();
       // this.refreshPadding();
       // this.refreshMargin();
@@ -293,14 +305,14 @@ export class Control extends Component {
       }
    }
 
-   //==========================================================
-   // <T>获得宽度。</T>
-   //
-   // @return 宽度
-   //==========================================================
-   public width() {
-      return this._size.width;
-   }
+   // //==========================================================
+   // // <T>获得宽度。</T>
+   // //
+   // // @return 宽度
+   // //==========================================================
+   // public width() {
+   //    return this._size.width;
+   // }
 
    //==========================================================
    // <T>设置宽度。</T>
@@ -311,14 +323,14 @@ export class Control extends Component {
       this.setSize(width, null);
    }
 
-   //==========================================================
-   // <T>获得高度。</T>
-   //
-   // @return 高度
-   //==========================================================
-   public height() {
-      return this._size.width;
-   }
+   // //==========================================================
+   // // <T>获得高度。</T>
+   // //
+   // // @return 高度
+   // //==========================================================
+   // public height() {
+   //    return this._size.width;
+   // }
 
    //==========================================================
    // <T>设置高度。</T>
@@ -329,15 +341,15 @@ export class Control extends Component {
       this.setSize(null, height);
    }
 
-   //==========================================================
-   // <T>获得大小。</T>
-   //
-   // @method
-   // @return SSize2 大小
-   //==========================================================
-   public get size() {
-      return this._size;
-   }
+   // //==========================================================
+   // // <T>获得大小。</T>
+   // //
+   // // @method
+   // // @return SSize2 大小
+   // //==========================================================
+   // public get size() {
+   //    return this._size;
+   // }
 
    //==========================================================
    // <T>设置大小。</T>
@@ -350,7 +362,7 @@ export class Control extends Component {
       var hPanel = this.getPanel(PanelEnum.Size);
       // 设置宽度
       if (width != null) {
-         this._size.width = width;
+         //this._size.width = width;
          //if (hPanel && !hPanel.__fragment) {
          if (hPanel) {
             if (hPanel.tagName == 'TD') {
@@ -368,7 +380,7 @@ export class Control extends Component {
       }
       // 设置高度
       if (height != null) {
-         this._size.height = height;
+         //this._size.height = height;
          //if (hPanel && !hPanel.__fragment) {
          if (hPanel) {
             if (hPanel.tagName == 'TD') {

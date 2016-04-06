@@ -1,3 +1,6 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {Listeners} from './runtime/common/lang/Listeners';
+import {Property} from './runtime/common/reflect/Property';
 import {DirectionEnum} from './runtime/ui/DirectionEnum';
 import {Material} from './runtime/graphic/material/Material';
 import {Container} from './plugin/dui/Container';
@@ -9,7 +12,6 @@ import {TreeNodeType} from './plugin/dui/tree/TreeNodeType';
 import {TreeNode} from './plugin/dui/tree/TreeNode';
 import {TreeEvent} from './plugin/dui/tree/TreeEvent';
 import {React} from './plugin/dui/React';
-import {ToolBarUi} from './frame/ToolBarUi';
 import {Scene} from '../../plugin/cl3d/shape/Scene';
 import {SceneLayer} from '../../plugin/cl3d/shape/SceneLayer';
 import {SceneDisplay} from '../../plugin/cl3d/shape/SceneDisplay';
@@ -17,12 +19,16 @@ import {Template} from '../../plugin/cl3d/shape/Template';
 import {TemplateRenderable} from '../../plugin/cl3d/shape/TemplateRenderable';
 
 export class CatalogUi extends Container {
+   // 节点点击事件
+   @Property('onnodeclick', DataTypeEnum.Listeners)
+   public nodeClickListeners: Listeners;
 
    //==========================================================
    // <T>构造处理。</T>
    //==========================================================
    public constructor() {
       super();
+      // 设置属性
       this.name = "scene.catalog";
    }
 
@@ -136,7 +142,6 @@ export class CatalogUi extends Container {
    // <T>加载场景。</T>
    //==========================================================
    public loadScene(scene: Scene) {
-      var treeview: TreeView = this.findChildFirst() as TreeView;
       var layers = scene.layers;
       if (layers) {
          var count = layers.count();
@@ -151,10 +156,9 @@ export class CatalogUi extends Container {
    // <T>节点点击处理。</T>
    //==========================================================
    public onNodeClick(sender, event: TreeEvent) {
-      var node = event.node;
-      var tag = node.tag;
-      if (tag instanceof Material) {
-         console.log('Material ', tag);
+      var listeners = this.nodeClickListeners;
+      if (listeners) {
+         listeners.process(event);
       }
    }
 

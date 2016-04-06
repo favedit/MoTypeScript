@@ -7,10 +7,18 @@ import {TreeView} from './plugin/dui/tree/TreeView';
 import {TreeNodeType} from './plugin/dui/tree/TreeNodeType';
 import {TreeNode} from './plugin/dui/tree/TreeNode';
 import {React} from './plugin/dui/React';
-import {ToolBarUi} from './frame/ToolBarUi';
 import {CatalogUi} from './frame/scene/CatalogUi';
 
-export class Renderable extends Container {
+export class TechniqueUi extends Container {
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this.renderOptionFragment = false;
+   }
 
    // public render() {
    //    return <Frame name="resource.common.property.TechniqueFrame" type='FDsCommonTechniquePropertyFrame' label="技术属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y">

@@ -1,7 +1,8 @@
+import {RenderContext} from './RenderContext';
 import {Container} from './Container';
 
 export class Element extends Container {
-
+   // 类型名称
    public typeName: string
 
    //==========================================================
@@ -19,15 +20,11 @@ export class Element extends Container {
    }
 
    //==========================================================
-   // <T>配置处理。</T>
+   // <T>构建处理。</T>
+   //
+   // @param context 环境
    //==========================================================
-   public setup(parameters?: any) {
-   }
-
-   //==========================================================
-   // <T>配置处理。</T>
-   //==========================================================
-   public render() {
+   public build(context: RenderContext) {
       var hPanel = this._hPanel = this.renderContext.hDocument.createElement(this.typeName);
       var properties = this.properties;
       var count = properties.count();
@@ -37,5 +34,4 @@ export class Element extends Container {
          hPanel[name] = value;
       }
    }
-
 }

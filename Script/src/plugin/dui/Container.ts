@@ -1,9 +1,11 @@
 import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {Objects} from './runtime/common/lang/Objects';
 import {Dictionary} from './runtime/common/lang/Dictionary';
 import {Property} from './runtime/common/reflect/Property';
 import {ScrollEnum} from './runtime/ui/ScrollEnum';
 import {PanelEnum} from './runtime/ui/PanelEnum';
 import {RenderContext} from './RenderContext';
+import {Component} from './Component';
 import {Control} from './Control';
 
 //==========================================================
@@ -167,6 +169,23 @@ export class Container extends Control {
       control.build(this.renderContext);
       // 增加显示
       this.appendDisplay(control);
+   }
+
+   //==========================================================
+   // <T>追加一个显示控件。</T>
+   //
+   // @param control 控件
+   //==========================================================
+   public appendChildren(children: Objects<Component>) {
+      if (children) {
+         var count = children.count();
+         for (var i = count - 1; i >= 0; i--) {
+            var child = children.at(i);
+            if (child instanceof Control) {
+               this.appendChild(child);
+            }
+         }
+      }
    }
 
    //==========================================================

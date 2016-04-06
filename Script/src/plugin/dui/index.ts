@@ -2,6 +2,7 @@ export * from './Component';
 export * from './Container';
 export * from './Control';
 export * from './Element';
+export * from './Fragment';
 export * from './React';
 export * from './Render';
 export * from './RenderContext';

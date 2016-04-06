@@ -1,6 +1,5 @@
 export * from './MainUi';
 export * from './Test';
-export * from './ToolBarUi';
 
 import * as base from './base/index';
 export {base as base};

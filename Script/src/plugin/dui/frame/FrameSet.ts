@@ -101,7 +101,7 @@ export class FrameSet extends Container {
          // 横向排布
          page.setParentPanel(this._hLine);
          // 设置宽度
-         var sizeWidth = page.size.width;
+         var sizeWidth = page.width;
          if (sizeWidth) {
             page.setWidth(sizeWidth);
          }
@@ -110,7 +110,7 @@ export class FrameSet extends Container {
          var hLine = context.appendTableRow(this._hPanel);
          page.setParentPanel(hLine);
          // 设置高度
-         var sizeHeight = page.size.height;
+         var sizeHeight = page.height;
          if (sizeHeight) {
             page.setHeight(sizeHeight);
          }

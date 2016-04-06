@@ -1,3 +1,4 @@
+import {DispatchEvent} from './runtime/ui/event/DispatchEvent';
 import {ScrollEnum} from './runtime/ui/ScrollEnum';
 import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {RenderContext} from '../RenderContext';
@@ -30,8 +31,8 @@ export class FramePage extends Container {
    //==========================================================
    public onBuildPanel(context: RenderContext) {
       var hPanel = this._hPanel = context.createTableCell(this.styleClass || this.styleName('Panel'));
-      //hPanel.vAlign = 'top';
-      //hPanel.height = '100%';
+      hPanel.vAlign = 'top';
+      // hPanel.height = '100%';
       if (this.backColor) {
          hPanel.bgColor = this.backColor;
       }
@@ -54,27 +55,33 @@ export class FramePage extends Container {
       }
    }
 
-   // //==========================================================
-   // // <T>改变当前控件的显示大小。</T>
-   // //
-   // // @method
-   // // @param e:event:TEventProcess 事件处理
-   // // @return EEventStatus 处理状态
-   // //==========================================================
-   // MO.FDuiFramePage_oeResize = function FDuiFramePage_oeResize(p) {
-   //    var o = this;
-   //    var p = o._parent;
-   //    if (p._directionCd == MO.EUiDirection.Horizontal) {
-   //       // 横向排布
-   //       //var v = o._hPanel.offsetHeight;
-   //       //o._hContainer.style.height = v + 'px';
-   //    } else if (p._directionCd == MO.EUiDirection.Vertical) {
-   //       // 纵向排布
-   //    } else {
-   //       throw new MO.TError(o, 'Unknown direcion type. (direction_cd={1})', o._directionCd);
-   //    }
-   //    return MO.EEventStatus.Continue;
-   // }
+   //==========================================================
+   // <T>改变当前控件的显示大小。</T>
+   //
+   // @method
+   // @param e:event:TEventProcess 事件处理
+   // @return EEventStatus 处理状态
+   //==========================================================
+   public oeResize(event: DispatchEvent) {
+      if (event.isAfter()) {
+         if (this.scrollCd != ScrollEnum.None) {
+            var hPanel = this._hPanel;
+            var hContainer = this._hContainer;
+            hContainer.style.width = hPanel.offsetWidth + 'px';
+            hContainer.style.height = hPanel.offsetHeight + 'px';
+         }
+         // if (this._directionCd == MO.EUiDirection.Horizontal) {
+         //    // 横向排布
+         //    //var v = o._hPanel.offsetHeight;
+         //    //o._hContainer.style.height = v + 'px';
+         // } else if (event._directionCd == MO.EUiDirection.Vertical) {
+         //    // 纵向排布
+         // } else {
+         //    throw new MO.TError(this, 'Unknown direcion type. (direction_cd={1})', this._directionCd);
+         // }
+      }
+      //return MO.EEventStatus.Continue;
+   }
 
    // //==========================================================
    // // <T>增加一个控件。</T>

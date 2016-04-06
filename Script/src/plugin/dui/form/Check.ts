@@ -1,3 +1,7 @@
+import {EventEnum} from './runtime/ui/EventEnum';
+import {RenderContext} from './RenderContext';
+import {EditControl} from './EditControl';
+
 //==========================================================
 // <T>复选框。</T>
 //
@@ -5,59 +9,18 @@
 // @author maocy
 // @version 150216
 //==========================================================
-export class Check {
-   // MO.FDuiCheck = function FDuiCheck(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiEditControl, MO.MUiPropertyCheck);
-   //    //..........................................................
+export class Check extends EditControl {
    //    // @attribute
    //    o._optionValueStyle = false;
    //    // @attribute
    //    o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
-   //    //..........................................................
-   //    // @html
-   //    o._hInput = null;
+   //..........................................................
+   // 输入框
+   public _hInput: HTMLInputElement;
    //    //..........................................................
    //    // @event
    //    o.onBuildEditValue = MO.FDuiCheck_onBuildEditValue;
    //    o.onInputClick = MO.Class.register(o, new MO.AEventClick('onInputClick'), MO.FDuiCheck_onInputClick);
-   //    //..........................................................
-   //    // @method
-   //    o.construct = MO.FDuiCheck_construct;
-   //    // @method
-   //    o.get = MO.FDuiCheck_get;
-   //    o.set = MO.FDuiCheck_set;
-   //    o.text = MO.FDuiCheck_text;
-   //    // @method
-   //    o.refreshValue = MO.FDuiCheck_refreshValue;
-   //    o.refreshStyle = MO.FDuiCheck_refreshStyle;
-   //    // @method
-   //    o.dispose = MO.FDuiCheck_dispose;
-   //    return o;
-   // }
-
-   // //==========================================================
-   // // <T>建立编辑器内容。</T>
-   // //
-   // // @method
-   // // @param p:argements:SArgements 参数集合
-   // //==========================================================
-   // MO.FDuiCheck_onBuildEditValue = function FDuiCheck_onBuildEditValue(p) {
-   //    var o = this;
-   //    // 建立编辑控件
-   //    var hInput = o._hInput = MO.Window.Builder.appendCheck(o._hValuePanel);
-   //    hInput.style.cursor = 'hand';
-   //    o.attachEvent('onInputClick', hInput);
-   // }
-
-   // //==========================================================
-   // // <T>鼠标单击事件。</T>
-   // //
-   // // @method
-   // // @param p:argements:SArgements 参数集合
-   // //==========================================================
-   // MO.FDuiCheck_onInputClick = function FDuiCheck_onInputClick(p) {
-   //    this.refreshValue();
-   // }
 
    // //==========================================================
    // // <T>构造处理。</T>
@@ -71,6 +34,29 @@ export class Check {
    //    // 设置属性
    //    o._editSize.set(60, 20);
    // }
+
+   //==========================================================
+   // <T>建立编辑器内容。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildEditValue(context: RenderContext) {
+      var o = this;
+      // 建立编辑控件
+      var hInput = o._hInput = context.appendCheck(o._hValuePanel);
+      hInput.style.cursor = 'hand';
+      o.attachEvent(hInput, EventEnum.Click, this.onInputClick);
+   }
+
+   //==========================================================
+   // <T>鼠标单击事件。</T>
+   //
+   // @method
+   // @param p:argements:SArgements 参数集合
+   //==========================================================
+   public onInputClick(sender, event) {
+      this.refreshValue();
+   }
 
    // //==========================================================
    // // <T>获得数据。</T>
@@ -114,16 +100,15 @@ export class Check {
    //    return text;
    // }
 
-   // //==========================================================
-   // // <T>刷新数据。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiCheck_refreshValue = function FDuiCheck_refreshValue() {
-   //    var o = this;
-   //    // 内容改变通知
-   //    o.processDataChangedListener(o);
-   // }
+   //==========================================================
+   // <T>刷新数据。</T>
+   //
+   // @method
+   //==========================================================
+   public refreshValue() {
+      // 内容改变通知
+      //this.processDataChangedListener(this);
+   }
 
    // //==========================================================
    // // <T>根据当前状态刷新样式。</T>
