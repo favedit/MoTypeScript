@@ -1,3 +1,8 @@
+import {ClassUtil} from './runtime/common/reflect/ClassUtil';
+import {RenderContext} from './RenderContext';
+import {Container} from './Container';
+import {ListItem} from './ListItem';
+
 //==========================================================
 // <T>列表控件。</T>
 //
@@ -17,8 +22,7 @@
 // @author maocy
 // @history 150224
 //==========================================================
-export class ListBox {
-   // MO.FDuiListBox = function FDuiListBox(o) {
+export class ListBox extends Container {
    //    o = MO.Class.inherits(this, o, MO.FDuiContainer, MO.MDuiHorizontal, MO.MListenerClick);
    //    //..........................................................
    //    // @property
@@ -29,57 +33,40 @@ export class ListBox {
    //    //..........................................................
    //    // @html
    //    o._hForm = null;
-   //    //..........................................................
-   //    // @event
-   //    o.onBuildPanel = MO.FDuiListBox_onBuildPanel;
-   //    //..........................................................
-   //    // @method
-   //    o.createItem = MO.FDuiListBox_createItem;
-   //    o.appendChild = MO.FDuiListBox_appendChild;
-   //    o.clickItem = MO.FDuiListBox_clickItem;
-   //    o.clear = MO.FDuiListBox_clear;
-   //    o.dispose = MO.FDuiListBox_dispose;
-   //    return o;
-   // }
 
-   // //==========================================================
-   // // <T>建立编辑器内容。</T>
-   // //
-   // // @method
-   // // @param p:argements:SArgements 参数集合
-   // //==========================================================
-   // MO.FDuiListBox_onBuildPanel = function FDuiListBox_onBuildPanel(p) {
-   //    var o = this;
-   //    // 建立编辑控件
-   //    o._hPanel = MO.Window.Builder.createTable(p, o.styleName('Panel'));
-   // }
+   //==========================================================
+   // <T>创建一个控件容器。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildPanel(context: RenderContext) {
+      // 建立编辑控件
+      this._hPanel = context.createTable(this.styleName('Panel'));
+   }
 
-   // //==========================================================
-   // // <T>创建一个列表项目。</T>
-   // //
-   // // @method
-   // // @param icon:String 图标
-   // // @param label:String 标签
-   // // @return FDuiListItem 列表项目
-   // //==========================================================
-   // MO.FDuiListBox_createItem = function FDuiListBox_createItem(icon, label) {
-   //    var o = this;
-   //    var item = MO.Class.create(MO.FDuiListItem);
-   //    item.build(o._hPanel);
-   //    item.setLabel(label);
-   //    return item;
-   // }
+   //==========================================================
+   // <T>创建一个列表项目。</T>
+   //
+   // @param icon 图标
+   // @param label 标签
+   // @return 列表项目
+   //==========================================================
+   public createItem(icon, label) {
+      var item = ClassUtil.create(ListItem);
+      item.build(this._hPanel);
+      item.setLabel(label);
+      return item;
+   }
 
-   // //==========================================================
-   // // <T>追加一个控件容器。</T>
-   // //
-   // // @method
-   // // @return control:FControl 控件
-   // //==========================================================
-   // MO.FDuiListBox_appendChild = function FDuiListBox_appendChild(control) {
-   //    var o = this;
-   //    o._hPanel.appendChild(control._hPanel);
-   // }
+   //==========================================================
+   // <T>追加一个控件容器。</T>
+   //
+   // @method
+   // @return control:FControl 控件
+   //==========================================================
+   public appendChild(control) {
+      this._hPanel.appendChild(control._hPanel);
+   }
 
    // //==========================================================
    // // <T>点击一个列表项目。</T>

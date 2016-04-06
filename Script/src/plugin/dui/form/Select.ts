@@ -1,3 +1,5 @@
+import {EditControl} from './EditControl';
+
 //==========================================================
 // <T>下拉选择框。</T>
 //
@@ -14,10 +16,7 @@
 // @author maocy
 // @version 150224
 //==========================================================
-export class Select {
-   // MO.FDuiSelect = function FDuiSelect(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiEditControl, MO.MUiContainer, MO.MUiPropertySelect);
-   //    //..........................................................
+export class Select extends EditControl{
    //    // @property
    //    o._inputSize = MO.Class.register(o, [new MO.APtySize2('_inputSize'), new MO.AGetter('_inputSize')]);
    //    //..........................................................
@@ -35,32 +34,6 @@ export class Select {
    //    o.onDoubleClick = MO.Class.register(o, new MO.AEventDoubleClick('onDoubleClick'), MO.FDuiSelect_onDropClick);
    //    o.onDropClick = MO.FDuiSelect_onDropClick;
    //    o.onKeyDown = MO.Class.register(o, new MO.AEventKeyDown('onKeyDown'), MO.FDuiSelect_onKeyDown);
-   //    //..........................................................
-   //    // @method
-   //    o.construct = MO.FDuiSelect_construct;
-   //    // @method
-   //    o.createChild = MO.FDuiSelect_createChild;
-   //    o.findItemByLabel = MO.FDuiSelect_findItemByLabel;
-   //    o.findItemByValue = MO.FDuiSelect_findItemByValue;
-   //    o.formatValue = MO.FDuiSelect_formatValue;
-   //    o.formatDisplay = MO.FDuiSelect_formatDisplay;
-   //    o.get = MO.FDuiSelect_get;
-   //    o.set = MO.FDuiSelect_set;
-   //    o.selectItem = MO.FDuiSelect_selectItem;
-   //    o.refreshValue = MO.FDuiSelect_refreshValue;
-   //    o.refreshStyle = MO.FDuiSelect_refreshStyle;
-   //    // @method
-   //    o.drop = MO.FDuiSelect_drop;
-   //    // @method
-   //    o.dispose = MO.FDuiSelect_dispose;
-
-   //    //..........................................................
-   //    // @event
-   //    //o.onEditEnd     = FDuiSelect_onEditEnd;
-   //    //o.loadConfig    = FDuiSelect_loadConfig;
-   //    //o.doBlur        = FDuiSelect_doBlur;
-   //    return o;
-   // }
 
    // //==========================================================
    // // <T>建立编辑器内容。</T>

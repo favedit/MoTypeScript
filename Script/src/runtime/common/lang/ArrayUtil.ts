@@ -8,7 +8,6 @@ import {AssertUtil} from '../AssertUtil';
 // @version 141229
 //==========================================================
 export class ArrayUtil {
-   // @attribute
    public static array1 = new Array(1);
    public static array2 = new Array(2);
    public static array3 = new Array(3);
@@ -20,19 +19,16 @@ export class ArrayUtil {
    //==========================================================
    // <T>判断数组内所有内容是否全部相同。</T>
    //
-   // @method
-   // @param s:source:Array 源数组
-   // @param t:target:Array 目标数组
-   // @return Boolean
-   //    <L value='true'>相等</L>
-   //    <L value='false'>不相等</L>
+   // @param source 源数组
+   // @param target 目标数组
+   // @return 是否相等
    //==========================================================
-   public static equals(s, t) {
-      if (s && t) {
-         if (s.length == t.length) {
-            var c = s.length;
-            for (var n = 0; n < c; n++) {
-               if (s[n] != t[n]) {
+   public static equals(source: Array<any>, target: Array<any>): boolean {
+      if (source && target) {
+         if (source.length == target.length) {
+            var length = source.length;
+            for (var i = 0; i < length; i++) {
+               if (source[i] != target[i]) {
                   return false;
                }
             }
@@ -45,9 +41,8 @@ export class ArrayUtil {
    //==========================================================
    // <T>取得对象内的所有数据的总数。</T>
    //
-   // @method
-   // @param value:Object 对象
-   // @return Integer 数据总数
+   // @param value 对象
+   // @return 数据总数
    //==========================================================
    public static count(value) {
       var count = 0;
@@ -60,17 +55,14 @@ export class ArrayUtil {
    //==========================================================
    // <T>判断数组中是否含有指定的对象。</T>
    //
-   // @method
-   // @param array:Array 数组对象
-   // @param value:Object 对象名
-   // @return Boolean
-   //    <L value='true'>含有</L>
-   //    <L value='false'>不含有</L>
+   // @param array 数组对象
+   // @param value 对象名
+   // @return 是否含有
    //==========================================================
-   public static contains(array, v) {
-      var c = array.length;
-      for (var n = 0; n < c; n++) {
-         if (array[n] == v) {
+   public static contains(array: Array<any>, value: any): boolean {
+      var length = array.length;
+      for (var i = 0; i < length; i++) {
+         if (array[i] == value) {
             return true;
          }
       }
@@ -80,16 +72,15 @@ export class ArrayUtil {
    //==========================================================
    // <T>在数组中查找指定对象的索引位置，没找到返回-1。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param v:value:Object 对象名
-   // @return Integer 索引位置
+   // @param array 数组对象
+   // @param value 对象名
+   // @return 索引位置
    //==========================================================
-   public static find(a, v) {
-      var c = a.length;
-      for (var n = 0; n < c; n++) {
-         if (a[n] == v) {
-            return n;
+   public static find(array: Array<any>, value: any): number {
+      var length = array.length;
+      for (var i = 0; i < length; i++) {
+         if (array[i] == value) {
+            return i;
          }
       }
       return -1;
@@ -98,15 +89,14 @@ export class ArrayUtil {
    //==========================================================
    // <T>在数组中查找指定对象的名称，并把名称返回，没找到返回空。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param v:value:Object 对象名
-   // @return Object 没有找到返回-1
+   // @param array 数组对象
+   // @param value 对象名
+   // @return 没有找到返回空
    //==========================================================
-   public static search(a, v) {
-      for (var n in a) {
-         if (a[n] == v) {
-            return n;
+   public static search(array: Array<any>, value: any): string {
+      for (var index in array) {
+         if (array[index] == value) {
+            return index;
          }
       }
       return null;
@@ -115,31 +105,29 @@ export class ArrayUtil {
    //==========================================================
    // <T>对数组内的元素反向排列。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param s:start:Integer 开始位置
-   // @param e:end:Integer 结束位置
+   // @param array 数组对象
+   // @param start 开始位置
+   // @param end 结束位置
    //==========================================================
-   public static reverse(a, s, e) {
-      var c = (e + 1 - s) >> 1;
-      for (var n = 0; n < c; n++) {
-         var t = a[s + n];
-         a[s + n] = a[e - n];
-         a[e - n] = t;
+   public static reverse(array: Array<any>, start: number, end: number) {
+      var count = (end + 1 - start) >> 1;
+      for (var i = 0; i < count; i++) {
+         var value = array[start + i];
+         array[start + i] = array[end - i];
+         array[end - i] = value;
       }
    }
 
    //==========================================================
    // <T>复制数组的内容。</T>
    //
-   // @method
-   // @param source:Array 来源数组
-   // @param sourceOffset:Integer 来源位置
-   // @param sourceCount:Integer 来源长度
-   // @param target:Array 目标数组
-   // @param targetOffset:Integer 目标位置
+   // @param source 来源数组
+   // @param sourceOffset 来源位置
+   // @param sourceCount 来源长度
+   // @param target 目标数组
+   // @param targetOffset 目标位置
    //==========================================================
-   public static copy(source, sourceOffset, sourceCount, target, targetOffset) {
+   public static copy(source: Array<any>, sourceOffset: number, sourceCount: number, target: Array<any>, targetOffset: number) {
       AssertUtil.debugNotNull(source);
       AssertUtil.debugTrue((sourceOffset >= 0) && (sourceOffset + sourceCount <= source.length));
       AssertUtil.debugTrue(sourceCount <= source.length);
@@ -154,20 +142,19 @@ export class ArrayUtil {
    //==========================================================
    // <T>复制数组中的一部分内容到指定位置。</T>
    //
-   // @method
-   // @param array:Array 数组对象
-   // @param offset:Integer 开始位置
-   // @param count:Integer 复制总数
-   // @param target:Integer 目标位置
+   // @param array 数组对象
+   // @param offset 开始位置
+   // @param count 复制总数
+   // @param target 目标位置
    //==========================================================
-   public static move(array, offset, count, target) {
+   public static move(array: Array<any>, offset: number, count: number, target: number) {
       if (offset > target) {
-         for (var n = 0; n < count; n++) {
-            array[target - n] = array[offset + n];
+         for (var i = 0; i < count; i++) {
+            array[target - i] = array[offset + i];
          }
       } else if (offset < target) {
-         for (var n = 0; n < count; n++) {
-            array[target + count - n - 1] = array[offset + count - n - 1];
+         for (var i = 0; i < count; i++) {
+            array[target + count - i - 1] = array[offset + count - i - 1];
          }
       }
    }
@@ -175,90 +162,81 @@ export class ArrayUtil {
    //==========================================================
    // <T>删除数组中指定位置的一个对象。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param n:index:Integer 索引位置
-   // @return Array 删除后的数组对象
+   // @param array 数组对象
+   // @param index 索引位置
+   // @return 删除后的数组对象
    //==========================================================
-   public static remove(a, n) {
-      return a.slice(0, n).concat(a.slice(n + 1));
+   public static remove(array: Array<any>, index: number) {
+      return array.slice(0, index).concat(array.slice(index + 1));
    }
 
    //==========================================================
    // <T>数组的部分排序。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param l:left:Integer 左边位置
-   // @param r:right:Integer 右边位置
-   // @return Integer 排序结束位置
+   // @param array 数组对象
+   // @param left 左边位置
+   // @param right 右边位置
+   // @return 排序结束位置
    //==========================================================
-   public static sortPartition(a, l, r) {
-      var s = l;
-      var e = r + 1;
-      var t = a[s];
+   public static sortPartition(array: Array<any>, left: number, right: number) {
+      var start = left;
+      var end = right + 1;
+      var first = array[start];
       while (true) {
-         while (a[++s] < t) {
+         while (array[++start] < first) {
          }
-         while (a[--e] > t) {
+         while (array[--end] > first) {
          }
-         if (s > e) {
+         if (start > end) {
             break;
          }
-         var v = a[s];
-         a[s] = a[e];
-         a[e] = v;
+         var value = array[start];
+         array[start] = array[end];
+         array[end] = value;
       }
-      a[l] = a[e];
-      a[e] = t;
-      return e;
+      array[left] = array[end];
+      array[end] = first;
+      return end;
    }
 
    //==========================================================
    // <T>对数组进行排序。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param s:start:Integer 开始位置
-   // @param e:end:Integer 结束位置
+   // @param array 数组对象
+   // @param start 开始位置
+   // @param end 结束位置
    //==========================================================
-   public static sortArray(a, s, e) {
-      if (s < e) {
-         var o = this;
-         var p = o.sortPartition(a, s, e);
-         o.sortArray(a, s, p - 1);
-         o.sortArray(a, p + 1, e);
+   public static sortArray(array: Array<any>, start: number, end: number) {
+      if (start < end) {
+         var index = this.sortPartition(array, start, end);
+         this.sortArray(array, start, index - 1);
+         this.sortArray(array, index + 1, end);
       }
    }
 
    //==========================================================
    // <T>对数组进行排序。</T>
    //
-   // @method
-   // @param a:array:Array 数组对象
-   // @param t:type:Boolean
-   //    <L value='true'>降序排列</L>
-   //    <L value='false'>升序排列</L>
+   // @param array 数组对象
+   // @param type 顺序
    //==========================================================
-   public static sort(a, t) {
-      var o = this;
-      var c = a.length - 1;
-      o.sortArray(a, 0, c);
-      if (t) {
-         o.reverse(a, 0, c);
+   public static sort(array: Array<any>, type: boolean) {
+      var count = array.length - 1;
+      this.sortArray(array, 0, count);
+      if (type) {
+         this.reverse(array, 0, count);
       }
-      return a;
+      return array;
    }
 
    //==========================================================
    // <T>取得对象内的最长的属性名称的长度。</T>
    //
-   // @method
-   // @param value:Object 对象
-   // @return Integer 字符串长度
+   // @param value 对象
+   // @return 字符串长度
    //==========================================================
-   public static nameMaxLength(value) {
-      var length: number = 0;
+   public static nameMaxLength(value: any): number {
+      var length = 0;
       for (var name in value) {
          var nameLength: number = name.length;
          if (length < nameLength) {
@@ -266,19 +244,5 @@ export class ArrayUtil {
          }
       }
       return length;
-   }
-
-   //==========================================================
-   // <T>对数组快速排序。</T>
-   //
-   // @method
-   // @param items:Array 数组
-   // @param offset:Integer 位置
-   // @param count:Integer 总数
-   // @param comparer:Function 比较器
-   // @param parameters:Object 参数
-   //==========================================================
-   public static quickSort(items, offset, count, comparer, parameters) {
-      //this.pairSort(items, null, offset, count, comparer, parameters);
    }
 }

@@ -1,3 +1,5 @@
+import {EditControl} from './EditControl';
+
 //==========================================================
 // <T>单选框控件。</T>
 //
@@ -5,10 +7,7 @@
 // @author maocy
 // @version 150123
 //==========================================================
-export class Radio {
-   // MO.FDuiRadio = function FDuiRadio(o) {
-   //    o = MO.Class.inherits(this, o, MO.FEditControl);
-   //    //..........................................................
+export class Radio extends EditControl {
    //    // @property
    //    o._groupName = MO.Class.register(o, new MO.APtyString('_groupName'));
    //    //..........................................................
@@ -23,20 +22,7 @@ export class Radio {
    //    //..........................................................
    //    // @attribute
    //    //o._editChecked = MO.Class.register(o, new MO.APtyBoolean('_editChecked'), false);
-   //    //..........................................................
-   //    // @event
-   //    //o.onClick      = RMethod.emptyCall;
-   //    //o.onDataClick  = RMethod.emptyCall;
-   //    //..........................................................
-   //    // @method
-   //    //o.clearValue   = FDuiRadio_clearValue;
-   //    //o.resetValue   = FDuiRadio_resetValue;
-   //    //o.saveValue    = FDuiRadio_saveValue;
-   //    //o.text         = FDuiRadio_text;
-   //    //o.setText      = FDuiRadio_setText;
-   //    //o.refreshStyle = FDuiRadio_refreshStyle;
-   //    return o;
-   // }
+
 
    // //==========================================================
    // // <T>建立编辑器内容。</T>
@@ -49,10 +35,6 @@ export class Radio {
    //    // 建立编辑控件
    //    o._hInput = MO.Window.Builder.appendRadio(o._hValuePanel, o.styleName('Input'));
    // }
-
-
-
-
 
 
 

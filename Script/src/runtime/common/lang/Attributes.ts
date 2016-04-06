@@ -6,7 +6,6 @@ import {RuntimeUtil} from '../RuntimeUtil'
 //==========================================================
 // <T>名称和内容都是字符串的关联保存表的工具类。</T>
 //
-// @reference
 // @author maocy
 // @version 141229
 //==========================================================
@@ -14,9 +13,8 @@ export class Attributes extends Dictionary<string> {
    //==========================================================
    // <T>将内部所有内容目关联成一个字符串。</T>
    //
-   // @method
-   // @param split:String 分隔符
-   // @return String 字符串
+   // @param split 分隔符
+   // @return 字符串
    //==========================================================
    public joinValue(split): string {
       var source: StringBuffer = new StringBuffer();
@@ -33,10 +31,9 @@ export class Attributes extends Dictionary<string> {
    //==========================================================
    // <T>将内部所有项目关联成一个字符串。</T>
    //
-   // @method
-   // @param name:String 分隔名称的字符
-   // @param value:String 分隔内容的字符
-   // @return String 字符串
+   // @param name 分隔名称的字符
+   // @param value 分隔内容的字符
+   // @return 字符串
    //==========================================================
    public join(name, value): string {
       var source: StringBuffer = new StringBuffer();
@@ -61,10 +58,9 @@ export class Attributes extends Dictionary<string> {
    //==========================================================
    // <T>将字符串分割为子项。</T>
    //
-   // @method
-   // @param source:String 字符串
-   // @param name:String 分隔名称的字符
-   // @param value:String 分隔内容的字符
+   // @param source 字符串
+   // @param name 分隔名称的字符
+   // @param value 分隔内容的字符
    //==========================================================
    public split(source, name, value): void {
       var o = this;
@@ -87,8 +83,7 @@ export class Attributes extends Dictionary<string> {
    // <T>将表中所有数据连接成一个字符串。</T>
    // <P>打包方式：项目1(名称长度的长度+名称长度+名称+内容长度的长度+内容长度+内容)+...。</P>
    //
-   // @method
-   // @return String 打包字符串
+   // @return 打包字符串
    //==========================================================
    public pack(): string {
       var source: StringBuffer = new StringBuffer();
@@ -114,8 +109,7 @@ export class Attributes extends Dictionary<string> {
    //==========================================================
    // <T>将一个打包字符串分解为所有子项。</T>
    //
-   // @method
-   // @param source:String 打包字符串
+   // @param source 打包字符串
    //==========================================================
    public unpack(source): void {
       this._count = 0;
@@ -143,8 +137,7 @@ export class Attributes extends Dictionary<string> {
    //==========================================================
    // <T>获得数组的内部信息。</T>
    //
-   // @method
-   // @return String 字符串
+   // @return 字符串
    //==========================================================
    public dump(): string {
       var result: StringBuffer = new StringBuffer();

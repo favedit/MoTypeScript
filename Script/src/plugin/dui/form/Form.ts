@@ -1,3 +1,5 @@
+import {Layout} from './Layout';
+
 //==========================================================
 // <T>表单控件。</T>
 //
@@ -5,10 +7,7 @@
 // @author maocy
 // @version 150122
 //==========================================================
-export class Form {
-   // MO.FDuiForm = function FDuiForm(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiLayout, MO.MUiDataContainer, MO.MUiDisplayContrainer, MO.MDuiDescribeFrame);
-   //    //..........................................................
+export class Form extends Layout{
    //    // @property
    //    o._logicGroup = MO.Class.register(o, [new MO.APtyString('_logicGroup'), new MO.AGetter('_logicGroup')]);
    //    o._logicCode = MO.Class.register(o, [new MO.APtyString('_logicCode'), new MO.AGetter('_logicCode')]);
@@ -38,52 +37,6 @@ export class Form {
    //    // @event
    //    //o.onLoadDataset      = MO.FDuiForm_onLoadDataset;
    //    //o.onLoadDatasetEnd   = MO.FDuiForm_onLoadDatasetEnd;
-   //    //..........................................................
-   //    // @method
-   //    //o.isDataChanged      = MO.FDuiForm_isDataChanged;
-   //    //o.getFormLink        = MO.FDuiForm_getFormLink;
-   //    //o.allDataComponents  = MO.FDuiForm_allDataComponents;
-   //    //o.get                = MO.FDuiForm_get;
-   //    //o.reget              = FDuiForm_reget;
-   //    //o.set                = MO.FDuiForm_set;
-   //    //o.getDataCodes       = MO.FDuiForm_getDataCodes;
-   //    //o.getCurrentRow      = MO.FDuiForm_getCurrentRow;
-   //    //o.getSelectedRows    = MO.FDuiForm_getSelectedRows;
-   //    //o.getCurrentRows     = MO.FDuiForm_getCurrentRows;
-   //    //o.getChangedRows     = MO.FDuiForm_getChangedRows;
-   //    //o.getRows            = MO.FDuiForm_getRows;
-   //    //o.clearValue         = MO.FDuiForm_clearValue;
-   //    //o.resetValue         = MO.FDuiForm_resetValue;
-   //    //o.loadValue          = MO.FDuiForm_loadValue;
-   //    //o.saveValue          = MO.FDuiForm_saveValue;
-   //    //o.recordValue        = MO.FDuiForm_recordValue;
-   //    //o.toAttributes       = MO.FDuiForm_toAttributes;
-   //    //o.focus              = MO.FDuiForm_focus;
-   //    //o.dsUpdate           = MO.FDuiForm_dsUpdate;
-   //    //o.doPrepare          = MO.FDuiForm_doPrepare;
-   //    //o.doUpdate           = MO.FDuiForm_doUpdate;
-   //    //o.doDelete           = MO.FDuiForm_doDelete;
-   //    /// @attribute TMap<String, FComponent> 按照控件名称存储的数据组件集合
-   //    //o._nameComponents    = null;
-   //    //----------------------------------------------------------
-   //    // Method
-   //    //o.allNameComponents  = FDuiForm_allNameComponents;
-   //    // Attribute
-   //    //o.isLoading          = false;
-   //    // Event
-   //    //o.onLoaded           = FDuiForm_onLoaded;
-   //    //o.onDsFetchEnd       = FDuiForm_onDsFetchEnd;
-   //    //o.onDsUpdateBegin    = FDuiForm_onDsUpdateBegin;
-   //    //o.onDsUpdateEnd      = FDuiForm_onDsUpdateEnd;
-   //    //o.onLoadValue        = RMethod.empty;
-   //    //o.onSaveValue        = RMethod.empty;
-   //    //o.connect            = FDuiForm_connect;
-   //    //o.loadDocument       = FDuiForm_loadDocument;
-   //    //o.testStatus         = FDuiForm_testStatus;
-   //    //o.hasAction          = FDuiForm_hasAction;
-   //    //o.setEditable        = FDuiForm_setEditable;
-   //    return o;
-   // }
 
    // //==========================================================
    // // <T>构造函数。</T>

@@ -1,3 +1,6 @@
+import {RenderContext} from '../RenderContext';
+import {Container} from './Container';
+
 //==========================================================
 // <T>列表控件。</T>
 //
@@ -17,10 +20,7 @@
 // @author maocy
 // @history 150224
 //==========================================================
-export class ListView {
-   // MO.FDuiListView = function FDuiListView(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiContainer, MO.MDuiHorizontal);
-   //    //..........................................................
+export class ListView extends Container {
    //    // @property
    //    o._sizeCd = MO.EUiSize.Horizontal
    //    //..........................................................
@@ -42,65 +42,44 @@ export class ListView {
    //    o.onBuild = MO.FDuiListView_onBuild;
    //    // @event
    //    o.onClick = MO.Class.register(o, new MO.AEventClick('onClick'), MO.FDuiListView_onClick);
-   //    //..........................................................
-   //    // @method
-   //    o.construct = MO.FDuiListView_construct;
-   //    // @method
-   //    o.focusItem = MO.FDuiListView_focusItem;
-   //    // @method
-   //    o.createItem = MO.FDuiListView_createItem;
-   //    o.appendChild = MO.FDuiListView_appendChild;
-   //    o.selectItem = MO.FDuiListView_selectItem;
-   //    o.doClickItem = MO.FDuiListView_doClickItem;
-   //    o.doDoubleClickItem = MO.FDuiListView_doDoubleClickItem;
-   //    o.clear = MO.FDuiListView_clear;
-   //    o.dispose = MO.FDuiListView_dispose;
-   //    return o;
-   // }
 
-   // //==========================================================
-   // // <T>建立编辑器内容。</T>
-   // //
-   // // @method
-   // // @param p:argements:SArgements 参数集合
-   // //==========================================================
-   // MO.FDuiListView_onBuildPanel = function FDuiListView_onBuildPanel(p) {
-   //    var o = this;
-   //    // 建立编辑控件
-   //    o._hPanel = MO.Window.Builder.createDiv(p, o.styleName('Panel'));
-   // }
+   //==========================================================
+   // <T>创建一个控件容器。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildPanel(context: RenderContext) {
+      // 建立编辑控件
+      this._hPanel = context.createDiv(this.styleName('Panel'));
+   }
 
-   // //==========================================================
-   // // <T>构件页面处理。</T>
-   // //
-   // // @method
-   // // @param event:TProcessEvent 处理事件
-   // //==========================================================
-   // MO.FDuiListView_onBuild = function FDuiListView_onBuild(event) {
-   //    var o = this;
-   //    o.__base.FDuiContainer.onBuild.call(o, event);
-   //    // 关联事件
-   //    var hPanel = o._hPanel;
-   //    o.attachEvent('onClick', hPanel);
-   // }
+   //==========================================================
+   // <T>建立当前控件的显示框架。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuild(context: RenderContext) {
+      super.onBuild(context);
+      // 关联事件
+      this.attachEvent(this._hPanel, 'onClick');
+   }
 
-   // //==========================================================
-   // // <T>响应鼠标点击树节点复选框处理。</T>
-   // //
-   // // @method
-   // // @param s:source:FControl 源控件
-   // // @param e:event:TEvent 事件对象
-   // //==========================================================
-   // MO.FDuiListView_onClick = function FDuiListView_onClick(s, e) {
-   //    var o = this;
-   //    if (s.hSender == o._hNodePanel) {
-   //       var node = o._focusNode;
-   //       if (node) {
-   //          node.select(false);
-   //          o._focusNode = null;
-   //       }
-   //    }
-   // }
+   //==========================================================
+   // <T>响应鼠标点击树节点复选框处理。</T>
+   //
+   // @method
+   // @param s:source:FControl 源控件
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onClick(s, e) {
+      // if (s.hSender == this._hNodePanel) {
+      //    var node = this._focusNode;
+      //    if (node) {
+      //       node.select(false);
+      //       this._focusNode = null;
+      //    }
+      // }
+   }
 
    // //==========================================================
    // // <T>创建一个列表项目。</T>

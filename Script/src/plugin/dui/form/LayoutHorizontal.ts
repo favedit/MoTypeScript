@@ -1,3 +1,7 @@
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
+import {RenderContext} from '../RenderContext';
+import {Container} from '../Container';
+
 //==========================================================
 // <T>横向布局控件。</T>
 //
@@ -10,82 +14,61 @@
 // @author maocy
 // @version 150420
 //==========================================================
-export class LayoutHorizontal {
-   // MO.FDuiLayoutHorizontal = function FDuiLayoutHorizontal(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiContainer);
-   //    //..........................................................
-   //    // @style
-   //    o._stylePanel = MO.Class.register(o, new MO.AStyle('_stylePanel'));
-   //    //..........................................................
-   //    // @html
-   //    o._hLine = null;
-   //    //..........................................................
-   //    // @event
-   //    o.onBuildPanel = MO.FDuiLayoutHorizontal_onBuildPanel;
-   //    o.onBuild = MO.FDuiLayoutHorizontal_onBuild;
-   //    //..........................................................
-   //    // @method
-   //    o.appendChild = MO.FDuiLayoutHorizontal_appendChild;
-   //    // @method
-   //    o.dispose = MO.FDuiLayoutHorizontal_dispose;
-   //    return o;
-   // }
+export class LayoutHorizontal extends Container {
+   // 底板元素
+   public _hPanel: HTMLTableElement;
+   // 横线元素
+   public _hLine: HTMLTableRowElement;
 
-   // //==========================================================
-   // // <T>创建面板处理。</T>
-   // //
-   // // @method
-   // // @return event:TProcessEvent 处理事件
-   // //==========================================================
-   // MO.FDuiLayoutHorizontal_onBuildPanel = function FDuiLayoutHorizontal_onBuildPanel(event) {
-   //    var o = this;
-   //    o._hPanel = MO.Window.Builder.createTable(event, o.styleName('Panel'));
-   // }
+   //==========================================================
+   // <T>创建一个控件容器。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildPanel(context: RenderContext) {
+      this._hPanel = context.createTable(this.styleName('Panel'));
+   }
 
-   // //==========================================================
-   // // <T>创建布局处理。</T>
-   // //
-   // // @method
-   // // @return event:TProcessEvent 处理事件
-   // //==========================================================
-   // MO.FDuiLayoutHorizontal_onBuild = function FDuiLayoutHorizontal_onBuild(event) {
-   //    var o = this;
-   //    o.__base.FDuiContainer.onBuild.call(o, event)
-   //    // 创建横向容器
-   //    o._hLine = MO.Window.Builder.appendTableRow(o._hPanel);
-   // }
+   //==========================================================
+   // <T>创建布局处理。</T>
+   //
+   // @return event 处理事件
+   //==========================================================
+   public onBuild(event) {
+      super.onBuild(event);
+      // 创建横向容器
+      var context = this.renderContext;
+      this._hLine = context.appendTableRow(this._hPanel);
+   }
 
-   // //==========================================================
-   // // <T>追加一个控件容器。</T>
-   // //
-   // // @method
-   // // @return control:FControl 控件
-   // //==========================================================
-   // MO.FDuiLayoutHorizontal_appendChild = function FDuiLayoutHorizontal_appendChild(control) {
-   //    var o = this;
-   //    // 追加子控件
-   //    var hCell = MO.Window.Builder.appendTableCell(o._hLine);
-   //    hCell.appendChild(control._hPanel);
-   //    // 设置位置
-   //    var dockCd = control.dockCd();
-   //    if (dockCd == 'left') {
-   //       hCell.align = 'left';
-   //    } else if (dockCd == 'center') {
-   //       hCell.align = 'center';
-   //    } else if (dockCd == 'right') {
-   //       hCell.align = 'right';
-   //    }
-   // }
+   //==========================================================
+   // <T>追加一个控件容器。</T>
+   //
+   // @return control 控件
+   //==========================================================
+   public appendChild(control) {
+      var context = this.renderContext;
+      // 追加子控件
+      var hCell = context.appendTableCell(this._hLine);
+      hCell.appendChild(control._hPanel);
+      // 设置位置
+      var dockCd = control.dockCd;
+      if (dockCd == 'left') {
+         hCell.align = 'left';
+      } else if (dockCd == 'center') {
+         hCell.align = 'center';
+      } else if (dockCd == 'right') {
+         hCell.align = 'right';
+      }
+   }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiLayoutHorizontal_dispose = function FDuiLayoutHorizontal_dispose() {
-   //    var o = this;
-   //    o._hLine = MO.Window.Html.free(o._hLine);
-   //    // 父处理
-   //    o.__base.FDuiContainer.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      // 释放属性
+      this._hLine = HtmlUtil.dispose(this._hLine);
+      // 父处理
+      super.dispose();
+   }
 }

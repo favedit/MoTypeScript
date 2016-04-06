@@ -1,3 +1,6 @@
+import {RenderContext} from '../RenderContext';
+import {Control} from './Control';
+
 //==========================================================
 // <T>按钮控件。</T>
 //
@@ -5,13 +8,10 @@
 // @author maocy
 // @history 150329
 //==========================================================
-export class Button {
-   // MO.FDuiButton = function FDuiButton(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiControl, MListenerClick);
-   //    //..........................................................
+export class Button extends Control {
    //    // @attribute
    //    o._labelPositionCd = MO.Class.register(o, new MO.APtyString('_labelPositionCd'), MO.EUiPosition.Left);
-   //    o._icon = MO.Class.register(o, new MO.APtyString('_icon'));
+   public _icon: string;
    //    o._action = MO.Class.register(o, new MO.APtyString('_action'));
    //    //o._type              = MO.Class.register(o, new MO.APtyString('_type'));
    //    //o._dataAction        = MO.Class.register(o, new MO.APtyString('_dataAction'));
@@ -44,73 +44,47 @@ export class Button {
    //    o._hLeftButton = null;
    //    o._hMiddleButton = null;
    //    o._hRightButton = null;
-   //    o._hLabelPanel = null;
-   //    o._hLabel = null;
-   //    //..........................................................
-   //    // @event
-   //    o.onBuild = MO.FDuiButton_onBuild;
-   //    // @event
-   //    o.onClick = MO.Class.register(o, new MO.AEventClick('onClick'), MO.FDuiButton_onClick);
-   //    //o.onButtonEnter      = MO.Class.register(o, new MO.AEventMouseEnter('onButtonEnter'), FDuiButton_onButtonEnter);
-   //    //o.onButtonLeave      = MO.Class.register(o, new MO.AEventMouseLeave('onButtonLeave'), FDuiButton_onButtonLeave);
-   //    //o.onButtonDown       = MO.Class.register(o, new MO.AEventMouseDown('onButtonDown'), FDuiButton_onButtonDown);
-   //    //o.onButtonUp         = MO.Class.register(o, new MO.AEventMouseUp('onButtonUp'), FDuiButton_onButtonUp);
-   //    //o.onButtonClickDelay = FDuiButton_onButtonClickDelay;
-   //    //o.onButtonClick      = MO.Class.register(o, new MO.AEventClick('onButtonClick'), FDuiButton_onButtonClick);
-   //    //..........................................................
-   //    // @process
-   //    //o.oeMode             = FDuiButton_oeMode;
-   //    //..........................................................
-   //    // @method
-   //    //o.setLabel           = FDuiButton_setLabel;
-   //    //o.setLabelColor      = FDuiButton_setLabelColor;
-   //    //o.setLabelStyle      = FDuiButton_setLabelStyle;
-   //    o.doClick = MO.FDuiButton_doClick;
-   //    //o.dispose            = FDuiButton_dispose;
-   //    return o;
-   // }
+   public _hLabelPanel;
+   public _hLabel;
 
-   // //==========================================================
-   // // <T>构建按钮，链接相应事件。</T>
-   // //
-   // // @method
-   // // @param e:event:TEvent 事件对象
-   // // @return EEventStatus 处理状态
-   // //==========================================================
-   // MO.FDuiButton_onBuild = function FDuiButton_onBuild(e) {
-   //    var o = this;
-   //    o.__base.FDuiControl.onBuild.call(o, e);
-   //    // 设置底板
-   //    var hPanel = o._hPanel;
-   //    o.attachEvent('onClick', hPanel);
-   //    //o.attachEvent('onButtonEnter', hPanel, o.onButtonEnter);
-   //    //o.attachEvent('onButtonLeave', hPanel, o.onButtonLeave);
-   //    //o.attachEvent('onButtonDown', hPanel, o.onButtonDown);
-   //    //o.attachEvent('onButtonUp', hPanel, o.onButtonUp);
-   //    //o.attachEvent('onButtonClick', hPanel);
-   //    // 建立布局
-   //    var hForm = MO.Window.Builder.appendTable(hPanel, o.styleName('Form'));
-   //    var hLine = MO.Window.Builder.appendTableRow(hForm);
-   //    // 建立图标
-   //    if (o._icon) {
-   //       var hCell = MO.Window.Builder.appendTableCell(hLine);
-   //       hCell.width = 16;
-   //       o._hIcon = MO.Window.Builder.appendIcon(hCell, o.styleName('Icon'), o._icon);
-   //    }
-   //    // 建立标签
-   //    if (o.label) {
-   //       var hCell = MO.Window.Builder.appendTableCell(hLine);
-   //       hCell.align = 'center';
-   //       hCell.noWrap = true;
-   //       o._hLabel = MO.Window.Builder.appendText(hCell, o.styleName('Label'), o._label);
-   //    }
-   //    // 创建延时器
-   //    //o.__process = false;
-   //    //var ca = o.clickActive = new TActive(o, o.onButtonClickDelay);
-   //    //ca.interval = 500;
-   //    //ca.status = EActive.Sleep;
-   //    //RConsole.find(FActiveConsole).push(ca);
-   // }
+   //==========================================================
+   // <T>建立当前控件的显示框架。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuild(context: RenderContext) {
+      super.onBuild(context);
+      // 设置底板
+      var hPanel = this._hPanel;
+      this.attachEvent('onClick', hPanel);
+      //o.attachEvent('onButtonEnter', hPanel, o.onButtonEnter);
+      //o.attachEvent('onButtonLeave', hPanel, o.onButtonLeave);
+      //o.attachEvent('onButtonDown', hPanel, o.onButtonDown);
+      //o.attachEvent('onButtonUp', hPanel, o.onButtonUp);
+      //o.attachEvent('onButtonClick', hPanel);
+      // 建立布局
+      var hForm = context.appendTable(hPanel, this.styleName('Form'));
+      var hLine = context.appendTableRow(hForm);
+      // 建立图标
+      if (this._icon) {
+         var hCell = context.appendTableCell(hLine);
+         hCell.width = '16px';
+         //this._hIcon = context.appendIcon(hCell, this.styleName('Icon'), this._icon);
+      }
+      // 建立标签
+      if (this.label) {
+         var hCell = context.appendTableCell(hLine);
+         hCell.align = 'center';
+         hCell.noWrap = true;
+         this._hLabel = context.appendText(hCell, this.styleName('Label'), this.label);
+      }
+      // 创建延时器
+      //o.__process = false;
+      //var ca = o.clickActive = new TActive(o, o.onButtonClickDelay);
+      //ca.interval = 500;
+      //ca.status = EActive.Sleep;
+      //RConsole.find(FActiveConsole).push(ca);
+   }
 
    // //==========================================================
    // // <T>鼠标进入按键事件。</T>
