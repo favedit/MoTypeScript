@@ -86,70 +86,64 @@ export class Button extends Control {
       //RConsole.find(FActiveConsole).push(ca);
    }
 
-   // //==========================================================
-   // // <T>鼠标进入按键事件。</T>
-   // //
-   // // @method
-   // // @param event:event:TEvent
-   // // @return EEventStatus.Stop
-   // //==========================================================
-   // MO.FDuiButton_onButtonEnter = function FDuiButton_onButtonEnter(e) {
-   //    var o = this;
-   //    if (!o._disabled) {
-   //       o._hLeftButton.background = o.styleIconPath('HoverLeft');
-   //       o._hMiddleButton.background = o.styleIconPath('HoverMiddle');
-   //       o._hRightButton.background = o.styleIconPath('HoverRight');
-   //    }
-   // }
+   //==========================================================
+   // <T>鼠标进入按键事件。</T>
+   //
+   // @param event:event:TEvent
+   // @return EEventStatus.Stop
+   //==========================================================
+   public onButtonEnter(e) {
+      // if (!this._disabled) {
+      //    this._hLeftButton.background = this.styleIconPath('HoverLeft');
+      //    this._hMiddleButton.background = this.styleIconPath('HoverMiddle');
+      //    this._hRightButton.background = this.styleIconPath('HoverRight');
+      // }
+   }
 
-   // //==========================================================
-   // // <T>鼠标离开按键事件。</T>
-   // //
-   // // @method
-   // // @param event:event:TEvent
-   // // @return EEventStatus.Stop
-   // //==========================================================
-   // MO.FDuiButton_onButtonLeave = function FDuiButton_onButtonLeave(e) {
-   //    var o = this;
-   //    if (!o._disabled) {
-   //       o._hLeftButton.background = o.styleIconPath('ButtonLeft');
-   //       o._hMiddleButton.background = o.styleIconPath('Button');
-   //       o._hRightButton.background = o.styleIconPath('ButtonRight');
-   //    }
-   // }
+   //==========================================================
+   // <T>鼠标离开按键事件。</T>
+   //
+   // @method
+   // @param event:event:TEvent
+   // @return EEventStatus.Stop
+   //==========================================================
+   public onButtonLeave(e) {
+      // if (!this._disabled) {
+      //    this._hLeftButton.background = this.styleIconPath('ButtonLeft');
+      //    this._hMiddleButton.background = this.styleIconPath('Button');
+      //    this._hRightButton.background = this.styleIconPath('ButtonRight');
+      // }
+   }
 
+   //==========================================================
+   //<T>鼠标进入按键事件。</T>
+   //
+   //@method
+   //@param event:event:TEvent
+   //@return EEventStatus.Stop
+   //==========================================================
+   public onButtonDown(e) {
+      // if (!this._disabled) {
+      //    this._hLeftButton.background = this.styleIconPath('PressLeft');
+      //    this._hMiddleButton.background = this.styleIconPath('PressMiddle');
+      //    this._hRightButton.background = this.styleIconPath('PressRight');
+      // }
+   }
 
-   // //==========================================================
-   // //<T>鼠标进入按键事件。</T>
-   // //
-   // //@method
-   // //@param event:event:TEvent
-   // //@return EEventStatus.Stop
-   // //==========================================================
-   // MO.FDuiButton_onButtonDown = function FDuiButton_onButtonDown(e) {
-   //    var o = this;
-   //    if (!o._disabled) {
-   //       o._hLeftButton.background = o.styleIconPath('PressLeft');
-   //       o._hMiddleButton.background = o.styleIconPath('PressMiddle');
-   //       o._hRightButton.background = o.styleIconPath('PressRight');
-   //    }
-   // }
-
-   // //==========================================================
-   // //<T>鼠标离开按键事件。</T>
-   // //
-   // //@method
-   // //@param event:event:TEvent
-   // //@return EEventStatus.Stop
-   // //==========================================================
-   // MO.FDuiButton_onButtonUp = function FDuiButton_onButtonUp(e) {
-   //    var o = this;
-   //    if (!o._disabled) {
-   //       o._hLeftButton.background = o.styleIconPath('ButtonLeft');
-   //       o._hMiddleButton.background = o.styleIconPath('Button');
-   //       o._hRightButton.background = o.styleIconPath('ButtonRight');
-   //    }
-   // }
+   //==========================================================
+   //<T>鼠标离开按键事件。</T>
+   //
+   //@method
+   //@param event:event:TEvent
+   //@return EEventStatus.Stop
+   //==========================================================
+   public onButtonUp(e) {
+      // if (!this._disabled) {
+      //    this._hLeftButton.background = this.styleIconPath('ButtonLeft');
+      //    this._hMiddleButton.background = this.styleIconPath('Button');
+      //    this._hRightButton.background = this.styleIconPath('ButtonRight');
+      // }
+   }
 
    // //==========================================================
    // // <T>点击按键的延时处理，防止按键被连续点中。</T>

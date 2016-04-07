@@ -132,15 +132,15 @@ export class SlideBlock {
    //==========================================================
    // <T>设置范围。</T>
    //
-   // @param i:min:Number 最小值
-   // @param a:max:Number 最大值
+   // @param min 最小值
+   // @param max 最大值
    //==========================================================
-   public setRange(i, a) {
-      if (i != null) {
-         this.minValue = FloatUtil.parse(i);
+   public setRange(min: number, max: number) {
+      if (min != null) {
+         this.minValue = FloatUtil.parse(min);
       }
-      if (a != null) {
-         this.maxValue = FloatUtil.parse(a);
+      if (max != null) {
+         this.maxValue = FloatUtil.parse(max);
       }
       this.range = this.maxValue - this.minValue;
    }
@@ -148,51 +148,49 @@ export class SlideBlock {
    //==========================================================
    // <T>设置滑动内容。</T>
    //
-   // @param p:value:Number 内容
+   // @param value 内容
    //==========================================================
-   public setSlideValue(p) {
-      var w = this.hSlideForm.offsetWidth;
-      if (w > 0) {
-         var v = (p - this.minValue) / this.range * w;
-         this.hSlideML.width = IntegerUtil.toRange(v, 1, w - 1);
+   public setSlideValue(value) {
+      var width = this.hSlideForm.offsetWidth;
+      if (width > 0) {
+         var offset = (value - this.minValue) / this.range * width;
+         this.hSlideML.width = IntegerUtil.toRange(offset, 1, width - 1);
       }
    }
 
    //==========================================================
    // <T>获得内容。</T>
    //
-   // @return Number 内容
+   // @return 内容
    //==========================================================
    public get(p) {
-      var w = this.hSlideForm.offsetWidth - 3;
-      var v = (p / w) * this.range + this.minValue;
-      return v;
+      var width = this.hSlideForm.offsetWidth - 3;
+      var value = (p / width) * this.range + this.minValue;
+      return value;
    }
 
    //==========================================================
    // <T>设置内容。</T>
    //
-   // @method
-   // @param p:value:Number 内容
+   // @param value 内容
    //==========================================================
-   public set(p) {
+   public set(value) {
       // 设置宽度
-      this.setSlideValue(p);
+      this.setSlideValue(value);
    }
 
    //==========================================================
    // <T>滑动变更处理。</T>
    //
-   // @method
-   // @param p:value:Number 内容
+   // @param value 内容
    //==========================================================
-   public changeSlide(p) {
+   public changeSlide(value) {
       var control = this.control;
       // 设置滑动
-      var w = this.hSlideForm.offsetWidth - 3;
-      this.hSlideML.width = IntegerUtil.toRange(p, 1, w - 1);
+      var width = this.hSlideForm.offsetWidth - 3;
+      this.hSlideML.width = IntegerUtil.toRange(value, 1, width - 1);
       // 获得数值
-      var v = (p / w) * this.range + this.minValue;
+      var v = (value / width) * this.range + this.minValue;
       v = FloatUtil.toRange(v, this.minValue, this.maxValue);
       // 设置内容
       this.onSlideChange.call(control, v);

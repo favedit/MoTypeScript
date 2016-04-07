@@ -15,8 +15,10 @@ export enum PanelEnum {
    // 尺寸底板
    Size,
    // Border,
-   // Edit,
-   // Focus,
+   // 编辑框
+   Edit,
+   // 焦点
+   Focus,
    // Design,
    // Scroll,
    // Shadow,

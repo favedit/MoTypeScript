@@ -1,3 +1,6 @@
+import {Fatal} from './runtime/common/lang/Fatal';
+import {IntegerUtil} from './runtime/common/lang/IntegerUtil';
+import {HexUtil} from './runtime/common/lang/HexUtil';
 import {RenderContext} from '../RenderContext';
 
 //==========================================================
@@ -27,8 +30,8 @@ export class ColorBar {
    public control = null;
    public typeCd = null;
    // @attribute
-   public minValue = 0;
-   public maxValue = 1;
+   public minValue: number = 0;
+   public maxValue: number = 1;
    //..........................................................
    // @html
    public hPanel = null;
@@ -55,48 +58,44 @@ export class ColorBar {
    public hInputPanel = null;
    public hInput = null;
 
-   // //==========================================================
-   // // <T>鼠标落下处理。 </T>
-   // //
-   // // @param p:event:SEvent 事件对象
-   // //==========================================================
-   // MO.SDuiColorBar_onMouseDown = function SDuiColorBar_onMouseDown(p) {
-   //    var o = this;
-   //    var x = MO.Window.Html.clientX(p.hSource, o.hSlideForm) + p.offsetX;
-   //    o._draging = true;
-   //    MO.Window.setOptionSelect(false);
-   //    o.changeSlide(x);
-   // }
+   //==========================================================
+   // <T>鼠标落下处理。 </T>
+   //
+   // @param p:event:SEvent 事件对象
+   //==========================================================
+   public onMouseDown(p) {
+      // var x = MO.Window.Html.clientX(p.hSource, this.hSlideForm) + p.offsetX;
+      // this._draging = true;
+      // MO.Window.setOptionSelect(false);
+      // this.changeSlide(x);
+   }
 
-   // //==========================================================
-   // // <T>鼠标移动处理。 </T>
-   // //
-   // // @param p:event:SEvent 事件对象
-   // //==========================================================
-   // MO.SDuiColorBar_onMouseMove = function SDuiColorBar_onMouseMove(p) {
-   //    var o = this;
-   //    if (o._draging) {
-   //       var x = MO.Window.Html.clientX(p.hSource, o.hSlideForm) + p.offsetX;
-   //       o.changeSlide(x);
-   //    }
-   // }
+   //==========================================================
+   // <T>鼠标移动处理。 </T>
+   //
+   // @param p:event:SEvent 事件对象
+   //==========================================================
+   public onMouseMove(p) {
+      // if (this._draging) {
+      //    var x = MO.Window.Html.clientX(p.hSource, this.hSlideForm) + p.offsetX;
+      //    this.changeSlide(x);
+      // }
+   }
 
-   // //==========================================================
-   // // <T>鼠标抬起处理。 </T>
-   // //
-   // // @param p:event:SEvent 事件对象
-   // //==========================================================
-   // MO.SDuiColorBar_onMouseUp = function SDuiColorBar_onMouseUp(p) {
-   //    var o = this;
-   //    o._draging = false;
-   //    MO.Window.setOptionSelect(true);
-   // }
+   //==========================================================
+   // <T>鼠标抬起处理。 </T>
+   //
+   // @param p:event:SEvent 事件对象
+   //==========================================================
+   public onMouseUp(p) {
+      // this._draging = false;
+      // MO.Window.setOptionSelect(true);
+   }
 
    //==========================================================
    // <T>构件处理。</T>
    //
-   // @method
-   // @param p:event:TEventProcess 事件
+   // @param context 环境信息
    //==========================================================
    public build(content: RenderContext) {
       var control = this.control;
@@ -155,75 +154,69 @@ export class ColorBar {
       //control.attachEvent('onInputChange', he, control.onInputChange);
    }
 
-   // //==========================================================
-   // // <T>设置范围。</T>
-   // //
-   // // @method
-   // // @param i:min:Number 最小值
-   // // @param a:max:Number 最大值
-   // //==========================================================
-   // MO.SDuiColorBar_setRange = function SDuiColorBar_setRange(i, a) {
-   //    var o = this;
-   //    if (i != null) {
-   //       o.minValue = i;
-   //    }
-   //    if (a != null) {
-   //       o.maxValue = a;
-   //    }
-   // }
+   //==========================================================
+   // <T>设置范围。</T>
+   //
+   // @param min 最小值
+   // @param max 最大值
+   //==========================================================
+   public setRange(min, max) {
+      if (min != null) {
+         this.minValue = min;
+      }
+      if (max != null) {
+         this.maxValue = max;
+      }
+   }
 
-   // //==========================================================
-   // // <T>设置颜色内容。</T>
-   // //
-   // // @method
-   // // @param p:value:Number 内容 (0~255)
-   // //==========================================================
-   // MO.SDuiColorBar_setColorValue = function SDuiColorBar_setColorValue(p) {
-   //    var o = this;
-   //    // 计算内容
-   //    var v = MO.Lang.Hex.format(p, 2);
-   //    var c = null;
-   //    switch (o.typeCd) {
-   //       case 'red':
-   //          c = v + '0000';
-   //          break;
-   //       case 'green':
-   //          c = '00' + v + '00';
-   //          break;
-   //       case 'blue':
-   //          c = '0000' + v;
-   //          break;
-   //       default:
-   //          throw new MO.TError(o, 'Invalid type.');
-   //    }
-   //    // 设置颜色
-   //    o.hColorImage.style.backgroundColor = '#' + c;
-   // }
+   //==========================================================
+   // <T>设置颜色内容。</T>
+   //
+   // @param value 内容 (0~255)
+   //==========================================================
+   public setColorValue(value) {
+      // 计算内容
+      var data = HexUtil.format(value, 2);
+      var color = null;
+      switch (this.typeCd) {
+         case 'red':
+            color = data + '0000';
+            break;
+         case 'green':
+            color = '00' + data + '00';
+            break;
+         case 'blue':
+            color = '0000' + data;
+            break;
+         default:
+            return;
+         //throw new Fatal(this, 'Invalid type.');
+      }
+      // 设置颜色
+      this.hColorImage.style.backgroundColor = '#' + color;
+   }
 
-   // //==========================================================
-   // // <T>设置滑动内容。</T>
-   // //
-   // // @method
-   // // @param p:value:Number 内容
-   // //==========================================================
-   // MO.SDuiColorBar_setSlideValue = function SDuiColorBar_setSlideValue(p) {
-   //    var o = this;
-   //    var w = o.hSlideForm.offsetWidth;
-   //    if (w > 0) {
-   //       var v = p / o.maxValue * w;
-   //       o.hSlideRowML.width = MO.Lang.Integer.toRange(v, 1, w - 1);
-   //    }
-   // }
+   //==========================================================
+   // <T>设置滑动内容。</T>
+   //
+   // @param value 内容
+   //==========================================================
+   public setSlideValue(value) {
+      var width = this.hSlideForm.offsetWidth;
+      if (width > 0) {
+         var data = value / this.maxValue * width;
+         this.hSlideRowML.width = IntegerUtil.toRange(data, 1, width - 1);
+      }
+   }
 
-   // //==========================================================
-   // // <T>设置输入内容。</T>
-   // //
-   // // @method
-   // // @param p:value:Number 内容
-   // //==========================================================
-   // MO.SDuiColorBar_setInputValue = function SDuiColorBar_setInputValue(p) {
-   //    this.hInput.value = p;
-   // }
+   //==========================================================
+   // <T>设置输入内容。</T>
+   //
+   // @param value 内容
+   //==========================================================
+   public setInputValue(value) {
+      this.hInput.value = value;
+   }
 
    // //==========================================================
    // // <T>获得转换。</T>
@@ -246,33 +239,30 @@ export class ColorBar {
    //    return o.convertGet(o.hInput.value);
    // }
 
-   // //==========================================================
-   // // <T>设置转换。</T>
-   // //
-   // // @method
-   // // @param p:value:Number 内容
-   // //==========================================================
-   // MO.SDuiColorBar_convertSet = function SDuiColorBar_convertSet(p) {
-   //    return p;
-   // }
+   //==========================================================
+   // <T>设置转换。</T>
+   //
+   // @param value 内容
+   //==========================================================
+   public convertSet(value) {
+      return value;
+   }
 
-   // //==========================================================
-   // // <T>设置内容。</T>
-   // //
-   // // @method
-   // // @param p:value:Number 内容
-   // //==========================================================
-   // MO.SDuiColorBar_set = function SDuiColorBar_set(p) {
-   //    var o = this;
-   //    // 转换内容
-   //    var v = o.convertSet(p);
-   //    // 设置颜色
-   //    o.setColorValue(v);
-   //    // 设置宽度
-   //    o.setSlideValue(v);
-   //    // 设置颜色
-   //    o.setInputValue(v);
-   // }
+   //==========================================================
+   // <T>设置内容。</T>
+   //
+   // @param value 内容
+   //==========================================================
+   public set(value) {
+      // 转换内容
+      var v = this.convertSet(value);
+      // 设置颜色
+      this.setColorValue(v);
+      // 设置宽度
+      this.setSlideValue(v);
+      // 设置颜色
+      this.setInputValue(v);
+   }
 
    // //==========================================================
    // // <T>滑动转换。</T>

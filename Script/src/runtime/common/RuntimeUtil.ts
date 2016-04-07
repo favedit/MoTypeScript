@@ -208,31 +208,32 @@ export class RuntimeUtil extends SingletonObject {
    //==========================================================
    // <T>获得对象实例的类名称。</T>
    //
-   // @method
-   // @param value:Object 函数对象
-   // @return String 类名称
+   // @param value 函数对象
+   // @return 类名称
    //==========================================================
-   public static className(value): string {
+   public static className(value: any, cache?: boolean): string {
       var result: string = null;
       if (value) {
          // 如果对象是函数的情况
          if (typeof value == 'function') {
-            var spaceName = value.__spaceName;
-            if (spaceName) {
-               return spaceName;
+            if (cache) {
+               var spaceName = value.__spaceName;
+               if (spaceName) {
+                  return spaceName;
+               }
             }
-            // if (value.__className) {
-            //    return value.__className;
-            // } else {
-            //    var source: string = value.toString();
-            //    result = value.__className = this.subString(source, 'function ', '(');
-            // }
             return this.subString(value.toString(), 'function ', '(');
          }
          // 如果对象是普通对象的情况
          var clazz = value.constructor;
          if (clazz) {
             if (typeof clazz == 'function') {
+               if (cache) {
+                  var spaceName = clazz.__spaceName;
+                  if (spaceName) {
+                     return spaceName;
+                  }
+               }
                return this.subString(clazz.toString(), 'function ', '(');
             }
          }

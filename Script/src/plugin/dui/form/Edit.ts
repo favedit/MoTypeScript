@@ -1,3 +1,6 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {Property} from './runtime/common/reflect/Property';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {RenderContext} from '../RenderContext';
 import {EditControl} from './EditControl';
 
@@ -18,10 +21,16 @@ import {EditControl} from './EditControl';
 // @version 150102
 //==========================================================
 export class Edit extends EditControl {
-   // // @property
-   // o._inputSize            = MO.Class.register(o, [new MO.APtySize2('_inputSize'), new MO.AGetter('_inputSize')]);
-   // o._unit                 = MO.Class.register(o, [new MO.APtyString('_unit'), new MO.AGetSet('_unit')]);
+   // 输入宽度
+   @Property('input_width', DataTypeEnum.String)
+   public inputWidth: string;
+   // 输入高度
+   @Property('input_height', DataTypeEnum.String)
+   public inputHeight: string;
+   // 编辑长度
+   @Property('edit_length', DataTypeEnum.Int32)
    public editLength: number;
+   // o._unit                 = MO.Class.register(o, [new MO.APtyString('_unit'), new MO.AGetSet('_unit')]);
    // //..........................................................
    // // @attribute
    // o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged'));
@@ -39,13 +48,10 @@ export class Edit extends EditControl {
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 设置属性
-      //this._inputSize = new MO.SSize2();
    }
 
    //==========================================================
@@ -57,7 +63,7 @@ export class Edit extends EditControl {
       var hValuePanel = this._hValuePanel;
       var hValueForm = this._hValueForm = context.appendTable(hValuePanel);
       var hValueLine = context.appendTableRow(hValueForm);
-      //MO.Window.Html.setSize(hValueForm, this._inputSize);
+      HtmlUtil.setSize(hValueForm, this.inputWidth, this.inputHeight);
       //..........................................................
       // 建立改变栏
       //this._hChangePanel = context.appendTableCell(hValueLine);

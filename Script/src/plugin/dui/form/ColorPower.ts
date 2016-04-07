@@ -1,6 +1,13 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {Fatal} from './runtime/common/lang/Fatal';
+import {HexUtil} from './runtime/common/lang/HexUtil';
+import {IntegerUtil} from './runtime/common/lang/IntegerUtil';
+import {Property} from './runtime/common/reflect/Property';
+import {Color4} from './runtime/common/math/Color4';
 import {RenderContext} from '../RenderContext';
 import {EditControl} from './EditControl';
-import {ColorChannel} from './ColorChannel';
+import {ColorPowerChannel} from './ColorPowerChannel';
+import {ColorPowerRate} from './ColorPowerRate';
 
 //==========================================================
 // <T>颜色强度编辑框。</T>
@@ -19,35 +26,46 @@ import {ColorChannel} from './ColorChannel';
 // @version 150102
 //==========================================================
 export class ColorPower extends EditControl {
-   // MO.FDuiColorPower = function FDuiColorPower(o) {
-   //    o = MO.Class.inherits(this, o, MO.FDuiEditControl, MO.MListenerDataChanged, MO.MMouseCapture);
-   //    //..........................................................
-   //    // @property
-   //    o._inputSize = MO.Class.register(o, new MO.APtySize2('_inputSize'));
-   //    o._valueMin = MO.Class.register(o, new MO.APtyNumber('_valueMin'));
-   //    o._valueMax = MO.Class.register(o, new MO.APtyNumber('_valueMax'));
-   //    //..........................................................
-   //    // @style
-   //    o._styleValuePanel = MO.Class.register(o, new MO.AStyle('_styleValuePanel'));
-   //    o._styleInputPanel = MO.Class.register(o, new MO.AStyle('_styleInputPanel'));
-   //    o._styleInput = MO.Class.register(o, new MO.AStyle('_styleInput'));
-   //    //..........................................................
-   //    // @attribute
-   //    o._innerOriginValue = null;
-   //    o._innerDataValue = null;
-   //    // @attribute
-   public _barRed = null;
-   public _barGreen = null;
-   public _barBlue = null;
-   public _barPower = null;
-   //    //..........................................................
-   //    // @html
-   public _hValueForm;
-   public _hValueLine;
-   public _hColorPanel;
-   public _hColorImage;
-   public _hChannelPanel;
-   public _hChannelForm;
+   // 输入宽度
+   @Property('input_width', DataTypeEnum.String)
+   public inputWidth: string;
+   // 输入高度
+   @Property('input_height', DataTypeEnum.String)
+   public inputHeight: string;
+   // 最小值
+   @Property('value_min', DataTypeEnum.Float32)
+   public valueMin: number;
+   // 最大值
+   @Property('value_max', DataTypeEnum.Float32)
+   public valueMax: number;
+   // 值精度
+   @Property('value_precision', DataTypeEnum.Float32)
+   public valuePrecision: number;
+   // @attribute
+   protected _innerOriginValue;
+   protected _innerDataValue;
+   // @attribute
+   protected _barRed = null;
+   protected _barGreen = null;
+   protected _barBlue = null;
+   protected _barPower = null;
+   // 页面元素
+   protected _hValueForm;
+   protected _hValueLine;
+   protected _hColorPanel;
+   protected _hColorImage;
+   protected _hChannelPanel;
+   protected _hChannelForm;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this._innerOriginValue = new Color4();
+      this._innerDataValue = new Color4();
+   }
 
    //==========================================================
    // <T>建立编辑器内容。</T>
@@ -62,8 +80,8 @@ export class ColorPower extends EditControl {
       var hl = this._hValueLine = context.appendTableRow(hf);
       //..........................................................
       // 建立改变栏
-      //this._hChangePanel = context.appendTableCell(hl);
-      //this.onBuildEditChange(context);
+      this._hChangePanel = context.appendTableCell(hl);
+      this.onBuildEditChange(context);
       //..........................................................
       // 建立颜色栏
       var hcp = this._hColorPanel = context.appendTableCell(hl);
@@ -76,30 +94,30 @@ export class ColorPower extends EditControl {
       //hcf.__linker = this;
       hcf.width = '100%';
       // 建立红色输入栏
-      var channel = this._barRed = new ColorChannel();
+      var channel = this._barRed = new ColorPowerChannel();
       channel.control = this;
       channel.typeCd = 'red';
       channel.hPanel = hcf;
       channel.build(context);
       // 建立绿色输入栏
-      var channel = this._barGreen = new ColorChannel();
+      var channel = this._barGreen = new ColorPowerChannel();
       channel.control = this;
       channel.typeCd = 'green';
       channel.hPanel = hcf;
       channel.build(context);
       // 建立蓝色输入栏
-      var channel = this._barBlue = new ColorChannel();
+      var channel = this._barBlue = new ColorPowerChannel();
       channel.control = this;
       channel.typeCd = 'blue';
       channel.hPanel = hcf;
       channel.build(context);
       // 建立强度输入栏
-      // var channel = this._barPower = new MO.SDuiColorPower();
-      // channel.control = this;
-      // channel.typeCd = 'power';
-      // //channel.setRange(this._valueMin, this._valueMax);
-      // channel.hPanel = hcf;
-      // channel.build(context);
+      var channel = this._barPower = new ColorPowerRate();
+      channel.control = this;
+      channel.typeCd = 'power';
+      channel.setRange(this.valueMin, this.valueMax);
+      channel.hPanel = hcf;
+      channel.build(context);
    }
 
    // //==========================================================
@@ -191,81 +209,58 @@ export class ColorPower extends EditControl {
    //    o.processDataChangedListener(o);
    // }
 
-   // //==========================================================
-   // // <T>构造处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiColorPower_construct = function FDuiColorPower_construct() {
-   //    var o = this;
-   //    o.__base.FDuiEditControl.construct.call(o);
-   //    // 设置属性
-   //    o._inputSize = new MO.SSize2(120, 0);
-   //    o._innerOriginValue = new MO.SColor4();
-   //    o._innerDataValue = new MO.SColor4();
-   // }
+   //==========================================================
+   // <T>获得数据。</T>
+   //
+   // @return 数据
+   //==========================================================
+   public get() {
+      var value = this._innerDataValue;
+      // 获得数据
+      value.red = this._barRed.get();
+      value.green = this._barGreen.get();
+      value.blue = this._barBlue.get();
+      value.alpha = this._barPower.get();
+      return value;
+   }
 
-   // //==========================================================
-   // // <T>获得数据。</T>
-   // //
-   // // @method
-   // // @return String 数据
-   // //==========================================================
-   // MO.FDuiColorPower_get = function FDuiColorPower_get(p) {
-   //    var o = this;
-   //    var v = o._innerDataValue;
-   //    // 获得数据
-   //    v.red = o._barRed.get();
-   //    v.green = o._barGreen.get();
-   //    v.blue = o._barBlue.get();
-   //    v.alpha = o._barPower.get();
-   //    return v;
-   // }
+   //==========================================================
+   // <T>设置显示数据。</T>
+   //==========================================================
+   public setDisplayColor() {
+      var value = this._innerDataValue;
+      // 设置颜色
+      var va = value.alpha;
+      var vr = HexUtil.format(IntegerUtil.toRange(parseInt((value.red * va * 255) as any), 0, 255), 2);
+      var vg = HexUtil.format(IntegerUtil.toRange(parseInt((value.green * va * 255) as any), 0, 255), 2);
+      var vb = HexUtil.format(IntegerUtil.toRange(parseInt((value.blue * va * 255) as any), 0, 255), 2);
+      this._hColorImage.style.backgroundColor = '#' + vr + vg + vb;
+   }
 
-   // //==========================================================
-   // // <T>设置数据。</T>
-   // //
-   // // @method
-   // // @param p:value:String 数据
-   // //==========================================================
-   // MO.FDuiColorPower_set = function FDuiColorPower_set(p) {
-   //    var o = this;
-   //    o.__base.FDuiEditControl.set.call(o, p);
-   //    // 设置显示
-   //    if (p.constructor == MO.SColor4) {
-   //       o._innerOriginValue.assign(p);
-   //       o._innerDataValue.assign(p);
-   //    } else {
-   //       throw new MO.TError('Invalid value format.');
-   //    }
-   //    // 设置颜色
-   //    o.setDisplayColor();
-   //    // 设置数据
-   //    var v = o._innerDataValue;
-   //    o._barRed.set(v.red);
-   //    o._barGreen.set(v.green);
-   //    o._barBlue.set(v.blue);
-   //    o._barPower.set(v.alpha);
-   //    // 设置修改状态
-   //    o.changeSet(false);
-   // }
-
-   // //==========================================================
-   // // <T>设置显示数据。</T>
-   // //
-   // // @method
-   // // @param p:value:String 数据
-   // //==========================================================
-   // MO.FDuiColorPower_setDisplayColor = function FDuiColorPower_setDisplayColor() {
-   //    var o = this;
-   //    var v = o._innerDataValue;
-   //    // 设置颜色
-   //    var va = v.alpha;
-   //    var vr = MO.Lang.Hex.format(MO.Lang.Integer.toRange(parseInt(v.red * va * 255), 0, 255), 2);
-   //    var vg = MO.Lang.Hex.format(MO.Lang.Integer.toRange(parseInt(v.green * va * 255), 0, 255), 2);
-   //    var vb = MO.Lang.Hex.format(MO.Lang.Integer.toRange(parseInt(v.blue * va * 255), 0, 255), 2);
-   //    o._hColorImage.style.backgroundColor = '#' + vr + vg + vb;
-   // }
+   //==========================================================
+   // <T>设置数据。</T>
+   //
+   // @param value 数据
+   //==========================================================
+   public set(value) {
+      // 设置显示
+      if (value instanceof Color4) {
+         this._innerOriginValue.assign(value);
+         this._innerDataValue.assign(value);
+      } else {
+         throw new Fatal(this, 'Invalid value format.');
+      }
+      // 设置颜色
+      this.setDisplayColor();
+      // 设置数据
+      var data = this._innerDataValue;
+      this._barRed.set(data.red);
+      this._barGreen.set(data.green);
+      this._barBlue.set(data.blue);
+      this._barPower.set(data.alpha);
+      // 设置修改状态
+      this.changeSet(false);
+   }
 
    // //==========================================================
    // // <T>设置显示数据。</T>
@@ -298,13 +293,10 @@ export class ColorPower extends EditControl {
    //    o.processDataChangedListener(o);
    // }
 
-   // //==========================================================
-   // // <T>释放处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiColorPower_dispose = function FDuiColorPower_dispose(t) {
-   //    var o = this;
-   //    o.__base.FDuiEditControl.dispose.call(o, t);
-   // }
+   //==========================================================
+   // <T>释放处理。</T>
+   //==========================================================
+   public dispose() {
+      super.dispose();
+   }
 }

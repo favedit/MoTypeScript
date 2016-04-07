@@ -1,3 +1,9 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {StringUtil} from './runtime/common/lang/StringUtil';
+import {FloatUtil} from './runtime/common/lang/FloatUtil';
+import {Property} from './runtime/common/reflect/Property';
+import {EventEnum} from './runtime/ui/EventEnum';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {RenderContext} from '../RenderContext';
 import {EditControl} from './EditControl';
 import {SlideBlock} from './SlideBlock';
@@ -24,32 +30,29 @@ import {SlideBlock} from './SlideBlock';
 // @version 150131
 //==========================================================
 export class SlideNumber extends EditControl {
-   //    //..........................................................
-   //    // @property
-   //    o._inputSize = MO.Class.register(o, new MO.APtySize2('_inputSize'));
-   //    //..........................................................
-   //    // @style
-   //    o._styleSlidePanel = MO.Class.register(o, new MO.AStyle('_styleSlidePanel'));
-   //    o._styleValuePanel = MO.Class.register(o, new MO.AStyle('_styleValuePanel'));
-   //    o._styleInput = MO.Class.register(o, new MO.AStyle('_styleInput'));
-   //    o._styleAdjustForm = MO.Class.register(o, new MO.AStyle('_styleAdjustForm'));
-   //    o._styleUpPanel = MO.Class.register(o, new MO.AStyle('_styleUpPanel'));
-   //    o._styleDownPanel = MO.Class.register(o, new MO.AStyle('_styleDownPanel'));
-   //    //..........................................................
-   //    // @attribute
-   //    o._innerOriginValue = null;
-   //    o._innerDataValue = null;
-   //    // @attribute
-   public _valueMin;
-   public _valueMax;
-   public _valuePrecision = 3;
+   // 输入宽度
+   @Property('input_width', DataTypeEnum.String)
+   public inputWidth: string;
+   // 输入高度
+   @Property('input_height', DataTypeEnum.String)
+   public inputHeight: string;
+   // 最小值
+   @Property('value_min', DataTypeEnum.Float32)
+   public valueMin: number;
+   // 最大值
+   @Property('value_max', DataTypeEnum.Float32)
+   public valueMax: number;
+   // 值精度
+   @Property('value_precision', DataTypeEnum.Float32)
+   public valuePrecision: number;
+   // 编辑长度
+   @Property('edit_length', DataTypeEnum.Int32)
    public _editLength;
+   // 数据内容
+   protected _innerOriginValue;
+   protected _innerDataValue;
    protected _slide: SlideBlock;
-   //    //..........................................................
-   //    // @html
-   //    o._hInput = null;
-   //    o._iconUp = null;
-   //    o._iconDown = null;
+   // 页面元素
    protected _hValueForm;
    protected _hValueLine;
    protected _hChangePanel;
@@ -60,6 +63,15 @@ export class SlideNumber extends EditControl {
    protected hAdjustForm;
    protected _hUpIcon;
    protected _hDownIcon;
+
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      this.valuePrecision = 3;
+   }
 
    //==========================================================
    // <T>建立编辑器内容。</T>
@@ -76,46 +88,46 @@ export class SlideNumber extends EditControl {
       //..........................................................
       // 建立改变栏
       this._hChangePanel = context.appendTableCell(hValueLine);
-      //this.onBuildEditChange(context);
+      this.onBuildEditChange(context);
       //..........................................................
       // 建立滑动栏
       var hsp = this._hSlidePanel = context.appendTableCell(hValueLine, this.styleName('SlidePanel'));
       var slide = this._slide = new SlideBlock();
       slide.control = this;
       slide.hPanel = hsp;
-      slide.setRange(this._valueMin, this._valueMax);
+      slide.setRange(this.valueMin, this.valueMax);
       slide.onSlideChange = this.onSlideChange;
       slide.build(context);
       //..........................................................
       // 建立输入栏
-      var hep = this._hInputPanel = context.appendTableCell(hValueLine);
-      var he = this._hInput = context.appendEdit(hep, this.styleName('Input'));
-      //this.attachEvent('onInputKeyPress', he, this.onInputKeyPress);
-      //this.attachEvent('onInputEdit', he, this.onInputEdit);
-      //this.attachEvent('onInputChange', he, this.onInputChange);
+      var hInputPanel = this._hInputPanel = context.appendTableCell(hValueLine);
+      var hInput = this._hInput = context.appendEdit(hInputPanel, this.styleName('Input'));
+      // this.attachEvent(hInput, EventEnum.KeyPress.this.onInputKeyPress);
+      // this.attachEvent(hInput, EventEnum.KeyDown, this.onInputEdit);
+      // this.attachEvent(hInput, EventEnum.Change, this.onInputChange);
       // 设置大小
-      //HtmlUtil.setSize(hep, this._inputSize);
+      HtmlUtil.setSize(hInputPanel, this.inputWidth, this.inputHeight);
       // 设置可以输入的最大长度
       if (this._editLength) {
-         he.maxLength = this._editLength;
+         hInput.maxLength = this._editLength;
       }
       //..........................................................
       // 建立调整栏
       var hap = this._hAdjustPanel = context.appendTableCell(hValueLine);
       hap.style.borderLeft = '1px solid #666666';
       hap.width = '12px';
-      var haf = this.hAdjustForm = context.appendTable(hap, this.styleName('AdjustForm'));
+      var hAdjustForm = this.hAdjustForm = context.appendTable(hap, this.styleName('AdjustForm'));
       // 建立上按键
-      var hc = context.appendTableRowCell(haf);
-      hc.className = this.styleName('UpPanel');
-      var hi = this._hUpIcon = context.appendIcon(hc, null, 'control.number.up');
-      hi.align = 'center';
-      //o.attachEvent('onUpMouseDown', hi);
+      var hCell = context.appendTableRowCell(hAdjustForm);
+      hCell.className = this.styleName('UpPanel');
+      var hIcon = this._hUpIcon = context.appendIcon(hCell, null, 'control.number.up');
+      hIcon.align = 'center';
+      //this.attachEvent(hIcon, EventEnum.MouseDown, this.onUpMouseDown);
       // 建立下按键
-      var hc = context.appendTableRowCell(haf);
-      hc.className = this.styleName('DownPanel');
-      var hi = this._hDownIcon = context.appendIcon(hc, null, 'control.number.down');
-      //o.attachEvent('onDownMouseDown', hi);
+      var hCell = context.appendTableRowCell(hAdjustForm);
+      hCell.className = this.styleName('DownPanel');
+      var hIcon = this._hDownIcon = context.appendIcon(hCell, null, 'control.number.down');
+      //this.attachEvent(hIcon, EventEnum.MouseDown, this.onDownMouseDown);
    }
 
    // //==========================================================
@@ -160,129 +172,104 @@ export class SlideNumber extends EditControl {
    //==========================================================
    // <T>滑动栏数据变动处理。 </T>
    //
-   // @param p:value:Number 内容
+   // @param value 内容
    //==========================================================
    public onSlideChange(p) {
       // 设置输入内容
-      //this.setInputValue(p);
+      this.setInputValue(p);
       // 刷新数据
-      //this.refreshValue();
+      this.refreshValue();
    }
 
-   // //==========================================================
-   // // <T>编辑控件中键盘按下处理。 </T>
-   // //
-   // // @param p:event:SEvent 事件对象
-   // //==========================================================
-   // MO.FDuiSlideNumber_onInputKeyPress = function FDuiSlideNumber_onInputKeyPress(p) {
-   //    var o = this;
-   //    var c = p.keyCode;
-   //    // 检查输入字符是否为浮点数，否则给清除输入内容
-   //    if (!MO.RKeyboard.isFloatKey(c)) {
-   //       p.cancel();
-   //    }
-   // }
+   //==========================================================
+   // <T>编辑控件中键盘按下处理。 </T>
+   //
+   // @param event 事件对象
+   //==========================================================
+   public onInputKeyPress(event) {
+      var keyCode = event.keyCode;
+      // 检查输入字符是否为浮点数，否则给清除输入内容
+      // if (!RKeyboard.isFloatKey(keyCode)) {
+      //    event.cancel();
+      // }
+   }
 
-   // //==========================================================
-   // // <T>编辑控件中数据修改处理。 </T>
-   // //
-   // // @param p:event:SEvent 事件对象
-   // //==========================================================
-   // MO.FDuiSlideNumber_onInputEdit = function FDuiSlideNumber_onInputEdit(p) {
-   //    var o = this;
-   //    // 设置滑动栏
-   //    var v = o._hInput.value;
-   //    o._slide.set(v);
-   //    // 刷新数据
-   //    o.refreshValue();
-   // }
+   //==========================================================
+   // <T>编辑控件中数据修改处理。 </T>
+   //
+   // @param event 事件对象
+   //==========================================================
+   public onInputEdit(event) {
+      // 设置滑动栏
+      var value = this._hInput.value;
+      this._slide.set(value);
+      // 刷新数据
+      this.refreshValue();
+   }
 
-   // //==========================================================
-   // // <T>编辑控件完成处理。 </T>
-   // //
-   // // @param p:event:SEvent 事件对象
-   // //==========================================================
-   // MO.FDuiSlideNumber_onInputChange = function FDuiSlideNumber_onInputChange(p) {
-   //    var o = this;
-   //    // 设置数据内容
-   //    var v = o._hInput.value;
-   //    o._slide.set(v);
-   //    o.setInputValue(v);
-   //    // 刷新数据
-   //    o.refreshValue();
-   // }
+   //==========================================================
+   // <T>编辑控件完成处理。 </T>
+   //
+   // @param event 事件对象
+   //==========================================================
+   public onInputChange(event) {
+      // 设置数据内容
+      var value = this._hInput.value;
+      this._slide.set(value);
+      this.setInputValue(value);
+      // 刷新数据
+      this.refreshValue();
+   }
 
-   // //==========================================================
-   // // <T>构造处理。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiSlideNumber_construct = function FDuiSlideNumber_construct() {
-   //    var o = this;
-   //    o.__base.FDuiEditControl.construct.call(o);
-   //    o._inputSize = new MO.SSize2(120, 0);
-   // }
+   //==========================================================
+   // <T>设置输入数据。</T>
+   //
+   // @param value 数据
+   //==========================================================
+   public setInputValue(value) {
+      // 设置显示
+      var data = FloatUtil.parse(value);
+      if (isNaN(data)) {
+         return;
+      }
+      data = FloatUtil.toRange(data, this.valueMin, this.valueMax);
+      this._hInput.value = FloatUtil.format(data, 0, null, 2, null);
+   }
 
-   // //==========================================================
-   // // <T>获得数据。</T>
-   // //
-   // // @method
-   // // @return String 数据
-   // //==========================================================
-   // MO.FDuiSlideNumber_get = function FDuiSlideNumber_get(p) {
-   //    var o = this;
-   //    // 获得显示
-   //    var v = o._hInput.value;
-   //    var r = MO.Lang.Float.parse(v);
-   //    return MO.Lang.Float.toRange(r, o._valueMin, o._valueMax);
-   // }
+   //==========================================================
+   // <T>获得数据。</T>
+   //
+   // @return 数据
+   //==========================================================
+   public get() {
+      var value = FloatUtil.parse(this._hInput.value);
+      return FloatUtil.toRange(value, this.valueMin, this.valueMax);
+   }
 
-   // //==========================================================
-   // // <T>设置数据。</T>
-   // //
-   // // @method
-   // // @param p:value:String 数据
-   // //==========================================================
-   // MO.FDuiSlideNumber_set = function FDuiSlideNumber_set(p) {
-   //    var o = this;
-   //    o.__base.FDuiEditControl.set.call(o, p);
-   //    // 获得内容
-   //    var v = MO.Lang.String.nvl(p, '0');
-   //    o._innerOriginValue = v;
-   //    o._innerDataValue = v;
-   //    // 设置显示
-   //    o._slide.set(v);
-   //    o.setInputValue(v);
-   //    // 设置修改状态
-   //    o.changeSet(false);
-   // }
+   //==========================================================
+   // <T>设置数据。</T>
+   //
+   // @param value 数据
+   //==========================================================
+   public set(value) {
+      // 获得内容
+      var data = StringUtil.nvl(value, '0');
+      this._innerOriginValue = data;
+      this._innerDataValue = data;
+      // 设置显示
+      this._slide.set(data);
+      this.setInputValue(data);
+      // 设置修改状态
+      this.changeSet(false);
+   }
 
-   // //==========================================================
-   // // <T>设置输入数据。</T>
-   // //
-   // // @method
-   // // @param p:value:String 数据
-   // //==========================================================
-   // MO.FDuiSlideNumber_setInputValue = function FDuiSlideNumber_setInputValue(p) {
-   //    var o = this;
-   //    // 设置显示
-   //    var v = MO.Lang.Float.parse(p);
-   //    if (isNaN(v)) {
-   //       return;
-   //    }
-   //    v = MO.Lang.Float.toRange(v, o._valueMin, o._valueMax);
-   //    o._dataDisplay = MO.Lang.Float.format(v, 0, null, 2, null);
-   //    o._hInput.value = o._dataDisplay;
-   // }
-
-   // //==========================================================
-   // // <T>刷新数据。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiSlideNumber_refreshValue = function FDuiSlideNumber_refreshValue() {
-   //    var o = this;
-   //    // 内容改变通知
-   //    o.processDataChangedListener(o);
-   // }
+   //==========================================================
+   // <T>刷新数据。</T>
+   //
+   // @method
+   //==========================================================
+   public refreshValue() {
+      // 内容改变通知
+      // this.processDataChangedListener(this);
+   }
 }

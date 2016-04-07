@@ -7,19 +7,6 @@
 }
 
 /* ------------------------------------------------------ */
-/* MDuiEditChange                                         */
-/* ------------------------------------------------------ */
-.MDuiEditChange_ChangePanel{
-   cursor: pointer;
-   width: 6px;
-   vertical_align: top;
-}
-
-.MDuiEditChange_ChangeIcon{
-   display: none;
-}
-
-/* ------------------------------------------------------ */
 /* MDuiEditDrop                                           */
 /* ------------------------------------------------------ */
 .MDuiEditDrop_DropPanel{
@@ -116,6 +103,16 @@
    padding: 1px;
    margin: 1px;
    background-color: #FEFECB;
+}
+
+.EditControl_ChangePanel{
+   cursor: pointer;
+   width: 6px;
+   vertical_align: top;
+}
+
+.EditControl_ChangeIcon{
+   display: none;
 }
 
 /* ------------------------------------------------------ */
@@ -635,6 +632,7 @@
 }
 
 .Panel_Form{
+   width: 100%;
 }
 
 /* ------------------------------------------------------ */

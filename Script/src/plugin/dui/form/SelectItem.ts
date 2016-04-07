@@ -1,5 +1,7 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
 import {BooleanUtil} from './runtime/common/lang/BooleanUtil';
 import {StringUtil} from './runtime/common/lang/StringUtil';
+import {Property} from './runtime/common/reflect/Property';
 import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {EventEnum} from './runtime/ui/EventEnum';
 import {RenderContext} from './RenderContext';
@@ -21,13 +23,17 @@ import {Control} from './Control';
 //==========================================================
 export class SelectItem extends Control {
    // 选中
-   public _checked: boolean;
+   @Property('checked', DataTypeEnum.Boolean)
+   public checked: boolean;
    // 图标
-   public _icon: string;
+   @Property('icon', DataTypeEnum.String)
+   public icon: string;
    // 数据内容
-   public _dataValue: string;
+   @Property('data_value', DataTypeEnum.String)
+   public dataValue: string;
    // 备注
-   public _note: string;
+   @Property('note', DataTypeEnum.String)
+   public note: string;
    //    o._listenersClick = MO.Class.register(o, new MO.AListener('_listenersClick', MO.EEvent.Click));
    // 面板
    public _hIconPanel;
@@ -78,7 +84,7 @@ export class SelectItem extends Control {
    //==========================================================
    public onEnter() {
       //super.onEnter();
-      this._hPanel.className = BooleanUtil.parse(this._checked) ? this.styleName('Select') : this.styleName('Hover');
+      this._hPanel.className = BooleanUtil.parse(this.checked) ? this.styleName('Select') : this.styleName('Hover');
    }
 
    //==========================================================
@@ -87,7 +93,7 @@ export class SelectItem extends Control {
    // @method
    //==========================================================
    public onLeave() {
-      this._hPanel.className = BooleanUtil.parse(this._checked) ? this.styleName('Select') : this.styleName('Normal');
+      this._hPanel.className = BooleanUtil.parse(this.checked) ? this.styleName('Select') : this.styleName('Normal');
       //super.onLeave();
    }
 
@@ -117,7 +123,7 @@ export class SelectItem extends Control {
    // @param value:Boolean 内容
    //==========================================================
    public setChecked(value) {
-      this._checked = value;
+      this.checked = value;
       if (this._hIcon) {
          this._hIcon.style.display = value ? 'block' : 'none';
       } else {
@@ -133,15 +139,15 @@ export class SelectItem extends Control {
    //==========================================================
    public set(icon, label, value, note) {
       var context = this.renderContext;
-      this._icon = StringUtil.nvl(icon);
-      if (!StringUtil.isEmpty(this._icon)) {
+      this.icon = StringUtil.nvl(icon);
+      if (!StringUtil.isEmpty(this.icon)) {
          //this._hIcon = context.appendIcon(this._hIconPanel, this.styleIcon(this._icon));
       }
       this.label = StringUtil.nvl(label);
       //this._value = StringUtil.nvl(value);
-      this._note = StringUtil.nvl(note);
+      this.note = StringUtil.nvl(note);
       this._hLabelPanel.innerText = this.label;
-      this._hNotePanel.innerText = this._note;
+      this._hNotePanel.innerText = this.note;
    }
 
    //==========================================================

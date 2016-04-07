@@ -143,12 +143,21 @@ export class ClassUtil {
    //==========================================================
    // <T>获得对象实例的类短名称。</T>
    //
-   // @method
    // @param instance 对象实例
    // @return 类短名称
    //==========================================================
    public static shortName(instance: any): string {
-      return RuntimeUtil.className(instance);
+      return RuntimeUtil.className(instance, false);
+   }
+
+   //==========================================================
+   // <T>获得对象实例的类全名称。</T>
+   //
+   // @param instance 对象实例
+   // @return 类全名称
+   //==========================================================
+   public static fullName(instance: any): string {
+      return RuntimeUtil.className(instance, true);
    }
 
    //==========================================================

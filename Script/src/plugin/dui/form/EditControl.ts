@@ -1,7 +1,12 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
 import {StringUtil} from './runtime/common/lang/StringUtil';
+import {Property} from './runtime/common/reflect/Property';
 import {LabelModeEnum} from './runtime/ui/LabelModeEnum';
 import {LabelPositionEnum} from './runtime/ui/LabelPositionEnum';
 import {AlignEnum} from './runtime/ui/AlignEnum';
+import {EventEnum} from './runtime/ui/EventEnum';
+import {PanelEnum} from './runtime/ui/PanelEnum';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
 import {RenderContext} from '../RenderContext';
 import {Control} from '../Control';
 
@@ -25,55 +30,83 @@ import {Control} from '../Control';
 // @version 150102
 //==========================================================
 export class EditControl extends Control {
-   // // @property
+   // 标签模式
+   @Property('label_mode_cd', DataTypeEnum.Enum, LabelModeEnum.All, LabelModeEnum)
    public labelModeCd: LabelModeEnum;
+   // 标签位置
+   @Property('label_position_cd', DataTypeEnum.Enum, LabelPositionEnum.Left, LabelPositionEnum)
    public labelPositionCd: LabelPositionEnum;
-   public _labelSize;
-   public _labelAlignCd: AlignEnum;
-   public _labelColor: string;
-   // // @property
-   // o._editSize               = MO.Class.register(o, new MO.APtySize2('_editSize'));
-   // o._editColor              = MO.Class.register(o, new MO.APtyString('_editColor'));
+   // 标签宽度
+   @Property('label_width', DataTypeEnum.String)
+   public labelWidth: string;
+   // 标签高度
+   @Property('label_height', DataTypeEnum.String)
+   public labelHeight: string;
+   // 标签宽度
+   @Property('label_align_cd', DataTypeEnum.Enum, AlignEnum.Left, AlignEnum)
+   public labelAlignCd: AlignEnum;
+   // 标签颜色
+   @Property('label_color', DataTypeEnum.String)
+   public labelColor: string;
+   // 编辑单位
+   @Property('edit_unit', DataTypeEnum.String)
+   public editUnit: string;
+   // 编辑宽度
+   @Property('edit_width', DataTypeEnum.String)
+   public editWidth: string;
+   // 编辑高度
+   @Property('edit_height', DataTypeEnum.String)
+   public editHeight: string;
+   // 编辑颜色
+   @Property('edit_color', DataTypeEnum.String)
+   public editColor: string;
    // //..........................................................
-   // // @style
-   // o._styleLabelPanel        = MO.Class.register(o, new MO.AStyle('_styleLabelPanel'));
-   // o._styleEditPanel         = MO.Class.register(o, new MO.AStyle('_styleEditPanel'));
-   // o._styleValuePanel        = MO.Class.register(o, new MO.AStyle('_styleValuePanel'));
-   // o._styleValueNormal       = MO.Class.register(o, new MO.AStyle('_styleValueNormal'));
-   // o._styleValueHover        = MO.Class.register(o, new MO.AStyle('_styleValueHover'));
-   // o._styleValueReadonly     = MO.Class.register(o, new MO.AStyle('_styleValueReadonly'));
-   // o._styleInputPanel        = MO.Class.register(o, new MO.AStyle('_styleInputPanel'));
-   // o._styleInputNormal       = MO.Class.register(o, new MO.AStyle('_styleInputNormal'));
-   // o._styleInputHover        = MO.Class.register(o, new MO.AStyle('_styleInputHover'));
-   // o._styleInputReadonly     = MO.Class.register(o, new MO.AStyle('_styleInputReadonly'));
-   // //..........................................................
-   // // @attribute
-   // o._optionValueStyle       = true;
-   // // @attribute
-   // o._statusValueHover       = false;
+   // 设置内容样式
+   protected _optionValueStyle: boolean;
+   // 可编辑状态
+   protected _statusEditable: boolean;
+   // 内容热点状态
+   protected _statusValueHover: boolean;
    // o._progressing            = false;
    // //..........................................................
+   // 底板
    protected _hPanel: HTMLTableElement;
-   // // @html <TD> 标签面板
+   // 标签面板
    protected _hLabelPanel: HTMLTableCellElement;
-   // @html <TABLE> 标签容器
+   // 标签容器
    protected _hLabelForm: HTMLTableElement;
-   // @html <TD> 标签图标面板
-   protected _hIconPanel;
-   // @html <IMG> 标签图标
-   protected _hIcon;
-   // @html <TD> 标签文字面板
-   protected _hTextPanel;
-   // @html <SPAN> 标签文字
-   protected _hText;
-   // // @html <TD> 编辑面板
+   // 标签图标面板
+   protected _hIconPanel: any;
+   // 标签图标
+   protected _hIcon: HTMLImageElement;
+   // 标签文字面板
+   protected _hTextPanel: any;
+   // 标签文字
+   protected _hText: any;
+   // 编辑面板
    protected _hEditPanel: HTMLTableCellElement;
-   // @html <TABLE> 编辑容器
+   // 编辑容器
    protected _hEditForm: HTMLTableElement;
-   // @html <TD> 编辑内容面板
+   // 编辑控件
+   protected _hEdit;
+   // 编辑内容面板
    protected _hValuePanel: HTMLTableCellElement;
-   //o.hHintPanel            = null;
-   //o.hHintIcon             = null;
+   // 编辑内容表单
+   protected _hValueForm: any;
+   // 内容变更底板
+   protected _hChangePanel: any;
+   // 内容变更图标
+   protected _hChangeIcon: HTMLImageElement;
+   // 下拉底板
+   protected _hDropPanel: any;
+   // 下拉图标
+   protected _hDropIcon: HTMLImageElement;
+   // 提示底板
+   protected _hHintPanel;
+   // 提示图标
+   protected _hHintIcon;
+   // 单位
+   protected _hUnit;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -85,33 +118,9 @@ export class EditControl extends Control {
       // 设置属性
       this.labelModeCd = LabelModeEnum.All;
       this.labelPositionCd = LabelPositionEnum.Left;
-      //this._labelSize = new SSize2(0, 0);
-      //this._editSize = new SSize2(0, 0);
+      this._optionValueStyle = true;
+      this._statusEditable = true;
    }
-
-   // //==========================================================
-   // // <T>当该内容获得热点时的处理</T>
-   // //
-   // // @method
-   // // @param event:TEvent 事件对象
-   // //==========================================================
-   // MO.FDuiEditControl_onValueEnter = function FDuiEditControl_onValueEnter(event) {
-   //    var o = this;
-   //    o._statusValueHover = true;
-   //    o.refreshStyle();
-   // }
-
-   // //==========================================================
-   // // <T>当该内容失去热点时的处理</T>
-   // //
-   // // @method
-   // // @param event:TEvent 事件对象
-   // //==========================================================
-   // MO.FDuiEditControl_onValueLeave = function FDuiEditControl_onValueLeave(event) {
-   //    var o = this;
-   //    o._statusValueHover = false;
-   //    o.refreshStyle();
-   // }
 
    //==========================================================
    // <T>建立标签图标。</T>
@@ -152,16 +161,75 @@ export class EditControl extends Control {
       hTextPanel.noWrap = true;
       this.onBuildLabelText(context);
       // 设置标签尺寸
-      //MO.Window.Html.setSize(hLabelForm, this._labelSize);
+      HtmlUtil.setSize(hLabelForm, this.labelWidth, this.labelHeight);
       // 设置标签对齐
-      if (this._labelAlignCd) {
+      if (this.labelAlignCd) {
          //hTextPanel.align = this._labelAlignCd;
          //hTextPanel.style.paddingRight = 4;
       }
       // 设置标签颜色
-      if (this._labelColor) {
-         this._hText.style.color = this._labelColor;
+      if (this.labelColor) {
+         this._hText.style.color = this.labelColor;
       }
+   }
+
+   //==========================================================
+   // <T>鼠标进入修改标志。</T>
+   //
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onChangeEnter(e) {
+      var o = this;
+      //var t = null;
+      //if(MO.Lang.String.isEmpty(o.dataValue)){
+      //   t = RContext.get('MDuiEditChange:change.empty');
+      //}else{
+      //   t = RContext.get('MDuiEditChange:change.restore', o.dataValue);
+      //}
+      //o.hChangeIcon.title = t;
+   }
+
+   //==========================================================
+   // <T>鼠标离开修改标志。</T>
+   //
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onChangeLeave(e) {
+      var o = this;
+      //var t = null;
+      //if(MO.Lang.String.isEmpty(o.dataValue)){
+      //   t = RContext.get('MDuiEditChange:change.empty');
+      //}else{
+      //   t = RContext.get('MDuiEditChange:change.restore', o.dataValue);
+      //}
+      //o.hChangeIcon.title = t;
+   }
+
+   //==========================================================
+   // <T>鼠标点击修改标志。</T>
+   //
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onChangeClick(e) {
+      //this.set(this.dataValue);
+   }
+
+   //==========================================================
+   // <T>建立编辑修改标志。</T>
+   //
+   // @method
+   // @param p:arguments:SArguments 参数集合
+   //==========================================================
+   public onBuildEditChange(context: RenderContext) {
+      // 设置底板
+      var hPanel = this._hChangePanel;
+      hPanel.className = this.styleName('ChangePanel', EditControl);
+      // 设置事件
+      this.attachEvent(hPanel, EventEnum.Enter, this.onChangeEnter);
+      this.attachEvent(hPanel, EventEnum.Leave, this.onChangeLeave);
+      this.attachEvent(hPanel, EventEnum.Click, this.onChangeClick);
+      // 建立图标
+      this._hChangeIcon = context.appendIcon(hPanel, this.styleName('ChangeIcon', EditControl), 'control.change');
    }
 
    //==========================================================
@@ -170,6 +238,88 @@ export class EditControl extends Control {
    // @param context 环境信息
    //==========================================================
    public onBuildEditValue(context: RenderContext) {
+   }
+
+   //==========================================================
+   // <T>鼠标进入修改标志。</T>
+   //
+   // @method
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onDropEnter(e) {
+      var o = this;
+      //var t = null;
+      //if(MO.Lang.String.isEmpty(o.dataValue)){
+      //   t = RContext.get('MDuiEditDrop:Drop.empty');
+      //}else{
+      //   t = RContext.get('MDuiEditDrop:Drop.restore', o.dataValue);
+      //}
+      //o.hDropIcon.title = t;
+   }
+
+   //==========================================================
+   // <T>鼠标离开修改标志。</T>
+   //
+   // @method
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onDropLeave(e) {
+      var o = this;
+      //var t = null;
+      //if(MO.Lang.String.isEmpty(o.dataValue)){
+      //   t = RContext.get('MDuiEditDrop:Drop.empty');
+      //}else{
+      //   t = RContext.get('MDuiEditDrop:Drop.restore', o.dataValue);
+      //}
+      //o.hDropIcon.title = t;
+   }
+
+   //==========================================================
+   // <T>鼠标点击修改标志。</T>
+   //
+   // @method
+   // @param e:event:TEvent 事件对象
+   //==========================================================
+   public onDropClick(e) {
+      //this.set(this.dataValue);
+   }
+
+   //==========================================================
+   // <T>建立编辑下拉标志。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildEditDrop(context: RenderContext) {
+      // 设置底板
+      var hDropPanel = this._hDropPanel;
+      hDropPanel.align = 'center';
+      hDropPanel.className = this.styleName('DropPanel', EditControl);
+      this.attachEvent(hDropPanel, EventEnum.Enter, this.onDropEnter);
+      this.attachEvent(hDropPanel, EventEnum.Leave, this.onDropLeave);
+      this.attachEvent(hDropPanel, EventEnum.Click, this.onDropClick);
+      // 设置图标
+      var hDropIcon = this._hDropIcon = context.appendIcon(hDropPanel, this.styleName('DropIcon'), 'control.drop');
+      hDropIcon.align = 'absmiddle';
+   }
+
+   //==========================================================
+   // <T>当该内容获得热点时的处理</T>
+   //
+   // @param event:TEvent 事件对象
+   //==========================================================
+   public onValueEnter(event) {
+      this._statusValueHover = true;
+      this.refreshStyle();
+   }
+
+   //==========================================================
+   // <T>当该内容失去热点时的处理</T>
+   //
+   // @param event:TEvent 事件对象
+   //==========================================================
+   public onValueLeave(event) {
+      this._statusValueHover = false;
+      this.refreshStyle();
    }
 
    //==========================================================
@@ -183,14 +333,11 @@ export class EditControl extends Control {
       var hEditLine = context.appendTableRow(hEditForm);
       // 建立编辑面板
       var hValuePanel = this._hValuePanel = context.appendTableCell(hEditLine);
-      //this.attachEvent('onValueEnter', hValuePanel);
-      //this.attachEvent('onValueLeave', hValuePanel);
+      this.attachEvent(hValuePanel, EventEnum.Enter, this.onValueEnter);
+      this.attachEvent(hValuePanel, EventEnum.Leave, this.onValueLeave);
       this.onBuildEditValue(context);
       // 设置大小
-      //MO.Window.Html.setSize(hEditForm, this._editSize);
-      //if(o.editWidth){
-      //hc.width = o.editWidth;
-      //}
+      HtmlUtil.setSize(hEditForm, this.editWidth, this.editHeight);
       //if(o.validRequire){
       //var hccc = o.hControlRow.insertCell();
       //hccc.width = 30;
@@ -206,39 +353,37 @@ export class EditControl extends Control {
       //hCk1.style.display = 'none';
       //hCk2.style.display = 'none';
       //}
-      /*
       // 设置编辑框的信息
-      var he = o.hEdit;
-      if(he){
-         if(o.editAlign){
-            he.style.textAlign = o.editAlign;
-         }
-         // 关联编辑事件
-         o.linkEvent(o, 'onFocus', he);
-         o.linkEvent(o, 'onBlur', he);
-         o.linkEvent(o, 'onDataClick', he);
-         o.linkEvent(o, 'onDataDoubleClick', he);
-         o.linkEvent(o, 'onDataKeyDown', he);
-         o.linkEvent(o, 'onDataChange', he);
-
-      }
+      // var he = this.hEdit;
+      // if(he){
+      //    if(this.editAlign){
+      //       he.style.textAlign = this.editAlign;
+      //    }
+      //    // 关联编辑事件
+      //    this.linkEvent(this, 'onFocus', he);
+      //    this.linkEvent(this, 'onBlur', he);
+      //    this.linkEvent(this, 'onDataClick', he);
+      //    this.linkEvent(this, 'onDataDoubleClick', he);
+      //    this.linkEvent(this, 'onDataKeyDown', he);
+      //    this.linkEvent(this, 'onDataChange', he);
+      // }
       // 建立提示区
-      if(o.hint){
-         var hp = o.hHintPanel = hcr.insertCell();
-         hp.width = 13;
-         hp.align = 'right';
-         hp.vAlign = 'top';
-         var hi = o.hHintIcon = context.appendIcon(hp, 'ctl.hint');
-         hi._pname = 'hHintIcon';
-         hi.title = o.hint;
+      if (this.hint) {
+         var hHintPanel = this._hHintPanel = context.appendTableCell(hEditLine);
+         hHintPanel.width = '13px';
+         hHintPanel.align = 'right';
+         hHintPanel.vAlign = 'top';
+         var hHintIcon = this._hHintIcon = context.appendIcon(hHintPanel, 'ctl.hint');
+         hHintIcon.title = this.hint;
+         //hHintIcon._pname = 'hHintIcon';
       }
       // 建立编辑单位信息
-      if(o.editUnit){
-         var h = o.hUnit = o.hControlRow.insertCell();
-         h.className = o.styleName('EditUnit');
-         h._pname = 'hUnit';
-         h.innerHTML = '&nbsp;'+o.editUnit;
-      }*/
+      if (this.editUnit) {
+         var hUnit = this._hUnit = context.appendTableCell(hEditLine);
+         hUnit.className = this.styleName('EditUnit');
+         hUnit.innerHTML = '&nbsp;' + this.editUnit;
+         //hUnit._pname = 'hUnit';
+      }
    }
 
    //==========================================================
@@ -324,7 +469,7 @@ export class EditControl extends Control {
          this.onBuildEdit(context);
       }
       // 刷新样式
-      //this.refreshStyle();
+      this.refreshStyle();
    }
 
    // //==========================================================
@@ -415,22 +560,45 @@ export class EditControl extends Control {
    //    return MO.EEventStatus.Stop;
    // }
 
-   // //==========================================================
-   // // <T>获得底板。</T>
-   // //
-   // // @method
-   // // @param panelCd:EPanel 类型
-   // // @return HtmlTag 页面元素
-   // //==========================================================
-   // MO.FDuiEditControl_panel = function FDuiEditControl_panel(panelCd) {
-   //    var o = this;
-   //    if (MO.EPanel.Edit == panelCd) {
-   //       return o._hEdit;
-   //    } else if (MO.EPanel.Focus == panelCd) {
-   //       return o._hEdit;
-   //    }
-   //    return o.__base.FDuiControl.panel.call(o, panelCd);
-   // }
+   //==========================================================
+   // <T>设置改变标志内容。</T>
+   //
+   // @param flag 标志
+   //==========================================================
+   public changeSet(flag: boolean) {
+   }
+
+   //==========================================================
+   // <T>获得数据。</T>
+   //
+   // @return 数据
+   //==========================================================
+   public get(): any {
+   }
+
+   //==========================================================
+   // <T>设置数据。</T>
+   //
+   // @param value 数据
+   //==========================================================
+   public set(value: any) {
+   }
+
+   //==========================================================
+   // <T>获得底板。</T>
+   //
+   // @method
+   // @param panelCd:EPanel 类型
+   // @return HtmlTag 页面元素
+   //==========================================================
+   public getPanel(panelCd: PanelEnum) {
+      if (panelCd == PanelEnum.Edit) {
+         return this._hEdit;
+      } else if (panelCd == PanelEnum.Focus) {
+         return this._hEdit;
+      }
+      return super.getPanel(panelCd);
+   }
 
    //==========================================================
    // <T>设置标签。</T>
@@ -444,19 +612,17 @@ export class EditControl extends Control {
       }
    }
 
-   // //==========================================================
-   // // <T>设置编辑对象的可编辑性。</T>
-   // //
-   // // @method
-   // // @param value:Boolean 可编辑性
-   // //==========================================================
-   // MO.FDuiEditControl_setEditable = function FDuiEditControl_setEditable(value) {
-   //    var o = this;
-   //    // 设置属性
-   //    o._statusEditable = value;
-   //    // 刷新样式
-   //    o.refreshStyle();
-   // }
+   //==========================================================
+   // <T>设置编辑对象的可编辑性。</T>
+   //
+   // @param value 可编辑性
+   //==========================================================
+   public setEditable(value: boolean) {
+      // 设置属性
+      this._statusEditable = value;
+      // 刷新样式
+      this.refreshStyle();
+   }
 
    // //==========================================================
    // // <T>获得编辑区大小。</T>
@@ -479,53 +645,45 @@ export class EditControl extends Control {
    //    return rectangle;
    // }
 
-   // //==========================================================
-   // // <T>根据当前状态刷新样式。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiEditControl_refreshStyle = function FDuiEditControl_refreshStyle() {
-   //    var o = this;
-   //    if (o._optionValueStyle) {
-   //       var hForm = o._hValueForm;
-   //       if (hForm) {
-   //          if (o._statusEditable) {
-   //             if (o._statusValueHover) {
-   //                hForm.className = o.styleName('ValueHover');
-   //             } else {
-   //                hForm.className = o.styleName('ValueNormal');
-   //             }
-   //          } else {
-   //             hForm.className = o.styleName('ValueReadonly');
-   //          }
-   //       }
-   //    }
-   // }
+   //==========================================================
+   // <T>根据当前状态刷新样式。</T>
+   //==========================================================
+   public refreshStyle() {
+      if (this._optionValueStyle) {
+         var hForm = this._hValueForm;
+         if (hForm) {
+            if (this._statusEditable) {
+               if (this._statusValueHover) {
+                  hForm.className = this.styleName('ValueHover', EditControl);
+               } else {
+                  hForm.className = this.styleName('ValueNormal', EditControl);
+               }
+            } else {
+               hForm.className = this.styleName('ValueReadonly', EditControl);
+            }
+         }
+      }
+   }
 
-   // //==========================================================
-   // // <T>释放对象。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiEditControl_dispose = function FDuiEditControl_dispose() {
-   //    var o = this;
-   //    // 释放属性
-   //    o._labelSize = MO.Lang.Object.dispose(o._labelSize);
-   //    o._editSize = MO.Lang.Object.dispose(o._editSize);
-   //    // 释放页面元素
-   //    o._hLabelPanel = MO.Window.Html.free(o._hLabelPanel);
-   //    o._hLabelForm = MO.Window.Html.free(o._hLabelForm);
-   //    o._hIconPanel = MO.Window.Html.free(o._hIconPanel);
-   //    o._hIcon = MO.Window.Html.free(o._hIcon);
-   //    o._hTextPanel = MO.Window.Html.free(o._hTextPanel);
-   //    o._hText = MO.Window.Html.free(o._hText);
-   //    o._hEditPanel = MO.Window.Html.free(o._hEditPanel);
-   //    o._hEditForm = MO.Window.Html.free(o._hEditForm);
-   //    o._hValuePanel = MO.Window.Html.free(o._hValuePanel);
-   //    o._hDropPanel = MO.Window.Html.free(o._hDropPanel);
-   //    // 父处理
-   //    o.__base.MDuiEditDrop.dispose.call(o);
-   //    o.__base.MDuiEditChange.dispose.call(o);
-   //    o.__base.FDuiControl.dispose.call(o);
-   // }
+   //==========================================================
+   // <T>释放对象。</T>
+   //==========================================================
+   public dispose() {
+      // // 释放属性
+      // this._labelSize = MO.Lang.Object.dispose(this._labelSize);
+      // this._editSize = MO.Lang.Object.dispose(this._editSize);
+      // // 释放页面元素
+      this._hLabelPanel = HtmlUtil.dispose(this._hLabelPanel);
+      this._hLabelForm = HtmlUtil.dispose(this._hLabelForm);
+      // this._hIconPanel = MO.Window.Html.free(this._hIconPanel);
+      // this._hIcon = MO.Window.Html.free(this._hIcon);
+      // this._hTextPanel = MO.Window.Html.free(this._hTextPanel);
+      // this._hText = MO.Window.Html.free(this._hText);
+      // this._hEditPanel = MO.Window.Html.free(this._hEditPanel);
+      // this._hEditForm = MO.Window.Html.free(this._hEditForm);
+      // this._hValuePanel = MO.Window.Html.free(this._hValuePanel);
+      // this._hDropPanel = MO.Window.Html.free(this._hDropPanel);
+      // 父处理
+      super.dispose();
+   }
 }

@@ -1,6 +1,6 @@
 import {ColorBar} from './ColorBar';
 
-export class ColorChannel extends ColorBar {
+export class ColorPowerChannel extends ColorBar {
    // //==========================================================
    // // <T>颜色通道编辑框。</T>
    // //

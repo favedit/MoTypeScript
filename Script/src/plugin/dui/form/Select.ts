@@ -1,4 +1,11 @@
+import {DataTypeEnum} from './runtime/common/lang/DataTypeEnum';
+import {Property} from './runtime/common/reflect/Property';
+import {ClassUtil} from './runtime/common/reflect/ClassUtil';
+import {EventEnum} from './runtime/ui/EventEnum';
+import {HtmlUtil} from './runtime/ui/utility/HtmlUtil';
+import {RenderContext} from '../RenderContext';
 import {EditControl} from './EditControl';
+import {SelectItem} from './SelectItem';
 
 //==========================================================
 // <T>下拉选择框。</T>
@@ -16,63 +23,74 @@ import {EditControl} from './EditControl';
 // @author maocy
 // @version 150224
 //==========================================================
-export class Select extends EditControl{
+export class Select extends EditControl {
+   // 输入宽度
+   @Property('input_width', DataTypeEnum.String)
+   public inputWidth: string;
+   // 输入高度
+   @Property('input_height', DataTypeEnum.String)
+   public inputHeight: string;
+   // 编辑长度
+   @Property('edit_length', DataTypeEnum.Int32)
+   public editLength: number;
    //    // @property
    //    o._inputSize = MO.Class.register(o, [new MO.APtySize2('_inputSize'), new MO.AGetter('_inputSize')]);
    //    //..........................................................
    //    // @attribtue
    //    o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
    //    //..........................................................
-   //    // @html
-   //    o._hValueForm = null;
-   //    o._hValueLine = null;
-   //    o._hInputPanel = null;
-   //    o._hInput = null;
-   //    //..........................................................
-   //    // @event
-   //    o.onBuildEditValue = MO.FDuiSelect_onBuildEditValue;
-   //    o.onDoubleClick = MO.Class.register(o, new MO.AEventDoubleClick('onDoubleClick'), MO.FDuiSelect_onDropClick);
-   //    o.onDropClick = MO.FDuiSelect_onDropClick;
-   //    o.onKeyDown = MO.Class.register(o, new MO.AEventKeyDown('onKeyDown'), MO.FDuiSelect_onKeyDown);
+   protected _emptyItem: SelectItem;
+   // 页面元素
+   protected _hValueForm: HTMLTableElement;
+   protected _hValueLine: HTMLTableRowElement;
+   protected _hInputPanel: HTMLTableCellElement;
+   protected _hInput: HTMLInputElement;
+   protected _hDropPanel: HTMLTableCellElement;
 
-   // //==========================================================
-   // // <T>建立编辑器内容。</T>
-   // //
-   // // @method
-   // // @param event:SEvent 事件信息
-   // //==========================================================
-   // MO.FDuiSelect_onBuildEditValue = function FDuiSelect_onBuildEditValue(event) {
-   //    var o = this;
-   //    var hValuePanel = o._hValuePanel;
-   //    var hValueForm = o._hValueForm = MO.Window.Builder.appendTable(hValuePanel);
-   //    var hValueLine = o._hValueLine = MO.Window.Builder.appendTableRow(hValueForm);
-   //    MO.Window.Html.setSize(hValueForm, o._inputSize);
-   //    //..........................................................
-   //    // 建立改变栏
-   //    o._hChangePanel = MO.Window.Builder.appendTableCell(hValueLine);
-   //    o.onBuildEditChange(event);
-   //    //..........................................................
-   //    // 建立输入栏
-   //    var hInputPanel = o._hInputPanel = MO.Window.Builder.appendTableCell(hValueLine, o.styleName('InputPanel'));
-   //    var hInput = o._hInput = MO.Window.Builder.appendEdit(hInputPanel);
-   //    o.attachEvent('onDoubleClick', hInput);
-   //    o.attachEvent('onKeyDown', hInput);
-   //    //o.attachEvent('onInputEdit', hInput, o.onInputEdit);
-   //    // 设置大小
-   //    // 设置可以输入的最大长度
-   //    if (o._editLength) {
-   //       hInput.maxLength = o._editLength;
-   //    }
-   //    //..........................................................
-   //    // 建立下拉栏
-   //    var hdp = o._hDropPanel = MO.Window.Builder.appendTableCell(hValueLine);
-   //    o.onBuildEditDrop(event);
-   //    //..........................................................
-   //    // 创建空行
-   //    var item = o._emptyItem = MO.Class.create(MO.FDuiSelectItem);
-   //    item.build(event);
-   //    o.push(item);
-   // }
+   //==========================================================
+   // <T>构造处理。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 设置属性
+      //this._inputSize = new MO.SSize2();
+   }
+
+   //==========================================================
+   // <T>建立编辑器内容。</T>
+   //
+   // @param context 环境信息
+   //==========================================================
+   public onBuildEditValue(context: RenderContext) {
+      var hValuePanel = this._hValuePanel;
+      var hValueForm = this._hValueForm = context.appendTable(hValuePanel);
+      var hValueLine = this._hValueLine = context.appendTableRow(hValueForm);
+      HtmlUtil.setSize(hValueForm, this.inputWidth, this.inputHeight);
+      //..........................................................
+      // 建立改变栏
+      this._hChangePanel = context.appendTableCell(hValueLine);
+      this.onBuildEditChange(context);
+      //..........................................................
+      // 建立输入栏
+      var hInputPanel = this._hInputPanel = context.appendTableCell(hValueLine, this.styleName('InputPanel'));
+      var hInput = this._hInput = context.appendEdit(hInputPanel);
+      //this.attachEvent(hInput, EventEnum.DoubleClick, this.onDoubleClick);
+      //this.attachEvent(hInput, EventEnum.KeyDown, this.onKeyDown);
+      //o.attachEvent('onInputEdit', hInput, o.onInputEdit);
+      // 设置可以输入的最大长度
+      if (this.editLength) {
+         hInput.maxLength = this.editLength;
+      }
+      //..........................................................
+      // 建立下拉栏
+      var hDropPanel = this._hDropPanel = context.appendTableCell(hValueLine);
+      this.onBuildEditDrop(context);
+      //..........................................................
+      // 创建空行
+      var item = this._emptyItem = ClassUtil.create(SelectItem);
+      item.build(context);
+      this.push(item);
+   }
 
    // //==========================================================
    // // <T>鼠标点击修改标志。</T>

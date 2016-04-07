@@ -340,23 +340,21 @@ export class HtmlUtil {
    //    return r;
    // }
 
-   // //==========================================================
-   // // <T>设置页面元素大小。</T>
-   // //
-   // // @method
-   // // @param hTag:HtmlTag 页面元素
-   // // @param size:SSize2 大小
-   // //==========================================================
-   // public static setSize(hTag, size) {
-   //    if (size) {
-   //       if (size.width) {
-   //          hTag.style.width = size.width + 'px';
-   //       }
-   //       if (size.height) {
-   //          hTag.style.height = size.height + 'px';
-   //       }
-   //    }
-   // }
+   //==========================================================
+   // <T>设置页面元素大小。</T>
+   //
+   // @param hTag 页面元素
+   // @param width 宽度
+   // @param height 高度
+   //==========================================================
+   public static setSize(hTag: HTMLElement, width?: string, height?: string) {
+      if (width) {
+         hTag.style.width = width;
+      }
+      if (height) {
+         hTag.style.height = height;
+      }
+   }
 
    // //==========================================================
    // // <T>将页面内容转换成文本内容。</T>

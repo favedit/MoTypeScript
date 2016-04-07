@@ -41,11 +41,10 @@ export class Check extends EditControl {
    // @param context 环境信息
    //==========================================================
    public onBuildEditValue(context: RenderContext) {
-      var o = this;
       // 建立编辑控件
-      var hInput = o._hInput = context.appendCheck(o._hValuePanel);
-      hInput.style.cursor = 'hand';
-      o.attachEvent(hInput, EventEnum.Click, this.onInputClick);
+      var hInput = this._hInput = context.appendCheck(this._hValuePanel);
+      hInput.style.cursor = 'pointor';
+      this.attachEvent(hInput, EventEnum.Click, this.onInputClick);
    }
 
    //==========================================================

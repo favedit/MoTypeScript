@@ -24,6 +24,19 @@ export class RenderableUi extends Container {
       this.renderOptionFragment = false;
    }
 
+   //==========================================================
+   // <T>加载内容数据。</T>
+   //
+   // @param value 数据内容
+   //==========================================================
+   public load(value) {
+   }
+
+   //==========================================================
+   // <T>渲染页面处理。</T>
+   //
+   // @return 页面元素
+   //==========================================================
    public render() {
       return <Frame label="显示属性" width='100%'>
          <Panel name='infoPanel' icon='design.panel.icon' label='显示属性'>

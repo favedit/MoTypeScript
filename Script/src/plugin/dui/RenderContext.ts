@@ -119,7 +119,7 @@ export class RenderContext {
    // @return 页面复选框对象
    //==========================================================
    public createButton(styleName?: string) {
-      var hButton: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      var hButton: HTMLInputElement = this.create("INPUT", styleName) as HTMLInputElement;
       hButton.type = 'button';
       return hButton;
    }
@@ -131,7 +131,7 @@ export class RenderContext {
    // @return 页面复选框对象
    //==========================================================
    public createCheck(styleName?: string) {
-      var hCheck: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      var hCheck: HTMLInputElement = this.create("INPUT", styleName) as HTMLInputElement;
       hCheck.type = 'checkbox';
       return hCheck;
    }
@@ -143,7 +143,7 @@ export class RenderContext {
    // @return 页面单选框对象
    //==========================================================
    public createRadio(styleName?: string) {
-      var hRadio: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      var hRadio: HTMLInputElement = this.create("INPUT", styleName) as HTMLInputElement;
       hRadio.type = 'radio';
       return hRadio;
    }
@@ -155,8 +155,20 @@ export class RenderContext {
    // @return 页面编辑框对象
    //==========================================================
    public createEdit(styleName?: string): HTMLInputElement {
-      var hInput: HTMLInputElement = <HTMLInputElement>this.create("INPUT", styleName);
+      var hInput: HTMLInputElement = this.create("INPUT", styleName) as HTMLInputElement;
       hInput.type = 'text';
+      return hInput;
+   }
+
+   //==========================================================
+   // <T>创建一个页面文件对象。</T>
+   //
+   // @param styleName 样式名称
+   // @return 页面编辑框对象
+   //==========================================================
+   public createFile(styleName?: string): HTMLInputElement {
+      var hInput: HTMLInputElement = this.create("INPUT", styleName) as HTMLInputElement;
+      hInput.type = 'file';
       return hInput;
    }
 
@@ -167,7 +179,7 @@ export class RenderContext {
    // @return 页面浮动块对象
    //==========================================================
    public createSpan(styleName): HTMLSpanElement {
-      return <HTMLSpanElement>this.create('SPAN', styleName);
+      return this.create('SPAN', styleName) as HTMLSpanElement;
    }
 
    //==========================================================
@@ -177,7 +189,7 @@ export class RenderContext {
    // @return 页面浮动块对象
    //==========================================================
    public createDiv(styleName?: any): HTMLDivElement {
-      return <HTMLDivElement>this.create('DIV', styleName);
+      return this.create('DIV', styleName) as HTMLDivElement;
    }
 
    //==========================================================
@@ -189,11 +201,11 @@ export class RenderContext {
    // @param cellPadding 单元格内文字与单元格边框之间的距离
    // @return 表格对象
    //==========================================================
-   public createTable(styleName: string, border: any = 0, cellSpaceing: any = 0, cellPadding: any = 0): HTMLTableElement {
-      var hElement: HTMLTableElement = <HTMLTableElement>this.create('TABLE', styleName);
-      hElement.border = border;
-      hElement.cellSpacing = cellSpaceing;
-      hElement.cellPadding = cellPadding;
+   public createTable(styleName: string, border?: any, cellSpaceing?: any, cellPadding?: any): HTMLTableElement {
+      var hElement: HTMLTableElement = this.create('TABLE', styleName) as HTMLTableElement;
+      hElement.border = border || 0;
+      hElement.cellSpacing = cellSpaceing || 0;
+      hElement.cellPadding = cellPadding || 0;
       return hElement;
    }
 
@@ -341,6 +353,19 @@ export class RenderContext {
    //==========================================================
    public appendEdit(hParent, styleName?: string): HTMLInputElement {
       var hInput = this.createEdit(styleName);
+      hParent.appendChild(hInput);
+      return hInput;
+   }
+
+   //==========================================================
+   // <T>追加一个页面文件框对象，放在父容器里面，并返回这个对象。</T>
+   //
+   // @param hParent 页面标签
+   // @param styleName 样式名称
+   // @return 页面编辑框对象
+   //==========================================================
+   public appendFile(hParent, styleName?: string): HTMLInputElement {
+      var hInput = this.createFile(styleName);
       hParent.appendChild(hInput);
       return hInput;
    }

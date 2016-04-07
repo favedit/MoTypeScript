@@ -28,10 +28,14 @@ export class FrameSetUi extends FrameSet {
 
    public onCatalogNodeClick(sender, event: TreeEvent) {
       var tag = event.node.tag;
+      var frame = null;
       if (tag instanceof Material) {
-         this.selectFrame(MaterialUi);
+         frame = this.selectFrame(MaterialUi);
       } else if (tag instanceof Renderable) {
-         this.selectFrame(RenderableUi);
+         frame = this.selectFrame(RenderableUi);
+      }
+      if (frame) {
+         frame.load(tag);
       }
    }
 
@@ -50,7 +54,7 @@ export class FrameSetUi extends FrameSet {
                   <canvas id='id_canvas3d'/>
                </FramePage>
                <FrameSpliter/>
-               <FramePage linker='propertyContainer' style_class='FrameSet_Property_Content' width='300' scroll_cd={ScrollEnum.VerticalAuto}/>
+               <FramePage linker='propertyContainer' style_class='FrameSet_Property_Content' width='320' scroll_cd={ScrollEnum.VerticalAuto}/>
             </FrameSet>
          </FramePage>
          <FramePage style_class= 'FrameSet_StatusBar_Ground' height='24'></FramePage>

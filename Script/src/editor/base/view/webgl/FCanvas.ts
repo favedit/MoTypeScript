@@ -29,7 +29,7 @@ export class FCanvas extends FBaseCanvas {
       var hPanel = parameters.hPanel;
       var size = parameters.size;
       // 创建画板
-      var hCanvas = null;
+      var hCanvas:HTMLCanvasElement = null;
       if (this.hCanvas) {
          hCanvas = this.hCanvas;
       } else {
@@ -40,9 +40,7 @@ export class FCanvas extends FBaseCanvas {
       hCanvas.style.width = '100%';
       hCanvas.style.height = '100%';
       hCanvas.width = hParent.offsetWidth;
-      hCanvas.height = hParent.offsetHeight;
-      //hCanvas.width = size.width;
-      //hCanvas.height = size.height;
+      hCanvas.height = hParent.offsetHeight - 3;
       // 创建环境
       var context = WglContextUtil.create(hCanvas);
       // 设置事件

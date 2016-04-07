@@ -76,37 +76,21 @@ export class Control extends Component {
    // 高度
    @Property('height', DataTypeEnum.String)
    public height: string;
+   // 前景色
+   @Property('fore_color', DataTypeEnum.String)
+   public foreColor: string;
+   // 后景色
+   @Property('back_color', DataTypeEnum.String)
+   public backColor: string;
    // 样式
    @Property('style_class', DataTypeEnum.String)
    public styleClass: string;
    // 提示信息
    @Property('hint', DataTypeEnum.String)
    public hint: string;
-   // 大小
-   // @Property('size', DataTypeEnum.Struct, null, Size2)
-   // protected _size: Size2;
-   // 位置
-   @Property('location', DataTypeEnum.Struct, null, Point2)
-   protected _location: Point2;
    // 不回行
+   @Property('nowrap', DataTypeEnum.Boolean)
    public nowrap: boolean;
-   public foreColor: string;
-   public foreFont: string;
-   public backColor: string;
-   public backFont: string;
-   // //..........................................................
-   // // @style
-   // o._stylePanel = MO.Class.register(o, new MO.AStyle('_stylePanel'));
-   // // @style
-   // //o._styleDesign = MO.Class.register(o, new MO.AStyle('Design'));
-   // // @style
-   // //o._styleDesignHover = MO.Class.register(o, new MO.AStyle('DesignHover'));
-   // // @style
-   // //o._styleDesignDrag  = MO.Class.register(o, new MO.AStyle('DesignDrag'));
-   // // @style
-   // //o._styleDesignMove  = MO.Class.register(o, new MO.AStyle('DesignMove'));
-   // //..........................................................
-   // @attribute
    // 构建状态
    protected _statusBuild: boolean;
    // 可见状态
@@ -117,9 +101,8 @@ export class Control extends Component {
    // o._storage = null;
    // //o._events      = null;
    //..........................................................
-   // @html 父容器
+   // 页面容器
    protected _hParent: HTMLElement;
-   // @html 面板容器
    protected _hPanel: any;
    public _hPanelLine: any;
    public _hLayoutRow: any;
@@ -127,8 +110,6 @@ export class Control extends Component {
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
@@ -137,7 +118,7 @@ export class Control extends Component {
       this.visible = true;
       this.dockCd = DockEnum.LeftTop;
       this.anchorCd = AnchorEnum.None;
-      this._location = new Point2();
+      // this._location = new Point2();
       //this._size = new Size2();
       this.layoutCd = LayoutEnum.Display;
       this.sizeCd = SizeEnum.Normal;

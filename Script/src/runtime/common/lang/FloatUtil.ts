@@ -74,19 +74,18 @@ export class FloatUtil {
    // @return String 浮点数
    //===========================================================
    public static format(value, leftLength: number = 0, leftPad: string = null, rightLength: number = null, rightPad: string = null) {
-      var o = this;
       // 检查参数
       if (value == null) {
          return '';
       }
       if (leftPad == null) {
-         leftPad = o.PAD_CHAR;
+         leftPad = this.PAD_CHAR;
       }
       if (rightLength == null) {
          rightLength = 6;
       }
       if (rightPad == null) {
-         rightPad = o.PAD_CHAR;
+         rightPad = this.PAD_CHAR;
       }
       // 分割内容
       var leftSource = null;

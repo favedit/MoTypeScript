@@ -4,6 +4,7 @@
 // @author maocy
 // @history 141231
 //==========================================================
+window.MO = window.MO || {};
 MO.FDuiConfirmDialog = function FDuiConfirmDialog(o){
    o = MO.Class.inherits(this, o, MO.FDuiDialog, MO.MListenerResult);
    //..........................................................

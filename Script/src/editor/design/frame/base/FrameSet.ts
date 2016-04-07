@@ -87,6 +87,7 @@ export class FrameSet extends BaseFrameSet {
       var frame = this.findPropertyFrame(clazz);
       this.propertyContainer.appendChild(frame);
       this.activePropertyFrame = frame;
+      return frame;
    }
 
    //==========================================================
