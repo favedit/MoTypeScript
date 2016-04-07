@@ -1,5 +1,8 @@
 export * from './Button';
 export * from './Check';
+export * from './ColorBar';
+export * from './ColorChannel';
+export * from './ColorPower';
 export * from './DropEditor';
 export * from './Edit';
 export * from './EditControl';
@@ -18,3 +21,6 @@ export * from './Radio';
 export * from './Select';
 export * from './SelectEditor';
 export * from './SelectItem';
+export * from './SlideBlock';
+export * from './SlideNumber';
+export * from './SplitStyleEnum';

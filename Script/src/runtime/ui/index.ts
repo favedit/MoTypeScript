@@ -32,9 +32,6 @@ export * from './Style';
 export * from './TimeUnitEnum';
 export * from './WrapEnum';
 
-import * as device from './device/index';
-export {device as device};
-
 import * as event from './event/index';
 export {event as event};
 

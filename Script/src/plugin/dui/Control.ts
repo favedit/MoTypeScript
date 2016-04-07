@@ -58,24 +58,36 @@ export class Control extends Component {
    // 锚点方式
    @Property('anchor_cd', DataTypeEnum.Enum, null, AnchorEnum)
    public anchorCd: AnchorEnum;
-   public hint: string;
+   // 布局方式
+   @Property('layout_cd', DataTypeEnum.Enum, null, LayoutEnum)
+   public layoutCd: LayoutEnum;
+   // 大小方式
+   @Property('size_cd', DataTypeEnum.Enum, null, SizeEnum)
+   public sizeCd: SizeEnum;
+   // 左边
+   @Property('left', DataTypeEnum.String)
+   public left: string;
+   // 上边
+   @Property('top', DataTypeEnum.String)
+   public top: string;
+   // 宽度
+   @Property('width', DataTypeEnum.String)
+   public width: string;
+   // 高度
+   @Property('height', DataTypeEnum.String)
+   public height: string;
    // 样式
    @Property('style_class', DataTypeEnum.String)
    public styleClass: string;
-   // 位置
-   @Property('location', DataTypeEnum.Struct, null, Point2)
-   protected _location: Point2;
-   // 宽度
-   @Property('width', DataTypeEnum.String)
-   public width: number;
-   // 宽度
-   @Property('height', DataTypeEnum.String)
-   public height: string;
+   // 提示信息
+   @Property('hint', DataTypeEnum.String)
+   public hint: string;
    // 大小
    // @Property('size', DataTypeEnum.Struct, null, Size2)
    // protected _size: Size2;
-   // 提示信息
-   @Property('hint', DataTypeEnum.String)
+   // 位置
+   @Property('location', DataTypeEnum.Struct, null, Point2)
+   protected _location: Point2;
    // 不回行
    public nowrap: boolean;
    public foreColor: string;
@@ -94,9 +106,6 @@ export class Control extends Component {
    // // @style
    // //o._styleDesignMove  = MO.Class.register(o, new MO.AStyle('DesignMove'));
    // //..........................................................
-   // // @attribute
-   protected _layoutCd: LayoutEnum;
-   protected _sizeCd: SizeEnum;
    // @attribute
    // 构建状态
    protected _statusBuild: boolean;
@@ -112,6 +121,9 @@ export class Control extends Component {
    protected _hParent: HTMLElement;
    // @html 面板容器
    protected _hPanel: any;
+   public _hPanelLine: any;
+   public _hLayoutRow: any;
+   public _hLayoutCell: any;
 
    //==========================================================
    // <T>构造处理。</T>
@@ -127,8 +139,8 @@ export class Control extends Component {
       this.anchorCd = AnchorEnum.None;
       this._location = new Point2();
       //this._size = new Size2();
-      this._layoutCd = LayoutEnum.Display;
-      this._sizeCd = SizeEnum.Normal;
+      this.layoutCd = LayoutEnum.Display;
+      this.sizeCd = SizeEnum.Normal;
       this._statusVisible = true;
       this._statusEnable = true;
    }

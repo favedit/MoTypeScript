@@ -2,6 +2,8 @@ import {SetUtil} from './runtime/common/lang/SetUtil';
 import {SizeEnum} from './runtime/ui/SizeEnum';
 import {DockEnum} from './runtime/ui/DockEnum';
 import {LayoutEnum} from './runtime/ui/LayoutEnum';
+import {PanelEnum} from './runtime/ui/PanelEnum';
+import {Control} from '../Control';
 import {Container} from '../Container';
 import {RenderContext} from '../RenderContext';
 
@@ -37,7 +39,7 @@ export class Layout extends Container {
    //    // @html
    public _hPanelForm: HTMLTableElement;
    protected _hPanelTable;
-   protected _hPanelLine;
+   //protected _hPanelLine;
    protected _hPanelLast;
    protected _lastSplit;
    //    o._hContainer = null;
@@ -52,7 +54,7 @@ export class Layout extends Container {
    public onBuildPanel(context: RenderContext) {
       var hPanel = this._hPanel = this._hPanelForm = context.createTable(this.styleName('Form'), null, 0, 1);
       // 设计模式
-      if (this._layoutCd == LayoutEnum.Design) {
+      if (this.layoutCd == LayoutEnum.Design) {
          var hRow = context.appendTableRow(hPanel);
          var hCell = context.appendTableCell(hRow);
          this._hContainer = hCell;
@@ -277,9 +279,10 @@ export class Layout extends Container {
    public innerAppendLine() {
       var context = this.renderContext;
       var hLine = null;
-      if (this._layoutCd == LayoutEnum.Design) {
+      if (this.layoutCd == LayoutEnum.Design) {
          hLine = this._hPanelTable = context.appendTable(this._hContainer);
          hLine.style.paddingBottom = 4;
+         hLine.width = '100%';
          this._hPanelLine = context.appendTableRow(hLine);
       } else {
          this._hPanelTable = null;
@@ -289,14 +292,15 @@ export class Layout extends Container {
    }
 
    //==========================================================
-   // <T>追加一个控件容器。</T>
+   // <T>追加一个显示控件。</T>
    //
-   // @return control 控件
+   // @param control 控件
    //==========================================================
-   public appendChild(control) {
+   public appendDisplay(control: Control) {
       var context = this.renderContext;
+      var hControlPanel = control.getPanel(PanelEnum.Panel);
       // 设计模式时
-      if (this._layoutCd == LayoutEnum.Design) {
+      if (this.layoutCd == LayoutEnum.Design) {
          // 追加第一行
          if (!this._hPanelLine) {
             this.innerAppendLine();
@@ -316,23 +320,23 @@ export class Layout extends Container {
          if (!(control instanceof Layout)) {
             control._hPanelLine = this._hPanelTable;
          }
-         hCell.appendChild(control._hPanel);
+         hCell.appendChild(hControlPanel);
          control._hLayoutCell = hCell;
          // 追加下一行
          // if (!control.nowrap() && (this.controls.last() != control)) {
          //    this.innerAppendLine();
          // }
       } else {
-         control._hPanel.style.paddingTop = 2;
-         control._hPanel.style.paddingBottom = 2;
+         hControlPanel.style.paddingTop = '2px';
+         hControlPanel.style.paddingBottom = '2px';
          // 追加横向对象
-         if (control.dockCd() == DockEnum.Fill) {
+         if (control.dockCd == DockEnum.Fill) {
             var hCell = context.appendTableRowCell(this._hPanelForm, this.styleName('ControlPanel'));
-            hCell.appendChild(control._hPanel);
-         } else if (control._sizeCd == SizeEnum.Fill) {
+            hCell.appendChild(hControlPanel);
+         } else if (control.sizeCd == SizeEnum.Fill) {
             var hCell = context.appendTableRowCell(this._hPanelForm, this.styleName('ControlPanel'));
-            hCell.appendChild(control._hPanel);
-         } else if (SetUtil.contains(control._sizeCd, SizeEnum.Horizontal) || '100%' == control.width) {
+            hCell.appendChild(hControlPanel);
+         } else if (SetUtil.contains(control.sizeCd, SizeEnum.Horizontal) || '100%' == control.width) {
             // if (MO.Class.isClass(control, MO.FDuiSplit)) {
             //    this._lastSplit = control;
             // }
@@ -340,11 +344,11 @@ export class Layout extends Container {
             var hLine = context.appendTableRow(this._hPanelForm);
             var hCell = context.appendTableCell(hLine, this.styleName('ControlPanel'));
             hCell.vAlign = 'top';
-            hCell.appendChild(control._hPanel);
+            hCell.appendChild(hControlPanel);
             control._hLayoutRow = hLine;
             this._hPanelLast = hCell;
             // 设置行高
-            if (!SetUtil.contains(control._sizeCd, SizeEnum.Vertical)) {
+            if (!SetUtil.contains(control.sizeCd, SizeEnum.Vertical)) {
                hCell.height = 1;
             } else if (control.height) {
                hCell.height = control.height;
@@ -369,10 +373,10 @@ export class Layout extends Container {
             // 追加一般控件
             control._hLayoutRow = this._hPanelLine;
             this._hPanelLast = hCell;
-            hCell.appendChild(control._hPanel);
+            hCell.appendChild(hControlPanel);
             control._hLayoutCell = hCell;
             // 追加下一行
-            if (!control.nowrap()) {
+            if (!control.nowrap) {
                this._hPanelLine = null;
             }
          }
