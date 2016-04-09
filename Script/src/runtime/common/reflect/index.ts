@@ -8,4 +8,5 @@ export * from './LoggerAnnotation';
 export * from './MethodUtil';
 export * from './Property';
 export * from './PropertyAnnotation';
+export * from './Prototype';
 export * from './Readonly';

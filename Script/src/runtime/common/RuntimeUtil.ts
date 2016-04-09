@@ -1,6 +1,5 @@
 import {ProcessEnum} from './ProcessEnum';
 import {PlatformEnum} from './PlatformEnum';
-import {SingletonObject} from './lang/SingletonObject';
 
 //==========================================================
 // <T>运行库。</T>
@@ -9,14 +8,16 @@ import {SingletonObject} from './lang/SingletonObject';
 // @author maocy
 // @version 141226
 //==========================================================
-export class RuntimeUtil extends SingletonObject {
+export class RuntimeUtil {
    //..........................................................
    // 版本
-   public static version: string = '1.0';
+   public static version: string = '0.1.0';
    // 模式
    public static processCd: ProcessEnum = ProcessEnum.Release;
    // 平台
    public static platformCd: PlatformEnum = PlatformEnum.Pc;
+   // 编号集合
+   protected static _ids: any = new Object();
    // 实例集合
    protected static _instances = new Array<any>();
 
@@ -77,6 +78,22 @@ export class RuntimeUtil extends SingletonObject {
    //==========================================================
    public static nvl(value, defaultValue) {
       return (value != null) ? value : defaultValue;
+   }
+
+   //==========================================================
+   // <T>获得下一个编号。</T>
+   //
+   // @param code 代码
+   // @return Integer 编号
+   //==========================================================
+   public static nextId(code: string) {
+      var id: number = this._ids[code];
+      if (id == null) {
+         id = this._ids[code] = 0;
+      } else {
+         this._ids[code] = ++id;
+      }
+      return id;
    }
 
    //==========================================================

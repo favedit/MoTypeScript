@@ -1,4 +1,4 @@
-﻿import {ObjectBase} from './ObjectBase'
+﻿import {Base} from './Base'
 import {LoggerUtil} from './LoggerUtil'
 
 //==========================================================
@@ -8,7 +8,7 @@ import {LoggerUtil} from './LoggerUtil'
 // @author maocy
 // @version 141229
 //==========================================================
-export class Speed extends ObjectBase {
+export class Speed extends Base {
    //..........................................................
    // @attribute
    public parameters = null;

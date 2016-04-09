@@ -1,4 +1,4 @@
-import {ObjectBase} from './ObjectBase';
+import {Base} from './Base';
 import {StringBuffer} from './StringBuffer';
 import {RuntimeUtil} from '../RuntimeUtil';
 
@@ -8,7 +8,7 @@ import {RuntimeUtil} from '../RuntimeUtil';
 // @author maocy
 // @version 141230
 // =========================================================
-export class Objects<T> extends ObjectBase {
+export class Objects<T> extends Base {
    // 项目个数
    protected _count: number;
    // 项目集合

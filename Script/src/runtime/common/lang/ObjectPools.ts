@@ -1,4 +1,4 @@
-﻿import {ObjectBase} from './ObjectBase'
+﻿import {Base} from './Base'
 import {Dictionary} from './Dictionary'
 import {ObjectPool} from './ObjectPool'
 import {ClassUtil} from '../reflect/ClassUtil'
@@ -10,7 +10,7 @@ import {ClassUtil} from '../reflect/ClassUtil'
 // @author maocy
 // @version 150411
 //==========================================================
-export class ObjectPools extends ObjectBase {
+export class ObjectPools extends Base {
    // 缓冲字典
    public _pools: Dictionary<any> = null;
 

@@ -1,8 +1,8 @@
-import {MemoryUtil} from '../MemoryUtil';
-import {RuntimeUtil} from '../RuntimeUtil';
-import {ObjectBase} from './ObjectBase';
+import {Base} from './Base';
 import {StringBuffer} from './StringBuffer';
 import {LooperEntry} from './LooperEntry';
+import {MemoryUtil} from '../MemoryUtil';
+import {RuntimeUtil} from '../RuntimeUtil';
 
 //==========================================================
 // <T>自循环链表。</T>
@@ -11,7 +11,7 @@ import {LooperEntry} from './LooperEntry';
 // @author maocy
 // @version 150110
 //==========================================================
-export class Looper extends ObjectBase {
+export class Looper extends Base {
    // 总数
    _count: number = 0;
    // 记录数

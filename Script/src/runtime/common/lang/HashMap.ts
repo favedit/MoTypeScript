@@ -1,7 +1,7 @@
+import {Base} from './Base';
+import {StringBuffer} from './StringBuffer'
 import {AssertUtil} from '../AssertUtil';
 import {RuntimeUtil} from '../RuntimeUtil';
-import {StringBuffer} from './StringBuffer'
-import {ObjectBase} from './ObjectBase';
 
 //==========================================================
 // <T>名称和内容的关联保存表的工具类。</T>
@@ -10,7 +10,7 @@ import {ObjectBase} from './ObjectBase';
 // @author maocy
 // @version 141226
 //==========================================================
-export class HashMap<N, V> extends ObjectBase {
+export class HashMap<N, V> extends Base {
    // 总数
    protected _count: number;
    // 对照表

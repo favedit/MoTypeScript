@@ -1,4 +1,3 @@
-import {ObjectIdUtil} from './ObjectIdUtil';
 import {RuntimeUtil} from '../RuntimeUtil';
 
 //==========================================================
@@ -10,6 +9,8 @@ import {RuntimeUtil} from '../RuntimeUtil';
 //==========================================================
 export class Base {
    // 哈希值
+   protected static __nextHash: number = 1;
+   // 哈希值
    protected __hashCode: number;
    // 释放标志
    protected __dispose: boolean;
@@ -18,7 +19,6 @@ export class Base {
    // <T>构建当前对象的实例。</T>
    //==========================================================
    public constructor() {
-      this.__hashCode = 0;
       this.__dispose = false;
    }
 
@@ -29,8 +29,8 @@ export class Base {
    //==========================================================
    public get hashCode(): number {
       var hashCode: number = this.__hashCode;
-      if (hashCode == 0) {
-         hashCode = this.__hashCode = ObjectIdUtil.nextHash();
+      if (!hashCode) {
+         hashCode = this.__hashCode = Base.__nextHash++;
       }
       return hashCode;
    }

@@ -1,4 +1,4 @@
-import {ObjectBase} from './ObjectBase'
+import {Base} from './Base'
 import {Objects} from './Objects'
 import {ObjectUtil} from './ObjectUtil'
 import {StringBuffer} from './StringBuffer'
@@ -14,7 +14,7 @@ import {RuntimeUtil} from './RuntimeUtil'
 // @author maocy
 // @version 141229
 //==========================================================
-export class Listeners extends ObjectBase {
+export class Listeners extends Base {
    // 发送者
    public sender = null;
    // 监听集合

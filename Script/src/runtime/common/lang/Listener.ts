@@ -1,10 +1,10 @@
-import {MethodUtil} from '../reflect/MethodUtil'
-import {ClassUtil} from '../reflect/ClassUtil'
-import {MemoryUtil} from '../MemoryUtil'
+import {Base} from './Base'
 import {ListenerContext} from './ListenerContext'
-import {ObjectBase} from './ObjectBase'
 import {ObjectUtil} from './ObjectUtil'
 import {ListenerUtil} from './ListenerUtil'
+import {MemoryUtil} from '../MemoryUtil'
+import {MethodUtil} from '../reflect/MethodUtil'
+import {ClassUtil} from '../reflect/ClassUtil'
 
 //==========================================================
 // <T>监听器。</T>
@@ -13,7 +13,7 @@ import {ListenerUtil} from './ListenerUtil'
 // @author maocy
 // @version 160306
 //==========================================================
-export class Listener extends ObjectBase {
+export class Listener extends Base {
    //..........................................................
    // 拥有者
    public owner: any = null;

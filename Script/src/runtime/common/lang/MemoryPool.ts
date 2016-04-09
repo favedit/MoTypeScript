@@ -1,3 +1,4 @@
+import {Base} from './Base';
 import {MemoryUtil} from '../MemoryUtil';
 import {AssertUtil} from '../AssertUtil';
 
@@ -8,7 +9,7 @@ import {AssertUtil} from '../AssertUtil';
 // @author maocy
 // @version 150523
 //==========================================================
-export class MemoryPool {
+export class MemoryPool extends Base {
    // @attribute
    _constructor = null;
    _unused = null;

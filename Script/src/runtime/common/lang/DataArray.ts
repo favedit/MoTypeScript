@@ -1,6 +1,6 @@
-import {RuntimeUtil} from '../RuntimeUtil'
-import {ObjectBase} from './ObjectBase'
+import {Base} from './Base'
 import {StringBuffer} from './StringBuffer'
+import {RuntimeUtil} from '../RuntimeUtil'
 
 //==========================================================
 // <T>数组的操作类。</T>
@@ -9,7 +9,7 @@ import {StringBuffer} from './StringBuffer'
 // @author maocy
 // @version 141229
 //==========================================================
-export class DataArray extends ObjectBase {
+export class DataArray extends Base {
    //..........................................................
    // @attribute
    protected _length: number = 0;

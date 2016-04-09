@@ -32,7 +32,6 @@ export class ByteUtil {
    // @param key:Integer 键
    //===========================================================
    public static encodeBytes(data, offset, length, key) {
-      var o = this;
       var sign = new Uint8Array(8);
       sign[0] = (key >> 16) & 0xFF;
       sign[1] = (key >> 8) & 0xFF;

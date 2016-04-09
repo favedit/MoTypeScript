@@ -22,7 +22,7 @@ export class ObjectBase extends Base {
    public getClass(): Class {
       var clazz = this.__class;
       if (!clazz) {
-         //clazz = this.__class = ClassUtil.get(this.constructor);
+         clazz = this.__class = ClassUtil.get(this.constructor);
       }
       return clazz;
    }
@@ -33,7 +33,7 @@ export class ObjectBase extends Base {
    // @param flag 全部释放标志
    //==========================================================
    public dispose(flag: boolean = false): void {
-     this.__class = null;
+      this.__class = null;
       // 父处理
       super.dispose(flag);
    }

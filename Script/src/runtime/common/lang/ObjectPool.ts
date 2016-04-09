@@ -1,4 +1,4 @@
-import {ObjectBase} from './ObjectBase'
+import {Base} from './Base'
 import {Objects} from './Objects'
 import {ObjectUtil} from './ObjectUtil'
 import {AssertUtil} from '../AssertUtil'
@@ -10,7 +10,7 @@ import {AssertUtil} from '../AssertUtil'
 // @author maocy
 // @version 150108
 //==========================================================
-export class ObjectPool extends ObjectBase {
+export class ObjectPool extends Base {
    // @attribute
    public items:Objects<any> = null;
    public frees:Objects<any> = null;
