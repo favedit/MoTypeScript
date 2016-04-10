@@ -14,25 +14,21 @@ import {HttpConnection} from './HttpConnection';
 //==========================================================
 export class XmlConnection extends HttpConnection {
    // 输入节点
-   public _inputNode = null;
+   public _inputNode;
    // 输出节点
-   public _outputNode = null;
+   public _outputNode;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 设置属性
-      this._contentCd = HttpContentEnum.Text;
+      this.contentCd = HttpContentEnum.Text;
    }
 
    //==========================================================
    // <T>响应链接发送处理。</T>
-   //
-   // @method
    //==========================================================
    public onConnectionSend() {
       var data = this._input;
@@ -59,8 +55,6 @@ export class XmlConnection extends HttpConnection {
 
    //==========================================================
    // <T>事件响应处理。</T>
-   //
-   // @method
    //==========================================================
    public onConnectionComplete() {
       var handle = this._handle;
@@ -74,8 +68,7 @@ export class XmlConnection extends HttpConnection {
          throw new Fatal(this, "Fetch xml data failure.");
       }
       if (!element) {
-         //return RLogger.fatal(this, 'Read xml error. (url={1})\n{2}', this._url, this._outputText)
-         return LoggerUtil.fatal(this, 'Read xml error. (url={1})', this._url)
+         return LoggerUtil.fatal(this, 'Read xml error. (url={1})', this.url)
       }
       // 建立文档对象
       var document = new XmlDocument();
@@ -92,7 +85,7 @@ export class XmlConnection extends HttpConnection {
       this.loadListeners.process(event);
       event.dispose();
       // 异步处理后清空属性
-      if (this._asynchronous) {
+      if (this.asynchronous) {
          this._input = null;
          this._inputNode = null;
          this._output = null;
@@ -103,9 +96,9 @@ export class XmlConnection extends HttpConnection {
    //==========================================================
    // <T>获得内容。</T>
    //
-   // @return Object 内容
+   // @return 内容
    //==========================================================
-   public content() {
+   public get content(): any {
       return this._outputNode;
    }
 }

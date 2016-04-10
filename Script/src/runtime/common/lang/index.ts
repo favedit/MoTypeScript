@@ -35,6 +35,7 @@ export * from './Looper';
 export * from './LooperEntry';
 export * from './MemoryPool';
 export * from './ObjectBase';
+export * from './ObjectIdUtil';
 export * from './ObjectPool';
 export * from './ObjectPools';
 export * from './Objects';

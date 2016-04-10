@@ -18,38 +18,49 @@ import {HttpStatusEnum} from './HttpStatusEnum';
 // @version 150104
 //==========================================================
 export class HttpConnection extends ObjectBase {
-   // @attribute
-   protected _asynchronous: boolean;
-   protected _methodCd = HttpMethodEnum.Get;
-   protected _contentCd: HttpContentEnum;
-   protected _url: string;
-   // @attribute
-   protected _linker;
+   // 异步标志
+   public asynchronous: boolean;
+   // 函数类型
+   public methodCd: HttpMethodEnum;
+   // 内容类型
+   public contentCd: HttpContentEnum;
+   // 网络地址
+   public url: string;
+   // 头信息集合
    protected _heads;
+   // 属性集合
    protected _attributes;
+   // 输入内容
    protected _input;
+   // 输入数据
    protected _inputData;
+   // 输出内容
    protected _output;
+   // 输出数据
    protected _outputData;
-   // @attribute
+   // 关联器
+   protected _linker;
+   // 关联句柄
    protected _handle;
+   // 内容长度
    protected _contentLength: number;
+   // 自由状态
    protected _statusFree: boolean;
+   // 事件信息
    protected _event;
-   // @attribute
+   // 加载监听器
    public loadListeners: Listeners;
+   // 完成监听器
    public completeListeners: Listeners;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 设置属性
-      this._methodCd = HttpMethodEnum.Get;
-      this._contentCd = HttpContentEnum.Binary;
+      this.methodCd = HttpMethodEnum.Get;
+      this.contentCd = HttpContentEnum.Binary;
       this._heads = new Attributes();
       this._attributes = new Attributes();
       this._event = new Event(this);
@@ -157,14 +168,14 @@ export class HttpConnection extends ObjectBase {
    public setHeaders() {
       var handle = this._handle;
       // 传输格式
-      if (this._contentCd == HttpContentEnum.Binary) {
+      if (this.contentCd == HttpContentEnum.Binary) {
          // 二进制内容
          //if (MO.Window.Browser.isBrowser(MO.EBrowser.Explorer)) {
          //   handle.setRequestHeader('Accept-Charset', 'x-user-defined');
          //   handle.responseType = 'arraybuffer';
          //} else {
          handle.overrideMimeType('text/plain; charset=x-user-defined');
-         if (this._asynchronous) {
+         if (this.asynchronous) {
             handle.responseType = 'arraybuffer';
          }
          //}
@@ -194,13 +205,11 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>设置接收信息。</T>
-   //
-   // @method
    //==========================================================
    public setOutputData() {
       var handle = this._handle;
       // 传输格式
-      if (this._contentCd == HttpContentEnum.Binary) {
+      if (this.contentCd == HttpContentEnum.Binary) {
          this._outputData = handle.response;
       } else {
          this._outputData = handle.responseText;
@@ -209,18 +218,14 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>获得内容。</T>
-   //
-   // @method
    // @return Object 内容
    //==========================================================
-   public content() {
+   public get content(): any {
       return this._outputData;
    }
 
    //==========================================================
    // <T>重置处理。</T>
-   //
-   // @method
    //==========================================================
    public reset() {
       // 重置链接
@@ -234,60 +239,54 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>同步发送页面请求。</T>
-   //
-   // @method
    //==========================================================
    public sendSync() {
       var handle = this._handle;
-      handle.open(this._methodCd, this._url, false);
+      handle.open(this.methodCd, this.url, false);
       this.setHeaders();
       handle.send(this._inputData);
       this.setOutputData();
       this.onConnectionComplete();
-      LoggerUtil.info(this, 'Send http sync request. (method={1}, url={2})', this._methodCd, this._url);
+      LoggerUtil.info(this, 'Send http sync request. (method={1}, url={2})', this.methodCd, this.url);
    }
 
    //==========================================================
    // <T>异步发送页面请求。</T>
-   //
-   // @method
    //==========================================================
    public sendAsync() {
       var handle = this._handle;
-      handle.open(this._methodCd, this._url, true);
+      handle.open(this.methodCd, this.url, true);
       this.setHeaders();
       handle.send(this._inputData);
-      LoggerUtil.info(this, 'Send http asynchronous request. (method={1}, url={2})', this._methodCd, this._url);
+      LoggerUtil.info(this, 'Send http asynchronous request. (method={1}, url={2})', this.methodCd, this.url);
    }
 
    //==========================================================
    // <T>发送页面请求。</T>
    //
-   // @method
    // @param url:String 发送地址
    // @param data:Object 发送数据
    //==========================================================
    public send(url, data) {
       // 设置参数
-      this._url = url;
+      this.url = url;
       this._input = data;
       // 设置状态
-      this._methodCd = (data != null) ? HttpMethodEnum.Post : HttpMethodEnum.Get;
+      this.methodCd = (data != null) ? HttpMethodEnum.Post : HttpMethodEnum.Get;
       this._statusFree = false;
       // 发送信息
       this.onConnectionSend();
-      if (this._asynchronous) {
+      if (this.asynchronous) {
          this.sendAsync();
       } else {
          this.sendSync();
       }
-      return this.content();
+      return this.content;
    }
 
    //==========================================================
    // <T>发送页面请求。</T>
    //
-   // @method
    // @param url:String 发送地址
    // @param data:Object 发送数据
    //==========================================================

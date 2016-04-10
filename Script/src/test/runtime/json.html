@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<TITLE>Test - Graphic</TITLE>
+<SCRIPT type="text/javascript" src="../../../library/require.js"></script>
+<SCRIPT type="text/javascript" src="../../../build/mo.js"></script>
+<SCRIPT>
+var test = null;
+require(['test/runtime/json'], function (space){
+   // 创建测试
+   test = new space.Tester();
+   test.setup(window);
+   test.setEnvironment('resource', '/asset/demo');
+   // 运行测试
+   var url = 'http://localhost:8030/cloud.resource.template.wj';
+   var info = new Object();
+   info.action = 'create';
+   var template = info.content = new Object();
+   template.class = 'Template';
+   template.name = 'lgt.item.001';
+   template.label = '招财蟾蜍';
+   var templateContent = template.content = new Array();
+   var renderable = new Object();
+   renderable.class = 'TemplateRenderable';
+   renderable.model_url = '${resource}/model/lgt.sta.0001.model';
+   renderable.mesh_code = 'ms_001';
+   renderable.material_url = '${resource}/material/lgt.sta.0001.material';
+   templateContent.push(renderable);
+   test.send(url, info);
+});
+</SCRIPT>
+</HEAD>
+<BODY></BODY>
+</HTML>

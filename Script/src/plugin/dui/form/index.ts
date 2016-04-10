@@ -10,6 +10,8 @@ export * from './EditControl';
 export * from './Editor';
 export * from './Form';
 export * from './Frame';
+export * from './ImageFile';
+export * from './Label';
 export * from './Layout';
 export * from './LayoutHorizontal';
 export * from './LayoutVertical';

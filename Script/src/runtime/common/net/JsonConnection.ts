@@ -9,24 +9,36 @@ import {HttpConnection} from './HttpConnection';
 // @version 150104
 //==========================================================
 export class JsonConnection extends HttpConnection {
-
-   protected _content: any = null;
+   // 内容
+   protected _content: any;
 
    //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 设置属性
-      this._contentCd = HttpContentEnum.Text;
+      this.contentCd = HttpContentEnum.Text;
+   }
+
+   //==========================================================
+   // <T>响应链接发送处理。</T>
+   //==========================================================
+   public onConnectionSend() {
+      var input = this._input;
+      if (input) {
+         if (input.constructor == String) {
+            this._inputData = input;
+            this._contentLength = input.length;
+         } else {
+            var value = this._inputData = JSON.stringify(input)
+            this._contentLength = value.length;
+         }
+      }
    }
 
    //==========================================================
    // <T>事件响应处理。</T>
-   //
-   // @method
    //==========================================================
    public onConnectionComplete() {
       this._statusFree = true;
@@ -48,10 +60,8 @@ export class JsonConnection extends HttpConnection {
 
    //==========================================================
    // <T>获得内容。</T>
-   //
-   // @return 内容
    //==========================================================
-   public content() {
+   public get content(): any {
       return this._content;
    }
 }

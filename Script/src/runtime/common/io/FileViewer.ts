@@ -1,5 +1,6 @@
 import {Event} from '../lang/Event';
 import {ObjectBase} from '../lang/ObjectBase';
+import {Listeners} from '../lang/Listeners';
 import {LoggerUtil} from '../lang/LoggerUtil';
 
 //==========================================================
@@ -10,117 +11,110 @@ import {LoggerUtil} from '../lang/LoggerUtil';
 // @version 150401
 //==========================================================
 export class FileViewer extends ObjectBase {
-   //..........................................................
-   // @attribute
-   protected __linker = null;
-   // @attribute
-   protected _reader: FileReader = null;
-   // @attribute
-   //_fileName = MO.Class.register(o, new MO.AGetter('_fileName'));
-   protected _fileName: string = null;
-   //_length = MO.Class.register(o, new MO.AGetter('_length'), 0);
-   protected _length: number = 0;
-   //_data = MO.Class.register(o, new MO.AGetter('_data'));
-   protected _data: any = null;
-   // @attribute
-   protected _statusLoading: boolean = false;
-
-   //==========================================================
-   // <T>开始加载处理。</T>
-   //
-   // @method
-   //==========================================================
-   public ohLoadStart() {
-      //var o = this.__linker;
-   }
+   // 准备好
+   public ready: boolean;
+   // 文件名称
+   public fileName: string;
+   // 长度
+   public length: number;
+   // 数据
+   public data: any;
+   // 加载状态
+   // public statusLoading: boolean;
+   // 加载监听器集合
+   public loadListeners: Listeners;
+   // 读取器
+   protected _reader: FileReader;
 
    //==========================================================
    // <T>加载中处理。</T>
-   //
-   // @method
    //==========================================================
    public ohLoad() {
       //var o = this.__linker;
+      //LoggerUtil.error(linker, 'Load file failure. (error={1])', reader.error);
+   }
+
+   //==========================================================
+   // <T>开始加载处理。</T>
+   //==========================================================
+   public ohLoadStart() {
+      //var o = this.__linker;
+      //LoggerUtil.error(linker, 'Load file failure. (error={1])', reader.error);
+   }
+
+   //==========================================================
+   // <T>加载进度响应处理。</T>
+   //==========================================================
+   public ohProgress() {
+      //var o = this.__linker;
+      //LoggerUtil.error(linker, 'Load file failure. (error={1])', reader.error);
    }
 
    //==========================================================
    // <T>加载完成处理。</T>
-   //
-   // @method
    //==========================================================
    public ohLoadEnd() {
-      var linker = this.__linker;
+      var linker = (this as any).__linker;
       var reader = linker._reader;
-      linker._statusFree = true;
       if (reader.error) {
          LoggerUtil.error(linker, 'Load file failure. (error={1])', reader.error);
       } else {
          // 设置属性
-         linker._length = reader.result.byteLength;
-         linker._data = reader.result;
+         var length = linker.length = reader.result.byteLength;
+         var data = linker.data = reader.result;
+         this.ready = true;
          // 完成处理
-         var event = new Event(linker);
-         linker.processLoadListener(event);
+         var event:any = new Event(linker);
+         event.fileName = linker.fileName;
+         event.dataLength = length;
+         event.data = data;
+         linker.loadListeners.process(event);
          event.dispose();
       }
    }
 
    //==========================================================
-   // <T>加载进度响应处理。</T>
-   //
-   // @method
-   //==========================================================
-   public ohProgress() {
-      var o = this.__linker;
-   }
-
-   //==========================================================
    // <T>构造处理。</T>
-   //
-   // @method
    //==========================================================
    public constructor() {
       super();
       // 创建读取器
+      this.length = 0;
       var reader = this._reader = new FileReader();
       (reader as any).__linker = this;
-      reader.onloadstart = this.ohLoadStart;
       reader.onload = this.ohLoad;
-      reader.onloadend = this.ohLoadEnd;
       reader.onprogress = this.ohProgress;
+      reader.onloadstart = this.ohLoadStart;
+      reader.onloadend = this.ohLoadEnd;
+      this.loadListeners = new Listeners();
    }
 
    //==========================================================
    // <T>加载文件数据。</T>
    //
-   // @method
-   // @param file:Object 文件数据
+   // @param file 文件数据
    //==========================================================
    public loadFile(file) {
-      var o = this;
-      o._fileName = file.name;
-      o._length = file.size;
-      var reader = o._reader;
+      this.fileName = file.name;
+      this.length = file.size;
+      var reader = this._reader;
       reader.readAsArrayBuffer(file);
    }
 
    //==========================================================
    // <T>释放处理。</T>
-   //
-   // @method
    //==========================================================
    public dispose() {
-      var o = this;
       // 释放属性
-      var reader = o._reader;
+      var reader = this._reader;
       (reader as any).__linker = null;
       reader.onloadstart = null;
       reader.onload = null;
       reader.onloadend = null;
       reader.onprogress = null;
-      o._reader = null;
-      o._fileName = null;
-      o._data = null;
+      this._reader = null;
+      this.fileName = null;
+      this.data = null;
       // 父处理
       super.dispose();
    }
