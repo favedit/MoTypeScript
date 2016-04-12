@@ -1,4 +1,3 @@
-export * from './main';
 
 import * as application from './application/index';
 export {application as application};

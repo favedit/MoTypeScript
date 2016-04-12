@@ -67,7 +67,7 @@ export class ListItem extends Control {
          this.setLabel(this.label);
       }
       // 关联事件
-      this.attachEvent('onClick', hPanel);
+      //this.attachEvent('onClick', hPanel);
    }
 
    // //==========================================================

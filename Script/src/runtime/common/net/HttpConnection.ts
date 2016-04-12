@@ -59,6 +59,7 @@ export class HttpConnection extends ObjectBase {
    public constructor() {
       super();
       // 设置属性
+      this.asynchronous = true;
       this.methodCd = HttpMethodEnum.Get;
       this.contentCd = HttpContentEnum.Binary;
       this._heads = new Attributes();
@@ -76,8 +77,6 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>响应链接发送处理。</T>
-   //
-   // @method
    //==========================================================
    public onConnectionSend() {
       var input = this._input;
@@ -96,19 +95,17 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>响应链接准备处理。</T>
-   //
-   // @method
    //==========================================================
    public onConnectionReady() {
-      var linker = this._linker;
-      if (linker._asynchronous) {
+      var linker: HttpConnection = this._linker;
+      if (linker.asynchronous) {
          var handle = linker._handle;
          if (handle.readyState == HttpStatusEnum.Loaded) {
             if (handle.status == 200) {
                linker.setOutputData();
                linker.onConnectionComplete();
             } else {
-               LoggerUtil.fatal(linker, 'Connection failure. (url={1})', linker._url);
+               LoggerUtil.fatal(linker, 'Connection failure. (url={1})', linker.url);
             }
          }
       }
@@ -116,8 +113,6 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>响应链接完成处理。</T>
-   //
-   // @method
    //==========================================================
    public onConnectionComplete() {
       this._statusFree = true;
@@ -141,9 +136,8 @@ export class HttpConnection extends ObjectBase {
    //==========================================================
    // <T>获得头信息。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @return String 内容
+   // @param name 名称
+   // @return 内容
    //==========================================================
    public header(name) {
       return this._heads.get(name);
@@ -152,9 +146,8 @@ export class HttpConnection extends ObjectBase {
    //==========================================================
    // <T>设置头信息。</T>
    //
-   // @method
-   // @param name:String 名称
-   // @param value:String 内容
+   // @param name 名称
+   // @param value 内容
    //==========================================================
    public setHeader(name, value) {
       this._heads.set(name, value);
@@ -162,8 +155,6 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>设置头信息集合。</T>
-   //
-   // @method
    //==========================================================
    public setHeaders() {
       var handle = this._handle;
@@ -218,7 +209,8 @@ export class HttpConnection extends ObjectBase {
 
    //==========================================================
    // <T>获得内容。</T>
-   // @return Object 内容
+   //
+   // @return 内容
    //==========================================================
    public get content(): any {
       return this._outputData;
@@ -240,7 +232,7 @@ export class HttpConnection extends ObjectBase {
    //==========================================================
    // <T>同步发送页面请求。</T>
    //==========================================================
-   public sendSync() {
+   protected sendSync() {
       var handle = this._handle;
       handle.open(this.methodCd, this.url, false);
       this.setHeaders();
@@ -253,7 +245,7 @@ export class HttpConnection extends ObjectBase {
    //==========================================================
    // <T>异步发送页面请求。</T>
    //==========================================================
-   public sendAsync() {
+   protected sendAsync() {
       var handle = this._handle;
       handle.open(this.methodCd, this.url, true);
       this.setHeaders();
@@ -264,10 +256,10 @@ export class HttpConnection extends ObjectBase {
    //==========================================================
    // <T>发送页面请求。</T>
    //
-   // @param url:String 发送地址
-   // @param data:Object 发送数据
+   // @param url 发送地址
+   // @param data 发送数据
    //==========================================================
-   public send(url, data) {
+   public send(url, data?: any) {
       // 设置参数
       this.url = url;
       this._input = data;
@@ -285,10 +277,7 @@ export class HttpConnection extends ObjectBase {
    }
 
    //==========================================================
-   // <T>发送页面请求。</T>
-   //
-   // @param url:String 发送地址
-   // @param data:Object 发送数据
+   // <T>释放处理。</T>
    //==========================================================
    public dispose() {
       // 释放属性

@@ -327,8 +327,10 @@ export class Layout extends Container {
          //    this.innerAppendLine();
          // }
       } else {
-         hControlPanel.style.paddingTop = '2px';
-         hControlPanel.style.paddingBottom = '2px';
+         if (hControlPanel.style) {
+            hControlPanel.style.paddingTop = '2px';
+            hControlPanel.style.paddingBottom = '2px';
+         }
          // 追加横向对象
          if (control.dockCd == DockEnum.Fill) {
             var hCell = context.appendTableRowCell(this._hPanelForm, this.styleName('ControlPanel'));

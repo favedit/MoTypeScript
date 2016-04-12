@@ -1,4 +1,34 @@
 /* ------------------------------------------------------ */
+/* FrameSet                                            */
+/* ------------------------------------------------------ */
+.FrameSet_ToolBar_Ground{
+   padding-left: 4px;
+   padding-top: 1px;
+   padding-bottom: 1px;
+   border-top: 1px solid #EEEEEE;
+   border-bottom: 1px solid #666666;
+   background-color: #EEEEEE;
+}
+
+.FrameSet_Catalog_Content{
+   background-color: #EEEEEE;
+}
+
+.FrameSet_Canvas_Content{
+   background-color: #EEEEEE;
+}
+
+.FrameSet_Property_Content{
+   background-color: #777777;
+}
+
+.FrameSet_StatusBar_Ground{
+   background: #EEEEEE;
+   border-top: 1px solid #999999;
+}
+
+
+/* ------------------------------------------------------ */
 /* ResourceSelectDialog                                */
 /* ------------------------------------------------------ */
 .ResourceSelectDialog_Toolbar_Ground{
@@ -22,42 +52,6 @@
    background-color: #EEEEEE;
 }
 
-/* ------------------------------------------------------ */
-/* FrameSet                                            */
-/* ------------------------------------------------------ */
-.FrameSet_ToolBar_Ground{
-   padding-left: 4px;
-   padding-top: 1px;
-   padding-bottom: 1px;
-   border-top: 1px solid #EEEEEE;
-   border-bottom: 1px solid #666666;
-   background-color: #AEAEAE;
-   background: -ms-linear-gradient(top, #CFCFCF, #BBBBBB);
-   background: -moz-linear-gradient(top, #CFCFCF, #BBBBBB); 
-   background: -webkit-gradient(linear, left top, left bottom, from(#DDDDDD), to(#BBBBBB)); 
-   filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#CFCFCF, endColorStr=#BBBBBB);
-}
-
-.FrameSet_Catalog_Content{
-   background-color: #EEEEEE;
-}
-
-.FrameSet_Canvas_Content{
-   background-color: #EEEEEE;
-}
-
-.FrameSet_Property_Content{
-   background-color: #777777;
-}
-
-.FrameSet_StatusBar_Ground{
-   background: #AEAEAE;
-   border-top: 1px solid #999999;
-   background: -ms-linear-gradient(top, #555555, #AEAEAE);
-   background: -moz-linear-gradient(top, #555555, #AEAEAE); 
-   background: -webkit-gradient(linear, left top, left bottom, from(#EEEEEE), to(#BBBBBB)); 
-   filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#555555, endColorStr=#AEAEAE);
-}
 
 
 

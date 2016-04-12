@@ -47,7 +47,7 @@ export class Application extends BaseApplication {
    public onResize(sender, event) {
       var views = this.views;
       var count = views.count();
-      for(var i = 0; i < count; i++){
+      for (var i = 0; i < count; i++) {
          var view = views.at(i);
          view.onResize(sender, event);
       }
@@ -59,7 +59,7 @@ export class Application extends BaseApplication {
    public newDocument() {
    }
 
-   public openDocument() {
+   public openDocument(guid?: string) {
    }
 
    public saveDocument() {

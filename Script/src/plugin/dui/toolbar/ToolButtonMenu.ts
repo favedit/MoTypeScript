@@ -1,4 +1,6 @@
-import {RenderContext} from '../RenderContext';
+import {PopupMenu} from '../menu/PopupMenu';
+import {RenderContext} from './RenderContext';
+import {Component} from './Component';
 import {ToolButton} from './ToolButton';
 
 //==========================================================
@@ -7,41 +9,24 @@ import {ToolButton} from './ToolButton';
 // @author maocy
 // @history 150121
 //==========================================================
-export class ToolButtonMenu extends ToolButton{
-   // MO.FDuiToolButtonMenu = function FDuiToolButtonMenu(o){
-   //    o = MO.Class.inherits(this, o, MO.FDuiToolButton, MO.MUiContainer, MO.MDuiDropable, MO.MDuiFocus);
-   //    //..........................................................
-   //    // @attribute
-   //    o._menu           = null;
-   //    o._statusDrop     = false;
+export class ToolButtonMenu extends ToolButton {
+   // @attribute
+   protected _menu: PopupMenu;
+   protected _statusDrop: boolean;
    //    //..........................................................
    //    // @html
    //    o._hDropPanel     = null;
-   //    //..........................................................
-   //    // @style
-   //    o._stylePanel     = MO.Class.register(o, new MO.AStyle('_stylePanel'));
-   //    o._styleDropHover = MO.Class.register(o, new MO.AStyleIcon('_styleDropHover'));
-   //    //..........................................................
-   //    // @event
-   //    o.onBuild         = MO.FDuiToolButtonMenu_onBuild;
-   //    // @event
-   //    o.onEnter         = MO.FDuiToolButtonMenu_onEnter;
-   //    o.onLeave         = MO.FDuiToolButtonMenu_onLeave;
-   //    o.onMouseDown     = MO.FDuiToolButtonMenu_onMouseDown;
-   //    o.onBlur          = MO.FDuiToolButtonMenu_onBlur;
-   //    o.onMouseUp       = MO.Method.empty;
-   //    //..........................................................
-   //    // @method
-   //    o.construct       = MO.FDuiToolButtonMenu_construct;
-   //    // @method
-   //    o.createChild     = MO.FDuiToolButtonMenu_createChild;
-   //    // @method
-   //    o.push            = MO.FDuiToolButtonMenu_push;
-   //    o.drop            = MO.FDuiToolButtonMenu_drop;
-   //    o.doClick         = MO.FDuiToolButtonMenu_doClick;
-   //    o.dispose         = MO.FDuiToolButtonMenu_dispose;
-   //    return o;
-   // }
+
+   //==========================================================
+   // <T>构建对象。</T>
+   //==========================================================
+   public constructor() {
+      super();
+      // 创建弹出窗口
+      var menu = this._menu = new PopupMenu();
+      menu.opener = this;
+      this.push(menu);
+   }
 
    // //==========================================================
    // // <T>构建页面对象。</T>
@@ -130,20 +115,6 @@ export class ToolButtonMenu extends ToolButton{
    // }
 
    // //==========================================================
-   // // <T>构建对象。</T>
-   // //
-   // // @method
-   // //==========================================================
-   // MO.FDuiToolButtonMenu_construct = function FDuiToolButtonMenu_construct(){
-   //    var o = this;
-   //    o.__base.FDuiToolButton.construct.call(o);
-   //    // 创建弹出窗口
-   //    var menu = o._menu = MO.Class.create(MO.FDuiPopupMenu);
-   //    menu._opener = o;
-   //    o.push(menu);
-   // }
-
-   // //==========================================================
    // // <T>创建子节点。</T>
    // //
    // // @method
@@ -157,20 +128,18 @@ export class ToolButtonMenu extends ToolButton{
    //    return control;
    // }
 
-   // //==========================================================
-   // // <T>添加一个菜单选项到这个菜单里。</T>
-   // //
-   // // @method
-   // // @param component:FComponent 组件
-   // //==========================================================
-   // MO.FDuiToolButtonMenu_push = function FDuiToolButtonMenu_push(component){
-   //    var o = this;
-   //    if(MO.Class.isClass(component, MO.MUiMenuButton)){
-   //       o._menu.push(component);
-   //    }else{
-   //       o.__base.FDuiToolButton.push.call(o, component);
-   //    }
-   // }
+   //==========================================================
+   // <T>添加一个菜单选项到这个菜单里。</T>
+   //
+   // @param component 组件
+   //==========================================================
+   public push(component: Component) {
+      // if(component instanceof MenuButton){
+      //    this._menu.push(component);
+      // }else{
+      //    this.__base.FDuiToolButton.push.call(this, component);
+      // }
+   }
 
    // //==========================================================
    // // <T>弹出下拉框。</T>

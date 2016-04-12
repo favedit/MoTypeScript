@@ -1,4 +1,5 @@
 import {ServiceUtil} from './runtime/core/ServiceUtil';
+import {JsonConnection} from './runtime/common/net/JsonConnection';
 import {EnvironmentService} from './runtime/core/service/EnvironmentService';
 import {Application as BaseApplication} from './base/application/FApplication';
 import {Render} from './plugin/dui/Render';
@@ -56,5 +57,42 @@ export class Application extends BaseApplication {
       super.start();
       // 界面大小处理
       this.mainUi.processResize();
+   }
+
+   protected _guid: string;
+
+   //==========================================================
+   // <T>改变大小事件</T>
+   //==========================================================
+   public onOpenDocument(sender, event) {
+      var content = event.content;
+   }
+
+   //==========================================================
+   // <T>改变大小事件</T>
+   //==========================================================
+   public openDocument(guid: string) {
+      this._guid = guid;
+      var environmentService: EnvironmentService = ServiceUtil.find(EnvironmentService);
+      var url = environmentService.parse('${service}/cloud.resource.scene.wj?action=query&guid=' + guid);
+      var connection = new JsonConnection();
+      connection.loadListeners.register(this, this.onOpenDocument);
+      connection.send(url);
+   }
+
+   //==========================================================
+   // <T>改变大小事件</T>
+   //==========================================================
+   public saveDocument() {
+      var environmentService: EnvironmentService = ServiceUtil.find(EnvironmentService);
+      var url = environmentService.parse('${service}/cloud.resource.scene.wj?action=update&guid=' + this._guid);
+      var send: any = new Object();
+      var data: any = send.data = new Object();
+      data.class = 'asdf';
+      var template:any  = data.template = new Object();
+      template.name = 'asd';
+      var connection = new JsonConnection();
+      connection.loadListeners.register(this, this.onOpenDocument);
+      connection.send(url, send);
    }
 }

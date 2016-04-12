@@ -61,7 +61,7 @@ export class ListView extends Container {
    public onBuild(context: RenderContext) {
       super.onBuild(context);
       // 关联事件
-      this.attachEvent(this._hPanel, 'onClick');
+      //this.attachEvent(this._hPanel, 'onClick');
    }
 
    //==========================================================

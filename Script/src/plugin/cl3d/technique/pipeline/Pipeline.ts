@@ -58,9 +58,7 @@ export abstract class Pipeline extends Content {
       var context = this.graphicContext;
       AssertUtil.debugNotNull(context);
       var scene = this.scene;
-      if (!scene) {
-         return false;
-      }
+      AssertUtil.debugNotNull(scene);
       var technique = this.drawTechnique;
       if (!technique) {
          return false;
@@ -114,9 +112,12 @@ export abstract class Pipeline extends Content {
       // 进入帧处理
       this.enterFrameListeners.process();
       // 场景处理
-      this.scene.process(this.region);
-      // 渲染处理
-      this.onProcess();
+      var scene = this.scene;
+      if (scene) {
+         scene.process(this.region);
+         // 渲染处理
+         this.onProcess();
+      }
       // 离开帧处理
       this.leaveFrameListeners.process();
    }

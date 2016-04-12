@@ -501,9 +501,14 @@ export class Control extends Component {
    // @param capture 捕捉
    // @return TEvent 关联的事件对象
    //==========================================================
-   public attachEvent(hTag: any, eventCd: string, method: Function = null, capture: boolean = false) {
+   public attachEvent(hTag: any, eventCd: string, method: Function, capture: boolean = false) {
       var eventService: EventService = ServiceUtil.find(EventService);
       eventService.attachEvent(this, hTag, eventCd, method, capture);
+   }
+
+   public linkEvent(hTag: any, eventCd: string, owner: any, method: Function, capture: boolean = false) {
+      var eventService: EventService = ServiceUtil.find(EventService);
+      eventService.attachEvent(owner, hTag, eventCd, method, capture);
    }
 
    //==========================================================
@@ -557,8 +562,6 @@ export class Control extends Component {
 
    //==========================================================
    // <T>构建处理。</T>
-   //
-   // @param context 环境
    //==========================================================
    public builded() {
    }

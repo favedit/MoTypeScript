@@ -11,7 +11,7 @@ RuntimeUtil.namespace(mo, 'mo');
 (window as any).mo = (window as any).mo || mo;
 
 // 启动应用
-export class Design {
+export class Editor {
 
    public settings;
 
@@ -22,7 +22,7 @@ export class Design {
       var settings = this.settings = new mo.editor.design.application.Settings();
       settings.hWindow = hWindow;
       settings.hDocument = hWindow.document;
-      settings.hPanel = <HTMLBodyElement>hWindow.document.body;
+      settings.hPanel = hWindow.document.body as HTMLBodyElement;
       settings.size.set(800, 400);
    }
 
@@ -32,10 +32,12 @@ export class Design {
       environmentConsole.registerValue(name, value);
    }
 
-   public startup() {
+   public startup(): any {
       var application = this.application = new mo.editor.design.application.Application();
       application.setup(this.settings);
       application.start();
+      (window as any).MoApplication = application;
+      return application;
    }
 
 }

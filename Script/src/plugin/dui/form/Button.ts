@@ -1,3 +1,4 @@
+import {EventEnum} from './runtime/ui/EventEnum';
 import {RenderContext} from '../RenderContext';
 import {Control} from './Control';
 
@@ -56,7 +57,7 @@ export class Button extends Control {
       super.onBuild(context);
       // 设置底板
       var hPanel = this._hPanel;
-      this.attachEvent('onClick', hPanel);
+      //this.attachEvent(hPanel, EventEnum.Click, this.oncl);
       //o.attachEvent('onButtonEnter', hPanel, o.onButtonEnter);
       //o.attachEvent('onButtonLeave', hPanel, o.onButtonLeave);
       //o.attachEvent('onButtonDown', hPanel, o.onButtonDown);

@@ -10,11 +10,16 @@
 <SCRIPT type="text/javascript" src="../../../build/mo.js"></script>
 <SCRIPT>
 require(['editor/design/main'], function (space){
-   var design = new space.Design();
-   design.setup(window);
-   design.setEnvironment('resource', '/asset/demo');
-   design.setEnvironment('resource.icon', '/sk/res/icon');
-   design.startup();
+   // 创建编辑器
+   var editor = new space.Editor();
+   editor.setup(window);
+   editor.setEnvironment('resource', '/asset/demo');
+   editor.setEnvironment('resource.icon', '/sk/res/icon');
+   editor.setEnvironment('service', 'http://localhost:8030');
+   // 启动应用
+   var application = editor.startup();
+   // 打开文档
+   application.openDocument('A2A1CA8F12DC4CF29A21ED07AF2A34B7');
 });
 </SCRIPT>
 </HEAD>

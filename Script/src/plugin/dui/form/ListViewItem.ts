@@ -84,8 +84,8 @@ export class ListViewItem extends Control {
          this.setLabel(this.label);
       }
       // 关联事件
-      this.attachEvent('onClick', hPanel);
-      this.attachEvent('onDoubleClick', hPanel);
+      //this.attachEvent('onClick', hPanel);
+      //this.attachEvent('onDoubleClick', hPanel);
    }
 
    // //==========================================================

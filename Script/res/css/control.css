@@ -644,34 +644,25 @@
 }
 
 .PageSheet_Sheet{
-   padding:10px;
+   padding:12px;
 }
 
 .PageSheet_Button{
-   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
-   background: -ms-linear-gradient(top, #EEEEEE, #999999);
-   background: -moz-linear-gradient(top, #EEEEEE, #999999); 
-   background: -webkit-gradient(linear, left top, left bottom, from(#EEEEEE), to(#999999)); 
-   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#EEEEEE, endcolorstr=#999999);
+   padding-left:12px; padding-top:3px; padding-right:12px; padding-bottom:2px;
+   background-color: #EEEEEE;
 }
 
 .PageSheet_ButtonHover{
    cursor:pointer;
    border-top:1 solid #EEEEEE;
-   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
-   background: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
-   background: -moz-linear-gradient(top, #FFFFFF, #DDDDDD); 
-   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD)); 
-   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#DDDDDD);
+   padding-left:12px; padding-top:3px; padding-right:12px; padding-bottom:2px;
+   background-color: #FFFFFF;
 }
 
 .PageSheet_ButtonSelect{
    cursor:pointer;
-   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
-   background: -ms-linear-gradient(top, #BBBBBB, #EEEEEE);
-   background: -moz-linear-gradient(top, #BBBBBB, #EEEEEE); 
-   background: -webkit-gradient(linear, left top, left bottom, from(#BBBBBB), to(#EEEEEE)); 
-   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#BBBBBB, endcolorstr=#EEEEEE);
+   padding-left:12px; padding-top:3px; padding-right:12px; padding-bottom:2px;
+   background-color: #FFFFFF;
 }
 
 .PageSheet_ButtonText{
@@ -724,10 +715,11 @@
 /* ------------------------------------------------------ */
 .PageControl_Panel{
    width: 100%;
+   height: 100%;
 }
 
 .PageControl_TitlePanel{
-   height: 1px;
+   height: 30px;
 }
 
 .PageControl_TitleForm{

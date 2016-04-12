@@ -59,11 +59,11 @@ export class Canvas extends View {
       canvas.addListener(EventEnum.MouseMove, this, this.onMouseMove);
       var hCanvas = canvas.hCanvas;
       var context = canvas.graphicContent;
-      // 创建场景
-      var sceneService: SceneService = ServiceUtil.find(SceneService);
-      var scene = this.scene = sceneService.allocByUrl(context, '${resource}/scene/pvw.sc.car.01.001.scene');
-      scene.backgroundColor.set(0, 0, 0, 1);
-      scene.loadListeners.register(this, this.onSceneLoad);
+      // // 创建场景
+      // var sceneService: SceneService = ServiceUtil.find(SceneService);
+      // var scene = this.scene = sceneService.allocByUrl(context, '${resource}/scene/pvw.sc.car.01.001.scene');
+      // scene.backgroundColor.set(0, 0, 0, 1);
+      // scene.loadListeners.register(this, this.onSceneLoad);
       //scene.lo
       // var scene: Scene = this.scene = new Scene();
       // scene.backgroundColor.set(0.2, 0.2, 0.2, 1);
@@ -85,7 +85,7 @@ export class Canvas extends View {
       // 设置渲染管道
       var pipelineConsole = ServiceUtil.find(PipelineService);
       var pipeline = this.pipeline = pipelineConsole.alloc(context, ForwardPipeline);
-      pipeline.scene = scene;
+      // pipeline.scene = scene;
       pipeline.camera = camera;
    }
 
